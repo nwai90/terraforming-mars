@@ -152,11 +152,11 @@ export const Colony = Vue.component("colony", {
       <div v-if="colony.name === getMiranda()" class="resource animal" style="margin-left:20px;margin-top:-10px;"></div>
       <div v-if="colony.name === getPluto()" class="resource card" style="margin-left:20px;transform: scale(0.8);margin-top:-10px;"></div>
       <div v-if="colony.name !== getEuropa() && colony.name !== getMercury() && colony.name !== getIapetus() && colony.name !== getHygiea() && colony.name !== getTitania() && colony.name !== getVenus() && colony.name !== getLeavitt()" class="white-x"></div>
-      <div v-if="colony.name === getIapetus()" class="white-x" style="margin-left:-42px;"></div>
-      <div v-if="colony.name === getTitania()" class="white-x" style="margin-left:42px;"></div>
+      <div v-if="colony.name === getIapetus()" class="white-x" style="margin-left:-32px;"></div>
+      <div v-if="colony.name === getTitania()" class="white-x" style="margin-left:52px;"></div>
       <div v-if="colony.name === getTitania()" class="points points-big" style="margin-left: 10px; margin-top: -53px; transform: scale(0.5); height: 50px; width: 50px">&nbsp;</div>
-      <div v-if="colony.name === getVenus()" class="white-x" style="margin-left:45px; margin-bottom:4px;"></div>
-      <div v-if="colony.name === getVenus()" class="resource" style="background:white;margin:10px 10px 10px -20px;">?<div class="card-icon card-icon-venus" style="color: white;margin-top: -36px;margin-left: 16px;">V</div></div>
+      <div v-if="colony.name === getVenus()" class="white-x" style="margin-left:52px; margin-bottom:4px;"></div>
+      <div v-if="colony.name === getVenus()" class="resource" style="background:white;margin:10px 10px 10px -30px;">?<div class="card-icon card-icon-venus" style="color: white;margin-top: -36px;margin-left: 16px;">V</div></div>
       <div v-if="colony.name === getLeavitt()" class="resource card" style="margin-left:5px;transform: scale(0.8)"></div>
 
       <span v-if="colony.name !== getEuropa() && colony.name !== getMercury() && colony.name !== getIapetus() && colony.name !== getHygiea() && colony.name !== getTitania() && colony.name !== getLeavitt()" class="colony-background-color">
