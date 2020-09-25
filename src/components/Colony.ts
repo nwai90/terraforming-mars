@@ -21,8 +21,12 @@ export const Colony = Vue.component("colony", {
         },
         getCubeYPosition: (colony: ColonyModel): number => {
             if (colony.name === ColonyName.IAPETUS) return 185;
+<<<<<<< HEAD
             if (colony.name === ColonyName.VENUS || colony.name === ColonyName.LEAVITT) return 180;
             if (colony.name === ColonyName.EUROPA || colony.name === ColonyName.MERCURY || colony.name === ColonyName.HYGIEA) return 145;
+=======
+            if (colony.name === ColonyName.EUROPA || colony.name === ColonyName.MERCURY) return 145;
+>>>>>>> Add Mercury colony tile
             if (colony.name === ColonyName.MIRANDA || colony.name === ColonyName.PLUTO ) return 180;
             return 165;
         },
@@ -72,6 +76,7 @@ export const Colony = Vue.component("colony", {
         },
         getMercury:(): string => {
           return ColonyName.MERCURY;
+<<<<<<< HEAD
         },
         getHygiea:(): string => {
           return ColonyName.HYGIEA;
@@ -84,6 +89,8 @@ export const Colony = Vue.component("colony", {
         },
         getLeavitt:(): string => {
           return ColonyName.LEAVITT;
+=======
+>>>>>>> Add Mercury colony tile
         }
     },
     template: `

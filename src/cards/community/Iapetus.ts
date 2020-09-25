@@ -11,7 +11,11 @@ export class Iapetus extends Colony implements IColony {
 
     public trade(player: Player, game: Game, usesTradeFleet: boolean = true): void {
         if (usesTradeFleet) this.beforeTrade(this, player, game);
+<<<<<<< HEAD
         let steps : number = 0;
+=======
+        let qty : number = 0;
+>>>>>>> Add Mercury colony tile
 
         if (this.trackPosition === MAX_COLONY_TRACK_POSITION) {
             steps = 2;
