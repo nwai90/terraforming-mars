@@ -19,16 +19,11 @@ export const Colony = Vue.component("colony", {
             let offset: number = 5;
             return index * 56 + 27 + offset;
         },
-        getCubeYPosition: (
-            colony: ColonyModel,
-            isColonyCube: boolean
-        ): number => {
-            let offset: number = 0;
-            if (isColonyCube !== true) offset = 7;
-            if (colony.name === ColonyName.EUROPA) return 170 + offset;
-            if (colony.name === ColonyName.PLUTO) return 169 + offset;
-            if (colony.name === ColonyName.MIRANDA) return 180 + offset;
-            return 168 + offset;
+        getCubeYPosition: (colony: ColonyModel): number => {
+            if (colony.name === ColonyName.IAPETUS) return 185;
+            if (colony.name === ColonyName.EUROPA) return 145;
+            if (colony.name === ColonyName.MIRANDA || colony.name === ColonyName.PLUTO ) return 180;
+            return 165;
         },
         getGanymede: (): string => {
             return ColonyName.GANYMEDE;
@@ -71,13 +66,16 @@ export const Colony = Vue.component("colony", {
                 return -12;
             return 0;
         },
+        getIapetus:(): string => {
+          return ColonyName.IAPETUS;
+        }
     },
     template: `
     <div class="filterDiv colony-card colonies" :class="colony.name + '-background'" v-i18n>
     <div v-if="colony.visitor !== undefined" class="colony-spaceship">
       <div :class="'colonies-fleet colonies-fleet-'+ colony.visitor"></div>
     </div>
-    <div v-if="colony.isActive" :style="'margin-left:' + getCubeXPosition(colony, true) + 'px; margin-top:' + getCubeYPosition(colony, true) + 'px;'" class="colony_cube"></div>
+    <div v-if="colony.isActive" :style="'margin-left:' + getCubeXPosition(colony, true) + 'px; margin-top:' + getCubeYPosition(colony) + 'px;'" class="colony_cube"></div>
     <div v-if="colony.colonies.length > 0" :style="'margin-left: ' + getColonyXPosition(0) + 'px;  margin-top:' + getCubeYPosition(colony) + 'px;'" :class="'board-cube board-cube--' + colony.colonies[0]"></div>
     <div v-if="colony.colonies.length > 1" :style="'margin-left: ' + getColonyXPosition(1) + 'px;  margin-top:' + getCubeYPosition(colony) + 'px;'" :class="'board-cube board-cube--' + colony.colonies[1]"></div>
     <div v-if="colony.colonies.length > 2" :style="'margin-left: ' + getColonyXPosition(2) + 'px;  margin-top:' + getCubeYPosition(colony) + 'px;'" :class="'board-cube board-cube--' + colony.colonies[2]"></div>
@@ -101,6 +99,10 @@ export const Colony = Vue.component("colony", {
       <div v-if="colony.name === getIo()" class="resource heat"></div>      
       <div v-if="colony.name === getLuna()" class="resource money">2</div>
 
+      <div v-if="colony.name === getIapetus()" class="resource card" style="transform: scale(0.8);"></div>
+      <span v-if="colony.name === getIapetus()" class="white-char">:</span>
+      <div v-if="colony.name === getIapetus()" class="resource money">-1</div>
+
       <span v-if="colony.name === getPluto()" class="white-char" style="margin-left:5px;">+</span>
       <div v-if="colony.name === getPluto()" class="resource card" style="transform: scale(0.8);margin-left:-2px;"></div>
       <span v-if="colony.name === getPluto()" class="white-char">-</span>
@@ -116,6 +118,7 @@ export const Colony = Vue.component("colony", {
       <div v-if="colony.name === getTriton()" class="resource titanium" style="margin-left:20px;"></div>
       <div v-if="colony.name === getCeres()" class="resource steel" style="margin-left:20px;"></div>
       <div v-if="colony.name === getLuna()" class="resource money" style="margin-left:20px;">&nbsp;</div>
+      <div v-if="colony.name === getIapetus()" class="resource money" style="margin-left:20px;">&nbsp;</div>
       <div v-if="colony.name === getIo()" class="resource heat" style="margin-left:20px;"></div>
       <div v-if="colony.name === getMiranda()" class="resource animal" style="margin-left:20px;"></div>
       <div v-if="colony.name === getPluto()" class="resource card" style="margin-left:20px;transform: scale(0.8);margin-top: -8px;"></div>
@@ -242,6 +245,25 @@ export const Colony = Vue.component("colony", {
       <div>10</div>
       <div>13</div>
       <div>17</div>
+    </div>
+
+    <div v-if="colony.name === getIapetus()" class="colony-grid-container">
+      <div><div class="tile rating" style="transform: scale(0.8); margin-left:-1px"></div></div>
+      <div><div class="tile rating" style="transform: scale(0.8); margin-left:-1px"></div></div>
+      <div><div class="tile rating" style="transform: scale(0.8); margin-left:-1px"></div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <div v-if="colony.name === getIapetus()" class="colony-grid-container2">
+      <div>0</div>
+      <div>1</div>
+      <div>2</div>
+      <div>4</div>
+      <div>8</div>
+      <div>12</div>
+      <div>16</div>
     </div>
 
     <div v-if="colony.name === getCeres()" class="colony-grid-container">
