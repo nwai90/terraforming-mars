@@ -344,9 +344,12 @@ export class Game implements ILoadable<SerializedGame, Game> {
       if (gameOptions.customColoniesList.includes(ColonyName.IAPETUS)) return true;
       if (gameOptions.customColoniesList.includes(ColonyName.MERCURY)) return true;
       if (gameOptions.customColoniesList.includes(ColonyName.HYGIEA)) return true;
+<<<<<<< HEAD
       if (gameOptions.customColoniesList.includes(ColonyName.TITANIA)) return true;
       if (gameOptions.customColoniesList.includes(ColonyName.VENUS)) return true;
       if (gameOptions.customColoniesList.includes(ColonyName.LEAVITT)) return true;
+=======
+>>>>>>> Add Hygiea colony tile
 
       return false;
     }

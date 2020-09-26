@@ -21,12 +21,8 @@ export const Colony = Vue.component("colony", {
         },
         getCubeYPosition: (colony: ColonyModel): number => {
             if (colony.name === ColonyName.IAPETUS) return 185;
-<<<<<<< HEAD
             if (colony.name === ColonyName.VENUS || colony.name === ColonyName.LEAVITT) return 180;
             if (colony.name === ColonyName.EUROPA || colony.name === ColonyName.MERCURY || colony.name === ColonyName.HYGIEA) return 145;
-=======
-            if (colony.name === ColonyName.EUROPA || colony.name === ColonyName.MERCURY) return 145;
->>>>>>> Add Mercury colony tile
             if (colony.name === ColonyName.MIRANDA || colony.name === ColonyName.PLUTO ) return 180;
             return 165;
         },
@@ -76,7 +72,6 @@ export const Colony = Vue.component("colony", {
         },
         getMercury:(): string => {
           return ColonyName.MERCURY;
-<<<<<<< HEAD
         },
         getHygiea:(): string => {
           return ColonyName.HYGIEA;
@@ -89,9 +84,7 @@ export const Colony = Vue.component("colony", {
         },
         getLeavitt:(): string => {
           return ColonyName.LEAVITT;
-=======
->>>>>>> Add Mercury colony tile
-        }
+        },
     },
     template: `
     <div class="filterDiv colony-card colonies" :class="colony.name + '-background'" v-i18n>
@@ -158,6 +151,7 @@ export const Colony = Vue.component("colony", {
       <div v-if="colony.name === getIo()" class="resource heat" style="margin-left:20px;"></div>
       <div v-if="colony.name === getMiranda()" class="resource animal" style="margin-left:20px;margin-top:-10px;"></div>
       <div v-if="colony.name === getPluto()" class="resource card" style="margin-left:20px;transform: scale(0.8);margin-top:-10px;"></div>
+
       <div v-if="colony.name !== getEuropa() && colony.name !== getMercury() && colony.name !== getIapetus() && colony.name !== getHygiea() && colony.name !== getTitania() && colony.name !== getVenus() && colony.name !== getLeavitt()" class="white-x"></div>
       <div v-if="colony.name === getIapetus()" class="white-x" style="margin-left:-42px;"></div>
       <div v-if="colony.name === getTitania()" class="white-x" style="margin-left:42px;"></div>
