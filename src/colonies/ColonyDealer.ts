@@ -14,12 +14,9 @@ import { Iapetus } from '../cards/community/Iapetus';
 import { Mercury } from '../cards/community/Mercury';
 import { ColonyName } from './ColonyName';
 import { Hygiea } from '../cards/community/Hygiea';
-<<<<<<< HEAD
 import { Titania } from '../cards/community/Titania';
 import { Venus } from '../cards/community/Venus';
 import { Leavitt } from '../cards/community/Leavitt';
-=======
->>>>>>> Add Hygiea colony tile
 
 export interface IColonyFactory<T> {
     colonyName: ColonyName;
