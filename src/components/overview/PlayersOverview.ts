@@ -1,6 +1,5 @@
 import Vue from "vue";
 import { PlayerInfo } from "./PlayerInfo";
-import { OverviewSettings } from "./OverviewSettings";
 import { Player } from "../../Player";
 import { OtherPlayer } from "../OtherPlayer";
 import { PlayerModel } from "../../models/PlayerModel";
@@ -23,7 +22,6 @@ export const PlayersOverview = Vue.component("players-overview", {
     props: ["player"],
     components: {
         "player-info": PlayerInfo,
-        "overview-settings": OverviewSettings,
         "other-player": OtherPlayer,
     },
     data: function () {
