@@ -393,10 +393,8 @@
         border: 2px solid #fff;
     }
 }
-
-.milestones_cont, .awards_cont {
-    display: inline-block;
-    vertical-align: top;
+.awards-padding {
+    padding: 3px 42px 3px 42px !important;
 }
 
 .milestones,
@@ -407,49 +405,40 @@
         letter-spacing: 1px;
         font-size: 16px;
         font-weight: bold;
-        color: #ffcc64;
+        color: #303030;
         text-transform: uppercase;
-        background: #303030;
-        padding: 1px 5px 1px 10px;
-        border-radius: 2px;
+        background: lightblue;
+        padding: 3px 26px 3px 26px;
+        border-radius: 20px 20px 0 0;
         text-decoration: none;
-        width: 140px;
-        margin-left: 5px;
         cursor: pointer;
+        min-width: 180px;
         display: inline-block;
         text-align: center;
     }
 
     .ma-block {
         display: inline-block;
-        width: 140px;
-        border-radius: 0 0 5px 5px;
-        border-radius: 10px;
-        margin: 5px;
         vertical-align: top;
-
-        .award-block {
-            border-radius: 10px !important;
-        }
+        width: 156px;
+        cursor: pointer;
 
         .ma-score {
-            width: 24px;
-            height: 18px;
-            line-height: 18px;
-            border-radius: 2px;
-            margin: 5px 2px 0px 2px;
             display: inline-block;
-            font-size: 15px;
-            font-family: Prototype;
-            color: black;
+            color: white;
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            border-radius: 50%;
+            margin: 6px 2px 0 2px;
+            display: inline-block;
+            color: white;
             font-weight: normal;
-            box-shadow: 0 0 1px 1px black;
         }
 
         .ma-scores {
             display: inline-block;
-            width: 144px;
-            margin-left: -2px;
+            width: 156px;
         }
 
         .ma-player {
@@ -459,157 +448,162 @@
 
         .ma-name {
             display: inline-block;
-            width: 140px;
-            height: 83px;
-            color: black;
-            padding-top: 60px;
-            font-size: 15px;
+            width: 156px;
+            height: 99px;
+
+            color: #000000b0;
+            padding-top: 62px;
+            font-size: 13px;
             text-transform: uppercase;
             text-align: center;
             font-weight: bold;
-            background-size: 200px;
-            background-position: -30px -5px;
-            border-radius: 10px 10px 0 0;
+        }
+
+        .ma-name--awards {
+            background: url(assets/awards_bg.png) 0px -52px;
+        }
+
+        .ma-name--milestones {
+            background: url(assets/milestones_bg.png) 0px -52px;
         }
 
         .ma-name--terraformer {
-            background-image: url(assets/ma/terraformer.png);
+            background-position: 0px -52px;
         }
 
         .ma-name--mayor {
-            background-image: url(assets/ma/mayor.png);
+            background-position: 0px -152px;
         }
 
         .ma-name--gardener {
-            background-image: url(assets/ma/gardener.png);
+            background-position: 0px -252px;
         }
 
         .ma-name--builder {
-            background-image: url(assets/ma/builder.png);
+            background-position: 0px -352px;
         }
 
         .ma-name--planner {
-            background-image: url(assets/ma/planner.png);
+            background-position: 0px -452px;
         }
 
         .ma-name--generalist {
-            background-image: url(assets/ma/generalist.png);
+            background-position: 0px -552px;
         }
 
         .ma-name--specialist {
-            background-image: url(assets/ma/specialist.png);
+            background-position: 0px -652px;
         }
 
         .ma-name--ecologist {
-            background-image: url(assets/ma/ecologist.png);
+            background-position: 0px -752px;
         }
 
         .ma-name--tycoon {
-            background-image: url(assets/ma/tycoon.png);
+            background-position: 0px -852px;
         }
 
         .ma-name--legend {
-            background-image: url(assets/ma/legend.png);
+            background-position: 0px -952px;
         }
 
         .ma-name--diversifier {
-            background-image: url(assets/ma/diversifier.png);
+            background-position: 0px -1052px;
         }
 
         .ma-name--tactician {
-            background-image: url(assets/ma/tactician.png);
+            background-position: 0px -1152px;
         }
 
         .ma-name--polar-explorer {
-            background-image: url(assets/ma/polar_explorer.png);
+            background-position: 0px -1252px;
         }
 
         .ma-name--energizer {
-            background-image: url(assets/ma/energizer.png);
+            background-position: 0px -1352px;
         }
 
         .ma-name--rim-settler {
-            background-image: url(assets/ma/rim_settler.png);
+            background-position: 0px -1452px;
         }
 
         .ma-name--hoverlord {
-            background-image: url(assets/ma/hoverlord.png);
+            background-position: 0px -1552px;
         }
 
         .ma-name--landlord {
-            background-image: url(assets/ma/landlord.png);
+            background-position: 0px -52px;
         }
 
         .ma-name--banker {
-            background-image: url(assets/ma/banker.png);
+            background-position: 0px -252px;
         }
 
         .ma-name--scientist {
-            background-image: url(assets/ma/scientist.png);
+            background-position: 0px -152px;
         }
 
         .ma-name--thermalist {
-            background-image: url(assets/ma/thermalist.png);
+            background-position: 0px -352px;
         }
 
         .ma-name--miner {
-            background-image: url(assets/ma/miner.png);
+            background-position: 0px -452px;
         }
 
         .ma-name--celebrity {
-            background-image: url(assets/ma/celebrity.png);
+            background-position: 0px -552px;
         }
 
         .ma-name--industrialist {
-            background-image: url(assets/ma/industrialist.png);
+            background-position: 0px -652px;
         }
 
         .ma-name--desert-settler {
-            background-image: url(assets/ma/desert_settler.png);
+            background-position: 0px -752px;
         }
 
         .ma-name--estate-dealer {
-            background-image: url(assets/ma/estate_dealer.png);
+            background-position: 0px -852px;
         }
 
         .ma-name--benefactor {
-            background-image: url(assets/ma/benefactor.png);
+            background-position: 0px -952px;
         }
 
         .ma-name--cultivator {
-            background-image: url(assets/ma/cultivator.png);
+            background-position: 0px -1052px;
         }
 
         .ma-name--magnate {
-            background-image: url(assets/ma/magnate.png);
+            background-position: 0px -1152px;
         }
 
         .ma-name--space-baron {
-            background-image: url(assets/ma/space_baron.png);
+            background-position: 0px -1252px;
         }
 
         .ma-name--excentric {
-            background-image: url(assets/ma/excentric.png);
+            background-position: 0px -1352px;
         }
 
         .ma-name--contractor {
-            background-image: url(assets/ma/contractor.png);
+            background-position: 0px -1452px;
         }
 
         .ma-name--venuphile {
-            background-image: url(assets/ma/venuphile.png);
+            background-position: 0px -1552px;
         }
 
         .ma-description {
             display: inline-block;
-            width: 140px;
+            width: 156px;
             height: 70px;
             color: #ddd;
-            padding: 0px 2px 0px 2px;
+            padding: 5px 2px 0px 2px;
             font-size: 14px;
             line-height: 15px;
             text-align: center;
-            
         }
 
         .ma-description-hidden {
@@ -628,7 +622,7 @@
 
 .with-turmoil {
     .ma-name--terraformer {
-        background-image: url(assets/ma/terraformer26.png) !important;
+        background-position: 0px -1752px !important;
     }
 }
 
@@ -636,35 +630,22 @@
     margin: 0 0 0 5px;
 }
 
+.milestones .ma-block {
+    margin-bottom: 5px;
+}
+
+.funded-award-inline,
 .claimed-milestone-inline {
     white-space: nowrap;
     color: #000;
     text-transform: uppercase;
-    background: linear-gradient(to right, #e28c22, #ffcc64, #ffcc64, #e28c22);
+    background: #c2c2c2;
     padding: 1px 33px 1px 10px;
-    width: 140px;
-    text-align: center;
     font-size: 15px;
     line-height: 23px;
     font-weight: bold;
-    margin: 0 5px 0 5px;
-    border-radius: 2px;
-    display: inline-block;
-}
-.funded-award-inline {
-    white-space: nowrap;
-    color: #000;
-    text-transform: uppercase;
-    background: linear-gradient(135deg, #e28c22, #ffcc64, #ffcc64, #e28c22);
-    padding: 1px 33px 1px 10px;
-    width: 140px;
-    text-align: center;
-    font-size: 15px;
-    line-height: 23px;
-    font-weight: bold;
-    margin: 0 5px 0 5px;
+    margin: 0 0 0 10px;
     border-radius: 20px;
-    font-style: italic;
     display: inline-block;
 }
 
