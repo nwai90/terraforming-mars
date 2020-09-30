@@ -1709,11 +1709,10 @@ export const HTML_DATA: Map<string, string> =
                 <div class="production-prefix ">&#x2796;&#xFE0E;</div><div class="energy production "></div>
                 <div class="production-prefix ">&#x2795;&#xFE0E;</div><div class="money production ">4</div>
             </div>
-            <div class="tile city-tile " style="margin-left:20px;margin-bottom:5px; "></div><br>
-            <div class="plant resource "></div><div class="plant resource "></div>
-            <div class="description " style="margin-top:-8px;font-size:11px;text-align: left">
-                <div>Requires 12% oxygen. Gain 2 plants. Place a City tile.</div>
-                <div style="width: 135px">Decrease your Energy production 1 step and increase your MC production 4 steps.</div>
+            <div class="tile city-tile " style="margin-left:20px;margin-bottom:5px;top: -30px;"></div><br>
+            <div style="margin-left: 90px;margin-top: -30px;"><div class="plant resource "></div><div class="plant resource "></div></div>
+            <div class="description " style="margin-top:-4px;font-size:11px;text-align: left">
+                Requires 12% oxygen. Gain 2 plants. Place a City tile. Decrease your Energy production 1 step and increase your MC production 4 steps.
             </div>
         </div>
 `],
@@ -2309,7 +2308,7 @@ export const HTML_DATA: Map<string, string> =
             <div class="production-box production-box-size1a" style="margin-top:2px;">
                 <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="plant production red-outline"></div>
             </div>
-            <div class="description" style="position:absolute;text-align:left;margin-top:-25px; width: 130px;">
+            <div class="description" style="position:absolute;text-align:left;margin-top:-55px; margin-left: -5px;width: 110px;">
               (Requires 8% oxygen. Add 1 Animal to this card. Decrease any Plant production 1 step. 1 VP per 2 Animals on this card.)
             </div>
         </div>
@@ -3371,10 +3370,13 @@ export const HTML_DATA: Map<string, string> =
               <div class="points points-big">1</div>
               <div class="requirements">3 Science</div>
               <div class="nowrap">
-                <div class="tile temperature-tile"></div><div class="tile temperature-tile"></div> OR
-                <div class="tile venus-tile"></div><div class="tile venus-tile"></div>
+                <div class="tile temperature-tile" style="transform: scale(0.8); margin: 0 -8px"></div>
+                <div class="tile temperature-tile" style="transform: scale(0.8); margin: 0"></div>
+                 OR
+                <div class="tile venus-tile" style="transform: scale(0.8); margin: 0 -2px 0 0">V</div>
+                <div class="tile venus-tile" style="transform: scale(0.8); margin: 0 -4px">V</div>
               </div>
-              <span>*</span><div class="resource floater"></div><div class="resource floater"></div>
+              <span>*</span><div class="resource floater" style="margin-top: 10px; margin-bottom: 15px"></div><div class="resource floater"></div>
               <div class="description" style="text-align:left;position:absolute;margin-top:-8px;">
                 (Requires 3 Science tags. Either raise the temperature 2 steps, or raise Venus 2 steps. Add 2 Floaters to ANY card)
               </div>
@@ -3546,7 +3548,7 @@ export const HTML_DATA: Map<string, string> =
                    <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="energy production"></div>
                    <div class="production-prefix">&#x2795;&#xFE0E;</div><div class="money production">2</div>
                </div>
-               <div class="description" style="position:absolute;margin-top:-90px;margin-left:10px;text-align:left; width: 120px">
+               <div class="description" style="position:absolute;margin-top:-80px;margin-left:10px;text-align:left; width: 120px">
                  (Requires 10% Venus. Add 2 Microbes or 2 Animals to another Venus card. Decrease your energy production 1 step and increase your MC production 2 steps)
               </div>
             </div>
@@ -3887,18 +3889,18 @@ export const HTML_DATA: Map<string, string> =
                 <div class="red-arrow "></div>
                 <div class="resource floater"><div class="card-icon card-icon-venus">V</div></div>
                 <div class="resource floater"><div class="card-icon card-icon-venus">V</div></div>
-                <div class="description " style="margin-top:-5px">
+                <div class="description " style="margin-top:-5px;margin-left:-15px;width:250px">
                   (Action: Add 2 floaters to ANY VENUS CARD.)
                 </div>
               <div class="production-box" style="margin-left:85px">
                 <div class="money production">2</div>
               </div>
               &nbsp;<div class="tile city-tile"></div>*
-                <div class="description " style="text-align:left;margin-top:-58px; width: 92px;">
+                <div class="description " style="text-align:left;margin-top:-58px; width: 92px; margin-left: -5px">
                   Requires 2 science tags. Increase your MC production 2 steps.
                 </div>
-                <div class="description" style="text-align:left; width: 117px; margin-left: 19px;">
-                  Place a City tile ON THE RESERVED AREA. 1 VP for every 3rd Floater on this card.
+                <div class="description" style="text-align:left; width: 140px; margin-left: -5px;">
+                  Place a City tile ON THE RESERVED AREA. 1 VP per 3 Floaters on this card.
                 </div>
             </div>
 `],
@@ -4123,7 +4125,7 @@ export const HTML_DATA: Map<string, string> =
             <div class="content ">
               <div class="points points-big">1</div>
               <div class="requirements">16% Venus</div>
-              <div class="tile venus-tile"></div>
+              <div class="tile venus-tile">V</div>
               <br><div class="microbe resource"><div class="card-icon tag-venus"></div></div> OR
               <div class="animal resource"><div class="card-icon tag-venus"></div></div>
               <div class="description">
@@ -4522,7 +4524,7 @@ export const HTML_DATA: Map<string, string> =
                 </div>
                 <div class="tile rating"></div> <div class="resource floater"></div><div class="resource floater"></div>*
                 <div class="description " style="margin-top:-5px;text-align:left;">
-                  (Requires 1 Jovian tag. Increase your TR 1 step. Add 2 floaters to ANY card. 1VP per 2 floaters.)
+                  <span>(Requires 1 Jovian tag. Increase your TR 1 step. Add 2 floaters to ANY<br>card. 1VP per 2 floaters.)</span>
                 </div>
               </div>
 `],
@@ -4745,7 +4747,8 @@ export const HTML_DATA: Map<string, string> =
                 <div class="description ">
                   (Action: Add 1 floater to this card, or spend 1 floater here to draw a card.)
                 </div>
-                <div class="resource card"></div><div class="resource card"></div>
+                <div class="resource card" style="transform:scale(0.9); margin-left:-5px"></div>
+                <div class="resource card" style="transform:scale(0.9); margin-left:-5px"></div>
                 <div class="description bottom">(Requires 3 Science tags.</div>
                 <div class="description bottom">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Draw 2 cards.)</div>
               </div>
