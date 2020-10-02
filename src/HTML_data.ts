@@ -7567,10 +7567,10 @@ export const HTML_DATA: Map<string, string> =
         <div class="corporationEffectBox">
           <div class="corporationEffectBoxLabel">ACTION</div>
 
-          <div style="margin-top:-2px">
-            FLIP <div class="resource card card-small"><div class="card-icon card-icon-blue"></div></div>
+          <div style="margin-top:-2px; margin-left: -5px; font-size: 14px;">
+            FLIP&nbsp;&nbsp;<div class="resource card card-small"><div class="card-icon card-icon-blue"></div></div>
             <div class="red-arrow "></div>
-            ? <div class="tile rating"></div>
+            ?&nbsp;<div class="tile rating"></div>
             <div class="resource card card-small"></div>
             <div class="resource card card-small"></div>
           </div>
