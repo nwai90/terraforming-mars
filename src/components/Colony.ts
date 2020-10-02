@@ -20,10 +20,9 @@ export const Colony = Vue.component("colony", {
             return index * 56 + 27 + offset;
         },
         getCubeYPosition: (colony: ColonyModel): number => {
-            if (colony.name === ColonyName.IAPETUS) return 185;
-            if (colony.name === ColonyName.VENUS || colony.name === ColonyName.LEAVITT) return 180;
+            if (colony.name === ColonyName.IAPETUS || colony.name === ColonyName.LEAVITT) return 185;
             if (colony.name === ColonyName.EUROPA || colony.name === ColonyName.MERCURY || colony.name === ColonyName.HYGIEA) return 145;
-            if (colony.name === ColonyName.MIRANDA || colony.name === ColonyName.PLUTO ) return 180;
+            if (colony.name === ColonyName.MIRANDA || colony.name === ColonyName.PLUTO || colony.name === ColonyName.VENUS) return 180;
             return 165;
         },
         getGanymede: (): string => {

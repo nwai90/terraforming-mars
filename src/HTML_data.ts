@@ -5200,8 +5200,8 @@ export const HTML_DATA: Map<string, string> =
 [CardName.INVENTRIX,`
     <div class="tag tag1 tag-science"></div>
       <div class="corporationLabel ">CORPORATION</div>
-      <div class="contentCorporation ">
-          <div class="corporationEffectBox ">
+      <div class="contentCorporation" style="margin-top:10px">
+          <div class="corporationEffectBox" style="margin-top:140px">
               <div class="corporationEffectBoxLabel ">EFFECT</div>
                 <div class="tile background-color-corporation" style="width:100px;text-shadow:none;color:black;font-size:11px;padding-top:5px;padding-bottom:5px;">Temp / O2 / Ocean</div>: +/- 2
               <div class="description " style="text-align:center;margin-top:0px; ">
@@ -5209,12 +5209,12 @@ export const HTML_DATA: Map<string, string> =
               </div>
           </div>
           <span style="color: #020202;
-          font-size:24px;
+          font-size:28px;
           padding-left:5px;
           padding-bottom:5px;
           text-shadow: 6px 6px 5px grey;
           ;">
-            <span style="color: #020202;background-color:#6bb5c7;padding-left:4px;padding-right:4px;font-size:26px;box-shadow: 6px 6px 10px grey;">X</span> INVENTRIX
+            INVENTRIX
           </span>
           <div class="description " style="text-align:center ">
             <div class="resource money " style="margin-left:20px;">45</div> <div class="resource card" style="margin-left:20px"></div><div class="resource card"></div><div class="resource card"></div><br>
@@ -5236,6 +5236,7 @@ export const HTML_DATA: Map<string, string> =
       </div>
       <span style="font-size:24px;
                       margin-left:15px;
+                      margin-top:10px;
                       color:white;
                       line-height:40px;
                       background: #32004d;
@@ -5273,11 +5274,11 @@ export const HTML_DATA: Map<string, string> =
               </div>
           </div>
           <div style="color: #020202;font-size:24px;text-shadow:6px 6px 6px grey;">
-            <div style="text-shadow:none;box-shadow:3px 3px 6px grey;margin-right:2px;border: 1px solid red;display:inline-block;background-color:#ff5f00;">&#x25b2;<span style="color: #020202;font-size:14px;padding:0px;border:none;margin-left:-5px;">&#x25b2;</span>
-            </div>THARSIS<br>&nbsp; REPUBLIC</div>
+            <div style="text-shadow:none;box-shadow:3px 3px 6px grey;margin-right:8px;;margin-top:4px;display:inline-block;background-color:#ff5f00;">&#x25b2;<span style="color: #020202;font-size:14px;padding:0px;border:none;margin-left:-5px;">&#x25b2;</span>
+            </div>&nbsp;THARSIS<br>&nbsp; REPUBLIC</div>
           <div class="description " style="text-align:center ">
           <div class="resource money " style="margin-left:60px;">40</div> <div class="tile city-tile" style="margin-left:40px;margin-top:-20px;"> </div><br>
-              (You start with 40 MC. As your first action in the game,place a city tile.)
+              (You start with 40 MC. As your first action in the game, place a city tile.)
           </div>
       </div>
 `],
@@ -5293,9 +5294,9 @@ export const HTML_DATA: Map<string, string> =
           (Effect: When playing a power card OR THE STANDARD PROJECT POWER PLANT, you pay 3 MC less for it.)
         </div>
       </div>
-      <span style="color: #020202;
+      <span style="color: purple;
                       font-size:32px;
-                      font-family: 'Arial Narrow','Verdana';
+                      font-family: 'Verdana';
                       font-weight:normal;
                       text-shadow: 6px 3px 5px  grey;">
                   THORGATE
@@ -5353,10 +5354,11 @@ export const HTML_DATA: Map<string, string> =
           (Effect: When you play an Earth tag, you pay 3 MC less for it.)
         </div>
       </div>
-      <span style="font-size:34px;
+      <span style="font-size:32px;
                       color: orangered;
-                      font-family: 'Times New Roman';
+                      font-family: Georgia;
                       font-weight:normal;
+                      letter-spacing: 2px;
                       text-shadow: -1px 0 #333333, 0 1px #333333, 1px 0 #333333,0px -1px #333333, 6px 3px 5px  grey;">
                   TERACTOR
               </span><br><br>
@@ -5636,8 +5638,8 @@ export const HTML_DATA: Map<string, string> =
                     (Effect: When you play an Science tag, you pay 2MC less for it.)
                 </div>
             </div>
-            <div style="color:rgb(2,125,195);background:linear-gradient(to right,rgb(2,125,195) 10%,white,white,white, white,white,white, white);box-shadow:3px 3px 10px 1px rgb(58,58,58);width:135px;line-height:24px;border-radius:10px 0px 0px 10px">
-              <div style="display:inline-block;margin-left:25px;margin-top: 3px;margin-bottom:15px;font-size:26px;text-shadow: 2px 2px #ccc;text-align:center">VALLEY TRUST</div>
+            <div style="color:rgb(2,125,195);background:linear-gradient(to right,rgb(2,125,195) 10%,white,white,white, white,white,white, white);box-shadow:3px 3px 10px 1px rgb(58,58,58);width:135px;line-height:24px;border-radius:10px 0px 0px 10px;margin-top:5px;margin-bottom:5px;">
+              <div style="display:inline-block;margin-left:25px;padding:4px;font-size:26px;text-shadow: 2px 2px #ccc;text-align:center">VALLEY TRUST</div>
             </div>
             <div class="description" style="text-align:center;">
             <div class="resource money" style="margin-left:12px;margin-top:10px;">37</div> <div class="resource card-corporation" style="margin-left:50px"><span style="background:linear-gradient(to right, rgb(235,118,171), #e64d91);padding-left:4px;padding-right:4px;border-radius:2px;">PREL</span></div>
@@ -5875,7 +5877,7 @@ export const HTML_DATA: Map<string, string> =
           </div>
         </div>
         <div class="poseidon">POSEIDON</div>
-        <div class="resource money" style="margin-left:50px;margin-right:20px;">45</div> <div class="triangle triangle-black"></div>
+        <div class="resource money" style="margin-left:50px;margin-right:20px;margin-top:15px;">45</div> <div class="triangle triangle-black"></div>
         <div class="description" style="text-align:center;margin-top:0px;">
           (You start with 45MC. As your first action, place a colony.)
         </div>
@@ -6020,8 +6022,8 @@ export const HTML_DATA: Map<string, string> =
                         (Effect: When any ocean tile is placed, increase your MC production 1 step. Your bonus for placing adjacent to oceans is 3MC instead of 2MC.)
                     </div>
                 </div>
-                <div style="font-size:22px;margin-top:10px;margin-left:10px;font-family:Times;color:white;
-                text-shadow:0 1px 0px #444, 0px -1px 0px #444, -1px 0px 0px #444, 1px 0px 0px #444;letter-spacing:4px;">
+                <div style="font-size:24px;margin-top:10px;font-family:Arial;color:white;letter-spacing:4px; -webkit-text-stroke: 1px black;
+                text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">
                   LAKEFRONT <br> &nbsp;&nbsp;RESORTS
                   </div>
                 <div class="resource money " style="margin-left:75px;margin-top:10px;">54</div>
@@ -6043,10 +6045,10 @@ export const HTML_DATA: Map<string, string> =
               (Effect: Buying cards to hand costs 1MC.)
           </div>
       </div>
-      <div style="font-size:16px;margin-top:33px;margin-left:75px;margin-bottom:5px; font-family:Prototype;color:#222;transform:scale(2,1)">
+      <div style="font-size:16px;margin-top:40px;margin-left:75px;margin-bottom:5px; font-family:Prototype;color:#222;transform:scale(2)">
         TERRALABS
         </div>
-        <div style="font-size:8px;letter-spacing:2px;font-family:Prototype;margin-left:100px;margin-top:-5px;margin-bottom:10px;transform:scale(2,1)">RESEARCH</div>
+        <div style="font-size:8px;letter-spacing:2px;font-family:Prototype;margin-left:100px;margin-bottom:5px;transform:scale(2)">RESEARCH</div>
       <div class="resource money " style="margin-left:25px;margin-right:20px;">14</div> - <div class="tile rating"></div>
       <div class="description " style="text-align:center;">
           (You start with 14 MC. Lower your TR 1 step.)
@@ -6487,7 +6489,7 @@ export const HTML_DATA: Map<string, string> =
       </div>
 `],
 [CardName.ORBITAL_CONSTRUCTION_YARD,`
-      <div class="title background-color-prelude">Orbital Construction Yard</div>
+      <div class="title background-color-prelude" style="font-size:14px;">Orbital Construction Yard</div>
       <div class="tag tag1 tag-space"></div>
       <div class="prelude-label">PRELUDE</div>
       <div class="prelude-icon preludeCard-icon"></div>
@@ -6547,7 +6549,7 @@ export const HTML_DATA: Map<string, string> =
       </div>
 `],
 [CardName.SELF_SUFFICIENT_SETTLEMENT,`
-      <div class="title background-color-prelude">Self-Sufficient Settlement</div>
+      <div class="title background-color-prelude" style="font-size:14px;">Self-Sufficient Settlement</div>
       <div class="prelude-label">PRELUDE</div>
       <div class="tag tag1 tag-building"></div>
       <div class="tag tag2 tag-city"></div>
@@ -6997,7 +6999,7 @@ export const HTML_DATA: Map<string, string> =
 </div>
 `],
 [CardName.SUB_CRUST_MEASUREMENTS,`
-    <div class="title background-color-active">Sub-Crust Measurements</div>
+    <div class="title background-color-active" style="font-size:15px;">Sub-Crust Measurements</div>
     <div class="price">20</div>
     <div class="tag tag1 tag-building"></div>
     <div class="tag tag2 tag-science"></div>
