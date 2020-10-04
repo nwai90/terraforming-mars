@@ -1084,7 +1084,7 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
             useColoniesNextExtension : boolean,
             usePromoCards: boolean,
             useTurmoilExtension: boolean,
-            useCommunityCards: boolean,
+            useCommunityCards: boolean = false,
             cardsBlackList?: Array<CardName>
         ) {
         this.useCorporateEra = useCorporateEra;
