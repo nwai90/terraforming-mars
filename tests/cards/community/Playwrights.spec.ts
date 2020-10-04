@@ -11,6 +11,7 @@ import { DeimosDown } from "../../../src/cards/DeimosDown";
 import { ICard } from "../../../src/cards/ICard";
 import { LocalHeatTrapping } from "../../../src/cards/LocalHeatTrapping";
 import { MartianSurvey } from "../../../src/cards/prelude/MartianSurvey";
+import { ReleaseOfInertGases } from "../../../src/cards/ReleaseOfInertGases";
 
 describe("Playwrights", function () {
     let card : Playwrights, player : Player, player2: Player, game : Game;
@@ -31,19 +32,20 @@ describe("Playwrights", function () {
     });
 
     it("Can replay own event", function () {
-        const techDemo = new TechnologyDemonstration();
-        techDemo.play(player, game);
-        player.playedCards.push(techDemo);
-
-        expect(player.cardsInHand.length).to.eq(2);
+        const event = new ReleaseOfInertGases();
+        let tr = player.getTerraformRating();
+        event.play(player, game);
+        player.playedCards.push(event);
+        
+        expect(player.getTerraformRating()).to.eq(tr + 2);
         expect(card.canAct(player, game)).to.eq(false);
 
-        player.megaCredits = 5;
+        player.megaCredits = event.cost;
         expect(card.canAct(player, game)).to.eq(true);
 
         const selectCard = card.action(player, game) as SelectCard<ICard>;
-        selectCard.cb([techDemo]);
-        expect(player.cardsInHand.length).to.eq(4);
+        selectCard.cb([event]);
+        expect(player.getTerraformRating()).to.eq(tr + 4);
         expect(player.megaCredits).eq(0);
         expect(player.playedCards.length).to.eq(0);
         expect(player.removedFromPlayCards.length).to.eq(1);
