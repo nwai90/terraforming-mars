@@ -5,8 +5,6 @@ import {OtherPlayer} from '../OtherPlayer';
 import {PlayerModel} from '../../models/PlayerModel';
 import {ActionLabel} from './ActionLabel';
 
-const SHOW_NEXT_LABEL_MIN = 2;
-
 export const getCurrentPlayerIndex = (
   player: PlayerModel,
   players: Array<PlayerModel>,
@@ -64,27 +62,8 @@ export const PlayersOverview = Vue.component('players-overview', {
       return result.slice(0, -1);
     },
     getActionLabel(player: PlayerModel): string {
-      if (this.player.passedPlayers.includes(player.color)) {
-        return ActionLabel.PASSED;
-      }
+      if (this.player.passedPlayers.includes(player.color)) return ActionLabel.PASSED;
       if (player.isActive) return ActionLabel.ACTIVE;
-      const notPassedPlayers = this.player.players.filter(
-        (p: PlayerModel) => !this.player.passedPlayers.includes(p.color),
-      );
-
-      const currentPlayerIndex: number = getCurrentPlayerIndex(
-        player,
-        notPassedPlayers,
-      );
-      const prevPlayerIndex =
-                currentPlayerIndex === 0 ?
-                  notPassedPlayers.length - 1 :
-                  currentPlayerIndex - 1;
-      const isNext = notPassedPlayers[prevPlayerIndex].isActive;
-
-      if (isNext && this.player.players.length > SHOW_NEXT_LABEL_MIN) {
-        return ActionLabel.NEXT;
-      }
 
       return ActionLabel.NONE;
     },
