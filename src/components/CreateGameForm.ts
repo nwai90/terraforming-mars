@@ -635,9 +635,16 @@ export const CreateGameForm = Vue.component('create-game-form', {
                         <div class="create-game-page-column">
                             <h4 v-i18n>Options</h4>
 
-                            <label for="startingCorpNum-checkbox">
-                            <input type="number" class="create-game-corporations-count" value="2" min="1" :max="6" v-model="startingCorporations" id="startingCorpNum-checkbox">
-                                <span v-i18n>Starting Corporations</span>
+                            <label for="startingCorps-checkbox" class="startingCorps-checkbox">
+                                <span>
+                                    <template v-for="n in 3">
+                                        <input type="radio" :value="n+1" v-model="startingCorporations" :id="n+'-checkbox'">
+                                        <label :for="n+'-checkbox'" class="corporation-count">
+                                            <span>{{ n + 1 }}</span>
+                                        </label>
+                                    </template>
+                                </span>
+                                <span v-i18n>Starting corporations</span>
                             </label>
 
                             <input type="checkbox" v-model="solarPhaseOption" id="WGT-checkbox">
