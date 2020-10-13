@@ -79,8 +79,7 @@ export interface GameOptions {
   undoOption: boolean;
   showTimers: boolean;
   fastModeOption: boolean;
-  showOtherPlayersVP: boolean;
-
+  
   // Extensions
   corporateEra: boolean;
   venusNextExtension: boolean;
@@ -132,7 +131,6 @@ const DEFAULT_GAME_OPTIONS: GameOptions = {
   randomMA: RandomMAOptionType.NONE,
   removeNegativeGlobalEventsOption: false,
   requiresVenusTrackCompletion: false,
-  showOtherPlayersVP: false,
   showTimers: true,
   shuffleMapOption: false,
   solarPhaseOption: false,

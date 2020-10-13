@@ -402,6 +402,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       venusScaleLevel: game.getVenusScaleLevel(),
       colonies: getColonies(game),
       tags: player.getAllTags(),
+      showTimers: game.gameOptions.showTimers,
       actionsThisGeneration: Array.from(
         player.getActionsThisGeneration(),
       ),

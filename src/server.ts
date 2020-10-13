@@ -422,7 +422,6 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         undoOption: gameReq.undoOption,
         showTimers: gameReq.showTimers,
         fastModeOption: gameReq.fastModeOption,
-        showOtherPlayersVP: gameReq.showOtherPlayersVP,
 
         corporateEra: gameReq.corporateEra,
         venusNextExtension: gameReq.venusNext,

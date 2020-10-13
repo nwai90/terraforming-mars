@@ -181,9 +181,6 @@ export const PlayerTags = Vue.component('player-tags', {
     getVpCount: function(): number {
       return this.player.victoryPointsBreakdown.total;
     },
-    hideVpCount: function(): boolean {
-      return !this.player.gameOptions.showOtherPlayersVP && !this.isActivePlayer;
-    },
     showShortTags: function(): boolean {
       if (this.hideZeroTags === true) return true;
       return isTagsViewConcise(this.$root);
@@ -260,7 +257,7 @@ export const PlayerTags = Vue.component('player-tags', {
   template: `
         <div class="player-tags">
             <div class="player-tags-main">
-                <tag-count :tag="'vp'" :count="getVpCount()" :size="'big'" :type="'main'" :hideCount="hideVpCount()" />
+                <tag-count :tag="'vp'" :count="getVpCount()" :size="'big'" :type="'main'" />
                 <tag-count :tag="'tr'" :count="getTR()" :size="'big'" :type="'main'"/>
                 <div class="tag-and-discount">
                   <PlayerTagDiscount v-if="hasTagDiscount('all')" :amount="getTagDiscountAmount('all')" :color="player.color" />
