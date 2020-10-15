@@ -640,7 +640,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
                                         </label>
                                     </template>
                                 </span>
-                                <span v-i18n>Starting corporations</span>
+                                <span v-i18n>Corporations</span>
                             </label>
 
                             <input type="checkbox" v-model="solarPhaseOption" id="WGT-checkbox">
