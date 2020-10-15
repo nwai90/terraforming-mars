@@ -24,7 +24,7 @@ export class GameSetup {
       awards: [],
     } as IDrawnMilestonesAndAwards;
 
-    const includeVenus = gameOptions.venusNextExtension && gameOptions.includeVenusMA;
+    const includeVenus = gameOptions.venusNextExtension;
     const requiredQty = includeVenus ? 6 : 5;
 
     switch (gameOptions.randomMA) {

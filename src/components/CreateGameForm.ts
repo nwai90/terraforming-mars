@@ -50,8 +50,6 @@ export interface CreateGameModel {
     undoOption: boolean;
     showTimers: boolean;
     fastModeOption: boolean;
-    removeNegativeGlobalEventsOption: boolean;
-    includeVenusMA: boolean;
     startingCorporations: number;
     soloTR: boolean;
     clonedGameData: IGameData | undefined;
@@ -120,8 +118,6 @@ export const CreateGameForm = Vue.component('create-game-form', {
       undoOption: false,
       showTimers: true,
       fastModeOption: false,
-      removeNegativeGlobalEventsOption: false,
-      includeVenusMA: true,
       startingCorporations: 2,
       soloTR: false,
       clonedGameData: undefined,
@@ -392,8 +388,6 @@ export const CreateGameForm = Vue.component('create-game-form', {
       const undoOption = component.undoOption;
       const showTimers = component.showTimers;
       const fastModeOption = component.fastModeOption;
-      const removeNegativeGlobalEventsOption = this.removeNegativeGlobalEventsOption;
-      const includeVenusMA = component.includeVenusMA;
       const startingCorporations = component.startingCorporations;
       const soloTR = component.soloTR;
       const beginnerOption = component.beginnerOption;
@@ -450,8 +444,6 @@ export const CreateGameForm = Vue.component('create-game-form', {
         undoOption,
         showTimers,
         fastModeOption,
-        removeNegativeGlobalEventsOption,
-        includeVenusMA,
         startingCorporations,
         soloTR,
         clonedGamedId,
@@ -729,14 +721,6 @@ export const CreateGameForm = Vue.component('create-game-form', {
                                     <span v-i18n>Custom Colonies list</span>
                                 </label>
                             </template>
-                            
-                            <template v-if="turmoil">
-                                <input type="checkbox" v-model="removeNegativeGlobalEventsOption" id="removeNegativeEvent-checkbox">
-                                <label for="removeNegativeEvent-checkbox">
-                                    <span v-i18n>Remove negative Global Events</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#remove-negative-global-events" class="tooltip" target="_blank">&#9432;</a>
-                                </label>
-                            </template>
-
                         </div>
 
 
@@ -754,10 +738,6 @@ export const CreateGameForm = Vue.component('create-game-form', {
                             </label>
 
                             <template v-if="venusNext">
-                                <input type="checkbox" v-model="includeVenusMA" id="venusMA-checkbox">
-                                <label for="venusMA-checkbox">
-                                    <span v-i18n>Venus Milestone/Award</span>
-                                </label>
                                 <input type="checkbox" v-model="requiresVenusTrackCompletion" id="requiresVenusTrackCompletion-checkbox">
                                 <label for="requiresVenusTrackCompletion-checkbox">
                                     <span v-i18n>Mandatory Venus Terraforming</span> &nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#venus-terraforming" class="tooltip" target="_blank">&#9432;</a>

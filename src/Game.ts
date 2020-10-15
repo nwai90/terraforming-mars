@@ -92,8 +92,6 @@ export interface GameOptions {
   aresHazards: boolean;
   politicalAgendasExtension: AgendaStyle;
   solarPhaseOption: boolean;
-  removeNegativeGlobalEventsOption: boolean;
-  includeVenusMA: boolean;
   moonExpansion: boolean;
 
   // Variants
@@ -122,7 +120,6 @@ const DEFAULT_GAME_OPTIONS: GameOptions = {
   customCorporationsList: [],
   draftVariant: false,
   fastModeOption: false,
-  includeVenusMA: true,
   initialDraftVariant: false,
   moonExpansion: false,
   politicalAgendasExtension: AgendaStyle.STANDARD,
