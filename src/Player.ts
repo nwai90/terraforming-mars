@@ -937,7 +937,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
   public worldGovernmentTerraforming(): void {
     const action: OrOptions = new OrOptions();
-    action.title = 'Select action for World Government Terraforming';
+    action.title = 'Select action for Solar Phase';
     action.buttonLabel = 'Confirm';
     const game = this.game;
     if (game.getTemperature() < constants.MAX_TEMPERATURE) {
