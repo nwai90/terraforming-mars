@@ -743,21 +743,15 @@ export const CreateGameForm = Vue.component('create-game-form', {
                         <div class="create-game-page-column" v-if="playersCount > 1">
                             <h4 v-i18n>Multiplayer Options</h4>
 
-                            <div class="create-game-page-column-row">
-                                <div>
-                                <input type="checkbox" name="draftVariant" v-model="draftVariant" id="draft-checkbox">
-                                <label for="draft-checkbox">
-                                    <span v-i18n>Draft variant</span>
-                                </label>
-                                </div>
+                            <input type="checkbox" name="draftVariant" v-model="draftVariant" id="draft-checkbox">
+                            <label for="draft-checkbox">
+                                <span v-i18n>Draft variant</span>
+                            </label>
 
-                                <div>
-                                <input type="checkbox" name="initialDraft" v-model="initialDraft" id="initialDraft-checkbox">
-                                <label for="initialDraft-checkbox">
-                                    <span v-i18n>Initial Draft</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#initial-draft" class="tooltip" target="_blank">&#9432;</a>
-                                </label>
-                                </div>
-                            </div>
+                            <input type="checkbox" name="initialDraft" v-model="initialDraft" id="initialDraft-checkbox">
+                            <label for="initialDraft-checkbox">
+                                <span v-i18n>Initial Draft</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#initial-draft" class="tooltip" target="_blank">&#9432;</a>
+                            </label>
 
                             <template v-if="venusNext">
                                 <input type="checkbox" v-model="includeVenusMA" id="venusMA-checkbox">
