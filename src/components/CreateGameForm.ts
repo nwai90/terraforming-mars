@@ -795,15 +795,15 @@ export const CreateGameForm = Vue.component('create-game-form', {
                         </div>
 
                         <div class="create-game-action">
-                            <Button title="Create game" size="big" :onClick="createGame"/>
+                            <Button title="Create game" size="big" :onClick="createGame" class="create-game-btn"/>
 
                             <label>
-                                <div class="btn btn-primary btn-action btn-lg"><i class="icon icon-upload"></i></div>
+                                <div class="btn btn-primary btn-action btn-lg import-export-settings-btn"><i class="icon icon-upload import-export-settings-icon"></i></div>
                                 <input style="display: none" type="file" id="settings-file" ref="file" v-on:change="handleSettingsUpload()"/>
                             </label>
 
                             <label>
-                                <div v-on:click="downloadCurrentSettings()" class="btn btn-primary btn-action btn-lg"><i class="icon icon-download"></i></div>
+                                <div v-on:click="downloadCurrentSettings()" class="btn btn-primary btn-action btn-lg import-export-settings-btn"><i class="icon icon-download import-export-settings-icon"></i></div>
                             </label>
                         </div>  
                     </div>
