@@ -14,17 +14,18 @@ export class ElysiumBoard extends Board {
     const STEEL = SpaceBonus.STEEL;
     const DRAW_CARD = SpaceBonus.DRAW_CARD;
     const TITANIUM = SpaceBonus.TITANIUM;
+    const VOLCANIC = SpaceBonus.VOLCANIC;
 
     // y=0
     builder.ocean().ocean(TITANIUM).ocean(DRAW_CARD).ocean(STEEL).land(DRAW_CARD);
     // y=1
-    builder.land(TITANIUM).land().land().ocean().ocean().land(STEEL, STEEL);
+    builder.land(TITANIUM, VOLCANIC).land().land().ocean().ocean().land(STEEL, STEEL);
     // y=2
-    builder.land(TITANIUM, TITANIUM).land().land(DRAW_CARD).land().ocean(PLANT).ocean().land(DRAW_CARD, DRAW_CARD, DRAW_CARD);
+    builder.land(TITANIUM, TITANIUM, VOLCANIC).land().land(DRAW_CARD).land().ocean(PLANT).ocean().land(DRAW_CARD, DRAW_CARD, DRAW_CARD, VOLCANIC);
     // y=3
     builder.land(PLANT).land(PLANT).land(PLANT).ocean(PLANT, PLANT).land(PLANT).ocean(PLANT).ocean(PLANT).land(PLANT, STEEL);
     // y=4
-    builder.land(PLANT, PLANT).land(PLANT, PLANT).land(PLANT, PLANT).ocean(PLANT, PLANT).land(PLANT, PLANT).land(PLANT, PLANT, PLANT).land(PLANT, PLANT).land(PLANT, PLANT).land(PLANT, TITANIUM);
+    builder.land(PLANT, PLANT).land(PLANT, PLANT).land(PLANT, PLANT).ocean(PLANT, PLANT).land(PLANT, PLANT).land(PLANT, PLANT, PLANT).land(PLANT, PLANT).land(PLANT, PLANT).land(PLANT, TITANIUM, VOLCANIC);
     // y=5
     builder.land(STEEL).land(PLANT).land(PLANT).land(PLANT).land(PLANT).land(PLANT).land(PLANT).land();
     // y=6

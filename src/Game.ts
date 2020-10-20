@@ -63,6 +63,8 @@ import {IMoonData} from './moon/IMoonData';
 import {MoonExpansion} from './moon/MoonExpansion';
 import {TurmoilHandler} from './turmoil/TurmoilHandler';
 import {Random} from './Random';
+import {AddResourcesToCard} from './deferredActions/AddResourcesToCard';
+import {AmazonisBoard} from './boards/AmazonisBoard';
 
 export type GameId = string;
 
@@ -126,7 +128,6 @@ const DEFAULT_GAME_OPTIONS: GameOptions = {
   preludeExtension: false,
   promoCardsOption: false,
   randomMA: RandomMAOptionType.NONE,
-  removeNegativeGlobalEventsOption: false,
   requiresVenusTrackCompletion: false,
   showTimers: true,
   shuffleMapOption: false,
@@ -1364,6 +1365,24 @@ export class Game implements ISerializable<SerializedGame> {
       player.titanium++;
     } else if (spaceBonus === SpaceBonus.HEAT) {
       player.heat++;
+    } else if (spaceBonus === SpaceBonus.ANIMAL) {
+      const animalCards = player.getResourceCards(ResourceType.ANIMAL);
+
+      if (animalCards.length === 1) {
+        player.addResourceTo(animalCards[0], 1);
+        LogHelper.logAddResource(this, player, animalCards[0]);
+      } else if (animalCards.length > 1) {
+        this.defer(new AddResourcesToCard(player, this, ResourceType.ANIMAL, 1));
+      }
+    } else if (spaceBonus === SpaceBonus.MICROBE) {
+      const microbeCards = player.getResourceCards(ResourceType.MICROBE);
+
+      if (microbeCards.length === 1) {
+        player.addResourceTo(microbeCards[0], 1);
+        LogHelper.logAddResource(this, player, microbeCards[0]);
+      } else if (microbeCards.length > 1) {
+        this.defer(new AddResourcesToCard(player, this, ResourceType.MICROBE, 1));
+      }
     }
   }
 
@@ -1516,6 +1535,8 @@ export class Game implements ISerializable<SerializedGame> {
       board = ElysiumBoard.deserialize(d.board, playersForBoard);
     } else if (gameOptions.boardName === BoardName.HELLAS) {
       board = HellasBoard.deserialize(d.board, playersForBoard);
+    } else if (gameOptions.boardName === BoardName.AMAZONIS) {
+      board = AmazonisBoard.deserialize(d.board, playersForBoard);
     } else {
       board = OriginalBoard.deserialize(d.board, playersForBoard);
     }
