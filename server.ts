@@ -439,6 +439,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
                 turmoilExtension: gameReq.turmoil,
                 aresExtension: gameReq.aresExtension,
                 aresHazards: true, // Not a runtime option.
+                politicalAgendasExtension: gameReq.politicalAgendasExtension,
                 promoCardsOption: gameReq.promoCardsOption,
                 communityCardsOption: gameReq.communityCardsOption,
                 solarPhaseOption: gameReq.solarPhaseOption,
@@ -609,6 +610,7 @@ function getPlayer(player: Player, game: Game): string {
         passedPlayers: game.getPassedPlayers(),
         aresExtension: game.gameOptions.aresExtension,
         aresData: game.aresData,
+        politicalAgendasExtension: game.gameOptions.politicalAgendasExtension,
         preludeExtension: game.gameOptions.preludeExtension,
     };
     return JSON.stringify(output);
@@ -818,6 +820,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
             deckSize: game.dealer.getDeckSize(),
             actionsTakenThisRound: player.actionsTakenThisRound,
             preludeExtension: game.gameOptions.preludeExtension,
+            politicalAgendasExtension: game.gameOptions.politicalAgendasExtension,
         } as PlayerModel;
     });
 }
