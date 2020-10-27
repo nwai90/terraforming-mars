@@ -41,6 +41,7 @@ export interface SerializedGame {
     initialDraftIteration: number;
     lastSaveId: number;
     milestones: Array<IMilestone>;
+    erodedSpaces: Array<string>;
     monsInsuranceOwner: PlayerId | undefined;
     moonData: SerializedMoonData | undefined;
     oxygenLevel: number;

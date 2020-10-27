@@ -182,6 +182,7 @@ export class Game implements ISerializable<SerializedGame> {
   public turmoil: Turmoil | undefined;
   public aresData: IAresData | undefined;
   public moonData: IMoonData | undefined;
+  public erodedSpaces: Array<string> = [];
 
   // Card-specific data
   // Mons Insurance promo corp
@@ -233,7 +234,8 @@ export class Game implements ISerializable<SerializedGame> {
     }
 
     const rng = new Random(seed);
-    const board = GameSetup.newBoard(gameOptions.boardName, gameOptions.shuffleMapOption, rng, gameOptions.venusNextExtension);
+    const initialErodedSpaces: Array<string> = [];
+    const board = GameSetup.newBoard(gameOptions.boardName, gameOptions.shuffleMapOption, rng, gameOptions.venusNextExtension, initialErodedSpaces);
     const cardFinder = new CardFinder();
     const cardLoader = new CardLoader(gameOptions);
     const dealer = Dealer.newInstance(cardLoader);
@@ -267,7 +269,7 @@ export class Game implements ISerializable<SerializedGame> {
       const communityColoniesSelected = GameSetup.includesCommunityColonies(gameOptions);
       const allowCommunityColonies = gameOptions.communityCardsOption || communityColoniesSelected;
 
-      game.colonies = game.colonyDealer.drawColonies(players.length, gameOptions.customColoniesList, gameOptions.venusNextExtension, gameOptions.turmoilExtension, allowCommunityColonies);
+      game.colonies = game.colonyDealer.drawColonies(players.length, this.gameOptions, allowCommunityColonies);
       if (players.length === 1) {
         players[0].addProduction(Resources.MEGACREDITS, -2);
         game.defer(new RemoveColonyFromGame(players[0]));
@@ -568,7 +570,9 @@ export class Game implements ISerializable<SerializedGame> {
     }
 
     if (corporationCard.name !== CardName.BEGINNER_CORPORATION) {
-      player.megaCredits -= player.cardsInHand.length * player.cardCost;
+      const cardsToPayFor: number = player.cardsInHand.length;
+      player.megaCredits -= cardsToPayFor * player.cardCost;
+      player.totalSpend += cardsToPayFor * player.cardCost;
     }
     corporationCard.play(player);
     this.log('${0} played ${1}', (b) => b.player(player).card(corporationCard));
@@ -603,27 +607,8 @@ export class Game implements ISerializable<SerializedGame> {
       }
     }
 
-<<<<<<< HEAD
     this.playerIsFinishedWithResearchPhase(player);
   }
-=======
-    private playCorporationCard(
-      player: Player, corporationCard: CorporationCard,
-    ): void {
-      player.corporationCard = corporationCard;
-      player.megaCredits = corporationCard.startingMegaCredits;
-      if (corporationCard.cardCost !== undefined) {
-        player.cardCost = corporationCard.cardCost;
-      }
-
-      if (corporationCard.name !== CardName.BEGINNER_CORPORATION) {
-        const cardsToPayFor: number = player.cardsInHand.length;
-        player.megaCredits -= cardsToPayFor * player.cardCost;
-        player.totalSpend += cardsToPayFor * player.cardCost;
-      }
-      corporationCard.play(player, this);
-      this.log('${0} played ${1}', (b) => b.player(player).card(corporationCard));
->>>>>>> Add Efficiency stat to game end screen
 
   private pickCorporationCard(player: Player): PlayerInput {
     return new SelectInitialCards(player, (corporation: CorporationCard) => {
@@ -1591,7 +1576,9 @@ export class Game implements ISerializable<SerializedGame> {
 
     if (gameOptions.aresExtension) {
       game.aresData = d.aresData;
+      game.erodedSpaces = d.erodedSpaces;
     }
+
     // Reload colonies elements if needed
     if (gameOptions.coloniesExtension) {
       game.colonyDealer = new ColonyDealer();

@@ -65,15 +65,15 @@ export class GameSetup {
   };
 
   // Function to construct the board and milestones/awards list
-  public static newBoard(boardName: BoardName, shuffle: boolean, rng: Random, includeVenus: boolean): Board {
+  public static newBoard(boardName: BoardName, shuffle: boolean, rng: Random, includeVenus: boolean, erodedSpaces: Array<string>): Board {
     if (boardName === BoardName.ELYSIUM) {
-      return ElysiumBoard.newInstance(shuffle, rng, includeVenus);
+      return ElysiumBoard.newInstance(shuffle, rng, includeVenus, erodedSpaces);
     } else if (boardName === BoardName.HELLAS) {
-      return HellasBoard.newInstance(shuffle, rng, includeVenus);
+      return HellasBoard.newInstance(shuffle, rng, includeVenus, erodedSpaces);
     } else if (boardName === BoardName.AMAZONIS) {
-      return AmazonisBoard.newInstance(shuffle, rng, includeVenus);
+      return AmazonisBoard.newInstance(shuffle, rng, includeVenus, erodedSpaces);
     } else {
-      return OriginalBoard.newInstance(shuffle, rng, includeVenus);
+      return OriginalBoard.newInstance(shuffle, rng, includeVenus, erodedSpaces);
     }
   }
 
@@ -95,6 +95,7 @@ export class GameSetup {
     if (gameOptions.customColoniesList.includes(ColonyName.VENUS)) return true;
     if (gameOptions.customColoniesList.includes(ColonyName.LEAVITT)) return true;
     if (gameOptions.customColoniesList.includes(ColonyName.PALLAS)) return true;
+    if (gameOptions.customColoniesList.includes(ColonyName.DEIMOS)) return true;
 
     return false;
   }

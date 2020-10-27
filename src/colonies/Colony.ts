@@ -22,6 +22,12 @@ import {SerializedColony} from '../SerializedColony';
 import {StealResources} from '../deferredActions/StealResources';
 import {Tags} from '../cards/Tags';
 import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
+import {Deimos} from '../cards/community/Deimos';
+import {PlaceHazardTile} from '../deferredActions/PlaceHazardTile';
+import {_AresHazardPlacement} from '../ares/AresHazards';
+import { SelectSpace } from '../inputs/SelectSpace';
+import { ISpace } from '../ISpace';
+import { SpaceBonus } from '../SpaceBonus';
 
 export enum ShouldIncreaseTrack { YES, NO, ASK }
 
@@ -236,6 +242,45 @@ export abstract class Colony implements SerializedColony {
           player.setResource(Resources.MEGACREDITS, partyDelegateCount);
           LogHelper.logGainStandardResource(player, Resources.MEGACREDITS, partyDelegateCount);
         }
+        break;
+
+      case ColonyBenefit.PLACE_HAZARD_TILE:
+        const availableSpaces = Deimos.getAvailableSpaces(player, game);
+        game.defer(new PlaceHazardTile(player, game, 'Select space next to no other tile for hazard', availableSpaces));
+        break;
+
+      case ColonyBenefit.ERODE_SPACES_ADJACENT_TO_HAZARDS:
+        for (let i = 0; i < quantity; i++) {
+          const availableSpaces = _AresHazardPlacement.getAllLandSpacesAdjacentToHazards(game);
+    
+          if (availableSpaces.length > 0) {
+            game.defer(new DeferredAction(
+              player,
+              () => new SelectSpace(
+                "Select space adjacent to hazard tile to erode",
+                availableSpaces,
+                (foundSpace: ISpace) => {
+                  foundSpace.bonus.forEach((spaceBonus) => game.grantSpaceBonus(player, spaceBonus));
+
+                  const reservedBonuses = [SpaceBonus.VOLCANIC, SpaceBonus.RESTRICTED];
+                  foundSpace.bonus = foundSpace.bonus.filter((bonus) => reservedBonuses.includes(bonus));
+                  game.erodedSpaces.push(foundSpace.id);
+    
+                  const offset: number = Math.abs(foundSpace.y - 4);
+                  const row: number = foundSpace.y + 1;
+                  const position: number = foundSpace.x - offset + 1;
+                  game.log("${0} eroded space on row ${1} position ${2}", b => b.player(player).number(row).number(position));
+    
+                  return undefined;
+                }
+              )
+            ));
+          }
+        }
+        break;
+
+      case ColonyBenefit.GAIN_MC_PER_HAZARD_TILE:
+        player.megaCredits += _AresHazardPlacement.getHazardsCount(game);
         break;
 
       case ColonyBenefit.GAIN_TR:

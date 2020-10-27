@@ -19,6 +19,7 @@ import {Titania} from '../cards/community/Titania';
 import {Venus} from '../cards/community/Venus';
 import {Leavitt} from '../cards/community/Leavitt';
 import {Pallas} from '../cards/community/Pallas';
+import {Deimos} from '../cards/community/Deimos';
 
 const officialColonies: Array<Colony> = [
   new Callisto(),
@@ -42,6 +43,7 @@ const communityColonies: Array<Colony> = [
   new Leavitt(),
   new Venus(),
   new Pallas(),
+  new Deimos(),
 ];
 
 export const ColoniesFilter = Vue.component('colonies-filter', {
@@ -54,6 +56,9 @@ export const ColoniesFilter = Vue.component('colonies-filter', {
     },
     turmoil: {
       type: Boolean,
+    },
+    aresExtension: {
+      type: Boolean
     },
   },
   data: function() {
@@ -112,6 +117,15 @@ export const ColoniesFilter = Vue.component('colonies-filter', {
         }
       }
     },
+    aresExtension: function (enabled) {
+      const index = communityColonies.findIndex(c => c.name === ColonyName.DEIMOS);
+
+      if (enabled && index === -1) {
+        communityColonies.push(new Deimos());
+      } else if (!enabled && index !== -1) {
+        communityColonies.splice(index, 1);
+      }
+    }
   },
   template: `
     <div class="colonies-filter">

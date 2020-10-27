@@ -20,4 +20,5 @@ export enum ColonyName {
     VENUS = 'Venus',
     LEAVITT = 'Leavitt',
     PALLAS = 'Pallas',
+    DEIMOS = 'Deimos',
 }

@@ -2,17 +2,12 @@ import {SpaceBonus} from "../SpaceBonus";
 import {Board} from "./Board";
 import {BoardBuilder} from "./BoardBuilder";
 import {SpaceName} from "../SpaceName";
-import {ISpace} from "./ISpace";
 import {Player} from "../Player";
 import {SerializedBoard} from "./SerializedBoard";
 import {Random} from "../Random";
 
 export class AmazonisBoard extends Board {
-    private constructor(public spaces: Array<ISpace>) {
-        super();
-      }
-    
-    public static newInstance(shuffle: boolean, rng: Random, includeVenus: boolean): AmazonisBoard {
+    public static newInstance(shuffle: boolean, rng: Random, includeVenus: boolean, erodedSpaces: Array<string> = []): AmazonisBoard {
       const builder = new BoardBuilder(includeVenus);
 
       const PLANT = SpaceBonus.PLANT;
@@ -49,7 +44,7 @@ export class AmazonisBoard extends Board {
           builder.shuffle(rng, SpaceName.MEDUSAE_FOSSAE, SpaceName.ALBOR_THOLUS, SpaceName.ANSERIS_MONS, SpaceName.PINUDS_MONS, SpaceName.ULYSSES_THOLUS);
       }
 
-      const spaces = builder.build();
+      const spaces = builder.build(erodedSpaces);
       return new AmazonisBoard(spaces);
     }
     
