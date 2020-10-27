@@ -169,12 +169,12 @@ export const Colony = Vue.component('colony', {
       <div v-if="colony.name === getPluto()" class="resource card card-with-border" style="margin-left:20px;transform: scale(0.8);margin-top: -8px;"></div>
       <div v-if="colony.name === getEuropa()" style="height: 20px; visibility: hidden;display: block;" />
       <div v-if="colony.name !== getEuropa() && colony.name !== getMercury() && colony.name !== getIapetus() && colony.name !== getHygiea() && colony.name !== getTitania() && colony.name !== getVenus() && colony.name !== getLeavitt() && colony.name !== getPallas()" class="white-x"></div>
-      <div v-if="colony.name === getIapetus()" class="white-x" style="margin-left:-42px;"></div>
-      <div v-if="colony.name === getTitania()" class="white-x" style="margin-left:42px;"></div>
-      <div v-if="colony.name === getTitania()" class="points points-big" style="margin-left: 10px; margin-top: -53px; transform: scale(0.5); height: 50px; width: 50px">&nbsp;</div>
+      <div v-if="colony.name === getIapetus()" class="white-x" style="margin-left:-32px; top:-2px"></div>
+      <div v-if="colony.name === getTitania()" class="white-x" style="margin-left:56px;"></div>
+      <div v-if="colony.name === getTitania()" class="points points-big" style="margin-left: 15px; margin-top: -53px; transform: scale(0.5); height: 50px; width: 50px">&nbsp;</div>
       <div v-if="colony.name === getPallas()" class="white-x" style="margin-left:52px; margin-right: -30px;"></div>
       <div v-if="colony.name === getPallas()" class="delegate" style="margin-top:-23px; margin-right:5px"></div>
-      <div v-if="colony.name === getVenus()" class="white-x" style="margin-left:45px; margin-bottom:4px;"></div>
+      <div v-if="colony.name === getVenus()" class="white-x" style="margin-left:55px; margin-right:-10px;"></div>
       <div v-if="colony.name === getVenus()" class="resource" style="background:white;margin:10px 10px 10px -20px;">?<div class="card-icon tag-venus" style="color: white;margin-top: -36px;margin-left: 16px;"></div></div>
       <div v-if="colony.name === getLeavitt()" class="resource card" style="margin-left:5px;transform: scale(0.8)"></div>
       <span v-if="colony.name !== getEuropa() && colony.name !== getPluto() && colony.name !== getMercury() && colony.name !== getIapetus() && colony.name !== getHygiea() && colony.name !== getTitania() && colony.name !== getLeavitt() && colony.name !== getPallas()" class="colony-background-color">
