@@ -13,6 +13,7 @@ import {TradeAdvance} from './TradeAdvance';
 import {PoliticalUprising} from './PoliticalUprising';
 import {ByElection} from './ByElection';
 import {Midas} from './Midas';
+import {ColonialOne} from './ColonialOne';
 
 export const COMMUNITY_CARD_MANIFEST = new CardManifest({
   module: GameModule.Community,
@@ -23,6 +24,7 @@ export const COMMUNITY_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.INCITE, Factory: Incite, compatibility: GameModule.Turmoil},
     {cardName: CardName.PLAYWRIGHTS, Factory: Playwrights},
     {cardName: CardName.MIDAS, Factory: Midas},
+    {cardName: CardName.COLONIAL_ONE, Factory: ColonialOne},
   ],
   preludeCards: [
     {cardName: CardName.RESEARCH_GRANT, Factory: ResearchGrant},

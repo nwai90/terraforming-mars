@@ -533,8 +533,8 @@ function serveAsset(req: http.IncomingMessage, res: http.ServerResponse): void {
     file = `build${req.url}${suffix}`;
   } else if (req.url === '/assets/Prototype.ttf') {
     file = 'assets/Prototype.ttf';
-  } else if (req.url === '/assets/futureforces.ttf') {
-    file = 'assets/futureforces.ttf';
+  } else if (req.url === "/assets/BattleStar.ttf") {
+    file = "assets/BattleStar.ttf";
   } else if (req.url.endsWith('.png')) {
     const assetsRoot = path.resolve('./assets');
     const reqFile = path.resolve(path.normalize(req.url).slice(1));
