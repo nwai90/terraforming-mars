@@ -413,7 +413,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
       if (gameReq.board === 'random') {
         let boards = Object.values(BoardName);
         if (!gameReq.communityCardsOption) boards = boards.filter((b) => b !== BoardName.AMAZONIS);
-        
+
         gameReq.board = boards[Math.floor(Math.random() * boards.length)];
       }
 

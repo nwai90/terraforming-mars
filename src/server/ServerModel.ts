@@ -121,6 +121,7 @@ export class Server {
       passedPlayers: game.getPassedPlayers(),
       aresData: game.aresData,
       timer: player.timer.serialize(),
+      totalSpend: player.totalSpend,
     };
   }
 }
@@ -414,6 +415,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       deckSize: game.dealer.getDeckSize(),
       actionsTakenThisRound: player.actionsTakenThisRound,
       timer: player.timer.serialize(),
+      totalSpend: player.totalSpend,
     } as PlayerModel;
   });
 }

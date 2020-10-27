@@ -603,8 +603,27 @@ export class Game implements ISerializable<SerializedGame> {
       }
     }
 
+<<<<<<< HEAD
     this.playerIsFinishedWithResearchPhase(player);
   }
+=======
+    private playCorporationCard(
+      player: Player, corporationCard: CorporationCard,
+    ): void {
+      player.corporationCard = corporationCard;
+      player.megaCredits = corporationCard.startingMegaCredits;
+      if (corporationCard.cardCost !== undefined) {
+        player.cardCost = corporationCard.cardCost;
+      }
+
+      if (corporationCard.name !== CardName.BEGINNER_CORPORATION) {
+        const cardsToPayFor: number = player.cardsInHand.length;
+        player.megaCredits -= cardsToPayFor * player.cardCost;
+        player.totalSpend += cardsToPayFor * player.cardCost;
+      }
+      corporationCard.play(player, this);
+      this.log('${0} played ${1}', (b) => b.player(player).card(corporationCard));
+>>>>>>> Add Efficiency stat to game end screen
 
   private pickCorporationCard(player: Player): PlayerInput {
     return new SelectInitialCards(player, (corporation: CorporationCard) => {

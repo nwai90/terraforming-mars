@@ -152,6 +152,9 @@ export class Player implements ISerializable<SerializedPlayer> {
   // cards that provide 'next card' discounts. This will clear between turns.
   public removedFromPlayCards: Array<IProjectCard> = [];
 
+  // Stats
+  public totalSpend: number = 0;
+
   constructor(
     public name: string,
     public color: Color,
@@ -1167,6 +1170,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     if (totalToPay < cardCost) {
       throw new Error('Did not spend enough to pay for card');
     }
+    this.totalSpend += cardCost;
     return this.playCard(selectedCard, howToPay);
   }
 
