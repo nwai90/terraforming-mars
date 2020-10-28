@@ -9,6 +9,7 @@ import {CommercialDistrictAres} from './CommercialDistrictAres';
 import {DesperateMeasures} from './DesperateMeasures';
 import {EcologicalSurvey} from './EcologicalSurvey';
 import {EcologicalZoneAres} from './EcologicalZoneAres';
+import {Eris} from './Eris';
 import {GeologicalSurvey} from './GeologicalSurvey';
 import {IndustrialCenterAres} from './IndustrialCenterAres';
 import {LavaFlowsAres} from './LavaFlowsAres';
@@ -65,4 +66,7 @@ export const ARES_CARD_MANIFEST = new CardManifest({
     CardName.NUCLEAR_ZONE,
     CardName.RESTRICTED_AREA,
   ],
+  corporationCards: [
+    {cardName: CardName.ERIS, Factory: Eris},
+  ]
 });
