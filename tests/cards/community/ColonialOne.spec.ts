@@ -32,9 +32,8 @@ describe("ColonialOne", function () {
         expect(action!.options.length).to.eq(2);
 
         action!.options[0].cb();
-        
         expect(game.deferredActions.length).to.eq(1);
-        const selectColony = game.deferredActions[0].execute() as SelectColony;
+        const selectColony = game.deferredActions.next()!.execute() as SelectColony;
         selectColony.cb((<any>ColonyName)[selectColony.coloniesModel[0].name.toUpperCase()]);
 
         expect(card.resourceCount).to.eq(2);
@@ -45,7 +44,7 @@ describe("ColonialOne", function () {
         action!.options[1].cb();
         expect(game.deferredActions.length).to.eq(1);
 
-        const selectColony = game.deferredActions.splice(0, 1)[0];
+        const selectColony = game.deferredActions.next()!;
         expect(selectColony.execute() instanceof SelectColony).to.eq(true);
     });
 });
