@@ -119,6 +119,7 @@ const ALL_EVENTS = [
   ...VENUS_POSITIVE_GLOBAL_EVENTS,
   ...COMMUNITY_GLOBAL_EVENTS,
 ];
+
 // Function to return a global event object by its name
 export function getGlobalEventByName(globalEventName: string): IGlobalEvent | undefined {
   const globalEventFactory = ALL_EVENTS.find((globalEventFactory) => globalEventFactory.globalEventName === globalEventName);
