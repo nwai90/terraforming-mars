@@ -6,7 +6,7 @@ import { TileType } from "../TileType";
 import { Bonus } from "./Bonus";
 
 export class GreensBonus01 implements Bonus {
-    grant(player: Player, _game: Game) {
+    grant(player: Player) {
         const tags = [Tags.ANIMAL, Tags.PLANT, Tags.MICROBES];
         const tagCount = tags.map((tag) => player.getTagCount(tag, false, false)).reduce((acc, count) => acc + count, 0);
 
