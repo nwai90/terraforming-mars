@@ -59,6 +59,7 @@ import { RandomMAOptionType } from "./RandomMAOptionType";
 import { AresHandler } from "./ares/AresHandler";
 import { IAresData } from "./ares/IAresData";
 import { Multiset } from "./utils/Multiset";
+import { PoliticalAgendasData } from "./politicalagendas/PoliticalAgendasData";
 
 export interface Score {
   corporation: String;
@@ -87,6 +88,7 @@ export interface GameOptions {
   solarPhaseOption: boolean;
   removeNegativeGlobalEventsOption: boolean;
   includeVenusMA: boolean;
+  politicalEventsExtension: boolean;
   
   // Variants
   draftVariant: boolean;
@@ -143,6 +145,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public colonyDealer: ColonyDealer | undefined = undefined;
     public turmoil: Turmoil | undefined;
     public aresData: IAresData | undefined;
+    public politicalAgendasData: PoliticalAgendasData | undefined;
 
     // Card-specific data
     // Mons Insurance promo corp
@@ -180,6 +183,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           solarPhaseOption: false,
           removeNegativeGlobalEventsOption: false,
           includeVenusMA: true,
+          politicalEventsExtension: false,
 
           draftVariant: false,
           initialDraftVariant: false,

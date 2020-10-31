@@ -1,10 +1,10 @@
-import { IProjectCard } from "../../cards/IProjectCard";
-import { Tags } from "../../cards/Tags";
-import { Game } from "../../Game";
-import { ISpace } from "../../ISpace";
-import { Player } from "../../Player";
-import { TileType } from "../../TileType";
-import { PartyName } from "../../turmoil/parties/PartyName";
+import { IProjectCard } from "../cards/IProjectCard";
+import { Tags } from "../cards/Tags";
+import { Game } from "../Game";
+import { ISpace } from "../ISpace";
+import { Player } from "../Player";
+import { TileType } from "../TileType";
+import { PartyName } from "../turmoil/parties/PartyName";
 import { Policy } from "./Policy";
 
 export class ForestSubsidy implements Policy {
@@ -14,7 +14,7 @@ export class ForestSubsidy implements Policy {
         if (space.tile?.tileType === TileType.GREENERY) {
             player.megaCredits += 4;
         }
-    };
+    }
 }
 
 export class FertilizingResearch implements Policy {
@@ -22,7 +22,7 @@ export class FertilizingResearch implements Policy {
     party = PartyName.GREENS;
     onTilePlaced(player: Player, _space: ISpace, _game: Game) {
         player.plants++;
-    };
+    }
 }
 
 export class BiologicalResearchGrant implements Policy {
