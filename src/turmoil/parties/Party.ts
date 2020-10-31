@@ -1,5 +1,5 @@
 import { Player, PlayerId } from "../../Player";
-import { Game } from '../../Game';
+import { Game } from "../../Game";
 
 export abstract class Party  {
     public partyLeader: undefined | PlayerId | "NEUTRAL" = undefined;
@@ -22,12 +22,12 @@ export abstract class Party  {
         // If there is a party leader
         if (this.partyLeader) {
             if (game) {
-                let sortedPlayers = [...this.getPresentPlayers()].sort(
+                const sortedPlayers = [...this.getPresentPlayers()].sort(
                     (p1, p2) => this.getDelegates(p2) - this.getDelegates(p1)
                 );
                 const max = this.getDelegates(sortedPlayers[0]);
 
-                if (this.getDelegates(this.partyLeader) != max) {
+                if (this.getDelegates(this.partyLeader) !== max) {
                     let currentIndex = 0;
                     if (this.partyLeader === "NEUTRAL") {
                         currentIndex = game.getPlayers().indexOf(game.getPlayerById(game.activePlayer));
@@ -47,7 +47,7 @@ export abstract class Party  {
                         playersToCheck.unshift(game.getPlayers()[currentIndex]);
                     }
                     else {
-                        let left = game.getPlayers().slice(0, currentIndex);
+                        const left = game.getPlayers().slice(0, currentIndex);
                         const right = game.getPlayers().slice(currentIndex);
                         playersToCheck = right.concat(left);
                     }
@@ -83,7 +83,7 @@ export abstract class Party  {
 
     // Return number of delegate
     public getDelegates(player: PlayerId | "NEUTRAL"): number {
-        let delegates = this.delegates.filter(p => p === player).length;
+        const delegates = this.delegates.filter(p => p === player).length;
         return delegates;
     }
 }    

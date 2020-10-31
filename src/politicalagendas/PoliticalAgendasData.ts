@@ -1,10 +1,18 @@
-import { Bonus } from "./Bonus";
+import { Bonus } from "../turmoil/Bonus";
+import { PartyName } from "../turmoil/parties/PartyName";
 import { Policy } from "./Policy";
 
+export enum AgendaStyle {
+    STANDARD,
+    RANDOM,
+    CHAIRMAN
+}
+
+export interface Agenda {
+    partyName: PartyName;
+    definedBonus: Bonus;
+    definedPolicy: Policy | undefined;
+}
 export interface PoliticalAgendasData {
-    // Depending on how the implementation goes, this will contain
-    // a list of the set of bonuses and policies in place for the
-    // whole game, or be selectable one at a time.
-    bonus: Bonus | undefined;
-    policy: Policy | undefined;
+    agendas: Array<Agenda>;
 }

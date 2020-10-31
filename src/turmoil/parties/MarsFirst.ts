@@ -4,15 +4,37 @@ import { PartyName } from "./PartyName";
 import { Game } from "../../Game";
 import { Tags } from "../../cards/Tags";
 import { Resources } from "../../Resources";
+import { Bonus } from "../Bonus";
+import { SpaceType } from "../../SpaceType";
 
 export class MarsFirst extends Party implements IParty {
-    public name = PartyName.MARS;
-    public description: string = "All players receive 1 MC for each Building tag they have.";
+    name = PartyName.MARS;
+    description = "Focused on Martian development and independence.";
+    bonuses = [ new MarsFirstBonus01(), new MarsFirstBonus02() ];
+}
 
-    public rulingBonus(game: Game): void {
+export class MarsFirstBonus01 implements Bonus {
+    id = "mb01";
+    description = "All players receive 1 MC for each Building tag they have.";
+    isDefault = true;
+    grant(game: Game) {
         game.getPlayers().forEach(player => {
-            let tagCount = player.getTagCount(Tags.STEEL, false, false);
+            const tagCount = player.getTagCount(Tags.STEEL, false, false);
             player.setResource(Resources.MEGACREDITS, tagCount);
+        });
+    }
+}
+
+export class MarsFirstBonus02 implements Bonus {
+    id = "mb02";
+    description = "All players receive 1 MC for something something something.";
+    grant(game: Game) {
+        game.getPlayers().forEach(player => {
+            const tileCount = game.board.spaces.filter((space) => {
+                space.tile !== undefined && space.player === player && space.spaceType !== SpaceType.COLONY
+            }).length;
+
+            player.setResource(Resources.MEGACREDITS, tileCount);
         });
     }
 }
