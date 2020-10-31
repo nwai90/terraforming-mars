@@ -85,6 +85,7 @@ export interface GameOptions {
   communityCardsOption: boolean;
   aresExtension: boolean;
   aresHazards: boolean;
+  politicalAgendasExtension: boolean;
   solarPhaseOption: boolean;
   removeNegativeGlobalEventsOption: boolean;
   includeVenusMA: boolean;
@@ -180,6 +181,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           communityCardsOption: false,
           aresExtension: false,
           aresHazards: true,
+          politicalAgendasExtension: false,
           solarPhaseOption: false,
           removeNegativeGlobalEventsOption: false,
           includeVenusMA: true,

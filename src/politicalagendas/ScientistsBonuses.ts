@@ -1,24 +1,18 @@
 import { Tags } from "../cards/Tags";
-import { Game } from "../Game";
 import { Player } from "../Player";
-import { TileType } from "../TileType";
+import { Resources } from "../Resources";
 import { Bonus } from "./Bonus";
 
-export class Scientists01 implements Bonus {
-    grant(player: Player, _game: Game) {
-        const count = player.playedCards
-            .filter((card) => 
-                card.tags.filter(
-                    (tag) => tag === Tags.SCIENCE
-                ).length > 0
-            ).length;
-
-        player.megaCredits += count;
+export class ScientistsBonus01 implements Bonus {
+    grant(player: Player) {
+        const tagCount = player.getTagCount(Tags.SCIENCE, false, false);
+        player.setResource(Resources.MEGACREDITS, tagCount);
     }
 }
 
-export class Scientists02 implements Bonus {
-    grant(player: Player, game: Game) {
-        player.megaCredits += player.cardsInHand.length * 2;
+export class ScientistsBonus02 implements Bonus {
+    grant(player: Player) {
+        const amount = Math.floor(player.cardsInHand.length / 2);
+        player.setResource(Resources.MEGACREDITS, amount);
     }
 }
