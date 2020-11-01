@@ -27,17 +27,61 @@ export const Colony = Vue.component('colony', {
       colony: ColonyModel,
       isColonyCube = false,
     ): number => {
-      if (colony.name === ColonyName.IAPETUS || colony.name === ColonyName.LEAVITT) return 183;
-      if (colony.name === ColonyName.VENUS) return 190;
-      if (colony.name === ColonyName.PALLAS) return 172;
-      if (colony.name === ColonyName.MERCURY || colony.name === ColonyName.HYGIEA) return 148;
-      if (colony.name === ColonyName.DEIMOS) return 183;
+      if (colony.name === ColonyName.IAPETUS || colony.name === ColonyName.LEAVITT) {
+        if (isColonyCube) return 184;
+        return 189;
+      }
+
+      if (colony.name === ColonyName.TITANIA) {
+        if (isColonyCube) return 170;
+        return 176;
+      }
+
+      if (colony.name === ColonyName.VENUS) {
+        if (isColonyCube) return 191;
+        return 197;
+      }
+
+      if (colony.name === ColonyName.PALLAS) {
+        if (isColonyCube) return 172;
+        return 178;
+      }
+
+      if (colony.name === ColonyName.MERCURY || colony.name === ColonyName.HYGIEA) {
+        if (isColonyCube) return 149;
+        return 155;
+      }
+
+      if (colony.name === ColonyName.DEIMOS) {
+        if (isColonyCube) return 183;
+        return 188;
+      }
+
+      if (colony.name === ColonyName.MIRANDA) {
+        if (isColonyCube) return 174;
+        return 180;
+      };
+
+      if (colony.name === ColonyName.TITAN || colony.name === ColonyName.TRITON) {
+        if (isColonyCube) return 171;
+        return 178;
+      };
+
+      if (colony.name === ColonyName.EUROPA) {
+        if (isColonyCube) return 170;
+        return 175;
+      };
+
+      if (colony.name === ColonyName.ENCELADUS) {
+        if (isColonyCube) return 172;
+        return 175;
+      };
 
       let offset: number = 0;
       if (isColonyCube !== true) offset = 7;
-      if (colony.name === ColonyName.EUROPA) return 170 + offset;
+        
       if (colony.name === ColonyName.PLUTO) return 169 + offset;
-      if (colony.name === ColonyName.MIRANDA) return 180 + offset;
+
       return 168 + offset;
     },
     getGanymede: (): string => {
@@ -112,9 +156,9 @@ export const Colony = Vue.component('colony', {
       <div :class="'colonies-fleet colonies-fleet-'+ colony.visitor"></div>
     </div>
     <div v-if="colony.isActive" :style="'margin-left:' + getCubeXPosition(colony) + 'px; margin-top:' + getCubeYPosition(colony, true) + 'px;'" class="colony_cube"></div>
-    <div v-if="colony.colonies.length > 0" :style="'margin-left: ' + getColonyXPosition(0) + 'px;  margin-top:' + getCubeYPosition(colony) + 'px;'" :class="'board-cube board-cube--' + colony.colonies[0]"></div>
-    <div v-if="colony.colonies.length > 1" :style="'margin-left: ' + getColonyXPosition(1) + 'px;  margin-top:' + getCubeYPosition(colony) + 'px;'" :class="'board-cube board-cube--' + colony.colonies[1]"></div>
-    <div v-if="colony.colonies.length > 2" :style="'margin-left: ' + getColonyXPosition(2) + 'px;  margin-top:' + getCubeYPosition(colony) + 'px;'" :class="'board-cube board-cube--' + colony.colonies[2]"></div>
+    <div v-if="colony.colonies.length > 0" :style="'margin-left: ' + getColonyXPosition(0) + 'px;  margin-top:' + getCubeYPosition(colony) + 'px;'" :class="'board-cube colony-cube board-cube--' + colony.colonies[0]"></div>
+    <div v-if="colony.colonies.length > 1" :style="'margin-left: ' + getColonyXPosition(1) + 'px;  margin-top:' + getCubeYPosition(colony) + 'px;'" :class="'board-cube colony-cube board-cube--' + colony.colonies[1]"></div>
+    <div v-if="colony.colonies.length > 2" :style="'margin-left: ' + getColonyXPosition(2) + 'px;  margin-top:' + getCubeYPosition(colony) + 'px;'" :class="'board-cube colony-cube board-cube--' + colony.colonies[2]"></div>
 
     <div class="colony-card-title-div">
       <span class="colony-card-title-span" :class="colony.name + '-title'">{{colony.name}}</span>
