@@ -44,7 +44,7 @@ export class Turmoil implements ILoadable<SerializedTurmoil, Turmoil> {
     public currentGlobalEvent: IGlobalEvent | undefined;
     public politicalAgendasData: PoliticalAgendasData;
 
-    constructor(game: Game) {
+    constructor(game: Game, politicalAgendas: boolean) {
         // Init parties
         this.parties = ALL_PARTIES.map((cf) => new cf.factory());
 
@@ -72,7 +72,7 @@ export class Turmoil implements ILoadable<SerializedTurmoil, Turmoil> {
             agendas: ALL_PARTIES.map(p => { 
                 return {
                         partyName: p.partyName,
-                        definedBonus: this.getBonus(p.partyName), 
+                        definedBonus: this.getBonus(p.partyName, politicalAgendas ? AgendaStyle.RANDOM : AgendaStyle.STANDARD), 
                         definedPolicy: undefined
                     } as Agenda;
             })

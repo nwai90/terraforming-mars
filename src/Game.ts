@@ -80,15 +80,14 @@ export interface GameOptions {
   coloniesExtension: boolean;
   preludeExtension: boolean;
   turmoilExtension: boolean;
+  politicalAgendasExtension: boolean;
   promoCardsOption: boolean;
   communityCardsOption: boolean;
   aresExtension: boolean;
   aresHazards: boolean;
-  politicalAgendasExtension: boolean;
   solarPhaseOption: boolean;
   removeNegativeGlobalEventsOption: boolean;
   includeVenusMA: boolean;
-  politicalEventsExtension: boolean;
   
   // Variants
   draftVariant: boolean;
@@ -1794,7 +1793,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       // Reload turmoil elements if needed
       if (this.gameOptions.turmoilExtension) {
-        const turmoil = new Turmoil(this);
+        const turmoil = new Turmoil(this, this.gameOptions.politicalAgendasExtension);
         this.turmoil = turmoil.loadFromJSON(d.turmoil);
 
         // Rebuild lobby
