@@ -85,6 +85,7 @@ export interface GameOptions {
   communityCardsOption: boolean;
   aresExtension: boolean;
   aresHazards: boolean;
+  politicalAgendasExtension: boolean;
   solarPhaseOption: boolean;
   removeNegativeGlobalEventsOption: boolean;
   includeVenusMA: boolean;
@@ -281,7 +282,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       corporationCards = this.dealer.shuffleCards(corporationCards);
 
-      // Give each player their corporation cards and other cards
+      // Initialize each player:
+      // Give them their corporation cards, other cards, starting production,
+      // handicaps.
       for (let i = 0; i < players.length; i++) {
         const player = players[i];
         const remainingPlayers = this.players.length - i;
