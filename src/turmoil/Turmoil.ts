@@ -13,7 +13,7 @@ import { IGlobalEvent } from "./globalEvents/IGlobalEvent";
 import { ILoadable } from "../ILoadable";
 import { SerializedTurmoil } from "./SerializedTurmoil";
 import { PLAYER_DELEGATES_COUNT } from "../constants";
-import { AgendaStyle, Agenda, PoliticalAgendasData } from "../politicalagendas/PoliticalAgendasData";
+import { AgendaStyle, Agenda, PoliticalAgendasData } from "./PoliticalAgendasData";
 import { Bonus } from "./Bonus";
 
 export interface IPartyFactory {

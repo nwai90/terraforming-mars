@@ -1,6 +1,5 @@
-
-import { Bonus } from "../turmoil/Bonus";
-import { PartyName } from "../turmoil/parties/PartyName";
+import { Bonus } from "./Bonus";
+import { PartyName } from "./parties/PartyName";
 import { Policy } from "./Policy";
 
 export enum AgendaStyle {
