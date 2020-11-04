@@ -8,7 +8,7 @@ export interface Policy {
     id: string;
     description: string;
     isDefault?: boolean;
-    onTilePlaced?: (player: Player, space: ISpace) => void;
+    onTilePlaced?: (player: Player, space: ISpace, game: Game) => void;
     onCardPlayed?: (player: Player, card: IProjectCard) => void;
     action?: (player: Player, game: Game) => OrOptions | undefined;
     canAct?: (player: Player, game: Game) => boolean;

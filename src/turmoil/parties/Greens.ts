@@ -16,6 +16,7 @@ import { OrOptions } from "../../inputs/OrOptions";
 import { SelectCard } from "../../inputs/SelectCard";
 import { SelectOption } from "../../inputs/SelectOption";
 import { ResourceType } from "../../ResourceType";
+import { Phase } from "../../Phase";
 
 export class Greens extends Party implements IParty {
     name = PartyName.GREENS;
@@ -56,8 +57,8 @@ export class GreensPolicy01 implements Policy {
     id = "gp01";
     description: string = "Whenever you place a greenery tile, gain 4 MC.";
 
-    onTilePlaced(player: Player, space: ISpace) {
-        if (space.tile?.tileType === TileType.GREENERY) {
+    onTilePlaced(player: Player, space: ISpace, game: Game) {
+        if (space.tile?.tileType === TileType.GREENERY && game.phase === Phase.ACTION) {
             player.setResource(Resources.MEGACREDITS, 4);
         }
     }
