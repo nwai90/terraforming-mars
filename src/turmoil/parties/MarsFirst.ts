@@ -75,8 +75,6 @@ export class MarsFirstPolicy02 implements Policy {
 export class MarsFirstPolicy03 implements Policy {
     id = "mfp03";
     description: string = "Your steel resources are worth 1 MC extra.";
-
-    // TODO: Implement player.getSteelValue(game: Game)
 }
 
 export class MarsFirstPolicy04 implements Policy {
