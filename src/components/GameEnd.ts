@@ -70,9 +70,9 @@ export const GameEnd = Vue.component('game-end', {
     },
     getEfficiencyScore: function (player: PlayerModel): string {
       const startTR : number = this.getStartTR();
-      const avgMcPerGeneration : number = startTR + 20;
+      const avgMcPerGeneration : number = startTR + 25;
 
-      const dummyPlayerScore : number = startTR + (80 + avgMcPerGeneration * (this.player.generation - 1)) / 9;
+      const dummyPlayerScore : number = startTR + (80 + avgMcPerGeneration * (this.player.generation - 1)) / 8.5;
       const playerScore = this.getPointsEarned(player);
       let value : number;
 
