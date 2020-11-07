@@ -163,6 +163,8 @@ export abstract class Board {
       .filter(
         (space) => space.tile === undefined &&
                       (space.player === undefined || space.player === player),
+      ).concat(
+        this.getSpaces(SpaceType.LAND, player).filter((space) => space.tile === undefined && space.bonus.includes(SpaceBonus.COVE))
       );
   }
 

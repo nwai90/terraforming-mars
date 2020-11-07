@@ -65,6 +65,7 @@ import {TurmoilHandler} from './turmoil/TurmoilHandler';
 import {Random} from './Random';
 import {AddResourcesToCard} from './deferredActions/AddResourcesToCard';
 import {AmazonisBoard} from './boards/AmazonisBoard';
+import {ArabiaTerraBoard} from './boards/ArabiaTerraBoard';
 
 export type GameId = string;
 
@@ -1251,7 +1252,7 @@ export class Game implements ISerializable<SerializedGame> {
       throw new Error('This space is land claimed by ' + space.player.name);
     }
 
-    if (space.spaceType !== spaceType) {
+    if (space.spaceType !== spaceType && !space.bonus.includes(SpaceBonus.COVE)) {
       throw new Error(
         `Select a valid location ${space.spaceType} is not ${spaceType}`,
       );
@@ -1541,6 +1542,8 @@ export class Game implements ISerializable<SerializedGame> {
       board = HellasBoard.deserialize(d.board, playersForBoard);
     } else if (gameOptions.boardName === BoardName.AMAZONIS) {
       board = AmazonisBoard.deserialize(d.board, playersForBoard);
+    } else if (gameOptions.boardName === BoardName.ARABIA_TERRA) {
+      board = ArabiaTerraBoard.deserialize(d.board, playersForBoard);
     } else {
       board = OriginalBoard.deserialize(d.board, playersForBoard);
     }

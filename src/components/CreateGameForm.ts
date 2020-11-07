@@ -104,6 +104,8 @@ export const CreateGameForm = Vue.component('create-game-form', {
         BoardName.ORIGINAL,
         BoardName.HELLAS,
         BoardName.ELYSIUM,
+        BoardName.AMAZONIS,
+        BoardName.ARABIA_TERRA,
         'random',
       ],
       seed: Math.random(),
@@ -305,6 +307,8 @@ export const CreateGameForm = Vue.component('create-game-form', {
         return 'create-game-board-hexagon create-game-elysium';
       } else if (boardName === BoardName.AMAZONIS) {
         return "create-game-board-hexagon create-game-amazonis";
+      } else if (boardName === BoardName.ARABIA_TERRA) {
+        return "create-game-board-hexagon create-game-arabia_terra";
       } else {
         return 'create-game-board-hexagon create-game-random';
       }
