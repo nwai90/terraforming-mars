@@ -58,4 +58,69 @@ export const HTML_DATA: Map<string, string> =
         (You start with 46 MC. As your first action, draw an Ares card.)
       </div>
 `],
+    [CardName.HYDROGEN_BOMBARDMENT,`
+      <div class="content">
+        <div class="production-box"><div class="production titanium"></div></div><br>
+        <div class="tile venus-tile"></div>
+        <div class="description">
+            Increase your titanium production by 1 step. Raise Venus 1 step.
+        </div>
+      </div>
+`],
+    [CardName.VITAL_COLONY,`
+      <div class="content">
+      <div class="tile colony"></div><br>
+      <div class="resource money">5</div>
+        <div class="description">
+          Place a colony. Gain 5 MC.
+        </div>
+      </div>
+`],
+    [CardName.STRATEGIC_BASE_PLANNING,`
+      <div class="content">
+      <div class="tile colony"></div>
+      <div class="tile city-tile"></div><br>
+      - <div class="resource money">6</div>
+        <div class="description">
+          Place a colony. Place a city tile on Mars. Pay 6 MC.
+        </div>
+      </div>
+`],
+    [CardName.NITRATE_REDUCERS,`
+      <div class="content">
+        <div class="resource card"><div class="card-icon tag-microbe"></div></div>
+        <div class="resource card"><div class="card-icon tag-microbe"></div></div>
+        <br>
+        <div class="production-box ">
+            <div class="production money">3</div>
+        </div>        
+        <div class="description">
+          Draw 2 microbe cards from the deck. Increase your MC production 3 steps.
+        </div>
+      </div>
+`],
+    [CardName.EXPERIENCED_MARTIANS,`
+    <div class="content">
+        <div class="delegate"></div>
+        <div class="delegate"></div>
+        <br>
+        <div class="production-box production-box-size2">
+            <div class="plant production"></div>
+            <div class="heat production"></div>
+        </div>
+        <div class="description">
+            Place 2 delegates in any one party. Increase your plant and heat production 1 step.
+        </div>
+    </div>
+`],
+    [CardName.TRADE_INFRASTRUCTURE,`
+    <div class="content">
+        <div class="production-box "><div class="energy production"></div></div>
+        <br>
+        <div class="tile fleet"></div>
+        <div class="description">
+            Increase your energy production 1 step. Gain 1 trade fleet.
+        </div>
+    </div>
+`],
   ]);

@@ -479,6 +479,12 @@ export enum CardName {
     TRADE_ADVANCE = 'Trade Advance',
     POLITICAL_UPRISING = 'Political Uprising',
     BY_ELECTION = 'By-Election',
+    HYDROGEN_BOMBARDMENT = 'Hydrogen Bombardment',
+    VITAL_COLONY = 'Vital Colony',
+    STRATEGIC_BASE_PLANNING = 'Strategic Base Planning',
+    NITRATE_REDUCERS = 'Nitrate Reducers',
+    EXPERIENCED_MARTIANS = 'Experienced Martians',
+    TRADE_INFRASTRUCTURE = 'Trade Infrastructure',
 
     // Community colonies
     SCIENCE_TAG_BLANK_CARD = '',
