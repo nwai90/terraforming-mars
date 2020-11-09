@@ -15,7 +15,7 @@ describe("Eris", function () {
         card = new Eris();
         player = new Player("test", Color.BLUE, false);
 
-        const gameOptions = setCustomGameOptions({aresExtension: true}) as GameOptions;
+        const gameOptions = setCustomGameOptions({aresExtension: true, aresHazards: true}) as GameOptions;
         game = new Game("foobar", [player, player], player, gameOptions);
 
         card.play();
@@ -31,12 +31,11 @@ describe("Eris", function () {
         const action = card.action(player, game) as OrOptions;
         const initialHazardsCount = AresHandler.getHazardsCount(game);
         const initialTR = player.getTerraformRating();
-        
+
         // Place a hazard tile
         action.options[0].cb();
         expect(game.deferredActions).has.lengthOf(1);
         const placeHazard = game.deferredActions.next()!.execute() as SelectSpace;
-        
         placeHazard.cb(placeHazard.availableSpaces[0]);
         expect(AresHandler.getHazardsCount(game)).to.eq(initialHazardsCount + 1);
 
