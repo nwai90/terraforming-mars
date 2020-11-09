@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {PoliticalAlliance} from '../../../src/cards/turmoil/PoliticalAlliance';
-import {Game} from '../../../src/Game';
+import {Game, GameOptions} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
@@ -13,8 +13,13 @@ describe('PoliticalAlliance', function() {
     card = new PoliticalAlliance();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
+<<<<<<< HEAD
     const gameOptions = setCustomGameOptions();
     game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
+=======
+    const gameOptions = setCustomGameOptions() as GameOptions;
+    game = new Game('foobar', [player, redPlayer], player, gameOptions);
+>>>>>>> Fix GTS issues
     turmoil = game.turmoil!;
   });
 

@@ -82,7 +82,7 @@ export interface GameOptions {
   undoOption: boolean;
   showTimers: boolean;
   fastModeOption: boolean;
-  
+
   // Extensions
   corporateEra: boolean;
   venusNextExtension: boolean;
@@ -422,6 +422,7 @@ export class Game implements ISerializable<SerializedGame> {
         ];
       }),
       venusScaleLevel: this.venusScaleLevel,
+      erodedSpaces: this.erodedSpaces,
     };
     if (this.aresData !== undefined) {
       result.aresData = this.aresData;

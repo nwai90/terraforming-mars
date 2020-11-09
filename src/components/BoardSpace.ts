@@ -4,7 +4,7 @@ import {SpaceModel} from '../models/SpaceModel';
 import {SpaceType} from '../SpaceType';
 import {TileType} from '../TileType';
 import {$t} from '../directives/i18n';
-import { SpaceBonus } from '../SpaceBonus';
+import {SpaceBonus} from '../SpaceBonus';
 
 const tileTypeToCssClass = new Map<TileType, string>([
   [TileType.COMMERCIAL_DISTRICT, 'commercial_district'],

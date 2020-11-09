@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Game} from '../src/Game';
+import {Game, GameOptions} from '../src/Game';
 import {SpaceName} from '../src/SpaceName';
 import {Mayor} from '../src/milestones/Mayor';
 import {Banker} from '../src/awards/Banker';
@@ -35,7 +35,7 @@ describe('Game', function() {
   it('sets starting production if corporate era not selected', function() {
     const player = TestPlayers.BLUE.newPlayer();
 
-    const gameOptions = setCustomGameOptions({corporateEra: false});
+    const gameOptions = setCustomGameOptions({corporateEra: false}) as GameOptions;
 
     Game.newInstance('foobar', [player], player, gameOptions);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);

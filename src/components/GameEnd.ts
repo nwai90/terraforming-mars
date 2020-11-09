@@ -58,17 +58,17 @@ export const GameEnd = Vue.component('game-end', {
     getStartTR: function(): number {
       return this.isSoloGame() ? 14 : 20;
     },
-    getPointsEarned: function (player: PlayerModel): number {
+    getPointsEarned: function(player: PlayerModel): number {
       const totalPoints : number = player.victoryPointsBreakdown.total;
       const startTR : number = this.getStartTR();
 
       if (player.turmoil) {
         return totalPoints - startTR + (this.player.generation - 1) / 2;
       }
-        
+
       return totalPoints - startTR;
     },
-    getEfficiencyScore: function (player: PlayerModel): string {
+    getEfficiencyScore: function(player: PlayerModel): string {
       const startTR : number = this.getStartTR();
       const avgMcPerGeneration : number = startTR + 25;
 
@@ -82,8 +82,8 @@ export const GameEnd = Vue.component('game-end', {
       }
 
       value = (playerScore - dummyPlayerScore) / dummyPlayerScore;
-      return "+" + value.toFixed(2).toString();
-    }
+      return '+' + value.toFixed(2).toString();
+    },
   },
   template: `
         <div id="game-end" class="game_end_cont">

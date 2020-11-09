@@ -58,7 +58,7 @@ export const ColoniesFilter = Vue.component('colonies-filter', {
       type: Boolean,
     },
     aresExtension: {
-      type: Boolean
+      type: Boolean,
     },
   },
   data: function() {
@@ -117,15 +117,15 @@ export const ColoniesFilter = Vue.component('colonies-filter', {
         }
       }
     },
-    aresExtension: function (enabled) {
-      const index = communityColonies.findIndex(c => c.name === ColonyName.DEIMOS);
-
-      if (enabled && index === -1) {
-        communityColonies.push(new Deimos());
-      } else if (!enabled && index !== -1) {
-        communityColonies.splice(index, 1);
+    aresExtension: function(enabled) {
+      if (this.aresExtension && Array.isArray(this.selectedColonies)) {
+        if (enabled === false) {
+          this.selectedColonies = this.selectedColonies.filter((c) => c.name !== ColonyName.DEIMOS);
+        } else if (this.selectedColonies.find((c) => c.name === ColonyName.DEIMOS) === undefined) {
+          this.selectedColonies.push(new Deimos());
+        }
       }
-    }
+    },
   },
   template: `
     <div class="colonies-filter">

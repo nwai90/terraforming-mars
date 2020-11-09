@@ -412,7 +412,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
 
       if (gameReq.board === 'random') {
         let boards = Object.values(BoardName);
-        const communityBoards = [BoardName.AMAZONIS, BoardName.ARABIA_TERRA]
+        const communityBoards = [BoardName.AMAZONIS, BoardName.ARABIA_TERRA];
         if (!gameReq.communityCardsOption) boards = boards.filter((b) => !communityBoards.includes(b));
 
         gameReq.board = boards[Math.floor(Math.random() * boards.length)];
@@ -534,8 +534,8 @@ function serveAsset(req: http.IncomingMessage, res: http.ServerResponse): void {
     file = `build${req.url}${suffix}`;
   } else if (req.url === '/assets/Prototype.ttf') {
     file = 'assets/Prototype.ttf';
-  } else if (req.url === "/assets/BattleStar.ttf") {
-    file = "assets/BattleStar.ttf";
+  } else if (req.url === '/assets/BattleStar.ttf') {
+    file = 'assets/BattleStar.ttf';
   } else if (req.url.endsWith('.png')) {
     const assetsRoot = path.resolve('./assets');
     const reqFile = path.resolve(path.normalize(req.url).slice(1));

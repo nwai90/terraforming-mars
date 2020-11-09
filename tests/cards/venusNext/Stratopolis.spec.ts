@@ -43,7 +43,7 @@ describe('Stratopolis', function() {
 
     const action = card.action(player);
     expect(action instanceof SelectCard).is.true;
-        action!.cb([card2]);
-        expect(player.getResourcesOnCard(card2)).to.eq(2);
+    action!.cb([card2]);
+    expect(player.getResourcesOnCard(card2)).to.eq(2);
   });
 });

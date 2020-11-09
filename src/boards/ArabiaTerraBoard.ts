@@ -27,9 +27,9 @@ export class ArabiaTerraBoard extends Board {
     builder.land().land().ocean(STEEL).land(COVE).ocean(PLANT, PLANT).land(STEEL, DRAW_CARD).land().land().land();
     // y=5
     builder.land(PLANT).land(PLANT).ocean(STEEL, STEEL).land(PLANT).land(STEEL).land().land(TITANIUM, PLANT, COVE).land(PLANT);
-    //y=6
+    // y=6
     builder.land(TITANIUM, PLANT, COVE).ocean(PLANT, PLANT).land(PLANT, PLANT, COVE).land(PLANT).land(STEEL).land(TITANIUM, PLANT).land(TITANIUM, TITANIUM);
-    //y=7
+    // y=7
     builder.ocean(PLANT, PLANT).land(PLANT).land(DRAW_CARD, STEEL).land(STEEL, STEEL).land(STEEL).land(DRAW_CARD);
     // y=8
     builder.land().land().land().land().land(STEEL);

@@ -68,5 +68,5 @@ export const ARES_CARD_MANIFEST = new CardManifest({
   ],
   corporationCards: [
     {cardName: CardName.ERIS, Factory: Eris},
-  ]
+  ],
 });

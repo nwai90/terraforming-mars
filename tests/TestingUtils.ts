@@ -67,7 +67,7 @@ export const setCustomGameOptions = function(options: object = {}): GameOptions 
     moonExpansion: false,
   };
 
-  return Object.assign(defaultOptions, options);
+  return Object.assign(defaultOptions, options) as GameOptions;
 };
 
 export const setRulingPartyAndRulingPolicy = function(game: Game, turmoil: Turmoil, party: IParty, policyId: TurmoilPolicy) {
