@@ -20,6 +20,10 @@ import {StrategicBasePlanning} from './StrategicBasePlanning';
 import {NitrateReducers} from './NitrateReducers';
 import {ExperiencedMartians} from './ExperiencedMartians';
 import {TradeInfrastructure} from './TradeInfrastructure';
+import {GeothermalVent} from './GeothermalVent';
+import {AccumulatedKnowledge} from './AccumulatedKnowledge';
+import {BotanicalHarvest} from './BotanicalHarvest';
+import {MartianLumberYard} from './MartianLumberYard';
 
 export const COMMUNITY_CARD_MANIFEST = new CardManifest({
   module: GameModule.Community,
@@ -93,6 +97,22 @@ export const COMMUNITY_CARD_MANIFEST = new CardManifest({
       cardName: CardName.TRADE_INFRASTRUCTURE,
       Factory: TradeInfrastructure,
       compatibility: GameModule.Colonies,
+    },
+    {
+      cardName: CardName.GEOTHERMAL_VENT,
+      Factory: GeothermalVent,
+    },
+    {
+      cardName: CardName.ACCUMULATED_KNOWLEDGE,
+      Factory: AccumulatedKnowledge,
+    },
+    {
+      cardName: CardName.BOTANICAL_HARVEST,
+      Factory: BotanicalHarvest,
+    },
+    {
+      cardName: CardName.MARTIAN_LUMBER_YARD,
+      Factory: MartianLumberYard,
     },
   ],
 });

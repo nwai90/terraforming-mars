@@ -485,6 +485,10 @@ export enum CardName {
     NITRATE_REDUCERS = 'Nitrate Reducers',
     EXPERIENCED_MARTIANS = 'Experienced Martians',
     TRADE_INFRASTRUCTURE = 'Trade Infrastructure',
+    GEOTHERMAL_VENT = 'Geothermal Vent',
+    ACCUMULATED_KNOWLEDGE = 'Accumulated Knowledge',
+    BOTANICAL_HARVEST = 'Botanical Harvest',
+    MARTIAN_LUMBER_YARD = 'Martian Lumber Yard',
 
     // Community colonies
     SCIENCE_TAG_BLANK_CARD = '',

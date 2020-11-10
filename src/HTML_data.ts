@@ -117,9 +117,70 @@ export const HTML_DATA: Map<string, string> =
     <div class="content">
         <div class="production-box "><div class="energy production"></div></div>
         <br>
+        <div class="energy resource"></div>
+        <div class="energy resource"></div>
+        <div class="energy resource"></div>
         <div class="tile fleet"></div>
         <div class="description">
-            Increase your energy production 1 step. Gain 1 trade fleet.
+            Increase your energy production 1 step. Gain 3 energy. Gain 1 trade fleet.
+        </div>
+    </div>
+`],
+    [CardName.GEOTHERMAL_VENT, `
+    <div class="content">
+        <div class="tile temperature-tile"></div>
+        <div class="tile temperature-tile"></div>
+        <br>
+        <div class="production-box production-box-size2">
+            <div class="heat production"></div>
+            <div class="heat production"></div>
+        </div>
+        <div class="description">
+            Raise temperature 2 steps. Increase your heat production 2 steps.
+        </div>
+    </div>
+`],
+    [CardName.ACCUMULATED_KNOWLEDGE, `
+    <div class="content">
+        <div class="resource card"></div>
+        <div class="resource card"></div>
+        <div class="resource card"></div>
+        <div class="resource card"></div>
+        <div class="resource card"></div>
+        <div class="description">
+            Draw 5 cards.
+        </div>
+    </div>
+`],
+    [CardName.BOTANICAL_HARVEST, `
+    <div class="content">
+        <div class="tile oxygen-tile"></div>
+        <div class="production-box "><div class="plant production"></div></div>
+        <br>
+        <div class="resource plant"></div>
+        <div class="resource plant"></div>
+        <div class="resource plant"></div>
+        <div class="resource plant"></div>
+        <div class="resource plant"></div>
+        <div class="description">
+            Raise oxygen 1 step. Increase your plant production 1 step. Gain 5 plants.
+        </div>
+    </div>
+`],
+    [CardName.MARTIAN_LUMBER_YARD, `
+    <div class="content">
+        <div class="production-box production-box-size2">
+            <div class="steel production"></div>
+            <div class="plant production"></div>
+        </div>
+        <br>
+        <div class="resource steel"></div>
+        <div class="resource steel"></div>
+        <div class="resource plant"></div>
+        <div class="resource plant"></div>
+        <div class="resource plant"></div>
+        <div class="description">
+            Increase your steel and plant production 1 step. Gain 2 steel and 3 plants.
         </div>
     </div>
 `],

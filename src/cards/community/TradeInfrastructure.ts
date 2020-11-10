@@ -11,6 +11,7 @@ export class TradeInfrastructure extends PreludeCard implements IProjectCard {
 
     public play(player: Player) {
       player.addProduction(Resources.ENERGY);
+      player.setResource(Resources.ENERGY, 3);
       player.increaseFleetSize();
 
       return undefined;
