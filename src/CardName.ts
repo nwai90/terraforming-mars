@@ -489,6 +489,7 @@ export enum CardName {
     ACCUMULATED_KNOWLEDGE = 'Accumulated Knowledge',
     BOTANICAL_HARVEST = 'Botanical Harvest',
     MARTIAN_LUMBER_YARD = 'Martian Lumber Yard',
+    FORTIFIED_OUTPOST = 'Fortified Outpost',
 
     // Community colonies
     SCIENCE_TAG_BLANK_CARD = '',

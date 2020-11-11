@@ -184,4 +184,15 @@ export const HTML_DATA: Map<string, string> =
         </div>
     </div>
 `],
+    [CardName.FORTIFIED_OUTPOST, `
+    <div class="content">
+        <div class="tile city-tile"></div>
+        <div class="tile greenery-tile"></div>
+        <br>
+        - <div class="resource money">10</div>
+        <div class="description">
+            Place a city tile on Mars. Place a greenery tile. Pay 10 MC.
+        </div>
+    </div>
+`],
   ]);

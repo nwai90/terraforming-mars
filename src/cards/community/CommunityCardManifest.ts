@@ -24,6 +24,7 @@ import {GeothermalVent} from './GeothermalVent';
 import {AccumulatedKnowledge} from './AccumulatedKnowledge';
 import {BotanicalHarvest} from './BotanicalHarvest';
 import {MartianLumberYard} from './MartianLumberYard';
+import {FortifiedOutpost} from './FortifiedOutpost';
 
 export const COMMUNITY_CARD_MANIFEST = new CardManifest({
   module: GameModule.Community,
@@ -113,6 +114,10 @@ export const COMMUNITY_CARD_MANIFEST = new CardManifest({
     {
       cardName: CardName.MARTIAN_LUMBER_YARD,
       Factory: MartianLumberYard,
+    },
+    {
+      cardName: CardName.FORTIFIED_OUTPOST,
+      Factory: FortifiedOutpost,
     },
   ],
 });
