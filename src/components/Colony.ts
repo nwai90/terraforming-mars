@@ -572,13 +572,13 @@ export const Colony = Vue.component('colony', {
     <div></div>
   </div>
   <div v-if="colony.name === getTitania()" class="colony-grid-container2">
+    <div>3</div>
+    <div>3</div>
     <div>2</div>
     <div>2</div>
     <div>2</div>
     <div>1</div>
     <div>1</div>
-    <div>0</div>
-    <div>0</div>
   </div>
 
   <div v-if="colony.name === getVenus()" class="colony-grid-container" style="margin-top:5px;">
