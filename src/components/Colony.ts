@@ -149,6 +149,10 @@ export const Colony = Vue.component('colony', {
     getDeimos: (): string => {
       return ColonyName.DEIMOS;
     },
+    getClassForColonyPlacementBonus: (colony: ColonyModel, index: number): string => {
+        if (colony.colonies.length > index) return 'filter: grayscale(1) opacity(0.5)';
+        return '';
+    }
   },
   template: `
     <div class="filterDiv colony-card colonies" :class="colony.name + '-background'" v-i18n>
@@ -265,15 +269,15 @@ export const Colony = Vue.component('colony', {
       </span>
 
     <div v-if="colony.name === getEnceladus()" class="colony-grid-container">
-      <div>
+      <div :style="getClassForColonyPlacementBonus(colony, 0)">
         <div class="colony-placement-bonus triple-res resource microbe white-x white-x--3"></div>
       </div>
 
-      <div>
+      <div :style="getClassForColonyPlacementBonus(colony, 1)">
         <div class="colony-placement-bonus triple-res resource microbe white-x white-x--3"></div>
       </div>
 
-      <div>
+      <div :style="getClassForColonyPlacementBonus(colony, 2)">
         <div class="colony-placement-bonus triple-res resource microbe white-x white-x--3"></div>
       </div>
 
@@ -293,15 +297,15 @@ export const Colony = Vue.component('colony', {
     </div>
 
     <div v-if="colony.name === getPluto()" class="colony-grid-container">
-      <div>
+      <div :style="getClassForColonyPlacementBonus(colony, 0)">
         <div class="resource card card-with-border" style="margin-top: 0px; margin-left: -5px; transform: scale(0.8);"></div>
         <div class="resource card card-with-border" style="position absolute; margin: 0 0 0 -30px; transform: scale(0.8);"></div>
       </div>
-      <div>
+      <div :style="getClassForColonyPlacementBonus(colony, 1)">
         <div class="resource card card-with-border" style="margin-top: 0px; margin-left: -5px; transform: scale(0.8);"></div>
         <div class="resource card card-with-border" style="position absolute; margin: 0 0 0 -30px; transform: scale(0.8);"></div>
       </div>
-      <div>
+      <div :style="getClassForColonyPlacementBonus(colony, 2)">
         <div class="resource card card-with-border" style="margin-top: 0px; margin-left: -5px; transform: scale(0.8);"></div>
         <div class="resource card card-with-border" style="position absolute; margin: 0 0 0 -30px; transform: scale(0.8);"></div>
       </div>
@@ -321,9 +325,9 @@ export const Colony = Vue.component('colony', {
     </div>
 
     <div v-if="colony.name === getMiranda()" class="colony-grid-container">
-      <div><div class="resource animal" style="margin-top:11px;"></div></div>
-      <div><div class="resource animal" style="margin-top:11px;"></div></div>
-      <div><div class="resource animal" style="margin-top:11px;"></div></div>
+      <div :style="getClassForColonyPlacementBonus(colony, 0)"><div class="resource animal" style="margin-top:11px;"></div></div>
+      <div :style="getClassForColonyPlacementBonus(colony, 1)"><div class="resource animal" style="margin-top:11px;"></div></div>
+      <div :style="getClassForColonyPlacementBonus(colony, 2)"><div class="resource animal" style="margin-top:11px;"></div></div>
       <div></div>
       <div></div>
       <div></div>
@@ -340,9 +344,9 @@ export const Colony = Vue.component('colony', {
     </div>
 
     <div v-if="colony.name === getIo()" class="colony-grid-container">
-      <div><div class="production-box"><div class="production heat"></div></div></div>
-      <div><div class="production-box"><div class="production heat"></div></div></div>
-      <div><div class="production-box"><div class="production heat"></div></div></div>
+      <div :style="getClassForColonyPlacementBonus(colony, 0)"><div class="production-box"><div class="production heat"></div></div></div>
+      <div :style="getClassForColonyPlacementBonus(colony, 1)"><div class="production-box"><div class="production heat"></div></div></div>
+      <div :style="getClassForColonyPlacementBonus(colony, 2)"><div class="production-box"><div class="production heat"></div></div></div>
       <div></div>
       <div></div>
       <div></div>
@@ -359,9 +363,9 @@ export const Colony = Vue.component('colony', {
     </div>
 
     <div v-if="colony.name === getLuna()" class="colony-grid-container">
-      <div><div class="production-box"><div class="production money">2</div></div></div>
-      <div><div class="production-box"><div class="production money">2</div></div></div>
-      <div><div class="production-box"><div class="production money">2</div></div></div>
+      <div :style="getClassForColonyPlacementBonus(colony, 0)"><div class="production-box"><div class="production money">2</div></div></div>
+      <div :style="getClassForColonyPlacementBonus(colony, 1)"><div class="production-box"><div class="production money">2</div></div></div>
+      <div :style="getClassForColonyPlacementBonus(colony, 2)"><div class="production-box"><div class="production money">2</div></div></div>
       <div></div>
       <div></div>
       <div></div>
@@ -378,9 +382,9 @@ export const Colony = Vue.component('colony', {
     </div>
 
     <div v-if="colony.name === getIapetus()" class="colony-grid-container">
-      <div><div class="tile rating" style="transform: scale(0.8); margin-left:-1px"></div></div>
-      <div><div class="tile rating" style="transform: scale(0.8); margin-left:-1px"></div></div>
-      <div><div class="tile rating" style="transform: scale(0.8); margin-left:-1px"></div></div>
+      <div :style="getClassForColonyPlacementBonus(colony, 0)"><div class="tile rating" style="transform: scale(0.8); margin-left:-1px"></div></div>
+      <div :style="getClassForColonyPlacementBonus(colony, 1)"><div class="tile rating" style="transform: scale(0.8); margin-left:-1px"></div></div>
+      <div :style="getClassForColonyPlacementBonus(colony, 2)"><div class="tile rating" style="transform: scale(0.8); margin-left:-1px"></div></div>
       <div></div>
       <div></div>
       <div></div>
@@ -397,9 +401,9 @@ export const Colony = Vue.component('colony', {
     </div>
 
     <div v-if="colony.name === getCeres()" class="colony-grid-container">
-      <div><div class="production-box"><div class="production steel"></div></div></div>
-      <div><div class="production-box"><div class="production steel"></div></div></div>
-      <div><div class="production-box"><div class="production steel"></div></div></div>
+      <div :style="getClassForColonyPlacementBonus(colony, 0)"><div class="production-box"><div class="production steel"></div></div></div>
+      <div :style="getClassForColonyPlacementBonus(colony, 1)"><div class="production-box"><div class="production steel"></div></div></div>
+      <div :style="getClassForColonyPlacementBonus(colony, 2)"><div class="production-box"><div class="production steel"></div></div></div>
       <div></div>
       <div></div>
       <div></div>
@@ -416,15 +420,15 @@ export const Colony = Vue.component('colony', {
     </div>
 
     <div v-if="colony.name === getTriton()" class="colony-grid-container">
-      <div>
+      <div :style="getClassForColonyPlacementBonus(colony, 0)">
         <div class="colony-placement-bonus resource triple-res titanium white-x white-x--3"></div>
       </div>
 
-      <div>
+      <div :style="getClassForColonyPlacementBonus(colony, 1)">
         <div class="colony-placement-bonus resource triple-res titanium white-x white-x--3"></div>
       </div>
 
-      <div>
+      <div :style="getClassForColonyPlacementBonus(colony, 2)">
         <div class="colony-placement-bonus resource triple-res titanium white-x white-x--3"></div>
       </div>
       <div></div>
@@ -443,9 +447,9 @@ export const Colony = Vue.component('colony', {
     </div>
 
     <div v-if="colony.name === getGanymede()" class="colony-grid-container">
-      <div><div class="production-box"><div class="production plant"></div></div></div>
-      <div><div class="production-box"><div class="production plant"></div></div></div>
-      <div><div class="production-box"><div class="production plant"></div></div></div>
+      <div :style="getClassForColonyPlacementBonus(colony, 0)"><div class="production-box"><div class="production plant"></div></div></div>
+      <div :style="getClassForColonyPlacementBonus(colony, 1)"><div class="production-box"><div class="production plant"></div></div></div>
+      <div :style="getClassForColonyPlacementBonus(colony, 2)"><div class="production-box"><div class="production plant"></div></div></div>
       <div></div>
       <div></div>
       <div></div>
@@ -462,9 +466,9 @@ export const Colony = Vue.component('colony', {
     </div>
 
     <div v-if="colony.name === getCallisto()" class="colony-grid-container">
-    <div><div class="production-box"><div class="production energy"></div></div></div>
-    <div><div class="production-box"><div class="production energy"></div></div></div>
-    <div><div class="production-box"><div class="production energy"></div></div></div>
+    <div :style="getClassForColonyPlacementBonus(colony, 0)"><div class="production-box"><div class="production energy"></div></div></div>
+    <div :style="getClassForColonyPlacementBonus(colony, 1)"><div class="production-box"><div class="production energy"></div></div></div>
+    <div :style="getClassForColonyPlacementBonus(colony, 2)"><div class="production-box"><div class="production energy"></div></div></div>
     <div></div>
     <div></div>
     <div></div>
@@ -481,9 +485,9 @@ export const Colony = Vue.component('colony', {
   </div>
 
   <div v-if="colony.name === getEuropa()" class="colony-grid-container">
-    <div><div class="tile ocean-tile ocean-tile-colony"></div></div>
-    <div><div class="tile ocean-tile ocean-tile-colony"></div></div>
-    <div><div class="tile ocean-tile ocean-tile-colony"></div></div>
+    <div :style="getClassForColonyPlacementBonus(colony, 0)"><div class="tile ocean-tile ocean-tile-colony"></div></div>
+    <div :style="getClassForColonyPlacementBonus(colony, 1)"><div class="tile ocean-tile ocean-tile-colony"></div></div>
+    <div :style="getClassForColonyPlacementBonus(colony, 2)"><div class="tile ocean-tile ocean-tile-colony"></div></div>
     <div></div>
     <div></div>
     <div></div>
@@ -500,9 +504,9 @@ export const Colony = Vue.component('colony', {
   </div>
 
   <div v-if="colony.name === getPallas()" class="colony-grid-container">
-    <div><div class="influence" style="margin-top:5px"></div></div>
-    <div><div class="influence" style="margin-top:5px"></div></div>
-    <div><div class="influence" style="margin-top:5px"></div></div>
+    <div :style="getClassForColonyPlacementBonus(colony, 0)"><div class="influence" style="margin-top:5px"></div></div>
+    <div :style="getClassForColonyPlacementBonus(colony, 1)"><div class="influence" style="margin-top:5px"></div></div>
+    <div :style="getClassForColonyPlacementBonus(colony, 2)"><div class="influence" style="margin-top:5px"></div></div>
     <div></div>
     <div></div>
     <div></div>
@@ -519,9 +523,9 @@ export const Colony = Vue.component('colony', {
   </div>
 
   <div v-if="colony.name === getMercury()" class="colony-grid-container">
-    <div><div class="copy-trade-box">Copy Trade</div></div>
-    <div><div class="copy-trade-box">Copy Trade</div></div>
-    <div><div class="copy-trade-box">Copy Trade</div></div>
+    <div :style="getClassForColonyPlacementBonus(colony, 0)"><div class="copy-trade-box">Copy Trade</div></div>
+    <div :style="getClassForColonyPlacementBonus(colony, 1)"><div class="copy-trade-box">Copy Trade</div></div>
+    <div :style="getClassForColonyPlacementBonus(colony, 2)"><div class="copy-trade-box">Copy Trade</div></div>
     <div></div>
     <div></div>
     <div></div>
@@ -538,13 +542,13 @@ export const Colony = Vue.component('colony', {
   </div>
 
   <div v-if="colony.name === getHygiea()" class="colony-grid-container">
-    <div>
+    <div :style="getClassForColonyPlacementBonus(colony, 0)">
       <div class="resource card red-outline" style="margin-left: 5px; margin-top: 2px; transform: scale(0.8);"></div>
     </div>
-    <div>
+    <div :style="getClassForColonyPlacementBonus(colony, 1)">
       <div class="resource card red-outline" style="margin-left: 5px; margin-top: 2px; transform: scale(0.8);"></div>
     </div>
-    <div>
+    <div :style="getClassForColonyPlacementBonus(colony, 2)">
       <div class="resource card red-outline" style="margin-left: 5px; margin-top: 2px; transform: scale(0.8);"></div>
     </div>
     <div></div>
@@ -563,9 +567,9 @@ export const Colony = Vue.component('colony', {
   </div>
 
   <div v-if="colony.name === getTitania()" class="colony-grid-container">
-    <div><div class="points points-big" style="transform:scale(0.5); margin-left: -16px; margin-top: -18px; height: 80px; line-height:80px; font-size: 72px">5</div></div>
-    <div><div class="points points-big" style="transform:scale(0.5); margin-left: -16px; margin-top: -18px; height: 80px; line-height:80px; font-size: 72px">3</div></div>
-    <div><div class="points points-big" style="transform:scale(0.5); margin-left: -16px; margin-top: -18px; height: 80px; line-height:80px; font-size: 72px">2</div></div>
+    <div :style="getClassForColonyPlacementBonus(colony, 0)"><div class="points points-big" style="transform:scale(0.5); margin-left: -16px; margin-top: -18px; height: 80px; line-height:80px; font-size: 72px">5</div></div>
+    <div :style="getClassForColonyPlacementBonus(colony, 1)"><div class="points points-big" style="transform:scale(0.5); margin-left: -16px; margin-top: -18px; height: 80px; line-height:80px; font-size: 72px">3</div></div>
+    <div :style="getClassForColonyPlacementBonus(colony, 2)"><div class="points points-big" style="transform:scale(0.5); margin-left: -16px; margin-top: -18px; height: 80px; line-height:80px; font-size: 72px">2</div></div>
     <div></div>
     <div></div>
     <div></div>
@@ -582,9 +586,9 @@ export const Colony = Vue.component('colony', {
   </div>
 
   <div v-if="colony.name === getVenus()" class="colony-grid-container" style="margin-top:5px;">
-    <div><div class="tile venus-tile venus-colony-bonus"></div></div>
-    <div><div class="tile venus-tile venus-colony-bonus"></div></div>
-    <div><div class="tile venus-tile venus-colony-bonus"></div></div>
+    <div :style="getClassForColonyPlacementBonus(colony, 0)"><div class="tile venus-tile venus-colony-bonus"></div></div>
+    <div :style="getClassForColonyPlacementBonus(colony, 1)"><div class="tile venus-tile venus-colony-bonus"></div></div>
+    <div :style="getClassForColonyPlacementBonus(colony, 2)"><div class="tile venus-tile venus-colony-bonus"></div></div>
     <div></div>
     <div></div>
     <div></div>
@@ -601,9 +605,9 @@ export const Colony = Vue.component('colony', {
   </div>
 
   <div v-if="colony.name === getLeavitt()" class="colony-grid-container">
-    <div><div class="tag tag-science" style="transform: scale(0.8); margin-top: 2px; margin-left: 4px"></div></div>
-    <div><div class="tag tag-science" style="transform: scale(0.8); margin-top: 2px; margin-left: 4px"></div></div>
-    <div><div class="tag tag-science" style="transform: scale(0.8); margin-top: 2px; margin-left: 4px"></div></div>
+    <div :style="getClassForColonyPlacementBonus(colony, 0)"><div class="tag tag-science" style="transform: scale(0.8); margin-top: 2px; margin-left: 4px"></div></div>
+    <div :style="getClassForColonyPlacementBonus(colony, 1)"><div class="tag tag-science" style="transform: scale(0.8); margin-top: 2px; margin-left: 4px"></div></div>
+    <div :style="getClassForColonyPlacementBonus(colony, 2)"><div class="tag tag-science" style="transform: scale(0.8); margin-top: 2px; margin-left: 4px"></div></div>
     <div></div>
     <div></div>
     <div></div>
@@ -620,15 +624,15 @@ export const Colony = Vue.component('colony', {
   </div>
 
   <div v-if="colony.name === getTitan()" class="colony-grid-container">
-    <div>
+    <div :style="getClassForColonyPlacementBonus(colony, 0)">
       <div class="colony-placement-bonus triple-res resource floater white-x white-x--3"></div>
     </div>
 
-    <div>
+    <div :style="getClassForColonyPlacementBonus(colony, 1)">
       <div class="colony-placement-bonus triple-res resource floater white-x white-x--3"></div>
     </div>
 
-    <div>
+    <div :style="getClassForColonyPlacementBonus(colony, 2)">
       <div class="colony-placement-bonus triple-res resource floater white-x white-x--3"></div>
     </div>
     <div></div>
@@ -647,9 +651,9 @@ export const Colony = Vue.component('colony', {
   </div>
 
   <div v-if="colony.name === getDeimos()" class="colony-grid-container">
-    <div><div class="tile hazard-tile"></div></div>
-    <div><div class="tile hazard-tile"></div></div>
-    <div><div class="tile hazard-tile"></div></div>
+    <div :style="getClassForColonyPlacementBonus(colony, 0)"><div class="tile hazard-tile"></div></div>
+    <div :style="getClassForColonyPlacementBonus(colony, 1)"><div class="tile hazard-tile"></div></div>
+    <div :style="getClassForColonyPlacementBonus(colony, 2)"><div class="tile hazard-tile"></div></div>
     <div></div>
     <div></div>
     <div></div>
