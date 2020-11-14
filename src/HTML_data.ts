@@ -146,9 +146,10 @@ export const HTML_DATA: Map<string, string> =
         <div class="resource card"></div>
         <div class="resource card"></div>
         <div class="resource card"></div>
-        <div class="resource card"></div>
+        <br>
+        - <div class="resource card"></div> + <div class="resource card"></div>
         <div class="description">
-            Draw 5 cards.
+            Draw 4 cards. You may discard a card to draw a card.
         </div>
     </div>
 `],
