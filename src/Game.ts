@@ -259,7 +259,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       // Add Turmoil stuff
       if (gameOptions.turmoilExtension) {
-        this.turmoil = new Turmoil(this);
+        this.turmoil = new Turmoil(this, this.gameOptions.politicalAgendasExtension);
       }
 
       // Setup Ares hazards
@@ -826,9 +826,10 @@ export class Game implements ILoadable<SerializedGame, Game> {
         }
         return;
       }
+      
       // solar Phase Option
+      this.phase = Phase.SOLAR;
       if (this.gameOptions.solarPhaseOption && ! this.marsIsTerraformed()) {
-        this.phase = Phase.SOLAR;
         this.gotoWorldGovernmentTerraforming();
         return;
       }
@@ -836,7 +837,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     private gotoEndGeneration() {
-      this.phase = Phase.INTERGENERATION
       if (this.gameOptions.coloniesExtension) {
         this.colonies.forEach(colony => {
           colony.endGeneration();
@@ -852,7 +852,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
         this.resolveTurmoilDeferredActions();
         return;
       }
-      
+     
+      this.phase = Phase.INTERGENERATION;
       this.goToDraftOrResearch();
     }
 
@@ -1370,14 +1371,17 @@ export class Game implements ILoadable<SerializedGame, Game> {
         }
       });
 
+      // Oceans are not subject to Ares adjacency production penalties.
+      const subjectToHazardAdjacency = (tile.tileType === TileType.OCEAN) ? false : true;
+
       AresHandler.ifAres(this, () => {
-        AresHandler.assertCanPay(this, player, space);
+        AresHandler.assertCanPay(this, player, space, subjectToHazardAdjacency);
       });
 
       // Part 2. Collect additional fees.
       // Adjacency costs are before the hellas ocean tile because this is a mandatory cost.
       AresHandler.ifAres(this, () => {
-        AresHandler.payAdjacencyAndHazardCosts(this, player, space);
+        AresHandler.payAdjacencyAndHazardCosts(this, player, space, subjectToHazardAdjacency);
       });
 
       // Hellas special requirements ocean tile

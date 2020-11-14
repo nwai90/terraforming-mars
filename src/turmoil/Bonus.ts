@@ -4,4 +4,4 @@ export interface Bonus {
     description: string;
     isDefault?: boolean;
     grant: (game: Game) => void;
-}
+} 

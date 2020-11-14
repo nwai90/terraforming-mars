@@ -3,10 +3,10 @@ import { ImprovedEnergyTemplates } from "../../src/turmoil/globalEvents/Improved
 import { Player } from "../../src/Player";
 import { Color } from "../../src/Color";
 import { Resources } from "../../src/Resources";
-import { Game } from '../../src/Game';
-import { Turmoil } from '../../src/turmoil/Turmoil';
-import { Kelvinists } from '../../src/turmoil/parties/Kelvinists';
-import { SolarWindPower } from '../../src/cards/SolarWindPower';
+import { Game } from "../../src/Game";
+import { Turmoil } from "../../src/turmoil/Turmoil";
+import { Kelvinists } from "../../src/turmoil/parties/Kelvinists";
+import { SolarWindPower } from "../../src/cards/SolarWindPower";
 
 describe("ImprovedEnergyTemplates", function () {
     it("resolve play", function () {
@@ -14,7 +14,7 @@ describe("ImprovedEnergyTemplates", function () {
         const player = new Player("test", Color.BLUE, false);
         const player2 = new Player("test2", Color.RED, false);
         const game = new Game("foobar", [player,player2], player);
-        const turmoil = new Turmoil(game);
+        const turmoil = new Turmoil(game, false);
         turmoil.initGlobalEvent(game);
         player.playedCards.push(new SolarWindPower());
         player2.playedCards.push(new SolarWindPower());

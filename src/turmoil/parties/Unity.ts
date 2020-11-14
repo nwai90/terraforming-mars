@@ -7,15 +7,16 @@ import { Bonus } from "../Bonus";
 import { Game } from "../../Game";
 
 export class Unity extends Party implements IParty {
-    public name = PartyName.UNITY;
+    name = PartyName.UNITY;
     description = "Wants to see humanity prosper in the whole solar system.";
-    public bonuses = [new UnityBonus01(), new UnityBonus02()];
+    bonuses = [new UnityBonus01(), new UnityBonus02()];
 }
 
 export class UnityBonus01 implements Bonus {
     id = "ub01";
-    description = "All players receive 1 MC for each Venus tag, Earth tag, and Jovian tag they have.";
+    description = "Gain 1 MC for each Venus tag, Earth tag, and Jovian tag you have.";
     isDefault = true;
+
     grant(game: Game) {
         game.getPlayers().forEach(player => {
             const tags = [Tags.VENUS, Tags.EARTH, Tags.JOVIAN];
@@ -28,7 +29,8 @@ export class UnityBonus01 implements Bonus {
 
 export class UnityBonus02 implements Bonus {
     id = "ub02";
-    description = "All players receive 1 MC for each space tag they have.";
+    description = "Gain 1 MC for each space tag you have, including events.";
+
     grant(game: Game) {
         game.getPlayers().forEach(player => {
             const tagCount = player.getTagCount(Tags.SPACE, true, false);

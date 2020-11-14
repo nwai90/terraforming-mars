@@ -3786,28 +3786,20 @@ export const HTML_DATA: Map<string, string> =
     
     <div class="venus-icon corporation-icon"></div>
     <div class="contentCorporation">
-      <div class="corporationEffectBox">
+    <div class="corporationEffectBox">
         <div class="corporationEffectBoxLabel">EFFECT</div>
-        <div class="tile venus-tile">V</div> : <div class="resource money">2</div>
-        <div class="description" style="text-align:center;margin-top:0px;">
+        <div class="tile venus-tile red-outline">V</div> : <div class="resource money">2</div>
+        <div class="description description-effect">
           (Effect: Whenever Venus is terraformed 1 step, you gain 2MC.)
-        </div>
-      </div>
-      <div style="font-size:23px;
-                    color: orange;
-                    font-weight:bold;
-                    margin-top:10px;
-                    text-shadow:  6px 6px 6px  grey;
-                    text-shadow: -1px 0 #333333, 0 1px #333333, 1px 0 #333333,0px -1px #333333, 6px 3px 5px  grey;">
-                APHRODITE</div>
-                <br><div class="production-box " style="margin-top:5px;margin-left:50px; ">
-                <div class="production plant "></div>
-            </div>
-            <div class="resource money " style="margin-left:20px; ">47</div>
-            <div class="description " style="text-align:center; ">
-                (You start with 1 plant production and 47 MC)
-            </div>
-        </div>
+    </div>
+    </div>
+    <div class="corporation-logo">APHRODITE</div><br>
+    <div class="starting-resources">
+        <div class="production-box"><div class="production plant"></div></div>
+        <div class="resource money">47</div>
+    </div>
+    <div class="description description-starting-resource">(You start with 1 plant production and 47 MC)</div>
+    </div>
 `],
 [CardName.CELESTIC,` 
       
@@ -5523,7 +5515,7 @@ export const HTML_DATA: Map<string, string> =
           <br>
           <div class="delegate effect"></div> : <div class="money resource effect-money">-2</div>
           <div class="description effect">
-            (Effect: You have influence +1. When you send a delegate from the reserve, you pay 2 MC less for it.)
+            (Effect: You have influence +1. When you send a delegate using the lobbying action, you pay 2 MC less for it.)
           </div>
         </div>
       </div>
@@ -5576,12 +5568,14 @@ export const HTML_DATA: Map<string, string> =
 [CardName.VALUABLE_GASES,`
       <div class="content">
         <div class="resource money">6</div>
-        <div class="resource card" style="margin-left:10px">
+        <br>
+        PLAY
+        <div class="resource card">
           <div class="card-icon tag-venus"></div>
         </div>
         &nbsp;: +4 <div class="resource floater"></div>
         <div class="description">
-          Gain 6 MC. Play a Venus card from your hand that collects floaters and add 4 floaters to it.
+          Gain 6 MC. Play a Venus card from your hand and add 4 floaters to it.
         </div>
       </div>
 `],
@@ -5624,7 +5618,7 @@ export const HTML_DATA: Map<string, string> =
         <div>Trade all colonies with</div>
         <div class="tile trade"></div> : <span class="card-sign">+1</span>
         <div class="description">
-          Immediately trade with all active colonies. You may increase the Colony Tile track 1 step before each trade.
+          Immediately trade with all active colonies. You may increase the Colony Tile track 1 step before each of these trades.
           <br><br>Gain 2 MC (SOLO: Gain 10 MC).
         </div>
       </div>

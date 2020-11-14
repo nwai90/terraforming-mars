@@ -14,7 +14,8 @@ export class Kelvinists extends Party implements IParty {
 export class KelvinistsBonus01 implements Bonus {
     id = "kb01";
     isDefault = true;
-    description = "All players receive 1 MC for each Heat production they have.";
+    description = "Gain receive 1 MC for each Heat production you have.";
+
     grant(game: Game) {
         game.getPlayers().forEach(player => {
             const heatProduction = player.getProduction(Resources.HEAT);
@@ -25,7 +26,8 @@ export class KelvinistsBonus01 implements Bonus {
 
 export class KelvinistsBonus02 implements Bonus {
     id = "kb02";
-    description = "All palyeres receive one unit of Heat for each Heat production they have.";
+    description = "Gain 1 heat for each Heat production you have.";
+
     grant(game: Game) {
         game.getPlayers().forEach(player => {
             const heatProduction = player.getProduction(Resources.HEAT);

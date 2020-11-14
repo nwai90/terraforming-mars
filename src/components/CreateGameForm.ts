@@ -142,6 +142,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
     methods: {
         downloadCurrentSettings: function () {
             const serializedData = this.serializeSettings();
+            
             if (serializedData) {
                 let a = document.createElement("a");
                 const blob = new Blob([serializedData], {'type': "application/json"});
@@ -338,6 +339,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             const startingCorporations = component.startingCorporations;
             const soloTR = component.soloTR;
             const beginnerOption = component.beginnerOption;
+            const randomFirstPlayer = component.randomFirstPlayer;
             let clonedGamedId: undefined | string = undefined;
 
             if (customColoniesList.length > 0) {
@@ -397,6 +399,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 randomMA,
                 shuffleMapOption,
                 beginnerOption,
+                randomFirstPlayer
             }, undefined, 4);
 
             return dataToSend;
@@ -508,7 +511,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                                 <span v-i18n>Promos</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#promo-cards" class="tooltip" target="_blank">&#9432;</a>
                             </label>
 
-                            <div class="create-game-subsection-label">Fan-made</div>
+                            <div class="create-game-subsection-label" v-i18n>Fan-made</div>
 
                             <input type="checkbox" name="ares" id="ares-checkbox" v-model="aresExtension">
                             <label for="ares-checkbox" class="expansion-button">
@@ -584,7 +587,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                             </div>
 
 
-                            <div class="create-game-subsection-label">Filter</div>
+                            <div class="create-game-subsection-label" v-i18n>Filter</div>
 
                             <input type="checkbox" v-model="showCorporationList" id="customCorps-checkbox">
                             <label for="customCorps-checkbox">

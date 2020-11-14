@@ -6,7 +6,7 @@ import { Bonus } from "../Bonus";
 
 export class Reds extends Party implements IParty {
     name = PartyName.REDS;
-    description = "Wishes to preserve the red planet. They ahve a hard time succeedingr with that.";
+    description = "Wishes to preserve the red planet.";
     bonuses = [new RedsBonus01(), new RedsBonus02()];
 }
 

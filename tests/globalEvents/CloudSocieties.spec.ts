@@ -2,9 +2,9 @@ import { expect } from "chai";
 import { CloudSocieties } from "../../src/turmoil/globalEvents/CloudSocieties";
 import { Player } from "../../src/Player";
 import { Color } from "../../src/Color";
-import { Game } from '../../src/Game';
-import { Turmoil } from '../../src/turmoil/Turmoil';
-import { Kelvinists } from '../../src/turmoil/parties/Kelvinists';
+import { Game } from "../../src/Game";
+import { Turmoil } from "../../src/turmoil/Turmoil";
+import { Kelvinists } from "../../src/turmoil/parties/Kelvinists";
 import { FloatingHabs } from "../../src/cards/venusNext/FloatingHabs";
 
 describe("CloudSocieties", function () {
@@ -12,7 +12,7 @@ describe("CloudSocieties", function () {
         const card = new CloudSocieties();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player], player);
-        const turmoil = new Turmoil(game);
+        const turmoil = new Turmoil(game, false);
         player.playedCards.push(new FloatingHabs());
         turmoil.chairman = player.id;
         turmoil.dominantParty = new Kelvinists();

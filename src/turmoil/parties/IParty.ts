@@ -2,7 +2,7 @@ import { PartyName } from "./PartyName";
 import { PlayerId } from "../../Player";
 import { Game } from "../../Game";
 import { Bonus } from "../Bonus";
-
+import { Policy } from "../Policy";
 
 export interface IParty {
     name: PartyName;
@@ -14,4 +14,6 @@ export interface IParty {
     bonuses: Array<Bonus>;
     getPresentPlayers(): Array<PlayerId | "NEUTRAL">;
     getDelegates:(player: PlayerId | "NEUTRAL") => number;
+    activeBonus?: Bonus;
+    activePolicy?: Policy;
 }

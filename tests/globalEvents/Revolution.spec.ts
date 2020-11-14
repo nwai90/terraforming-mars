@@ -2,9 +2,9 @@ import { expect } from "chai";
 import { Revolution } from "../../src/turmoil/globalEvents/Revolution";
 import { Player } from "../../src/Player";
 import { Color } from "../../src/Color";
-import { Game } from '../../src/Game';
-import { Turmoil } from '../../src/turmoil/Turmoil';
-import { Kelvinists } from '../../src/turmoil/parties/Kelvinists';
+import { Game } from "../../src/Game";
+import { Turmoil } from "../../src/turmoil/Turmoil";
+import { Kelvinists } from "../../src/turmoil/parties/Kelvinists";
 import { Sponsors } from "../../src/cards/Sponsors";
 
 describe("Revolution", function () {
@@ -16,7 +16,7 @@ describe("Revolution", function () {
         player2 = new Player("test2", Color.RED, false);
 
         game = new Game("foobar", [player, player2], player);
-        turmoil = new Turmoil(game);
+        turmoil = new Turmoil(game, false);
 
         turmoil.initGlobalEvent(game);
         turmoil.chairman = player2.id;

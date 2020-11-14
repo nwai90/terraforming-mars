@@ -101,6 +101,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     public actionsTakenThisRound: number = 0;
     private actionsThisGeneration: Set<string> = new Set<string>();
     public lastCardPlayed: IProjectCard | undefined;
+    private corporationInitialActionDone: boolean = false;
 
     // Cards
     public dealtCorporationCards: Array<CorporationCard> = [];
@@ -159,6 +160,11 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     public getTitaniumValue(game: Game): number {
       if (PartyHooks.shouldApplyPolicy(game, PartyName.UNITY)) return this.titaniumValue + 1;
       return this.titaniumValue;
+    }
+
+    public getSteelValue(game: Game): number {
+        if (PartyHooks.shouldApplyPolicy(game, PartyName.MARS, "mfp03")) return this.steelValue + 1;
+        return this.steelValue;
     }
 
     public increaseTitaniumValue() {
@@ -498,11 +504,11 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           if (removingPlayer !== this) this.resolveMonsInsurance(game);
 
           if (shouldLogAction) {
-            game.log("${0} loses ${1} resource(s) on ${2} by ${3}", b =>
-                  b.player(this)
-                  .number(count)
-                  .card(card)
-                  .player(removingPlayer));
+              game.log("${0} removed ${1} resource(s) from ${2}'s ${3}", b =>
+              b.player(removingPlayer)
+              .number(count)
+              .player(this)
+              .card(card));
           }
         }
         // Lawsuit hook
@@ -527,23 +533,20 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       }
     }
 
-    public getCardsWithResources(): Array<ICard> {
-      const result: Array<ICard> = [];
-
-      this.playedCards.forEach((card) => {
-        if (card.resourceType !== undefined && card.resourceCount && card.resourceCount > 0) {
-          result.push(card);
+    public getCardsWithResources(resource?: ResourceType): Array<ICard> {
+        let result: Array<ICard> = this.playedCards.filter((card) => card.resourceType !== undefined && card.resourceCount && card.resourceCount > 0);
+        if (this.corporationCard !== undefined 
+            && this.corporationCard.resourceType !== undefined 
+            && this.corporationCard.resourceCount !== undefined 
+            && this.corporationCard.resourceCount > 0) {
+                result.push(this.corporationCard);
         }
-      });
 
-      if (this.corporationCard !== undefined 
-          && this.corporationCard.resourceType !== undefined 
-          && this.corporationCard.resourceCount !== undefined 
-          && this.corporationCard.resourceCount > 0) {
-        result.push(this.corporationCard);
-      }
-      
-      return result;      
+        if (resource !== undefined) {
+            result = result.filter((card) => card.resourceType === resource)
+        }
+
+        return result;      
     }
 
     public getResourceCards(resource: ResourceType | undefined): Array<ICard> {
@@ -561,11 +564,11 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     }  
 
     public getResourceCount(resource: ResourceType): number {
-      let count: number = 0;
-      this.getCardsWithResources().filter(card => card.resourceType === resource).forEach((card) => {
-        count += this.getResourcesOnCard(card)!;
-      });
-      return count;
+        let count: number = 0;
+        this.getCardsWithResources(resource).forEach((card) => {
+            count += this.getResourcesOnCard(card)!;
+        });
+        return count;
     }
 
     public getCardsByCardType(cardType: CardType) {
@@ -722,7 +725,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         this.runInputCb(game, pi.cb());
       } else if (pi instanceof SelectColony) {
         const colony: ColonyName = (input[0][0]) as ColonyName;
-        if (colony === null) {
+        if (colony === undefined) {
           throw new Error("No colony selected");
         }
         this.runInputCb(game, pi.cb(colony));        
@@ -1189,8 +1192,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       );
     }
 
-    public playProjectCard(game: Game): PlayerInput {
-      const cb = (selectedCard: IProjectCard, howToPay: HowToPay) => {
+    public checkHowToPayAndPlayCard(selectedCard: IProjectCard, howToPay: HowToPay, game: Game) {
         const cardCost: number = this.getCardCost(game, selectedCard);
         let totalToPay: number = 0;
 
@@ -1201,7 +1203,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           if (howToPay.steel > this.steel) {
             throw new Error("Do not have enough steel");
           }
-          totalToPay += howToPay.steel * this.steelValue;
+          totalToPay += howToPay.steel * this.getSteelValue(game);
         } 
         
         if (canUseTitanium && howToPay.titanium > 0) {
@@ -1221,7 +1223,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
         if (howToPay.floaters !== undefined && howToPay.floaters > 0) {
           if (selectedCard.name === CardName.STRATOSPHERIC_BIRDS && howToPay.floaters === this.getFloatersCanSpend()) {
-            const cardsWithFloater = this.getCardsWithResources().filter(card => card.resourceType === ResourceType.FLOATER);
+            const cardsWithFloater = this.getCardsWithResources(ResourceType.FLOATER);
             if (cardsWithFloater.length === 1) {
               throw new Error("Cannot spend all floaters to play Stratospheric Birds");
             }
@@ -1239,9 +1241,16 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           throw new Error("Did not spend enough to pay for card");
         }
         return this.playCard(game, selectedCard, howToPay);
-      };
+    }
 
-      return new SelectHowToPayForCard(this.getPlayableCards(game), this.getMicrobesCanSpend(), this.getFloatersCanSpend(), this.canUseHeatAsMegaCredits, cb);
+    public playProjectCard(game: Game): PlayerInput {
+        return new SelectHowToPayForCard(
+            this.getPlayableCards(game),
+            this.getMicrobesCanSpend(),
+            this.getFloatersCanSpend(),
+            this.canUseHeatAsMegaCredits,
+            (selectedCard, howToPay) => this.checkHowToPayAndPlayCard(selectedCard, howToPay, game)
+        );
     }
 
     public getMicrobesCanSpend(): number {
@@ -1351,10 +1360,6 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             }
         }
 
-        if (selectedCard.addPlayCardDeferredAction !== undefined) {
-            selectedCard.addPlayCardDeferredAction(this, game);
-        }
-
         return undefined;
     }
 
@@ -1422,10 +1427,19 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       return new SelectColony("Build colony (" + constants.BUILD_COLONY_COST + " MC)", "Build", coloniesModel, (colonyName: ColonyName) => {
         openColonies.forEach(colony => {
           if (colony.name === colonyName) {
-            game.defer(new SelectHowToPayDeferred(this, constants.BUILD_COLONY_COST, false, false, "Select how to pay for Colony project"));
-            colony.onColonyPlaced(this, game);
-            this.onStandardProject(StandardProjectType.BUILD_COLONY);
-            return undefined;
+              game.defer(new SelectHowToPayDeferred(
+                  this,
+                  constants.BUILD_COLONY_COST,
+                  false,
+                  false,
+                  "Select how to pay for Colony project",
+                  () => {
+                      game.log("${0} used ${1} standard project", b => b.player(this).standardProject("Build Colony"));
+                      colony.onColonyPlaced(this, game);
+                      this.onStandardProject(StandardProjectType.BUILD_COLONY);
+                  }
+              ));
+              return undefined;
           }
           return undefined;
         });
@@ -1438,11 +1452,19 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         "Air scrapping (" + constants.AIR_SCRAPPING_COST + " MC)", 
         "Confirm",
         () => {
-          game.defer(new SelectHowToPayDeferred(this, constants.AIR_SCRAPPING_COST, false, false, "Select how to pay for Air Scrapping project"));
-          game.increaseVenusScaleLevel(this, 1);
-          this.onStandardProject(StandardProjectType.AIR_SCRAPPING);
-          game.log("${0} used ${1} standard project", b => b.player(this).standardProject("Air Scrapping"));
-          return undefined;
+            game.defer(new SelectHowToPayDeferred(
+                this,
+                constants.AIR_SCRAPPING_COST,
+                false,
+                false,
+                "Select how to pay for Air Scrapping project",
+                () => {
+                    game.log("${0} used ${1} standard project", b => b.player(this).standardProject("Air Scrapping"));
+                    game.increaseVenusScaleLevel(this, 1);
+                    this.onStandardProject(StandardProjectType.AIR_SCRAPPING);
+                }
+            ));
+            return undefined;
         }
       );
     }
@@ -1452,11 +1474,19 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         "Buffer Gas (" + constants.BUFFER_GAS_COST + " MC)", 
         "Confirm",
         () => {
-          game.defer(new SelectHowToPayDeferred(this, constants.BUFFER_GAS_COST, false, false, "Select how to pay for Buffer Gas project"));
-          this.increaseTerraformRatingSteps(1, game);
-          this.onStandardProject(StandardProjectType.BUFFER_GAS);
-          game.log("${0} used ${1} standard project", b => b.player(this).standardProject("Buffer Gas"));
-          return undefined;
+            game.defer(new SelectHowToPayDeferred(
+                this,
+                constants.BUFFER_GAS_COST,
+                false,
+                false,
+                "Select how to pay for Buffer Gas project",
+                () => {
+                    game.log("${0} used ${1} standard project", b => b.player(this).standardProject("Buffer Gas"));
+                    this.increaseTerraformRatingSteps(1, game);
+                    this.onStandardProject(StandardProjectType.BUFFER_GAS);
+                }
+            ));
+            return undefined;
         }
       );
     }    
@@ -1466,11 +1496,19 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         "Power plant (" + this.powerPlantCost + " MC)", 
         "Confirm",
         () => {
-          game.defer(new SelectHowToPayDeferred(this, this.powerPlantCost, false, false, "Select how to pay for Power Plant project"));
-          this.addProduction(Resources.ENERGY);
-          this.onStandardProject(StandardProjectType.POWER_PLANT);
-          game.log("${0} used ${1} standard project", b => b.player(this).standardProject("Power plant"));
-          return undefined;
+            game.defer(new SelectHowToPayDeferred(
+                this,
+                this.powerPlantCost,
+                false,
+                false,
+                "Select how to pay for Power Plant project",
+                () => {
+                    game.log("${0} used ${1} standard project", b => b.player(this).standardProject("Power plant"));
+                    this.addProduction(Resources.ENERGY);
+                    this.onStandardProject(StandardProjectType.POWER_PLANT);
+                }
+            ));
+            return undefined;
         }
       );
     }
@@ -1480,11 +1518,19 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         "Asteroid (" + constants.ASTEROID_COST + " MC)", 
         "Confirm",
         () => {
-          game.defer(new SelectHowToPayDeferred(this, constants.ASTEROID_COST, false, false, "Select how to pay for Asteroid project"));
-          game.increaseTemperature(this, 1);
-          this.onStandardProject(StandardProjectType.ASTEROID);
-          game.log("${0} used ${1} standard project", b => b.player(this).standardProject("Asteroid"));
-          return undefined;
+            game.defer(new SelectHowToPayDeferred(
+                this,
+                constants.ASTEROID_COST,
+                false,
+                false,
+                "Select how to pay for Asteroid project",
+                () => {
+                    game.log("${0} used ${1} standard project", b => b.player(this).standardProject("Asteroid"));
+                    game.increaseTemperature(this, 1);
+                    this.onStandardProject(StandardProjectType.ASTEROID);
+                }
+            ));
+            return undefined;
         }
       );
     }  
@@ -1494,11 +1540,19 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         "Aquifer (" + constants.AQUIFER_COST + " MC)", 
         "Confirm",
         () => {
-          game.defer(new SelectHowToPayDeferred(this, constants.AQUIFER_COST, false, false, "Select how to pay for Aquifer project"));
-          game.defer(new PlaceOceanTile(this, game, "Select space for ocean"));
-          this.onStandardProject(StandardProjectType.AQUIFER);
-          game.log("${0} used ${1} standard project", b => b.player(this).standardProject("Aquifer"));
-          return undefined;
+            game.defer(new SelectHowToPayDeferred(
+                this,
+                constants.AQUIFER_COST,
+                false,
+                false,
+                "Select how to pay for Aquifer project",
+                () => {
+                    game.log("${0} used ${1} standard project", b => b.player(this).standardProject("Aquifer"));
+                    game.defer(new PlaceOceanTile(this, game, "Select space for ocean"));
+                    this.onStandardProject(StandardProjectType.AQUIFER);
+                }
+            ));
+            return undefined;
         }
       );
     } 
@@ -1508,11 +1562,19 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         "Greenery (" + constants.GREENERY_COST + " MC)", 
         "Confirm",
         () => {
-          game.defer(new SelectHowToPayDeferred(this, constants.GREENERY_COST, false, false, "Select how to pay for Greenery project"));
-          game.defer(new PlaceGreeneryTile(this, game));
-          this.onStandardProject(StandardProjectType.GREENERY);
-          game.log("${0} used ${1} standard project", b => b.player(this).standardProject("Greenery"));
-          return undefined;
+            game.defer(new SelectHowToPayDeferred(
+                this,
+                constants.GREENERY_COST,
+                false,
+                false,
+                "Select how to pay for Greenery project",
+                () => {
+                    game.log("${0} used ${1} standard project", b => b.player(this).standardProject("Greenery"));
+                    game.defer(new PlaceGreeneryTile(this, game));
+                    this.onStandardProject(StandardProjectType.GREENERY);
+                }
+            ));
+            return undefined;
         }
       );
     } 
@@ -1522,32 +1584,56 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         "City (" + constants.CITY_COST + " MC)", 
         "Confirm",
         () => {
-          game.defer(new SelectHowToPayDeferred(this, constants.CITY_COST, false, false, "Select how to pay for City project"));
-          game.defer(new PlaceCityTile(this, game));
-          this.onStandardProject(StandardProjectType.CITY);
-          this.addProduction(Resources.MEGACREDITS);
-          game.log("${0} used ${1} standard project", b => b.player(this).standardProject("City"));
-          return undefined;
+            game.defer(new SelectHowToPayDeferred(
+                this,
+                constants.CITY_COST,
+                false,
+                false,
+                "Select how to pay for City project",
+                () => {
+                    game.log("${0} used ${1} standard project", b => b.player(this).standardProject("City"));
+                    game.defer(new PlaceCityTile(this, game));
+                    this.onStandardProject(StandardProjectType.CITY);
+                    this.addProduction(Resources.MEGACREDITS);
+                }
+            ));
+            return undefined;
         }
       );
     } 
 
     private tradeWithColony(openColonies: Array<IColony>, game: Game): PlayerInput {
       const opts: Array<OrOptions | SelectColony> = [];
-      let payWith: Resources | undefined = undefined; 
+      let payWith: Resources | ResourceType | undefined = undefined;
       const coloniesModel: Array<ColonyModel> = game.getColoniesModel(openColonies);
+      const titanFloatingLaunchPad = this.playedCards.find(card => card.name === CardName.TITAN_FLOATER_LAUNCHPAD);
+
       const selectColony = new SelectColony("Select colony for trade", "trade", coloniesModel, (colonyName: ColonyName) => {
         openColonies.forEach(colony => {
           if (colony.name === colonyName) {
             game.log("${0} traded with ${1}", b => b.player(this).colony(colony));
             if (payWith === Resources.MEGACREDITS) {
-              game.defer(new SelectHowToPayDeferred(this, 9 - this.colonyTradeDiscount, false, false, "Select how to pay " + (9 - this.colonyTradeDiscount) + " for colony trade"));
+                game.defer(new SelectHowToPayDeferred(
+                    this,
+                    9 - this.colonyTradeDiscount,
+                    false,
+                    false,
+                    "Select how to pay " + (9 - this.colonyTradeDiscount) + " for colony trade",
+                    () => {
+                        colony.trade(this, game);
+                    }
+                ));
             } else if (payWith === Resources.ENERGY) {
               this.energy -= (3 - this.colonyTradeDiscount);
+              colony.trade(this, game);
             } else if (payWith === Resources.TITANIUM) {
               this.titanium -= (3 - this.colonyTradeDiscount);
+              colony.trade(this, game);
+            } else if (payWith === ResourceType.FLOATER && titanFloatingLaunchPad !== undefined && titanFloatingLaunchPad.resourceCount) {
+                titanFloatingLaunchPad.resourceCount--;
+                this.actionsThisGeneration.add(titanFloatingLaunchPad.name);
+                colony.trade(this, game);
             }
-            colony.trade(this, game);
             return undefined;
           }
           return undefined;
@@ -1571,6 +1657,16 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         payWith = Resources.TITANIUM;
         return undefined;
       });
+
+      if (titanFloatingLaunchPad !== undefined
+        && titanFloatingLaunchPad.resourceCount !== undefined
+        && titanFloatingLaunchPad.resourceCount > 0
+        && !this.actionsThisGeneration.has(titanFloatingLaunchPad.name)) {
+        howToPayForTrade.options.push(new SelectOption("Pay 1 Floater (use Titan Floating Launch-pad action)", "", () => {
+            payWith = ResourceType.FLOATER;
+            return undefined;
+          }));
+      }
 
       if (this.energy >= (3 - this.colonyTradeDiscount)) howToPayForTrade.options.push(payWithEnergy);
       if (this.titanium >= (3 - this.colonyTradeDiscount)) howToPayForTrade.options.push(payWithTitanium);
@@ -1845,7 +1941,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           maxPay += this.heat;
         }
         if (canUseSteel) {
-          maxPay += this.steel * this.steelValue;
+          maxPay += this.steel * this.getSteelValue(game);
         }
         if (canUseTitanium) {
           maxPay += this.titanium * this.getTitaniumValue(game);
@@ -1889,8 +1985,15 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       
       if (game !== undefined && canUseTitanium) {
         return (this.canUseHeatAsMegaCredits ? this.heat : 0) +
-        (canUseSteel ? this.steel * this.steelValue : 0) +
+        (canUseSteel ? this.steel * this.getSteelValue(game) : 0) +
         (canUseTitanium ? this.titanium * this.getTitaniumValue(game) : 0) +
+        extraResource +
+          this.megaCredits >= cost;        
+      }
+
+      if (game !== undefined && canUseSteel) {
+        return (this.canUseHeatAsMegaCredits ? this.heat : 0) +
+        (canUseSteel ? this.steel * this.getSteelValue(game) : 0) +
         extraResource +
           this.megaCredits >= cost;        
       }
@@ -2019,31 +2122,39 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         game.phase = Phase.ACTION;
       }
 
-      if (
-        game.getGeneration() === 1 &&
-            this.corporationCard !== undefined &&
-            this.corporationCard.initialAction !== undefined &&
-            !this.actionsThisGeneration.has("CORPORATION_INITIAL_ACTION") &&
-            this.actionsTakenThisRound === 0
-      ) {
-        const input = this.corporationCard.initialAction(this, game);
-        if (input !== undefined) {
-          game.defer(new DeferredAction(
-            this,
-            () => input
-          ));
+        if (game.hasPassedThisActionPhase(this) || this.actionsTakenThisRound >= 2) {
+            this.actionsTakenThisRound = 0;
+            game.playerIsFinishedTakingActions();
+            return;
         }
-        this.actionsThisGeneration.add("CORPORATION_INITIAL_ACTION");
-        this.actionsTakenThisRound++;
-        this.takeAction(game);
-        return;
-      }
 
-      if (game.hasPassedThisActionPhase(this) || this.actionsTakenThisRound >= 2) {
-        this.actionsTakenThisRound = 0;
-        game.playerIsFinishedTakingActions();
-        return;
-      }         
+        const corporationCard = this.corporationCard;
+        if (corporationCard !== undefined &&
+            corporationCard.initialAction !== undefined &&
+            corporationCard.initialActionText !== undefined &&
+            this.corporationInitialActionDone === false
+        ) {
+            const initialActionOption = new SelectOption("Take " + corporationCard.name + "'s first action", corporationCard.initialActionText, () => {
+                game.defer(new DeferredAction(this, () => {
+                    if (corporationCard.initialAction) {
+                        return corporationCard.initialAction(this, game);
+                    } else {
+                        return undefined;
+                    }
+                }));
+                this.corporationInitialActionDone = true;
+                return undefined;
+            })
+            const initialActionOrPass = new OrOptions(
+                initialActionOption,
+                this.passOption(game)
+            );
+            this.setWaitingFor(initialActionOrPass, () => {
+                this.actionsTakenThisRound++;
+                this.takeAction(game);
+            });
+            return;
+        }
 
       const action: OrOptions = new OrOptions();
       action.title = "Take action for action phase, select one " +
@@ -2330,6 +2441,16 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
     public increaseFleetSize() {
       if (this.fleetSize < MAX_FLEET_SIZE) this.fleetSize++;
+    }
+
+    public canPlayColonyPlacementCard(game: Game): boolean {
+        let colonyTilesAlreadyBuiltOn: number = 0;
+
+        game.colonies.forEach(colony => {
+            if (colony.colonies.includes(this.id)) colonyTilesAlreadyBuiltOn++;
+        });
+
+        return colonyTilesAlreadyBuiltOn < game.colonies.length;
     }
 }
 

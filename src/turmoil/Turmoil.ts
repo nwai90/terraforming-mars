@@ -13,7 +13,7 @@ import { IGlobalEvent } from "./globalEvents/IGlobalEvent";
 import { ILoadable } from "../ILoadable";
 import { SerializedTurmoil } from "./SerializedTurmoil";
 import { PLAYER_DELEGATES_COUNT } from "../constants";
-import { AgendaStyle, Agenda, PoliticalAgendasData } from "../politicalagendas/PoliticalAgendasData";
+import { AgendaStyle, Agenda, PoliticalAgendasData } from "./PoliticalAgendasData";
 import { Bonus } from "./Bonus";
 
 export interface IPartyFactory {
@@ -72,7 +72,7 @@ export class Turmoil implements ILoadable<SerializedTurmoil, Turmoil> {
             agendas: ALL_PARTIES.map(p => { 
                 return {
                         partyName: p.partyName,
-                        definedBonus: this.getBonus(p.partyName, politicalAgendas ? AgendaStyle.RANDOM : AgendaStyle.STANDARD), 
+                        definedBonus: this.getBonus(p.partyName, politicalAgendas ? AgendaStyle.RANDOM : AgendaStyle.STANDARD),
                         definedPolicy: undefined
                     } as Agenda;
             })
@@ -266,9 +266,10 @@ export class Turmoil implements ILoadable<SerializedTurmoil, Turmoil> {
     public setRulingParty(game: Game): void {
         if (this.rulingParty !== undefined) {
             const rulingParty = this.rulingParty;
+
             // Resolve Ruling Bonus
-            const agenda = this.politicalAgendasData.agendas
-                .find(agenda => agenda.partyName === rulingParty.name);
+            const agenda = this.politicalAgendasData.agendas.find(agenda => agenda.partyName === rulingParty.name);
+
             if (agenda === undefined) {
                 throw new Error("agenda not found for party " + rulingParty.name);
             }

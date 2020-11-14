@@ -576,7 +576,7 @@ function getPlayer(player: Player, game: Game): string {
         spaces: getSpaces(game.board.spaces),
         steel: player.steel,
         steelProduction: player.getProduction(Resources.STEEL),
-        steelValue: player.steelValue,
+        steelValue: player.getSteelValue(game),
         temperature: game.getTemperature(),
         terraformRating: player.getTerraformRating(),
         titanium: player.titanium,
@@ -794,7 +794,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
             coloniesExtension: game.gameOptions.coloniesExtension,
             steel: player.steel,
             steelProduction: player.getProduction(Resources.STEEL),
-            steelValue: player.steelValue,
+            steelValue: player.getSteelValue(game),
             terraformRating: player.getTerraformRating(),
             titanium: player.titanium,
             titaniumProduction: player.getProduction(Resources.TITANIUM),
@@ -923,7 +923,7 @@ function getTurmoil(game: Game): TurmoilModel | undefined {
     }
 }
 
-function getParties(game: Game): Array<PartyModel> | undefined {
+function getParties(game: Game): Array<PartyModel> {
     if (game.gameOptions.turmoilExtension && game.turmoil) {
         return game.turmoil.parties.map(function (party) {
             const delegates = new Array<DelegatesModel>();
@@ -953,9 +953,8 @@ function getParties(game: Game): Array<PartyModel> | undefined {
                 delegates: delegates,
             };
         });
-    } else {
-        return undefined;
     }
+    return [];
 }
 
 // Oceans can't be owned so they shouldn't have a color associated with them

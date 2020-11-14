@@ -2,10 +2,10 @@ import { expect } from "chai";
 import { Election } from "../../src/turmoil/globalEvents/Election";
 import { Player } from "../../src/Player";
 import { Color } from "../../src/Color";
-import { Game } from '../../src/Game';
-import { Turmoil } from '../../src/turmoil/Turmoil';
-import { StripMine } from '../../src/cards/StripMine';
-import { Kelvinists } from '../../src/turmoil/parties/Kelvinists';
+import { Game } from "../../src/Game";
+import { Turmoil } from "../../src/turmoil/Turmoil";
+import { StripMine } from "../../src/cards/StripMine";
+import { Kelvinists } from "../../src/turmoil/parties/Kelvinists";
 
 describe("Election", function () {
     it("resolve play", function () {
@@ -14,7 +14,7 @@ describe("Election", function () {
         const player2 = new Player("test2", Color.RED, false);
         const player3 = new Player("test3", Color.GREEN, false);
         const game = new Game("foobar", [player,player2, player3], player);
-        const turmoil = new Turmoil(game);
+        const turmoil = new Turmoil(game, false);
         turmoil.initGlobalEvent(game);
         player.playedCards.push(new StripMine());
         player2.playedCards.push(new StripMine());

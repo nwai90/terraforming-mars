@@ -7,16 +7,16 @@ import { Bonus } from "../Bonus";
 import { Game } from "../../Game";
 
 export class Scientists extends Party implements IParty {
-    public name = PartyName.SCIENTISTS;
+    name = PartyName.SCIENTISTS;
     description = "Tech is the door to the future, and Scientists will do anything to open it.";
     bonuses = [ new ScientistsBonus01(), new ScientistsBonus02()];
 }
 
-
 export class ScientistsBonus01 implements Bonus {
     id = "sb01";
     isDefault = true;
-    description: string = "All players receive 1 MC for each Science tag they have.";
+    description: string = "Gain 1 MC for each Science tag you have.";
+
     grant(game: Game) {
         game.getPlayers().forEach(player => {
             const tagCount = player.getTagCount(Tags.SCIENCE, false, false);
@@ -27,7 +27,8 @@ export class ScientistsBonus01 implements Bonus {
 
 export class ScientistsBonus02 implements Bonus {
     id = "sb02";
-    description = "Gain 1 MC for every 2 cards in your hand."
+    description: string = "Gain 1 MC for every 2 cards in hand.";
+
     grant(game: Game) {
         game.getPlayers().forEach(player => {
             const amount = Math.floor(player.cardsInHand.length / 2);
