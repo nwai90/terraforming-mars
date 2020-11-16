@@ -100,7 +100,7 @@ export class ColonialOne implements CorporationCard {
         return undefined;
       });
 
-      if (openColonies.length > 0 && player.fleetSize > player.tradesThisTurn && this.resourceCount > 0) {
+      if (openColonies.length > 0 && player.getFleetSize() > player.tradesThisTurn && this.resourceCount > 0) {
         opts.push(spendResource);
       }
 
