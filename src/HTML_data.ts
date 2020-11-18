@@ -69,10 +69,11 @@ export const HTML_DATA: Map<string, string> =
 `],
     [CardName.VITAL_COLONY, `
       <div class="content">
-      <div class="tile colony"></div><br>
-      <div class="resource money">5</div>
+      <div class="tile colony"></div>
+      <div class="colony-placement"></div><br>
+      <div class="resource money">-5</div>
         <div class="description">
-          Place a colony. Gain 5 MC.
+          Place a colony. Gain its placement bonus a second time. Pay 5 MC.
         </div>
       </div>
 `],

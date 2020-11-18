@@ -19,8 +19,9 @@ describe('VitalColony', function() {
   });
 
   it('Should play', function() {
+    player.megaCredits = 5;
     card.play(player, game);
-    expect(game.deferredActions).has.lengthOf(1);
+    expect(game.deferredActions).has.lengthOf(2);
 
     const selectColony = game.deferredActions.next()!.execute() as SelectColony;
     game.deferredActions.shift();
@@ -28,6 +29,6 @@ describe('VitalColony', function() {
 
     const openColonies = game.colonies.filter((colony) => colony.isActive);
     expect(openColonies[0].colonies.find((c) => c === player.id)).is.not.undefined;
-    expect(player.megaCredits).to.eq(5);
+    expect(player.megaCredits).to.eq(0);
   });
 });
