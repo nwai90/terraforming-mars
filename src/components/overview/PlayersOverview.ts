@@ -4,6 +4,7 @@ import {OverviewSettings} from './OverviewSettings';
 import {OtherPlayer} from '../OtherPlayer';
 import {PlayerModel} from '../../models/PlayerModel';
 import {ActionLabel} from './ActionLabel';
+import { Phase } from '../../Phase';
 
 export const getCurrentPlayerIndex = (
   player: PlayerModel,
@@ -62,6 +63,8 @@ export const PlayersOverview = Vue.component('players-overview', {
       return result.slice(0, -1);
     },
     getActionLabel(player: PlayerModel): string {
+      if (!this.player.draftedPlayers.includes(player.color) && this.player.phase === Phase.DRAFTING) return ActionLabel.DRAFTING;
+      if (this.player.phase === Phase.DRAFTING) return ActionLabel.NONE;
       if (this.player.passedPlayers.includes(player.color)) return ActionLabel.PASSED;
       if (player.isActive) return ActionLabel.ACTIVE;
 

@@ -1216,6 +1216,14 @@ export class Game implements ISerializable<SerializedGame> {
     return passedPlayersColors;
   }
 
+  public getDraftedPlayers():Array<Color> {
+    const draftedPlayersColors: Array<Color> = [];
+    this.draftedPlayers.forEach((player) => {
+      draftedPlayersColors.push(this.getPlayerById(player).color);
+    });
+    return draftedPlayersColors;
+  }
+
   public getPlayer(name: string): Player {
     const player = this.players.find((player) => player.name === name);
     if (player === undefined) {

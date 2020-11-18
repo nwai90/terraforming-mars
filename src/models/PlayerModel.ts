@@ -73,6 +73,7 @@ export interface PlayerModel {
     dealtProjectCards: Array<CardModel>;
     needsToDraft: boolean | undefined;
     passedPlayers: Array<Color>;
+    draftedPlayers: Array<Color>;
     actionsTakenThisRound: number;
     deckSize: number;
     waitingFor: PlayerInputModel | undefined;

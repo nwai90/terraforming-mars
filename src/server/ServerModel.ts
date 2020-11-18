@@ -119,6 +119,7 @@ export class Server {
       deckSize: game.dealer.getDeckSize(),
       actionsTakenThisRound: player.actionsTakenThisRound,
       passedPlayers: game.getPassedPlayers(),
+      draftedPlayers: game.getDraftedPlayers(),
       aresData: game.aresData,
       timer: player.timer.serialize(),
       totalSpend: player.totalSpend,
