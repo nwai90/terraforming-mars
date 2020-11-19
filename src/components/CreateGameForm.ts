@@ -234,6 +234,9 @@ export const CreateGameForm = Vue.component('create-game-form', {
     isRandomMAEnabled: function(): Boolean {
       return this.randomMA !== RandomMAOptionType.NONE;
     },
+    isSoloGame: function(): Boolean {
+      return this.playersCount === 1;
+    },
     randomMAToggle: function() {
       const component = (this as any) as CreateGameModel;
       if (component.randomMA === RandomMAOptionType.NONE) {
@@ -678,29 +681,34 @@ export const CreateGameForm = Vue.component('create-game-form', {
 
                             <div class="create-game-subsection-label">Randomize</div>
 
-                            <input type="checkbox" v-model="randomFirstPlayer" id="randomFirstPlayer-checkbox">
-                            <label for="randomFirstPlayer-checkbox">
-                                <span v-i18n>First player</span>
-                            </label>
-
-                            <input type="checkbox" name="randomMAToggle" id="randomMA-checkbox" v-on:change="randomMAToggle()">
-                            <label for="randomMA-checkbox">
-                                <span v-i18n>Milestones/Awards</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#random-milestones-and-awards" class="tooltip" target="_blank">&#9432;</a>
-                            </label>
-
-                            <div class="create-game-page-column-row" v-if="isRandomMAEnabled()">
-                                <div>
-                                <input type="radio" name="randomMAOption" v-model="randomMA" :value="getRandomMaOptionType('limited')" id="limitedRandomMA-radio">
-                                <label class="label-randomMAOption" for="limitedRandomMA-radio">
-                                    <span v-i18n>{{ getRandomMaOptionType('limited') }}</span>
+                            <div v-if="!isSoloGame()">
+                                <input type="checkbox" v-model="randomFirstPlayer" id="randomFirstPlayer-checkbox">
+                                <label for="randomFirstPlayer-checkbox">
+                                    <span v-i18n>First player</span>
                                 </label>
-                                </div>
+                            </div>
 
-                                <div>
-                                <input type="radio" name="randomMAOption" v-model="randomMA" :value="getRandomMaOptionType('full')" id="unlimitedRandomMA-radio">
-                                <label class="label-randomMAOption" for="unlimitedRandomMA-radio">
-                                    <span v-i18n>{{ getRandomMaOptionType('full') }}</span>
+                            <div v-if="!isSoloGame()">
+                                <input type="checkbox" name="randomMAToggle" id="randomMA-checkbox" v-on:change="randomMAToggle()">
+                                <label for="randomMA-checkbox">
+                                    <span v-i18n>Milestones/Awards</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#random-milestones-and-awards" class="tooltip" target="_blank">&#9432;</a>
                                 </label>
+
+
+                                <div class="create-game-page-column-row" v-if="isRandomMAEnabled()">
+                                    <div>
+                                    <input type="radio" name="randomMAOption" v-model="randomMA" :value="getRandomMaOptionType('limited')" id="limitedRandomMA-radio">
+                                    <label class="label-randomMAOption" for="limitedRandomMA-radio">
+                                        <span v-i18n>{{ getRandomMaOptionType('limited') }}</span>
+                                    </label>
+                                    </div>
+
+                                    <div>
+                                    <input type="radio" name="randomMAOption" v-model="randomMA" :value="getRandomMaOptionType('full')" id="unlimitedRandomMA-radio">
+                                    <label class="label-randomMAOption" for="unlimitedRandomMA-radio">
+                                        <span v-i18n>{{ getRandomMaOptionType('full') }}</span>
+                                    </label>
+                                    </div>
                                 </div>
                             </div>
 
