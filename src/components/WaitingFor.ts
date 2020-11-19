@@ -21,6 +21,7 @@ import {playActivePlayerSound} from '../SoundManager';
 import {SelectColony} from './SelectColony';
 import {SelectProductionToLose} from './SelectProductionToLose';
 import {ShiftAresGlobalParameters} from './ShiftAresGlobalParameters';
+import {Phase} from '../Phase';
 
 import * as raw_settings from '../genfiles/settings.json';
 
@@ -63,6 +64,25 @@ export const WaitingFor = Vue.component('waiting-for', {
     'shift-ares-global-parameters': ShiftAresGlobalParameters,
   },
   methods: {
+    updatePlayersOverview: function() {
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', '/api/player' + window.location.search.replace('&noredirect', ''));
+      xhr.onerror = function() {
+        alert('Error getting game data');
+      };
+      xhr.onload = () => {
+        if (xhr.status === 200) {
+          const player = (this.$root as unknown as typeof mainAppSettings.data).player;
+          const draftedPlayers = (xhr.response as PlayerModel).draftedPlayers;
+          if (player !== undefined && player.draftedPlayers.length !== draftedPlayers.length) {
+            player.draftedPlayers = draftedPlayers;
+            this.$root.$emit('updatePlayersOverview');
+          }
+        }
+      };
+      xhr.responseType = 'json';
+      xhr.send();
+    },
     waitForUpdate: function() {
       const vueApp = this;
       const root = this.$root as unknown as typeof mainAppSettings.methods;
@@ -76,6 +96,7 @@ export const WaitingFor = Vue.component('waiting-for', {
         xhr.onload = () => {
           if (xhr.status === 200) {
             const result = xhr.response;
+            const player = (this.$root as unknown as typeof mainAppSettings.data).player;
             if (result['result'] === 'GO') {
               root.updatePlayer();
 
@@ -97,6 +118,8 @@ export const WaitingFor = Vue.component('waiting-for', {
               // Something changed, let's refresh UI
               root.updatePlayer();
               return;
+            } else if (player !== undefined && player.phase === Phase.DRAFTING) {
+              this.updatePlayersOverview();
             }
             (vueApp).waitForUpdate();
           } else {
@@ -108,11 +131,22 @@ export const WaitingFor = Vue.component('waiting-for', {
       };
       ui_update_timeout_id = window.setTimeout(askForUpdate, this.waitingForTimeout);
     },
+    checkDraftStatus: function() {
+      clearTimeout(ui_update_timeout_id);
+      const checkDrafters = () => {
+        this.updatePlayersOverview();
+        ui_update_timeout_id = window.setTimeout(checkDrafters, this.waitingForTimeout);
+      };
+      ui_update_timeout_id = window.setTimeout(checkDrafters, this.waitingForTimeout);
+    },
   },
   render: function(createElement) {
     if (this.waitingfor === undefined) {
       this.waitForUpdate();
       return createElement('div', $t('Not your turn to take any actions'));
+    }
+    if (this.player.phase === Phase.DRAFTING) {
+      this.checkDraftStatus();
     }
     const input = new PlayerInputFactory().getPlayerInput(createElement, this.players, this.player, this.waitingfor, (out: Array<Array<string>>) => {
       const xhr = new XMLHttpRequest();
