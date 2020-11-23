@@ -5,7 +5,7 @@ import {setCustomGameOptions} from '../../TestingUtils';
 import {Game, GameOptions} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
-import {ExperiencedMartians} from '../../../src/cards/community/ExperiencedMartians';
+import {ExperiencedMartians} from '../../../src/cards/community/preludes/ExperiencedMartians';
 import {Resources} from '../../../src/Resources';
 
 describe('ExperiencedMartians', function() {

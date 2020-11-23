@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
-import {FortifiedOutpost} from '../../../src/cards/community/FortifiedOutpost';
+import {FortifiedOutpost} from '../../../src/cards/community/preludes/FortifiedOutpost';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {TileType} from '../../../src/TileType';
 

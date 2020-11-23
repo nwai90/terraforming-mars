@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {AdvancedAlloys} from '../../../src/cards/base/AdvancedAlloys';
 import {SmallAnimals} from '../../../src/cards/base/SmallAnimals';
 import {CardType} from '../../../src/cards/CardType';
-import {ProjectWorkshop} from '../../../src/cards/community/ProjectWorkshop';
+import {ProjectWorkshop} from '../../../src/cards/community/corporations/ProjectWorkshop';
 import {ICard} from '../../../src/cards/ICard';
 import {Extremophiles} from '../../../src/cards/venusNext/Extremophiles';
 import {Game} from '../../../src/Game';

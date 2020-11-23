@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {PoliticalUprising} from '../../../src/cards/community/PoliticalUprising';
+import {PoliticalUprising} from '../../../src/cards/community/preludes/PoliticalUprising';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';

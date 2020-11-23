@@ -5,7 +5,7 @@ import {setCustomGameOptions} from '../../TestingUtils';
 import {Game, GameOptions} from '../../../src/Game';
 import {ColonyName} from '../../../src/colonies/ColonyName';
 import {SelectColony} from '../../../src/inputs/SelectColony';
-import {VitalColony} from '../../../src/cards/community/VitalColony';
+import {VitalColony} from '../../../src/cards/community/preludes/VitalColony';
 
 describe('VitalColony', function() {
   let card : VitalColony; let player : Player; let game : Game;

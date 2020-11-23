@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {ColonialOne} from '../../../src/cards/community/ColonialOne';
+import {ColonialOne} from '../../../src/cards/community/corporations/ColonialOne';
 import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Game, GameOptions} from '../../../src/Game';

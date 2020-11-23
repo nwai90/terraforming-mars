@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
-import {AccumulatedKnowledge} from '../../../src/cards/community/AccumulatedKnowledge';
+import {AccumulatedKnowledge} from '../../../src/cards/community/preludes/AccumulatedKnowledge';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 
 describe('AccumulatedKnowledge', function() {

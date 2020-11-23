@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {ByElection} from '../../../src/cards/community/ByElection';
+import {ByElection} from '../../../src/cards/community/preludes/ByElection';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';

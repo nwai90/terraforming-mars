@@ -10,16 +10,16 @@ import {Io} from './Io';
 import {Miranda} from './Miranda';
 import {Pluto} from './Pluto';
 import {Enceladus} from './Enceladus';
-import {Iapetus} from '../cards/community/Iapetus';
-import {Mercury} from '../cards/community/Mercury';
+import {Iapetus} from '../cards/community/colonies/Iapetus';
+import {Mercury} from '../cards/community/colonies/Mercury';
 import {ColonyName} from './ColonyName';
-import {Hygiea} from '../cards/community/Hygiea';
-import {Titania} from '../cards/community/Titania';
-import {Venus} from '../cards/community/Venus';
-import {Leavitt} from '../cards/community/Leavitt';
-import {Pallas} from '../cards/community/Pallas';
+import {Hygiea} from '../cards/community/colonies/Hygiea';
+import {Titania} from '../cards/community/colonies/Titania';
+import {Venus} from '../cards/community/colonies/Venus';
+import {Leavitt} from '../cards/community/colonies/Leavitt';
+import {Pallas} from '../cards/community/colonies/Pallas';
+import {Deimos} from '../cards/community/colonies/Deimos';
 import {SerializedColony} from '../SerializedColony';
-import {Deimos} from '../cards/community/Deimos';
 import {GameOptions} from '../Game';
 
 export interface IColonyFactory<T> {

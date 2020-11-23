@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {MartianLumberYard} from '../../../src/cards/community/MartianLumberYard';
+import {MartianLumberYard} from '../../../src/cards/community/preludes/MartianLumberYard';
 
 describe('MartianLumberYard', function() {
   let card : MartianLumberYard; let player : Player;

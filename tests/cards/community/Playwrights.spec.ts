@@ -3,7 +3,7 @@ import {DeimosDown} from '../../../src/cards/base/DeimosDown';
 import {IndenturedWorkers} from '../../../src/cards/base/IndenturedWorkers';
 import {LocalHeatTrapping} from '../../../src/cards/base/LocalHeatTrapping';
 import {ReleaseOfInertGases} from '../../../src/cards/base/ReleaseOfInertGases';
-import {Playwrights} from '../../../src/cards/community/Playwrights';
+import {Playwrights} from '../../../src/cards/community/corporations/Playwrights';
 import {ICard} from '../../../src/cards/ICard';
 import {MartianSurvey} from '../../../src/cards/prelude/MartianSurvey';
 import {LawSuit} from '../../../src/cards/promo/LawSuit';

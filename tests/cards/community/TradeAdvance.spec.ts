@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {TradeAdvance} from '../../../src/cards/community/TradeAdvance';
+import {TradeAdvance} from '../../../src/cards/community/preludes/TradeAdvance';
 import {ColonyName} from '../../../src/colonies/ColonyName';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';

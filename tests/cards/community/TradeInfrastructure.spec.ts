@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {TradeInfrastructure} from '../../../src/cards/community/TradeInfrastructure';
+import {TradeInfrastructure} from '../../../src/cards/community/preludes/TradeInfrastructure';
 
 describe('TradeInfrastructure', function() {
   let card : TradeInfrastructure; let player : Player;

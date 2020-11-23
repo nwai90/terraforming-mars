@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {BotanicalHarvest} from '../../../src/cards/community/BotanicalHarvest';
+import {BotanicalHarvest} from '../../../src/cards/community/preludes/BotanicalHarvest';
 import {Game} from '../../../src/Game';
 
 describe('BotanicalHarvest', function() {

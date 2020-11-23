@@ -4,7 +4,7 @@ import {Player} from '../../../src/Player';
 import {Game, GameOptions} from '../../../src/Game';
 import {setCustomGameOptions} from '../../TestingUtils';
 import {Tags} from '../../../src/cards/Tags';
-import {NitrateReducers} from '../../../src/cards/community/NitrateReducers';
+import {NitrateReducers} from '../../../src/cards/community/preludes/NitrateReducers';
 import {Resources} from '../../../src/Resources';
 
 describe('NitrateReducers', function() {

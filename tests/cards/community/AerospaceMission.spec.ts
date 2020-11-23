@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {AerospaceMission} from '../../../src/cards/community/AerospaceMission';
+import {AerospaceMission} from '../../../src/cards/community/preludes/AerospaceMission';
 import {ColonyName} from '../../../src/colonies/ColonyName';
 import {Game} from '../../../src/Game';
 import {SelectColony} from '../../../src/inputs/SelectColony';

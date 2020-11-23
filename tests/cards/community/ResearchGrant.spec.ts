@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {ResearchGrant} from '../../../src/cards/community/ResearchGrant';
+import {ResearchGrant} from '../../../src/cards/community/preludes/ResearchGrant';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestingUtils';
 

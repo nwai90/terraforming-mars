@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {GeothermalVent} from '../../../src/cards/community/GeothermalVent';
+import {GeothermalVent} from '../../../src/cards/community/preludes/GeothermalVent';
 import {Game} from '../../../src/Game';
 
 describe('GeothermalVent', function() {

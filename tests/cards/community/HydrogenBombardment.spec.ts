@@ -3,7 +3,7 @@ import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Game, GameOptions} from '../../../src/Game';
 import {setCustomGameOptions} from '../../TestingUtils';
-import {HydrogenBombardment} from '../../../src/cards/community/HydrogenBombardment';
+import {HydrogenBombardment} from '../../../src/cards/community/preludes/HydrogenBombardment';
 import {Resources} from '../../../src/Resources';
 
 describe('HydrogenBombardment', function() {

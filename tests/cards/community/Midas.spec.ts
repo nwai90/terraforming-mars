@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Midas} from '../../../src/cards/community/Midas';
+import {Midas} from '../../../src/cards/community/corporations/Midas';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestingUtils';
 

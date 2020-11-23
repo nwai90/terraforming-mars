@@ -12,14 +12,14 @@ import {Titan} from '../colonies/Titan';
 import {Triton} from '../colonies/Triton';
 import {Enceladus} from '../colonies/Enceladus';
 import {ColonyName} from '../colonies/ColonyName';
-import {Iapetus} from '../cards/community/Iapetus';
-import {Mercury} from '../cards/community/Mercury';
-import {Hygiea} from '../cards/community/Hygiea';
-import {Titania} from '../cards/community/Titania';
-import {Venus} from '../cards/community/Venus';
-import {Leavitt} from '../cards/community/Leavitt';
-import {Pallas} from '../cards/community/Pallas';
-import {Deimos} from '../cards/community/Deimos';
+import {Iapetus} from '../cards/community/colonies/Iapetus';
+import {Mercury} from '../cards/community/colonies/Mercury';
+import {Hygiea} from '../cards/community/colonies/Hygiea';
+import {Titania} from '../cards/community/colonies/Titania';
+import {Venus} from '../cards/community/colonies/Venus';
+import {Leavitt} from '../cards/community/colonies/Leavitt';
+import {Pallas} from '../cards/community/colonies/Pallas';
+import {Deimos} from '../cards/community/colonies/Deimos';
 
 const officialColonies: Array<Colony> = [
   new Callisto(),

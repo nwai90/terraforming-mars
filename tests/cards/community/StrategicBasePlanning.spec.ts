@@ -5,7 +5,7 @@ import {setCustomGameOptions} from '../../TestingUtils';
 import {Game, GameOptions} from '../../../src/Game';
 import {ColonyName} from '../../../src/colonies/ColonyName';
 import {SelectColony} from '../../../src/inputs/SelectColony';
-import {StrategicBasePlanning} from '../../../src/cards/community/StrategicBasePlanning';
+import {StrategicBasePlanning} from '../../../src/cards/community/preludes/StrategicBasePlanning';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {TileType} from '../../../src/TileType';
 

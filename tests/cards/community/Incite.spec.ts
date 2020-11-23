@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Incite} from '../../../src/cards/community/Incite';
+import {Incite} from '../../../src/cards/community/corporations/Incite';
 import {EventAnalysts} from '../../../src/cards/turmoil/EventAnalysts';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
