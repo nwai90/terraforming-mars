@@ -395,6 +395,7 @@ export class Game implements ISerializable<SerializedGame> {
       donePlayers: Array.from(this.donePlayers),
       draftedPlayers: Array.from(this.draftedPlayers),
       draftRound: this.draftRound,
+      erodedSpaces: this.erodedSpaces,
       first: this.first.id,
       fundedAwards: serializeFundedAwards(this.fundedAwards),
       gameAge: this.gameAge,
@@ -422,7 +423,6 @@ export class Game implements ISerializable<SerializedGame> {
         ];
       }),
       venusScaleLevel: this.venusScaleLevel,
-      erodedSpaces: this.erodedSpaces,
     };
     if (this.aresData !== undefined) {
       result.aresData = this.aresData;

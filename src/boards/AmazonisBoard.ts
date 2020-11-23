@@ -30,7 +30,7 @@ export class AmazonisBoard extends Board {
     builder.land().ocean(PLANT).land().land(PLANT).land(HEAT, PLANT).land(STEEL).land(PLANT).ocean(STEEL, PLANT);
     // y=4
     builder.land(PLANT).land(PLANT).land().land(HEAT, HEAT).land(RESTRICTED)
-        .land(HEAT, HEAT).land(PLANT, PLANT, VOLCANIC).land().land(TITANIUM, TITANIUM);
+      .land(HEAT, HEAT).land(PLANT, PLANT, VOLCANIC).land().land(TITANIUM, TITANIUM);
     // y=5
     builder.ocean(PLANT, PLANT).land(PLANT).land(STEEL).land(HEAT, PLANT).land(PLANT).land(DRAW_CARD, VOLCANIC).land().ocean(PLANT);
     //y=6

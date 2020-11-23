@@ -36,7 +36,7 @@ export const Milestone = Vue.component('milestone', {
       this.showList = !this.showList;
     },
     getClassForMilestoneTile: function(milestone: ClaimedMilestoneModel) {
-      if (milestone.player_name) return 'ma-block pwned-item';
+      if (milestone.player_name) return 'ma-block ma-block-grayscale pwned-item';
       if (milestone.scores.length > 0) return 'ma-block';
       return 'ma-block ma-block-grayscale';
     }

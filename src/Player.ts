@@ -1994,6 +1994,8 @@ export class Player implements ISerializable<SerializedPlayer> {
       timer: this.timer.serialize(),
       // Used when undoing action
       usedUndo: this.usedUndo,
+      // Stats
+      totalSpend: this.totalSpend,
     };
     if (this.lastCardPlayed !== undefined) {
       result.lastCardPlayed = this.lastCardPlayed.name;
