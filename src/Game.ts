@@ -436,6 +436,24 @@ export class Game implements ISerializable<SerializedGame> {
     return result;
   }
 
+<<<<<<< HEAD
+=======
+  public checkForCommunityColonies(gameOptions: GameOptions) : boolean {
+    if (!gameOptions.customColoniesList) return false;
+    if (gameOptions.customColoniesList.includes(ColonyName.IAPETUS)) return true;
+    if (gameOptions.customColoniesList.includes(ColonyName.MERCURY)) return true;
+    if (gameOptions.customColoniesList.includes(ColonyName.HYGIEA)) return true;
+    if (gameOptions.customColoniesList.includes(ColonyName.TITANIA)) return true;
+    if (gameOptions.customColoniesList.includes(ColonyName.VENUS)) return true;
+    if (gameOptions.customColoniesList.includes(ColonyName.LEAVITT)) return true;
+    if (gameOptions.customColoniesList.includes(ColonyName.PALLAS)) return true;
+    if (gameOptions.customColoniesList.includes(ColonyName.DEIMOS)) return true;
+    if (gameOptions.customColoniesList.includes(ColonyName.TERRA)) return true;
+
+    return false;
+  }
+
+>>>>>>> Add Terra colony tile
   public isSoloMode() :boolean {
     return this.players.length === 1;
   }
