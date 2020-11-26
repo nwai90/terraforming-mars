@@ -49,6 +49,7 @@ export const setCustomGameOptions = function(options: object = {}): GameOptions 
     boardName: BoardName.ORIGINAL,
     customCorporationsList: [],
     solarPhaseOption: false,
+    silverCubeVariant: false,
     shuffleMapOption: false,
     promoCardsOption: false,
     communityCardsOption: false,

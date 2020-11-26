@@ -944,43 +944,125 @@ export class Player implements ISerializable<SerializedPlayer> {
     action.buttonLabel = 'Confirm';
     const game = this.game;
     if (game.getTemperature() < constants.MAX_TEMPERATURE) {
-      action.options.push(
-        new SelectOption('Increase temperature', 'Increase', () => {
-          game.increaseTemperature(this, 1);
-          game.log('${0} acted as World Government and increased temperature', (b) => b.player(this));
-          return undefined;
-        }),
-      );
+      if (game.gameOptions.silverCubeVariant === true) {
+        action.options.push(
+          new SelectOption('Add 5 MC to temperature track', 'Select', () => {
+            game.temperatureSilverCubeBonusMC += 5;
+            game.log('${0} acted as World Government and placed 5 MC on temperature track', (b) => b.player(this));
+
+            if (game.temperatureSilverCubeBonusMC >= constants.ASTEROID_COST) {
+              game.temperatureSilverCubeBonusMC = 0;
+              if (game.getTemperature() < constants.MAX_TEMPERATURE) {
+                game.increaseTemperature(this, 1);
+                game.log('${0} acted as World Government and increased temperature', (b) => b.player(this));
+              }
+            }
+
+            return undefined;
+          }),
+        );
+      } else {
+        action.options.push(
+          new SelectOption('Increase temperature', 'Increase', () => {
+            game.increaseTemperature(this, 1);
+            game.log('${0} acted as World Government and increased temperature', (b) => b.player(this));
+            return undefined;
+          }),
+        );
+      }
     }
     if (game.getOxygenLevel() < constants.MAX_OXYGEN_LEVEL) {
-      action.options.push(
-        new SelectOption('Increase oxygen', 'Increase', () => {
-          game.increaseOxygenLevel(this, 1);
-          game.log('${0} acted as World Government and increased oxygen level', (b) => b.player(this));
-          return undefined;
-        }),
-      );
+      if (game.gameOptions.silverCubeVariant === true) {
+        action.options.push(
+          new SelectOption('Add 5 MC to oxygen track', 'Select', () => {
+            game.oxygenSilverCubeBonusMC += 5;
+            game.log('${0} acted as World Government and placed 5 MC on oxygen track', (b) => b.player(this));
+
+            if (game.oxygenSilverCubeBonusMC >= constants.GREENERY_COST) {
+              game.oxygenSilverCubeBonusMC = 0;
+              if (game.getOxygenLevel() < constants.MAX_OXYGEN_LEVEL) {
+                game.increaseOxygenLevel(this, 1);
+                game.log('${0} acted as World Government and increased oxygen level', (b) => b.player(this));
+              }
+            }
+
+            return undefined;
+          }),
+        );
+      } else {
+        action.options.push(
+          new SelectOption('Increase oxygen', 'Increase', () => {
+            game.increaseOxygenLevel(this, 1);
+            game.log('${0} acted as World Government and increased oxygen level', (b) => b.player(this));
+            return undefined;
+          }),
+        );
+      }
     }
     if (game.board.getOceansOnBoard() < constants.MAX_OCEAN_TILES) {
-      action.options.push(
-        new SelectSpace(
-          'Add an ocean',
-          game.board.getAvailableSpacesForOcean(this), (space) => {
-            game.addOceanTile(this, space.id, SpaceType.OCEAN);
-            game.log('${0} acted as World Government and placed an ocean', (b) => b.player(this));
+      if (game.gameOptions.silverCubeVariant === true) {
+        action.options.push(
+          new SelectOption('Add 5 MC to oceans track', 'Select', () => {
+            game.oceansSilverCubeBonusMC += 5;
+            game.log('${0} acted as World Government and placed 5 MC on oceans track', (b) => b.player(this));
+
+            if (game.oceansSilverCubeBonusMC >= constants.AQUIFER_COST) {
+              game.oceansSilverCubeBonusMC = 0;
+              if (game.board.getOceansOnBoard() < constants.MAX_OCEAN_TILES) {
+                return new SelectSpace(
+                  'WGT: FhasAdd an ocean',
+                  game.board.getAvailableSpacesForOcean(this), (space) => {
+                    game.addOceanTile(this, space.id, SpaceType.OCEAN);
+                    game.log('${0} acted as World Government and placed an ocean', (b) => b.player(this));
+                    return undefined;
+                  },
+                );
+              }
+            }
+
             return undefined;
-          },
-        ),
-      );
+          }),
+        );
+      } else {
+        action.options.push(
+          new SelectSpace(
+            'Add an ocean',
+            game.board.getAvailableSpacesForOcean(this), (space) => {
+              game.addOceanTile(this, space.id, SpaceType.OCEAN);
+              game.log('${0} acted as World Government and placed an ocean', (b) => b.player(this));
+              return undefined;
+            },
+          ),
+        );
+      }
     }
     if (game.getVenusScaleLevel() < constants.MAX_VENUS_SCALE && game.gameOptions.venusNextExtension) {
-      action.options.push(
-        new SelectOption('Increase Venus scale', 'Increase', () => {
-          game.increaseVenusScaleLevel(this, 1);
-          game.log('${0} acted as World Government and increased Venus scale', (b) => b.player(this));
-          return undefined;
-        }),
-      );
+      if (game.gameOptions.silverCubeVariant === true) {
+        action.options.push(
+          new SelectOption('Add 5 MC to Venus track', 'Select', () => {
+            game.venusSilverCubeBonusMC += 5;
+            game.log('${0} acted as World Government and placed 5 MC on Venus track', (b) => b.player(this));
+
+            if (game.venusSilverCubeBonusMC >= constants.AIR_SCRAPPING_COST) {
+              game.venusSilverCubeBonusMC = 0;
+              if (game.getVenusScaleLevel() < constants.MAX_VENUS_SCALE) {
+                game.increaseVenusScaleLevel(this, 1);
+                game.log('${0} acted as World Government and increased Venus scale', (b) => b.player(this));
+              }
+            }
+
+            return undefined;
+          }),
+        );
+      } else {
+        action.options.push(
+          new SelectOption('Increase Venus scale', 'Increase', () => {
+            game.increaseVenusScaleLevel(this, 1);
+            game.log('${0} acted as World Government and increased Venus scale', (b) => b.player(this));
+            return undefined;
+          }),
+        );
+      }
     }
 
     this.setWaitingFor(action, () => {

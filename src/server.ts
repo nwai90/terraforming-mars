@@ -438,6 +438,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         promoCardsOption: gameReq.promoCardsOption,
         communityCardsOption: gameReq.communityCardsOption,
         solarPhaseOption: gameReq.solarPhaseOption,
+        silverCubeVariant: gameReq.silverCubeVariant,
 
         draftVariant: gameReq.draftVariant,
         initialDraftVariant: gameReq.initialDraft,

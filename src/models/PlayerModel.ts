@@ -79,4 +79,9 @@ export interface PlayerModel {
     waitingFor: PlayerInputModel | undefined;
     timer: SerializedTimer;
     totalSpend: number;
+    silverCubeVariant: boolean;
+    temperatureSilverCubeBonusMC: number;
+    oceansSilverCubeBonusMC: number;
+    oxygenSilverCubeBonusMC: number;
+    venusSilverCubeBonusMC: number;
 }

@@ -123,6 +123,11 @@ export class Server {
       aresData: game.aresData,
       timer: player.timer.serialize(),
       totalSpend: player.totalSpend,
+      silverCubeVariant: game.gameOptions.silverCubeVariant,
+      temperatureSilverCubeBonusMC: game.temperatureSilverCubeBonusMC,
+      oceansSilverCubeBonusMC: game.oceansSilverCubeBonusMC,
+      oxygenSilverCubeBonusMC: game.oxygenSilverCubeBonusMC,
+      venusSilverCubeBonusMC: game.venusSilverCubeBonusMC,
     };
   }
 }
@@ -415,8 +420,17 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       needsToDraft: player.needsToDraft,
       deckSize: game.dealer.getDeckSize(),
       actionsTakenThisRound: player.actionsTakenThisRound,
+      passedPlayers: game.getPassedPlayers(),
+      draftedPlayers: game.getDraftedPlayers(),
+      preludeExtension: game.gameOptions.preludeExtension,
+      politicalAgendasExtension: game.gameOptions.politicalAgendasExtension,
       timer: player.timer.serialize(),
       totalSpend: player.totalSpend,
+      silverCubeVariant: game.gameOptions.silverCubeVariant,
+      temperatureSilverCubeBonusMC: game.temperatureSilverCubeBonusMC,
+      oceansSilverCubeBonusMC: game.oceansSilverCubeBonusMC,
+      oxygenSilverCubeBonusMC: game.oxygenSilverCubeBonusMC,
+      venusSilverCubeBonusMC: game.venusSilverCubeBonusMC,
     } as PlayerModel;
   });
 }

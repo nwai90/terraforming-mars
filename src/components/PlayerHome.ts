@@ -231,7 +231,13 @@ export const PlayerHome = Vue.component('player-home', {
               :venus = "player.venusScaleLevel"
               :turmoil = "player.turmoil"
               :gameOptions = "player.gameOptions"
-              :playerNumber = "player.players.length">
+              :playerNumber = "player.players.length"
+              :silverCubeVariant = "player.silverCubeVariant"
+              :temperatureSilverCubeBonusMC = "player.temperatureSilverCubeBonusMC"
+              :oceansSilverCubeBonusMC = "player.oceansSilverCubeBonusMC"
+              :oxygenSilverCubeBonusMC = "player.oxygenSilverCubeBonusMC"
+              :venusSilverCubeBonusMC = "player.venusSilverCubeBonusMC"
+              >
                 <div class="deck-size">{{ player.deckSize }}</div>
             </preferences>
 

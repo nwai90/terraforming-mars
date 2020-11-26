@@ -108,6 +108,7 @@ export interface GameOptions {
   cardsBlackList: Array<CardName>;
   customColoniesList: Array<ColonyName>;
   requiresVenusTrackCompletion: boolean; // Venus must be completed to end the game
+  silverCubeVariant: boolean; // modified WGT phase
 }
 
 const DEFAULT_GAME_OPTIONS: GameOptions = {
@@ -133,6 +134,7 @@ const DEFAULT_GAME_OPTIONS: GameOptions = {
   showTimers: true,
   shuffleMapOption: false,
   solarPhaseOption: false,
+  silverCubeVariant: false,
   soloTR: false,
   startingCorporations: 2,
   turmoilExtension: false,
@@ -184,6 +186,10 @@ export class Game implements ISerializable<SerializedGame> {
   public aresData: IAresData | undefined;
   public moonData: IMoonData | undefined;
   public erodedSpaces: Array<string> = [];
+  public temperatureSilverCubeBonusMC: number = 0;
+  public oceansSilverCubeBonusMC: number = 0;
+  public oxygenSilverCubeBonusMC: number = 0;
+  public venusSilverCubeBonusMC: number = 0;
 
   // Card-specific data
   // Mons Insurance promo corp
@@ -423,6 +429,10 @@ export class Game implements ISerializable<SerializedGame> {
         ];
       }),
       venusScaleLevel: this.venusScaleLevel,
+      temperatureSilverCubeBonusMC: this.temperatureSilverCubeBonusMC,
+      oceansSilverCubeBonusMC: this.oceansSilverCubeBonusMC,
+      oxygenSilverCubeBonusMC: this.oxygenSilverCubeBonusMC,
+      venusSilverCubeBonusMC: this.venusSilverCubeBonusMC,
     };
     if (this.aresData !== undefined) {
       result.aresData = this.aresData;
@@ -1096,6 +1106,11 @@ export class Game implements ISerializable<SerializedGame> {
       AresHandler.onOxygenChange(this, aresData);
     });
 
+    if (this.oxygenSilverCubeBonusMC > 0) {
+      player.setResource(Resources.MEGACREDITS, this.oxygenSilverCubeBonusMC);
+      this.oxygenSilverCubeBonusMC = 0;
+    }
+
     return undefined;
   }
 
@@ -1136,6 +1151,11 @@ export class Game implements ISerializable<SerializedGame> {
     }
 
     this.venusScaleLevel += steps * 2;
+
+    if (this.venusSilverCubeBonusMC > 0) {
+      player.setResource(Resources.MEGACREDITS, this.venusSilverCubeBonusMC);
+      this.venusSilverCubeBonusMC = 0;
+    }
 
     return undefined;
   }
@@ -1180,6 +1200,11 @@ export class Game implements ISerializable<SerializedGame> {
     AresHandler.ifAres(this, (aresData) => {
       AresHandler.onTemperatureChange(this, aresData);
     });
+
+    if (this.temperatureSilverCubeBonusMC > 0) {
+      player.setResource(Resources.MEGACREDITS, this.temperatureSilverCubeBonusMC);
+      this.temperatureSilverCubeBonusMC = 0;
+    }
 
     return undefined;
   }
@@ -1458,6 +1483,11 @@ export class Game implements ISerializable<SerializedGame> {
     AresHandler.ifAres(this, (aresData) => {
       AresHandler.onOceanPlaced(aresData, player);
     });
+
+    if (this.oceansSilverCubeBonusMC > 0) {
+      player.setResource(Resources.MEGACREDITS, this.oceansSilverCubeBonusMC);
+      this.oceansSilverCubeBonusMC = 0;
+    }
   }
 
   public removeTile(spaceId: string): void {

@@ -41,6 +41,7 @@ export interface CreateGameModel {
     boards: Array<BoardName | 'random'>;
     seed: number;
     solarPhaseOption: boolean;
+    silverCubeVariant: boolean;
     shuffleMapOption: boolean;
     promoCardsOption: boolean;
     communityCardsOption: boolean;
@@ -111,6 +112,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       seed: Math.random(),
       seededGame: false,
       solarPhaseOption: false,
+      silverCubeVariant: false,
       shuffleMapOption: false,
       promoCardsOption: false,
       communityCardsOption: false,
@@ -287,9 +289,11 @@ export const CreateGameForm = Vue.component('create-game-form', {
       this.turmoil = this.$data.allOfficialExpansions;
       this.promoCardsOption = this.$data.allOfficialExpansions;
       this.solarPhaseOption = this.$data.allOfficialExpansions;
+      if (this.solarPhaseOption === false) this.silverCubeVariant = false;
     },
     toggleVenusNext: function() {
       this.solarPhaseOption = this.$data.venusNext;
+      if (this.solarPhaseOption === false) this.silverCubeVariant = false;
     },
     deselectPoliticalAgendasWhenDeselectingTurmoil: function() {
       if (this.$data.turmoil === false) {
@@ -300,6 +304,9 @@ export const CreateGameForm = Vue.component('create-game-form', {
       if (this.$data.venusNext === false) {
         this.requiresVenusTrackCompletion = false;
       }
+    },
+    toggleSolarPhase: function() {
+      if (this.solarPhaseOption === false) this.silverCubeVariant = false;
     },
     getBoardColorClass: function(boardName: string): string {
       if (boardName === BoardName.ORIGINAL) {
@@ -383,6 +390,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       const colonies = component.colonies;
       const turmoil = component.turmoil;
       const solarPhaseOption = this.solarPhaseOption;
+      const silverCubeVariant = this.silverCubeVariant;
       const shuffleMapOption = this.shuffleMapOption;
       const customCorporationsList = component.customCorporationsList;
       const customColoniesList = component.customColoniesList;
@@ -445,6 +453,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
         board,
         seed,
         solarPhaseOption,
+        silverCubeVariant,
         promoCardsOption,
         communityCardsOption,
         aresExtension: aresExtension,
@@ -616,6 +625,14 @@ export const CreateGameForm = Vue.component('create-game-form', {
                                     </div>
                                 </div>
                             </template>
+
+                            <template v-if="solarPhaseOption">
+                                <input type="checkbox" v-model="silverCubeVariant" id="silverCube-checkbox">
+                                <label for="silverCube-checkbox" class="expansion-button">
+                                    <div class="create-game-expansion-icon expansion-icon-silver-cube"></div>
+                                    <span v-i18n>Silver Cube</span>&nbsp;<a href="https://www.notion.so/Variants-32b53050f10a4cfbaea117c34d4f3a03#e13bc69e07e648fb86a6f23b7d3dc85b" class="tooltip" target="_blank">&#9432;</a>
+                                </label>
+                            </template>
                         </div>
 
                         <div class="create-game-page-column">
@@ -644,7 +661,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
                                 <span v-i18n>Corporations</span>
                             </label>
 
-                            <input type="checkbox" v-model="solarPhaseOption" id="WGT-checkbox">
+                            <input type="checkbox" v-model="solarPhaseOption" id="WGT-checkbox" v-on:change="toggleSolarPhase()">
                             <label for="WGT-checkbox">
                                 <span v-i18n>Solar Phase</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#solar-phase" class="tooltip" target="_blank">&#9432;</a>
                             </label>
