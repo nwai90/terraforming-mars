@@ -4,6 +4,7 @@ import {SpaceType} from '../SpaceType';
 import {TileType} from '../TileType';
 import {AresHandler} from '../ares/AresHandler';
 import {SerializedBoard, SerializedSpace} from './SerializedBoard';
+import {SpaceBonus} from '../SpaceBonus';
 
 /**
  * A representation of any hex board. This is normally Mars (Tharsis, Hellas, Elysium) but can also be The Moon.
@@ -221,7 +222,7 @@ export abstract class Board {
   }
 
   public canPlaceTile(space: ISpace): boolean {
-    return space.tile === undefined && space.spaceType === SpaceType.LAND;
+    return space.tile === undefined && space.spaceType === SpaceType.LAND && space.bonus.includes(SpaceBonus.RESTRICTED) === false;;
   }
 
   public static isCitySpace(space: ISpace): boolean {

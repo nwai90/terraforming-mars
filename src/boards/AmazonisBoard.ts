@@ -51,4 +51,8 @@ export class AmazonisBoard extends Board {
   public static deserialize(board: SerializedBoard, players: Array<Player>): AmazonisBoard {
     return new AmazonisBoard(Board.deserializeSpaces(board.spaces, players));
   }
+
+  public getNonReservedLandSpaces(): Array<ISpace> {
+    return super.getNonReservedLandSpaces().filter((space) => space.bonus.includes(SpaceBonus.RESTRICTED) === false);
+  }
 }
