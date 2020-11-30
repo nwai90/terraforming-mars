@@ -18,6 +18,7 @@ import {TileType} from './TileType';
 import {Random} from './Random';
 import {AmazonisBoard} from './boards/AmazonisBoard';
 import {ArabiaTerraBoard} from './boards/ArabiaTerraBoard';
+import {VastitasBorealisBoard} from './boards/VastitasBorealisBoard';
 
 export class GameSetup {
   public static chooseMilestonesAndAwards = function(gameOptions: GameOptions): IDrawnMilestonesAndAwards {
@@ -75,6 +76,8 @@ export class GameSetup {
       return AmazonisBoard.newInstance(shuffle, rng, includeVenus, erodedSpaces);
     } else if (boardName === BoardName.ARABIA_TERRA) {
       return ArabiaTerraBoard.newInstance(shuffle, rng, includeVenus, erodedSpaces);
+    } else if (boardName === BoardName.VASTITAS_BOREALIS) {
+      return VastitasBorealisBoard.newInstance(shuffle, rng, includeVenus, erodedSpaces);
     } else {
       return OriginalBoard.newInstance(shuffle, rng, includeVenus, erodedSpaces);
     }

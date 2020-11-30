@@ -3,5 +3,6 @@ export enum BoardName {
     HELLAS = 'hellas',
     ELYSIUM = 'elysium',
     AMAZONIS = 'amazonis',
-    ARABIA_TERRA = 'arabia terra'
+    ARABIA_TERRA = 'arabia terra',
+    VASTITAS_BOREALIS = 'v. borealis',
 }

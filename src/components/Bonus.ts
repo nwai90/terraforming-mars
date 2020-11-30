@@ -32,6 +32,8 @@ export const Bonus = Vue.component('bonus', {
         ret += 'animal';
       } else if (bonus === SpaceBonus.MICROBE) {
         ret += 'microbe';
+      } else if (bonus === SpaceBonus.TEMPERATURE) {
+        ret += 'bonustemperature';
       }
 
       ret += ' board-space-bonus-pos--' + idx.toString();

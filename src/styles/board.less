@@ -107,14 +107,24 @@
 }
 
 .board-space-bonus--bonusocean {
-    background: url(assets/tiles/ocean.png), url(assets/misc/hellas-ocean-cost.png);
-    background-repeat: no-repeat, no-repeat;
-    background-size: 21px, 12px;
-    background-position: left, 23px;
-    width: 35px;
-    height: 24px;
+    background: url(assets/misc/bonus_ocean.png);
+    background-repeat: no-repeat;
+    background-size: 35px 18px;
+    width: 37px;
+    height: 18px;
+    background-position: center;
+    filter: saturate(1.5);
 }
 
+.board-space-bonus--bonustemperature {
+    background: url(assets/misc/bonus_temperature.png);
+    background-repeat: no-repeat;
+    background-size: 32px 21px;
+    width: 36px;
+    height: 21px;
+    background-position: center;
+    filter: saturate(1.5);
+}
 
 .board-space-tile--ocean {
 	background: url(assets/board_icons.png) -79px -29px no-repeat;

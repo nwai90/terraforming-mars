@@ -66,6 +66,7 @@ import {Random} from './Random';
 import {AddResourcesToCard} from './deferredActions/AddResourcesToCard';
 import {AmazonisBoard} from './boards/AmazonisBoard';
 import {ArabiaTerraBoard} from './boards/ArabiaTerraBoard';
+import {VastitasBorealisBoard} from './boards/VastitasBorealisBoard';
 
 export type GameId = string;
 
@@ -446,24 +447,6 @@ export class Game implements ISerializable<SerializedGame> {
     return result;
   }
 
-<<<<<<< HEAD
-=======
-  public checkForCommunityColonies(gameOptions: GameOptions) : boolean {
-    if (!gameOptions.customColoniesList) return false;
-    if (gameOptions.customColoniesList.includes(ColonyName.IAPETUS)) return true;
-    if (gameOptions.customColoniesList.includes(ColonyName.MERCURY)) return true;
-    if (gameOptions.customColoniesList.includes(ColonyName.HYGIEA)) return true;
-    if (gameOptions.customColoniesList.includes(ColonyName.TITANIA)) return true;
-    if (gameOptions.customColoniesList.includes(ColonyName.VENUS)) return true;
-    if (gameOptions.customColoniesList.includes(ColonyName.LEAVITT)) return true;
-    if (gameOptions.customColoniesList.includes(ColonyName.PALLAS)) return true;
-    if (gameOptions.customColoniesList.includes(ColonyName.DEIMOS)) return true;
-    if (gameOptions.customColoniesList.includes(ColonyName.TERRA)) return true;
-
-    return false;
-  }
-
->>>>>>> Add Terra colony tile
   public isSoloMode() :boolean {
     return this.players.length === 1;
   }
@@ -1340,6 +1323,16 @@ export class Game implements ISerializable<SerializedGame> {
 
     TurmoilHandler.resolveTilePlacementCosts(player);
 
+    // Vastitas Borealis special requirements temperature tile
+    if (space.id === SpaceName.VASTITAS_BOREALIS_NORTH_POLE &&
+      this.temperature < constants.MAX_TEMPERATURE &&
+      this.gameOptions.boardName === BoardName.VASTITAS_BOREALIS) {
+      if (player.color !== Color.NEUTRAL) {
+        this.defer(new DeferredAction(player, () => this.increaseTemperature(player, 1)));
+        this.defer(new SelectHowToPayDeferred(player, 3, {title: 'Select how to pay for placement bonus temperature'}));
+      }
+    }
+
     // Part 3. Setup for bonuses
     const arcadianCommunityBonus = space.player === player && player.isCorporation(CardName.ARCADIAN_COMMUNITIES);
     let startingResources: Multiset<Resources | ResourceType> | undefined = undefined;
@@ -1601,6 +1594,8 @@ export class Game implements ISerializable<SerializedGame> {
       board = AmazonisBoard.deserialize(d.board, playersForBoard);
     } else if (gameOptions.boardName === BoardName.ARABIA_TERRA) {
       board = ArabiaTerraBoard.deserialize(d.board, playersForBoard);
+    } else if (gameOptions.boardName === BoardName.VASTITAS_BOREALIS) {
+      board = VastitasBorealisBoard.deserialize(d.board, playersForBoard);
     } else {
       board = OriginalBoard.deserialize(d.board, playersForBoard);
     }
