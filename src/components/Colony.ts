@@ -634,8 +634,8 @@ export const Colony = Vue.component('colony', {
 
   <div v-if="colony.name === getTitania()" class="colony-grid-container">
     <div :style="getClassForColonyPlacementBonus(colony, 0)"><div class="points points-big" style="transform:scale(0.5); margin-left: -16px; margin-top: -18px; height: 80px; line-height:80px; font-size: 72px">5</div></div>
-    <div :style="getClassForColonyPlacementBonus(colony, 1)"><div class="points points-big" style="transform:scale(0.5); margin-left: -16px; margin-top: -18px; height: 80px; line-height:80px; font-size: 72px">3</div></div>
-    <div :style="getClassForColonyPlacementBonus(colony, 2)"><div class="points points-big" style="transform:scale(0.5); margin-left: -16px; margin-top: -18px; height: 80px; line-height:80px; font-size: 72px">2</div></div>
+    <div :style="getClassForColonyPlacementBonus(colony, 1)"><div class="points points-big" style="transform:scale(0.5); margin-left: -16px; margin-top: -18px; height: 80px; line-height:80px; font-size: 72px">4</div></div>
+    <div :style="getClassForColonyPlacementBonus(colony, 2)"><div class="points points-big" style="transform:scale(0.5); margin-left: -16px; margin-top: -18px; height: 80px; line-height:80px; font-size: 72px">3</div></div>
     <div></div>
     <div></div>
     <div></div>
