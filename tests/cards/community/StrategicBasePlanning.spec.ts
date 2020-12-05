@@ -24,16 +24,16 @@ describe('StrategicBasePlanning', function() {
     player.megaCredits = 6;
 
     card.play(player, game);
-    expect(game.deferredActions).has.lengthOf(3);
+    expect(game.deferredActions).has.lengthOf(2);
 
     const selectColony = game.deferredActions.next()!.execute() as SelectColony;
     game.deferredActions.shift();
     selectColony.cb((<any>ColonyName)[selectColony.coloniesModel[0].name.toUpperCase()]);
 
+    game.deferredActions.runNext(); // howToPay
+
     const selectSpace = game.deferredActions.next()!.execute() as SelectSpace;
     game.deferredActions.shift();
-
-    game.deferredActions.runNext(); // howToPay
 
     const openColonies = game.colonies.filter((colony) => colony.isActive);
     expect(openColonies[0].colonies.find((c) => c === player.id)).is.not.undefined;

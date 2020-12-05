@@ -18,8 +18,10 @@ export class StrategicBasePlanning extends PreludeCard implements IProjectCard {
 
     public play(player: Player, game: Game) {
       game.defer(new BuildColony(player, game, false, 'Select where to build colony'));
-      game.defer(new PlaceCityTile(player, game));
-      game.defer(new SelectHowToPayDeferred(player, 6, false, false));
+      game.defer(new SelectHowToPayDeferred(player, 6, false, false, 'Select how to pay for prelude', () => {
+        game.defer(new PlaceCityTile(player, game));
+      }));
+
       return undefined;
     }
 }
