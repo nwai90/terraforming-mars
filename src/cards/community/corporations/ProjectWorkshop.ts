@@ -34,7 +34,7 @@ export class ProjectWorkshop implements CorporationCard {
 
     public canAct(player: Player): boolean {
       const activeCards = player.getCardsByCardType(CardType.ACTIVE);
-      return activeCards.length > 0 || player.megaCredits >= 3;
+      return activeCards.length > 0 || player.megaCredits >= 4;
     }
 
     public action(player: Player) {
@@ -65,14 +65,14 @@ export class ProjectWorkshop implements CorporationCard {
         },
       );
 
-      const drawBlueCard = new SelectOption('Spend 3 MC to draw a blue card', 'Draw card', () => {
-        player.megaCredits -= 3;
+      const drawBlueCard = new SelectOption('Spend 4 MC to draw a blue card', 'Draw card', () => {
+        player.megaCredits -= 4;
         player.drawCard(1, {cardType: CardType.ACTIVE});
         return undefined;
       });
 
       if (activeCards.length === 0) return drawBlueCard;
-      if (!player.canAfford(3)) return flipBlueCard;
+      if (!player.canAfford(4)) return flipBlueCard;
 
       return new OrOptions(drawBlueCard, flipBlueCard);
     }
@@ -110,8 +110,8 @@ export class ProjectWorkshop implements CorporationCard {
             eb.cards(2).digit;
           });
           cb.vSpace(CardRenderItemSize.SMALL);
-          cb.action('Flip and discard a played blue card to convert any VP on it into TR and draw 2 cards, or spend 3 MC to draw a blue card.', (eb) => {
-            eb.or().megacredits(3).startAction.cards(1).secondaryTag(AltSecondaryTag.BLUE);
+          cb.action('Flip and discard a played blue card to convert any VP on it into TR and draw 2 cards, or spend 4 MC to draw a blue card.', (eb) => {
+            eb.or().megacredits(4).startAction.cards(1).secondaryTag(AltSecondaryTag.BLUE);
           });
         });
       }),

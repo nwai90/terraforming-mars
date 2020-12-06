@@ -36,12 +36,12 @@ describe('ProjectWorkshop', function() {
   });
 
   it('Can\'t act', function() {
-    player.megaCredits = 2;
+    player.megaCredits = 3;
     expect(card.canAct(player)).is.not.true;
   });
 
-  it('Can spend 3 MC to draw a blue card', function() {
-    player.megaCredits = 3;
+  it('Can spend 4 MC to draw a blue card', function() {
+    player.megaCredits = 4;
 
     expect(card.canAct(player)).is.true;
     card.action(player).cb();
@@ -91,7 +91,7 @@ describe('ProjectWorkshop', function() {
 
   it('Can select option if able to do both actions', function() {
     player.playedCards.push(advancedAlloys);
-    player.megaCredits = 3;
+    player.megaCredits = 4;
     const result = card.action(player);
     expect(result instanceof OrOptions).is.true;
   });
