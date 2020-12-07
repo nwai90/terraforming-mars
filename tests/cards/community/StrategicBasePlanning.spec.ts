@@ -1,7 +1,6 @@
 import {expect} from 'chai';
-import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
 import {Game, GameOptions} from '../../../src/Game';
 import {ColonyName} from '../../../src/colonies/ColonyName';
 import {SelectColony} from '../../../src/inputs/SelectColony';
@@ -10,14 +9,16 @@ import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {TileType} from '../../../src/TileType';
 
 describe('StrategicBasePlanning', function() {
-  let card : StrategicBasePlanning; let player : Player; let game : Game;
+  let card : StrategicBasePlanning; let player : Player; let player2 : Player; let game : Game;
 
   beforeEach(function() {
     card = new StrategicBasePlanning();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
+    player2 = TestPlayers.RED.newPlayer();
+    game = new Game('foobar', [player, player2], player);
 
     const gameOptions = setCustomGameOptions({coloniesExtension: true}) as GameOptions;
-    game = new Game('foobar', [player, player], player, gameOptions);
+    game = new Game('foobar', [player, player2], player, gameOptions);
   });
 
   it('Should play', function() {
@@ -26,14 +27,12 @@ describe('StrategicBasePlanning', function() {
     card.play(player, game);
     expect(game.deferredActions).has.lengthOf(2);
 
-    const selectColony = game.deferredActions.next()!.execute() as SelectColony;
-    game.deferredActions.shift();
+    const selectColony = game.deferredActions.shift()!.execute() as SelectColony;
     selectColony.cb((<any>ColonyName)[selectColony.coloniesModel[0].name.toUpperCase()]);
 
-    game.deferredActions.runNext(); // howToPay
+    game.deferredActions.shift()!.execute(); // howToPay
 
-    const selectSpace = game.deferredActions.next()!.execute() as SelectSpace;
-    game.deferredActions.shift();
+    const selectSpace = game.deferredActions.shift()!.execute() as SelectSpace;
 
     const openColonies = game.colonies.filter((colony) => colony.isActive);
     expect(openColonies[0].colonies.find((c) => c === player.id)).is.not.undefined;
