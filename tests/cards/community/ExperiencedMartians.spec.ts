@@ -1,7 +1,6 @@
 import {expect} from 'chai';
-import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
 import {Game, GameOptions} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
@@ -13,7 +12,7 @@ describe('ExperiencedMartians', function() {
 
   beforeEach(function() {
     card = new ExperiencedMartians();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
 
     const gameOptions = setCustomGameOptions() as GameOptions;
     game = new Game('foobar', [player, player], player, gameOptions);

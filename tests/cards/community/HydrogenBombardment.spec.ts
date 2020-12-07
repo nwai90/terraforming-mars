@@ -1,8 +1,7 @@
 import {expect} from 'chai';
-import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Game, GameOptions} from '../../../src/Game';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
 import {HydrogenBombardment} from '../../../src/cards/community/preludes/HydrogenBombardment';
 import {Resources} from '../../../src/Resources';
 
@@ -11,7 +10,7 @@ describe('HydrogenBombardment', function() {
 
   beforeEach(function() {
     card = new HydrogenBombardment();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
 
     const gameOptions = setCustomGameOptions() as GameOptions;
     game = new Game('foobar', [player, player], player, gameOptions);

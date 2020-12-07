@@ -1,15 +1,15 @@
 import {expect} from 'chai';
-import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {TradeInfrastructure} from '../../../src/cards/community/preludes/TradeInfrastructure';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('TradeInfrastructure', function() {
   let card : TradeInfrastructure; let player : Player;
 
   beforeEach(function() {
     card = new TradeInfrastructure();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
   });
 
   it('Should play', function() {

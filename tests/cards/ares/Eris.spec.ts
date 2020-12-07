@@ -1,9 +1,8 @@
 import {expect} from 'chai';
 import {Eris} from '../../../src/cards/ares/Eris';
-import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Game, GameOptions} from '../../../src/Game';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {AresHandler} from '../../../src/ares/AresHandler';
@@ -13,7 +12,7 @@ describe('Eris', function() {
 
   beforeEach(function() {
     card = new Eris();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
 
     const gameOptions = setCustomGameOptions({aresExtension: true, aresHazards: true}) as GameOptions;
     game = new Game('foobar', [player, player], player, gameOptions);

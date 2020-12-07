@@ -1,15 +1,15 @@
 import {expect} from 'chai';
-import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {MartianLumberYard} from '../../../src/cards/community/preludes/MartianLumberYard';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('MartianLumberYard', function() {
   let card : MartianLumberYard; let player : Player;
 
   beforeEach(function() {
     card = new MartianLumberYard();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
   });
 
   it('Should play', function() {

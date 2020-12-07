@@ -1,17 +1,17 @@
 import {expect} from 'chai';
-import {Color} from '../../../src/Color';
 import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {FortifiedOutpost} from '../../../src/cards/community/preludes/FortifiedOutpost';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {TileType} from '../../../src/TileType';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('FortifiedOutpost', function() {
   let card : FortifiedOutpost; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new FortifiedOutpost();
-    player = new Player('test', Color.BLUE, false);
+    player = TestPlayers.BLUE.newPlayer();
     game = new Game('foobar', [player, player], player);
   });
 

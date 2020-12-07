@@ -15,7 +15,6 @@ describe('StrategicBasePlanning', function() {
     card = new StrategicBasePlanning();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    game = new Game('foobar', [player, player2], player);
 
     const gameOptions = setCustomGameOptions({coloniesExtension: true}) as GameOptions;
     game = new Game('foobar', [player, player2], player, gameOptions);
