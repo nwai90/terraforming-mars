@@ -52,9 +52,14 @@ export const Colony = Vue.component('colony', {
         return 178;
       }
 
-      if (colony.name === ColonyName.MERCURY || colony.name === ColonyName.HYGIEA) {
-        if (isColonyCube) return 149;
-        return 155;
+      if (colony.name === ColonyName.HYGIEA) {
+        if (isColonyCube) return 174;
+        return 180;
+      }
+
+      if (colony.name === ColonyName.MERCURY) {
+        if (isColonyCube) return 166;
+        return 172;
       }
 
       if (colony.name === ColonyName.DEIMOS) {
@@ -196,8 +201,8 @@ export const Colony = Vue.component('colony', {
       <span v-if="colony.name === getIapetus()" class="white-char">:</span>
       <div v-if="colony.name === getIapetus()" class="resource money">-1</div>
 
-      <div v-if="colony.name === getMercury()" class="resource money">2</div>
-      <div v-if="colony.name === getHygiea()" class="resource money">3</div>
+      <div v-if="colony.name === getMercury()" class="resource money" style="margin-top: 10px">2</div>
+      <div v-if="colony.name === getHygiea()" class="resource money" style="margin-top: 10px">3</div>
       <div v-if="colony.name === getTitania()" class="resource money">-3</div>
       <div v-if="colony.name === getVenus()" class="resource" style="background:white;margin:15px 10px 10px 20px;">?<div class="card-icon tag-venus" style="color: white;margin-top: -36px;margin-left: 16px;"></div></div>
 
@@ -271,12 +276,16 @@ export const Colony = Vue.component('colony', {
       <span v-if="colony.name === getTitania() || colony.name === getPallas()" class="colony-background-color" style="position:relative;top:-14px;left:12px">
         Trade Income
       </span>
-      <span v-if="colony.name === getMercury()" class="colony-background-color" style="margin-left: 3px;">
-        Trade Income
-      </span>
-      <span v-if="colony.name === getHygiea()" class="colony-background-color" style="margin-left: 3px;">
-        Trade Income: Steal 3 indicated resources
-      </span>
+      <div v-if="colony.name === getMercury()" style="margin-top: 10px;">
+        <span class="colony-background-color" style="margin-left: 3px">
+            Trade Income: Gain the indicated production
+        </span>
+      </div>
+      <div v-if="colony.name === getHygiea()" style="margin-top: 15px; margin-bottom: 5px;">
+        <span class="colony-background-color" style="margin-left: 3px;">
+            Trade Income: Steal 3 indicated resources
+        </span>
+      </div>
       <span v-if="colony.name === getLeavitt()" class="colony-background-color" style="margin-left: 3px;">
         Trade Income: Draw X cards and keep 1
       </span>
@@ -609,13 +618,13 @@ export const Colony = Vue.component('colony', {
 
   <div v-if="colony.name === getHygiea()" class="colony-grid-container">
     <div :style="getClassForColonyPlacementBonus(colony, 0)">
-      <div class="resource card red-outline" style="margin-left: 5px; margin-top: 2px; transform: scale(0.8);"></div>
+      <div class="resource card red-outline" style="margin-left: 5px; margin-top: 6px; transform: scale(0.8);"></div>
     </div>
     <div :style="getClassForColonyPlacementBonus(colony, 1)">
-      <div class="resource card red-outline" style="margin-left: 5px; margin-top: 2px; transform: scale(0.8);"></div>
+      <div class="resource card red-outline" style="margin-left: 5px; margin-top: 6px; transform: scale(0.8);"></div>
     </div>
     <div :style="getClassForColonyPlacementBonus(colony, 2)">
-      <div class="resource card red-outline" style="margin-left: 5px; margin-top: 2px; transform: scale(0.8);"></div>
+      <div class="resource card red-outline" style="margin-left: 5px; margin-top: 6px; transform: scale(0.8);"></div>
     </div>
     <div></div>
     <div></div>
