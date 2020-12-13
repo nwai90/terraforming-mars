@@ -13,9 +13,10 @@ describe('ExperiencedMartians', function() {
   beforeEach(function() {
     card = new ExperiencedMartians();
     player = TestPlayers.BLUE.newPlayer();
+    const redPlayer = TestPlayers.RED.newPlayer();
 
     const gameOptions = setCustomGameOptions() as GameOptions;
-    game = new Game('foobar', [player, player], player, gameOptions);
+    game = new Game('foobar', [player, redPlayer], player, gameOptions);
   });
 
   it('Should play', function() {
