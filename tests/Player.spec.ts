@@ -213,6 +213,7 @@ describe('Player', function() {
         afterFirstAction: false,
         lastStoppedAt: 0,
       } as SerializedTimer,
+      totalSpend: 0,
     };
 
     const newPlayer = Player.deserialize(json as SerializedPlayer);
