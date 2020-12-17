@@ -97,6 +97,7 @@ export const ColoniesFilter = Vue.component('colonies-filter', {
         this.selectedColonies = officialColonies.concat(communityColonies).slice();
         if (this.venusNext === false) this.selectedColonies = this.selectedColonies.filter((c) => c.name !== ColonyName.VENUS);
         if (this.turmoil === false) this.selectedColonies = this.selectedColonies.filter((c) => c.name !== ColonyName.PALLAS);
+        if (this.aresExtension === false) this.selectedColonies = this.selectedColonies.filter((c) => c.name !== ColonyName.DEIMOS);
       } else {
         this.selectedColonies = officialColonies.slice();
       }
@@ -120,7 +121,7 @@ export const ColoniesFilter = Vue.component('colonies-filter', {
       }
     },
     aresExtension: function(enabled) {
-      if (this.aresExtension && Array.isArray(this.selectedColonies)) {
+      if (this.communityCardsOption && Array.isArray(this.selectedColonies)) {
         if (enabled === false) {
           this.selectedColonies = this.selectedColonies.filter((c) => c.name !== ColonyName.DEIMOS);
         } else if (this.selectedColonies.find((c) => c.name === ColonyName.DEIMOS) === undefined) {
