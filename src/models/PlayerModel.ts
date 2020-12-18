@@ -50,6 +50,7 @@ export interface PlayerModel {
     plants: number;
     plantProduction: number;
     plantsAreProtected: boolean;
+    plantsNeededForGreenery: number;
     players: Array<PlayerModel>;
     spaces: Array<SpaceModel>;
     steel: number;
