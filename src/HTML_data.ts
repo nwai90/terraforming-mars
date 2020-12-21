@@ -59,7 +59,7 @@ export const HTML_DATA: Map<string, string> =
       </div>
 `],
     [CardName.HYDROGEN_BOMBARDMENT,`
-      <div class="content">
+      <div class="content" style="margin-top:30px">
         <div class="production-box"><div class="production titanium"></div></div><br>
         <div class="tile venus-tile"></div>
         <div class="description">
@@ -68,7 +68,7 @@ export const HTML_DATA: Map<string, string> =
       </div>
 `],
     [CardName.VITAL_COLONY, `
-      <div class="content">
+      <div class="content" style="margin-top:30px">
       <div class="tile colony"></div>
       <div class="colony-placement"></div><br>
       <div class="resource money">-5</div>
@@ -78,7 +78,7 @@ export const HTML_DATA: Map<string, string> =
       </div>
 `],
     [CardName.STRATEGIC_BASE_PLANNING, `
-      <div class="content">
+      <div class="content" style="margin-top:30px">
       <div class="tile colony"></div>
       <div class="tile city-tile"></div><br>
       - <div class="resource money">6</div>
@@ -88,7 +88,7 @@ export const HTML_DATA: Map<string, string> =
       </div>
 `],
     [CardName.NITRATE_REDUCERS, `
-      <div class="content">
+      <div class="content" style="margin-top:30px">
         <div class="resource card"><div class="card-icon tag-microbe"></div></div>
         <div class="resource card"><div class="card-icon tag-microbe"></div></div>
         <br>
@@ -101,7 +101,7 @@ export const HTML_DATA: Map<string, string> =
       </div>
 `],
     [CardName.EXPERIENCED_MARTIANS, `
-    <div class="content">
+    <div class="content" style="margin-top:30px">
         <div class="delegate"></div>
         <div class="delegate"></div>
         <br>
@@ -115,7 +115,7 @@ export const HTML_DATA: Map<string, string> =
     </div>
 `],
     [CardName.TRADE_INFRASTRUCTURE, `
-    <div class="content">
+    <div class="content" style="margin-top:30px">
         <div class="production-box "><div class="energy production"></div></div>
         <br>
         <div class="energy resource"></div>
@@ -128,7 +128,7 @@ export const HTML_DATA: Map<string, string> =
     </div>
 `],
     [CardName.GEOTHERMAL_VENT, `
-    <div class="content">
+    <div class="content" style="margin-top:30px">
         <div class="tile temperature-tile"></div>
         <div class="tile temperature-tile"></div>
         <br>
@@ -142,7 +142,7 @@ export const HTML_DATA: Map<string, string> =
     </div>
 `],
     [CardName.ACCUMULATED_KNOWLEDGE, `
-    <div class="content">
+    <div class="content" style="margin-top:30px">
         <div class="resource card"></div>
         <div class="resource card"></div>
         <div class="resource card"></div>
@@ -155,7 +155,7 @@ export const HTML_DATA: Map<string, string> =
     </div>
 `],
     [CardName.BOTANICAL_HARVEST, `
-    <div class="content">
+    <div class="content" style="margin-top:30px">
         <div class="tile oxygen-tile"></div>
         <div class="production-box "><div class="plant production"></div></div>
         <br>
@@ -170,7 +170,7 @@ export const HTML_DATA: Map<string, string> =
     </div>
 `],
     [CardName.MARTIAN_LUMBER_YARD, `
-    <div class="content">
+    <div class="content" style="margin-top:30px">
         <div class="production-box production-box-size2">
             <div class="steel production"></div>
             <div class="plant production"></div>
@@ -187,7 +187,7 @@ export const HTML_DATA: Map<string, string> =
     </div>
 `],
     [CardName.FORTIFIED_OUTPOST, `
-    <div class="content">
+    <div class="content" style="margin-top:30px">
         <div class="tile city-tile"></div>
         <div class="tile greenery-tile"></div>
         <br>
