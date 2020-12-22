@@ -1324,9 +1324,7 @@ export class Game implements ISerializable<SerializedGame> {
     TurmoilHandler.resolveTilePlacementCosts(player);
 
     // Vastitas Borealis special requirements temperature tile
-    if (space.id === SpaceName.VASTITAS_BOREALIS_NORTH_POLE &&
-      this.temperature < constants.MAX_TEMPERATURE &&
-      this.gameOptions.boardName === BoardName.VASTITAS_BOREALIS) {
+    if (space.id === SpaceName.VASTITAS_BOREALIS_NORTH_POLE && this.temperature < constants.MAX_TEMPERATURE && this.gameOptions.boardName === BoardName.VASTITAS_BOREALIS) {
       if (player.color !== Color.NEUTRAL) {
         this.defer(new DeferredAction(player, () => this.increaseTemperature(player, 1)));
         this.defer(new SelectHowToPayDeferred(player, 3, {title: 'Select how to pay for placement bonus temperature'}));
