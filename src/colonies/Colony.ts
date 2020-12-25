@@ -24,10 +24,10 @@ import {Tags} from '../cards/Tags';
 import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
 import {PlaceHazardTile} from '../deferredActions/PlaceHazardTile';
 import {_AresHazardPlacement} from '../ares/AresHazards';
-import { SelectSpace } from '../inputs/SelectSpace';
-import { ISpace } from '../ISpace';
-import { SpaceBonus } from '../SpaceBonus';
-import { Phase } from '../Phase';
+import {SelectSpace} from '../inputs/SelectSpace';
+import {ISpace} from '../boards/ISpace';
+import {SpaceBonus} from '../SpaceBonus';
+import {Phase} from '../Phase';
 
 export enum ShouldIncreaseTrack { YES, NO, ASK }
 

@@ -6,7 +6,7 @@ import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {ARES_CARD_MANIFEST} from './AresCardManifest';
 import {PlaceHazardTile} from '../../deferredActions/PlaceHazardTile';
-import {ISpace} from '../../ISpace';
+import {ISpace} from '../../boards/ISpace';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {HAZARD_TILES} from '../../ares/AresHandler';

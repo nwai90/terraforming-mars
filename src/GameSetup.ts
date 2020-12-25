@@ -102,6 +102,7 @@ export class GameSetup {
     if (gameOptions.customColoniesList.includes(ColonyName.LEAVITT)) return true;
     if (gameOptions.customColoniesList.includes(ColonyName.PALLAS)) return true;
     if (gameOptions.customColoniesList.includes(ColonyName.DEIMOS)) return true;
+    if (gameOptions.customColoniesList.includes(ColonyName.TERRA)) return true;
 
     return false;
   }
