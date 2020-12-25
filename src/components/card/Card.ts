@@ -15,6 +15,7 @@ import {CardMetadata} from '../../cards/CardMetadata';
 import {Tags} from '../../cards/Tags';
 import {ALL_CARD_MANIFESTS} from '../../cards/AllCards';
 import {GameModule} from '../../GameModule';
+import { HTML_DATA } from '../../HTML_data';
 
 export const Card = Vue.component('card', {
   components: {
@@ -71,6 +72,9 @@ export const Card = Vue.component('card', {
     };
   },
   methods: {
+    getCardContent: function() {
+      return getCardContent(this.card.name);
+    },
     getCardExpansion: function(): string {
       return this.expansion;
     },
@@ -136,6 +140,7 @@ export const Card = Vue.component('card', {
                 <CardTitle :title="card.name" :type="getCardType()"/>
                 <CardContent v-if="getCardMetadata() !== undefined" :metadata="getCardMetadata()" :isCorporation="isCorporationCard()"/>
                 <CardNumber v-if="getCardMetadata() !== undefined" :number="getCardNumber()"/>
+                <div v-else class="temporary-content-wrapper" v-html=this.getCardContent() />
             </div>
             <CardExpansion :expansion="getCardExpansion()" :isCorporation="isCorporationCard()"/>
             <CardResourceCounter v-if="card.resources !== undefined" :amount="getResourceAmount(card)" />
