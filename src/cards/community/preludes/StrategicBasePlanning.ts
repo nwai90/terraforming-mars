@@ -9,7 +9,7 @@ import {PlaceCityTile} from '../../../deferredActions/PlaceCityTile';
 import {SelectHowToPayDeferred} from '../../../deferredActions/SelectHowToPayDeferred';
 
 export class StrategicBasePlanning extends PreludeCard implements IProjectCard {
-    public tags = [Tags.STEEL];
+    public tags = [Tags.BUILDING];
     public name = CardName.STRATEGIC_BASE_PLANNING;
 
     public canPlay(player: Player) {

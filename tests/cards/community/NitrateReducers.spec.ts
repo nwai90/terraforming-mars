@@ -15,7 +15,7 @@ describe('NitrateReducers', function() {
     const redPlayer = TestPlayers.RED.newPlayer();
 
     const gameOptions = setCustomGameOptions() as GameOptions;
-    game = new Game('foobar', [player, redPlayer], player, gameOptions);
+    game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
   });
 
   it('Should play', function() {
@@ -24,6 +24,6 @@ describe('NitrateReducers', function() {
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(3);
     expect(player.cardsInHand).has.lengthOf(2);
 
-    player.cardsInHand.forEach((card) => expect(card.tags.indexOf(Tags.MICROBES)).not.to.eq(-1));
+    player.cardsInHand.forEach((card) => expect(card.tags.indexOf(Tags.MICROBE)).not.to.eq(-1));
   });
 });

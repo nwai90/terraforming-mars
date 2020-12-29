@@ -1,11 +1,12 @@
 import {expect} from 'chai';
 import {Eris} from '../../../src/cards/ares/Eris';
 import {Player} from '../../../src/Player';
-import {Game, GameOptions} from '../../../src/Game';
-import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {Game} from '../../../src/Game';
+import {TestPlayers} from '../../TestingUtils';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {AresHandler} from '../../../src/ares/AresHandler';
+import {ARES_OPTIONS_WITH_HAZARDS} from '../../ares/AresTestHelper';
 
 describe('Eris', function() {
   let card : Eris; let player : Player; let game : Game;
@@ -15,8 +16,7 @@ describe('Eris', function() {
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
 
-    const gameOptions = setCustomGameOptions({aresExtension: true, aresHazards: true}) as GameOptions;
-    game = new Game('foobar', [player, redPlayer], player, gameOptions);
+    game = Game.newInstance('foobar', [player, redPlayer], player, ARES_OPTIONS_WITH_HAZARDS);
 
     card.play();
     player.corporationCard = card;

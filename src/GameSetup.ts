@@ -34,6 +34,9 @@ export class GameSetup {
     case RandomMAOptionType.NONE:
       switch (gameOptions.boardName) {
       case BoardName.ORIGINAL:
+      case BoardName.AMAZONIS:
+      case BoardName.ARABIA_TERRA:
+      case BoardName.VASTITAS_BOREALIS:
         drawnMilestonesAndAwards.milestones.push(...ORIGINAL_MILESTONES);
         drawnMilestonesAndAwards.awards.push(...ORIGINAL_AWARDS);
         break;

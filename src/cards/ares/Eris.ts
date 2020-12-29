@@ -11,11 +11,11 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {HAZARD_TILES} from '../../ares/AresHandler';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {LogHelper} from '../../components/LogHelper';
+import {LogHelper} from '../../LogHelper';
 
 export class Eris implements CorporationCard {
     public name: CardName = CardName.ERIS;
-    public tags: Array<Tags> = [Tags.STEEL];
+    public tags: Array<Tags> = [Tags.BUILDING];
     public startingMegaCredits: number = 46;
     public cardType: CardType = CardType.CORPORATION;
 

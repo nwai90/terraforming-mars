@@ -16,7 +16,7 @@ describe('ColonialOne', function() {
     const redPlayer = TestPlayers.RED.newPlayer();
 
     const gameOptions = setCustomGameOptions({coloniesExtension: true}) as GameOptions;
-    game = new Game('foobar', [player, redPlayer], player, gameOptions);
+    game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
 
     card.play(player);
     player.corporationCard = card;

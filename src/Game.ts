@@ -277,7 +277,7 @@ export class Game implements ISerializable<SerializedGame> {
       const communityColoniesSelected = GameSetup.includesCommunityColonies(gameOptions);
       const allowCommunityColonies = gameOptions.communityCardsOption || communityColoniesSelected;
 
-      game.colonies = game.colonyDealer.drawColonies(players.length, this.gameOptions, allowCommunityColonies);
+      game.colonies = game.colonyDealer.drawColonies(players.length, gameOptions, allowCommunityColonies);
       if (players.length === 1) {
         players[0].addProduction(Resources.MEGACREDITS, -2);
         game.defer(new RemoveColonyFromGame(players[0]));

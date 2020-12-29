@@ -64,6 +64,10 @@ import {MoonExpansion} from './moon/MoonExpansion';
 import {StandardProjectCard} from './cards/StandardProjectCard';
 import {ConvertPlants} from './cards/base/standardActions/ConvertPlants';
 import {ConvertHeat} from './cards/base/standardActions/ConvertHeat';
+import {AsteroidStandardProject} from './cards/base/standardProjects/AsteroidStandardProject';
+import {GreeneryStandardProject} from './cards/base/standardProjects/GreeneryStandardProject';
+import {AquiferStandardProject} from './cards/base/standardProjects/AquiferStandardProject';
+import {AirScrappingStandardProject} from './cards/venusNext/AirScrappingStandardProject';
 
 export type PlayerId = string;
 
@@ -950,7 +954,9 @@ export class Player implements ISerializable<SerializedPlayer> {
             game.temperatureSilverCubeBonusMC += 5;
             game.log('${0} acted as World Government and placed 5 MC on temperature track', (b) => b.player(this));
 
-            if (game.temperatureSilverCubeBonusMC >= constants.ASTEROID_COST) {
+            const asteroidStandard = new AsteroidStandardProject();
+
+            if (game.temperatureSilverCubeBonusMC >= asteroidStandard.cost) {
               game.temperatureSilverCubeBonusMC = 0;
               if (game.getTemperature() < constants.MAX_TEMPERATURE) {
                 game.increaseTemperature(this, 1);
@@ -978,7 +984,9 @@ export class Player implements ISerializable<SerializedPlayer> {
             game.oxygenSilverCubeBonusMC += 5;
             game.log('${0} acted as World Government and placed 5 MC on oxygen track', (b) => b.player(this));
 
-            if (game.oxygenSilverCubeBonusMC >= constants.GREENERY_COST) {
+            const greeneryStandard = new GreeneryStandardProject();
+
+            if (game.oxygenSilverCubeBonusMC >= greeneryStandard.cost) {
               game.oxygenSilverCubeBonusMC = 0;
               if (game.getOxygenLevel() < constants.MAX_OXYGEN_LEVEL) {
                 game.increaseOxygenLevel(this, 1);
@@ -1006,7 +1014,9 @@ export class Player implements ISerializable<SerializedPlayer> {
             game.oceansSilverCubeBonusMC += 5;
             game.log('${0} acted as World Government and placed 5 MC on oceans track', (b) => b.player(this));
 
-            if (game.oceansSilverCubeBonusMC >= constants.AQUIFER_COST) {
+            const aquifer = new AquiferStandardProject();
+
+            if (game.oceansSilverCubeBonusMC >= aquifer.cost) {
               game.oceansSilverCubeBonusMC = 0;
               if (game.board.getOceansOnBoard() < constants.MAX_OCEAN_TILES) {
                 return new SelectSpace(
@@ -1043,7 +1053,9 @@ export class Player implements ISerializable<SerializedPlayer> {
             game.venusSilverCubeBonusMC += 5;
             game.log('${0} acted as World Government and placed 5 MC on Venus track', (b) => b.player(this));
 
-            if (game.venusSilverCubeBonusMC >= constants.AIR_SCRAPPING_COST) {
+            const airScrapping = new AirScrappingStandardProject();
+
+            if (game.venusSilverCubeBonusMC >= airScrapping.cost) {
               game.venusSilverCubeBonusMC = 0;
               if (game.getVenusScaleLevel() < constants.MAX_VENUS_SCALE) {
                 game.increaseVenusScaleLevel(this, 1);

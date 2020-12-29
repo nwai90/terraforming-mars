@@ -17,7 +17,7 @@ describe('StrategicBasePlanning', function() {
     player2 = TestPlayers.RED.newPlayer();
 
     const gameOptions = setCustomGameOptions({coloniesExtension: true}) as GameOptions;
-    game = new Game('foobar', [player, player2], player, gameOptions);
+    game = Game.newInstance('foobar', [player, player2], player, gameOptions);
   });
 
   it('Should play', function() {

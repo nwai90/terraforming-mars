@@ -8,7 +8,7 @@ import {Resources} from '../../../Resources';
 import {SendDelegateToArea} from '../../../deferredActions/SendDelegateToArea';
 
 export class ExperiencedMartians extends PreludeCard implements IProjectCard {
-    public tags = [Tags.STEEL];
+    public tags = [Tags.BUILDING];
     public name = CardName.EXPERIENCED_MARTIANS;
 
     public play(player: Player, game: Game) {

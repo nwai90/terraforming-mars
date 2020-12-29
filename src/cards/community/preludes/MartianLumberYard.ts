@@ -6,7 +6,7 @@ import {Tags} from '../../Tags';
 import {Resources} from '../../../Resources';
 
 export class MartianLumberYard extends PreludeCard implements IProjectCard {
-    public tags = [Tags.STEEL];
+    public tags = [Tags.BUILDING];
     public name = CardName.MARTIAN_LUMBER_YARD;
 
     public play(player: Player) {

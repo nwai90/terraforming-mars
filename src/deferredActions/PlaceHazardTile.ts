@@ -4,7 +4,7 @@ import {SelectSpace} from '../inputs/SelectSpace';
 import {ISpace} from '../boards/ISpace';
 import {DeferredAction} from './DeferredAction';
 import {AresHandler} from '../ares/AresHandler';
-import {LogHelper} from '../components/LogHelper';
+import {LogHelper} from '../LogHelper';
 import {TileType} from '../TileType';
 
 export class PlaceHazardTile implements DeferredAction {
