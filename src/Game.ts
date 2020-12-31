@@ -1679,6 +1679,10 @@ export class Game implements ISerializable<SerializedGame> {
     game.initialDraftIteration = d.initialDraftIteration;
     game.monsInsuranceOwner = d.monsInsuranceOwner;
     game.someoneHasRemovedOtherPlayersPlants = d.someoneHasRemovedOtherPlayersPlants;
+    game.temperatureSilverCubeBonusMC = d.temperatureSilverCubeBonusMC;
+    game.oceansSilverCubeBonusMC = d.oceansSilverCubeBonusMC;
+    game.oxygenSilverCubeBonusMC = d.oxygenSilverCubeBonusMC;
+    game.venusSilverCubeBonusMC = d.venusSilverCubeBonusMC;
 
     // Still in Draft or Research of generation 1
     if (game.generation === 1 && players.some((p) => p.corporationCard === undefined)) {
