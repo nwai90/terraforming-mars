@@ -15,7 +15,13 @@ import {CardMetadata} from '../../cards/CardMetadata';
 import {Tags} from '../../cards/Tags';
 import {ALL_CARD_MANIFESTS} from '../../cards/AllCards';
 import {GameModule} from '../../GameModule';
-import { HTML_DATA } from '../../HTML_data';
+import {HTML_DATA} from '../../HTML_data';
+
+function getCardContent(cardName: string): string {
+  let htmlData: string | undefined = '';
+  htmlData = HTML_DATA.get(cardName);
+  return htmlData || '';
+}
 
 export const Card = Vue.component('card', {
   components: {

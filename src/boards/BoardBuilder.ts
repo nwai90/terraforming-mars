@@ -64,7 +64,7 @@ export class BoardBuilder {
         );
       }
 
-      const reservedBonuses = [SpaceBonus.VOLCANIC, SpaceBonus.RESTRICTED, SpaceBonus.COVE];
+      const reservedBonuses = [SpaceBonus.RESTRICTED, SpaceBonus.COVE];
 
       this.spaces.forEach((space) => {
         if (erodedSpaces.includes(space.id)) {

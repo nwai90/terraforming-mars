@@ -44,7 +44,7 @@ export interface ICard {
     resourceCount?: number;
     cost?: number;
     cardType: CardType;
-    metadata: CardMetadata;
+    metadata?: CardMetadata;
     warning?: string | Message;
 }
 

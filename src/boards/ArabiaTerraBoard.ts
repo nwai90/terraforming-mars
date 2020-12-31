@@ -45,4 +45,12 @@ export class ArabiaTerraBoard extends Board {
   public static deserialize(board: SerializedBoard, players: Array<Player>): ArabiaTerraBoard {
     return new ArabiaTerraBoard(Board.deserializeSpaces(board.spaces, players));
   }
+
+  public getVolcanicSpaceIds(): Array<string> {
+    return [];
+  }
+
+  public getNoctisCitySpaceIds(): Array<string> {
+    return [];
+  }
 }

@@ -310,6 +310,11 @@ class Builder {
     return this;
   }
 
+  public colonyPlacementBonus(): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.COLONY_PLACEMENT_BONUS));
+    return this;
+  }
+
   public influence(amount: number): Builder {
     this._addRowItem(new CardRenderItem(CardRenderItemType.INFLUENCE, amount));
     return this;

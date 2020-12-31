@@ -268,7 +268,7 @@ export abstract class Colony implements SerializedColony {
                 (foundSpace: ISpace) => {
                   foundSpace.bonus.forEach((spaceBonus) => game.grantSpaceBonus(player, spaceBonus));
 
-                  const reservedBonuses = [SpaceBonus.VOLCANIC, SpaceBonus.RESTRICTED];
+                  const reservedBonuses = [SpaceBonus.RESTRICTED];
                   foundSpace.bonus = foundSpace.bonus.filter((bonus) => reservedBonuses.includes(bonus));
                   game.erodedSpaces.push(foundSpace.id);
     

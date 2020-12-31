@@ -23,16 +23,15 @@ export class VastitasBorealisBoard extends Board {
     const HEAT = SpaceBonus.HEAT;
     const TITANIUM = SpaceBonus.TITANIUM;
     const TEMPERATURE = SpaceBonus.TEMPERATURE;
-    const VOLCANIC = SpaceBonus.VOLCANIC;
     
     // y=0
-    builder.land(STEEL, STEEL).land(PLANT).land().land().land(TITANIUM, TITANIUM, VOLCANIC);
+    builder.land(STEEL, STEEL).land(PLANT).land().land().land(TITANIUM, TITANIUM);
     // y=1
-    builder.land(STEEL, STEEL).land(STEEL).land().land().land(TITANIUM, VOLCANIC).land(PLANT);
+    builder.land(STEEL, STEEL).land(STEEL).land().land().land(TITANIUM).land(PLANT);
     // y=2
     builder.land(TITANIUM).land().land().land().land(DRAW_CARD).ocean(PLANT, DRAW_CARD).ocean(PLANT);
     // y=3
-    builder.land(STEEL, TITANIUM, VOLCANIC).land(STEEL, DRAW_CARD, VOLCANIC).land(STEEL).ocean(HEAT, HEAT).ocean(HEAT, HEAT).ocean().ocean(PLANT, PLANT).land(STEEL, PLANT);
+    builder.land(STEEL, TITANIUM).land(STEEL, DRAW_CARD).land(STEEL).ocean(HEAT, HEAT).ocean(HEAT, HEAT).ocean().ocean(PLANT, PLANT).land(STEEL, PLANT);
     // y=4
     builder.land().land().land().ocean(HEAT, HEAT).land(TEMPERATURE).doNotShuffleLastSpace().land(STEEL).land().land(PLANT).ocean(TITANIUM);
     // y=5
@@ -74,5 +73,18 @@ export class VastitasBorealisBoard extends Board {
 
   public getAvailableSpacesForGreenery(player: Player): Array<ISpace> {
     return this.filterVastitasBorealis(player, super.getAvailableSpacesForGreenery(player));
+  }
+
+  public getVolcanicSpaceIds(): Array<string> {
+    return [
+      SpaceName.ELYSIUM_MONS_VASTITAS_BOREALIS,
+      SpaceName.ALBA_FOSSAE,
+      SpaceName.CERANIUS_FOSSAE,
+      SpaceName.ALBA_MONS,
+    ];
+  }
+
+  public getNoctisCitySpaceIds(): Array<string> {
+    return [];
   }
 }

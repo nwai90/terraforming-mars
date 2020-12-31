@@ -7,6 +7,8 @@ import {Tags} from '../../Tags';
 import {PlaceCityTile} from '../../../deferredActions/PlaceCityTile';
 import {SelectHowToPayDeferred} from '../../../deferredActions/SelectHowToPayDeferred';
 import {PlaceGreeneryTile} from '../../../deferredActions/PlaceGreeneryTile';
+import {CardMetadata} from '../../CardMetadata';
+import {CardRenderer} from '../../render/CardRenderer';
 
 export class FortifiedOutpost extends PreludeCard implements IProjectCard {
     public tags = [Tags.CITY];
@@ -21,6 +23,15 @@ export class FortifiedOutpost extends PreludeCard implements IProjectCard {
       game.defer(new PlaceGreeneryTile(player, game));
       game.defer(new SelectHowToPayDeferred(player, 10, false, false));
       return undefined;
+    }
+
+    public metadata: CardMetadata = {
+      cardNumber: 'Y11',
+      renderData: CardRenderer.builder((b) => {
+        b.city().greenery().br;
+        b.minus().megacredits(10);
+      }),
+      description: 'Place a city tile. Place a greenery tile. Pay 10 MC.',
     }
 }
 

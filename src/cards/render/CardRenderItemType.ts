@@ -51,6 +51,7 @@ export enum CardRenderItemType {
   VP = 'vp',
   COMMUNITY = 'community',
   DISEASE = 'disease',
+  COLONY_PLACEMENT_BONUS = 'colony_placement_bonus',
   MOON = 'moon',
   RESOURCE_CUBE = 'resource_cube',
   DATA_RESOURCE = 'data resource',

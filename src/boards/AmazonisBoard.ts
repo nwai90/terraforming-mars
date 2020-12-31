@@ -18,23 +18,22 @@ export class AmazonisBoard extends Board {
     const ANIMAL = SpaceBonus.ANIMAL;
     const HEAT = SpaceBonus.HEAT;
     const RESTRICTED = SpaceBonus.RESTRICTED;
-    const VOLCANIC = SpaceBonus.VOLCANIC;
 
     // y=0
     builder.land().ocean(PLANT).land(PLANT, PLANT, PLANT).land(MICROBE).land(ANIMAL);
     // y=1
-    builder.ocean(TITANIUM).land(MICROBE, MICROBE, VOLCANIC).land().land().ocean(DRAW_CARD, DRAW_CARD).ocean();
+    builder.ocean(TITANIUM).land(MICROBE, MICROBE).land().land().ocean(DRAW_CARD, DRAW_CARD).ocean();
     // y=2
     builder.land(PLANT, PLANT).land(STEEL, PLANT).land().land(HEAT,PLANT).land(ANIMAL).land().land(MICROBE);
     // y=3
     builder.land().ocean(PLANT).land().land(PLANT).land(HEAT, PLANT).land(STEEL).land(PLANT).ocean(STEEL, PLANT);
     // y=4
     builder.land(PLANT).land(PLANT).land().land(HEAT, HEAT).land(RESTRICTED)
-      .land(HEAT, HEAT).land(PLANT, PLANT, VOLCANIC).land().land(TITANIUM, TITANIUM);
+      .land(HEAT, HEAT).land(PLANT, PLANT).land().land(TITANIUM, TITANIUM);
     // y=5
-    builder.ocean(PLANT, PLANT).land(PLANT).land(STEEL).land(HEAT, PLANT).land(PLANT).land(DRAW_CARD, VOLCANIC).land().ocean(PLANT);
+    builder.ocean(PLANT, PLANT).land(PLANT).land(STEEL).land(HEAT, PLANT).land(PLANT).land(DRAW_CARD).land().ocean(PLANT);
     //y=6
-    builder.ocean(PLANT).land().land(MICROBE).land(HEAT, PLANT, VOLCANIC).land().land(PLANT, PLANT).ocean(PLANT, PLANT);
+    builder.ocean(PLANT).land().land(MICROBE).land(HEAT, PLANT).land().land(PLANT, PLANT).ocean(PLANT, PLANT);
     //y=7
     builder.land(TITANIUM).ocean(PLANT).land(STEEL).land().land(ANIMAL).land(PLANT);
     // y=8
@@ -54,5 +53,18 @@ export class AmazonisBoard extends Board {
 
   public getNonReservedLandSpaces(): Array<ISpace> {
     return super.getNonReservedLandSpaces().filter((space) => space.bonus.includes(SpaceBonus.RESTRICTED) === false);
+  }
+
+  public getVolcanicSpaceIds(): Array<string> {
+    return [
+      SpaceName.ALBOR_THOLUS,
+      SpaceName.ANSERIS_MONS,
+      SpaceName.PINDUS_MONS,
+      SpaceName.ULYSSES_THOLUS,
+    ];
+  }
+
+  public getNoctisCitySpaceIds(): Array<string> {
+    return [];
   }
 }

@@ -22,4 +22,8 @@ export enum SpaceName {
     PINDUS_MONS = '43',
     ULYSSES_THOLUS = '49',
     VASTITAS_BOREALIS_NORTH_POLE = '33',
+    ELYSIUM_MONS_VASTITAS_BOREALIS = '07',
+    ALBA_FOSSAE = '12',
+    CERANIUS_FOSSAE = '21',
+    ALBA_MONS = '22',
 }

@@ -7,6 +7,8 @@ import {BuildColony} from '../../../deferredActions/BuildColony';
 import {Resources} from '../../../Resources';
 import {DeferredAction} from '../../../deferredActions/DeferredAction';
 import {ColonyName} from '../../../colonies/ColonyName';
+import {CardMetadata} from '../../CardMetadata';
+import {CardRenderer} from '../../render/CardRenderer';
 
 export class VitalColony extends PreludeCard implements IProjectCard {
     public tags = [];
@@ -33,6 +35,15 @@ export class VitalColony extends PreludeCard implements IProjectCard {
 
       player.setResource(Resources.MEGACREDITS, -5);
       return undefined;
+    }
+
+    public metadata: CardMetadata = {
+      cardNumber: 'Y18',
+      renderData: CardRenderer.builder((b) => {
+        b.colonies(1).colonyPlacementBonus().br;
+        b.minus().megacredits(5);
+      }),
+      description: 'Place a colony. Gain its placement bonus a second time. Pay 5 MC.',
     }
 }
 
