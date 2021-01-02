@@ -25,7 +25,7 @@ ALL_CARD_MANIFESTS.forEach((manifest) => {
     manifest.standardProjects].forEach((deck) => {
     deck.factories.forEach((cf: ICardFactory<ICard>) => {
       const card: ICard = new cf.Factory();
-      const cardNumber = card.metadata.cardNumber;
+      const cardNumber = card.metadata?.cardNumber || ''; // TODO: Remove after migrating community corps to metadata
       cards.set(card.name, {card, module, cardNumber});
     });
   });
