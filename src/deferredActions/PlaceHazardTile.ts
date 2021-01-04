@@ -3,7 +3,7 @@ import {Player} from '../Player';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {ISpace} from '../boards/ISpace';
 import {DeferredAction} from './DeferredAction';
-import {AresHandler} from '../ares/AresHandler';
+import {_AresHazardPlacement} from '../ares/AresHazards';
 import {LogHelper} from '../LogHelper';
 import {TileType} from '../TileType';
 
@@ -23,7 +23,7 @@ export class PlaceHazardTile implements DeferredAction {
     return new SelectSpace(this.title, this.spaces, (foundSpace: ISpace) => {
       const tileType = Math.floor(Math.random() * 2) === 0 ? TileType.DUST_STORM_MILD : TileType.EROSION_MILD;
 
-      AresHandler.putHazardAt(foundSpace, tileType);
+      _AresHazardPlacement.putHazardAt(foundSpace, tileType);
       foundSpace.bonus.forEach((spaceBonus) => this.game.grantSpaceBonus(this.player, spaceBonus));
       LogHelper.logTilePlacement(this.game, this.player, foundSpace, tileType);
 

@@ -7,6 +7,7 @@ import {Game} from '../../../Game';
 import {Resources} from '../../../Resources';
 import {CardMetadata} from '../../CardMetadata';
 import {CardRenderer} from '../../render/CardRenderer';
+import {LogHelper} from '../../../LogHelper';
 
 export class NitrateReducers extends PreludeCard implements IProjectCard {
     public tags = [Tags.VENUS, Tags.MICROBE];
@@ -15,14 +16,9 @@ export class NitrateReducers extends PreludeCard implements IProjectCard {
     public play(player: Player, game: Game) {
       player.addProduction(Resources.MEGACREDITS, 3);
 
-      if (game.hasCardsWithTag(Tags.MICROBE, 2)) {
-        for (const foundCard of game.drawCardsByTag(Tags.MICROBE, 2)) {
-          player.cardsInHand.push(foundCard);
-        }
-
-        const drawnCards = game.getCardsInHandByTag(player, Tags.MICROBE).slice(-2);
-        game.log('${0} drew ${1} and ${2}', (b) => b.player(player).card(drawnCards[0]).card(drawnCards[1]));
-      }
+      const cards = game.drawCardsByTag(Tags.MICROBE, 2);
+      player.cardsInHand.push(...cards);
+      LogHelper.logDrawnCards(game, player, cards);
 
       return undefined;
     }

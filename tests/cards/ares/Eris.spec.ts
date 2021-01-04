@@ -5,7 +5,7 @@ import {Game} from '../../../src/Game';
 import {TestPlayers} from '../../TestingUtils';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
-import {AresHandler} from '../../../src/ares/AresHandler';
+import {_AresHazardPlacement} from '../../../src/ares/AresHazards';
 import {ARES_OPTIONS_WITH_HAZARDS} from '../../ares/AresTestHelper';
 
 describe('Eris', function() {
@@ -29,7 +29,7 @@ describe('Eris', function() {
 
   it('Can act', function() {
     const action = card.action(player, game) as OrOptions;
-    const initialHazardsCount = AresHandler.getHazardsCount(game);
+    const initialHazardsCount = _AresHazardPlacement.getHazardsCount(game);
     const initialTR = player.getTerraformRating();
 
     // Place a hazard tile
@@ -37,12 +37,12 @@ describe('Eris', function() {
     expect(game.deferredActions).has.lengthOf(1);
     const placeHazard = game.deferredActions.next()!.execute() as SelectSpace;
     placeHazard.cb(placeHazard.availableSpaces[0]);
-    expect(AresHandler.getHazardsCount(game)).to.eq(initialHazardsCount + 1);
+    expect(_AresHazardPlacement.getHazardsCount(game)).to.eq(initialHazardsCount + 1);
 
     // Remove a hazard tile to gain 1 TR
     const removableHazards = action.options[1].cb() as SelectSpace;
     removableHazards.cb(removableHazards.availableSpaces[0]);
-    expect(AresHandler.getHazardsCount(game)).to.eq(initialHazardsCount);
+    expect(_AresHazardPlacement.getHazardsCount(game)).to.eq(initialHazardsCount);
     expect(player.getTerraformRating()).to.eq(initialTR + 1);
   });
 });
