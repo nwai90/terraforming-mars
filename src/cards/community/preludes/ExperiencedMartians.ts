@@ -26,7 +26,7 @@ export class ExperiencedMartians extends PreludeCard implements IProjectCard {
       cardNumber: 'Y10',
       renderData: CardRenderer.builder((b) => {
         b.delegates(2).br;
-        b.productionBox((pb) => {
+        b.production((pb) => {
           pb.plants(1).heat(1);
         });
       }),

@@ -22,7 +22,7 @@ export class BotanicalHarvest extends PreludeCard implements IProjectCard {
     public metadata: CardMetadata = {
       cardNumber: 'Y09',
       renderData: CardRenderer.builder((b) => {
-        b.oxygen(1).productionBox((pb) => pb.plants(1)).br;
+        b.oxygen(1).production((pb) => pb.plants(1)).br;
         b.plants(5);
       }),
       description: 'Raise oxygen 1 step. Increase your plant production 1 step. Gain 5 plants.',

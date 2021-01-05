@@ -9,16 +9,41 @@ import {SelectCard} from '../../../inputs/SelectCard';
 import {ICard} from '../../ICard';
 import {OrOptions} from '../../../inputs/OrOptions';
 import {SelectOption} from '../../../inputs/SelectOption';
-import {CardMetadata} from '../../CardMetadata';
 import {CardRenderer} from '../../render/CardRenderer';
 import {CardRenderItemSize} from '../../render/CardRenderItemSize';
 import {AltSecondaryTag} from '../../render/CardRenderItem';
+import {Card} from '../../Card';
 
-export class ProjectWorkshop implements CorporationCard {
-    public name = CardName.PROJECT_WORKSHOP;
-    public tags = [Tags.EARTH];
-    public startingMegaCredits: number = 39;
-    public cardType = CardType.CORPORATION;
+export class ProjectWorkshop extends Card implements CorporationCard {
+    constructor() {
+      super({
+        cardType: CardType.CORPORATION,
+        name: CardName.PROJECT_WORKSHOP,
+        tags: [Tags.EARTH],
+        initialActionText: 'Draw a blue card',
+        startingMegaCredits: 39,
+
+        metadata: {
+          cardNumber: 'R45',
+          description: 'You start with 39 MC, 1 steel and 1 titanium. As your first action, draw a blue card.',
+          renderData: CardRenderer.builder((b) => {
+            b.megacredits(39).steel(1).titanium(1).cards(1).secondaryTag(AltSecondaryTag.BLUE);
+            b.corpBox('action', (cb) => {
+              cb.vSpace(CardRenderItemSize.LARGE);
+              cb.action(undefined, (eb) => {
+                eb.text('flip', CardRenderItemSize.SMALL, true).cards(1).secondaryTag(AltSecondaryTag.BLUE);
+                eb.startAction.text('?', CardRenderItemSize.MEDIUM, true).tr(1, CardRenderItemSize.SMALL);
+                eb.cards(2).digit;
+              });
+              cb.vSpace(CardRenderItemSize.SMALL);
+              cb.action('Flip and discard a played blue card to convert any VP on it into TR and draw 2 cards, or spend 4 MC to draw a blue card.', (eb) => {
+                eb.or().megacredits(4).startAction.cards(1).secondaryTag(AltSecondaryTag.BLUE);
+              });
+            });
+          }),
+        },
+      });
+    }
 
     public play(player: Player) {
       player.steel = 1;
@@ -26,7 +51,6 @@ export class ProjectWorkshop implements CorporationCard {
       return undefined;
     }
 
-    public initialActionText: string = 'Draw a blue card';
     public initialAction(player: Player) {
       player.drawCard(1, {cardType: CardType.ACTIVE});
       return undefined;
@@ -97,6 +121,7 @@ export class ProjectWorkshop implements CorporationCard {
       player.game.log('${0} flipped and discarded ${1}', (b) => b.player(player).card(card));
     }
 
+<<<<<<< HEAD
     public metadata: CardMetadata = {
       cardNumber: 'R45',
       description: 'You start with 39 MC, 1 steel and 1 titanium. As your first action, draw a blue card.',
@@ -115,5 +140,9 @@ export class ProjectWorkshop implements CorporationCard {
           });
         });
       }),
+=======
+    private logCardDraw(game: Game, player: Player, drawnCard: IProjectCard) {
+      game.log('${0} drew ${1}', (b) => b.player(player).card(drawnCard));
+>>>>>>> Modify community corps to use less memory
     }
 }

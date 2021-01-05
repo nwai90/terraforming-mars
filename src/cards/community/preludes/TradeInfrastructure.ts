@@ -22,7 +22,7 @@ export class TradeInfrastructure extends PreludeCard implements IProjectCard {
     public metadata: CardMetadata = {
       cardNumber: 'Y17',
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => pb.energy(1)).br;
+        b.production((pb) => pb.energy(1)).br;
         b.energy(3).tradeFleet();
       }),
       description: 'Increase your energy production 1 step. Gain 3 energy. Gain 1 trade fleet.',

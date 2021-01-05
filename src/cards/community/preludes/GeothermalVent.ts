@@ -21,7 +21,7 @@ export class GeothermalVent extends PreludeCard implements IProjectCard {
       cardNumber: 'Y12',
       renderData: CardRenderer.builder((b) => {
         b.temperature(2).br;
-        b.productionBox((pb) => pb.heat(2));
+        b.production((pb) => pb.heat(2));
       }),
       description: 'Raise temperature 2 steps. Increase your heat production 2 steps.',
     }

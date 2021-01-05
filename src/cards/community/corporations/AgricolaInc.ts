@@ -5,16 +5,33 @@ import {Resources} from '../../../Resources';
 import {CardName} from '../../../CardName';
 import {ITagCount} from '../../../ITagCount';
 import {CardType} from '../../CardType';
-import {CardMetadata} from '../../CardMetadata';
 import {CardRenderer} from '../../render/CardRenderer';
 import {CardRenderItemSize} from '../../render/CardRenderItemSize';
 import {CardRenderDynamicVictoryPoints} from '../../render/CardRenderDynamicVictoryPoints';
+import {Card} from '../../Card';
 
-export class AgricolaInc implements CorporationCard {
-    public name = CardName.AGRICOLA_INC;
-    public tags = [Tags.PLANT];
-    public startingMegaCredits: number = 40;
-    public cardType = CardType.CORPORATION;
+export class AgricolaInc extends Card implements CorporationCard {
+    constructor() {
+      super({
+        cardType: CardType.CORPORATION,
+        name: CardName.AGRICOLA_INC,
+        tags: [Tags.PLANT],
+        startingMegaCredits: 40,
+
+        metadata: {
+          cardNumber: 'R36',
+          description: 'You start with 1 plant production, 1 MC production and 40 MC.',
+          renderData: CardRenderer.builder((b) => {
+            b.br.br;
+            b.production((pb) => pb.megacredits(1).plants(1)).nbsp.megacredits(40);
+            b.corpBox('effect', (ce) => {
+              ce.text('Effect: At game end, score -2 / 0 / 1 / 2 VP PER TAG TYPE for 0 / 1-2 / 3-4 / 5+ tags.', CardRenderItemSize.SMALL, true);
+            });
+          }),
+          victoryPoints: CardRenderDynamicVictoryPoints.questionmark(),
+        },
+      });
+    }
 
     public play(player: Player) {
       player.addProduction(Resources.MEGACREDITS, 1);
@@ -43,17 +60,5 @@ export class AgricolaInc implements CorporationCard {
       });
 
       return points;
-    }
-    public metadata: CardMetadata = {
-      cardNumber: 'R36',
-      description: 'You start with 1 plant production, 1 MC production and 40 MC.',
-      renderData: CardRenderer.builder((b) => {
-        b.br.br;
-        b.production((pb) => pb.megacredits(1).plants(1)).nbsp.megacredits(40);
-        b.corpBox('effect', (ce) => {
-          ce.text('Effect: At game end, score -2 / 0 / 1 / 2 VP PER TAG TYPE for 0 / 1-2 / 3-4 / 5+ tags.', CardRenderItemSize.SMALL, true);
-        });
-      }),
-      victoryPoints: CardRenderDynamicVictoryPoints.questionmark(),
     }
 }

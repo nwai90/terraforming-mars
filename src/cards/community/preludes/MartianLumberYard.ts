@@ -22,7 +22,7 @@ export class MartianLumberYard extends PreludeCard implements IProjectCard {
     public metadata: CardMetadata = {
       cardNumber: 'Y14',
       renderData: CardRenderer.builder((b) => {
-        b.productionBox((pb) => pb.steel(1).plants(1)).br;
+        b.production((pb) => pb.steel(1).plants(1)).br;
         b.steel(2).plants(3);
       }),
       description: 'Increase your steel and plant production 1 step. Gain 2 steel and 3 plants.',
