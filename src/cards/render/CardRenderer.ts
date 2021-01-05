@@ -315,6 +315,11 @@ class Builder {
     return this;
   }
 
+  public hazardTile(): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.HAZARD_TILE));
+    return this;
+  }
+
   public influence(amount: number): Builder {
     this._addRowItem(new CardRenderItem(CardRenderItemType.INFLUENCE, amount));
     return this;

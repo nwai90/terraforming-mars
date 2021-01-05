@@ -12,12 +12,37 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {HAZARD_TILES} from '../../ares/AresHandler';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {LogHelper} from '../../LogHelper';
+import {Card} from '../Card';
+import {CardRenderer} from '../render/CardRenderer';
+import {AltSecondaryTag} from '../render/CardRenderItem';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
-export class Eris implements CorporationCard {
-    public name: CardName = CardName.ERIS;
-    public tags: Array<Tags> = [Tags.BUILDING];
-    public startingMegaCredits: number = 46;
-    public cardType: CardType = CardType.CORPORATION;
+export class Eris extends Card implements CorporationCard {
+    constructor() {
+      super({
+          cardType: CardType.CORPORATION,
+          name: CardName.ERIS,
+          tags: [Tags.BUILDING],
+          initialActionText: 'Draw an Ares card',
+          startingMegaCredits: 46,
+    
+          metadata: {
+            cardNumber: 'R47',
+            description: 'You start with 46 MC. As your first action, draw an Ares card.',
+            renderData: CardRenderer.builder((b) => {
+              b.br.br;
+              b.megacredits(46).nbsp.cards(1).secondaryTag(AltSecondaryTag.ARES);
+              b.corpBox('action', (ce) => {
+                ce.effectBox((eb) => {
+                  eb.empty().startAction.plus().hazardTile().slash().minus().hazardTile().any.colon().tr(1, CardRenderItemSize.SMALL);
+                  eb.description('Action: Place a new hazard tile adjacent to NO OTHER TILE, OR remove a hazard tile to gain 1 TR.');
+                });
+                 // to offset the description to the top a bit so it can be readable
+              });
+            }),
+          },
+        });
+    }
 
     public play() {
       return undefined;

@@ -147,6 +147,8 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
         classes.push('card-resource-disease');
       } else if (type === CardRenderItemType.COLONY_PLACEMENT_BONUS) {
         classes.push('colony-placement');
+      } else if (type === CardRenderItemType.HAZARD_TILE) {
+        classes.push('hazard-tile');
       }
 
       // round tags

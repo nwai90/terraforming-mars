@@ -17,6 +17,7 @@ export enum AltSecondaryTag {
   FLOATER = 'floater',
   // 'blue' => used in Project Workshop
   BLUE = 'blue',
+  ARES = 'ares',
 }
 
 export class CardRenderItem {
