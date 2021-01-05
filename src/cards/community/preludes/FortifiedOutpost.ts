@@ -9,6 +9,7 @@ import {SelectHowToPayDeferred} from '../../../deferredActions/SelectHowToPayDef
 import {PlaceGreeneryTile} from '../../../deferredActions/PlaceGreeneryTile';
 import {CardMetadata} from '../../CardMetadata';
 import {CardRenderer} from '../../render/CardRenderer';
+import {AltSecondaryTag} from '../../render/CardRenderItem';
 
 export class FortifiedOutpost extends PreludeCard implements IProjectCard {
     public tags = [Tags.CITY];
@@ -28,7 +29,7 @@ export class FortifiedOutpost extends PreludeCard implements IProjectCard {
     public metadata: CardMetadata = {
       cardNumber: 'Y11',
       renderData: CardRenderer.builder((b) => {
-        b.city().greenery().br;
+        b.city().greenery().secondaryTag(AltSecondaryTag.OXYGEN).br;
         b.minus().megacredits(10);
       }),
       description: 'Place a city tile. Place a greenery tile. Pay 10 MC.',

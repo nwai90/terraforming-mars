@@ -72,16 +72,9 @@ export class Eris implements CorporationCard {
     }
 
     private drawAresCard(player: Player, game: Game) {
-      const aresCards = ARES_CARD_MANIFEST.projectCards.cards.map((c) => c.cardName);
-      const drawnCard = game.dealer.deck.find((card) => aresCards.includes(card.name));
-
-      if (drawnCard) {
-        const cardIndex = game.dealer.deck.findIndex((c) => c.name === drawnCard.name);
-        game.dealer.deck.splice(cardIndex, 1);
-
-        player.cardsInHand.push(drawnCard);
-        game.log('${0} drew ${1}', (b) => b.player(player).card(drawnCard));
-      }
+      const drawnCard = game.drawProjectCardsByCondition(1, (card) => ARES_CARD_MANIFEST.projectCards.findByCardName(card.name) !== undefined);
+      player.cardsInHand.push(...drawnCard);
+      LogHelper.logDrawnCards(game, player, drawnCard);
 
       return undefined;
     }
