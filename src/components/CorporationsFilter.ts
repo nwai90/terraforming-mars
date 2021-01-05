@@ -50,6 +50,9 @@ export const CorporationsFilter = Vue.component('corporations-filter', {
     communityCardsOption: {
       type: Boolean,
     },
+    aresExtension: {
+      type: Boolean,
+    },
   },
   data: function() {
     const cardsByModuleMap: Map<GameModule, Array<CardName>> =
@@ -66,6 +69,7 @@ export const CorporationsFilter = Vue.component('corporations-filter', {
         ...this.turmoil ? cardsByModuleMap.get(GameModule.Turmoil)! : [],
         ...this.promoCardsOption ? cardsByModuleMap.get(GameModule.Promo)! : [],
         ...this.communityCardsOption ? cardsByModuleMap.get(GameModule.Community)! : [],
+        ...this.aresExtension ? cardsByModuleMap.get(GameModule.Ares)! : [],
       ] as Array<CardName> | boolean /* v-model thinks this can be boolean */,
       corpsByModule: Array.from(cardsByModuleMap),
     };
@@ -145,6 +149,9 @@ export const CorporationsFilter = Vue.component('corporations-filter', {
     },
     communityCardsOption: function(enabled) {
       enabled ? this.selectAll(GameModule.Community) : this.selectNone(GameModule.Community);
+    },
+    aresExtension: function(enabled) {
+      enabled ? this.selectAll(GameModule.Ares) : this.selectNone(GameModule.Ares);
     },
   },
   template: `
