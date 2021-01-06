@@ -174,6 +174,8 @@ export const CreateGameForm = Vue.component('create-game-form', {
         if (typeof(readerResults) === 'string') {
           const results = JSON.parse(readerResults);
 
+          
+
           component.playersCount = results['players'].length;
           component.showCorporationList = results['customCorporationsList'].length > 0;
           component.showColoniesList = results['customColoniesList'].length > 0;
@@ -181,6 +183,14 @@ export const CreateGameForm = Vue.component('create-game-form', {
 
           for (const k in results) {
             if (['customCorporationsList', 'customColoniesList', 'cardsBlackList'].includes(k)) continue;
+
+            if (k === 'randomMA') {
+              const validValues = [RandomMAOptionType.NONE, RandomMAOptionType.LIMITED, RandomMAOptionType.UNLIMITED];
+              if (validValues.includes(results[k]) === false) {
+                results[k] = RandomMAOptionType.LIMITED;
+              }
+            }
+
             (component as any)[k] = results[k];
           }
 
