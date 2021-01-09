@@ -25,6 +25,7 @@ import {AccumulatedKnowledge} from './preludes/AccumulatedKnowledge';
 import {BotanicalHarvest} from './preludes/BotanicalHarvest';
 import {MartianLumberYard} from './preludes/MartianLumberYard';
 import {FortifiedOutpost} from './preludes/FortifiedOutpost';
+import {GamblingHouse} from './preludes/GamblingHouse';
 
 export const COMMUNITY_CARD_MANIFEST = new CardManifest({
   module: GameModule.Community,
@@ -118,6 +119,10 @@ export const COMMUNITY_CARD_MANIFEST = new CardManifest({
     {
       cardName: CardName.FORTIFIED_OUTPOST,
       Factory: FortifiedOutpost,
+    },
+    {
+      cardName: CardName.GAMBLING_HOUSE,
+      Factory: GamblingHouse,
     },
   ],
 });
