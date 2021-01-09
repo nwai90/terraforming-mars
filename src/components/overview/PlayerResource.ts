@@ -2,7 +2,6 @@ import Vue from 'vue';
 import {DEFAULT_STEEL_VALUE, DEFAULT_TITANIUM_VALUE, HEAT_FOR_TEMPERATURE} from '../../constants';
 import {Resources} from '../../Resources';
 import {TurmoilModel} from '../../models/TurmoilModel';
-import {PartyName} from '../../turmoil/parties/PartyName';
 import {CardModel} from '../../models/CardModel';
 import {CardName} from '../../CardName';
 
@@ -37,15 +36,7 @@ export const PlayerResource = Vue.component('player-resource', {
     },
   },
   data: function() {
-    // TODO: Update logic after PoliticalAgendas merge
-    const unityTitaniumBonusActive: boolean = this.turmoil !== undefined && this.turmoil.ruling === PartyName.UNITY;
-
-    let playerTitaniumValueWithOffset: number = this.titaniumValue;
-    if (unityTitaniumBonusActive) playerTitaniumValueWithOffset -= 1;
-
-    return {
-      playerAdjustedTitaniumValue: playerTitaniumValueWithOffset,
-    };
+    return {};
   },
   methods: {
     mainCSS: function(): string {
