@@ -16,6 +16,9 @@ export class GamblingHouse extends PreludeCard {
 
       if (preludeCard.canPlay === undefined || preludeCard.canPlay(player, game)) {
         game.defer(new DeferredAction(player, () => player.playCard(game, preludeCard)));
+      } else {
+        game.dealer.discard(preludeCard);
+        game.log('${0} discarded ${1}', (b) => b.player(player).card(preludeCard));
       }
 
       return undefined;
