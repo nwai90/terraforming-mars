@@ -1418,18 +1418,18 @@ export class Game implements ISerializable<SerializedGame> {
 
       if (animalCards.length === 1) {
         player.addResourceTo(animalCards[0], 1);
-        LogHelper.logAddResource(this, player, animalCards[0]);
+        LogHelper.logAddResource(player, animalCards[0]);
       } else if (animalCards.length > 1) {
-        this.defer(new AddResourcesToCard(player, this, ResourceType.ANIMAL, 1));
+        this.defer(new AddResourcesToCard(player, this, ResourceType.ANIMAL));
       }
     } else if (spaceBonus === SpaceBonus.MICROBE) {
       const microbeCards = player.getResourceCards(ResourceType.MICROBE);
 
       if (microbeCards.length === 1) {
         player.addResourceTo(microbeCards[0], 1);
-        LogHelper.logAddResource(this, player, microbeCards[0]);
+        LogHelper.logAddResource(player, microbeCards[0]);
       } else if (microbeCards.length > 1) {
-        this.defer(new AddResourcesToCard(player, this, ResourceType.MICROBE, 1));
+        this.defer(new AddResourcesToCard(player, this, ResourceType.MICROBE));
       }
     }
   }

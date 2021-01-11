@@ -25,7 +25,7 @@ export class PlaceHazardTile implements DeferredAction {
 
       _AresHazardPlacement.putHazardAt(foundSpace, tileType);
       foundSpace.bonus.forEach((spaceBonus) => this.game.grantSpaceBonus(this.player, spaceBonus));
-      LogHelper.logTilePlacement(this.game, this.player, foundSpace, tileType);
+      LogHelper.logTilePlacement(this.player, foundSpace, tileType);
 
       return undefined;
     });

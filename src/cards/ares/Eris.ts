@@ -83,7 +83,7 @@ export class Eris extends Card implements CorporationCard {
               (space: ISpace) => {
                 space.tile = undefined;
                 player.increaseTerraformRating(game);
-                LogHelper.logTRIncrease(game, player, 1);
+                LogHelper.logTRIncrease(player, 1);
                 return undefined;
               },
           );
@@ -97,7 +97,7 @@ export class Eris extends Card implements CorporationCard {
     private drawAresCard(player: Player, game: Game) {
       const drawnCard = game.drawProjectCardsByCondition(1, (card) => ARES_CARD_MANIFEST.projectCards.findByCardName(card.name) !== undefined);
       player.cardsInHand.push(...drawnCard);
-      LogHelper.logDrawnCards(game, player, drawnCard);
+      LogHelper.logDrawnCards(player, drawnCard);
 
       return undefined;
     }

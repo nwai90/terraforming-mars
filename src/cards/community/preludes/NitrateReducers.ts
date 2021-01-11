@@ -18,7 +18,7 @@ export class NitrateReducers extends PreludeCard implements IProjectCard {
 
       const cards = game.drawCardsByTag(Tags.MICROBE, 2);
       player.cardsInHand.push(...cards);
-      LogHelper.logDrawnCards(game, player, cards);
+      LogHelper.logDrawnCards(player, cards);
 
       return undefined;
     }
