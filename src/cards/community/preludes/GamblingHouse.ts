@@ -2,13 +2,23 @@ import {Player} from '../../../Player';
 import {PreludeCard} from '../../prelude/PreludeCard';
 import {CardName} from '../../../CardName';
 import {Game} from '../../../Game';
-import {CardMetadata} from '../../CardMetadata';
 import {CardRenderer} from '../../render/CardRenderer';
 import {DeferredAction} from '../../../deferredActions/DeferredAction';
 
 export class GamblingHouse extends PreludeCard {
-    public tags = [];
-    public name = CardName.GAMBLING_HOUSE;
+    constructor() {
+      super({
+        name: CardName.GAMBLING_HOUSE,
+
+        metadata: {
+          cardNumber: 'Y19',
+          renderData: CardRenderer.builder((b) => {
+            b.prelude().br.br.megacredits(5);
+          }),
+          description: 'Draw and play another prelude card. Gain 5 MC.',
+        },
+      });
+    }
 
     public play(player: Player, game: Game) {
       player.megaCredits += 5;
@@ -22,13 +32,5 @@ export class GamblingHouse extends PreludeCard {
       }
 
       return undefined;
-    }
-
-    public metadata: CardMetadata = {
-      cardNumber: 'Y19',
-      renderData: CardRenderer.builder((b) => {
-        b.prelude().br.br.megacredits(5);
-      }),
-      description: 'Draw and play another prelude card. Gain 5 MC.',
     }
 }

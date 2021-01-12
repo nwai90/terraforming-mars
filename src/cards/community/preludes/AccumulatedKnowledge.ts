@@ -9,12 +9,24 @@ import {OrOptions} from '../../../inputs/OrOptions';
 import {SelectCard} from '../../../inputs/SelectCard';
 import {SelectOption} from '../../../inputs/SelectOption';
 import {DeferredAction} from '../../../deferredActions/DeferredAction';
-import {CardMetadata} from '../../CardMetadata';
 import {CardRenderer} from '../../render/CardRenderer';
 
 export class AccumulatedKnowledge extends PreludeCard implements IProjectCard {
-    public tags = [Tags.SCIENCE];
-    public name = CardName.ACCUMULATED_KNOWLEDGE;
+    constructor() {
+      super({
+        name: CardName.ACCUMULATED_KNOWLEDGE,
+        tags: [Tags.SCIENCE],
+
+        metadata: {
+          cardNumber: 'Y08',
+          renderData: CardRenderer.builder((b) => {
+            b.cards(4).br;
+            b.minus().cards(1).nbsp.plus().cards(1)
+          }),
+          description: 'Draw 4 cards. You may discard a card to draw a card.',
+        },
+      });
+    }
 
     public play(player: Player, game: Game) {
       game.defer(new DrawCards(player, game, 4));
@@ -32,15 +44,6 @@ export class AccumulatedKnowledge extends PreludeCard implements IProjectCard {
       )));
 
       return undefined;
-    }
-
-    public metadata: CardMetadata = {
-      cardNumber: 'Y08',
-      renderData: CardRenderer.builder((b) => {
-        b.cards(4).br;
-        b.minus().cards(1).nbsp.plus().cards(1)
-      }),
-      description: 'Draw 4 cards. You may discard a card to draw a card.',
     }
 }
 

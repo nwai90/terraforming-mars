@@ -5,12 +5,24 @@ import {IProjectCard} from '../../IProjectCard';
 import {CardName} from '../../../CardName';
 import {Game} from '../../../Game';
 import {Resources} from '../../../Resources';
-import {CardMetadata} from '../../CardMetadata';
 import {CardRenderer} from '../../render/CardRenderer';
 
 export class HydrogenBombardment extends PreludeCard implements IProjectCard {
-    public tags = [Tags.VENUS, Tags.SPACE];
-    public name = CardName.HYDROGEN_BOMBARDMENT;
+    constructor() {
+      super({
+        name: CardName.HYDROGEN_BOMBARDMENT,
+        tags: [Tags.VENUS, Tags.SPACE],
+
+        metadata: {
+          cardNumber: 'Y13',
+          renderData: CardRenderer.builder((b) => {
+            b.production((pb) => pb.titanium(1)).br;
+            b.venus(1);
+          }),
+          description: 'Increase your titanium production 1 step. Raise Venus 1 step.',
+        },
+      });
+    }
 
     public canPlay(player: Player) {
       return player.canAfford(3);
@@ -21,15 +33,6 @@ export class HydrogenBombardment extends PreludeCard implements IProjectCard {
       player.addProduction(Resources.TITANIUM);
 
       return undefined;
-    }
-
-    public metadata: CardMetadata = {
-      cardNumber: 'Y13',
-      renderData: CardRenderer.builder((b) => {
-        b.production((pb) => pb.titanium(1)).br;
-        b.venus(1);
-      }),
-      description: 'Increase your titanium production 1 step. Raise Venus 1 step.',
     }
 }
 
