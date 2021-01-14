@@ -48,7 +48,7 @@ export class Eris extends Card implements CorporationCard {
 
     public initialAction(player: Player, game: Game) {
       if (game.gameOptions.aresExtension) {
-        this.drawAresCard(player, game);
+        this.drawAresCard(player);
       }
 
       return undefined;
@@ -94,10 +94,10 @@ export class Eris extends Card implements CorporationCard {
       return orOptions;
     }
 
-    private drawAresCard(player: Player, game: Game) {
-      const drawnCard = game.drawProjectCardsByCondition(1, (card) => ARES_CARD_MANIFEST.projectCards.findByCardName(card.name) !== undefined);
-      player.cardsInHand.push(...drawnCard);
-      LogHelper.logDrawnCards(player, drawnCard);
+    private drawAresCard(player: Player) {
+      player.drawCard(1, {
+        include: (card) => ARES_CARD_MANIFEST.projectCards.findByCardName(card.name) !== undefined,
+      });
 
       return undefined;
     }

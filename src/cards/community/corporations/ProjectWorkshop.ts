@@ -120,29 +120,4 @@ export class ProjectWorkshop extends Card implements CorporationCard {
 
       player.game.log('${0} flipped and discarded ${1}', (b) => b.player(player).card(card));
     }
-
-<<<<<<< HEAD
-    public metadata: CardMetadata = {
-      cardNumber: 'R45',
-      description: 'You start with 39 MC, 1 steel and 1 titanium. As your first action, draw a blue card.',
-      renderData: CardRenderer.builder((b) => {
-        b.megacredits(39).steel(1).titanium(1).cards(1).secondaryTag(AltSecondaryTag.BLUE);
-        b.corpBox('action', (cb) => {
-          cb.vSpace(CardRenderItemSize.LARGE);
-          cb.action(undefined, (eb) => {
-            eb.text('flip', CardRenderItemSize.SMALL, true).cards(1).secondaryTag(AltSecondaryTag.BLUE);
-            eb.startAction.text('?', CardRenderItemSize.MEDIUM, true).tr(1, CardRenderItemSize.SMALL);
-            eb.cards(2).digit;
-          });
-          cb.vSpace(CardRenderItemSize.SMALL);
-          cb.action('Flip and discard a played blue card to convert any VP on it into TR and draw 2 cards, or spend 4 MC to draw a blue card.', (eb) => {
-            eb.or().megacredits(4).startAction.cards(1).secondaryTag(AltSecondaryTag.BLUE);
-          });
-        });
-      }),
-=======
-    private logCardDraw(game: Game, player: Player, drawnCard: IProjectCard) {
-      game.log('${0} drew ${1}', (b) => b.player(player).card(drawnCard));
->>>>>>> Modify community corps to use less memory
-    }
 }

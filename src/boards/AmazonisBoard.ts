@@ -5,6 +5,7 @@ import {SpaceName} from "../SpaceName";
 import {Player} from "../Player";
 import {SerializedBoard} from "./SerializedBoard";
 import {Random} from "../Random";
+import {ISpace} from "./ISpace";
 
 export class AmazonisBoard extends Board {
   public static newInstance(shuffle: boolean, rng: Random, includeVenus: boolean, erodedSpaces: Array<string> = []): AmazonisBoard {

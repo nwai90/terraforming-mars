@@ -3,10 +3,9 @@ import {Player} from '../../../Player';
 import {PreludeCard} from '../../prelude/PreludeCard';
 import {IProjectCard} from '../../IProjectCard';
 import {CardName} from '../../../CardName';
-import {Game} from '../../../Game';
 import {Resources} from '../../../Resources';
 import {CardRenderer} from '../../render/CardRenderer';
-import {LogHelper} from '../../../LogHelper';
+import {Game} from '../../../Game';
 
 export class NitrateReducers extends PreludeCard implements IProjectCard {
     constructor() {
@@ -25,13 +24,9 @@ export class NitrateReducers extends PreludeCard implements IProjectCard {
       });
     }
 
-    public play(player: Player, game: Game) {
+    public play(player: Player, _game: Game) {
       player.addProduction(Resources.MEGACREDITS, 3);
-
-      const cards = game.drawCardsByTag(Tags.MICROBE, 2);
-      player.cardsInHand.push(...cards);
-      LogHelper.logDrawnCards(player, cards);
-
+      player.drawCard(2, {tag: Tags.MICROBE});
       return undefined;
     }
 }

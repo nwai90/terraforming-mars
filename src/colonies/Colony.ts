@@ -343,7 +343,7 @@ export abstract class Colony implements SerializedColony {
         break;
 
       case ColonyBenefit.DRAW_EARTH_CARD:
-        action = new DrawCards(player, game, quantity, Tags.EARTH);
+        player.drawCard(quantity, {tag: Tags.EARTH});
         break;
 
       case ColonyBenefit.WGT_RAISE_GLOBAL_PARAMETER:

@@ -4,7 +4,6 @@ import {IProjectCard} from '../../IProjectCard';
 import {CardName} from '../../../CardName';
 import {Game} from '../../../Game';
 import {Tags} from '../../Tags';
-import {DrawCards} from '../../../deferredActions/DrawCards';
 import {OrOptions} from '../../../inputs/OrOptions';
 import {SelectCard} from '../../../inputs/SelectCard';
 import {SelectOption} from '../../../inputs/SelectOption';
@@ -29,7 +28,7 @@ export class AccumulatedKnowledge extends PreludeCard implements IProjectCard {
     }
 
     public play(player: Player, game: Game) {
-      game.defer(new DrawCards(player, game, 4));
+      player.drawCard(4);
 
       game.defer(new DeferredAction(player, () => new OrOptions(
         new SelectCard('Discard a card to draw a card', 'Discard', player.cardsInHand, (foundCards: Array<IProjectCard>) => {
