@@ -142,6 +142,8 @@ export const CardCorporationLogo = Vue.component('CardCorporationLogo', {
         result += '</div>';
       } else if (title === CardName.ERIS) {
         result += '<div class="card-eris-logo">Eris</div>';
+      } else if (title === CardName.COLONIAL_ONE) {
+        result += '<div class="card-colonial-one-logo">Colonial One</div>';
       }
 
       return result;
