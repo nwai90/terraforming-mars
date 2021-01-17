@@ -1420,7 +1420,7 @@ export class Game implements ISerializable<SerializedGame> {
         player.addResourceTo(animalCards[0], 1);
         LogHelper.logAddResource(player, animalCards[0]);
       } else if (animalCards.length > 1) {
-        this.defer(new AddResourcesToCard(player, this, ResourceType.ANIMAL));
+        this.defer(new AddResourcesToCard(player, ResourceType.ANIMAL));
       }
     } else if (spaceBonus === SpaceBonus.MICROBE) {
       const microbeCards = player.getResourceCards(ResourceType.MICROBE);
@@ -1429,7 +1429,7 @@ export class Game implements ISerializable<SerializedGame> {
         player.addResourceTo(microbeCards[0], 1);
         LogHelper.logAddResource(player, microbeCards[0]);
       } else if (microbeCards.length > 1) {
-        this.defer(new AddResourcesToCard(player, this, ResourceType.MICROBE));
+        this.defer(new AddResourcesToCard(player, ResourceType.MICROBE));
       }
     }
   }

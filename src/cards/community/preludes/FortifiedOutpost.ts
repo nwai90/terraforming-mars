@@ -32,8 +32,8 @@ export class FortifiedOutpost extends PreludeCard implements IProjectCard {
     }
 
     public play(player: Player, game: Game) {
-      game.defer(new PlaceCityTile(player, game));
-      game.defer(new PlaceGreeneryTile(player, game));
+      game.defer(new PlaceCityTile(player));
+      game.defer(new PlaceGreeneryTile(player));
       game.defer(new SelectHowToPayDeferred(player, 10, {title: 'Select how to pay for prelude'}));
       return undefined;
     }

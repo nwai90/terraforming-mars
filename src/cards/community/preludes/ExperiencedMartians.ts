@@ -31,7 +31,7 @@ export class ExperiencedMartians extends PreludeCard implements IProjectCard {
       player.addProduction(Resources.HEAT);
       player.addProduction(Resources.PLANTS);
 
-      game.defer(new SendDelegateToArea(player, game, 'Select where to send 2 delegates', 2, undefined, undefined, false));
+      game.defer(new SendDelegateToArea(player, 'Select where to send 2 delegates', 2, undefined, undefined, false));
 
       return undefined;
     }

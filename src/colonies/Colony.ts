@@ -144,7 +144,7 @@ export abstract class Colony implements SerializedColony {
     }
 
 
-    private giveBonus(player: Player, bonusType: ColonyBenefit, quantity: number, resource: Resources | undefined, isGiveColonyBonus: boolean = false): undefined | PlayerInput {
+    public giveBonus(player: Player, bonusType: ColonyBenefit, quantity: number, resource: Resources | undefined, isGiveColonyBonus: boolean = false): undefined | PlayerInput {
       const game = player.game;
 
       let action: undefined | DeferredAction = undefined;
@@ -360,7 +360,7 @@ export abstract class Colony implements SerializedColony {
             }));
         } else if (quantity === 1) {
             game.log('${0} acted as World Government and placed an ocean', (b) => b.player(player));
-            game.defer(new PlaceOceanTile(player, game, 'Select ocean space for ' + this.name + ' colony'));
+            game.defer(new PlaceOceanTile(player, 'Select ocean space for ' + this.name + ' colony'));
         } else if (quantity === 2) {
             game.defer(new DeferredAction(player, () => {
                 game.log('${0} acted as World Government and increased oxygen level', (b) => b.player(player));
