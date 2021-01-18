@@ -12,7 +12,6 @@ export interface GameOptionsModel {
   corporateEra: boolean,
   draftVariant: boolean,
   fastModeOption: boolean,
-  includeVenusMA: boolean,
   initialDraftVariant: boolean,
   moonExpansion: boolean,
   preludeExtension: boolean,

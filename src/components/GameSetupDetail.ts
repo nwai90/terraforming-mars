@@ -75,9 +75,6 @@ export const GameSetupDetail = Vue.component('game-setup-detail', {
               <div v-if="isRandomMANone()" class="game-config generic" v-i18n>Board-defined</div>
               <div v-if="isRandomMALimited()" class="game-config generic" v-i18n>Randomized with limited synergy</div>
               <div v-if="isRandomMAUnlimited()" class="game-config generic" v-i18n>Full randomized</div>
-              <div v-if="isRandomMANone() && gameOptions.includeVenusMA" class="game-config generic" v-i18n>HoverLord & Venuphile</div>
-              <div v-if="!isRandomMANone() && !gameOptions.includeVenusMA" class="game-config generic" v-i18n>(5 each)</div>
-              <div v-if="!isRandomMANone() && gameOptions.includeVenusMA" class="game-config generic" v-i18n>(6 each)</div>
             </li>
             
             <li v-if="playerNumber > 1">
@@ -99,7 +96,6 @@ export const GameSetupDetail = Vue.component('game-setup-detail', {
             <li><div class="setup-item" v-i18n>Game configs:</div>
               <div v-if="gameOptions.fastModeOption" class="game-config fastmode" v-i18n>fast mode</div>
               <div v-if="gameOptions.showTimers" class="game-config timer" v-i18n>timer</div>
-              <div v-if="gameOptions.showOtherPlayersVP" class="game-config realtime-vp" v-i18n>real-time vp</div>
               <div v-if="gameOptions.undoOption" class="game-config undo" v-i18n>undo</div>
             </li>
 

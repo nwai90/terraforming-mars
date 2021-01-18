@@ -503,7 +503,6 @@ function getGameOptionsAsModel(options: GameOptions): GameOptionsModel {
     corporateEra: options.corporateEra,
     draftVariant: options.draftVariant,
     fastModeOption: options.fastModeOption,
-    includeVenusMA: options.includeVenusMA,
     initialDraftVariant: options.initialDraftVariant,
     moonExpansion: options.moonExpansion,
     preludeExtension: options.preludeExtension,
