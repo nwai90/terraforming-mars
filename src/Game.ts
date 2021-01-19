@@ -775,6 +775,7 @@ export class Game implements ISerializable<SerializedGame> {
     this.players.forEach((player) => {
       player.terraformRatingAtGenerationStart = player.getTerraformRating();
       player.hasIncreasedTerraformRatingThisGeneration = false;
+      player.heatProductionStepsIncreasedThisGeneration = 0;
     });
 
     if (this.gameOptions.draftVariant) {

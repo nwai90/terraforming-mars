@@ -48,6 +48,7 @@ export interface SerializedPlayer {
     removedFromPlayCards: Array<CardName>;
     removingPlayers: Array<PlayerId>;
     scienceTagCount: number;
+    heatProductionStepsIncreasedThisGeneration: number;
     steel: number;
     steelProduction: number;
     steelValue: number;

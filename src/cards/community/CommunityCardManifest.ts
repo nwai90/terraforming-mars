@@ -14,6 +14,7 @@ import {PoliticalUprising} from './preludes/PoliticalUprising';
 import {ByElection} from './preludes/ByElection';
 import {Midas} from './corporations/Midas';
 import {ColonialOne} from './corporations/ColonialOne';
+import {Hotsprings} from './corporations/Hotsprings';
 import {HydrogenBombardment} from './preludes/HydrogenBombardment';
 import {VitalColony} from './preludes/VitalColony';
 import {StrategicBasePlanning} from './preludes/StrategicBasePlanning';
@@ -37,6 +38,7 @@ export const COMMUNITY_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.PLAYWRIGHTS, Factory: Playwrights},
     {cardName: CardName.MIDAS, Factory: Midas},
     {cardName: CardName.COLONIAL_ONE, Factory: ColonialOne, compatibility: GameModule.Colonies},
+    {cardName: CardName.HOTSPRINGS, Factory: Hotsprings},
   ],
   preludeCards: [
     {cardName: CardName.RESEARCH_GRANT, Factory: ResearchGrant},

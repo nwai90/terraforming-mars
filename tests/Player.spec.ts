@@ -202,6 +202,7 @@ describe('Player', function() {
       plantsNeededForGreenery: 5,
       removingPlayers: [],
       removedFromPlayCards: [],
+      heatProductionStepsIncreasedThisGeneration: 0,
       name: 'player-blue',
       color: 'purple' as Color,
       beginner: true,

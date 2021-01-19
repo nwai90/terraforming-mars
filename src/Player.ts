@@ -155,6 +155,8 @@ export class Player implements ISerializable<SerializedPlayer> {
   // removedFromPlayCards is a bit of a misname: it's a temporary storage for
   // cards that provide 'next card' discounts. This will clear between turns.
   public removedFromPlayCards: Array<IProjectCard> = [];
+  // Hotsprings
+  public heatProductionStepsIncreasedThisGeneration: number = 0;
 
   // Stats
   public totalSpend: number = 0;
@@ -359,7 +361,11 @@ export class Player implements ISerializable<SerializedPlayer> {
     if (resource === Resources.TITANIUM) this.titaniumProduction = Math.max(0, this.titaniumProduction + amount);
     if (resource === Resources.PLANTS) this.plantProduction = Math.max(0, this.plantProduction + amount);
     if (resource === Resources.ENERGY) this.energyProduction = Math.max(0, this.energyProduction + amount);
-    if (resource === Resources.HEAT) this.heatProduction = Math.max(0, this.heatProduction + amount);
+
+    if (resource === Resources.HEAT) {
+      this.heatProduction = Math.max(0, this.heatProduction + amount);
+      if (amount > 0) this.heatProductionStepsIncreasedThisGeneration += amount; // Hotsprings hook
+    }
 
     const modifier = amount > 0 ? 'increased' : 'decreased';
 
@@ -2081,6 +2087,8 @@ export class Player implements ISerializable<SerializedPlayer> {
       removingPlayers: this.removingPlayers,
       // Playwrights
       removedFromPlayCards: this.removedFromPlayCards.map((c) => c.name),
+      // Hotsprings
+      heatProductionStepsIncreasedThisGeneration: this.heatProductionStepsIncreasedThisGeneration,
       name: this.name,
       color: this.color,
       beginner: this.beginner,
@@ -2115,6 +2123,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     player.hasIncreasedTerraformRatingThisGeneration = d.hasIncreasedTerraformRatingThisGeneration;
     player.heat = d.heat;
     player.heatProduction = d.heatProduction;
+    player.heatProductionStepsIncreasedThisGeneration = d.heatProductionStepsIncreasedThisGeneration;
     player.megaCreditProduction = d.megaCreditProduction;
     player.megaCredits = d.megaCredits;
     player.needsToDraft = d.needsToDraft;
