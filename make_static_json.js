@@ -25,7 +25,7 @@ function getAllTranslations() {
 
         const dataJson = JSON.parse(fs.readFileSync(path.join(translationDir, file), 'utf8'));
 
-        for (let phrase = 0; phrase < dataJson.length; phrase++) {
+        for (const phrase in dataJson) {
           if (translations[phrase] === undefined) {
             translations[phrase] = {};
           }
