@@ -3,7 +3,7 @@ import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
-import {Playwrights} from '../community/Playwrights';
+import {Playwrights} from '../community/corporations/Playwrights';
 import {ICard} from '../ICard';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardRenderer} from '../render/CardRenderer';

@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {RestrictedArea} from '../../../src/cards/base/RestrictedArea';
 import {ProjectInspection} from '../../../src/cards/promo/ProjectInspection';
 import {IndenturedWorkers} from '../../../src/cards/base/IndenturedWorkers';
-import {Playwrights} from '../../../src/cards/community/Playwrights';
+import {Playwrights} from '../../../src/cards/community/corporations/Playwrights';
 import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {ICard} from '../../../src/cards/ICard';

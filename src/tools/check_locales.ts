@@ -22,12 +22,12 @@ if (args[0] === '--locales') {
   });
 }
 
-let sourceString: keyof typeof raw_translations;
+let sourceString: string;
 let warnings: Array<string>;
 
 for (sourceString in raw_translations) {
   if ( ! raw_translations.hasOwnProperty(sourceString)) continue;
-  const translations = raw_translations[sourceString];
+  const translations = raw_translations[sourceString as keyof typeof raw_translations];
   warnings = [];
   for (const localeName of localesToWarn) {
     const trans: string = (translations as any)[localeName];
