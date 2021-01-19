@@ -82,7 +82,7 @@ export class Eris extends Card implements CorporationCard {
               this.getAllUnprotectedHazardSpaces(game),
               (space: ISpace) => {
                 space.tile = undefined;
-                player.increaseTerraformRating(game);
+                player.increaseTerraformRating();
                 LogHelper.logTRIncrease(player, 1);
                 return undefined;
               },
