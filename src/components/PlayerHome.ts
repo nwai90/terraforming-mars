@@ -270,7 +270,7 @@ export const PlayerHome = Vue.component('player-home', {
 
                 <players-overview class="player_home_block player_home_block--players nofloat:" :player="player" v-trim-whitespace id="shortkey-playersoverview"/>
 
-                <div class="player_home_block player_home_block--log player_home_block--hide_log nofloat">
+                <div class="player_home_block player_home_block--log nofloat">
                     <dynamic-title v-if="player.players.length > 1" title="Game log" :color="player.color" :withAdditional="true" :additional="'generation ' + player.generation"/>
                     <h2 v-else :class="'player_color_'+ player.color">
                         <span v-i18n>Game log</span>
