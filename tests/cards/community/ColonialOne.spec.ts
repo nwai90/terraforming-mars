@@ -31,20 +31,20 @@ describe('ColonialOne', function() {
     expect(action instanceof OrOptions).to.eq(true);
     expect(action!.options.length).to.eq(2);
 
-        action!.options[0].cb();
-        expect(game.deferredActions.length).to.eq(1);
-        const selectColony = game.deferredActions.next()!.execute() as SelectColony;
-        selectColony.cb((<any>ColonyName)[selectColony.coloniesModel[0].name.toUpperCase()]);
+    action!.options[0].cb();
+    expect(game.deferredActions.length).to.eq(1);
+    const selectColony = game.deferredActions.next()!.execute() as SelectColony;
+    selectColony.cb((<any>ColonyName)[selectColony.coloniesModel[0].name.toUpperCase()]);
 
-        expect(card.resourceCount).to.eq(2);
+    expect(card.resourceCount).to.eq(2);
   });
 
   it('Can move a colony tile track', function() {
     const action = card.action(player, game);
-        action!.options[1].cb();
-        expect(game.deferredActions.length).to.eq(1);
+    action!.options[1].cb();
+    expect(game.deferredActions.length).to.eq(1);
 
-        const selectColony = game.deferredActions.next()!;
-        expect(selectColony.execute() instanceof SelectColony).to.eq(true);
+    const selectColony = game.deferredActions.next()!;
+    expect(selectColony.execute() instanceof SelectColony).to.eq(true);
   });
 });
