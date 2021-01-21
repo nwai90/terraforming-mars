@@ -36,7 +36,7 @@ export class JunkVentures extends Card implements CorporationCard {
       return undefined;
     }
 
-    public initialAction(player: Player, game: Game) {
+    public initialAction(player: Player) {
       const discardedCards = new Set<CardName>();
 
       for (let i = 0; i < 3; i++) {
@@ -45,7 +45,7 @@ export class JunkVentures extends Card implements CorporationCard {
         discardedCards.add(card.name);
       }
 
-      LogHelper.logDiscardedCards(game, Array.from(discardedCards));
+      LogHelper.logDiscardedCards(player.game, Array.from(discardedCards));
       return undefined;
     }
 

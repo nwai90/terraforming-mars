@@ -46,8 +46,8 @@ export class Eris extends Card implements CorporationCard {
       return undefined;
     }
 
-    public initialAction(player: Player, game: Game) {
-      if (game.gameOptions.aresExtension) {
+    public initialAction(player: Player) {
+      if (player.game.gameOptions.aresExtension) {
         this.drawAresCard(player);
       }
 

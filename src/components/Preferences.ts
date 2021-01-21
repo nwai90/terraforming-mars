@@ -190,16 +190,16 @@ export const Preferences = Vue.component('preferences', {
       }
     },
     getSilverCubeDiscountForTemperature: function(): string {
-        return `${this.temperatureSilverCubeBonusMC}`;
+      return `${this.temperatureSilverCubeBonusMC}`;
     },
     getSilverCubeDiscountForOceans: function(): string {
-        return `${this.oceansSilverCubeBonusMC}`;
+      return `${this.oceansSilverCubeBonusMC}`;
     },
     getSilverCubeDiscountForOxygen: function(): string {
-        return `${this.oxygenSilverCubeBonusMC}`;
+      return `${this.oxygenSilverCubeBonusMC}`;
     },
     getSilverCubeDiscountForVenus: function(): string {
-        return `${this.venusSilverCubeBonusMC}`;
+      return `${this.venusSilverCubeBonusMC}`;
     },
   },
   mounted: function() {

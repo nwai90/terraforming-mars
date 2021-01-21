@@ -23,7 +23,7 @@ describe('Eris', function() {
   });
 
   it('Starts with 1 Ares card', function() {
-    card.initialAction(player, game);
+    card.initialAction(player);
     expect(player.cardsInHand).has.lengthOf(1);
   });
 

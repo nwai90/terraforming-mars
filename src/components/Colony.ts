@@ -164,8 +164,8 @@ export const Colony = Vue.component('colony', {
       return ColonyName.TERRA;
     },
     getClassForColonyPlacementBonus: (colony: ColonyModel, index: number): string => {
-        if (colony.colonies.length > index) return 'filter: grayscale(1) opacity(0.5)';
-        return '';
+      if (colony.colonies.length > index) return 'filter: grayscale(1) opacity(0.5)';
+      return '';
     }
   },
   template: `
