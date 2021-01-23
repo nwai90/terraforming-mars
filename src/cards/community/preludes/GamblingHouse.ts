@@ -4,6 +4,7 @@ import {CardName} from '../../../CardName';
 import {Game} from '../../../Game';
 import {CardRenderer} from '../../render/CardRenderer';
 import {DeferredAction} from '../../../deferredActions/DeferredAction';
+import { AlliedBanks } from '../../prelude/AlliedBanks';
 
 export class GamblingHouse extends PreludeCard {
     constructor() {
@@ -22,6 +23,7 @@ export class GamblingHouse extends PreludeCard {
 
     public play(player: Player, game: Game) {
       player.megaCredits += 5;
+      game.dealer.preludeDeck.push(new AlliedBanks()); // ensure first prelude is playable
       const preludeCard = game.dealer.dealPreludeCard();
 
       if (preludeCard.canPlay === undefined || preludeCard.canPlay(player, game)) {
