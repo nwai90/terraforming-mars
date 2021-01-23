@@ -48,6 +48,7 @@ export const SelectInitialCards = Vue.component('select-initial-cards', {
           result += 3;
           break;
         case CardName.BUSINESS_EMPIRE:
+        case CardName.STRATEGIC_BASE_PLANNING:
           result -= 6;
           break;
         case CardName.AQUIFER_TURBINES:
@@ -58,16 +59,31 @@ export const SelectInitialCards = Vue.component('select-initial-cards', {
           break;
         case CardName.GALILEAN_MINING:
         case CardName.HUGE_ASTEROID:
+        case CardName.VITAL_COLONY:
           result -= 5;
           break;
         case CardName.LOAN:
           result += 30;
           break;
         case CardName.MARTIAN_INDUSTRIES:
+        case CardName.VALUABLE_GASES:
           result += 6;
           break;
         case CardName.NITROGEN_SHIPMENT:
+        case CardName.GAMBLING_HOUSE:
           result += 5;
+          break;
+        case CardName.AEROSPACE_MISSION:
+          result -= 14;
+          break;
+        case CardName.FORTIFIED_OUTPOST:
+          result -= 10;
+          break;
+        case CardName.RESEARCH_GRANT:
+          result += 8;
+          break;
+        case CardName.TRADE_ADVANCE:
+          result += 2;
           break;
         }
         switch (this.selectedCorporation?.name) {
@@ -87,12 +103,16 @@ export const SelectInitialCards = Vue.component('select-initial-cards', {
           case CardName.RESEARCH_NETWORK:
             result += 1;
             break;
+          case CardName.NITRATE_REDUCERS:
+            result += 3;
+            break;
           }
           break;
         case CardName.THARSIS_REPUBLIC:
           switch (prelude) {
           case CardName.SELF_SUFFICIENT_SETTLEMENT:
           case CardName.EARLY_SETTLEMENT:
+          case CardName.FORTIFIED_OUTPOST:
             result += 3;
             break;
           }
@@ -101,6 +121,7 @@ export const SelectInitialCards = Vue.component('select-initial-cards', {
           switch (prelude) {
           case CardName.BIOFUELS:
           case CardName.ECOLOGY_EXPERTS:
+          case CardName.NITRATE_REDUCERS:
             result -= 4;
             break;
           }
@@ -109,6 +130,17 @@ export const SelectInitialCards = Vue.component('select-initial-cards', {
           switch (prelude) {
           case CardName.BIOFUELS:
           case CardName.ECOLOGY_EXPERTS:
+          case CardName.NITRATE_REDUCERS:
+            result += 4;
+            break;
+          }
+          break;
+        case CardName.APHRODITE:
+          switch (prelude) {
+          case CardName.VENUS_FIRST:
+            result += 4;
+            break;
+          case CardName.HYDROGEN_BOMBARDMENT:
             result += 2;
             break;
           }
