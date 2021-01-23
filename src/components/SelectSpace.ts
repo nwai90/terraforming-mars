@@ -102,8 +102,8 @@ export const SelectSpace = Vue.component('select-space', {
       this.disableAvailableSpaceAnimation();
       this.animateSpace(tile, true);
       tile.classList.remove('board-space--available');
-      const hideTileConfirmation = PreferencesManager.loadValue('show_tile_confirmation') === '1';
-      if (hideTileConfirmation) {
+      const displayTileConfirmation = PreferencesManager.loadValue('show_tile_confirmation') === '1';
+      if (displayTileConfirmation) {
         this.confirmPlacement();
       } else {
         (this.$refs['confirmation'] as any).show();

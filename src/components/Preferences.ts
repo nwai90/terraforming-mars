@@ -79,7 +79,7 @@ export const Preferences = Vue.component('preferences', {
       'enable_sounds': false as boolean | unknown[],
       'smooth_scrolling': false as boolean | unknown[],
       'show_card_number': false as boolean | unknown[],
-      'show_tile_confirmation': true as boolean | unknown[],
+      'show_tile_confirmation': false as boolean | unknown[],
     };
   },
   methods: {
