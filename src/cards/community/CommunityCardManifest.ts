@@ -16,6 +16,7 @@ import {Midas} from './corporations/Midas';
 import {ColonialOne} from './corporations/ColonialOne';
 import {Hotsprings} from './corporations/Hotsprings';
 import {JunkVentures} from './corporations/JunkVentures';
+import {Aristarchus} from './corporations/Aristarchus';
 import {HydrogenBombardment} from './preludes/HydrogenBombardment';
 import {VitalColony} from './preludes/VitalColony';
 import {StrategicBasePlanning} from './preludes/StrategicBasePlanning';
@@ -41,6 +42,7 @@ export const COMMUNITY_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.COLONIAL_ONE, Factory: ColonialOne, compatibility: GameModule.Colonies},
     {cardName: CardName.HOTSPRINGS, Factory: Hotsprings},
     {cardName: CardName.JUNK_VENTURES, Factory: JunkVentures},
+    {cardName: CardName.ARISTARCHUS, Factory: Aristarchus},
   ],
   preludeCards: [
     {cardName: CardName.RESEARCH_GRANT, Factory: ResearchGrant},
