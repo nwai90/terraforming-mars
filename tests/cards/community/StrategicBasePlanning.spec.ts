@@ -26,8 +26,11 @@ describe('StrategicBasePlanning', function() {
     card.play(player, game);
     expect(game.deferredActions).has.lengthOf(2);
 
+    // selectColony can be undefined if game setup results in no open colonies available to build on
     const selectColony = game.deferredActions.pop()!.execute() as SelectColony;
-    selectColony.cb((<any>ColonyName)[selectColony.coloniesModel[0].name.toUpperCase()]);
+    if (selectColony !== undefined) {
+      selectColony.cb((<any>ColonyName)[selectColony.coloniesModel[0].name.toUpperCase()]);
+    }
 
     game.deferredActions.pop()!.execute(); // howToPay
 
