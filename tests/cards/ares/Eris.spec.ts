@@ -35,7 +35,7 @@ describe('Eris', function() {
     // Place a hazard tile
     action.options[0].cb();
     expect(game.deferredActions).has.lengthOf(1);
-    const placeHazard = game.deferredActions.next()!.execute() as SelectSpace;
+    const placeHazard = game.deferredActions.pop()!.execute() as SelectSpace;
     placeHazard.cb(placeHazard.availableSpaces[0]);
     expect(_AresHazardPlacement.getHazardsCount(game)).to.eq(initialHazardsCount + 1);
 

@@ -22,11 +22,11 @@ describe('FortifiedOutpost', function() {
     card.play(player, game);
     expect(game.deferredActions).has.lengthOf(3);
 
-    const selectSpaceForCity = game.deferredActions.next()!.execute() as SelectSpace;
-    game.deferredActions.shift();
+    const selectSpaceForCity = game.deferredActions.pop()!.execute() as SelectSpace;
+    game.deferredActions.peek();
 
-    const selectSpaceForGreenery = game.deferredActions.next()!.execute() as SelectSpace;
-    game.deferredActions.shift();
+    const selectSpaceForGreenery = game.deferredActions.pop()!.execute() as SelectSpace;
+    game.deferredActions.peek();
 
     game.deferredActions.runNext(); // howToPay
 

@@ -17,10 +17,9 @@ describe('AccumulatedKnowledge', function() {
 
   it('Should play', function() {
     card.play(player, game);
-    game.deferredActions.runNext();
     expect(player.cardsInHand).has.lengthOf(4);
     
-    const orOptions = game.deferredActions.next()!.execute() as OrOptions;
+    const orOptions = game.deferredActions.pop()!.execute() as OrOptions;
     orOptions.options[0].cb(player.cardsInHand[0]);
     expect(player.cardsInHand).has.lengthOf(4);
   });

@@ -23,8 +23,8 @@ describe('VitalColony', function() {
     card.play(player, game);
     expect(game.deferredActions).has.lengthOf(2);
 
-    const selectColony = game.deferredActions.next()!.execute() as SelectColony;
-    game.deferredActions.shift();
+    const selectColony = game.deferredActions.pop()!.execute() as SelectColony;
+    game.deferredActions.peek();
     selectColony.cb((<any>ColonyName)[selectColony.coloniesModel[0].name.toUpperCase()]);
 
     const openColonies = game.colonies.filter((colony) => colony.isActive);

@@ -23,9 +23,9 @@ describe('ExperiencedMartians', function() {
     card.play(player, game);
     expect(game.deferredActions).has.lengthOf(1);
 
-    const orOptions = game.deferredActions.next()!.execute() as OrOptions;
+    const orOptions = game.deferredActions.pop()!.execute() as OrOptions;
     orOptions.options[0].cb();
-    game.deferredActions.shift();
+    game.deferredActions.peek();
 
     const turmoil = game.turmoil!;
     const marsFirst = turmoil.getPartyByName(PartyName.MARS)!;

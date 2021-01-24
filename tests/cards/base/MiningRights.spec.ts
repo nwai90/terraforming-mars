@@ -36,6 +36,8 @@ describe('MiningRights', function() {
     expect(titaniumSpace!.bonus).contains(SpaceBonus.TITANIUM);
 
     action.cb(titaniumSpace!);
+    game.deferredActions.runNext();
+
     expect(titaniumSpace!.player).to.eq(player);
     expect(titaniumSpace!.tile && titaniumSpace!.tile!.tileType).to.eq(TileType.MINING_RIGHTS);
     expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
@@ -46,6 +48,8 @@ describe('MiningRights', function() {
     expect(steelSpace!.bonus).contains(SpaceBonus.STEEL);
 
     action.cb(steelSpace!);
+    game.deferredActions.runNext();
+
     expect(steelSpace!.player).to.eq(player);
     expect(steelSpace!.tile && steelSpace!.tile!.tileType).to.eq(TileType.MINING_RIGHTS);
     expect(player.getProduction(Resources.TITANIUM)).to.eq(1);

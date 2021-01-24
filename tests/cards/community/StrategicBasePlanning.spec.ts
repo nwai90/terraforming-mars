@@ -26,12 +26,12 @@ describe('StrategicBasePlanning', function() {
     card.play(player, game);
     expect(game.deferredActions).has.lengthOf(2);
 
-    const selectColony = game.deferredActions.shift()!.execute() as SelectColony;
+    const selectColony = game.deferredActions.pop()!.execute() as SelectColony;
     selectColony.cb((<any>ColonyName)[selectColony.coloniesModel[0].name.toUpperCase()]);
 
-    game.deferredActions.shift()!.execute(); // howToPay
+    game.deferredActions.pop()!.execute(); // howToPay
 
-    const selectSpace = game.deferredActions.shift()!.execute() as SelectSpace;
+    const selectSpace = game.deferredActions.pop()!.execute() as SelectSpace;
 
     const openColonies = game.colonies.filter((colony) => colony.isActive);
     expect(openColonies[0].colonies.find((c) => c === player.id)).is.not.undefined;

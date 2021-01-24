@@ -36,7 +36,7 @@ describe('JunkVentures', function() {
     card.action(player, game);
     expect(game.deferredActions).has.lengthOf(1);
 
-    const selectCardToKeep = game.deferredActions.next()!.execute() as SelectCard<IProjectCard>;
+    const selectCardToKeep = game.deferredActions.pop()!.execute() as SelectCard<IProjectCard>;
     expect(selectCardToKeep instanceof SelectCard).is.true;
     selectCardToKeep.cb([keptCard]);
     expect(player.cardsInHand).has.lengthOf(1);

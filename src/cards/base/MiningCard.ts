@@ -75,7 +75,7 @@ export abstract class MiningCard extends Card implements IProjectCard {
 
   public play(player: Player): SelectSpace {
     return new SelectSpace(this.getSelectTitle(), this.getAvailableSpaces(player), (foundSpace: ISpace) => {
-      let bonus = SpaceBonus.STEEL;
+      let bonus: SpaceBonus.STEEL | SpaceBonus.TITANIUM = SpaceBonus.STEEL;
       let resource = Resources.STEEL;
 
       if (foundSpace.bonus.includes(SpaceBonus.TITANIUM) === true) {
@@ -103,11 +103,18 @@ export abstract class MiningCard extends Card implements IProjectCard {
         }
       }
 
-      player.game.addTile(player, foundSpace.spaceType, foundSpace, {tileType: this.getTileType(bonus)});
-      foundSpace.adjacency = this.getAdjacencyBonus(bonus);
-      player.addProduction(resource);
-      this.bonusResource = resource;
-      LogHelper.logGainProduction(player, resource);
+      player.game.defer(new DeferredAction(
+        player,
+        () => {
+          player.game.addTile(player, foundSpace.spaceType, foundSpace, {tileType: this.getTileType(bonus)});
+          foundSpace.adjacency = this.getAdjacencyBonus(bonus);
+          player.addProduction(resource);
+          this.bonusResource = resource;
+          LogHelper.logGainProduction(player, resource);
+          return undefined;
+        },
+      ));
+
       return undefined;
     });
   }
