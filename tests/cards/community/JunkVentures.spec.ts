@@ -8,14 +8,15 @@ import {setCustomGameOptions} from '../../TestingUtils';
 import {TestPlayers} from '../../TestingUtils';
 
 describe('JunkVentures', function() {
-  let card : JunkVentures; let player : Player; let game : Game;
+  let card : JunkVentures; let player : Player; let player2 : Player; let game : Game;
 
   beforeEach(function() {
     card = new JunkVentures();
     player = TestPlayers.BLUE.newPlayer();
+    player2 = TestPlayers.RED.newPlayer();
 
     const gameOptions = setCustomGameOptions();
-    game = Game.newInstance('foobar', [player], player, gameOptions);
+    game = Game.newInstance('foobar', [player, player2], player, gameOptions);
 
     card.play();
     player.corporationCard = card;
