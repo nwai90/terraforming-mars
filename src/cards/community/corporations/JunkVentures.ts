@@ -40,7 +40,7 @@ export class JunkVentures extends Card implements CorporationCard {
       const discardedCards = new Set<CardName>();
 
       for (let i = 0; i < 3; i++) {
-        const card = player.game.dealer.dealCard();
+        const card = player.game.dealer.dealCard(player.game);
         player.game.dealer.discard(card);
         discardedCards.add(card.name);
       }

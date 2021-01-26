@@ -28,10 +28,10 @@ describe('JunkVentures', function() {
   });
 
   it('Can act', function() {
-    const keptCard = game.dealer.dealCard();
+    const keptCard = game.dealer.dealCard(game);
     game.dealer.discard(keptCard);
-    game.dealer.discard(game.dealer.dealCard());
-    game.dealer.discard(game.dealer.dealCard());
+    game.dealer.discard(game.dealer.dealCard(game));
+    game.dealer.discard(game.dealer.dealCard(game));
     expect(card.canAct(player)).is.true;
 
     card.action(player, game);
