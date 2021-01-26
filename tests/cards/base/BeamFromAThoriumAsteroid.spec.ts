@@ -1,5 +1,6 @@
 import {expect} from 'chai';
 import {BeamFromAThoriumAsteroid} from '../../../src/cards/base/BeamFromAThoriumAsteroid';
+import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestingUtils';
@@ -10,6 +11,7 @@ describe('BeamFromAThoriumAsteroid', function() {
   beforeEach(function() {
     card = new BeamFromAThoriumAsteroid();
     player = TestPlayers.BLUE.newPlayer();
+    Game.newInstance('foobar', [player], player);
   });
 
   it('Cannot play without a Jovian tag', function() {

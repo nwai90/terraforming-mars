@@ -1,5 +1,6 @@
 import {expect} from 'chai';
 import {CarbonateProcessing} from '../../../src/cards/base/CarbonateProcessing';
+import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestingUtils';
@@ -10,6 +11,7 @@ describe('CarbonateProcessing', function() {
   beforeEach(function() {
     card = new CarbonateProcessing();
     player = TestPlayers.BLUE.newPlayer();
+    Game.newInstance('foobar', [player], player);
   });
 
   it('Can\'t play', function() {

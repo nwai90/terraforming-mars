@@ -1,5 +1,6 @@
 import {expect} from 'chai';
 import {SoilFactory} from '../../../src/cards/base/SoilFactory';
+import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestingUtils';
@@ -10,6 +11,7 @@ describe('SoilFactory', function() {
   beforeEach(function() {
     card = new SoilFactory();
     player = TestPlayers.BLUE.newPlayer();
+    Game.newInstance('foobar', [player], player);
   });
 
   it('Can\'t play', function() {

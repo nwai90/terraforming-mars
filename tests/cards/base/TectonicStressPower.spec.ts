@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import {SearchForLife} from '../../../src/cards/base/SearchForLife';
 import {TectonicStressPower} from '../../../src/cards/base/TectonicStressPower';
+import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestingUtils';
@@ -11,6 +12,7 @@ describe('TectonicStressPower', function() {
   beforeEach(function() {
     card = new TectonicStressPower();
     player = TestPlayers.BLUE.newPlayer();
+    Game.newInstance('foobar', [player], player);
   });
 
   it('Can\'t play', function() {

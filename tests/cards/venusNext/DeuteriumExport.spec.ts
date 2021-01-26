@@ -1,5 +1,6 @@
 import {expect} from 'chai';
 import {DeuteriumExport} from '../../../src/cards/venusNext/DeuteriumExport';
+import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
@@ -11,6 +12,7 @@ describe('DeuteriumExport', function() {
   beforeEach(function() {
     card = new DeuteriumExport();
     player = TestPlayers.BLUE.newPlayer();
+    Game.newInstance('foobar', [player], player);
   });
 
   it('Should play', function() {

@@ -1,5 +1,6 @@
 import {expect} from 'chai';
 import {FuelFactory} from '../../../src/cards/base/FuelFactory';
+import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestingUtils';
@@ -10,6 +11,7 @@ describe('FuelFactory', function() {
   beforeEach(function() {
     card = new FuelFactory();
     player = TestPlayers.BLUE.newPlayer();
+    Game.newInstance('foobar', [player], player);
   });
 
   it('Can\'t play', function() {

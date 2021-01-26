@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import {Research} from '../../../src/cards/base/Research';
 import {DuskLaserMining} from '../../../src/cards/promo/DuskLaserMining';
+import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestingUtils';
@@ -11,6 +12,7 @@ describe('DuskLaserMining', function() {
   beforeEach(function() {
     card = new DuskLaserMining();
     player = TestPlayers.BLUE.newPlayer();
+    Game.newInstance('foobar', [player], player);
   });
 
   it('Can\'t play if not enough science tags', function() {

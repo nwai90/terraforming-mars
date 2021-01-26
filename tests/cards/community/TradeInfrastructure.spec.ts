@@ -3,6 +3,7 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {TradeInfrastructure} from '../../../src/cards/community/preludes/TradeInfrastructure';
 import {TestPlayers} from '../../TestingUtils';
+import {Game} from '../../../src/Game';
 
 describe('TradeInfrastructure', function() {
   let card : TradeInfrastructure; let player : Player;
@@ -10,6 +11,7 @@ describe('TradeInfrastructure', function() {
   beforeEach(function() {
     card = new TradeInfrastructure();
     player = TestPlayers.BLUE.newPlayer();
+    Game.newInstance('foobar', [player], player);
   });
 
   it('Should play', function() {

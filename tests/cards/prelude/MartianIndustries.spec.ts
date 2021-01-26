@@ -1,5 +1,6 @@
 import {expect} from 'chai';
 import {MartianIndustries} from '../../../src/cards/prelude/MartianIndustries';
+import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestingUtils';
 
@@ -7,7 +8,9 @@ describe('MartianIndustries', function() {
   it('Should play', function() {
     const card = new MartianIndustries();
     const player = TestPlayers.BLUE.newPlayer();
+    Game.newInstance('foobar', [player], player);
     const action = card.play(player);
+
     expect(action).is.undefined;
     expect(player.getProduction(Resources.ENERGY)).to.eq(1);
     expect(player.getProduction(Resources.STEEL)).to.eq(1);
