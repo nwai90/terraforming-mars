@@ -19,7 +19,7 @@ describe('FortifiedOutpost', function() {
   it('Should play', function() {
     player.megaCredits = 10;
 
-    card.play(player, game);
+    card.play(player);
     expect(game.deferredActions).has.lengthOf(3);
 
     const selectSpaceForCity = game.deferredActions.pop()!.execute() as SelectSpace;

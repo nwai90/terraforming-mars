@@ -20,7 +20,7 @@ describe('VitalColony', function() {
 
   it('Should play', function() {
     player.megaCredits = 5;
-    card.play(player, game);
+    card.play(player);
     expect(game.deferredActions).has.lengthOf(2);
 
     const selectColony = game.deferredActions.pop()!.execute() as SelectColony;

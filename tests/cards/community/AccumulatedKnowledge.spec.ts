@@ -16,7 +16,7 @@ describe('AccumulatedKnowledge', function() {
   });
 
   it('Should play', function() {
-    card.play(player, game);
+    card.play(player);
     expect(player.cardsInHand).has.lengthOf(4);
     
     const orOptions = game.deferredActions.pop()!.execute() as OrOptions;

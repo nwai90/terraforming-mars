@@ -2,7 +2,6 @@ import {Player} from '../../../Player';
 import {PreludeCard} from '../../prelude/PreludeCard';
 import {IProjectCard} from '../../IProjectCard';
 import {CardName} from '../../../CardName';
-import {Game} from '../../../Game';
 import {Tags} from '../../Tags';
 import {OrOptions} from '../../../inputs/OrOptions';
 import {SelectCard} from '../../../inputs/SelectCard';
@@ -27,7 +26,8 @@ export class AccumulatedKnowledge extends PreludeCard implements IProjectCard {
       });
     }
 
-    public play(player: Player, game: Game) {
+    public play(player: Player) {
+      const game = player.game;
       player.drawCard(4);
 
       game.defer(new DeferredAction(player, () => new OrOptions(

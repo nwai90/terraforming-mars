@@ -2,7 +2,6 @@ import {Player} from '../../../Player';
 import {PreludeCard} from '../../prelude/PreludeCard';
 import {IProjectCard} from '../../IProjectCard';
 import {CardName} from '../../../CardName';
-import {Game} from '../../../Game';
 import {BuildColony} from '../../../deferredActions/BuildColony';
 import {Resources} from '../../../Resources';
 import {DeferredAction} from '../../../deferredActions/DeferredAction';
@@ -25,8 +24,10 @@ export class VitalColony extends PreludeCard implements IProjectCard {
       });
     }
 
-    public play(player: Player, game: Game) {
+    public play(player: Player) {
       const coloniesBeforeBuilding: ColonyName[] = [];
+      const game = player.game;
+
       game.colonies.forEach((colony) => {
         if (colony.colonies.includes(player.id)) {
           coloniesBeforeBuilding.push(colony.name);

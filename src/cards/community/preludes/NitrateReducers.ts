@@ -5,7 +5,6 @@ import {IProjectCard} from '../../IProjectCard';
 import {CardName} from '../../../CardName';
 import {Resources} from '../../../Resources';
 import {CardRenderer} from '../../render/CardRenderer';
-import {Game} from '../../../Game';
 
 export class NitrateReducers extends PreludeCard implements IProjectCard {
     constructor() {
@@ -24,7 +23,7 @@ export class NitrateReducers extends PreludeCard implements IProjectCard {
       });
     }
 
-    public play(player: Player, _game: Game) {
+    public play(player: Player) {
       player.addProduction(Resources.MEGACREDITS, 3);
       player.drawCard(2, {tag: Tags.MICROBE});
       return undefined;

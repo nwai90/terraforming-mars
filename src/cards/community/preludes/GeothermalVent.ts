@@ -3,7 +3,6 @@ import {PreludeCard} from '../../prelude/PreludeCard';
 import {IProjectCard} from '../../IProjectCard';
 import {CardName} from '../../../CardName';
 import {Resources} from '../../../Resources';
-import {Game} from '../../../Game';
 import {CardRenderer} from '../../render/CardRenderer';
 
 export class GeothermalVent extends PreludeCard implements IProjectCard {
@@ -22,9 +21,9 @@ export class GeothermalVent extends PreludeCard implements IProjectCard {
       });
     }
 
-    public play(player: Player, game: Game) {
+    public play(player: Player) {
       player.addProduction(Resources.HEAT, 2);
-      game.increaseTemperature(player, 2);
+      player.game.increaseTemperature(player, 2);
       return undefined;
     }
 }

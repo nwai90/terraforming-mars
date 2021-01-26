@@ -17,7 +17,7 @@ describe('BotanicalHarvest', function() {
 
   it('Should play', function() {
     const initialTR = player.getTerraformRating();
-    card.play(player, game);
+    card.play(player);
 
     expect(player.getProduction(Resources.PLANTS)).to.eq(1);
     expect(player.plants).to.eq(5);

@@ -3,7 +3,6 @@ import {Player} from '../../../Player';
 import {PreludeCard} from '../../prelude/PreludeCard';
 import {IProjectCard} from '../../IProjectCard';
 import {CardName} from '../../../CardName';
-import {Game} from '../../../Game';
 import {Resources} from '../../../Resources';
 import {SendDelegateToArea} from '../../../deferredActions/SendDelegateToArea';
 import {CardRenderer} from '../../render/CardRenderer';
@@ -27,11 +26,11 @@ export class ExperiencedMartians extends PreludeCard implements IProjectCard {
       });
     }
 
-    public play(player: Player, game: Game) {
+    public play(player: Player) {
       player.addProduction(Resources.HEAT);
       player.addProduction(Resources.PLANTS);
 
-      game.defer(new SendDelegateToArea(player, 'Select where to send 2 delegates', 2, undefined, undefined, false));
+      player.game.defer(new SendDelegateToArea(player, 'Select where to send 2 delegates', 2, undefined, undefined, false));
 
       return undefined;
     }

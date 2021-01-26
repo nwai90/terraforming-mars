@@ -7,7 +7,7 @@ import {NitrateReducers} from '../../../src/cards/community/preludes/NitrateRedu
 import {Resources} from '../../../src/Resources';
 
 describe('NitrateReducers', function() {
-  let card : NitrateReducers; let player : Player; let game : Game;
+  let card : NitrateReducers; let player : Player;
 
   beforeEach(function() {
     card = new NitrateReducers();
@@ -15,11 +15,11 @@ describe('NitrateReducers', function() {
     const redPlayer = TestPlayers.RED.newPlayer();
 
     const gameOptions = setCustomGameOptions() as GameOptions;
-    game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
+    Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
   });
 
   it('Should play', function() {
-    card.play(player, game);
+    card.play(player);
 
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(3);
     expect(player.cardsInHand).has.lengthOf(2);

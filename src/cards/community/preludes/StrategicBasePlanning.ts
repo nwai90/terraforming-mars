@@ -2,7 +2,6 @@ import {Player} from '../../../Player';
 import {PreludeCard} from '../../prelude/PreludeCard';
 import {IProjectCard} from '../../IProjectCard';
 import {CardName} from '../../../CardName';
-import {Game} from '../../../Game';
 import {BuildColony} from '../../../deferredActions/BuildColony';
 import {Tags} from '../../Tags';
 import {PlaceCityTile} from '../../../deferredActions/PlaceCityTile';
@@ -31,7 +30,9 @@ export class StrategicBasePlanning extends PreludeCard implements IProjectCard {
       return player.canAfford(6);
     }
 
-    public play(player: Player, game: Game) {
+    public play(player: Player) {
+      const game = player.game;
+
       game.defer(new BuildColony(player, false, 'Select where to build colony'));
       game.defer(new SelectHowToPayDeferred(player, 6, {title: 'Select how to pay for prelude', afterPay: () => {
         game.defer(new PlaceCityTile(player));

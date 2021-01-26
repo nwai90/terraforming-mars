@@ -23,7 +23,7 @@ describe('StrategicBasePlanning', function() {
   it('Should play', function() {
     player.megaCredits = 6;
 
-    card.play(player, game);
+    card.play(player);
     expect(game.deferredActions).has.lengthOf(2);
 
     // selectColony can be undefined if game setup results in no open colonies available to build on

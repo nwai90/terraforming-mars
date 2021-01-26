@@ -20,7 +20,7 @@ describe('ExperiencedMartians', function() {
   });
 
   it('Should play', function() {
-    card.play(player, game);
+    card.play(player);
     expect(game.deferredActions).has.lengthOf(1);
 
     const orOptions = game.deferredActions.pop()!.execute() as OrOptions;

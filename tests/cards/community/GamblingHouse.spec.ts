@@ -1,5 +1,6 @@
 import {expect} from 'chai';
 import {GamblingHouse} from '../../../src/cards/community/preludes/GamblingHouse';
+import {AlliedBanks} from '../../../src/cards/prelude/AlliedBanks';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
@@ -16,7 +17,8 @@ describe('GamblingHouse', function() {
   });
 
   it('Should play', function() {
-    card.play(player, game);
+    game.dealer.preludeDeck.push(new AlliedBanks()); // ensure first prelude is playable
+    card.play(player);
     expect(game.deferredActions).has.lengthOf(1);
     expect(player.megaCredits).to.eq(5);
   });
