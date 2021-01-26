@@ -34,7 +34,7 @@ export const ConfirmDialog = Vue.component('confirm-dialog', {
   mounted: function() {
     dialogPolyfill.default.registerDialog(this.$refs['dialog']);
   },
-  template: `<dialog ref="dialog">
+  template: `<dialog ref="dialog" class="dialog">
       <form method="dialog">
         <p v-i18n class="newlines">{{ message }}</p>
         <menu class="dialog-menu centered-content">
