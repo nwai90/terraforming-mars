@@ -65,6 +65,7 @@ export class TestingUtils {
       customColoniesList: [],
       requiresVenusTrackCompletion: false,
       politicalAgendasExtension: AgendaStyle.STANDARD,
+      societyExpansion: false,
       moonExpansion: false,
       requiresMoonTrackCompletion: false,
     };

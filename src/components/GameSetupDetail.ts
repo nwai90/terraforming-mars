@@ -17,6 +17,9 @@ export const GameSetupDetail = Vue.component('game-setup-detail', {
     isPoliticalAgendasOn: function(): boolean {
       return (this.gameOptions.politicalAgendasExtension !== AgendaStyle.STANDARD);
     },
+    isSocietyExpansionOn: function(): boolean {
+        return (this.gameOptions.societyExpansion === true);
+    },
     getBoardColorClass: function(boardName: string): string {
       if (boardName === BoardName.ORIGINAL) {
         return 'game-config board-tharsis map';
@@ -27,6 +30,9 @@ export const GameSetupDetail = Vue.component('game-setup-detail', {
       } else {
         return 'game-config board-other map';
       }
+    },
+    includeUnOfficialExpansions: function(): boolean {
+      return (this.gameOptions.aresExtension || this.gameOptions.communityCardsOption || this.isPoliticalAgendasOn() || this.isSocietyExpansionOn());
     },
     isRandomMANone: function(): boolean {
       return this.gameOptions.randomMA === RandomMAOptionType.NONE;
@@ -51,6 +57,7 @@ export const GameSetupDetail = Vue.component('game-setup-detail', {
               <div v-if="gameOptions.moonExpansion" class="create-game-expansion-icon expansion-icon-themoon"></div>
               <div v-if="gameOptions.communityCardsOption" class="create-game-expansion-icon expansion-icon-community"></div>
               <div v-if="isPoliticalAgendasOn()" class="create-game-expansion-icon expansion-icon-agendas"></div>
+              <div v-if="isSocietyExpansionOn()" class="create-game-expansion-icon expansion-icon-society"></div>
             </li>
 
             <li><div class="setup-item" v-i18n>Board:</div>

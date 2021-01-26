@@ -96,6 +96,7 @@ export interface GameOptions {
   aresExtension: boolean;
   aresHazards: boolean;
   politicalAgendasExtension: AgendaStyle;
+  societyExpansion: boolean;
   solarPhaseOption: boolean;
   moonExpansion: boolean;
 
@@ -130,6 +131,7 @@ const DEFAULT_GAME_OPTIONS: GameOptions = {
   initialDraftVariant: false,
   moonExpansion: false,
   politicalAgendasExtension: AgendaStyle.STANDARD,
+  societyExpansion: false,
   preludeExtension: false,
   promoCardsOption: false,
   randomMA: RandomMAOptionType.NONE,

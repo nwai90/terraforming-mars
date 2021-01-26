@@ -51,6 +51,7 @@ export interface CreateGameModel {
     communityCardsOption: boolean;
     aresExtension: boolean;
     politicalAgendasExtension: AgendaStyle;
+    societyExpansion: boolean;
     moonExpansion: boolean;
     undoOption: boolean;
     showTimers: boolean;
@@ -125,6 +126,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       communityCardsOption: false,
       aresExtension: false,
       politicalAgendasExtension: AgendaStyle.STANDARD,
+      societyExpansion: false,
       moonExpansion: false,
       undoOption: false,
       showTimers: true,
@@ -296,6 +298,9 @@ export const CreateGameForm = Vue.component('create-game-form', {
         return AgendaStyle.STANDARD;
       }
     },
+    societyExpansionToggle: function() {
+      if (this.turmoil === false) this.societyExpansion = false;
+    },
     isBeginnerToggleEnabled: function(): Boolean {
       return !(this.initialDraft || this.prelude || this.venusNext || this.colonies || this.turmoil);
     },
@@ -419,6 +424,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       const communityCardsOption = component.communityCardsOption;
       const aresExtension = component.aresExtension;
       const politicalAgendasExtension = this.politicalAgendasExtension;
+      const societyExpansion = this.societyExpansion;
       const moonExpansion = component.moonExpansion;
       const undoOption = component.undoOption;
       const showTimers = component.showTimers;
@@ -488,6 +494,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
         communityCardsOption,
         aresExtension: aresExtension,
         politicalAgendasExtension: politicalAgendasExtension,
+        societyExpansion: societyExpansion,
         moonExpansion: moonExpansion,
         undoOption,
         showTimers,
@@ -656,6 +663,12 @@ export const CreateGameForm = Vue.component('create-game-form', {
                                     </label>
                                     </div>
                                 </div>
+
+                                <input type="checkbox" name="societyExpansion" id="society-checkbox" v-on:change="societyExpansionToggle()">
+                                <label for="society-checkbox" class="expansion-button">
+                                    <div class="create-game-expansion-icon expansion-icon-society"></div>
+                                    <span v-i18n>Society</span>&nbsp;<a href="https://www.notion.so/Variants-32b53050f10a4cfbaea117c34d4f3a03#e13bc69e07e648fb86a6f23b7d3dc85b" class="tooltip" target="_blank">&#9432;</a>
+                                </label>
                             </template>
 
                             <template v-if="solarPhaseOption">
