@@ -143,6 +143,30 @@ const AGENDA_HTML: Map<BonusId | PolicyId, string> = new Map();
     <span class="money resource">5</span>
     <span class="red-arrow-3x"></span>3<span class="plant resource"></span> / 2<span class="microbe resource"></span>
     </div>` );
+  AGENDA_HTML.set('spb01',
+    `<div class="resource money party-resource">2</div> /
+    <div class="tile colony"></div> + <div class="tile city-tile-small"></div>`);
+  AGENDA_HTML.set('spb02',
+    `<div class="resource money party-resource">1</div> /
+    <div class="resource wild"></div>`);
+  AGENDA_HTML.set('spp01',
+    `<div class="policy-top-margin">
+    <div class="tile venus-tile"></div> : <div class="resource money">2</div>
+    </div>`);
+  AGENDA_HTML.set('spp02',
+    `<div class="policy-top-margin">
+    <div class="resource money">10</div>
+    <span class="red-arrow"></span>
+    <div class="card-resource-trade-fleet"></div>
+    </div>`);
+  AGENDA_HTML.set('spp03',
+    `<div class="policy-top-margin"><div class="tile empty-tile-small"></div> : -
+    <span class="resource card card-with-border"></span></div>`);
+  // TODO: Update CSS for spp04
+  AGENDA_HTML.set('spp04',
+    `<span class="money resource">4</span>
+    <span class="red-arrow-3x"></span>
+    <div class="resource card card-with-border policy-card-with-tag"><div class="card-icon tag-venus"></div></div>`);
 }
 
 export const Turmoil = Vue.component('turmoil', {

@@ -23,4 +23,8 @@ export enum TurmoilPolicy {
   KELVINISTS_POLICY_2 = 'kp02',
   KELVINISTS_POLICY_3 = 'kp03',
   KELVINISTS_POLICY_4 = 'kp04',
+  SPOME_DEFAULT_POLICY = 'spp01',
+  SPOME_POLICY_2 = 'spp02',
+  SPOME_POLICY_3 = 'spp03',
+  SPOME_POLICY_4 = 'spp04',
 }

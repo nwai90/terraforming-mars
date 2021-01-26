@@ -15,6 +15,7 @@ import {SerializedTurmoil} from './SerializedTurmoil';
 import {PLAYER_DELEGATES_COUNT} from '../constants';
 import {AgendaStyle, PoliticalAgendasData, PoliticalAgendas} from './PoliticalAgendas';
 import {CardName} from '../CardName';
+import {Spome} from './parties/Spome';
 
 export type NeutralPlayer = 'NEUTRAL';
 
@@ -23,13 +24,17 @@ export interface IPartyFactory {
     Factory: new () => IParty
 }
 
-export const ALL_PARTIES: Array<IPartyFactory> = [
+export const ALL_DEFAULT_PARTIES: Array<IPartyFactory> = [
   {partyName: PartyName.MARS, Factory: MarsFirst},
   {partyName: PartyName.SCIENTISTS, Factory: Scientists},
   {partyName: PartyName.UNITY, Factory: Unity},
   {partyName: PartyName.GREENS, Factory: Greens},
   {partyName: PartyName.REDS, Factory: Reds},
   {partyName: PartyName.KELVINISTS, Factory: Kelvinists},
+];
+
+export const ALL_SOCIETY_PARTIES: Array<IPartyFactory> = [
+  {partyName: PartyName.SPOME, Factory: Spome},
 ];
 
 const UNINITIALIZED_POLITICAL_AGENDAS_DATA: PoliticalAgendasData = {
@@ -47,7 +52,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
     public dominantParty: IParty;
     public lobby: Set<PlayerId> = new Set<PlayerId>();
     public delegateReserve: Array<PlayerId | NeutralPlayer> = [];
-    public parties: Array<IParty> = ALL_PARTIES.map((cf) => new cf.Factory());
+    public parties: Array<IParty> = ALL_DEFAULT_PARTIES.map((cf) => new cf.Factory());
     public playersInfluenceBonus: Map<string, number> = new Map<string, number>();
     public readonly globalEventDealer: GlobalEventDealer;
     public distantGlobalEvent: IGlobalEvent | undefined;
@@ -67,16 +72,22 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
     }
 
     public static newInstance(game: Game, agendaStyle: AgendaStyle = AgendaStyle.STANDARD): Turmoil {
-      const dealer = GlobalEventDealer.newInstance(game);
+      const societyExpansion: boolean = game.gameOptions.societyExpansion;
+      const dealer = GlobalEventDealer.newInstance(game); // TODO: Different GE deck if Society expansion used
 
-      // The game begins with Greens in power and a Neutral chairman
-      const turmoil = new Turmoil(PartyName.GREENS, 'NEUTRAL', PartyName.GREENS, dealer);
+      // The game begins with Greens / Spome in power and a Neutral chairman
+      const rulingParty = societyExpansion ? PartyName.SPOME : PartyName.GREENS;
+      const turmoil = new Turmoil(rulingParty, 'NEUTRAL', rulingParty, dealer);
 
       game.log('A neutral delegate is the new chairman.');
-      game.log('Greens are in power in the first generation.');
+      game.log(rulingParty + ' are in power in the first generation.');
 
       // Init parties
-      turmoil.parties = ALL_PARTIES.map((cf) => new cf.Factory());
+      if (game.gameOptions.societyExpansion) {
+        turmoil.parties = ALL_SOCIETY_PARTIES.map((cf) => new cf.Factory());
+      } else {
+        turmoil.parties = ALL_DEFAULT_PARTIES.map((cf) => new cf.Factory());
+      }
 
       game.getPlayers().forEach((player) => {
         // Begin with one delegate in the lobby

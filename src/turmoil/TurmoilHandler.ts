@@ -12,6 +12,7 @@ import {PartyHooks} from './parties/PartyHooks';
 import {PartyName} from './parties/PartyName';
 import {REDS_POLICY_2, REDS_POLICY_3} from './parties/Reds';
 import {SCIENTISTS_POLICY_1} from './parties/Scientists';
+import {SPOME_POLICY_3, SPOME_POLICY_4} from './parties/Spome';
 import {UNITY_POLICY_2, UNITY_POLICY_3} from './parties/Unity';
 import {TurmoilPolicy} from './TurmoilPolicy';
 
@@ -138,6 +139,21 @@ export class TurmoilHandler {
         );
       }
     }
+
+    // Turmoil Spome action
+    if (PartyHooks.shouldApplyPolicy(game, PartyName.SPOME, TurmoilPolicy.SPOME_POLICY_4)) {
+      const spomePolicy = SPOME_POLICY_4;
+
+      if (spomePolicy.canAct(player)) {
+        options.push(
+          new SelectOption(
+            spomePolicy.description,
+            'Pay',
+            () => spomePolicy.action(player),
+          ),
+        );
+      }
+    }
   }
 
   public static applyOnCardPlayedEffect(player: Player, selectedCard: IProjectCard): void {
@@ -159,6 +175,12 @@ export class TurmoilHandler {
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS, TurmoilPolicy.REDS_POLICY_2)) {
       const redsPolicy = REDS_POLICY_2;
       redsPolicy.onTilePlaced(player);
+    }
+
+    // PoliticalAgendas Spome P3 hook
+    if (PartyHooks.shouldApplyPolicy(game, PartyName.SPOME, TurmoilPolicy.SPOME_POLICY_3)) {
+      const spomePolicy = SPOME_POLICY_3;
+      spomePolicy.onTilePlaced(player);
     }
   }
 
@@ -194,6 +216,11 @@ export class TurmoilHandler {
     // PoliticalAgendas Scientists P3 hook
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.SCIENTISTS, TurmoilPolicy.SCIENTISTS_POLICY_3)) {
       player.drawCard(steps);
+    }
+
+    // PoliticalAgendas Spome P1 hook
+    if (PartyHooks.shouldApplyPolicy(game, PartyName.SPOME, TurmoilPolicy.SPOME_POLICY_2)) {
+      player.setResource(Resources.MEGACREDITS, steps * 2);
     }
   }
 }

@@ -4,5 +4,12 @@ export enum PartyName {
     UNITY = 'Unity',
     KELVINISTS = 'Kelvinists',
     REDS = 'Reds',
-    GREENS = 'Greens'
+    GREENS = 'Greens',
+    // Society expansion
+    EMPOWER = 'Empower',
+    SPOME = 'Spome',
+    BUREAUCRATS = 'Bureaucrats',
+    POPULISTS = 'Populists',
+    TRANSHUMANS = 'Transhumans',
+    CENTRISTS = 'Centrists',
 }

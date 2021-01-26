@@ -18,7 +18,7 @@ export const GameSetupDetail = Vue.component('game-setup-detail', {
       return (this.gameOptions.politicalAgendasExtension !== AgendaStyle.STANDARD);
     },
     isSocietyExpansionOn: function(): boolean {
-        return (this.gameOptions.societyExpansion === true);
+      return (this.gameOptions.societyExpansion === true);
     },
     getBoardColorClass: function(boardName: string): string {
       if (boardName === BoardName.ORIGINAL) {
