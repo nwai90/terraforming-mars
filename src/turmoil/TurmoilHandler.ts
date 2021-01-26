@@ -5,6 +5,7 @@ import {Player} from '../Player';
 import {PlayerInput} from '../PlayerInput';
 import {Resources} from '../Resources';
 import {SpaceType} from '../SpaceType';
+import {EMPOWER_POLICY_1, EMPOWER_POLICY_2} from './parties/Empower';
 import {GREENS_POLICY_2, GREENS_POLICY_3, GREENS_POLICY_4} from './parties/Greens';
 import {KELVINISTS_POLICY_1, KELVINISTS_POLICY_3, KELVINISTS_POLICY_4} from './parties/Kelvinists';
 import {MARS_FIRST_POLICY_2, MARS_FIRST_POLICY_4} from './parties/MarsFirst';
@@ -12,7 +13,7 @@ import {PartyHooks} from './parties/PartyHooks';
 import {PartyName} from './parties/PartyName';
 import {REDS_POLICY_2, REDS_POLICY_3} from './parties/Reds';
 import {SCIENTISTS_POLICY_1} from './parties/Scientists';
-import {SPOME_POLICY_3, SPOME_POLICY_4} from './parties/Spome';
+import {SPOME_POLICY_2, SPOME_POLICY_3, SPOME_POLICY_4} from './parties/Spome';
 import {UNITY_POLICY_2, UNITY_POLICY_3} from './parties/Unity';
 import {TurmoilPolicy} from './TurmoilPolicy';
 
@@ -141,6 +142,21 @@ export class TurmoilHandler {
     }
 
     // Turmoil Spome action
+    if (PartyHooks.shouldApplyPolicy(game, PartyName.SPOME, TurmoilPolicy.SPOME_POLICY_2)) {
+        const spomePolicy = SPOME_POLICY_2;
+  
+        if (spomePolicy.canAct(player)) {
+          options.push(
+            new SelectOption(
+              spomePolicy.description,
+              'Pay',
+              () => spomePolicy.action(player),
+            ),
+          );
+        }
+      }
+
+    // Turmoil Spome action
     if (PartyHooks.shouldApplyPolicy(game, PartyName.SPOME, TurmoilPolicy.SPOME_POLICY_4)) {
       const spomePolicy = SPOME_POLICY_4;
 
@@ -150,6 +166,21 @@ export class TurmoilHandler {
             spomePolicy.description,
             'Pay',
             () => spomePolicy.action(player),
+          ),
+        );
+      }
+    }
+
+    // Turmoil Empower action
+    if (PartyHooks.shouldApplyPolicy(game, PartyName.EMPOWER, TurmoilPolicy.EMPOWER_DEFAULT_POLICY)) {
+      const empowerPolicy = EMPOWER_POLICY_1;
+
+      if (empowerPolicy.canAct(player)) {
+        options.push(
+          new SelectOption(
+            empowerPolicy.description,
+            'Pay',
+            () => empowerPolicy.action(player),
           ),
         );
       }
@@ -198,6 +229,12 @@ export class TurmoilHandler {
       const kelvinistsPolicy = KELVINISTS_POLICY_4;
       kelvinistsPolicy.onTilePlaced(player);
     }
+
+    // PoliticalAgendas Empower P2 hook
+    if (PartyHooks.shouldApplyPolicy(game, PartyName.EMPOWER, TurmoilPolicy.EMPOWER_POLICY_2)) {
+      const empowerPolicy = EMPOWER_POLICY_2;
+      empowerPolicy.onTilePlaced(player);
+    }
   }
 
   public static onGlobalParameterIncrease(player: Player, parameter: GlobalParameter, steps: number = 1): void {
@@ -219,8 +256,10 @@ export class TurmoilHandler {
     }
 
     // PoliticalAgendas Spome P1 hook
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.SPOME, TurmoilPolicy.SPOME_POLICY_2)) {
-      player.setResource(Resources.MEGACREDITS, steps * 2);
+    if (parameter === GlobalParameter.VENUS) {
+      if (PartyHooks.shouldApplyPolicy(game, PartyName.SPOME, TurmoilPolicy.SPOME_DEFAULT_POLICY)) {
+        player.setResource(Resources.MEGACREDITS, steps * 2);
+      }
     }
   }
 }

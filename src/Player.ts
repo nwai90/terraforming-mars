@@ -361,7 +361,14 @@ export class Player implements ISerializable<SerializedPlayer> {
     if (resource === Resources.STEEL) this.steelProduction = Math.max(0, this.steelProduction + amount);
     if (resource === Resources.TITANIUM) this.titaniumProduction = Math.max(0, this.titaniumProduction + amount);
     if (resource === Resources.PLANTS) this.plantProduction = Math.max(0, this.plantProduction + amount);
-    if (resource === Resources.ENERGY) this.energyProduction = Math.max(0, this.energyProduction + amount);
+
+    if (resource === Resources.ENERGY) {
+      this.energyProduction = Math.max(0, this.energyProduction + amount);
+
+      if (PartyHooks.shouldApplyPolicy(this.game, PartyName.EMPOWER, TurmoilPolicy.EMPOWER_POLICY_3)) {
+        this.setResource(Resources.ENERGY, Math.abs(amount));
+      }      
+    }
 
     if (resource === Resources.HEAT) {
       this.heatProduction = Math.max(0, this.heatProduction + amount);
@@ -1178,6 +1185,11 @@ export class Player implements ISerializable<SerializedPlayer> {
     // PoliticalAgendas Unity P4 hook
     if (card.tags.includes(Tags.SPACE) && PartyHooks.shouldApplyPolicy(this.game, PartyName.UNITY, TurmoilPolicy.UNITY_POLICY_4)) {
       cost -= 2;
+    }
+
+    // PoliticalAgendas Empower P4 hook
+    if (card.tags.includes(Tags.ENERGY) && PartyHooks.shouldApplyPolicy(this.game, PartyName.EMPOWER, TurmoilPolicy.EMPOWER_POLICY_4)) {
+      cost -= 3;
     }
 
     return Math.max(cost, 0);

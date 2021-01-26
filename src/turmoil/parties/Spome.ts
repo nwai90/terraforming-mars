@@ -67,11 +67,12 @@ class SpomePolicy02 implements Policy {
   isDefault = false;
 
   canAct(player: Player) {
-    return player.megaCredits >= 10;
+    return player.megaCredits >= 10 && player.turmoilPolicyActionUsed === false;
   }
 
   action(player: Player) {
     player.increaseFleetSize();
+    player.turmoilPolicyActionUsed = true;
     return undefined;
   }
 }

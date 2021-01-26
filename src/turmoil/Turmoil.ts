@@ -16,6 +16,7 @@ import {PLAYER_DELEGATES_COUNT} from '../constants';
 import {AgendaStyle, PoliticalAgendasData, PoliticalAgendas} from './PoliticalAgendas';
 import {CardName} from '../CardName';
 import {Spome} from './parties/Spome';
+import {Empower} from './parties/Empower';
 
 export type NeutralPlayer = 'NEUTRAL';
 
@@ -35,6 +36,7 @@ export const ALL_DEFAULT_PARTIES: Array<IPartyFactory> = [
 
 export const ALL_SOCIETY_PARTIES: Array<IPartyFactory> = [
   {partyName: PartyName.SPOME, Factory: Spome},
+  {partyName: PartyName.EMPOWER, Factory: Empower},
 ];
 
 const UNINITIALIZED_POLITICAL_AGENDAS_DATA: PoliticalAgendasData = {

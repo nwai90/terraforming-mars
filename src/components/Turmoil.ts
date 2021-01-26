@@ -167,6 +167,28 @@ const AGENDA_HTML: Map<BonusId | PolicyId, string> = new Map();
     `<span class="money resource">4</span>
     <span class="red-arrow-3x"></span>
     <div class="resource card card-with-border policy-card-with-tag"><div class="card-icon tag-venus"></div></div>`);
+  AGENDA_HTML.set('eb01',
+    `<div class="resource money party-resource">2</div> /
+    <div class="resource-tag tag-power party-resource-tag"></div>`);
+  AGENDA_HTML.set('eb02',
+    `<div class="resource money party-resource">1</div> /
+    <div class="production-box party-production-box">
+        <div class="energy production"></div>
+    </div>`);
+  AGENDA_HTML.set('ep01',
+    `<span class="money resource">X</span>
+    <span class="red-arrow"></span>
+    <span class="energy resource">X</span>`);
+  AGENDA_HTML.set('ep02',
+    `<div class="policy-top-margin"><div class="tile empty-tile-small"></div> :
+    <span class="energy resource"></span></div>`);
+  AGENDA_HTML.set('ep03',
+    `<div class="policy-top-margin">
+        +/- <div class="production-box>
+            <div class="energy production"></div>
+        </div> : <span class="energy resource"></span>
+    </div>`);
+  AGENDA_HTML.set('ep04', `<div class="policy-top-margin"><div class="resource-tag tag-power"></div> : <div class="money resource">-3</div></div>`);
 }
 
 export const Turmoil = Vue.component('turmoil', {
@@ -183,6 +205,7 @@ export const Turmoil = Vue.component('turmoil', {
       }
       return party.toLowerCase().split(' ').join('_');
     },
+    // TODO: Update getBonus and getPolicy
     getBonus: function(party: PartyName, politicalAgendas: PoliticalAgendasModel | undefined): string {
       let bonusId: BonusId | undefined = undefined;
       if (politicalAgendas?.staticAgendas !== undefined) {
