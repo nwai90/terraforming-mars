@@ -4,7 +4,7 @@ import {OverviewSettings} from './OverviewSettings';
 import {OtherPlayer} from '../OtherPlayer';
 import {PlayerModel} from '../../models/PlayerModel';
 import {ActionLabel} from './ActionLabel';
-import { Phase } from '../../Phase';
+import {Phase} from '../../Phase';
 
 export const getCurrentPlayerIndex = (
   player: PlayerModel,
