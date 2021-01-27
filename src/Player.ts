@@ -934,6 +934,12 @@ export class Player implements ISerializable<SerializedPlayer> {
 
   private getPlayableActionCards(): Array<ICard> {
     const result: Array<ICard> = [];
+
+    // PoliticalAgendas Populists P3 hook
+    if (PartyHooks.shouldApplyPolicy(this.game, PartyName.POPULISTS, TurmoilPolicy.POPULISTS_POLICY_3)) {
+      return result;
+    }
+
     if (
       this.corporationCard !== undefined &&
           !this.actionsThisGeneration.has(this.corporationCard.name) &&
@@ -1161,6 +1167,11 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public getCardCost(card: IProjectCard): number {
+    // PoliticalAgendas Populists P1 hook
+    if (PartyHooks.shouldApplyPolicy(this.game, PartyName.POPULISTS, TurmoilPolicy.POPULISTS_DEFAULT_POLICY)) {
+      return card.cost;
+    }
+
     let cost: number = card.cost;
     cost -= this.cardDiscount;
 

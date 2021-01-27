@@ -11,6 +11,7 @@ import {KELVINISTS_POLICY_1, KELVINISTS_POLICY_3, KELVINISTS_POLICY_4} from './p
 import {MARS_FIRST_POLICY_2, MARS_FIRST_POLICY_4} from './parties/MarsFirst';
 import {PartyHooks} from './parties/PartyHooks';
 import {PartyName} from './parties/PartyName';
+import {POPULISTS_POLICY_2, POPULISTS_POLICY_4} from './parties/Populists';
 import {REDS_POLICY_2, REDS_POLICY_3} from './parties/Reds';
 import {SCIENTISTS_POLICY_1} from './parties/Scientists';
 import {SPOME_POLICY_2, SPOME_POLICY_3, SPOME_POLICY_4} from './parties/Spome';
@@ -199,6 +200,12 @@ export class TurmoilHandler {
       const policy = MARS_FIRST_POLICY_2;
       policy.onCardPlayed(player, selectedCard);
     }
+
+    // PoliticalAgendas Populists P2 hook
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.MARS, TurmoilPolicy.POPULISTS_POLICY_2)) {
+      const policy = POPULISTS_POLICY_2;
+      policy.onCardPlayed(player, selectedCard);
+    }
   }
 
   public static resolveTilePlacementCosts(player: Player): void {
@@ -234,6 +241,12 @@ export class TurmoilHandler {
     if (PartyHooks.shouldApplyPolicy(game, PartyName.EMPOWER, TurmoilPolicy.EMPOWER_POLICY_2)) {
       const empowerPolicy = EMPOWER_POLICY_2;
       empowerPolicy.onTilePlaced(player);
+    }
+
+    // PoliticalAgendas Populists P4 hook
+    if (PartyHooks.shouldApplyPolicy(game, PartyName.POPULISTS, TurmoilPolicy.POPULISTS_POLICY_4)) {
+      const populistsPolicy = POPULISTS_POLICY_4;
+      populistsPolicy.onTilePlaced(player);
     }
   }
 
