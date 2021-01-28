@@ -47,7 +47,7 @@ export const mainAppSettings = {
     componentsVisibility: {
       'millestones_list': true,
       'awards_list': true,
-      'tags_concise': false,
+      'tags_concise': true,
       'pinned_player_0': false,
       'pinned_player_1': false,
       'pinned_player_2': false,

@@ -87,7 +87,6 @@ export const PlayersOverview = Vue.component('players-overview', {
                 </div>
             </div>
             <player-info v-for="(p, index) in getPlayersInOrder()" :activePlayer="player" :player="p"  :key="p.id" :firstForGen="getIsFirstForGen(p)" :actionLabel="getActionLabel(p)" :playerIndex="index"/>
-            <div v-if="player.players.length > 1" class="player-divider" />
             <player-info :player="getPlayerOnFocus()" :activePlayer="player" :key="player.players.length - 1" :firstForGen="getIsFirstForGen(player)" :actionLabel="getActionLabel(player)" :playerIndex="-1"/>
         </div>
     `,
