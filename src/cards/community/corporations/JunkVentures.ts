@@ -2,7 +2,6 @@ import {CorporationCard} from '../../corporation/CorporationCard';
 import {Player} from '../../../Player';
 import {CardName} from '../../../CardName';
 import {CardType} from '../../CardType';
-import {Game} from '../../../Game';
 import {CardRenderer} from '../../render/CardRenderer';
 import {CardRenderItemSize} from '../../render/CardRenderItemSize';
 import {Card} from '../../Card';
@@ -53,7 +52,8 @@ export class JunkVentures extends Card implements CorporationCard {
       return player.game.dealer.getDiscardedSize() >= 3;
     }
 
-    public action(player: Player, game: Game) {
+    public action(player: Player) {
+      const game = player.game;
       const dealer = game.dealer;
       dealer.discarded = dealer.shuffleCards(dealer.discarded);
 

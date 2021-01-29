@@ -54,7 +54,8 @@ export class Eris extends Card implements CorporationCard {
       return undefined;
     }
 
-    public canAct(player: Player, game: Game): boolean {
+    public canAct(player: Player): boolean {
+      const game = player.game;
       const availableSpaces = this.getAvailableSpaces(player, game);
       const hazardSpaces = this.getAllUnprotectedHazardSpaces(game);
 
@@ -62,7 +63,8 @@ export class Eris extends Card implements CorporationCard {
       return true;
     }
 
-    public action(player: Player, game: Game) {
+    public action(player: Player) {
+      const game = player.game;
       const orOptions = new OrOptions();
       const availableSpaces = this.getAvailableSpaces(player, game);
       const hazardSpaces = this.getAllUnprotectedHazardSpaces(game);

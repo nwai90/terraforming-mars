@@ -1,7 +1,6 @@
 import {CorporationCard} from '../../corporation/CorporationCard';
 import {Player} from '../../../Player';
 import {Tags} from '../../Tags';
-import {Game} from '../../../Game';
 import {CardName} from '../../../CardName';
 import {CardType} from '../../CardType';
 import {ResourceType} from '../../../ResourceType';
@@ -57,7 +56,8 @@ export class ColonialOne extends Card implements CorporationCard {
       return true;
     }
 
-    public action(player: Player, game: Game) {
+    public action(player: Player) {
+      const game = player.game;
       if (game.colonyDealer === undefined) return undefined;
 
       const opts: Array<SelectOption> = [];

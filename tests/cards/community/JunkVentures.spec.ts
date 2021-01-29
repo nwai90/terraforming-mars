@@ -34,7 +34,7 @@ describe('JunkVentures', function() {
     game.dealer.discard(game.dealer.dealCard(game));
     expect(card.canAct(player)).is.true;
 
-    card.action(player, game);
+    card.action(player);
     expect(game.deferredActions).has.lengthOf(1);
 
     const selectCardToKeep = game.deferredActions.pop()!.execute() as SelectCard<IProjectCard>;

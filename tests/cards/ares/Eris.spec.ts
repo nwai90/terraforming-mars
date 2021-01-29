@@ -28,7 +28,7 @@ describe('Eris', function() {
   });
 
   it('Can act', function() {
-    const action = card.action(player, game) as OrOptions;
+    const action = card.action(player) as OrOptions;
     const initialHazardsCount = _AresHazardPlacement.getHazardsCount(game);
     const initialTR = player.getTerraformRating();
 

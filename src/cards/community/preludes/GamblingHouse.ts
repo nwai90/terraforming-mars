@@ -24,7 +24,7 @@ export class GamblingHouse extends PreludeCard {
       player.megaCredits += 5;
       const preludeCard = game.dealer.dealPreludeCard();
 
-      if (preludeCard.canPlay === undefined || preludeCard.canPlay(player, game)) {
+      if (preludeCard.canPlay === undefined || preludeCard.canPlay(player)) {
         game.defer(new DeferredAction(player, () => player.playCard(preludeCard)));
       } else {
         game.dealer.discard(preludeCard);

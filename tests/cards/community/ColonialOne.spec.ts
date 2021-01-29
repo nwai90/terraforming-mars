@@ -27,7 +27,7 @@ describe('ColonialOne', function() {
   });
 
   it('Can spend fighter resource to trade for free', function() {
-    const action = card.action(player, game);
+    const action = card.action(player);
     expect(action instanceof OrOptions).to.eq(true);
     expect(action!.options.length).to.eq(2);
 
@@ -40,7 +40,7 @@ describe('ColonialOne', function() {
   });
 
   it('Can move a colony tile track', function() {
-    const action = card.action(player, game);
+    const action = card.action(player);
     action!.options[1].cb();
     expect(game.deferredActions.length).to.eq(1);
 
