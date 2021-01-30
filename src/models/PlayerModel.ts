@@ -50,6 +50,7 @@ export interface PlayerModel {
     plants: number;
     plantProduction: number;
     plantsAreProtected: boolean;
+    plantsNeededForGreenery: number;
     players: Array<PlayerModel>;
     spaces: Array<SpaceModel>;
     steel: number;
@@ -71,11 +72,17 @@ export interface PlayerModel {
     dealtCorporationCards: Array<CardModel>;
     dealtPreludeCards: Array<CardModel>;
     dealtProjectCards: Array<CardModel>;
-    initialDraft: boolean;
     needsToDraft: boolean | undefined;
     passedPlayers: Array<Color>;
+    draftedPlayers: Array<Color>;
     actionsTakenThisRound: number;
     deckSize: number;
     waitingFor: PlayerInputModel | undefined;
     timer: SerializedTimer;
+    totalSpend: number;
+    silverCubeVariant: boolean;
+    temperatureSilverCubeBonusMC: number;
+    oceansSilverCubeBonusMC: number;
+    oxygenSilverCubeBonusMC: number;
+    venusSilverCubeBonusMC: number;
 }

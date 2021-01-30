@@ -36,9 +36,8 @@
     margin-bottom: 10px;
 }
 
-.create-game--block {	 
-    padding: 10px;	    
-    border-radius: 10px;
+.create-game--block {  
+    border-radius: 15px;
 }
 
 .create-game-form {
@@ -56,11 +55,14 @@
     padding: 0 0 25px 25px;
 }
 
-.create-game-corporations-count {
-    width: 80px;
-    margin-right: 10px;
-    height: 40px;
-    padding-left: 30px;
+.startingCorps-checkbox {
+    background: none !important;
+    margin: 0 -10px !important;
+}
+
+.corporation-count {
+    display: inline !important;
+    margin: 0 10px 0 -5px !important;
 }
 
 .player-handicap {
@@ -113,7 +115,7 @@
 .create-game-page-column {
   display: flex;
   flex-flow: column wrap;
-  padding: 20px 10px;
+  padding: 20px;
 }
 
 .create-game-page-column-row {
@@ -193,6 +195,15 @@
 .create-game-page-column .create-game-elysium {
     color: @board-elysium;
 }
+.create-game-page-column .create-game-amazonis {
+    color: @board-amazonis;
+}
+.create-game-page-column .create-game-arabia_terra {
+    color: @board-arabia_terra;
+}
+.create-game-page-column .create-game-vastitas_borealis{
+    color: @board-vastitas_borealis;
+}
 .create-game-page-column .create-game-random {
     color: rgb(106,106,106);
 }
@@ -229,9 +240,14 @@
 .create-game-playerblock-purple {
     background-color: fade(@player_purple, 60%);
 }
+.create-game-playerblock-orange {
+    background-color: fade(@player_orange, 60%);
+}
+.create-game-playerblock-pink {
+    background-color: fade(@player_pink, 60%);
+}
 
 .create-game-player-name {
-    width: 240px;
     height: 40px;
     border: none;
     color: #ccc;
@@ -337,4 +353,22 @@
 
 .create-game-beginner-option-label {
     margin-top: 15px;
+}
+
+.create-game-btn {
+    height: 3rem !important;
+    width: 10rem;
+    border-radius: 5px;
+    font-size: 24px !important;
+}
+
+.import-export-settings-btn {
+    height: 3rem !important;
+    width: 3rem !important;
+    border-radius: 5px;
+}
+
+.import-export-settings-icon {
+    font-size: 24px;
+    vertical-align: -60% !important;
 }

@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Incite} from '../../../src/cards/community/Incite';
+import {Incite} from '../../../src/cards/community/corporations/Incite';
 import {EventAnalysts} from '../../../src/cards/turmoil/EventAnalysts';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
@@ -18,7 +18,7 @@ describe('Incite', function() {
     const gameOptions = setCustomGameOptions();
     game = Game.newInstance('foobar', [player], player, gameOptions);
 
-    card.play(player, game);
+    card.play(player);
     player.corporationCard = card;
   });
 
@@ -28,7 +28,7 @@ describe('Incite', function() {
 
   it('Works with Event Analysts', function() {
     const eventAnalysts = new EventAnalysts();
-    eventAnalysts.play(player, game);
+    eventAnalysts.play(player);
     expect(game.turmoil!.getPlayerInfluence(player)).to.eq(2);
   });
 
@@ -36,7 +36,7 @@ describe('Incite', function() {
     card.initialAction(player);
     expect(game.deferredActions).has.lengthOf(1);
 
-    const orOptions = game.deferredActions.next()!.execute() as OrOptions;
+    const orOptions = game.deferredActions.peek()!.execute() as OrOptions;
     orOptions.options[0].cb();
 
     const marsFirst = game.turmoil!.getPartyByName(PartyName.MARS);

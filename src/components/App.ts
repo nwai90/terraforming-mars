@@ -10,7 +10,7 @@ import {DebugUI} from './DebugUI';
 import {GameHomeModel} from '../models/GameHomeModel';
 import {HelpIconology} from './HelpIconology';
 
-import * as raw_settings from '../../assets/settings.json';
+import * as raw_settings from '../genfiles/settings.json';
 
 interface MainAppData {
     screen: 'create-game-form' |
@@ -47,7 +47,7 @@ export const mainAppSettings = {
     componentsVisibility: {
       'millestones_list': true,
       'awards_list': true,
-      'tags_concise': false,
+      'tags_concise': true,
       'pinned_player_0': false,
       'pinned_player_1': false,
       'pinned_player_2': false,

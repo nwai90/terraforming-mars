@@ -3,11 +3,10 @@ import {CardName} from '../CardName';
 import {ColonyBenefit} from './ColonyBenefit';
 import {ColonyModel} from '../models/ColonyModel';
 import {ColonyName} from './ColonyName';
-import {DeferredAction} from '../deferredActions/DeferredAction';
+import {DeferredAction, Priority} from '../deferredActions/DeferredAction';
 import {DiscardCards} from '../deferredActions/DiscardCards';
 import {DrawCards} from '../deferredActions/DrawCards';
 import {GiveColonyBonus} from '../deferredActions/GiveColonyBonus';
-import {IProjectCard} from '../cards/IProjectCard';
 import {IncreaseColonyTrack} from '../deferredActions/IncreaseColonyTrack';
 import {LogHelper} from '../LogHelper';
 import {MAX_COLONY_TRACK_POSITION, PLAYER_DELEGATES_COUNT} from '../constants';
@@ -17,13 +16,18 @@ import {PlayerInput} from '../PlayerInput';
 import {ResourceType} from '../ResourceType';
 import {Resources} from '../Resources';
 import {ScienceTagCard} from '../cards/community/ScienceTagCard';
-import {SelectCardToKeep} from '../deferredActions/SelectCardToKeep';
 import {SelectColony} from '../inputs/SelectColony';
 import {SelectPlayer} from '../inputs/SelectPlayer';
 import {SerializedColony} from '../SerializedColony';
 import {StealResources} from '../deferredActions/StealResources';
 import {Tags} from '../cards/Tags';
 import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
+import {PlaceHazardTile} from '../deferredActions/PlaceHazardTile';
+import {_AresHazardPlacement} from '../ares/AresHazards';
+import {SelectSpace} from '../inputs/SelectSpace';
+import {ISpace} from '../boards/ISpace';
+import {SpaceBonus} from '../SpaceBonus';
+import {Phase} from '../Phase';
 
 export enum ShouldIncreaseTrack { YES, NO, ASK }
 
@@ -131,7 +135,7 @@ export abstract class Colony implements SerializedColony {
         player.game.defer(new DeferredAction(player, () => {
           this.trackPosition = this.colonies.length;
           return undefined;
-        }));
+        }), Priority.DECREASE_COLONY_TRACK_AFTER_TRADE);
       }
     }
 
@@ -140,7 +144,7 @@ export abstract class Colony implements SerializedColony {
     }
 
 
-    private giveBonus(player: Player, bonusType: ColonyBenefit, quantity: number, resource: Resources | undefined, isGiveColonyBonus: boolean = false): undefined | PlayerInput {
+    public giveBonus(player: Player, bonusType: ColonyBenefit, quantity: number, resource: Resources | undefined, isGiveColonyBonus: boolean = false): undefined | PlayerInput {
       const game = player.game;
 
       let action: undefined | DeferredAction = undefined;
@@ -186,11 +190,7 @@ export abstract class Colony implements SerializedColony {
         break;
 
       case ColonyBenefit.DRAW_CARDS_AND_KEEP_ONE:
-        const cardsDrawn: Array<IProjectCard> = [];
-        for (let counter = 0; counter < quantity; counter++) {
-          cardsDrawn.push(game.dealer.dealCard());
-        };
-        action = new SelectCardToKeep(player, 'Select card to take into hand', cardsDrawn);
+        action = DrawCards.keepSome(player, quantity, {keepMax: 1});
         break;
 
       case ColonyBenefit.GAIN_CARD_DISCOUNT:
@@ -233,7 +233,7 @@ export abstract class Colony implements SerializedColony {
         }
         break;
 
-      case ColonyBenefit.GIVE_MC_PER_DELEGATE:
+      case ColonyBenefit.GAIN_MC_PER_DELEGATE:
         if (game.turmoil !== undefined) {
           let partyDelegateCount = PLAYER_DELEGATES_COUNT - game.turmoil.getDelegates(player.id);
           if (game.turmoil.lobby.has(player.id)) partyDelegateCount--;
@@ -242,6 +242,51 @@ export abstract class Colony implements SerializedColony {
           player.setResource(Resources.MEGACREDITS, partyDelegateCount);
           LogHelper.logGainStandardResource(player, Resources.MEGACREDITS, partyDelegateCount);
         }
+        break;
+
+      case ColonyBenefit.PLACE_HAZARD_TILE:
+        const availableSpaces = game.board.getAvailableSpacesOnLand(player)
+          .filter((space => space.tile === undefined))
+          .filter((space) => {
+            const adjacentSpaces = game.board.getAdjacentSpaces(space);
+            return adjacentSpaces.filter((space) => space.tile !== undefined).length === 0;
+          });
+
+        game.defer(new PlaceHazardTile(player, game, 'Select space next to no other tile for hazard', availableSpaces));
+        break;
+
+      case ColonyBenefit.ERODE_SPACES_ADJACENT_TO_HAZARDS:
+        for (let i = 0; i < quantity; i++) {
+          const availableSpaces = _AresHazardPlacement.getAllLandSpacesAdjacentToHazards(game);
+    
+          if (availableSpaces.length > 0) {
+            game.defer(new DeferredAction(
+              player,
+              () => new SelectSpace(
+                "Select space adjacent to hazard tile to erode",
+                availableSpaces,
+                (foundSpace: ISpace) => {
+                  foundSpace.bonus.forEach((spaceBonus) => game.grantSpaceBonus(player, spaceBonus));
+
+                  const reservedBonuses = [SpaceBonus.RESTRICTED];
+                  foundSpace.bonus = foundSpace.bonus.filter((bonus) => reservedBonuses.includes(bonus));
+                  game.erodedSpaces.push(foundSpace.id);
+    
+                  const offset: number = Math.abs(foundSpace.y - 4);
+                  const row: number = foundSpace.y + 1;
+                  const position: number = foundSpace.x - offset + 1;
+                  game.log("${0} eroded space on row ${1} position ${2}", b => b.player(player).number(row).number(position));
+    
+                  return undefined;
+                }
+              )
+            ));
+          }
+        }
+        break;
+
+      case ColonyBenefit.GAIN_MC_PER_HAZARD_TILE:
+        player.megaCredits += _AresHazardPlacement.getHazardsCount(game);
         break;
 
       case ColonyBenefit.GAIN_TR:
@@ -295,6 +340,48 @@ export abstract class Colony implements SerializedColony {
       case ColonyBenefit.STEAL_RESOURCES:
         if (resource === undefined) throw new Error('Resource cannot be undefined');
         action = new StealResources(player, resource, quantity);
+        break;
+
+      case ColonyBenefit.DRAW_EARTH_CARD:
+        player.drawCard(quantity, {tag: Tags.EARTH});
+        break;
+
+      case ColonyBenefit.WGT_RAISE_GLOBAL_PARAMETER:
+        game.defer(new DeferredAction(player, () => {
+            game.phase = Phase.SOLAR;
+            return undefined;
+        }));
+
+        if (quantity === 0) {
+            game.defer(new DeferredAction(player, () => {
+                game.log('${0} acted as World Government and increased temperature', (b) => b.player(player));
+                game.increaseTemperature(player, 1);
+                return undefined;
+            }));
+        } else if (quantity === 1) {
+            game.log('${0} acted as World Government and placed an ocean', (b) => b.player(player));
+            game.defer(new PlaceOceanTile(player, 'Select ocean space for ' + this.name + ' colony'));
+        } else if (quantity === 2) {
+            game.defer(new DeferredAction(player, () => {
+                game.log('${0} acted as World Government and increased oxygen level', (b) => b.player(player));
+                game.increaseOxygenLevel(player, 1);
+                return undefined;
+            }));
+        }
+
+        game.defer(new DeferredAction(player, () => {
+            game.phase = Phase.ACTION;
+            return undefined;
+        }));
+        
+        break;
+
+      case ColonyBenefit.GAIN_MC_FOR_EARTH_TAGS:
+        const amount = game.getPlayers()
+        .map((p) => p.getTagCount(Tags.EARTH, false, p.id === player.id))
+        .reduce((a, c) => a + c, 0);
+
+        player.megaCredits += Math.floor(amount / 3);
         break;
 
       default:

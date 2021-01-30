@@ -7,7 +7,7 @@ import {Player} from '../Player';
 import {Random} from '../Random';
 
 export class ElysiumBoard extends Board {
-  public static newInstance(shuffle: boolean, rng: Random, includeVenus: boolean): ElysiumBoard {
+  public static newInstance(shuffle: boolean, rng: Random, includeVenus: boolean, erodedSpaces: Array<string> = []): ElysiumBoard {
     const builder = new BoardBuilder(includeVenus);
 
     const PLANT = SpaceBonus.PLANT;
@@ -37,7 +37,7 @@ export class ElysiumBoard extends Board {
     if (shuffle) {
       builder.shuffle(rng, SpaceName.HECATES_THOLUS, SpaceName.ELYSIUM_MONS, SpaceName.ARSIA_MONS_ELYSIUM, SpaceName.OLYMPUS_MONS);
     }
-    const spaces = builder.build();
+    const spaces = builder.build(erodedSpaces);
     return new ElysiumBoard(spaces);
   }
 

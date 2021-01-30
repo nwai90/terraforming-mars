@@ -49,7 +49,6 @@ describe('GlobalEventsDealer', () => {
       turmoilExtension: true,
       aresExtension: true,
       communityCardsOption: true,
-      removeNegativeGlobalEventsOption: false,
     });
     const player = TestPlayers.BLUE.newPlayer();
     const game = Game.newInstance('foobar', [player], player, gameOptions);

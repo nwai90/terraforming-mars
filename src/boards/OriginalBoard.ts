@@ -8,7 +8,7 @@ import {SerializedBoard} from './SerializedBoard';
 import {Random} from '../Random';
 
 export class OriginalBoard extends Board {
-  public static newInstance(shuffle: boolean, rng: Random, includeVenus: boolean): OriginalBoard {
+  public static newInstance(shuffle: boolean, rng: Random, includeVenus: boolean, erodedSpaces: Array<string> = []): OriginalBoard {
     const builder = new BoardBuilder(includeVenus);
 
     const PLANT = SpaceBonus.PLANT;
@@ -40,7 +40,7 @@ export class OriginalBoard extends Board {
     if (shuffle) {
       builder.shuffle(rng, SpaceName.NOCTIS_CITY, SpaceName.THARSIS_THOLUS, SpaceName.ASCRAEUS_MONS, SpaceName.ARSIA_MONS, SpaceName.PAVONIS_MONS);
     }
-    const spaces = builder.build();
+    const spaces = builder.build(erodedSpaces);
     return new OriginalBoard(spaces);
   }
 

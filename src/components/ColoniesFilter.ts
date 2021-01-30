@@ -12,13 +12,15 @@ import {Titan} from '../colonies/Titan';
 import {Triton} from '../colonies/Triton';
 import {Enceladus} from '../colonies/Enceladus';
 import {ColonyName} from '../colonies/ColonyName';
-import {Iapetus} from '../cards/community/Iapetus';
-import {Mercury} from '../cards/community/Mercury';
-import {Hygiea} from '../cards/community/Hygiea';
-import {Titania} from '../cards/community/Titania';
-import {Venus} from '../cards/community/Venus';
-import {Leavitt} from '../cards/community/Leavitt';
-import {Pallas} from '../cards/community/Pallas';
+import {Iapetus} from '../cards/community/colonies/Iapetus';
+import {Mercury} from '../cards/community/colonies/Mercury';
+import {Hygiea} from '../cards/community/colonies/Hygiea';
+import {Titania} from '../cards/community/colonies/Titania';
+import {Venus} from '../cards/community/colonies/Venus';
+import {Leavitt} from '../cards/community/colonies/Leavitt';
+import {Pallas} from '../cards/community/colonies/Pallas';
+import {Deimos} from '../cards/community/colonies/Deimos';
+import {Terra} from '../cards/community/colonies/Terra';
 
 const officialColonies: Array<Colony> = [
   new Callisto(),
@@ -42,6 +44,8 @@ const communityColonies: Array<Colony> = [
   new Leavitt(),
   new Venus(),
   new Pallas(),
+  new Deimos(),
+  new Terra(),
 ];
 
 export const ColoniesFilter = Vue.component('colonies-filter', {
@@ -53,6 +57,9 @@ export const ColoniesFilter = Vue.component('colonies-filter', {
       type: Boolean,
     },
     turmoil: {
+      type: Boolean,
+    },
+    aresExtension: {
       type: Boolean,
     },
   },
@@ -90,6 +97,7 @@ export const ColoniesFilter = Vue.component('colonies-filter', {
         this.selectedColonies = officialColonies.concat(communityColonies).slice();
         if (this.venusNext === false) this.selectedColonies = this.selectedColonies.filter((c) => c.name !== ColonyName.VENUS);
         if (this.turmoil === false) this.selectedColonies = this.selectedColonies.filter((c) => c.name !== ColonyName.PALLAS);
+        if (this.aresExtension === false) this.selectedColonies = this.selectedColonies.filter((c) => c.name !== ColonyName.DEIMOS);
       } else {
         this.selectedColonies = officialColonies.slice();
       }
@@ -109,6 +117,15 @@ export const ColoniesFilter = Vue.component('colonies-filter', {
           this.selectedColonies = this.selectedColonies.filter((c) => c.name !== ColonyName.PALLAS);
         } else if (this.selectedColonies.find((c) => c.name === ColonyName.PALLAS) === undefined) {
           this.selectedColonies.push(new Pallas());
+        }
+      }
+    },
+    aresExtension: function(enabled) {
+      if (this.communityCardsOption && Array.isArray(this.selectedColonies)) {
+        if (enabled === false) {
+          this.selectedColonies = this.selectedColonies.filter((c) => c.name !== ColonyName.DEIMOS);
+        } else if (this.selectedColonies.find((c) => c.name === ColonyName.DEIMOS) === undefined) {
+          this.selectedColonies.push(new Deimos());
         }
       }
     },

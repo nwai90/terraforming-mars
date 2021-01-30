@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Research} from '../../../src/cards/base/Research';
 import {SolarWindPower} from '../../../src/cards/base/SolarWindPower';
 import {CoronaExtractor} from '../../../src/cards/colonies/CoronaExtractor';
-import {AgricolaInc} from '../../../src/cards/community/AgricolaInc';
+import {AgricolaInc} from '../../../src/cards/community/corporations/AgricolaInc';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';

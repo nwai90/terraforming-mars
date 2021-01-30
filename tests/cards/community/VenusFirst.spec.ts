@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {VenusFirst} from '../../../src/cards/community/VenusFirst';
+import {VenusFirst} from '../../../src/cards/community/preludes/VenusFirst';
 import {Tags} from '../../../src/cards/Tags';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
@@ -18,7 +18,7 @@ describe('VenusFirst', function() {
   });
 
   it('Should play', function() {
-    card.play(player, game);
+    card.play(player);
     expect(game.getVenusScaleLevel()).to.eq(4);
     expect(player.cardsInHand).has.lengthOf(2);
 

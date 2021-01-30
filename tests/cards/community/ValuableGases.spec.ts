@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {ValuableGases} from '../../../src/cards/community/ValuableGases';
+import {ValuableGases} from '../../../src/cards/community/preludes/ValuableGases';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestingUtils';

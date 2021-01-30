@@ -20,12 +20,14 @@ describe('MiningRightsAres', function() {
   });
 
   it('Should play', function() {
-    const action = card.play(player, game);
+    const action = card.play(player);
     expect(action instanceof SelectSpace).is.true;
 
     const titaniumSpace = action.availableSpaces.find((space) => space.bonus.indexOf(SpaceBonus.TITANIUM) !== -1 && space.bonus.indexOf(SpaceBonus.STEEL) === -1);
     expect(titaniumSpace).is.not.undefined;
     action.cb(titaniumSpace!);
+    game.deferredActions.runNext();
+
     expect(titaniumSpace!.player).to.eq(player);
     expect(titaniumSpace!.tile && titaniumSpace!.tile!.tileType).to.eq(TileType.MINING_TITANIUM_BONUS);
     expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
@@ -34,6 +36,8 @@ describe('MiningRightsAres', function() {
     const steelSpace = action.availableSpaces.find((space) => space.bonus.indexOf(SpaceBonus.TITANIUM) === -1 && space.bonus.indexOf(SpaceBonus.STEEL) !== -1);
     expect(steelSpace).is.not.undefined;
     action.cb(steelSpace!);
+    game.deferredActions.runNext();
+
     expect(steelSpace!.player).to.eq(player);
     expect(steelSpace!.tile && steelSpace!.tile!.tileType).to.eq(TileType.MINING_STEEL_BONUS);
     expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
@@ -44,12 +48,12 @@ describe('MiningRightsAres', function() {
     const land = game.board.getAvailableSpacesOnLand(player)
       .find((land) => land.bonus.indexOf(SpaceBonus.STEEL) !== -1)!;
 
-    let action = card.play(player, game) as SelectSpace;
+    let action = card.play(player) as SelectSpace;
     const size = action.availableSpaces.length;
     expect(action.availableSpaces).contains(land);
 
     land.tile = {tileType: TileType.MINING_RIGHTS};
-    action = card.play(player, game) as SelectSpace;
+    action = card.play(player) as SelectSpace;
     expect(action.availableSpaces).has.length(size - 1);
     expect(action.availableSpaces).does.not.contain(land);
   });

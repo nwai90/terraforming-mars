@@ -1,4 +1,3 @@
-
 import {CardMetadata} from './CardMetadata';
 import {CardName} from '../CardName';
 import {CardType} from './CardType';
@@ -6,8 +5,12 @@ import {IAdjacencyBonus} from '../ares/IAdjacencyBonus';
 import {ResourceType} from '../ResourceType';
 import {Tags} from './Tags';
 import {Player} from '../Player';
-import {Game} from '../Game';
 import {Units} from '../Units';
+
+export interface IDiscount {
+  tag: Tags;
+  amount: number;
+}
 
 export interface StaticCardProperties {
   adjacencyBonus?: IAdjacencyBonus;
@@ -32,8 +35,10 @@ export abstract class Card {
       if (properties.cardType === CardType.CORPORATION && properties.startingMegaCredits === undefined) {
         throw new Error('must define startingMegaCredits for corporation cards');
       }
-      if (properties.cardType !== CardType.CORPORATION && properties.cardType !== CardType.PRELUDE && properties.cost === undefined) {
-        throw new Error('must define cost for project cards');
+      if (properties.cost === undefined) {
+        if ([CardType.CORPORATION, CardType.PRELUDE, CardType.STANDARD_ACTION].includes(properties.cardType) === false) {
+          throw new Error(`${properties.name} must have a cost property`);
+        }
       }
       staticCardProperties.set(properties.name, properties);
       staticInstance = properties;
@@ -70,7 +75,7 @@ export abstract class Card {
   public get productionBox(): Units {
     return this.properties.productionBox || Units.EMPTY;
   }
-  public canPlay(player: Player, _game?: Game) {
+  public canPlay(player: Player) {
     if (this.properties.metadata.requirements === undefined) {
       return true;
     }

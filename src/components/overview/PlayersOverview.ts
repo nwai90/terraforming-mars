@@ -4,8 +4,7 @@ import {OverviewSettings} from './OverviewSettings';
 import {OtherPlayer} from '../OtherPlayer';
 import {PlayerModel} from '../../models/PlayerModel';
 import {ActionLabel} from './ActionLabel';
-
-const SHOW_NEXT_LABEL_MIN = 2;
+import {Phase} from '../../Phase';
 
 export const getCurrentPlayerIndex = (
   player: PlayerModel,
@@ -32,7 +31,9 @@ export const PlayersOverview = Vue.component('players-overview', {
     'other-player': OtherPlayer,
   },
   data: function() {
-    return {};
+    return {
+      componentKey: 0,
+    };
   },
   methods: {
     hasPlayers: function(): boolean {
@@ -64,33 +65,21 @@ export const PlayersOverview = Vue.component('players-overview', {
       return result.slice(0, -1);
     },
     getActionLabel(player: PlayerModel): string {
-      if (this.player.passedPlayers.includes(player.color)) {
-        return ActionLabel.PASSED;
-      }
+      if (!this.player.draftedPlayers.includes(player.color) && this.player.phase === Phase.DRAFTING) return ActionLabel.DRAFTING;
+      if (this.player.phase === Phase.DRAFTING) return ActionLabel.NONE;
+      if (this.player.passedPlayers.includes(player.color)) return ActionLabel.PASSED;
       if (player.isActive) return ActionLabel.ACTIVE;
-      const notPassedPlayers = this.player.players.filter(
-        (p: PlayerModel) => !this.player.passedPlayers.includes(p.color),
-      );
-
-      const currentPlayerIndex: number = getCurrentPlayerIndex(
-        player,
-        notPassedPlayers,
-      );
-      const prevPlayerIndex =
-                currentPlayerIndex === 0 ?
-                  notPassedPlayers.length - 1 :
-                  currentPlayerIndex - 1;
-      const isNext = notPassedPlayers[prevPlayerIndex].isActive;
-
-      if (isNext && this.player.players.length > SHOW_NEXT_LABEL_MIN) {
-        return ActionLabel.NEXT;
-      }
 
       return ActionLabel.NONE;
     },
   },
+  created: function(): void {
+    this.$root.$on('updatePlayersOverview', (_e: any) => {
+      this.componentKey += 1;
+    });
+  },
   template: `
-        <div class="players-overview" v-if="hasPlayers()">
+        <div class="players-overview" v-if="hasPlayers()" :key="componentKey">
             <overview-settings />
             <div class="other_player" v-if="player.players.length > 1">
                 <div v-for="(otherPlayer, index) in getPlayersInOrder()" :key="otherPlayer.id">
@@ -98,7 +87,6 @@ export const PlayersOverview = Vue.component('players-overview', {
                 </div>
             </div>
             <player-info v-for="(p, index) in getPlayersInOrder()" :activePlayer="player" :player="p"  :key="p.id" :firstForGen="getIsFirstForGen(p)" :actionLabel="getActionLabel(p)" :playerIndex="index"/>
-            <div v-if="player.players.length > 1" class="player-divider" />
             <player-info :player="getPlayerOnFocus()" :activePlayer="player" :key="player.players.length - 1" :firstForGen="getIsFirstForGen(player)" :actionLabel="getActionLabel(player)" :playerIndex="-1"/>
         </div>
     `,

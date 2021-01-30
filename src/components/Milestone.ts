@@ -35,6 +35,11 @@ export const Milestone = Vue.component('milestone', {
     toggleList: function() {
       this.showList = !this.showList;
     },
+    getClassForMilestoneTile: function(milestone: ClaimedMilestoneModel) {
+      if (milestone.player_name) return 'ma-block ma-block-grayscale pwned-item';
+      if (milestone.scores.length > 0) return 'ma-block';
+      return 'ma-block ma-block-grayscale';
+    }
   },
   template: `
     <div class="milestones_cont" v-trim-whitespace>
@@ -47,7 +52,7 @@ export const Milestone = Vue.component('milestone', {
                 </span>
             </div>
             <div v-show="shouldShowList()">
-                <div title="press to show or hide the description" v-on:click.prevent="toggle(milestone)" v-for="milestone in milestones_list" :class="milestone.player_name ? 'ma-block pwned-item': 'ma-block'">
+                <div title="press to show or hide the description" v-on:click.prevent="toggle(milestone)" v-for="milestone in milestones_list" :class=getClassForMilestoneTile(milestone)>
                     <div class="ma-player" v-if="milestone.player_name"><i :title="milestone.player_name" :class="'board-cube board-cube--'+milestone.player_color" /></div>
                     <div class="ma-name--milestones" :class="getNameCss(milestone.milestone.name)" v-i18n>
                         {{milestone.milestone.name}}

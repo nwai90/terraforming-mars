@@ -39,8 +39,7 @@ export class BoardBuilder {
       return this;
     }
 
-
-    build(): Array<ISpace> {
+    build(erodedSpaces: Array<string> = []): Array<ISpace> {
       const tilesPerRow = [5, 6, 7, 8, 9, 8, 7, 6, 5];
       const idOffset = this.spaces.length + 1;
       let idx = 0;
@@ -64,6 +63,14 @@ export class BoardBuilder {
           Space.colony(SpaceName.STRATOPOLIS),
         );
       }
+
+      const reservedBonuses = [SpaceBonus.RESTRICTED, SpaceBonus.COVE];
+
+      this.spaces.forEach((space) => {
+        if (erodedSpaces.includes(space.id)) {
+          space.bonus = space.bonus.filter((bonus) => reservedBonuses.includes(bonus));
+        }
+      });
 
       return this.spaces;
     }

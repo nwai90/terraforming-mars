@@ -14,7 +14,12 @@ export enum SpaceBonus {
     MEGACREDITS, // 6
     ANIMAL, // 7
     MICROBE, // 8
-    POWER // 9
+    POWER, // 9,
+
+    // Custom maps / special tiles
+    RESTRICTED, // Tiles cannot be placed on these spaces
+    COVE, // Spaces that allow both ocean and land tiles to be placed
+    TEMPERATURE, // Gives a bonus temperature raise
 }
 
 const TO_STRING_MAP: Map<SpaceBonus, string> = new Map([
@@ -28,6 +33,8 @@ const TO_STRING_MAP: Map<SpaceBonus, string> = new Map([
   [SpaceBonus.ANIMAL, 'Animal'],
   [SpaceBonus.MICROBE, 'Microbe'],
   [SpaceBonus.POWER, 'Power'],
+  [SpaceBonus.RESTRICTED, 'Restricted'],
+  [SpaceBonus.COVE, 'Cove'],
 ]);
 
 export namespace SpaceBonus {

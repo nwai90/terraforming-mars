@@ -10,6 +10,10 @@ export enum CardName {
     CITY_STANDARD_PROJECT = 'City',
     AIR_SCRAPPING_STANDARD_PROJECT = 'Air Scrapping',
 
+    // Standard actions:
+    CONVERT_PLANTS = 'Convert Plants',
+    CONVERT_HEAT = 'Convert Heat',
+
     ACQUIRED_COMPANY = 'Acquired Company',
     ADAPTATION_TECHNOLOGY = 'Adaptation Technology',
     ADAPTED_LICHEN = 'Adapted Lichen',
@@ -464,6 +468,11 @@ export enum CardName {
     INCITE = 'Incite',
     PLAYWRIGHTS = 'Playwrights',
     MIDAS = 'Midas',
+    COLONIAL_ONE = 'Colonial One',
+    ERIS = 'Eris',
+    HOTSPRINGS = 'Hotsprings',
+    JUNK_VENTURES = 'Junk Ventures',
+    ARISTARCHUS = 'Aristarchus',
 
     // Community preludes
     VALUABLE_GASES = 'Valuable Gases',
@@ -473,6 +482,18 @@ export enum CardName {
     TRADE_ADVANCE = 'Trade Advance',
     POLITICAL_UPRISING = 'Political Uprising',
     BY_ELECTION = 'By-Election',
+    HYDROGEN_BOMBARDMENT = 'Hydrogen Bombardment',
+    VITAL_COLONY = 'Vital Colony',
+    STRATEGIC_BASE_PLANNING = 'Strategic Base Planning',
+    NITRATE_REDUCERS = 'Nitrate Reducers',
+    EXPERIENCED_MARTIANS = 'Experienced Martians',
+    TRADE_INFRASTRUCTURE = 'Trade Infrastructure',
+    GEOTHERMAL_VENT = 'Geothermal Vent',
+    ACCUMULATED_KNOWLEDGE = 'Accumulated Knowledge',
+    BOTANICAL_HARVEST = 'Botanical Harvest',
+    MARTIAN_LUMBER_YARD = 'Martian Lumber Yard',
+    FORTIFIED_OUTPOST = 'Fortified Outpost',
+    GAMBLING_HOUSE = 'Gambling House',
 
     // Community colonies
     SCIENCE_TAG_BLANK_CARD = '',
@@ -608,7 +629,7 @@ export enum CardName {
     BASIC_INFRASTRUCTURE = 'Basic Infrastructure',
     LUNAR_PlANNING_OFFICE = 'Lunar Planning Office',
     MINING_COMPLEX = 'Mining Complex',
-    MOON_ROAD_STANDARD_PROJECT = 'Build Moon Road',
-    MOON_MINE_STANDARD_PROJECT = 'Build Moon Mine',
-    MOON_COLONY_STANDARD_PROJECT = 'Build Moon Colony',
+    MOON_ROAD_STANDARD_PROJECT = 'Road Infrastructure',
+    MOON_MINE_STANDARD_PROJECT = 'Lunar Mine',
+    MOON_COLONY_STANDARD_PROJECT = 'Lunar Habitat',
 }

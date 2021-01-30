@@ -85,7 +85,7 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
       } else if (req.url.startsWith('/assets/translations.json')) {
         res.setHeader('Content-Type', 'application/json');
         res.setHeader('Cache-Control', 'max-age=' + assetCacheMaxAge);
-        res.write(fs.readFileSync('build/assets/translations.json'));
+        res.write(fs.readFileSync('build/genfiles/translations.json'));
         res.end();
       } else if (req.url === '/styles.css') {
         res.setHeader('Content-Type', 'text/css');
@@ -411,7 +411,10 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
       }
 
       if (gameReq.board === 'random') {
-        const boards = Object.values(BoardName);
+        let boards = Object.values(BoardName);
+        const communityBoards = [BoardName.AMAZONIS, BoardName.ARABIA_TERRA, BoardName.VASTITAS_BOREALIS];
+        if (!gameReq.communityCardsOption) boards = boards.filter((b) => !communityBoards.includes(b));
+
         gameReq.board = boards[Math.floor(Math.random() * boards.length)];
       }
 
@@ -422,7 +425,6 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         undoOption: gameReq.undoOption,
         showTimers: gameReq.showTimers,
         fastModeOption: gameReq.fastModeOption,
-        showOtherPlayersVP: gameReq.showOtherPlayersVP,
 
         corporateEra: gameReq.corporateEra,
         venusNextExtension: gameReq.venusNext,
@@ -436,9 +438,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         promoCardsOption: gameReq.promoCardsOption,
         communityCardsOption: gameReq.communityCardsOption,
         solarPhaseOption: gameReq.solarPhaseOption,
-        removeNegativeGlobalEventsOption:
-          gameReq.removeNegativeGlobalEventsOption,
-        includeVenusMA: gameReq.includeVenusMA,
+        silverCubeVariant: gameReq.silverCubeVariant,
 
         draftVariant: gameReq.draftVariant,
         initialDraftVariant: gameReq.initialDraft,
@@ -525,15 +525,18 @@ function serveAsset(req: http.IncomingMessage, res: http.ServerResponse): void {
   } else if (req.url === '/main.js' || req.url === '/main.js.map') {
     res.setHeader('Content-Type', 'text/javascript');
     let suffix = '';
-    if (supportsGzip(req)) {
+    if (supportsEncoding(req, 'br')) {
+      res.setHeader('Content-Encoding', 'br');
+      suffix = '.br';
+    } else if (supportsEncoding(req, 'gzip')) {
       res.setHeader('Content-Encoding', 'gzip');
       suffix = '.gz';
     }
     file = `build${req.url}${suffix}`;
   } else if (req.url === '/assets/Prototype.ttf') {
     file = 'assets/Prototype.ttf';
-  } else if (req.url === '/assets/futureforces.ttf') {
-    file = 'assets/futureforces.ttf';
+  } else if (req.url === '/assets/BattleStar.ttf') {
+    file = 'assets/BattleStar.ttf';
   } else if (req.url.endsWith('.png')) {
     const assetsRoot = path.resolve('./assets');
     const reqFile = path.resolve(path.normalize(req.url).slice(1));
@@ -569,14 +572,14 @@ function serveAsset(req: http.IncomingMessage, res: http.ServerResponse): void {
   });
 }
 
-function supportsGzip(req: http.IncomingMessage): boolean {
+function supportsEncoding(req: http.IncomingMessage, encoding: 'gzip' | 'br'): boolean {
   return req.headers['accept-encoding'] !== undefined &&
-         req.headers['accept-encoding'].includes('gzip');
+         req.headers['accept-encoding'].includes(encoding);
 }
 
 function serveStyles(req: http.IncomingMessage, res: http.ServerResponse): void {
   let buffer = styles;
-  if (compressedStyles !== undefined && supportsGzip(req)) {
+  if (compressedStyles !== undefined && supportsEncoding(req, 'gzip')) {
     res.setHeader('Content-Encoding', 'gzip');
     buffer = compressedStyles;
   }
@@ -589,7 +592,7 @@ console.log('Starting server on port ' + (process.env.PORT || 8080));
 try {
   // The first call to Database.getInstance also intiailizes a connection to the database. Better to
   // fail here than after the server opens to process requests.
-  Database.getInstance();
+  Database.getInstance().purgeUnfinishedGames();
 } catch (err) {
   console.error('Cannot connect to database:', err);
   throw err;

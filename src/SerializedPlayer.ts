@@ -48,6 +48,7 @@ export interface SerializedPlayer {
     removedFromPlayCards: Array<CardName>;
     removingPlayers: Array<PlayerId>;
     scienceTagCount: number;
+    heatProductionStepsIncreasedThisGeneration: number;
     steel: number;
     steelProduction: number;
     steelValue: number;
@@ -57,6 +58,7 @@ export interface SerializedPlayer {
     titanium: number;
     titaniumProduction: number;
     titaniumValue: number;
+    totalSpend: number;
     tradesThisTurn: number;
     turmoilPolicyActionUsed: boolean;
     usedUndo: boolean;

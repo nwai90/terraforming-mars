@@ -55,6 +55,35 @@ export const GameEnd = Vue.component('game-end', {
     isSoloGame: function(): boolean {
       return this.player.players.length === 1;
     },
+    getStartTR: function(): number {
+      return this.isSoloGame() ? 14 : 20;
+    },
+    getPointsEarned: function(player: PlayerModel): number {
+      const totalPoints : number = player.victoryPointsBreakdown.total;
+      const startTR : number = this.getStartTR();
+
+      if (player.turmoil) {
+        return totalPoints - startTR + (this.player.generation - 1) / 2;
+      }
+
+      return totalPoints - startTR;
+    },
+    getEfficiencyScore: function(player: PlayerModel): string {
+      const startTR : number = this.getStartTR();
+      const avgMcPerGeneration : number = startTR + 25;
+
+      const dummyPlayerScore : number = startTR + (80 + avgMcPerGeneration * (this.player.generation - 1)) / 8.5;
+      const playerScore = this.getPointsEarned(player);
+      let value : number;
+
+      if (playerScore < dummyPlayerScore) {
+        value = (dummyPlayerScore - playerScore) / -dummyPlayerScore;
+        return value.toFixed(2).toString();
+      }
+
+      value = (playerScore - dummyPlayerScore) / dummyPlayerScore;
+      return '+' + value.toFixed(2).toString();
+    },
   },
   template: `
         <div id="game-end" class="game_end_cont">
@@ -143,6 +172,7 @@ export const GameEnd = Vue.component('game-end', {
                             <div class="game-end-winer-scorebreak-player-title">
                                 <span :class="'log-player ' + getEndGamePlayerHighlightColorClass(p.color)"><a :href="'/player?id='+p.id+'&noredirect'">{{p.name}}</a></span>
                             </div>
+                            <h3 v-i18n>Efficiency: <span>{{ getEfficiencyScore(p) }}</span></h3>
                             <div v-for="v in p.victoryPointsBreakdown.detailsCards">
                                 {{v}}
                             </div>

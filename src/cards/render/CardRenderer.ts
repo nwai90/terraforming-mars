@@ -310,6 +310,16 @@ class Builder {
     return this;
   }
 
+  public colonyPlacementBonus(): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.COLONY_PLACEMENT_BONUS));
+    return this;
+  }
+
+  public hazardTile(): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.HAZARD_TILE));
+    return this;
+  }
+
   public influence(amount: number): Builder {
     this._addRowItem(new CardRenderItem(CardRenderItemType.INFLUENCE, amount));
     return this;
@@ -322,7 +332,7 @@ class Builder {
     return this;
   }
 
-  public greenery(size: CardRenderItemSize = CardRenderItemSize.MEDIUM, withO2: boolean = false) {
+  public greenery(size: CardRenderItemSize = CardRenderItemSize.MEDIUM, withO2: boolean = true) {
     const item = new CardRenderItem(CardRenderItemType.GREENERY);
     item.size = size;
     if (withO2) {

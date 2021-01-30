@@ -28,7 +28,14 @@ export const Bonus = Vue.component('bonus', {
         ret += 'heat';
       } else if (bonus === SpaceBonus.OCEAN) {
         ret += 'bonusocean';
+      } else if (bonus === SpaceBonus.ANIMAL) {
+        ret += 'animal';
+      } else if (bonus === SpaceBonus.MICROBE) {
+        ret += 'microbe';
+      } else if (bonus === SpaceBonus.TEMPERATURE) {
+        ret += 'bonustemperature';
       }
+
       ret += ' board-space-bonus-pos--' + idx.toString();
       return ret;
     };

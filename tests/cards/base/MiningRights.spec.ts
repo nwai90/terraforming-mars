@@ -24,11 +24,11 @@ describe('MiningRights', function() {
         game.addTile(player, land.spaceType, land, {tileType: TileType.MINING_RIGHTS});
       }
     }
-    expect(card.canPlay(player, game)).is.not.true;
+    expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
-    const action = card.play(player, game);
+    const action = card.play(player);
     expect(action instanceof SelectSpace).is.true;
 
     const titaniumSpace = action.availableSpaces.find((space) => space.bonus.indexOf(SpaceBonus.TITANIUM) !== -1 && space.bonus.indexOf(SpaceBonus.STEEL) === -1);
@@ -36,6 +36,8 @@ describe('MiningRights', function() {
     expect(titaniumSpace!.bonus).contains(SpaceBonus.TITANIUM);
 
     action.cb(titaniumSpace!);
+    game.deferredActions.runNext();
+
     expect(titaniumSpace!.player).to.eq(player);
     expect(titaniumSpace!.tile && titaniumSpace!.tile!.tileType).to.eq(TileType.MINING_RIGHTS);
     expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
@@ -46,6 +48,8 @@ describe('MiningRights', function() {
     expect(steelSpace!.bonus).contains(SpaceBonus.STEEL);
 
     action.cb(steelSpace!);
+    game.deferredActions.runNext();
+
     expect(steelSpace!.player).to.eq(player);
     expect(steelSpace!.tile && steelSpace!.tile!.tileType).to.eq(TileType.MINING_RIGHTS);
     expect(player.getProduction(Resources.TITANIUM)).to.eq(1);

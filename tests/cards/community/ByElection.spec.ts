@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {ByElection} from '../../../src/cards/community/ByElection';
+import {ByElection} from '../../../src/cards/community/preludes/ByElection';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
@@ -22,7 +22,7 @@ describe('ByElection', function() {
     card.play(player);
     expect(game.deferredActions).has.lengthOf(1);
 
-    const orOptions = game.deferredActions.next()!.execute() as OrOptions;
+    const orOptions = game.deferredActions.peek()!.execute() as OrOptions;
     const subOptions = orOptions.options[0] as OrOptions;
     subOptions.cb();
 

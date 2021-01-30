@@ -1,9 +1,10 @@
 import {Player} from '../Player';
 import {SelectHowToPay} from '../inputs/SelectHowToPay';
 import {HowToPay} from '../inputs/HowToPay';
-import {DeferredAction} from './DeferredAction';
+import {DeferredAction, Priority} from './DeferredAction';
 
 export class SelectHowToPayDeferred implements DeferredAction {
+  public priority = Priority.DEFAULT;
   constructor(
         public player: Player,
         public amount: number,
@@ -11,6 +12,8 @@ export class SelectHowToPayDeferred implements DeferredAction {
   ) {}
 
   public execute() {
+    this.player.totalSpend += this.amount;
+
     if ((!this.player.canUseHeatAsMegaCredits || this.player.heat === 0) &&
             (!this.options.canUseSteel || this.player.steel === 0) &&
             (!this.options.canUseTitanium || this.player.titanium === 0)) {
