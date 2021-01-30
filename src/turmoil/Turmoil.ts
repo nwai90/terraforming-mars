@@ -37,6 +37,7 @@ const UNINITIALIZED_POLITICAL_AGENDAS_DATA: PoliticalAgendasData = {
     policyId: 'none',
   },
   staticAgendas: undefined,
+  agendaStyle: AgendaStyle.STANDARD,
 };
 
 export class Turmoil implements ISerializable<SerializedTurmoil> {
@@ -284,7 +285,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
         this.rulingParty.partyLeader = undefined;
         this.rulingParty.delegates = [];
 
-        PoliticalAgendas.setNextAgenda(this, game);
+        PoliticalAgendas.setNextAgenda(this, game, this.politicalAgendasData.agendaStyle);
 
         // Finally, award Chairman TR
         if (this.chairman !== 'NEUTRAL') {

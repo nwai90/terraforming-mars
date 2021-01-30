@@ -1,6 +1,5 @@
 import {ChoosePoliticalAgenda} from '../deferredActions/ChoosePoliticaAgenda';
 import {Game} from '../Game';
-import {PlayerId} from '../Player';
 import {Bonus, BonusId} from './Bonus';
 import {IParty} from './parties/IParty';
 import {PartyName} from './parties/PartyName';
@@ -21,15 +20,14 @@ export interface Agenda {
 export interface PoliticalAgendasData {
   // The agenda for this generation.
   currentAgenda: Agenda;
-  // Standard and Random agendas are static through the game. CHAIRMAN changes
-  // by the will of the chairperson, so when staticAgendas is undefined, that means
-  // it's the CHAIRMAN agenda style
   staticAgendas: Map<PartyName, Agenda> | undefined;
+  agendaStyle: AgendaStyle;
 }
 
 export interface SerializedPoliticalAgendasData {
   currentAgenda: Agenda;
   staticAgendas: Array<[PartyName, Agenda]> | undefined;
+  agendaStyle: AgendaStyle;
 }
 
 export class PoliticalAgendas {
@@ -37,32 +35,26 @@ export class PoliticalAgendas {
     agendaStyle: AgendaStyle,
     parties: Array<IParty>,
     firstRulingParty: IParty): PoliticalAgendasData {
-    if (agendaStyle === AgendaStyle.CHAIRMAN) {
-      return {
-        // First chairman will always be neutral, so get a random agenda.
-        currentAgenda: PoliticalAgendas.getRandomAgenda(firstRulingParty),
-        staticAgendas: undefined,
-      };
-    } else {
-      const staticAgendas: Map<PartyName, Agenda> = new Map();
-      parties.forEach((p) => {
-        if (agendaStyle === AgendaStyle.STANDARD) {
-          staticAgendas.set(p.name, {bonusId: p.bonuses[0].id, policyId: p.policies[0].id});
-        } else {
-          staticAgendas.set(p.name, PoliticalAgendas.getRandomAgenda(p));
-        }
-      });
+    const staticAgendas: Map<PartyName, Agenda> = new Map();
 
-
-      const firstAgenda = staticAgendas.get(firstRulingParty.name);
-      if (firstAgenda === undefined) {
-        throw new Error('No static agenda for party ' + firstRulingParty.name);
+    parties.forEach((p) => {
+      if (agendaStyle === AgendaStyle.STANDARD) {
+        staticAgendas.set(p.name, {bonusId: p.bonuses[0].id, policyId: p.policies[0].id});
+      } else {
+        staticAgendas.set(p.name, PoliticalAgendas.getRandomAgenda(p));
       }
-      return {
-        currentAgenda: firstAgenda,
-        staticAgendas: staticAgendas,
-      };
+    });
+
+    const firstAgenda = staticAgendas.get(firstRulingParty.name);
+    if (firstAgenda === undefined) {
+      throw new Error('No static agenda for party ' + firstRulingParty.name);
     }
+
+    return {
+      currentAgenda: firstAgenda,
+      staticAgendas: staticAgendas,
+      agendaStyle: agendaStyle,
+    };
   }
 
   private static getRandomAgenda(party: IParty): Agenda {
@@ -80,32 +72,24 @@ export class PoliticalAgendas {
   // The ruling party is already in power, and now it is time for the party to select an agenda.
   // Do not expect the method to return an activated agenda if the current agenda style is chairman
   // And a person is the chairman -- the end of this method will just defer selection until later.
-  static setNextAgenda(turmoil: Turmoil, game: Game): void {
+  static setNextAgenda(turmoil: Turmoil, game: Game, agendaStyle: AgendaStyle = AgendaStyle.STANDARD): void {
     const rulingParty = turmoil.rulingParty;
     const politicalAgendasData = turmoil.politicalAgendasData;
     const chairman: string = turmoil.chairman as string;
-    const nextAgenda = this.getDeterministicAgenda(rulingParty, politicalAgendasData.staticAgendas, chairman);
-    if (nextAgenda !== undefined) {
-      politicalAgendasData.currentAgenda = nextAgenda;
+
+    if (agendaStyle !== AgendaStyle.CHAIRMAN || (agendaStyle === AgendaStyle.CHAIRMAN && chairman === 'NEUTRAL')) {
+      politicalAgendasData.currentAgenda = this.getDeterministicAgenda(rulingParty, politicalAgendasData.staticAgendas);
       turmoil.onAgendaSelected(game);
     } else {
-      // Only called when player !== neutral and agenda style === chairman
       game.defer(new ChoosePoliticalAgenda(game.getPlayerById(chairman), rulingParty, turmoil));
     }
   }
 
-  // Getting the agenda most of the time is pretty simple - there's a simple algorithm.
-  // However, when agendaStyle is CHAIRMAN, the agenda is only known after a callback.
   private static getDeterministicAgenda(
     rulingParty: IParty,
-    staticAgendas: Map<PartyName, Agenda> | undefined,
-    chairman: PlayerId | 'NEUTRAL'): Agenda | undefined {
+    staticAgendas: Map<PartyName, Agenda> | undefined): Agenda {
     if (staticAgendas === undefined) {
-      if (chairman === 'NEUTRAL') {
-        return PoliticalAgendas.getRandomAgenda(rulingParty);
-      } else {
-        return undefined;
-      }
+      return PoliticalAgendas.getRandomAgenda(rulingParty);
     } else {
       const agenda = staticAgendas.get(rulingParty.name);
       if (agenda === undefined) {
@@ -121,6 +105,7 @@ export class PoliticalAgendas {
       staticAgendas: agenda.staticAgendas === undefined ?
         undefined :
         Array.from(agenda.staticAgendas.entries()),
+      agendaStyle: agenda.agendaStyle,
     };
   }
 
@@ -133,11 +118,13 @@ export class PoliticalAgendas {
       return {
         currentAgenda: d.currentAgenda,
         staticAgendas: new Map(d.staticAgendas),
+        agendaStyle: d.agendaStyle,
       };
     }
     return {
       currentAgenda: d.currentAgenda,
       staticAgendas: undefined,
+      agendaStyle: d.agendaStyle,
     };
   }
 }
