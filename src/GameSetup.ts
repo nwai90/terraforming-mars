@@ -22,10 +22,10 @@ import {VastitasBorealisBoard} from './boards/VastitasBorealisBoard';
 
 export class GameSetup {
   public static chooseMilestonesAndAwards = function(gameOptions: GameOptions): IDrawnMilestonesAndAwards {
-    let drawnMilestonesAndAwards = {
+    let drawnMilestonesAndAwards: IDrawnMilestonesAndAwards = {
       milestones: [],
       awards: [],
-    } as IDrawnMilestonesAndAwards;
+    };
 
     const includeVenus = gameOptions.venusNextExtension;
     const requiredQty = includeVenus ? 6 : 5;
