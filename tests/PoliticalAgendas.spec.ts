@@ -68,7 +68,7 @@ describe('PoliticalAgendas', () => {
     turmoil.endGeneration(game);
     expect(game.deferredActions).has.lengthOf(1);
 
-    const action = game.deferredActions.shift() as ChoosePoliticalAgenda;
+    const action = game.deferredActions.peek() as ChoosePoliticalAgenda;
     expect(action instanceof ChoosePoliticalAgenda).is.true;
 
     const orOptions = action.execute() as OrOptions;
