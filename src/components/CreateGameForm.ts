@@ -342,13 +342,6 @@ export const CreateGameForm = Vue.component('create-game-form', {
     getPlayerContainerColorClass: function(color: string): string {
       return playerColorClass(color.toLowerCase(), 'bg_transparent');
     },
-    showSecretOptions: function(): boolean {
-      const uri = window.location.href.split('?');
-      if (uri.length === 2 && uri[1].indexOf('secret') >= 0) {
-        return true;
-      }
-      return false;
-    },
     serializeSettings: function() {
       const component = (this as any) as CreateGameModel;
 
@@ -586,7 +579,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
                                 <div class="create-game-expansion-icon expansion-icon-turmoil"></div>
                                 <span v-i18n>Turmoil</span>
                             </label>
-                            
+
                             <input type="checkbox" name="promo" id="promo-checkbox" v-model="promoCardsOption">
                             <label for="promo-checkbox" class="expansion-button">
                                 <div class="create-game-expansion-icon expansion-icon-promo"></div>
@@ -607,13 +600,12 @@ export const CreateGameForm = Vue.component('create-game-form', {
                                 <span v-i18n>Community</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#community" class="tooltip" target="_blank">&#9432;</a>
                             </label>
 
-                            <div v-if="showSecretOptions()">
                             <input type="checkbox" name="themoon" id="themoon-checkbox" v-model="moonExpansion">
                             <label for="themoon-checkbox" class="expansion-button">
                                 <div class="create-game-expansion-icon expansion-icon-themoon"></div>
                                 <span v-i18n>The Moon</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/The-Moon" class="tooltip" target="_blank">&#9432;</a>
+                                &nbsp;<span style="font-size: smaller;">α: alpha</span>
                             </label>
-                            </div>
 
                             <template v-if="turmoil">
                                 <input type="checkbox" name="politicalAgendas" id="politicalAgendas-checkbox" v-on:change="politicalAgendasExtensionToggle()">
@@ -797,7 +789,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
                                 <span v-i18n>Beginner Options</span>
                             </label>
                         </div>
-                        
+
                         <div class="create-game-players-cont" v-if="playersCount > 1">
                             <div class="container">
                                 <div class="columns">
@@ -820,13 +812,13 @@ export const CreateGameForm = Vue.component('create-game-form', {
                                                     <input type="checkbox" v-model="newPlayer.beginner">
                                                     <i class="form-icon"></i> <span v-i18n>Beginner?</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#beginner-corporation" class="tooltip" target="_blank">&#9432;</a>
                                                 </label>
-            
+
                                                 <label class="form-label">
                                                     <input type="number" class="form-input form-inline player-handicap" value="0" min="0" :max="10" v-model.number="newPlayer.handicap" />
                                                     <i class="form-icon"></i><span v-i18n>TR Boost</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#tr-boost" class="tooltip" target="_blank">&#9432;</a>
                                                 </label>
                                             </template>
-            
+
                                             <label class="form-radio form-inline" v-if="!randomFirstPlayer">
                                                 <input type="radio" name="firstIndex" :value="newPlayer.index" v-model="firstIndex">
                                                 <i class="form-icon"></i> <span v-i18n>Goes First?</span>
@@ -849,7 +841,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
                             <label>
                                 <div v-on:click="downloadCurrentSettings()" class="btn btn-primary btn-action btn-lg import-export-settings-btn"><i class="icon icon-download import-export-settings-icon"></i></div>
                             </label>
-                        </div>  
+                        </div>
                     </div>
                 </div>
             </div>
