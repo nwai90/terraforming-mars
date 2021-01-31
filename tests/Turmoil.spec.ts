@@ -256,7 +256,7 @@ describe('Turmoil', function() {
     expect(t.comingGlobalEvent!.name).eq('Celebrity Leaders');
     expect(t.comingGlobalEvent!.revealedDelegate).eq('Unity');
     expect(t.delegateReserve).deep.eq(['blue-id', 'red-id', 'green-id', 'NEUTRAL', 'NEUTRAL']);
-    expect(t.rulingParty!.description).eq('Want to see a new Earth as soon as possible.');
+    expect(t.rulingParty!.description).eq('Wants to see a new Earth as soon as possible.');
     expect(t.getPartyByName(PartyName.KELVINISTS)!.description).eq('Pushes for rapid terraforming, usually employing a heat-first strategy.');
   });
 

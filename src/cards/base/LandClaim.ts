@@ -28,6 +28,10 @@ export class LandClaim extends Card implements IProjectCard {
     return player.game.board.getNonReservedLandSpaces().length > 0;
   }
   public play(player: Player) {
+    return LandClaim.selectSpaceForClaim(player);
+  }
+
+  public static selectSpaceForClaim(player: Player): SelectSpace {
     return new SelectSpace(
       'Select space for claim',
       player.game.board.getNonReservedLandSpaces(),

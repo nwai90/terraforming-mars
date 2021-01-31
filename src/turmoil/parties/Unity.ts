@@ -152,7 +152,7 @@ class UnityPolicy03 implements Policy {
 
 class UnityPolicy04 implements Policy {
   id = TurmoilPolicy.UNITY_POLICY_4;
-  description: string = 'Cards with Space tags cost 2 MC less to play';
+  description: string = 'When you play a Space tag, you pay 2 MC less for it';
   isDefault = false;
 }
 

@@ -64,7 +64,7 @@ class EmpowerPolicy01 implements Policy {
           (amount: number) => {
             player.setResource(Resources.MEGACREDITS, -amount);
             player.setResource(Resources.ENERGY, amount);
-
+            player.game.log('${0} used Turmoil Empower action', (b) => b.player(player));
             player.game.log('${0} spent ${1} MC to gain ${2} energy', (b) => b.player(player).number(amount).number(amount));
             return undefined;
           },
@@ -97,7 +97,7 @@ class EmpowerPolicy03 implements Policy {
 
 class EmpowerPolicy04 implements Policy {
   id = TurmoilPolicy.EMPOWER_POLICY_4;
-  description: string = 'Cards with Power tags cost 3 MC less to play';
+  description: string = 'When you play a Power tag, you pay 3 MC less for it';
   isDefault = false;
 }
 

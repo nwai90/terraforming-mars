@@ -73,6 +73,7 @@ class SpomePolicy02 implements Policy {
   action(player: Player) {
     player.increaseFleetSize();
     player.turmoilPolicyActionUsed = true;
+    player.game.log('${0} used Turmoil Spome action', (b) => b.player(player));
     return undefined;
   }
 }

@@ -62,17 +62,30 @@ class PopulistsPolicy02 implements Policy {
 
 class PopulistsPolicy03 implements Policy {
   id = TurmoilPolicy.POPULISTS_POLICY_3;
-  description: string = 'Mark all blue card actions as used this generation';
+  description: string = 'If your Terraform Rating was raised this generation, gain 8 MC';
   isDefault = false;
+
+  canAct(player: Player) {
+    return player.hasIncreasedTerraformRatingThisGeneration && player.turmoilPolicyActionUsed === false;
+  }
+
+  action(player: Player) {
+    const game = player.game;
+    game.log('${0} used Turmoil Populists action', (b) => b.player(player));
+    player.setResource(Resources.MEGACREDITS, 8);
+    player.turmoilPolicyActionUsed = true;
+
+    return undefined;
+  }
 }
 
 class PopulistsPolicy04 implements Policy {
   id = TurmoilPolicy.POPULISTS_POLICY_4;
-  description: string = 'When you place a tile, gain 2 MC';
+  description: string = 'When you place a tile, gain 3 MC';
   isDefault = false;
 
   onTilePlaced(player: Player) {
-    player.setResource(Resources.MEGACREDITS, 2);
+    player.setResource(Resources.MEGACREDITS, 3);
   }
 }
 

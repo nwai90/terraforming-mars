@@ -111,7 +111,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
   // This generation / this round
   public actionsTakenThisRound: number = 0;
-  private actionsThisGeneration: Set<CardName> = new Set();
+  public actionsThisGeneration: Set<CardName> = new Set();
   public lastCardPlayed: IProjectCard | undefined;
   private corporationInitialActionDone: boolean = false;
   public remainingStallActionsCount: number = 5;
@@ -932,13 +932,8 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
   }
 
-  private getPlayableActionCards(): Array<ICard> {
+  public getPlayableActionCards(): Array<ICard> {
     const result: Array<ICard> = [];
-
-    // PoliticalAgendas Populists P3 hook
-    if (PartyHooks.shouldApplyPolicy(this.game, PartyName.POPULISTS, TurmoilPolicy.POPULISTS_POLICY_3)) {
-      return result;
-    }
 
     if (
       this.corporationCard !== undefined &&
@@ -1201,6 +1196,12 @@ export class Player implements ISerializable<SerializedPlayer> {
     // PoliticalAgendas Empower P4 hook
     if (card.tags.includes(Tags.ENERGY) && PartyHooks.shouldApplyPolicy(this.game, PartyName.EMPOWER, TurmoilPolicy.EMPOWER_POLICY_4)) {
       cost -= 3;
+    }
+
+    // PoliticalAgendas Bureaucrats P4 hook
+    if (card.tags.includes(Tags.EARTH) && PartyHooks.shouldApplyPolicy(this.game, PartyName.BUREAUCRATS, TurmoilPolicy.BUREAUCRATS_POLICY_4)) {
+      const earthTagCount = card.tags.filter((tag) => tag === Tags.EARTH).length;
+      cost -= earthTagCount * 3;
     }
 
     return Math.max(cost, 0);

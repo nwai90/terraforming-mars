@@ -17,6 +17,8 @@ import {AgendaStyle, PoliticalAgendasData, PoliticalAgendas} from './PoliticalAg
 import {CardName} from '../CardName';
 import {Spome} from './parties/Spome';
 import {Empower} from './parties/Empower';
+import {PartyHooks} from './parties/PartyHooks';
+import {TurmoilPolicy} from './TurmoilPolicy';
 
 export type NeutralPlayer = 'NEUTRAL';
 
@@ -231,11 +233,12 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       }
 
       // 3 - New Government
+      const colonyTradePenaltyActive = PartyHooks.shouldApplyPolicy(game, PartyName.BUREAUCRATS, TurmoilPolicy.BUREAUCRATS_POLICY_2);
       this.rulingParty = this.dominantParty;
 
       // 3.a - Ruling Policy change
       if (this.rulingParty) {
-        this.setRulingParty(game);
+        this.setRulingParty(game, colonyTradePenaltyActive);
       }
 
       // 3.b - New dominant party
@@ -277,10 +280,13 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
     }
 
     // Ruling Party changes
-    public setRulingParty(game: Game): void {
+    public setRulingParty(game: Game, colonyTradePenaltyActive: boolean): void {
       if (this.rulingParty !== undefined) {
         // Cleanup previous party effects
-        game.getPlayers().forEach((player) => player.hasTurmoilScienceTagBonus = false);
+        game.getPlayers().forEach((player) => {
+          player.hasTurmoilScienceTagBonus = false;
+          if (colonyTradePenaltyActive) player.colonyTradeDiscount += 1;
+        });
 
         // Change the chairman
         if (this.chairman) {
@@ -334,7 +340,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
         throw new Error(`Policy id ${policyId} not found in party ${rulingParty.name}`);
       }
       game.log('The ruling policy is ${0}', (b) => b.string(policy.description).string(policyId));
-      // Resolve Ruling Policy for Scientists P4
+      // Resolve Ruling Policy for Scientists P4 and Bureaucrats P2
       if (policy.apply !== undefined) {
         policy.apply(game);
       }

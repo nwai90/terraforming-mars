@@ -5,13 +5,14 @@ import {Player} from '../Player';
 import {PlayerInput} from '../PlayerInput';
 import {Resources} from '../Resources';
 import {SpaceType} from '../SpaceType';
+import {BUREAUCRATS_POLICY_1} from './parties/Bureaucrats';
 import {EMPOWER_POLICY_1, EMPOWER_POLICY_2} from './parties/Empower';
 import {GREENS_POLICY_2, GREENS_POLICY_3, GREENS_POLICY_4} from './parties/Greens';
 import {KELVINISTS_POLICY_1, KELVINISTS_POLICY_3, KELVINISTS_POLICY_4} from './parties/Kelvinists';
 import {MARS_FIRST_POLICY_2, MARS_FIRST_POLICY_4} from './parties/MarsFirst';
 import {PartyHooks} from './parties/PartyHooks';
 import {PartyName} from './parties/PartyName';
-import {POPULISTS_POLICY_2, POPULISTS_POLICY_4} from './parties/Populists';
+import {POPULISTS_POLICY_2, POPULISTS_POLICY_3, POPULISTS_POLICY_4} from './parties/Populists';
 import {REDS_POLICY_2, REDS_POLICY_3} from './parties/Reds';
 import {SCIENTISTS_POLICY_1} from './parties/Scientists';
 import {SPOME_POLICY_2, SPOME_POLICY_3, SPOME_POLICY_4} from './parties/Spome';
@@ -182,6 +183,36 @@ export class TurmoilHandler {
             empowerPolicy.description,
             'Pay',
             () => empowerPolicy.action(player),
+          ),
+        );
+      }
+    }
+
+    // Turmoil Bureaucrats action
+    if (PartyHooks.shouldApplyPolicy(game, PartyName.BUREAUCRATS, TurmoilPolicy.BUREAUCRATS_DEFAULT_POLICY)) {
+      const bureaucratsPolicy = BUREAUCRATS_POLICY_1;
+
+      if (bureaucratsPolicy.canAct(player)) {
+        options.push(
+          new SelectOption(
+            bureaucratsPolicy.description,
+            'Send delegate',
+            () => bureaucratsPolicy.action(player),
+          ),
+        );
+      }
+    }
+
+    // Turmoil Populists action
+    if (PartyHooks.shouldApplyPolicy(game, PartyName.POPULISTS, TurmoilPolicy.POPULISTS_POLICY_3)) {
+      const populistsPolicy = POPULISTS_POLICY_3;
+
+      if (populistsPolicy.canAct(player)) {
+        options.push(
+          new SelectOption(
+            populistsPolicy.description,
+            'Select',
+            () => populistsPolicy.action(player),
           ),
         );
       }
