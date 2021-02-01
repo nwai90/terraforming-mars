@@ -5,8 +5,9 @@ import {CardType} from '../../CardType';
 import {CardRenderer} from '../../render/CardRenderer';
 import {CardRenderItemSize} from '../../render/CardRenderItemSize';
 import {Card} from '../../Card';
-import {SelectCardToKeep} from '../../../deferredActions/SelectCardToKeep';
 import {LogHelper} from '../../../LogHelper';
+import {DrawCards} from '../../../deferredActions/DrawCards';
+import {DeferredAction} from '../../../deferredActions/DeferredAction';
 
 export class JunkVentures extends Card implements CorporationCard {
     constructor() {
@@ -58,7 +59,8 @@ export class JunkVentures extends Card implements CorporationCard {
       dealer.discarded = dealer.shuffleCards(dealer.discarded);
 
       const drawnCards = dealer.discarded.splice(0, 3);
-      game.defer(new SelectCardToKeep(player, 'Select card to take into hand', drawnCards));
+      game.defer(new DeferredAction(player, () => DrawCards.choose(player, drawnCards, {keepMax: 1})));
+
       return undefined;
     }
 }
