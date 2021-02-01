@@ -46,7 +46,7 @@ import {LunarDustProcessingPlant} from './LunarDustProcessingPlant';
 import {LunaResort} from './LunaResort';
 // import {LunarIndependenceWar} from './LunarIndependenceWar';
 // import {LunarIndustryComplex} from './LunarIndustryComplex';
-// import {LunarMineUrbanization} from './LunarMineUrbanization';
+import {LunarMineUrbanization} from './LunarMineUrbanization';
 import {LunarObservationPost} from './LunarObservationPost';
 import {LunarPlanningOffice} from './LunarPlanningOffice';
 import {LunarSecurityStations} from './LunarSecurityStations';
@@ -73,7 +73,7 @@ import {MoonRoadStandardProject} from './MoonRoadStandardProject';
 // import {MoonTether} from './MoonTether';
 // import {NanotechIndustries} from './NanotechIndustries';
 import {NewColonyPlanningInitiaitives} from './NewColonyPlanningInitiaitives';
-// import {OffWorldCityLiving} from './OffWorldCityLiving';
+import {OffWorldCityLiving} from './OffWorldCityLiving';
 // import {OrbitalPowerGrid} from './OrbitalPowerGrid';
 // import {PreliminaryDarkside} from './PreliminaryDarkside';
 import {PrideoftheEarthArkship} from './PrideoftheEarthArkship';
@@ -156,9 +156,9 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     //   // Start of second pack.
     {cardName: CardName.REVOLTING_COLONISTS, Factory: RevoltingColonists},
     {cardName: CardName.COSMIC_RADIATION, Factory: CosmicRadiation},
-    //   {cardName: CardName.OFF_WORLD_CITY_LIVING, Factory: OffWorldCityLiving},
+    {cardName: CardName.OFF_WORLD_CITY_LIVING, Factory: OffWorldCityLiving},
     //   {cardName: CardName.ROAD_PIRACY, Factory: RoadPiracy},
-    //   {cardName: CardName.LUNAR_MINE_URBANIZATION, Factory: LunarMineUrbanization},
+    {cardName: CardName.LUNAR_MINE_URBANIZATION, Factory: LunarMineUrbanization},
     //   {cardName: CardName.THORIUM_RUSH, Factory: ThoriumRush},
     //   {cardName: CardName.HE3_PRODUCTION_QUOTAS, Factory: HE3ProductionQuotas, compatibility: GameModule.Turmoil},
     //   {cardName: CardName.LUNA_CONFERENCE, Factory: LunaConference, compatibility: GameModule.Turmoil},
