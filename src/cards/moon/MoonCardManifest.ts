@@ -11,7 +11,7 @@ import {ColonistShuttles} from './ColonistShuttles';
 import {CopernicusSolarArrays} from './CopernicusSolarArrays';
 // import {CopernicusTower} from './CopernicusTower';
 import {CoreMine} from './CoreMine';
-// import {CosmicRadiation} from './CosmicRadiation';
+import {CosmicRadiation} from './CosmicRadiation';
 // import {CrescentResearchAssociation} from './CrescentResearchAssociation';
 import {DarksideIncubationPlant} from './DarksideIncubationPlant';
 import {DarksideMeteorBombardment} from './DarksideMeteorBombardment';
@@ -49,6 +49,7 @@ import {LunaResort} from './LunaResort';
 // import {LunarMineUrbanization} from './LunarMineUrbanization';
 import {LunarObservationPost} from './LunarObservationPost';
 import {LunarPlanningOffice} from './LunarPlanningOffice';
+import {LunarSecurityStations} from './LunarSecurityStations';
 // import {LunarSteel} from './LunarSteel';
 import {LunarTradeFleet} from './LunarTradeFleet';
 // import {LunaSenate} from './LunaSenate';
@@ -77,7 +78,7 @@ import {NewColonyPlanningInitiaitives} from './NewColonyPlanningInitiaitives';
 // import {PreliminaryDarkside} from './PreliminaryDarkside';
 import {PrideoftheEarthArkship} from './PrideoftheEarthArkship';
 // import {ProcessorFactory} from './ProcessorFactory';
-// import {RevoltingColonists} from './RevoltingColonists';
+import {RevoltingColonists} from './RevoltingColonists';
 // import {RoadPiracy} from './RoadPiracy';
 // import {RoverDriversUnion} from './RoverDriversUnion';
 // import {RustEatingBacteria} from './RustEatingBacteria';
@@ -143,7 +144,7 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.HEAVY_DUTY_ROVERS, Factory: HeavyDutyRovers},
     {cardName: CardName.MICROSINGULARITY_PLANT, Factory: MicrosingularityPlant},
     {cardName: CardName.HELIOSTAT_MIRROR_ARRAY, Factory: HeliostatMirrorArray},
-    //   // {cardName: CardName.LUNAR_SECURITY_STATIONS, Factory: LunarSecurityStations},
+    {cardName: CardName.LUNAR_SECURITY_STATIONS, Factory: LunarSecurityStations},
     {cardName: CardName.HYPERSENSITIVE_SILICON_CHIP_FACTORY, Factory: HypersensitiveSiliconChipFactory},
     {cardName: CardName.COPERNICUS_SOLAR_ARRAYS, Factory: CopernicusSolarArrays},
     {cardName: CardName.DARKSIDE_INCUBATION_PLANT, Factory: DarksideIncubationPlant},
@@ -153,8 +154,8 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.HE3_REFINERY, Factory: HE3Refinery},
     {cardName: CardName.HE3_LOBBYISTS, Factory: HE3Lobbyists},
     //   // Start of second pack.
-    //   {cardName: CardName.REVOLTING_COLONISTS, Factory: RevoltingColonists},
-    //   {cardName: CardName.COSMIC_RADIATION, Factory: CosmicRadiation},
+    {cardName: CardName.REVOLTING_COLONISTS, Factory: RevoltingColonists},
+    {cardName: CardName.COSMIC_RADIATION, Factory: CosmicRadiation},
     //   {cardName: CardName.OFF_WORLD_CITY_LIVING, Factory: OffWorldCityLiving},
     //   {cardName: CardName.ROAD_PIRACY, Factory: RoadPiracy},
     //   {cardName: CardName.LUNAR_MINE_URBANIZATION, Factory: LunarMineUrbanization},
