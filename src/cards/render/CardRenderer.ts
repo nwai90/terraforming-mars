@@ -419,6 +419,11 @@ class Builder {
     return this;
   }
 
+  public data() {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.DATA_RESOURCE));
+    return this;
+  }
+
   public multiplierWhite() {
     this._addRowItem(new CardRenderItem(CardRenderItemType.MULTIPLIER_WHITE));
     return this;
@@ -465,8 +470,8 @@ class Builder {
     return this;
   }
 
-  public moonMineRate(amount: number = 1): Builder {
-    this._addRowItem(new CardRenderItem(CardRenderItemType.MOON_MINE_RATE, amount));
+  public moonMiningRate(amount: number = 1): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.MOON_MINING_RATE, amount));
     return this;
   }
 
