@@ -61,6 +61,9 @@ export const BoardSpace = Vue.component('board-space', {
     aresExtension: {
       type: Boolean,
     },
+    isTileHidden: {
+      type: Boolean,
+    },
   },
   data: function() {
     return {};
@@ -135,6 +138,10 @@ export const BoardSpace = Vue.component('board-space', {
       if (this.is_selectable) {
         css += ' board-space-selectable';
       }
+      return css;
+    },
+    getTileClass: function(): string {
+      let css = 'board-space';
       const tileType = this.space.tileType;
       if (tileType !== undefined) {
         switch (this.space.tileType) {
@@ -168,15 +175,19 @@ export const BoardSpace = Vue.component('board-space', {
           }
         }
       }
-
+      if (this.isTileHidden) {
+        css += ' board-hidden-tile';
+      }
       return css;
     },
   },
   template: `
-        <div :class="getMainClass()" :data_space_id="space.id" :title="getVerboseTitle(space.tileType)">
+        <div :class="getMainClass()" :data_space_id="space.id">
+            <div :class="getTileClass()" :title="getVerboseTitle(space.tileType)"></div>
             <div class="board-space-text" v-if="text" v-i18n>{{ text }}</div>
             <bonus :bonus="space.bonus" v-if="space.tileType === undefined"></bonus>
-            <div :class="'board-cube board-cube--'+space.color" v-if="space.color !== undefined"></div>
+            <bonus :bonus="space.bonus" v-if="space.tileType !== undefined && isTileHidden"></bonus>
+            <div :class="'board-cube board-cube--'+space.color" v-if="space.color !== undefined && !isTileHidden "></div>
         </div>
     `,
 });
