@@ -29,29 +29,29 @@ export abstract class MiningCard extends Card implements IProjectCard {
       metadata,
     });
   }
-    public bonusResource: Resources | undefined = undefined;
 
-    public canPlay(player: Player): boolean {
-      return this.getAvailableSpaces(player).length > 0;
+  public bonusResource: Resources | undefined = undefined;
+
+  public canPlay(player: Player): boolean {
+    return this.getAvailableSpaces(player).length > 0;
+  }
+
+  private isAres(): boolean {
+    return this.name === CardName.MINING_AREA_ARES || this.name === CardName.MINING_RIGHTS_ARES;
+  }
+
+  private getAdjacencyBonus(bonusType: SpaceBonus): IAdjacencyBonus | undefined {
+    if (this.isAres()) {
+      return {bonus: [bonusType]};
     }
+  return undefined;
+  }
 
-    private isAres(): boolean {
-      return this.name === CardName.MINING_AREA_ARES ||
-               this.name === CardName.MINING_RIGHTS_ARES;
-    }
-
-    private getAdjacencyBonus(bonusType: SpaceBonus): IAdjacencyBonus | undefined {
-      if (this.isAres()) {
-        return {bonus: [bonusType]};
-      }
-      return undefined;
-    }
-
-    protected getAvailableSpaces(player: Player): Array<ISpace> {
-      return player.game.board.getAvailableSpacesOnLand(player)
-      // Ares-only: exclude spaces already covered (which is only returned if the tile is a hazard tile.)
-      .filter((space) => space.tile === undefined)
-      .filter((space) => space.bonus.indexOf(SpaceBonus.STEEL) !== -1 || space.bonus.indexOf(SpaceBonus.TITANIUM) !== -1);
+  protected getAvailableSpaces(player: Player): Array<ISpace> {
+    return player.game.board.getAvailableSpacesOnLand(player)
+    // Ares-only: exclude spaces already covered (which is only returned if the tile is a hazard tile.)
+    .filter((space) => space.tile === undefined)
+    .filter((space) => space.bonus.includes(SpaceBonus.STEEL) || space.bonus.includes(SpaceBonus.TITANIUM));
   }
 
   private getSelectTitle(): string {

@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import {CardName} from '../../CardName';
 import {PlayerModel} from '../../models/PlayerModel';
 import {PlayerResource} from './PlayerResource';
 import {Resources} from '../../Resources';
@@ -15,6 +16,9 @@ export const PlayerResources = Vue.component('player-resources', {
     };
   },
   methods: {
+    canUseHeatAsMegaCredits: function(): boolean {
+      return this.player.corporationCard?.name === CardName.HELION;
+    },
   },
   components: {
     'player-resource': PlayerResource,
@@ -26,7 +30,7 @@ export const PlayerResources = Vue.component('player-resources', {
             <player-resource :type="resources.TITANIUM" :count="player.titanium" :production="player.titaniumProduction" :titaniumValue="player.titaniumValue" :turmoil="player.turmoil" :corporationCard="player.corporationCard"></player-resource>
             <player-resource :type="resources.PLANTS" :count="player.plants" :production="player.plantProduction" :plantsAreProtected="player.plantsAreProtected" :plantsNeededForGreenery="player.plantsNeededForGreenery"></player-resource>
             <player-resource :type="resources.ENERGY" :count="player.energy" :production="player.energyProduction"></player-resource>
-            <player-resource :type="resources.HEAT" :count="player.heat" :production="player.heatProduction" :corporationCard="player.corporationCard"></player-resource>
+            <player-resource :type="resources.HEAT" :count="player.heat" :production="player.heatProduction" :canUseHeatAsMegaCredits="canUseHeatAsMegaCredits()" :corporationCard="player.corporationCard"></player-resource>
         </div>
     `,
 });
