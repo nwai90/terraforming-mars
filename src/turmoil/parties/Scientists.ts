@@ -85,7 +85,7 @@ class ScientistsPolicy03 implements Policy {
 
 class ScientistsPolicy04 implements Policy {
   id = TurmoilPolicy.SCIENTISTS_POLICY_4;
-  description: string = 'Cards with Science tag requirements may be played with 1 less Science tag';
+  description: string = 'Cards with Science tag requirements cost 1 less tag to play';
   isDefault = false;
 
   apply(game: Game) {

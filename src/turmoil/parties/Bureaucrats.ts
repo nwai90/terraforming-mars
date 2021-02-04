@@ -83,7 +83,7 @@ class BureaucratsPolicy02 implements Policy {
 
 class BureaucratsPolicy03 implements Policy {
   id = TurmoilPolicy.BUREAUCRATS_POLICY_3;
-  description: string = 'Pay 3 MC to place your player marker on a non-reserved area'; // TODO
+  description: string = 'Pay 3 MC to place your player marker on a non-reserved area';
   isDefault = false;
 
   canAct(player: Player) {

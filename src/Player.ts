@@ -574,6 +574,11 @@ export class Player implements ISerializable<SerializedPlayer> {
       requirementsBonus += 2;
     }
 
+    // PoliticalAgendas Transhumans P3 hook
+    if (PartyHooks.shouldApplyPolicy(this.game, PartyName.TRANSHUMANS, TurmoilPolicy.TRANSHUMANS_POLICY_3)) {
+      requirementsBonus += 50;
+    }
+
     return requirementsBonus;
   }
 
@@ -699,6 +704,11 @@ export class Player implements ISerializable<SerializedPlayer> {
       tagCount += 1;
     }
 
+    // PoliticalAgendas Transhumans P1 hook
+    if (PartyHooks.shouldApplyPolicy(this.game, PartyName.TRANSHUMANS, TurmoilPolicy.TRANSHUMANS_DEFAULT_POLICY)) {
+      tagCount += 1;
+    }
+
     if (includeTagSubstitutions) {
       // Earth Embassy hook
       if (tag === Tags.EARTH && this.playedCards.some((c) => c.name === CardName.EARTH_EMBASSY)) {
@@ -707,8 +717,8 @@ export class Player implements ISerializable<SerializedPlayer> {
       if (tag !== Tags.WILDCARD) {
         tagCount += this.getTagCount(Tags.WILDCARD, includeEventsTags, false);
       }
-    } else {
     }
+
     return tagCount;
   }
 
