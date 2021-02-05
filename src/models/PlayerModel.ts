@@ -51,6 +51,7 @@ export interface PlayerModel {
     moon: MoonModel | undefined;
     name: string;
     needsToDraft: boolean | undefined;
+    needsToResearch: boolean | undefined;
     noTagsCount: number;
     oceans: number;
     oxygenLevel: number;

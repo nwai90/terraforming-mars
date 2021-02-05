@@ -65,8 +65,16 @@ export const PlayersOverview = Vue.component('players-overview', {
       return result.slice(0, -1);
     },
     getActionLabel(player: PlayerModel): string {
-      if (!this.player.draftedPlayers.includes(player.color) && this.player.phase === Phase.DRAFTING) return ActionLabel.DRAFTING;
-      if (this.player.phase === Phase.DRAFTING) return ActionLabel.NONE;
+      if (this.player.phase === Phase.DRAFTING) {
+        if (!this.player.draftedPlayers.includes(player.color)) return ActionLabel.DRAFTING;
+        return ActionLabel.NONE;
+      }
+
+      if (this.player.phase === Phase.RESEARCH) {
+        if (player.needsToResearch) return ActionLabel.RESEARCHING;
+        return ActionLabel.NONE;
+      }
+
       if (this.player.passedPlayers.includes(player.color)) return ActionLabel.PASSED;
       if (player.isActive) return ActionLabel.ACTIVE;
 
