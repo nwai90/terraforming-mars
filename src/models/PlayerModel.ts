@@ -51,7 +51,6 @@ export interface PlayerModel {
     moon: MoonModel | undefined;
     name: string;
     needsToDraft: boolean | undefined;
-    needsToResearch: boolean | undefined;
     noTagsCount: number;
     oceans: number;
     oxygenLevel: number;
@@ -65,6 +64,7 @@ export interface PlayerModel {
     playedCards: Array<CardModel>;
     players: Array<PlayerModel>;
     preludeCardsInHand: Array<CardModel>;
+    researchedPlayers: Array<Color>;
     selfReplicatingRobotsCards: Array<CardModel>;
     spaces: Array<SpaceModel>;
     steel: number;

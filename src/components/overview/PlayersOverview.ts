@@ -71,7 +71,7 @@ export const PlayersOverview = Vue.component('players-overview', {
       }
 
       if (this.player.phase === Phase.RESEARCH) {
-        if (player.needsToResearch) return ActionLabel.RESEARCHING;
+        if (!this.player.researchedPlayers.includes(player.color)) return ActionLabel.RESEARCHING;
         return ActionLabel.NONE;
       }
 

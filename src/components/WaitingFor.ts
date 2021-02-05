@@ -74,8 +74,13 @@ export const WaitingFor = Vue.component('waiting-for', {
         if (xhr.status === 200) {
           const player = (this.$root as unknown as typeof mainAppSettings.data).player;
           const draftedPlayers = (xhr.response as PlayerModel).draftedPlayers;
+          const researchedPlayers = (xhr.response as PlayerModel).researchedPlayers;
+
           if (player !== undefined && player.draftedPlayers.length !== draftedPlayers.length) {
             player.draftedPlayers = draftedPlayers;
+            this.$root.$emit('updatePlayersOverview');
+          } else if (player !== undefined && player.researchedPlayers.length !== researchedPlayers.length) {
+            player.researchedPlayers = researchedPlayers;
             this.$root.$emit('updatePlayersOverview');
           }
         }
@@ -118,7 +123,7 @@ export const WaitingFor = Vue.component('waiting-for', {
               // Something changed, let's refresh UI
               root.updatePlayer();
               return;
-            } else if (player !== undefined && player.phase === Phase.DRAFTING) {
+            } else if (player !== undefined && (player.phase === Phase.DRAFTING || player.phase === Phase.RESEARCH)) {
               this.updatePlayersOverview();
             }
             (vueApp).waitForUpdate();
@@ -131,7 +136,7 @@ export const WaitingFor = Vue.component('waiting-for', {
       };
       ui_update_timeout_id = window.setTimeout(askForUpdate, this.waitingForTimeout);
     },
-    checkDraftStatus: function() {
+    checkDraftAndResearchStatus: function() {
       clearTimeout(ui_update_timeout_id);
       const checkDrafters = () => {
         this.updatePlayersOverview();
@@ -145,8 +150,8 @@ export const WaitingFor = Vue.component('waiting-for', {
       this.waitForUpdate();
       return createElement('div', $t('Not your turn to take any actions'));
     }
-    if (this.player.phase === Phase.DRAFTING) {
-      this.checkDraftStatus();
+    if (this.player.phase === Phase.DRAFTING || this.player.phase === Phase.RESEARCH) {
+      this.checkDraftAndResearchStatus();
     }
     const input = new PlayerInputFactory().getPlayerInput(createElement, this.players, this.player, this.waitingfor, (out: Array<Array<string>>) => {
       const xhr = new XMLHttpRequest();
