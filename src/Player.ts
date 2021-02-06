@@ -793,7 +793,9 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
   }
 
-  private runInput(input: ReadonlyArray<ReadonlyArray<string>>, pi: PlayerInput): void {
+  // This is only public for a test. It's not great.
+  // TODO(kberg): Fix taht.
+  public runInput(input: ReadonlyArray<ReadonlyArray<string>>, pi: PlayerInput): void {
     if (pi instanceof AndOptions) {
       this.checkInputLength(input, pi.options.length);
       for (let i = 0; i < input.length; i++) {
@@ -847,6 +849,9 @@ export class Player implements ISerializable<SerializedPlayer> {
       const mappedCards: Array<ICard> = [];
       for (const cardName of input[0]) {
         mappedCards.push(this.getCard(pi.cards, cardName));
+        if (pi.enabled?.[pi.cards.findIndex((card) => card.name === cardName)] === false) {
+          throw new Error('Selected unavailable card');
+        }
       }
       this.runInputCb(pi.cb(mappedCards));
     } else if (pi instanceof SelectAmount) {
@@ -1740,26 +1745,24 @@ export class Player implements ISerializable<SerializedPlayer> {
       (canUseMicrobes ? this.getMicrobesCanSpend() * 2 : 0);
   }
 
-  // Public for testing
-  public getPlayableStandardProjects(): Array<StandardProjectCard> {
-    // TODO(kberg): Filter playability based on the project's reserve units.
+  private getStandardProjects(): Array<StandardProjectCard> {
     return new CardLoader(this.game.gameOptions)
       .getStandardProjects()
-      .filter((card) => card.name !== CardName.SELL_PATENTS_STANDARD_PROJECT && card.canAct(this))
+      .filter((card) => card.name !== CardName.SELL_PATENTS_STANDARD_PROJECT)
       .sort((a, b) => a.cost - b.cost);
   }
 
-  private getPlayableStandardProjectOption(): PlayerInput | undefined {
-    const standardProjects: Array<StandardProjectCard> = this.getPlayableStandardProjects();
-    if (standardProjects.length === 0) {
-      return undefined;
-    }
+  // Public for testing. TODO: make protected using the TestPlayer class.
+  public getStandardProjectOption(): SelectCard<StandardProjectCard> {
+    const standardProjects: Array<StandardProjectCard> = this.getStandardProjects();
 
     return new SelectCard(
       'Standard projects',
       'Confirm',
       standardProjects,
       (card) => card[0].action(this),
+      1, 1, false,
+      standardProjects.map((card) => card.canAct(this)),
     );
   }
 
@@ -1954,10 +1957,8 @@ export class Player implements ISerializable<SerializedPlayer> {
       action.options.push(remainingAwards);
     }
 
-    const standardProjectsOption = this.getPlayableStandardProjectOption();
-    if (standardProjectsOption !== undefined) {
-      action.options.push(standardProjectsOption);
-    }
+    const standardProjectsOption = this.getStandardProjectOption();
+    action.options.push(standardProjectsOption);
 
     action.options.push(
       this.passOption(),

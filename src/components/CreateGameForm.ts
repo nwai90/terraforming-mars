@@ -56,6 +56,7 @@ export interface CreateGameModel {
     clonedGameData: IGameData | undefined;
     cloneGameData: Array<IGameData>;
     requiresVenusTrackCompletion: boolean;
+    requiresMoonTrackCompletion: boolean;
     seededGame: boolean;
 }
 
@@ -129,6 +130,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       cloneGameData: [],
       allOfficialExpansions: false,
       requiresVenusTrackCompletion: false,
+      requiresMoonTrackCompletion: false,
     };
   },
   components: {
@@ -319,6 +321,11 @@ export const CreateGameForm = Vue.component('create-game-form', {
     toggleSolarPhase: function() {
       if (this.solarPhaseOption === false) this.silverCubeVariant = false;
     },
+    deselectMoonCompletion: function() {
+      if (this.$data.moonExpansion === false) {
+        this.requiresMoonTrackCompletion = false;
+      }
+    },
     getBoardColorClass: function(boardName: string): string {
       if (boardName === BoardName.ORIGINAL) {
         return 'create-game-board-hexagon create-game-tharsis';
@@ -416,6 +423,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       const beginnerOption = component.beginnerOption;
       const randomFirstPlayer = component.randomFirstPlayer;
       const requiresVenusTrackCompletion = component.requiresVenusTrackCompletion;
+      const requiresMoonTrackCompletion = component.requiresMoonTrackCompletion;
       let clonedGamedId: undefined | GameId = undefined;
 
       if (customColoniesList.length > 0) {
@@ -477,6 +485,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
         beginnerOption,
         randomFirstPlayer,
         requiresVenusTrackCompletion,
+        requiresMoonTrackCompletion,
       }, undefined, 4);
       return dataToSend;
     },
@@ -778,6 +787,13 @@ export const CreateGameForm = Vue.component('create-game-form', {
                                 <input type="checkbox" v-model="requiresVenusTrackCompletion" id="requiresVenusTrackCompletion-checkbox">
                                 <label for="requiresVenusTrackCompletion-checkbox">
                                     <span v-i18n>Venus Terraforming</span> &nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#venus-terraforming" class="tooltip" target="_blank">&#9432;</a>
+                                </label>
+                            </template>
+
+                            <template v-if="moonExpansion">
+                                <input type="checkbox" v-model="requiresMoonTrackCompletion" id="requiresMoonTrackCompletion-checkbox">
+                                <label for="requiresMoonTrackCompletion-checkbox">
+                                    <span v-i18n>Moon Terraforming</span> &nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#moon-terraforming" class="tooltip" target="_blank">&#9432;</a>
                                 </label>
                             </template>
                             
