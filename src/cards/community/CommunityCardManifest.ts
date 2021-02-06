@@ -29,6 +29,7 @@ import {BotanicalHarvest} from './preludes/BotanicalHarvest';
 import {MartianLumberYard} from './preludes/MartianLumberYard';
 import {FortifiedOutpost} from './preludes/FortifiedOutpost';
 import {GamblingHouse} from './preludes/GamblingHouse';
+import {LabourUnion} from './corporations/LabourUnion';
 
 export const COMMUNITY_CARD_MANIFEST = new CardManifest({
   module: GameModule.Community,
@@ -43,6 +44,7 @@ export const COMMUNITY_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.HOTSPRINGS, Factory: Hotsprings},
     {cardName: CardName.JUNK_VENTURES, Factory: JunkVentures},
     {cardName: CardName.ARISTARCHUS, Factory: Aristarchus},
+    {cardName: CardName.LABOUR_UNION, Factory: LabourUnion},
   ],
   preludeCards: [
     {cardName: CardName.RESEARCH_GRANT, Factory: ResearchGrant},

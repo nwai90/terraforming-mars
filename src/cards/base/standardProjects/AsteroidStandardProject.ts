@@ -24,7 +24,7 @@ export class AsteroidStandardProject extends StandardProjectCard {
   }
 
   public canAct(player: Player): boolean {
-    let asteroidCost = this.cost;
+    let asteroidCost = this.cost - super.discount(player);
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) asteroidCost += REDS_RULING_POLICY_COST;
 
     return player.canAfford(asteroidCost) && player.game.getTemperature() < constants.MAX_TEMPERATURE;

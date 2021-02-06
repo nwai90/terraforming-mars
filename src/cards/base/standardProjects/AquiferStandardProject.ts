@@ -32,7 +32,7 @@ export class AquiferStandardProject extends StandardProjectCard {
       additionalCost += REDS_RULING_POLICY_COST;
     }
 
-    return player.canAfford(this.cost + additionalCost);
+    return player.canAfford(this.cost - super.discount(player) + additionalCost);
   }
 
   actionEssence(player: Player): void {

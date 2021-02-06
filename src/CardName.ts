@@ -473,6 +473,7 @@ export enum CardName {
     HOTSPRINGS = 'Hotsprings',
     JUNK_VENTURES = 'Junk Ventures',
     ARISTARCHUS = 'Aristarchus',
+    LABOUR_UNION = 'Labour Union',
 
     // Community preludes
     VALUABLE_GASES = 'Valuable Gases',

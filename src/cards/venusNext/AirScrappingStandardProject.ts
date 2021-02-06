@@ -24,7 +24,7 @@ export class AirScrappingStandardProject extends StandardProjectCard {
   }
 
   public canAct(player: Player): boolean {
-    let cost = this.cost;
+    let cost = this.cost - super.discount(player);
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) cost += REDS_RULING_POLICY_COST;
 
     return player.canAfford(cost) && player.game.getVenusScaleLevel() < constants.MAX_VENUS_SCALE;
