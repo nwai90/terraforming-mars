@@ -1214,6 +1214,11 @@ export class Player implements ISerializable<SerializedPlayer> {
       cost -= earthTagCount * 3;
     }
 
+    // PoliticalAgendas Centrists P4 hook
+    if (card.tags.includes(Tags.EVENT) && PartyHooks.shouldApplyPolicy(this.game, PartyName.CENTRISTS, TurmoilPolicy.CENTRISTS_POLICY_4)) {
+      cost -= 2;
+    }
+
     return Math.max(cost, 0);
   }
 
@@ -1932,13 +1937,31 @@ export class Player implements ISerializable<SerializedPlayer> {
     // If you can pay to add a delegate to a party.
     if (this.game.gameOptions.turmoilExtension && this.game.turmoil !== undefined) {
       let sendDelegate;
-      if (this.game.turmoil?.lobby.has(this.id)) {
-        sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (from lobby)');
-      } else if (this.isCorporation(CardName.INCITE) && this.canAfford(3) && this.game.turmoil.getDelegates(this.id) > 0) {
-        sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (3 MC)', {cost: 3});
-      } else if (this.canAfford(5) && this.game.turmoil!.getDelegates(this.id) > 0) {
-        sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (5 MC)', {cost: 5});
+      const shouldApplyCentristsTax = PartyHooks.shouldApplyPolicy(this.game, PartyName.CENTRISTS, TurmoilPolicy.CENTRISTS_POLICY_2);
+
+      let canAffordLobbyDelegate = true;
+      if (shouldApplyCentristsTax && !this.canAfford(2)) canAffordLobbyDelegate = false;
+
+      let lobbyingCost: number = 3;
+      let inciteLobbyingCost: number = 5;
+
+      if (shouldApplyCentristsTax) {
+        lobbyingCost += 2;
+        inciteLobbyingCost += 2;
       }
+
+      if (this.game.turmoil?.lobby.has(this.id) && canAffordLobbyDelegate) {
+        sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (from lobby)');
+
+        if (shouldApplyCentristsTax) {
+          sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area from lobby (2 MC)', {cost: 2});
+        }
+      } else if (this.isCorporation(CardName.INCITE) && this.canAfford(inciteLobbyingCost) && this.game.turmoil!.getDelegates(this.id) > 0) {
+        sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (' + inciteLobbyingCost + ' MC)', {cost: inciteLobbyingCost});
+      } else if (this.canAfford(lobbyingCost) && this.game.turmoil!.getDelegates(this.id) > 0) {
+        sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (' + lobbyingCost + ' MC)', {cost: lobbyingCost});
+      }
+
       if (sendDelegate) {
         const input = sendDelegate.execute();
         if (input !== undefined) {

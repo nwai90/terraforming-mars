@@ -19,6 +19,10 @@ import {Spome} from './parties/Spome';
 import {Empower} from './parties/Empower';
 import {PartyHooks} from './parties/PartyHooks';
 import {TurmoilPolicy} from './TurmoilPolicy';
+import {Populists} from './parties/Populists';
+import {Bureaucrats} from './parties/Bureaucrats';
+import {Transhumans} from './parties/Transhumans';
+import {Centrists} from './parties/Centrists';
 
 export type NeutralPlayer = 'NEUTRAL';
 
@@ -39,6 +43,10 @@ export const ALL_DEFAULT_PARTIES: Array<IPartyFactory> = [
 export const ALL_SOCIETY_PARTIES: Array<IPartyFactory> = [
   {partyName: PartyName.SPOME, Factory: Spome},
   {partyName: PartyName.EMPOWER, Factory: Empower},
+  {partyName: PartyName.POPULISTS, Factory: Populists},
+  {partyName: PartyName.BUREAUCRATS, Factory: Bureaucrats},
+  {partyName: PartyName.TRANSHUMANS, Factory: Transhumans},
+  {partyName: PartyName.CENTRISTS, Factory: Centrists},
 ];
 
 const UNINITIALIZED_POLITICAL_AGENDAS_DATA: PoliticalAgendasData = {

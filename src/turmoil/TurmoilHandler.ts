@@ -6,6 +6,7 @@ import {PlayerInput} from '../PlayerInput';
 import {Resources} from '../Resources';
 import {SpaceType} from '../SpaceType';
 import {BUREAUCRATS_POLICY_1} from './parties/Bureaucrats';
+import {CENTRISTS_POLICY_1, CENTRISTS_POLICY_3} from './parties/Centrists';
 import {EMPOWER_POLICY_1, EMPOWER_POLICY_2} from './parties/Empower';
 import {GREENS_POLICY_2, GREENS_POLICY_3, GREENS_POLICY_4} from './parties/Greens';
 import {KELVINISTS_POLICY_1, KELVINISTS_POLICY_3, KELVINISTS_POLICY_4} from './parties/Kelvinists';
@@ -16,6 +17,7 @@ import {POPULISTS_POLICY_2, POPULISTS_POLICY_3, POPULISTS_POLICY_4} from './part
 import {REDS_POLICY_2, REDS_POLICY_3} from './parties/Reds';
 import {SCIENTISTS_POLICY_1} from './parties/Scientists';
 import {SPOME_POLICY_2, SPOME_POLICY_3, SPOME_POLICY_4} from './parties/Spome';
+import {TRANSHUMANS_POLICY_2, TRANSHUMANS_POLICY_3} from './parties/Transhumans';
 import {UNITY_POLICY_2, UNITY_POLICY_3} from './parties/Unity';
 import {TurmoilPolicy} from './TurmoilPolicy';
 
@@ -213,6 +215,66 @@ export class TurmoilHandler {
             populistsPolicy.description,
             'Select',
             () => populistsPolicy.action(player),
+          ),
+        );
+      }
+    }
+
+    // Turmoil Transhumans action
+    if (PartyHooks.shouldApplyPolicy(game, PartyName.TRANSHUMANS, TurmoilPolicy.TRANSHUMANS_POLICY_2)) {
+      const transhumansPolicy = TRANSHUMANS_POLICY_2;
+
+      if (transhumansPolicy.canAct(player)) {
+        options.push(
+          new SelectOption(
+            transhumansPolicy.description,
+            'Pay',
+            () => transhumansPolicy.action(player),
+          ),
+        );
+      }
+    }
+
+    // Turmoil Transhumans action
+    if (PartyHooks.shouldApplyPolicy(game, PartyName.TRANSHUMANS, TurmoilPolicy.TRANSHUMANS_POLICY_3)) {
+      const transhumansPolicy = TRANSHUMANS_POLICY_3;
+
+      if (transhumansPolicy.canAct(player)) {
+        options.push(
+          new SelectOption(
+            transhumansPolicy.description,
+            'Pay',
+            () => transhumansPolicy.action(player),
+          ),
+        );
+      }
+    }
+
+    // Turmoil Centrists action
+    if (PartyHooks.shouldApplyPolicy(game, PartyName.CENTRISTS, TurmoilPolicy.CENTRISTS_DEFAULT_POLICY)) {
+      const centristsPolicy = CENTRISTS_POLICY_1;
+
+      if (centristsPolicy.canAct(player)) {
+        options.push(
+          new SelectOption(
+            centristsPolicy.description,
+            'Select',
+            () => centristsPolicy.action(player),
+          ),
+        );
+      }
+    }
+
+    // Turmoil Centrists action
+    if (PartyHooks.shouldApplyPolicy(game, PartyName.CENTRISTS, TurmoilPolicy.CENTRISTS_POLICY_3)) {
+      const centristsPolicy = CENTRISTS_POLICY_3;
+
+      if (centristsPolicy.canAct(player)) {
+        options.push(
+          new SelectOption(
+            centristsPolicy.description,
+            'Select',
+            () => centristsPolicy.action(player),
           ),
         );
       }
