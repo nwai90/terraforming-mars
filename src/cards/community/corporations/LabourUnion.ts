@@ -27,8 +27,8 @@ export class LabourUnion extends Card implements CorporationCard {
               eb.plate('Standard projects').startEffect.megacredits(-4);
             });
             ce.vSpace();
-            ce.effect('Standard Projects cost 4 MC less. At generation end, discard down to 10 cards.', (eb) => {
-              eb.cards(1).startEffect.text('MAX 10 AT GEN END', CardRenderItemSize.SMALL);
+            ce.effect('Standard Projects cost 4 MC less. At generation end, discard down to 8 cards.', (eb) => {
+              eb.cards(1).startEffect.text('MAX 8 AT GEN END', CardRenderItemSize.SMALL);
             });
             ce.vSpace(CardRenderItemSize.SMALL);
           });
@@ -42,8 +42,8 @@ export class LabourUnion extends Card implements CorporationCard {
   }
 
   public onProductionPhase(player: Player) {
-    if (player.cardsInHand.length > 10) {
-      const cardsToDiscard: number = player.cardsInHand.length - 10;
+    if (player.cardsInHand.length > 8) {
+      const cardsToDiscard: number = player.cardsInHand.length - 8;
       player.game.defer(new DiscardCards(player, cardsToDiscard));
     }
     return undefined;
