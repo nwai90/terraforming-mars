@@ -85,7 +85,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
 
     public static newInstance(game: Game, agendaStyle: AgendaStyle = AgendaStyle.STANDARD): Turmoil {
       const societyExpansion: boolean = game.gameOptions.societyExpansion;
-      const dealer = GlobalEventDealer.newInstance(game); // TODO: Different GE deck if Society expansion used
+      const dealer = GlobalEventDealer.newInstance(game);
 
       // The game begins with Greens / Spome in power and a Neutral chairman
       const rulingParty = societyExpansion ? PartyName.SPOME : PartyName.GREENS;

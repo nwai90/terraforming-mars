@@ -35,7 +35,4 @@ export enum GlobalEventName {
     VENUS_INFRASTRUCTURE = 'Venus Infrastructure',
     CLOUD_SOCIETIES = 'Cloud Societies',
     MICROGRAVITY_HEALTH_PROBLEMS = 'Microgravity Health Problems',
-
-    // Community
-    LEADERSHIP_SUMMIT = 'Leadership Summit',
 }
