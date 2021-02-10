@@ -50,7 +50,7 @@
     "cover": "nyc mocha --file build/tests/utils/Vue.js --recursive build/tests",
     "precover": "tsc --build tests/tsconfig.json",
     "fix": "eslint --fix src tests --ext ts",
-    "lint": "eslint src/*.ts src/components/**/*.ts src/database/**/*.ts",
+    "lint": "eslint --cache src/*.ts src/components/**/*.ts src/database/**/*.ts",
     "makeCss": "lessc src/styles/common.less build/styles.css",
     "makeJson": "node make_static_json.js",
     "start": "node build/src/server.js",
