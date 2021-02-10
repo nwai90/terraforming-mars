@@ -39,6 +39,42 @@ import {CloudSocieties} from './CloudSocieties';
 import {MicrogravityHealthProblems} from './MicrogravityHealthProblems';
 import {SerializedGlobalEventDealer} from './SerializedGlobalEventDealer';
 import {ISerializable} from '../../ISerializable';
+import {FermiSolution} from './society/FermiSolution';
+import {OperationDaedalus} from './society/OperationDaedalus';
+import {ClimateImpact} from './society/ClimateImpact';
+import {Gerontocracy} from './society/Gerontocracy';
+import {MetaSpirituality} from './society/MetaSpirituality';
+import {UniversalRoom} from './society/UniversalRoom';
+import {ExhaltSpecies} from './society/ExhaltSpecies';
+import {AdaptedPathogens} from './society/AdaptedPathogens';
+import {ColonizationIncentives} from './society/ColonizationIncentives';
+import {SolarCryptocurrency} from './society/SolarCryptocurrency';
+import {SmugglingActivity} from './society/SmugglingActivity';
+import {GenomeControl} from './society/GenomeControl';
+import {VerdantEconomy} from './society/VerdantEconomy';
+import {ControlledTectonics} from './society/ControlledTectonics';
+import {RaidOnPrivateers} from './society/RaidOnPrivateers';
+import {DutyFreeSpace} from './society/DutyFreeSpace';
+import {Renationalisation} from './society/Renationalisation';
+import {TechnologicalTelepathy} from './society/TechnologicalTelepathy';
+import {VirtualDemocracy} from './society/VirtualDemocracy';
+import {ClosedBiospheres} from './society/ClosedBiospheres';
+import {ExtrasolarRace} from './society/ExtrasolarRace';
+import {SocialNihilism} from './society/SocialNihilism';
+import {DysonSwarmConstruction} from './society/DysonSwarmConstruction';
+import {MagneticShield} from './society/MagneticShield';
+import {PowerTrip} from './society/PowerTrip';
+import {ConnectedCommunities} from './society/ConnectedCommunities';
+import {PlanetFederation} from './society/PlanetFederation';
+import {TransparentPolitics} from './society/TransparentPolitics';
+import {PreferentialLoans} from './society/PreferentialLoans';
+import {KesslersBlast} from './society/KesslersBlast';
+import {PhaetonRescue} from './society/PhaetonRescue';
+import {Bioplague} from './society/Bioplague';
+import {AtmosphericCompression} from './society/AtmosphericCompression';
+import {WoodlandInitiatives} from './society/WoodlandInitiatives';
+import {ThermalFusion} from './society/ThermalFusion';
+import {BloomingVale} from './society/BloomingVale';
 
 export interface IGlobalEventFactory<T> {
     globalEventName: GlobalEventName;
@@ -104,6 +140,52 @@ export const NEGATIVE_GLOBAL_EVENTS: Array<IGlobalEventFactory<IGlobalEvent>> = 
   {globalEventName: GlobalEventName.SOLAR_FLARE, Factory: SolarFlare},
 ];
 
+// SOCIETY EXPANSION GLOBAL EVENTS
+export const SOCIETY_GLOBAL_EVENTS: Array<IGlobalEventFactory<IGlobalEvent>> = [
+  {globalEventName: GlobalEventName.ADAPTED_PATHOGENS, Factory: AdaptedPathogens},
+  {globalEventName: GlobalEventName.BIOPLAGUE, Factory: Bioplague},
+  {globalEventName: GlobalEventName.BLOOMING_VALE, Factory: BloomingVale},
+  {globalEventName: GlobalEventName.CLIMATE_IMPACT, Factory: ClimateImpact},
+  {globalEventName: GlobalEventName.CLOSED_BIOSPHERES, Factory: ClosedBiospheres},
+  {globalEventName: GlobalEventName.CONNECTED_COMMUNITIES, Factory: ConnectedCommunities},
+  {globalEventName: GlobalEventName.DYSON_SWARM_CONSTRUCTION, Factory: DysonSwarmConstruction},
+  {globalEventName: GlobalEventName.EXHALT_SPECIES, Factory: ExhaltSpecies},
+  {globalEventName: GlobalEventName.EXTRASOLAR_RACE, Factory: ExtrasolarRace},
+  {globalEventName: GlobalEventName.GENOME_CONTROL, Factory: GenomeControl},
+  {globalEventName: GlobalEventName.GERONTOCRACY, Factory: Gerontocracy},
+  {globalEventName: GlobalEventName.KESSLERS_BLAST, Factory: KesslersBlast},
+  {globalEventName: GlobalEventName.MAGNETIC_SHIELD, Factory: MagneticShield},
+  {globalEventName: GlobalEventName.META_SPIRITUALITY, Factory: MetaSpirituality},
+  {globalEventName: GlobalEventName.PLANET_FEDERATION, Factory: PlanetFederation},
+  {globalEventName: GlobalEventName.POWER_TRIP, Factory: PowerTrip},
+  {globalEventName: GlobalEventName.PREFERENTIAL_LOANS, Factory: PreferentialLoans},
+  {globalEventName: GlobalEventName.RAID_ON_PRIVATEERS, Factory: RaidOnPrivateers},
+  {globalEventName: GlobalEventName.RENATIONALISATION, Factory: Renationalisation},
+  {globalEventName: GlobalEventName.SOCIAL_NIHILISM, Factory: SocialNihilism},
+  {globalEventName: GlobalEventName.SOLAR_CRYPTOCURRENCY, Factory: SolarCryptocurrency},
+  {globalEventName: GlobalEventName.TECHNOLOGICAL_TELEPATHY, Factory: TechnologicalTelepathy},
+  {globalEventName: GlobalEventName.THERMAL_FUSION, Factory: ThermalFusion},
+  {globalEventName: GlobalEventName.TRANSPARENT_POLITICS, Factory: TransparentPolitics},
+  {globalEventName: GlobalEventName.UNIVERSAL_ROOM, Factory: UniversalRoom},
+  {globalEventName: GlobalEventName.VERDANT_ECONOMY, Factory: VerdantEconomy},
+  {globalEventName: GlobalEventName.VIRTUAL_DEMOCRACY, Factory: VirtualDemocracy},
+  {globalEventName: GlobalEventName.WOODLAND_INITIATIVES, Factory: WoodlandInitiatives},
+];
+
+export const SOCIETY_VENUS_GLOBAL_EVENTS: Array<IGlobalEventFactory<IGlobalEvent>> = [
+  {globalEventName: GlobalEventName.ATMOSPHERIC_COMPRESSION, Factory: AtmosphericCompression},
+  {globalEventName: GlobalEventName.CONTROLLED_TECTONICS, Factory: ControlledTectonics},
+  {globalEventName: GlobalEventName.DUTY_FREE_SPACE, Factory: DutyFreeSpace},
+]
+
+export const SOCIETY_COLONY_GLOBAL_EVENTS: Array<IGlobalEventFactory<IGlobalEvent>> = [
+  {globalEventName: GlobalEventName.COLONIZATION_INCENTIVES, Factory: ColonizationIncentives},
+  {globalEventName: GlobalEventName.FERMI_SOLUTION, Factory: FermiSolution},
+  {globalEventName: GlobalEventName.OPERATION_DAEDALUS, Factory: OperationDaedalus},
+  {globalEventName: GlobalEventName.PHAETON_RESCUE, Factory: PhaetonRescue},
+  {globalEventName: GlobalEventName.SMUGGLING_ACTIVITY, Factory: SmugglingActivity},
+]
+
 const ALL_EVENTS = [
   ...POSITIVE_GLOBAL_EVENTS,
   ...NEGATIVE_GLOBAL_EVENTS,
@@ -112,6 +194,9 @@ const ALL_EVENTS = [
   ...VENUS_COLONY_POSITIVE_GLOBAL_EVENTS,
   ...VENUS_COLONY_NEGATIVE_GLOBAL_EVENTS,
   ...VENUS_POSITIVE_GLOBAL_EVENTS,
+  ...SOCIETY_GLOBAL_EVENTS,
+  ...SOCIETY_VENUS_GLOBAL_EVENTS,
+  ...SOCIETY_COLONY_GLOBAL_EVENTS,
 ];
 
 // Function to return a global event object by its name
@@ -133,7 +218,9 @@ export class GlobalEventDealer implements ISerializable<SerializedGlobalEventDea
     const societyExpansionEnabled: boolean = game.gameOptions.societyExpansion;
 
     if (societyExpansionEnabled === true) {
-     // TODO: Populate Society deck
+      events.push(...SOCIETY_GLOBAL_EVENTS);
+      if (game.gameOptions.venusNextExtension) events.push(...SOCIETY_VENUS_GLOBAL_EVENTS);
+      if (game.gameOptions.coloniesExtension) events.push(...SOCIETY_COLONY_GLOBAL_EVENTS);
     } else {
       events.push(...POSITIVE_GLOBAL_EVENTS);
       events.push(...NEGATIVE_GLOBAL_EVENTS);

@@ -1128,13 +1128,13 @@ export class Game implements ISerializable<SerializedGame> {
     return this.oxygenLevel;
   }
 
-  public increaseVenusScaleLevel(player: Player, increments: -1 | 1 | 2 | 3): SelectSpace | undefined {
+  public increaseVenusScaleLevel(player: Player, increments: -2 | -1 | 1 | 2 | 3): SelectSpace | undefined {
     if (this.venusScaleLevel >= constants.MAX_VENUS_SCALE) {
       return undefined;
     }
 
     // PoliticalAgendas Reds P3 hook
-    if (increments === -1) {
+    if (increments === -1 || increments === -2) {
       this.venusScaleLevel = Math.max(constants.MIN_VENUS_SCALE, this.venusScaleLevel + increments * 2);
       return undefined;
     }
