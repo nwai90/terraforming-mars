@@ -1653,7 +1653,7 @@ export class Game implements ISerializable<SerializedGame> {
 
     // Reload turmoil elements if needed
     if (d.turmoil && gameOptions.turmoilExtension) {
-      game.turmoil = Turmoil.deserialize(d.turmoil);
+      game.turmoil = Turmoil.deserialize(d.turmoil, gameOptions.societyExpansion);
     }
 
     // Reload moon elements if needed

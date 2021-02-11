@@ -8,7 +8,6 @@ import {Policy} from '../Policy';
 import {Player} from '../../Player';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {TurmoilPolicy} from '../TurmoilPolicy';
-import {SpaceType} from '../../SpaceType';
 import {DiscardCards} from '../../deferredActions/DiscardCards';
 import {Tags} from '../../cards/Tags';
 import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../constants';
@@ -23,18 +22,11 @@ export class Spome extends Party implements IParty {
 class SpomeBonus01 implements Bonus {
   id = 'spb01';
   isDefault = true;
-  description = 'Gain 2 MC for each Colony and off-world City you have';
+  description = 'Gain 1 MC for each different tag you have';
 
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
-      const offWorldCitiesCount = game.board.spaces.filter((space) => space.player === player && space.spaceType === SpaceType.COLONY).length;
-      let coloniesCount: number = 0;
-
-      game.colonies.forEach((colony) => {
-        coloniesCount += colony.colonies.filter((playerId) => playerId === player.id).length;
-      });
-
-      player.setResource(Resources.MEGACREDITS, (coloniesCount + offWorldCitiesCount) * 2);
+      player.setResource(Resources.MEGACREDITS, player.getDistinctTagCount(false));
     });
   }
 }

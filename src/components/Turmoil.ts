@@ -80,7 +80,7 @@ const AGENDA_HTML: Map<BonusId | PolicyId, string> = new Map();
     <div class="tile ocean-tile req-tile-small"></div>
     <div class="tile temperature-tile req-tile-small"></div>
     : <div class="resource card card-with-border"></div></span>`);
-  AGENDA_HTML.set('sp04', `<div class="scientists-requisite"><div class="resource-tag tag-science party-resource-tag"></div></div>`);
+  AGENDA_HTML.set('sp04', `<div class="tags-requisite"><div class="resource-tag tag-science party-resource-tag"></div></div>`);
   AGENDA_HTML.set('up01',
     `<div class="policy-top-margin"><div class="resource titanium"></div> :
     + <div class="resource money">1</div></div>`);
@@ -144,14 +144,12 @@ const AGENDA_HTML: Map<BonusId | PolicyId, string> = new Map();
     <span class="red-arrow-3x"></span>3<span class="plant resource"></span> / 2<span class="microbe resource"></span>
     </div>` );
   AGENDA_HTML.set('spb01',
-    `<div class="resource money party-resource">2</div> /
-    <div class="tile colony"></div> + <div class="tile city-tile-small"></div>`);
+    `<div class="resource money party-resource">1</div> / <div class="resource-tag tag-wild party-resource-tag"></div>`);
   AGENDA_HTML.set('spb02',
-    `<div class="resource money party-resource">1</div> /
-    <div class="resource wild"></div>`);
+    `<div class="resource money party-resource">1</div> / <div class="resource wild"></div>`);
   AGENDA_HTML.set('spp01',
     `<div class="policy-top-margin">
-    <div class="tile venus-tile"></div> : <div class="resource money">2</div>
+    <div class="tile venus-tile" style="transform: scale(0.8);"></div>: <div class="resource money">2</div>
     </div>`);
   AGENDA_HTML.set('spp02',
     `<div class="policy-top-margin">
@@ -162,14 +160,12 @@ const AGENDA_HTML: Map<BonusId | PolicyId, string> = new Map();
   AGENDA_HTML.set('spp03',
     `<div class="policy-top-margin"><div class="tile empty-tile-small"></div> : -
     <span class="resource card card-with-border"></span></div>`);
-  // TODO: Update CSS for spp04
   AGENDA_HTML.set('spp04',
     `<span class="money resource">4</span>
     <span class="red-arrow-3x"></span>
-    <div class="resource card card-with-border policy-card-with-tag"><div class="card-icon tag-venus"></div></div>`);
+    <div class="resource card card-with-border policy-card-with-tag"><div class="card-icon tag-planetary"></div></div>`);
   AGENDA_HTML.set('eb01',
-    `<div class="resource money party-resource">2</div> /
-    <div class="resource-tag tag-power party-resource-tag"></div>`);
+    `<div class="resource money party-resource">2</div> / <div class="resource-tag tag-power party-resource-tag"></div>`);
   AGENDA_HTML.set('eb02',
     `<div class="resource money party-resource">1</div> /
     <div class="production-box party-production-box">
@@ -184,11 +180,94 @@ const AGENDA_HTML: Map<BonusId | PolicyId, string> = new Map();
     <span class="energy resource"></span></div>`);
   AGENDA_HTML.set('ep03',
     `<div class="policy-top-margin">
-        +/- <div class="production-box>
+        +/- <div class="production-box">
             <div class="energy production"></div>
         </div> : <span class="energy resource"></span>
     </div>`);
   AGENDA_HTML.set('ep04', `<div class="policy-top-margin"><div class="resource-tag tag-power"></div> : <div class="money resource">-3</div></div>`);
+  AGENDA_HTML.set('pb01',
+    `<div class="resource money party-resource">-1</div> / <div class="resource money party-resource">5</div> over 40`);
+  AGENDA_HTML.set('pb02',
+    `<div class="resource money party-resource">-2</div> / 8 <div class="resource card card-with-border card-small"></div>`);
+  AGENDA_HTML.set('pp01',
+    `<div class="policy-top-margin">
+    <div class="plate">No Card Discounts</div>
+    </div>`);
+  AGENDA_HTML.set('pp02',
+    `<div class="policy-top-margin">
+    <div class="card-vp-questionmark">?</div> : <div class="resource money">-2</div>
+    </div>`);
+  AGENDA_HTML.set('pp03',
+    `<div class="policy-top-margin">
+    <span class="red-arrow"></span>
+    <div class="resource card card-with-border"></div>
+    <div class="resource card card-with-border"></div> *
+    </div>`);
+  AGENDA_HTML.set('pp04',
+    `<div class="policy-top-margin"><div class="tile empty-tile-small"></div> :
+    <span class="money resource">3</span></div>`);
+  AGENDA_HTML.set('bb01',
+    `<div class="resource money party-resource">1</div> /
+    <div class="resource-tag tag-event party-resource-tag"></div>`);
+  AGENDA_HTML.set('bb02',
+    `Mark all <div class="resource card card-with-border"><div class="card-tag-blue"></div></div> actions`);
+  AGENDA_HTML.set('bp01',
+    `<div class="policy-top-margin">
+    <span class="money resource">3</span>
+    <span class="red-arrow-3x"></span>
+    <div class="delegate"></div>
+    </div>`);
+  AGENDA_HTML.set('bp02',
+    `<div class="policy-top-margin">
+    <div class="trade"></div> : <div class="trade-discount">+1</div>
+    </div>`);
+  AGENDA_HTML.set('bp03',
+    `<div class="policy-top-margin">
+    <span class="money resource">3</span>
+    <span class="red-arrow-3x"></span>
+    <div class="reserve-marker"></div>
+    </div>`);
+  AGENDA_HTML.set('bp04', `<div class="policy-top-margin"><div class="resource-tag tag-earth"></div> : <div class="money resource">-3</div></div>`);
+  AGENDA_HTML.set('tb01',
+  `<div class="resource money party-resource">1</div> / <div class="resource card card-small card-with-border"><div class="card-tag-req"></div></div>`);
+  AGENDA_HTML.set('tb02',
+  `<div class="resource money party-resource">1</div> / <div class="resource-tag tag-none party-resource-tag"></div>`);
+  AGENDA_HTML.set('tp01', `<div class="tags-requisite"><div class="resource-tag tag-wild party-resource-tag"></div></div>`);
+  AGENDA_HTML.set('tp02',
+  `<div class="policy-top-margin">
+  <span class="money resource">10</span>
+  <span class="red-arrow"></span>
+  <div class="influence"></div>
+  </div>`);
+  AGENDA_HTML.set('tp03',
+  `<div class="policy-top-margin">
+  <span class="money resource">10</span>
+  <span class="red-arrow"></span>
+  <div class="resource card card-small card-with-border">
+    <div class="card-tag-req"><div class="stretched-x">X</div></div>
+  </div>
+  </div>`);
+  AGENDA_HTML.set('tp04',
+  `<div class="policy-top-margin">
+  <div class="trade"></div> : +1
+  </div>`);
+  AGENDA_HTML.set('cb01', `<div class="resource money party-resource">8</div>`);
+  AGENDA_HTML.set('cb02', `1 <div class="rating tile"></div>`);
+  AGENDA_HTML.set('cp01',
+    `<div class="policy-top-margin">
+    <span class="red-arrow"></span>
+    <span class="money resource">6</span>
+    </div>`);
+  AGENDA_HTML.set('cp02',
+    `<div class="policy-top-margin">
+    <div class="delegate"></div> : <span class="money resource">+2</span>
+    </div>`);
+  AGENDA_HTML.set('cp03',
+    `<div class="policy-top-margin">
+    <span class="red-arrow"></span>
+    <div class="trade"></div>
+    </div>`);
+  AGENDA_HTML.set('cp04', `<div class="policy-top-margin"><div class="resource-tag tag-event"></div> : <div class="money resource">-2</div></div>`);
 }
 
 export const Turmoil = Vue.component('turmoil', {
@@ -205,29 +284,46 @@ export const Turmoil = Vue.component('turmoil', {
       }
       return party.toLowerCase().split(' ').join('_');
     },
-    // TODO: Update getBonus and getPolicy
     getBonus: function(party: PartyName, politicalAgendas: PoliticalAgendasModel | undefined): string {
       let bonusId: BonusId | undefined = undefined;
       if (politicalAgendas?.staticAgendas !== undefined) {
         const staticAgendas = politicalAgendas.staticAgendas;
         switch (party) {
         case PartyName.MARS:
-          bonusId = staticAgendas.marsFirst.bonusId;
+          bonusId = staticAgendas.marsFirst?.bonusId;
           break;
         case PartyName.SCIENTISTS:
-          bonusId = staticAgendas.scientists.bonusId;
+          bonusId = staticAgendas.scientists?.bonusId;
           break;
         case PartyName.UNITY:
-          bonusId = staticAgendas.unity.bonusId;
+          bonusId = staticAgendas.unity?.bonusId;
           break;
         case PartyName.KELVINISTS:
-          bonusId = staticAgendas.kelvinists.bonusId;
+          bonusId = staticAgendas.kelvinists?.bonusId;
           break;
         case PartyName.REDS:
-          bonusId = staticAgendas.reds.bonusId;
+          bonusId = staticAgendas.reds?.bonusId;
           break;
         case PartyName.GREENS:
-          bonusId = staticAgendas.greens.bonusId;
+          bonusId = staticAgendas.greens?.bonusId;
+          break;
+        case PartyName.SPOME:
+          bonusId = staticAgendas.spome?.bonusId;
+          break;
+        case PartyName.EMPOWER:
+          bonusId = staticAgendas.empower?.bonusId;
+          break;
+        case PartyName.POPULISTS:
+          bonusId = staticAgendas.populists?.bonusId;
+          break;
+        case PartyName.BUREAUCRATS:
+          bonusId = staticAgendas.bureaucrats?.bonusId;
+          break;
+        case PartyName.TRANSHUMANS:
+          bonusId = staticAgendas.transhumans?.bonusId;
+          break;
+        case PartyName.CENTRISTS:
+          bonusId = staticAgendas.centrists?.bonusId;
           break;
         }
       }
@@ -246,22 +342,40 @@ export const Turmoil = Vue.component('turmoil', {
           const staticAgendas = politicalAgendas.staticAgendas;
           switch (party) {
           case PartyName.MARS:
-            policyId = staticAgendas.marsFirst.policyId;
+            policyId = staticAgendas.marsFirst?.policyId;
             break;
           case PartyName.SCIENTISTS:
-            policyId = staticAgendas.scientists.policyId;
+            policyId = staticAgendas.scientists?.policyId;
             break;
           case PartyName.UNITY:
-            policyId = staticAgendas.unity.policyId;
+            policyId = staticAgendas.unity?.policyId;
             break;
           case PartyName.KELVINISTS:
-            policyId = staticAgendas.kelvinists.policyId;
+            policyId = staticAgendas.kelvinists?.policyId;
             break;
           case PartyName.REDS:
-            policyId = staticAgendas.reds.policyId;
+            policyId = staticAgendas.reds?.policyId;
             break;
           case PartyName.GREENS:
-            policyId = staticAgendas.greens.policyId;
+            policyId = staticAgendas.greens?.policyId;
+            break;
+          case PartyName.SPOME:
+            policyId = staticAgendas.spome?.policyId;
+            break;
+          case PartyName.EMPOWER:
+            policyId = staticAgendas.empower?.policyId;
+            break;
+          case PartyName.POPULISTS:
+            policyId = staticAgendas.populists?.policyId;
+            break;
+          case PartyName.BUREAUCRATS:
+            policyId = staticAgendas.bureaucrats?.policyId;
+            break;
+          case PartyName.TRANSHUMANS:
+            policyId = staticAgendas.transhumans?.policyId;
+            break;
+          case PartyName.CENTRISTS:
+            policyId = staticAgendas.centrists?.policyId;
             break;
           }
         }

@@ -19,11 +19,11 @@ export class Populists extends Party implements IParty {
 class PopulistsBonus01 implements Bonus {
   id = 'pb01';
   isDefault = true;
-  description = 'Lose 1 MC for every 4 MC production you have';
+  description = 'Lose 1 MC for every 5 MC you have over 40';
 
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
-      const amountLost = Math.floor(player.getProduction(Resources.MEGACREDITS) / 4);
+      const amountLost = Math.floor(Math.max(player.megaCredits - 40, 0) / 5);
       player.setResource(Resources.MEGACREDITS, amountLost);
     });
   }
@@ -31,7 +31,7 @@ class PopulistsBonus01 implements Bonus {
 
 class PopulistsBonus02 implements Bonus {
   id = 'pb02';
-  description = 'Lose 2 MC for every set of 8 cards you have in hand';
+  description = 'Lose 2 MC for every 8 cards you have in hand';
   isDefault = false;
 
   grant(game: Game) {
@@ -62,7 +62,7 @@ class PopulistsPolicy02 implements Policy {
 
 class PopulistsPolicy03 implements Policy {
   id = TurmoilPolicy.POPULISTS_POLICY_3;
-  description: string = 'If your Terraform Rating was raised this generation, gain 8 MC';
+  description: string = 'If your Terraform Rating was raised this generation, draw 2 cards';
   isDefault = false;
 
   canAct(player: Player) {
@@ -72,7 +72,7 @@ class PopulistsPolicy03 implements Policy {
   action(player: Player) {
     const game = player.game;
     game.log('${0} used Turmoil Populists action', (b) => b.player(player));
-    player.setResource(Resources.MEGACREDITS, 8);
+    player.drawCard(2);
     player.turmoilPolicyActionUsed = true;
 
     return undefined;

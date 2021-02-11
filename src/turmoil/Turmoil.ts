@@ -64,7 +64,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
     public dominantParty: IParty;
     public lobby: Set<PlayerId> = new Set<PlayerId>();
     public delegateReserve: Array<PlayerId | NeutralPlayer> = [];
-    public parties: Array<IParty> = ALL_DEFAULT_PARTIES.map((cf) => new cf.Factory());
+    public parties: Array<IParty> = ALL_DEFAULT_PARTIES.concat(ALL_SOCIETY_PARTIES).map((cf) => new cf.Factory());
     public playersInfluenceBonus: Map<string, number> = new Map<string, number>();
     public readonly globalEventDealer: GlobalEventDealer;
     public distantGlobalEvent: IGlobalEvent | undefined;
@@ -76,11 +76,19 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       rulingPartyName: PartyName,
       chairman: PlayerId | 'NEUTRAL',
       dominantPartyName: PartyName,
-      globalEventDealer: GlobalEventDealer) {
+      globalEventDealer: GlobalEventDealer,
+      societyExpansion: boolean) {
       this.rulingParty = this.getPartyByName(rulingPartyName);
       this.chairman = chairman;
       this.dominantParty = this.getPartyByName(dominantPartyName);
       this.globalEventDealer = globalEventDealer;
+
+      // Init parties
+      if (societyExpansion) {
+        this.parties = ALL_SOCIETY_PARTIES.map((cf) => new cf.Factory());
+      } else {
+        this.parties = ALL_DEFAULT_PARTIES.map((cf) => new cf.Factory());
+      }
     }
 
     public static newInstance(game: Game, agendaStyle: AgendaStyle = AgendaStyle.STANDARD): Turmoil {
@@ -89,7 +97,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
 
       // The game begins with Greens / Spome in power and a Neutral chairman
       const rulingParty = societyExpansion ? PartyName.SPOME : PartyName.GREENS;
-      const turmoil = new Turmoil(rulingParty, 'NEUTRAL', rulingParty, dealer);
+      const turmoil = new Turmoil(rulingParty, 'NEUTRAL', rulingParty, dealer, societyExpansion);
 
       game.log('A neutral delegate is the new chairman.');
       game.log(rulingParty + ' are in power in the first generation.');
@@ -460,9 +468,9 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       return result;
     }
 
-    public static deserialize(d: SerializedTurmoil): Turmoil {
+    public static deserialize(d: SerializedTurmoil, societyExpansion: boolean = false): Turmoil {
       const dealer = GlobalEventDealer.deserialize(d.globalEventDealer);
-      const turmoil = new Turmoil(d.rulingParty, d.chairman || 'NEUTRAL', d.dominantParty, dealer);
+      const turmoil = new Turmoil(d.rulingParty, d.chairman || 'NEUTRAL', d.dominantParty, dealer, societyExpansion);
 
       turmoil.lobby = new Set(d.lobby);
 

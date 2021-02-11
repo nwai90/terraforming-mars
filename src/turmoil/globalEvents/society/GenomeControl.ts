@@ -8,14 +8,14 @@ import {DiscardCards} from '../../../deferredActions/DiscardCards';
 
 export class GenomeControl implements IGlobalEvent {
     public name = GlobalEventName.GENOME_CONTROL;
-    public description = 'The player(s) with the most tags in play (reduced by influence) discards 2 cards. SOLO: Discard 2 cards if you have 10 or more cards.';
+    public description = 'The player(s) with the most tags in play (reduced by influence) discards 2 cards. SOLO: Discard 2 cards if you have 5 or more tags, reduced by influence.';
     public revealedDelegate = PartyName.SPOME;
     public currentDelegate = PartyName.BUREAUCRATS;
 
     public resolve(game: Game, turmoil: Turmoil) {
       if (game.isSoloMode()) {
         const player = game.getPlayers()[0];
-        if (player.cardsInHand.length >= 10) this.discardCards(player, game);
+        if (player.getDistinctTagCount(false) - turmoil.getPlayerInfluence(player) >= 5) this.discardCards(player, game);
       } else {
         const players = [...game.getPlayers()].sort(
           (p1, p2) => this.getScore(p2, turmoil) - this.getScore(p1, turmoil),

@@ -30,6 +30,7 @@
     background-size: 40px 40px;
     vertical-align: middle;
     margin-bottom: 5px;
+    filter: drop-shadow(0px 1px 1px white);
 }
 
 .colony-placement {
@@ -187,7 +188,7 @@
     }
 
     &.event-party--centrists {
-        background: #f5d773;
+        background: #cbaf56;
     }
 }
 
@@ -334,7 +335,7 @@
         background: #71726e;
     }
     &.party-name--centrists {
-        background: #f5d773;
+        background: #cbaf56;
     }
 }
 
@@ -647,13 +648,118 @@
     margin-top: 10px;
 }
 
-.scientists-requisite {
+.card-vp-questionmark {
+    background: linear-gradient(#cc8b00, rgb(128, 87, 0),rgb(128, 87, 0));
+    width: 40px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 22px;
+    border-radius: 12px;
+    border-style: outset;
+    background-color: rgb(205,162,130);
+    background: linear-gradient(#cc8b00, rgb(128, 87, 0),rgb(128, 87, 0));
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 0 0 0 2px rgba(0,0,0,0.3);
+    font-family: Prototype;
+    display: inline-block;
+    margin-left: 3px;
+    margin-right: 3px;
+    filter: drop-shadow(0px 0px 1px black);
+    vertical-align: top;
+    text-shadow: 0 0 5px darkorange;
+}
+
+.card-tag-blue {
+    margin-top: -10px;
+    margin-left: 20px;
+    background: #176fe4;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 1px solid white;
+}
+
+.card-tag-req {
+    margin-top: -5px;
+    margin-left: 20px;
+    background: linear-gradient(90deg, rgba(243,161,14,1) 0%, rgba(253,234,37,1) 45%, rgba(253,234,37,1) 55%, rgba(243,161,14,1) 100%);
+    width: 18px;
+    height: 12px;
+    border-radius: 0px;
+}
+
+.trade {
+    background-image: url(./assets/tiles/trade.png);
+    height: 40px;
+    width: 48px;
+    background-size: 48px;
+    display: inline-block;
+    line-height: 30px;
+    vertical-align: middle;
+}
+
+.trade-discount {
+    font-family: Prototype;
+    position: relative;
+    display: inline-block;
+    margin-left: 3px;
+    margin-right: 3px;
+    width: 30px;
+    height: 30px;
+    font-size: 22px;
+    line-height: 30px;
+    background-size: 30px;
+    filter: drop-shadow(0px 0px 1px white);
+    vertical-align: middle;
+    background: white;
+    color: black;
+}
+
+.reserve-marker {
+    font-family: Prototype;
+    position: relative;
+    display: inline-block;
+    margin-left: 3px;
+    margin-right: 3px;
+    width: 30px;
+    height: 30px;
+    font-size: 22px;
+    line-height: 30px;
+    background-size: 30px;
+    filter: drop-shadow(0px 0px 1px black);
+    vertical-align: middle;
+    background: linear-gradient(orange, orangered);
+}
+
+.tags-requisite {
     background-image: url(./assets/requisites/min_small.png);
     width: 60px;
     height: 30px;
     background-size: 60px 30px;
     margin-top: 15px;
     margin-left: 75px;
+}
+
+.stretched-x {
+    color: red;
+    line-height: 12px;
+    font-size: 28px;
+    transform: scaleX(1.5);
+    -webkit-text-stroke: 2px darkred;
+}
+
+.plate {
+    width: 130px;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 17px;
+    display: inline-block;
+    vertical-align: middle;
+    padding-top: 5px;
+    margin-right: 5px;
+    border-radius: 5px;
+    height: 20px;
+    background: linear-gradient(90deg, rgba(243,161,14,1) 0%, rgba(253,234,37,1) 45%, rgba(253,234,37,1) 55%, rgba(243,161,14,1) 100%);
+    filter: drop-shadow(0px 0px 1px black);
 }
 
 .standard-projects {

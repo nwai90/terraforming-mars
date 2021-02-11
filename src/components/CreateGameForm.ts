@@ -424,7 +424,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       const communityCardsOption = component.communityCardsOption;
       const aresExtension = component.aresExtension;
       const politicalAgendasExtension = this.politicalAgendasExtension;
-      const societyExpansion = this.societyExpansion;
+      const societyExpansion = component.societyExpansion;
       const moonExpansion = component.moonExpansion;
       const undoOption = component.undoOption;
       const showTimers = component.showTimers;
@@ -664,7 +664,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
                                     </div>
                                 </div>
 
-                                <input type="checkbox" name="societyExpansion" id="society-checkbox" v-on:change="societyExpansionToggle()">
+                                <input type="checkbox" name="societyExpansion" id="society-checkbox" v-model="societyExpansion" v-on:change="societyExpansionToggle()">
                                 <label for="society-checkbox" class="expansion-button">
                                     <div class="create-game-expansion-icon expansion-icon-society"></div>
                                     <span v-i18n>Society</span>&nbsp;<a href="https://www.notion.so/Variants-32b53050f10a4cfbaea117c34d4f3a03#e13bc69e07e648fb86a6f23b7d3dc85b" class="tooltip" target="_blank">&#9432;</a>

@@ -15,13 +15,13 @@ import {ColonyModel} from '../../models/ColonyModel';
 
 export class Centrists extends Party implements IParty {
   name = PartyName.CENTRISTS;
-  description = '';
+  description = 'Strives for equality and teamwork to achieve a greater good.';
   bonuses = [CENTRISTS_BONUS_1, CENTRISTS_BONUS_2];
   policies = [CENTRISTS_POLICY_1, CENTRISTS_POLICY_2, CENTRISTS_POLICY_3, CENTRISTS_POLICY_4];
 }
 
 class CentristsBonus01 implements Bonus {
-  id = 'tb01';
+  id = 'cb01';
   isDefault = true;
   description = 'Gain 8 MC';
 
@@ -33,7 +33,7 @@ class CentristsBonus01 implements Bonus {
 }
 
 class CentristsBonus02 implements Bonus {
-  id = 'tb02';
+  id = 'cb02';
   description = 'Gain 1 TR';
   isDefault = false;
 

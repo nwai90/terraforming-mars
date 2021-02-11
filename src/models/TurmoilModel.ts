@@ -42,12 +42,18 @@ export interface PoliticalAgendasModel {
 }
 
 export interface StaticAgendasModel {
-  marsFirst: Agenda;
-  scientists: Agenda;
-  unity: Agenda;
-  greens: Agenda;
-  reds: Agenda;
-  kelvinists: Agenda;
+  marsFirst: Agenda | undefined;
+  scientists: Agenda | undefined;
+  unity: Agenda | undefined;
+  greens: Agenda | undefined;
+  reds: Agenda | undefined;
+  kelvinists: Agenda | undefined;
+  spome: Agenda | undefined;
+  empower: Agenda | undefined
+  populists: Agenda | undefined;
+  bureaucrats: Agenda | undefined;
+  transhumans: Agenda | undefined;
+  centrists: Agenda | undefined;
 }
 
 export function getTurmoil(game: Game): TurmoilModel | undefined {
@@ -118,14 +124,11 @@ export function getTurmoil(game: Game): TurmoilModel | undefined {
     }
 
     const staticAgendas = turmoil.politicalAgendasData.staticAgendas;
-    const getStaticAgenda = function(partyName: PartyName): Agenda {
+    const getStaticAgenda = function(partyName: PartyName): Agenda | undefined {
       if (staticAgendas === undefined) {
         throw new Error('Trying to resolve static agendas when agendas are dynamic.');
       }
       const agenda = staticAgendas.get(partyName);
-      if (agenda === undefined) {
-        throw new Error(`Cannot find static agenda for party ${partyName}`);
-      }
       return agenda;
     };
 
@@ -138,6 +141,12 @@ export function getTurmoil(game: Game): TurmoilModel | undefined {
         greens: getStaticAgenda(PartyName.GREENS),
         reds: getStaticAgenda(PartyName.REDS),
         kelvinists: getStaticAgenda(PartyName.KELVINISTS),
+        spome: getStaticAgenda(PartyName.SPOME),
+        empower: getStaticAgenda(PartyName.EMPOWER),
+        populists: getStaticAgenda(PartyName.POPULISTS),
+        bureaucrats: getStaticAgenda(PartyName.BUREAUCRATS),
+        transhumans: getStaticAgenda(PartyName.TRANSHUMANS),
+        centrists: getStaticAgenda(PartyName.CENTRISTS),
       };
     }
 
