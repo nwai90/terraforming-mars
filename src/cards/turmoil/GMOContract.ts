@@ -9,6 +9,8 @@ import {Resources} from '../../Resources';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
+import {SOCIETY_ADDITIONAL_CARD_COST} from '../../constants';
+import {TurmoilHandler} from '../../turmoil/TurmoilHandler';
 
 export class GMOContract extends Card implements IProjectCard {
   constructor() {
@@ -33,8 +35,12 @@ export class GMOContract extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player): boolean {
-    if (player.game.turmoil !== undefined) {
-      return player.game.turmoil.canPlay(player, PartyName.GREENS);
+    const turmoil = player.game.turmoil;
+    if (turmoil !== undefined) {      
+      if (turmoil.parties.find((p) => p.name === PartyName.GREENS)) {
+        return turmoil.canPlay(player, PartyName.GREENS);
+      }
+      return player.canAfford(player.getCardCost(this) + SOCIETY_ADDITIONAL_CARD_COST);
     }
     return false;
   }
@@ -51,7 +57,8 @@ export class GMOContract extends Card implements IProjectCard {
     }
   }
 
-  public play() {
+  public play(player: Player) {
+    TurmoilHandler.handleSocietyPayment(player, PartyName.SCIENTISTS);
     return undefined;
   }
 }

@@ -8,6 +8,8 @@ import {PartyName} from '../../turmoil/parties/PartyName';
 import {RemoveAnyPlants} from '../../deferredActions/RemoveAnyPlants';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {SOCIETY_ADDITIONAL_CARD_COST} from '../../constants';
+import {TurmoilHandler} from '../../turmoil/TurmoilHandler';
 
 export class AerialLenses extends Card implements IProjectCard {
   constructor() {
@@ -27,14 +29,19 @@ export class AerialLenses extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player): boolean {
-    if (player.game.turmoil !== undefined) {
-      return player.game.turmoil.canPlay(player, PartyName.KELVINISTS);
+    const game = player.game;
+    if (game.turmoil !== undefined) {
+      if (game.turmoil.parties.find((p) => p.name === PartyName.KELVINISTS)) {
+        return game.turmoil.canPlay(player, PartyName.KELVINISTS);
+      }
+      return player.canAfford(player.getCardCost(this) + SOCIETY_ADDITIONAL_CARD_COST);
     }
     return false;
   }
 
   public play(player: Player) {
     player.addProduction(Resources.HEAT, 2);
+    TurmoilHandler.handleSocietyPayment(player, PartyName.KELVINISTS);
     player.game.defer(new RemoveAnyPlants(player, 2));
     return undefined;
   }

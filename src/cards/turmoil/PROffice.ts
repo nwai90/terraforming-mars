@@ -7,9 +7,10 @@ import {Player} from '../../Player';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {Resources} from '../../Resources';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
-import {REDS_RULING_POLICY_COST} from '../../constants';
+import {REDS_RULING_POLICY_COST, SOCIETY_ADDITIONAL_CARD_COST} from '../../constants';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {TurmoilHandler} from '../../turmoil/TurmoilHandler';
 
 export class PROffice extends Card implements IProjectCard {
   constructor() {
@@ -32,13 +33,18 @@ export class PROffice extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player): boolean {
-    if (player.game.turmoil !== undefined) {
-      const meetsPartyRequirements = player.game.turmoil.canPlay(player, PartyName.UNITY);
-      if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
-        return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST) && meetsPartyRequirements;
-      }
+    const turmoil = player.game.turmoil;
 
-      return meetsPartyRequirements;
+    if (turmoil !== undefined) {
+      if (turmoil.parties.find((p) => p.name === PartyName.UNITY)) {
+        const meetsPartyRequirements = turmoil.canPlay(player, PartyName.UNITY);
+        if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
+          return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST) && meetsPartyRequirements;
+        }
+  
+        return meetsPartyRequirements;
+      }
+      return player.canAfford(player.getCardCost(this) + SOCIETY_ADDITIONAL_CARD_COST); 
     }
     return false;
   }
@@ -47,6 +53,7 @@ export class PROffice extends Card implements IProjectCard {
     player.increaseTerraformRating();
     const amount = player.getTagCount(Tags.EARTH) + 1;
     player.setResource(Resources.MEGACREDITS, amount);
+    TurmoilHandler.handleSocietyPayment(player, PartyName.UNITY);
     return undefined;
   }
 }

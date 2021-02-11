@@ -10,6 +10,8 @@ import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
 import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {SOCIETY_ADDITIONAL_CARD_COST} from '../../constants';
+import {TurmoilHandler} from '../../turmoil/TurmoilHandler';
 
 export class CulturalMetropolis extends Card implements IProjectCard {
   constructor() {
@@ -34,9 +36,13 @@ export class CulturalMetropolis extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player): boolean {
-    if (player.game.turmoil !== undefined) {
+    const turmoil = player.game.turmoil;
+    if (turmoil !== undefined) {
       // This card requires player has 2 delegates available
-      return player.game.turmoil.canPlay(player, PartyName.UNITY) && player.getProduction(Resources.ENERGY) >= 1 && (player.game.turmoil.getDelegates(player.id) > 1 || (player.game.turmoil.getDelegates(player.id) === 1 && player.game.turmoil.lobby.has(player.id)));
+      if (turmoil.parties.find((p) => p.name === PartyName.UNITY)) {
+        return turmoil.canPlay(player, PartyName.UNITY) && player.getProduction(Resources.ENERGY) >= 1 && (turmoil.getDelegates(player.id) > 1 || (game.turmoil.getDelegates(player.id) === 1 && turmoil.lobby.has(player.id)));
+      }
+      return player.canAfford(player.getCardCost(this) + SOCIETY_ADDITIONAL_CARD_COST, true);
     }
     return false;
   }
@@ -45,6 +51,7 @@ export class CulturalMetropolis extends Card implements IProjectCard {
     player.addProduction(Resources.ENERGY, -1);
     player.addProduction(Resources.MEGACREDITS, 3);
     player.game.defer(new PlaceCityTile(player));
+    TurmoilHandler.handleSocietyPayment(player, PartyName.UNITY);
     const title = 'Select where to send two delegates';
 
     if (player.game.turmoil!.getDelegates(player.id) > 1) {

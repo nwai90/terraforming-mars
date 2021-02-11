@@ -29,6 +29,7 @@ export const TITANIUM_TRADE_COST: number = 3;
 export const PLAYER_DELEGATES_COUNT: number = 7;
 export const REDS_RULING_POLICY_COST: number = 3;
 export const POLITICAL_AGENDAS_MAX_ACTION_USES: number = 3;
+export const SOCIETY_ADDITIONAL_CARD_COST: number = 7;
 // Map specific
 export const HELLAS_BONUS_OCEAN_COST: number = 6;
 export const VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST: number = 3;

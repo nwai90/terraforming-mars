@@ -8,6 +8,8 @@ import {PartyName} from '../../turmoil/parties/PartyName';
 import {Resources} from '../../Resources';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {SOCIETY_ADDITIONAL_CARD_COST} from '../../constants';
+import {TurmoilHandler} from '../../turmoil/TurmoilHandler';
 
 export class ParliamentHall extends Card implements IProjectCard {
   constructor() {
@@ -32,8 +34,13 @@ export class ParliamentHall extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player): boolean {
-    if (player.game.turmoil !== undefined) {
-      return player.game.turmoil.canPlay(player, PartyName.MARS);
+    const turmoil = player.game.turmoil;
+
+    if (turmoil !== undefined) {
+      if (turmoil.parties.find((p) => p.name === PartyName.MARS)) {
+        return turmoil.canPlay(player, PartyName.MARS);
+      }
+      return player.canAfford(player.getCardCost(this) + SOCIETY_ADDITIONAL_CARD_COST);
     }
     return false;
   }
@@ -41,6 +48,7 @@ export class ParliamentHall extends Card implements IProjectCard {
   public play(player: Player) {
     const amount = Math.floor((player.getTagCount(Tags.BUILDING) + 1) / 3);
     player.addProduction(Resources.MEGACREDITS, amount);
+    TurmoilHandler.handleSocietyPayment(player, PartyName.MARS);
     return undefined;
   }
 

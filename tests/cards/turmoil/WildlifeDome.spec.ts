@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import {WildlifeDome} from '../../../src/cards/turmoil/WildlifeDome';
 import {Game} from '../../../src/Game';
+import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {Phase} from '../../../src/Phase';
 import {Player} from '../../../src/Player';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
@@ -39,7 +40,8 @@ describe('WildlifeDome', function() {
     player.megaCredits = 18;
     expect(card.canPlay(player)).is.true;
 
-    const action = card.play(player);
+    card.play(player);
+    const action = game.deferredActions.pop()!.execute()! as SelectSpace;
     expect(action).is.not.undefined;
     action.cb(action.availableSpaces[0]);
     expect(game.getOxygenLevel()).to.eq(1);

@@ -7,6 +7,8 @@ import {Player} from '../../Player';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
+import {TurmoilHandler} from '../../turmoil/TurmoilHandler';
+import {SOCIETY_ADDITIONAL_CARD_COST} from '../../constants';
 
 export class EventAnalysts extends Card implements IProjectCard {
   constructor() {
@@ -28,16 +30,24 @@ export class EventAnalysts extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player): boolean {
-    if (player.game.turmoil !== undefined) {
-      return player.game.turmoil.canPlay(player, PartyName.SCIENTISTS);
+    const turmoil = player.game.turmoil;
+
+    if (turmoil !== undefined) {
+      if (turmoil.parties.find((p) => p.name === PartyName.SCIENTISTS)) {
+        return turmoil.canPlay(player, PartyName.SCIENTISTS);
+      }
+      return player.canAfford(player.getCardCost(this) + SOCIETY_ADDITIONAL_CARD_COST);
     }
     return false;
   }
 
   public play(player: Player) {
+    TurmoilHandler.handleSocietyPayment(player, PartyName.SCIENTISTS);
+
     if (player.game.turmoil) {
       player.game.turmoil.addInfluenceBonus(player);
     }
+
     return undefined;
   }
 }

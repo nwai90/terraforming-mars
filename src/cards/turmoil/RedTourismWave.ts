@@ -9,6 +9,8 @@ import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
 import {Card} from '../Card';
+import {SOCIETY_ADDITIONAL_CARD_COST} from '../../constants';
+import {TurmoilHandler} from '../../turmoil/TurmoilHandler';
 
 export class RedTourismWave extends Card implements IProjectCard {
   constructor() {
@@ -30,8 +32,12 @@ export class RedTourismWave extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player): boolean {
-    if (player.game.turmoil !== undefined) {
-      return player.game.turmoil.canPlay(player, PartyName.REDS);
+    const turmoil = player.game.turmoil;
+    if (turmoil !== undefined) {
+      if (turmoil.parties.find((p) => p.name === PartyName.REDS)) {
+        return turmoil.canPlay(player, PartyName.REDS);
+      }
+      return player.canAfford(player.getCardCost(this) + SOCIETY_ADDITIONAL_CARD_COST);
     }
     return false;
   }
@@ -43,6 +49,7 @@ export class RedTourismWave extends Card implements IProjectCard {
       ),
     ).length;
     player.setResource(Resources.MEGACREDITS, amount);
+    TurmoilHandler.handleSocietyPayment(player, PartyName.REDS);
     return undefined;
   }
 }

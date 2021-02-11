@@ -1,4 +1,6 @@
 import {IProjectCard} from '../cards/IProjectCard';
+import {SOCIETY_ADDITIONAL_CARD_COST} from '../constants';
+import {SelectHowToPayDeferred} from '../deferredActions/SelectHowToPayDeferred';
 import {GlobalParameter} from '../GlobalParameter';
 import {SelectOption} from '../inputs/SelectOption';
 import {Player} from '../Player';
@@ -146,7 +148,7 @@ export class TurmoilHandler {
     }
 
     // Turmoil Spome action
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.SPOME, TurmoilPolicy.SPOME_POLICY_2)) {
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.SPOME, TurmoilPolicy.SPOME_POLICY_2)) {
         const spomePolicy = SPOME_POLICY_2;
   
         if (spomePolicy.canAct(player)) {
@@ -161,7 +163,7 @@ export class TurmoilHandler {
       }
 
     // Turmoil Spome action
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.SPOME, TurmoilPolicy.SPOME_POLICY_4)) {
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.SPOME, TurmoilPolicy.SPOME_POLICY_4)) {
       const spomePolicy = SPOME_POLICY_4;
 
       if (spomePolicy.canAct(player)) {
@@ -176,7 +178,7 @@ export class TurmoilHandler {
     }
 
     // Turmoil Empower action
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.EMPOWER, TurmoilPolicy.EMPOWER_DEFAULT_POLICY)) {
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.EMPOWER, TurmoilPolicy.EMPOWER_DEFAULT_POLICY)) {
       const empowerPolicy = EMPOWER_POLICY_1;
 
       if (empowerPolicy.canAct(player)) {
@@ -191,7 +193,7 @@ export class TurmoilHandler {
     }
 
     // Turmoil Bureaucrats action
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.BUREAUCRATS, TurmoilPolicy.BUREAUCRATS_DEFAULT_POLICY)) {
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.BUREAUCRATS, TurmoilPolicy.BUREAUCRATS_DEFAULT_POLICY)) {
       const bureaucratsPolicy = BUREAUCRATS_POLICY_1;
 
       if (bureaucratsPolicy.canAct(player)) {
@@ -206,7 +208,7 @@ export class TurmoilHandler {
     }
 
     // Turmoil Populists action
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.POPULISTS, TurmoilPolicy.POPULISTS_POLICY_3)) {
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.POPULISTS, TurmoilPolicy.POPULISTS_POLICY_3)) {
       const populistsPolicy = POPULISTS_POLICY_3;
 
       if (populistsPolicy.canAct(player)) {
@@ -221,7 +223,7 @@ export class TurmoilHandler {
     }
 
     // Turmoil Transhumans action
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.TRANSHUMANS, TurmoilPolicy.TRANSHUMANS_POLICY_2)) {
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.TRANSHUMANS, TurmoilPolicy.TRANSHUMANS_POLICY_2)) {
       const transhumansPolicy = TRANSHUMANS_POLICY_2;
 
       if (transhumansPolicy.canAct(player)) {
@@ -236,7 +238,7 @@ export class TurmoilHandler {
     }
 
     // Turmoil Transhumans action
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.TRANSHUMANS, TurmoilPolicy.TRANSHUMANS_POLICY_3)) {
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.TRANSHUMANS, TurmoilPolicy.TRANSHUMANS_POLICY_3)) {
       const transhumansPolicy = TRANSHUMANS_POLICY_3;
 
       if (transhumansPolicy.canAct(player)) {
@@ -251,7 +253,7 @@ export class TurmoilHandler {
     }
 
     // Turmoil Centrists action
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.CENTRISTS, TurmoilPolicy.CENTRISTS_DEFAULT_POLICY)) {
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.CENTRISTS, TurmoilPolicy.CENTRISTS_DEFAULT_POLICY)) {
       const centristsPolicy = CENTRISTS_POLICY_1;
 
       if (centristsPolicy.canAct(player)) {
@@ -266,7 +268,7 @@ export class TurmoilHandler {
     }
 
     // Turmoil Centrists action
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.CENTRISTS, TurmoilPolicy.CENTRISTS_POLICY_3)) {
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.CENTRISTS, TurmoilPolicy.CENTRISTS_POLICY_3)) {
       const centristsPolicy = CENTRISTS_POLICY_3;
 
       if (centristsPolicy.canAct(player)) {
@@ -309,7 +311,7 @@ export class TurmoilHandler {
     }
 
     // PoliticalAgendas Spome P3 hook
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.SPOME, TurmoilPolicy.SPOME_POLICY_3)) {
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.SPOME, TurmoilPolicy.SPOME_POLICY_3)) {
       const spomePolicy = SPOME_POLICY_3;
       spomePolicy.onTilePlaced(player);
     }
@@ -331,13 +333,13 @@ export class TurmoilHandler {
     }
 
     // PoliticalAgendas Empower P2 hook
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.EMPOWER, TurmoilPolicy.EMPOWER_POLICY_2)) {
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.EMPOWER, TurmoilPolicy.EMPOWER_POLICY_2)) {
       const empowerPolicy = EMPOWER_POLICY_2;
       empowerPolicy.onTilePlaced(player);
     }
 
     // PoliticalAgendas Populists P4 hook
-    if (PartyHooks.shouldApplyPolicy(game, PartyName.POPULISTS, TurmoilPolicy.POPULISTS_POLICY_4)) {
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.POPULISTS, TurmoilPolicy.POPULISTS_POLICY_4)) {
       const populistsPolicy = POPULISTS_POLICY_4;
       populistsPolicy.onTilePlaced(player);
     }
@@ -363,9 +365,17 @@ export class TurmoilHandler {
 
     // PoliticalAgendas Spome P1 hook
     if (parameter === GlobalParameter.VENUS) {
-      if (PartyHooks.shouldApplyPolicy(game, PartyName.SPOME, TurmoilPolicy.SPOME_DEFAULT_POLICY)) {
+      if (PartyHooks.shouldApplyPolicy(player.game, PartyName.SPOME, TurmoilPolicy.SPOME_DEFAULT_POLICY)) {
         player.setResource(Resources.MEGACREDITS, steps * 2);
       }
+    }
+  }
+
+  public static handleSocietyPayment(player: Player, partyName: PartyName): void {
+    const turmoil = player.game.turmoil;
+
+    if (turmoil !== undefined && turmoil.parties.find((p) => p.name === partyName) === undefined) {
+      player.game.defer(new SelectHowToPayDeferred(player, SOCIETY_ADDITIONAL_CARD_COST, {title: 'Society: Select how to pay for card'}));
     }
   }
 }

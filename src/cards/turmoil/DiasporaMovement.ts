@@ -8,6 +8,8 @@ import {Resources} from '../../Resources';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {SOCIETY_ADDITIONAL_CARD_COST} from '../../constants';
+import {TurmoilHandler} from '../../turmoil/TurmoilHandler';
 
 export class DiasporaMovement extends Card implements IProjectCard {
   constructor() {
@@ -30,8 +32,12 @@ export class DiasporaMovement extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player): boolean {
-    if (player.game.turmoil !== undefined) {
-      return player.game.turmoil.canPlay(player, PartyName.REDS);
+    const turmoil = player.game.turmoil;
+    if (turmoil !== undefined) {
+      if (turmoil.parties.find((p) => p.name === PartyName.REDS)) {
+        return turmoil.canPlay(player, PartyName.REDS);
+      }
+      return player.canAfford(player.getCardCost(this) + SOCIETY_ADDITIONAL_CARD_COST);
     }
     return false;
   }
@@ -41,6 +47,7 @@ export class DiasporaMovement extends Card implements IProjectCard {
       .map((p) => p.getTagCount(Tags.JOVIAN, false, p.id === player.id ? true : false))
       .reduce((a, c) => a + c);
     player.setResource(Resources.MEGACREDITS, amount + 1);
+    TurmoilHandler.handleSocietyPayment(player, PartyName.REDS);
     return undefined;
   }
 

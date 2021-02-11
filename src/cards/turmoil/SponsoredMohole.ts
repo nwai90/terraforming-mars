@@ -8,7 +8,8 @@ import {PartyName} from '../../turmoil/parties/PartyName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
-
+import {SOCIETY_ADDITIONAL_CARD_COST} from '../../constants';
+import {TurmoilHandler} from '../../turmoil/TurmoilHandler';
 
 export class SponsoredMohole extends Card implements IProjectCard {
   constructor() {
@@ -30,14 +31,19 @@ export class SponsoredMohole extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player): boolean {
-    if (player.game.turmoil !== undefined) {
-      return player.game.turmoil.canPlay(player, PartyName.KELVINISTS);
+    const turmoil = player.game.turmoil;
+    if (turmoil !== undefined) {
+      if (turmoil.parties.find((p) => p.name === PartyName.KELVINISTS)) {
+        return turmoil.canPlay(player, PartyName.KELVINISTS);
+      }
+      return player.canAfford(player.getCardCost(this) + SOCIETY_ADDITIONAL_CARD_COST);
     }
     return false;
   }
 
   public play(player: Player) {
     player.addProduction(Resources.HEAT, 2);
+    TurmoilHandler.handleSocietyPayment(player, PartyName.KELVINISTS);
     return undefined;
   }
 }
