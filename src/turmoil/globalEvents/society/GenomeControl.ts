@@ -20,7 +20,6 @@ export class GenomeControl implements IGlobalEvent {
         const players = [...game.getPlayers()].sort(
           (p1, p2) => this.getScore(p2, turmoil) - this.getScore(p1, turmoil),
         );
-
         // We have one rank 1 player
         if (this.getScore(players[0], turmoil) > this.getScore(players[1], turmoil)) {
           this.discardCards(players[0], game);

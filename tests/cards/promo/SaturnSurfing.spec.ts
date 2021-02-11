@@ -2,6 +2,7 @@ import {expect} from 'chai';
 import {EarthOffice} from '../../../src/cards/base/EarthOffice';
 import {Sponsors} from '../../../src/cards/base/Sponsors';
 import {SaturnSurfing} from '../../../src/cards/promo/SaturnSurfing';
+import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestingUtils';
@@ -12,6 +13,7 @@ describe('SaturnSurfing', function() {
   beforeEach(function() {
     card = new SaturnSurfing();
     player = TestPlayers.BLUE.newPlayer();
+    Game.newInstance('foobar', [player], player);
   });
 
   it('Should play', function() {

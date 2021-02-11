@@ -3,7 +3,7 @@ import {SmugglingActivity} from '../../../src/turmoil/globalEvents/society/Smugg
 import {Game} from '../../../src/Game';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
-import {TestPlayers} from '../../TestingUtils';
+import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
 import {VestaShipyard} from '../../../src/cards/base/VestaShipyard';
 import {Luna} from '../../../src/colonies/Luna';
 
@@ -11,7 +11,7 @@ describe('SmugglingActivity', function() {
   it('resolve play', function() {
     const card = new SmugglingActivity();
     const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player);
+    const game = Game.newInstance('foobar', [player], player, setCustomGameOptions({coloniesExtension: true}));
     const turmoil = Turmoil.newInstance(game);
 
     turmoil.dominantParty = turmoil.getPartyByName(PartyName.REDS)!;
@@ -20,11 +20,11 @@ describe('SmugglingActivity', function() {
     player.playedCards.push(new VestaShipyard());
 
     const colony1 = new Luna();
-    colony1.colonies.push(player.id);
+    colony1.addColony(player);
     game.colonies.push(colony1);
 
     card.resolve(game, turmoil);
     expect(player.megaCredits).to.eq(4);
-    expect(colony1.trackPosition).to.eq(3);
+    expect(colony1.trackPosition).to.eq(2);
   });
 });

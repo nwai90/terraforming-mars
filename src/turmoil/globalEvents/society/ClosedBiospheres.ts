@@ -17,7 +17,7 @@ export class ClosedBiospheres implements IGlobalEvent {
           player.addProduction(Resources.PLANTS, -1, game, undefined, true);
         }
 
-        if (player.getProduction(Resources.MEGACREDITS) > 0) {
+        if (player.getProduction(Resources.MEGACREDITS) > -5) {
           player.addProduction(Resources.MEGACREDITS, -1, game, undefined, true);
         }
 

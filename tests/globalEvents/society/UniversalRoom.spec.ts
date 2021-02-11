@@ -20,6 +20,6 @@ describe('UniversalRoom', function() {
 
     card.resolve(game, turmoil);
     expect(player.megaCredits).to.eq(2);
-    expect(game.deferredActions).has.lengthOf(1);
+    expect(game.deferredActions).has.lengthOf(2);
   });
 });

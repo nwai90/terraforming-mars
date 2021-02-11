@@ -2,6 +2,7 @@ import {expect} from 'chai';
 import {ResearchNetwork} from '../../../src/cards/prelude/ResearchNetwork';
 import {MiningQuota} from '../../../src/cards/venusNext/MiningQuota';
 import {SisterPlanetSupport} from '../../../src/cards/venusNext/SisterPlanetSupport';
+import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestingUtils';
 
@@ -9,6 +10,8 @@ describe('MiningQuota', function() {
   it('Should play', function() {
     const card = new MiningQuota();
     const player = TestPlayers.BLUE.newPlayer();
+    Game.newInstance('foobar', [player], player);
+
     player.playedCards.push(new SisterPlanetSupport);
     expect(card.canPlay(player)).is.not.true;
     player.playedCards.push(new ResearchNetwork());

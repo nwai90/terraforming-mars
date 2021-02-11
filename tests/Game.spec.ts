@@ -361,7 +361,7 @@ describe('Game', function() {
 
   it('Check Ecologist Milestone', function() {
     const player = TestPlayers.BLUE.newPlayer();
-
+    Game.newInstance('foobar', [player], player);
     const card1 = new ResearchNetwork();
     const card2 = new ArcticAlgae();
     const ecologist = new Ecologist();

@@ -1,5 +1,6 @@
 import {expect} from 'chai';
 import {SpaceHotels} from '../../../src/cards/prelude/SpaceHotels';
+import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestingUtils';
@@ -10,6 +11,7 @@ describe('SpaceHotels', function() {
   beforeEach(function() {
     card = new SpaceHotels();
     player = TestPlayers.BLUE.newPlayer();
+    Game.newInstance('foobar', [player], player);
   });
 
   it('Can\'t play', function() {

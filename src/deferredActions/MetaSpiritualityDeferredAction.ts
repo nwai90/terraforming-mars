@@ -64,7 +64,6 @@ export class MetaSpiritualityDeferredAction implements DeferredAction {
         if (Math.min(...amounts) < minSelectionPerResource || Math.max(...amounts) > maxSelectionPerResource) {
           throw new Error('Must select at least ' + this.count + ' of each resource');
         }
-
         this.player.megaCredits += megacreditsAmount;
         this.player.steel += steelAmount;
         this.player.titanium += titaniumAmount;

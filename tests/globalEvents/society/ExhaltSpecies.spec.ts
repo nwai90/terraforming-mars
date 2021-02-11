@@ -25,8 +25,7 @@ describe('ExhaltSpecies', function() {
     expect(player.megaCredits).to.eq(2);
     expect(game.deferredActions).has.lengthOf(1);
 
-    const addAnimals = game.deferredActions.pop()!.execute() as SelectCard<ICard>;
-    addAnimals.cb([smallAnimals]);
+    game.deferredActions.pop()!.execute() as SelectCard<ICard>;
     expect(player.getResourcesOnCard(smallAnimals)).to.eq(1);
   });
 });

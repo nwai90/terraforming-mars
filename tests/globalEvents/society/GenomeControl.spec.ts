@@ -5,6 +5,7 @@ import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {TestPlayers} from '../../TestingUtils';
 import {VestaShipyard} from '../../../src/cards/base/VestaShipyard';
 import {DustSeals} from '../../../src/cards/base/DustSeals';
+import {SearchForLife} from '../../../src/cards/base/SearchForLife';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 
 describe('GenomeControl', function() {
@@ -15,7 +16,7 @@ describe('GenomeControl', function() {
     const game = Game.newInstance('foobar', [player, player2], player);
     const turmoil = Turmoil.newInstance(game);
 
-    player.playedCards.push(new VestaShipyard(), new DustSeals());
+    player.cardsInHand.push(new VestaShipyard(), new DustSeals(), new SearchForLife());
 
     card.resolve(game, turmoil);
     expect(game.deferredActions).has.lengthOf(1);

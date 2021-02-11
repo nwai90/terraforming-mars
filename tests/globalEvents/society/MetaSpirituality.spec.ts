@@ -8,6 +8,8 @@ import {DustSeals} from '../../../src/cards/base/DustSeals';
 import {MicroMills} from '../../../src/cards/base/MicroMills';
 import {Hackers} from '../../../src/cards/base/Hackers';
 import {RadSuits} from '../../../src/cards/base/RadSuits';
+import {AndOptions} from '../../../src/inputs/AndOptions';
+import {SelectAmount} from '../../../src/inputs/SelectAmount';
 
 describe('MetaSpirituality', function() {
   it('resolve play', function() {
@@ -23,7 +25,13 @@ describe('MetaSpirituality', function() {
     player.playedCards.push(new DustSeals(), new MicroMills(), new RadSuits(), new Hackers());
 
     card.resolve(game, turmoil);
-    game.deferredActions.runAll(() => {});
+    const action = game.deferredActions.pop()!.execute()! as AndOptions;
+
+    action.options.forEach((option) => {
+      expect(option instanceof SelectAmount).is.true;
+      expect((option as SelectAmount).min).to.eq(1);
+    })
+    action.cb();
     expect(player.megaCredits).to.eq(1);
     expect(player.steel).to.eq(1);
     expect(player.titanium).to.eq(1);

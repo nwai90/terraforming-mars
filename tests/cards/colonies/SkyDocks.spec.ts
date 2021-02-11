@@ -1,11 +1,14 @@
 import {expect} from 'chai';
 import {SkyDocks} from '../../../src/cards/colonies/SkyDocks';
+import {Game} from '../../../src/Game';
 import {TestPlayers} from '../../TestingUtils';
 
 describe('SkyDocks', function() {
   it('Should play', function() {
     const card = new SkyDocks();
     const player = TestPlayers.BLUE.newPlayer();
+    Game.newInstance('foobar', [player], player);
+
     expect(card.canPlay(player)).is.not.true;
     const action = card.play(player);
     expect(action).is.undefined;

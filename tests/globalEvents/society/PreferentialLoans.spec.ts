@@ -9,7 +9,8 @@ describe('PreferentialLoans', function() {
   it('resolve play', function() {
     const card = new PreferentialLoans();
     const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player);
+    const player2 = TestPlayers.RED.newPlayer();
+    const game = Game.newInstance('foobar', [player, player2], player);
     const turmoil = Turmoil.newInstance(game);
 
     card.resolve(game, turmoil);

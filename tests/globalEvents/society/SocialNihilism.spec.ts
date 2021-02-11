@@ -8,11 +8,12 @@ describe('SocialNihilism', function() {
   it('resolve play', function() {
     const card = new SocialNihilism();
     const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player);
+    const player2 = TestPlayers.RED.newPlayer();
+    const game = Game.newInstance('foobar', [player, player2], player);
     const turmoil = Turmoil.newInstance(game);
 
     player.megaCredits = 2;
-    game.addCityTile(player, '03');
+    game.addCityTile(player, '21');
 
     card.resolve(game, turmoil);
     expect(player.megaCredits).to.eq(0);

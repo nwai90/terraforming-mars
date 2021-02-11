@@ -1,5 +1,6 @@
 import {expect} from 'chai';
 import {AntiGravityTechnology} from '../../../src/cards/base/AntiGravityTechnology';
+import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestingUtils';
 
@@ -9,6 +10,7 @@ describe('AntiGravityTechnology', function() {
   beforeEach(function() {
     card = new AntiGravityTechnology();
     player = TestPlayers.BLUE.newPlayer();
+    Game.newInstance('foobar', [player], player);
   });
 
   it('Can\'t play', function() {

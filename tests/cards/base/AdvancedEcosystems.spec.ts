@@ -6,6 +6,7 @@ import {TundraFarming} from '../../../src/cards/base/TundraFarming';
 import {ResearchCoordination} from '../../../src/cards/prelude/ResearchCoordination';
 import {ResearchNetwork} from '../../../src/cards/prelude/ResearchNetwork';
 import {TestPlayers} from '../../TestingUtils';
+import {Game} from '../../../src/Game';
 
 describe('AdvancedEcosystems', function() {
   let card : AdvancedEcosystems; let player : Player;
@@ -13,6 +14,7 @@ describe('AdvancedEcosystems', function() {
   beforeEach(function() {
     card = new AdvancedEcosystems();
     player = TestPlayers.BLUE.newPlayer();
+    Game.newInstance('foobar', [player], player);
     player.playedCards.push(new TundraFarming(), new ResearchNetwork());
   });
 

@@ -19,7 +19,7 @@ describe('Gerontocracy', function() {
     turmoil.dominantParty.delegates.push(player.id);
     turmoil.dominantParty.delegates.push(player.id);
 
-    (new StanfordTorus).play(player, game);
+    (new StanfordTorus).play(player);
     (new NoctisCity).play(player);
 
     card.resolve(game, turmoil);

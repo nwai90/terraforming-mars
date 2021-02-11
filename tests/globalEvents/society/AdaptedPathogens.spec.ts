@@ -25,8 +25,7 @@ describe('AdaptedPathogens', function() {
     expect(player.megaCredits).to.eq(2);
     expect(game.deferredActions).has.lengthOf(1);
 
-    const addMicrobes = game.deferredActions.pop()!.execute() as SelectCard<ICard>;
-    addMicrobes.cb([decomposers]);
+    game.deferredActions.pop()!.execute() as SelectCard<ICard>;
     expect(player.getResourcesOnCard(decomposers)).to.eq(1);
   });
 });

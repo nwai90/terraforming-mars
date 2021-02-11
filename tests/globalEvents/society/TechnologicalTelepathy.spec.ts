@@ -19,6 +19,6 @@ describe('TechnologicalTelepathy', function() {
     player.playedCards.push(new Research(), new Research());
 
     card.resolve(game, turmoil);
-    expect(player.cardsInHand).has.lengthOf(1);
+    expect(player.cardsInHand).has.lengthOf(2);
   });
 });

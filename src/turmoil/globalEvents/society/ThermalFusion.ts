@@ -16,9 +16,9 @@ export class ThermalFusion implements IGlobalEvent {
 
       game.getPlayers().forEach((player) => {
         player.setResource(Resources.HEAT, player.energy);
-        player.setResource(Resources.ENERGY, 0);
+        player.setResource(Resources.ENERGY, -player.energy);
 
-        const amount = Math.min(player.getProduction(Resources.HEAT), 5) + turmoil.getPlayerInfluence(player);
+        const amount = Math.min(player.getProduction(Resources.ENERGY), 5) + turmoil.getPlayerInfluence(player);
         if (amount > 0) player.setResource(Resources.HEAT, amount * 2, game, undefined, true);
       });
     }
