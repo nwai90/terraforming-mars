@@ -72,7 +72,7 @@ class SpomePolicy02 implements Policy {
 
 class SpomePolicy03 implements Policy {
   id = TurmoilPolicy.SPOME_POLICY_3;
-  description: string = 'When you place a tile on Mars, discard a card if possible';
+  description: string = 'When you place a tile ON MARS, discard a card if possible';
   isDefault = false;
 
   onTilePlaced(player: Player) {

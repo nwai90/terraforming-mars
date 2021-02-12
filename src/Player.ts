@@ -706,7 +706,13 @@ export class Player implements ISerializable<SerializedPlayer> {
 
     // PoliticalAgendas Transhumans P1 hook
     if (PartyHooks.shouldApplyPolicy(this.game, PartyName.TRANSHUMANS, TurmoilPolicy.TRANSHUMANS_DEFAULT_POLICY)) {
-      tagCount += 1;
+      if (tag === Tags.VENUS) {
+        if (this.game.gameOptions.venusNextExtension) tagCount += 1;
+      } else if (tag === Tags.MOON) {
+        if (this.game.gameOptions.moonExpansion) tagCount += 1;
+      } else {
+        tagCount += 1;
+      }
     }
 
     if (includeTagSubstitutions) {
@@ -1942,8 +1948,8 @@ export class Player implements ISerializable<SerializedPlayer> {
       let canAffordLobbyDelegate = true;
       if (shouldApplyCentristsTax && !this.canAfford(2)) canAffordLobbyDelegate = false;
 
-      let lobbyingCost: number = 3;
-      let inciteLobbyingCost: number = 5;
+      let lobbyingCost: number = 5;
+      let inciteLobbyingCost: number = 3;
 
       if (shouldApplyCentristsTax) {
         lobbyingCost += 2;

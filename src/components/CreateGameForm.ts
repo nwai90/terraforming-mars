@@ -298,8 +298,11 @@ export const CreateGameForm = Vue.component('create-game-form', {
         return AgendaStyle.STANDARD;
       }
     },
+    isSocietyExpansionEnabled: function(): Boolean {
+      return this.turmoil && this.colonies && this.venusNext;
+    },
     societyExpansionToggle: function() {
-      if (this.turmoil === false) this.societyExpansion = false;
+      if (!this.isSocietyExpansionEnabled()) this.societyExpansion = false;
     },
     isBeginnerToggleEnabled: function(): Boolean {
       return !(this.initialDraft || this.prelude || this.venusNext || this.colonies || this.turmoil);
@@ -317,10 +320,15 @@ export const CreateGameForm = Vue.component('create-game-form', {
     toggleVenusNext: function() {
       this.solarPhaseOption = this.$data.venusNext;
       if (this.solarPhaseOption === false) this.silverCubeVariant = false;
+      if (this.$data.venusNext === false) this.societyExpansion = false;
     },
-    deselectPoliticalAgendasWhenDeselectingTurmoil: function() {
+    toggleColonies: function() {
+      if (this.$data.colonies === false) this.societyExpansion = false;
+    },
+    toggleTurmoil: function() {
       if (this.$data.turmoil === false) {
         this.politicalAgendasExtension = AgendaStyle.STANDARD;
+        this.societyExpansion = false;
       }
     },
     deselectVenusCompletion: function() {
@@ -603,13 +611,13 @@ export const CreateGameForm = Vue.component('create-game-form', {
                                 <span v-i18n>Venus Next</span>
                             </label>
 
-                            <input type="checkbox" name="colonies" id="colonies-checkbox" v-model="colonies">
+                            <input type="checkbox" name="colonies" id="colonies-checkbox" v-model="colonies" v-on:change="toggleColonies()">
                             <label for="colonies-checkbox" class="expansion-button">
                             <div class="create-game-expansion-icon expansion-icon-colony"></div>
                                 <span v-i18n>Colonies</span>
                             </label>
 
-                            <input type="checkbox" name="turmoil" id="turmoil-checkbox" v-model="turmoil" v-on:change="deselectPoliticalAgendasWhenDeselectingTurmoil()">
+                            <input type="checkbox" name="turmoil" id="turmoil-checkbox" v-model="turmoil" v-on:change="toggleTurmoil()">
                             <label for="turmoil-checkbox" class="expansion-button">
                                 <div class="create-game-expansion-icon expansion-icon-turmoil"></div>
                                 <span v-i18n>Turmoil</span>
@@ -663,11 +671,13 @@ export const CreateGameForm = Vue.component('create-game-form', {
                                     </label>
                                     </div>
                                 </div>
+                            </template>
 
+                            <template v-if="isSocietyExpansionEnabled()">
                                 <input type="checkbox" name="societyExpansion" id="society-checkbox" v-model="societyExpansion" v-on:change="societyExpansionToggle()">
                                 <label for="society-checkbox" class="expansion-button">
                                     <div class="create-game-expansion-icon expansion-icon-society"></div>
-                                    <span v-i18n>Society</span>&nbsp;<a href="https://www.notion.so/Variants-32b53050f10a4cfbaea117c34d4f3a03#e13bc69e07e648fb86a6f23b7d3dc85b" class="tooltip" target="_blank">&#9432;</a>
+                                    <span v-i18n>Society</span>&nbsp;<a href="https://www.notion.so/Society-64620077dfc84d06bbe5235679be7017" class="tooltip" target="_blank">&#9432;</a>
                                 </label>
                             </template>
 
