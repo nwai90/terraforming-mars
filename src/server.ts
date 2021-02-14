@@ -53,14 +53,30 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
         }
       } else if (req.url.startsWith('/player?id=')) {
         // If this player id is called to the server, add to this game's clicked links.
-        const playerId: string = req.url.substring(
-          '/player?id='.length);
+        const queryString: string = req.url!.substring('/player'.length);
+        const queryParams = new URLSearchParams(queryString);
+        const playerId = queryParams.get('id') as string;
+        console.log('playerId: ' + playerId);
+        const incomingPassword = queryParams.get('password');
+        console.log('password: ' + incomingPassword);
+
         GameLoader.getInstance().getByPlayerId(playerId, (game) => {
           if (!game?.clickedLinks.includes(playerId)) {
-            game?.clickedLinks.push(playerId);
+            game!.clickedLinks.push(playerId);
+            const newPassword = generateRandomId();
+            game!.getPlayerById(playerId).password = newPassword
+            console.log('playerId: ' + playerId + '| new password: ' + newPassword);
+            req.url = req.url + '?password=' + newPassword;
+            serveApp(req, res);
+          } else {
+            const storedPassword = game.getPlayerById(playerId).password;
+            if (storedPassword !== undefined && storedPassword === incomingPassword) {
+              serveApp(req, res);
+            } else {
+              throw new Error("Incorrect password");
+            }
           }
         });
-        serveApp(req, res);
       } else if (
         req.url === '/' ||
         req.url.startsWith('/new-game') ||

@@ -1,4 +1,4 @@
-import {PlayerId} from './Player';
+import {Password, PlayerId} from './Player';
 import {CardName} from './CardName';
 import {Color} from './Color';
 import {SerializedCard} from './SerializedCard';
@@ -38,6 +38,7 @@ export interface SerializedPlayer {
     name: string;
     needsToDraft: boolean | undefined;
     oceanBonus: number;
+    password?: Password | undefined;
     pickedCorporationCard: CardName | undefined;
     plantProduction: number;
     plants: number;

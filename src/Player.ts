@@ -73,9 +73,11 @@ import {LunaProjectOffice} from './cards/moon/LunaProjectOffice';
 import { UnitedNationsMissionOne } from './cards/community/corporations/UnitedNationsMissionOne';
 
 export type PlayerId = string;
+export type Password = string;
 
 export class Player implements ISerializable<SerializedPlayer> {
   public readonly id: PlayerId;
+  public password?: Password | undefined;
   private usedUndo: boolean = false;
   private waitingFor?: PlayerInput;
   private waitingForCb?: () => void;
@@ -2051,6 +2053,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   public serialize(): SerializedPlayer {
     const result: SerializedPlayer = {
       id: this.id,
+      password: this.password,
       corporationCard: this.corporationCard === undefined ? undefined : {
         name: this.corporationCard.name,
         resourceCount: this.corporationCard.resourceCount,
