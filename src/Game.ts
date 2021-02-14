@@ -194,6 +194,8 @@ export class Game implements ISerializable<SerializedGame> {
   public oxygenSilverCubeBonusMC: number = 0;
   public venusSilverCubeBonusMC: number = 0;
 
+  public clickedLinks: Array<string> = [];
+
   // Card-specific data
   // Mons Insurance promo corp
   public monsInsuranceOwner: PlayerId | undefined = undefined;
@@ -399,6 +401,7 @@ export class Game implements ISerializable<SerializedGame> {
       awards: this.awards,
       board: this.board.serialize(),
       claimedMilestones: serializeClaimedMilestones(this.claimedMilestones),
+      clickedLinks: this.clickedLinks,
       colonies: this.colonies,
       colonyDealer: this.colonyDealer,
       dealer: this.dealer.serialize(),

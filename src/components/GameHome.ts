@@ -79,9 +79,8 @@ export const GameHome = Vue.component('game-home', {
           <li v-for="(player, index) in (game === undefined ? [] : game.players)">
             <span class="turn-order">{{getTurnOrder(index)}}</span>
             <span :class="'color-square ' + getPlayerCubeColorClass(player.color)"></span>
-            <span class="player-name"><a :href="getHref(player.id)">{{player.name}}</a></span>
-            <Button title="copy" size="tiny" :onClick="_=>copyUrl(player.id)"/>
-            <span v-if="isPlayerUrlCopied(player.id)" class="copied-notice">Playable link for {{player.name}} copied to clipboard <span class="dismissed" @click="setCopiedIdToDefault" >dismiss</span></span>
+            <span v-if="player.id !== ''" class="player-name"><a :href="getHref(player.id)" :onClick="_=>copyUrl(player.id)">{{player.name}}</a></span>
+            <span v-else class="player-name">{{player.name}}</span>
           </li>
         </ul>
 

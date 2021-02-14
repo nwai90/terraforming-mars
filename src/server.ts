@@ -51,12 +51,21 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
         } else {
           serveApp(req, res);
         }
+      } else if (req.url.startsWith('/player?id=')) {
+        // If this player id is called to the server, add to this game's clicked links.
+        const playerId: string = req.url.substring(
+          '/player?id='.length);
+        GameLoader.getInstance().getByPlayerId(playerId, (game) => {
+          if (!game?.clickedLinks.includes(playerId)) {
+            game?.clickedLinks.push(playerId);
+          }
+        });
+        serveApp(req, res);
       } else if (
         req.url === '/' ||
         req.url.startsWith('/new-game') ||
         req.url.startsWith('/solo') ||
         req.url.startsWith('/game?id=') ||
-        req.url.startsWith('/player?id=') ||
         req.url.startsWith('/the-end?id=') ||
         req.url.startsWith('/load') ||
         req.url.startsWith('/debug-ui') ||

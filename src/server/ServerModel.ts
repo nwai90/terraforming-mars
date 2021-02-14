@@ -49,7 +49,7 @@ export class Server {
       phase: game.phase,
       players: game.getPlayers().map((player) => ({
         color: player.color,
-        id: player.id,
+        id: game.clickedLinks.includes(player.id) ? '' : player.id,
         name: player.name,
       })),
       gameOptions: getGameOptionsAsModel(game.gameOptions),
