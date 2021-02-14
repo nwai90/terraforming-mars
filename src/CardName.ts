@@ -474,6 +474,7 @@ export enum CardName {
     JUNK_VENTURES = 'Junk Ventures',
     ARISTARCHUS = 'Aristarchus',
     LABOUR_UNION = 'Labour Union',
+    UNITED_NATIONS_MISSION_ONE = 'United Nations Mission One',
 
     // Community preludes
     VALUABLE_GASES = 'Valuable Gases',

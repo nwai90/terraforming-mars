@@ -70,6 +70,7 @@ import {AquiferStandardProject} from './cards/base/standardProjects/AquiferStand
 import {AirScrappingStandardProject} from './cards/venusNext/AirScrappingStandardProject';
 import {Manutech} from './cards/venusNext/Manutech';
 import {LunaProjectOffice} from './cards/moon/LunaProjectOffice';
+import { UnitedNationsMissionOne } from './cards/community/corporations/UnitedNationsMissionOne';
 
 export type PlayerId = string;
 
@@ -240,6 +241,9 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public increaseTerraformRating() {
+    // United Nations Mission One hook
+    UnitedNationsMissionOne.onTRIncrease(this.game);
+
     if (!this.game.gameOptions.turmoilExtension) {
       this.terraformRating++;
       this.hasIncreasedTerraformRatingThisGeneration = true;

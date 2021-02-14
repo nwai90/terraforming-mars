@@ -152,6 +152,8 @@ export const CardCorporationLogo = Vue.component('CardCorporationLogo', {
         result += '<div class="card-aristarchus-logo">Aristarchus</div>';
       } else if (title === CardName.LABOUR_UNION) {
         result += '<div class="card-labour-union-logo">Labour Union</div>';
+      } else if (title === CardName.UNITED_NATIONS_MISSION_ONE) {
+        result += '<span class="card-unmo-logo">UNITED NATIONS<br/>MISSION ONE</span>';
       }
 
       return result;

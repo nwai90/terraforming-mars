@@ -54,6 +54,7 @@ export interface SerializedGame {
     temperature: number;
     turmoil?: SerializedTurmoil;
     unDraftedCards: Array<[PlayerId, Array<CardName>]>;
+    unitedNationsMissionOneOwner: PlayerId | undefined;
     venusScaleLevel: number;
     temperatureSilverCubeBonusMC: number;
     oceansSilverCubeBonusMC: number;

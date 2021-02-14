@@ -199,6 +199,8 @@ export class Game implements ISerializable<SerializedGame> {
   public monsInsuranceOwner: PlayerId | undefined = undefined;
   // Crash Site promo project
   public someoneHasRemovedOtherPlayersPlants: boolean = false;
+  // United Nations Mission One community corp
+  public unitedNationsMissionOneOwner: PlayerId | undefined = undefined;
 
   private constructor(
     public id: GameId,
@@ -431,6 +433,7 @@ export class Game implements ISerializable<SerializedGame> {
           a[1].map((c) => c.name),
         ];
       }),
+      unitedNationsMissionOneOwner: this.unitedNationsMissionOneOwner,
       venusScaleLevel: this.venusScaleLevel,
       temperatureSilverCubeBonusMC: this.temperatureSilverCubeBonusMC,
       oceansSilverCubeBonusMC: this.oceansSilverCubeBonusMC,
@@ -1683,6 +1686,7 @@ export class Game implements ISerializable<SerializedGame> {
     game.draftRound = d.draftRound;
     game.initialDraftIteration = d.initialDraftIteration;
     game.monsInsuranceOwner = d.monsInsuranceOwner;
+    game.unitedNationsMissionOneOwner = d.unitedNationsMissionOneOwner;
     game.someoneHasRemovedOtherPlayersPlants = d.someoneHasRemovedOtherPlayersPlants;
     game.temperatureSilverCubeBonusMC = d.temperatureSilverCubeBonusMC;
     game.oceansSilverCubeBonusMC = d.oceansSilverCubeBonusMC;
