@@ -419,8 +419,8 @@ class Builder {
     return this;
   }
 
-  public data() {
-    this._addRowItem(new CardRenderItem(CardRenderItemType.DATA_RESOURCE));
+  public data(amount: number = 1) {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.DATA_RESOURCE, amount));
     return this;
   }
 
