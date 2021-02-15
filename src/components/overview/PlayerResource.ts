@@ -4,6 +4,7 @@ import {Resources} from '../../Resources';
 import {TurmoilModel} from '../../models/TurmoilModel';
 import {CardModel} from '../../models/CardModel';
 import {CardName} from '../../CardName';
+import {PreferencesManager} from '../PreferencesManager';
 
 export const PlayerResource = Vue.component('player-resource', {
   props: {
@@ -56,9 +57,14 @@ export const PlayerResource = Vue.component('player-resource', {
       return this.type === Resources.PLANTS && this.plantsAreProtected;
     },
     isResourceUpgraded: function(): boolean {
-      return (this.type === Resources.STEEL && this.steelValue > DEFAULT_STEEL_VALUE) ||
-        (this.type === Resources.TITANIUM && this.titaniumValue > DEFAULT_TITANIUM_VALUE) ||
-        (this.type === Resources.HEAT && this.canUseHeatAsMegaCredits);
+      const tutorialModeOn = PreferencesManager.loadValue('tutorial_mode') === '1';
+      if (tutorialModeOn) {
+        return (this.type === Resources.STEEL) || (this.type === Resources.TITANIUM) || (this.type === Resources.HEAT && this.canUseHeatAsMegaCredits);
+      } else {
+        return (this.type === Resources.STEEL && this.steelValue > DEFAULT_STEEL_VALUE) ||
+          (this.type === Resources.TITANIUM && this.titaniumValue > DEFAULT_TITANIUM_VALUE) ||
+          (this.type === Resources.HEAT && this.canUseHeatAsMegaCredits);
+      }
     },
     getResourceBonus: function(): string {
       if (this.type === Resources.STEEL) {
