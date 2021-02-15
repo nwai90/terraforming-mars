@@ -1,5 +1,7 @@
 import Vue from 'vue';
+import {MILESTONE_COST} from '../constants';
 import {ClaimedMilestoneModel} from '../models/ClaimedMilestoneModel';
+import {PreferencesManager} from './PreferencesManager';
 
 export const Milestone = Vue.component('milestone', {
   props: {
@@ -39,6 +41,18 @@ export const Milestone = Vue.component('milestone', {
       if (milestone.player_name) return 'ma-block ma-block-grayscale pwned-item';
       if (milestone.scores.length > 0) return 'ma-block';
       return 'ma-block ma-block-grayscale';
+    },
+    getAvailableMilestoneSpots: function(): Array<number> {
+      let numClaimedMilestones = 0;
+      this.milestones_list.forEach((milestone)=>{
+        if (milestone.player_name) {
+          numClaimedMilestones++;
+        }
+      })
+      return Array(3-numClaimedMilestones).fill(MILESTONE_COST)
+    },
+    isTutorialModeOn: function(): boolean {
+      return PreferencesManager.loadValue('tutorial_mode') === '1';
     }
   },
   template: `
@@ -46,10 +60,13 @@ export const Milestone = Vue.component('milestone', {
         <div class="milestones">
             <div class="ma-title">
                 <a class="ma-clickable" href="#" v-on:click.prevent="toggleList()" v-i18n>Milestones</a>
-                <span v-for="milestone in milestones_list" v-if="milestone.player_name" class="claimed-milestone-inline" :title="milestone.player_name">
+                <span v-for="milestone in milestones_list" v-if="milestone.player_name" class="milestone-award-inline paid" :title="milestone.player_name">
                     <span v-i18n>{{ milestone.milestone.name }}</span>
                     <span class="ma-player-cube"><i :class="'board-cube board-cube--'+milestone.player_color" /></span>
                 </span>
+                <span v-for="spotPrice in getAvailableMilestoneSpots()" class="milestone-award-inline unpaid" v-if="isTutorialModeOn()">
+                    <div class="milestone-award-price">{{spotPrice}}</div>
+                <span>
             </div>
             <div v-show="shouldShowList()">
                 <div title="press to show or hide the description" v-on:click.prevent="toggle(milestone)" v-for="milestone in milestones_list" :class=getClassForMilestoneTile(milestone)>

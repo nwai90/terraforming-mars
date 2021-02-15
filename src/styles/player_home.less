@@ -656,13 +656,13 @@
     margin: 0 0 0 5px;
 }
 
-.claimed-milestone-inline {
+.milestone-award-inline {
     white-space: nowrap;
     color: #000;
     text-transform: uppercase;
-    background: linear-gradient(to right, #e28c22, #ffcc64, #e28c22);
     padding: 1px 33px 1px 10px;
     width: 190px;
+    height: 25px;
     letter-spacing: 1px;
     text-align: center;
     font-size: 16px;
@@ -671,24 +671,30 @@
     margin: 0 5px 0 5px;
     border-radius: 2px;
     display: inline-block;
+    &.paid{
+        background: linear-gradient(to right, #e28c22, #ffcc64, #e28c22);
+    }
+    &.unpaid {
+        background: #303030;
+    }
 }
-.funded-award-inline {
-    white-space: nowrap;
-    color: #000;
-    text-transform: uppercase;
-    background: linear-gradient(135deg, #e28c22, #ffcc64, #e28c22);
-    padding: 1px 33px 1px 10px;
-    width: 190px;
-    letter-spacing: 1px;
+.milestone-award-price {
+    background-image: url(./assets/resources/megacredit.png);
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    background-size: 30px;
+    margin-top: -3px;
+    margin-left: 70px;
+    transform: scale(0.8);
+
+    font-family: Prototype;
+    color: black;
+    font-weight: normal;
+    font-size: 18px;
     text-align: center;
-    font-size: 16px;
-    line-height: 23px;
-    font-weight: bold;
-    margin: 0 5px 0 5px;
-    border-radius: 20px;
-    font-style: italic;
-    display: inline-block;
 }
+
 
 .active-award-or-milestone {
     color: #000;

@@ -81,6 +81,7 @@ export const Preferences = Vue.component('preferences', {
       'show_card_number': false as boolean | unknown[],
       'show_tile_confirmation': false as boolean | unknown[],
       'show_discount_on_cards': true as boolean | unknown[],
+      'tutorial_mode': false as boolean | unknown[],
     };
   },
   methods: {
@@ -350,6 +351,12 @@ export const Preferences = Vue.component('preferences', {
                         <label class="form-switch">
                             <input type="checkbox" v-on:change="updatePreferences" v-model="show_card_number" />
                             <i class="form-icon"></i> <span v-i18n>Show card numbers (req. refresh)</span>
+                        </label>
+                    </div>
+                    <div class="preferences_panel_item">
+                        <label class="form-switch">
+                            <input type="checkbox" v-on:change="updatePreferences" v-model="tutorial_mode" />
+                            <i class="form-icon"></i> <span v-i18n>Tutorial Mode (req. refresh)</span>
                         </label>
                     </div>
 
