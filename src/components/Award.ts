@@ -43,8 +43,8 @@ export const Award = Vue.component('award', {
     getAvailableAwardSpots: function(): Array<number> {
       const awardSpots = [8, 14, 20];
       let numFundedAwards = 0;
-      this.awards_list.forEach((milestone)=>{
-        if (milestone.player_name) {
+      this.awards_list.forEach((award)=>{
+        if (award.player_name) {
           numFundedAwards++;
         }
       })

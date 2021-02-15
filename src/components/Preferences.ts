@@ -356,7 +356,7 @@ export const Preferences = Vue.component('preferences', {
                     <div class="preferences_panel_item">
                         <label class="form-switch">
                             <input type="checkbox" v-on:change="updatePreferences" v-model="tutorial_mode" />
-                            <i class="form-icon"></i> <span v-i18n>Tutorial Mode</span>
+                            <i class="form-icon"></i> <span v-i18n>Tutorial Mode (req. refresh)</span>
                         </label>
                     </div>
 

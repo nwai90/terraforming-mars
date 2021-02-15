@@ -43,14 +43,13 @@ export const Milestone = Vue.component('milestone', {
       return 'ma-block ma-block-grayscale';
     },
     getAvailableMilestoneSpots: function(): Array<number> {
-      const milestoneSpots = [MILESTONE_COST, MILESTONE_COST, MILESTONE_COST];
       let numClaimedMilestones = 0;
       this.milestones_list.forEach((milestone)=>{
         if (milestone.player_name) {
           numClaimedMilestones++;
         }
       })
-      return milestoneSpots.slice(numClaimedMilestones);
+      return Array(3-numClaimedMilestones).fill(MILESTONE_COST)
     },
     isTutorialModeOn: function(): boolean {
       return PreferencesManager.loadValue('tutorial_mode') === '1';

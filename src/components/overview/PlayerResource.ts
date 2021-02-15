@@ -56,7 +56,7 @@ export const PlayerResource = Vue.component('player-resource', {
     displayPlantsProtectedIcon: function(): boolean {
       return this.type === Resources.PLANTS && this.plantsAreProtected;
     },
-    isResourceUpgraded: function(): boolean {
+    displayResourceValue: function(): boolean {
       const tutorialModeOn = PreferencesManager.loadValue('tutorial_mode') === '1';
       if (tutorialModeOn) {
         return (this.type === Resources.STEEL) || (this.type === Resources.TITANIUM) || (this.type === Resources.HEAT && this.canUseHeatAsMegaCredits);
@@ -104,7 +104,7 @@ export const PlayerResource = Vue.component('player-resource', {
             <div class="resource_item_prod">
                 <span class="resource_item_prod_count">{{ productionSign() }}{{ production }}</span>
                 <div v-if="displayPlantsProtectedIcon()" class="shield_icon"></div>
-                <div v-if="isResourceUpgraded()" class="resource_icon--metalbonus" v-html="getResourceBonus()"></div>
+                <div v-if="displayResourceValue()" class="resource_icon--metalbonus" v-html="getResourceBonus()"></div>
             </div>
         </div>
     `,
