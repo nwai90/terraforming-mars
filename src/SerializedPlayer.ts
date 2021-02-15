@@ -45,6 +45,7 @@ export interface SerializedPlayer {
     playedCards: Array<SerializedCard>;
     politicalAgendasActionUsedCount: number;
     preludeCardsInHand: Array<CardName>;
+    remainingStallActionsCount: number;
     removedFromPlayCards: Array<CardName>;
     removingPlayers: Array<PlayerId>;
     scienceTagCount: number;

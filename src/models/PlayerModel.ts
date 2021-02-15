@@ -64,6 +64,7 @@ export interface PlayerModel {
     playedCards: Array<CardModel>;
     players: Array<PlayerModel>;
     preludeCardsInHand: Array<CardModel>;
+    remainingStallActionsCount: number;
     researchedPlayers: Array<Color>;
     selfReplicatingRobotsCards: Array<CardModel>;
     spaces: Array<SpaceModel>;

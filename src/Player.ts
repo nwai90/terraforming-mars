@@ -116,6 +116,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   private actionsThisGeneration: Set<CardName> = new Set();
   public lastCardPlayed: IProjectCard | undefined;
   private corporationInitialActionDone: boolean = false;
+  public remainingStallActionsCount: number = 5;
 
   // Cards
   public dealtCorporationCards: Array<CorporationCard> = [];
@@ -1643,6 +1644,15 @@ export class Player implements ISerializable<SerializedPlayer> {
     });
   }
 
+  private stallOption(): PlayerInput {
+    return new SelectOption('End Turn (' + this.remainingStallActionsCount + '/5 remaining)', 'End', () => {
+      this.actionsTakenThisRound = 1;
+      this.remainingStallActionsCount -= 1;
+      this.game.log('${0} ended turn', (b) => b.player(this));
+      return undefined;
+    });
+  }
+
   // Exposed for tests
   public pass(): void {
     this.game.playerHasPassed(this);
@@ -1952,13 +1962,12 @@ export class Player implements ISerializable<SerializedPlayer> {
       }
     }
 
-    if (this.game.getPlayers().length > 1 &&
-      this.actionsTakenThisRound > 0 &&
-      !this.game.gameOptions.fastModeOption &&
-      this.allOtherPlayersHavePassed() === false) {
-      action.options.push(
-        this.endTurnOption(),
-      );
+    if (this.game.getPlayers().length > 1 && this.actionsTakenThisRound > 0 && this.allOtherPlayersHavePassed() === false) {
+      if (!this.game.gameOptions.fastModeOption) {
+        action.options.push(this.endTurnOption());
+      } else if (this.game.gameOptions.fastModeOption && this.remainingStallActionsCount > 0) {
+        action.options.push(this.stallOption());
+      }
     }
 
     if (this.canAfford(this.game.getAwardFundingCost()) && !this.game.allAwardsFunded()) {
@@ -2085,6 +2094,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       actionsTakenThisRound: this.actionsTakenThisRound,
       actionsThisGeneration: Array.from(this.actionsThisGeneration),
       corporationInitialActionDone: this.corporationInitialActionDone,
+      remainingStallActionsCount: this.remainingStallActionsCount,
       // Cards
       dealtCorporationCards: this.dealtCorporationCards.map((c) => c.name),
       dealtProjectCards: this.dealtProjectCards.map((c) => c.name),
@@ -2161,6 +2171,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     player.plantProduction = d.plantProduction;
     player.plants = d.plants;
     player.plantsNeededForGreenery = d.plantsNeededForGreenery;
+    player.remainingStallActionsCount = d.remainingStallActionsCount;
     player.removingPlayers = d.removingPlayers;
     player.scienceTagCount = d.scienceTagCount;
     player.steel = d.steel;
