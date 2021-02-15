@@ -51,8 +51,8 @@ export const Milestone = Vue.component('milestone', {
       })
       return Array(3-numClaimedMilestones).fill(MILESTONE_COST)
     },
-    isTutorialModeOn: function(): boolean {
-      return PreferencesManager.loadValue('tutorial_mode') === '1';
+    isLearnerModeOn: function(): boolean {
+      return PreferencesManager.loadValue('learner_mode') === '1';
     }
   },
   template: `
@@ -64,7 +64,7 @@ export const Milestone = Vue.component('milestone', {
                     <span v-i18n>{{ milestone.milestone.name }}</span>
                     <span class="ma-player-cube"><i :class="'board-cube board-cube--'+milestone.player_color" /></span>
                 </span>
-                <span v-for="spotPrice in getAvailableMilestoneSpots()" class="milestone-award-inline unpaid" v-if="isTutorialModeOn()">
+                <span v-for="spotPrice in getAvailableMilestoneSpots()" class="milestone-award-inline unpaid" v-if="isLearnerModeOn()">
                     <div class="milestone-award-price">{{spotPrice}}</div>
                 <span>
             </div>

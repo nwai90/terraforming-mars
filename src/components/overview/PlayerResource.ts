@@ -57,8 +57,8 @@ export const PlayerResource = Vue.component('player-resource', {
       return this.type === Resources.PLANTS && this.plantsAreProtected;
     },
     displayResourceValue: function(): boolean {
-      const tutorialModeOn = PreferencesManager.loadValue('tutorial_mode') === '1';
-      if (tutorialModeOn) {
+      const learnerModeOn = PreferencesManager.loadValue('learner_mode') === '1';
+      if (learnerModeOn) {
         return (this.type === Resources.STEEL) || (this.type === Resources.TITANIUM) || (this.type === Resources.HEAT && this.canUseHeatAsMegaCredits);
       } else {
         return (this.type === Resources.STEEL && this.steelValue > DEFAULT_STEEL_VALUE) ||
