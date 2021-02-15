@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import {FundedAwardModel} from '../models/FundedAwardModel';
+import {PreferencesManager} from './PreferencesManager';
 
 export const Award = Vue.component('award', {
   props: {
@@ -48,6 +49,9 @@ export const Award = Vue.component('award', {
         }
       })
       return awardSpots.slice(numFundedAwards);
+    },
+    isTutorialModeOn: function(): boolean {
+      return PreferencesManager.loadValue('tutorial_mode') === '1';
     }
   },
   template: `
@@ -59,7 +63,7 @@ export const Award = Vue.component('award', {
                     <span v-i18n>{{ award.award.name }}</span>
                     <span class="ma-player-cube"><i :class="'board-cube board-cube--'+award.player_color" /></span>
                 </span>
-                <span v-for="spotPrice in getAvailableAwardSpots()" class="milestone-award-inline unpaid">
+                <span v-for="spotPrice in getAvailableAwardSpots()" class="milestone-award-inline unpaid" v-if="isTutorialModeOn()">
                     <div class="milestone-award-price">{{spotPrice}}</div>
                 <span>
             </div>
