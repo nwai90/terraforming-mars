@@ -38,6 +38,16 @@ export const Award = Vue.component('award', {
     getClassForAwardTile: function(award: FundedAwardModel) {
       if (award.scores.length > 0) return 'ma-block';
       return 'ma-block ma-block-grayscale';
+    },
+    getAvailableAwardSpots: function(): Array<number> {
+      const awardSpots = [8, 14, 20];
+      let numFundedAwards = 0;
+      this.awards_list.forEach((milestone)=>{
+        if (milestone.player_name) {
+          numFundedAwards++;
+        }
+      })
+      return awardSpots.slice(numFundedAwards);
     }
   },
   template: `
@@ -45,10 +55,13 @@ export const Award = Vue.component('award', {
         <div class="awards">
             <div class="ma-title">
                 <a class="ma-clickable awards-padding" href="#" v-on:click.prevent="toggleList()" v-i18n>Awards</a>
-                <span v-for="award in awards_list" v-if="award.player_name" class="funded-award-inline" :title="award.player_name">
+                <span v-for="award in awards_list" v-if="award.player_name" class="milestone-award-inline paid" :title="award.player_name">
                     <span v-i18n>{{ award.award.name }}</span>
                     <span class="ma-player-cube"><i :class="'board-cube board-cube--'+award.player_color" /></span>
                 </span>
+                <span v-for="spotPrice in getAvailableAwardSpots()" class="milestone-award-inline unpaid">
+                    <div class="milestone-award-price">{{spotPrice}}</div>
+                <span>
             </div>
             
             <div v-show="shouldShowList()">
