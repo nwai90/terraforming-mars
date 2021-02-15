@@ -7,6 +7,7 @@ import {SelectColony} from '../../../src/inputs/SelectColony';
 import {StrategicBasePlanning} from '../../../src/cards/community/preludes/StrategicBasePlanning';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {TileType} from '../../../src/TileType';
+import {Iapetus} from '../../../src/cards/community/colonies/Iapetus';
 
 describe('StrategicBasePlanning', function() {
   let card : StrategicBasePlanning; let player : Player; let player2 : Player; let game : Game;
@@ -18,22 +19,18 @@ describe('StrategicBasePlanning', function() {
 
     const gameOptions = setCustomGameOptions({coloniesExtension: true}) as GameOptions;
     game = Game.newInstance('foobar', [player, player2], player, gameOptions);
+    game.colonies.push(new Iapetus()); // ensure an open colony is always available
   });
 
   it('Should play', function() {
     player.megaCredits = 6;
-
     card.play(player);
     expect(game.deferredActions).has.lengthOf(2);
 
-    // selectColony can be undefined if game setup results in no open colonies available to build on
     const selectColony = game.deferredActions.pop()!.execute() as SelectColony;
-    if (selectColony !== undefined) {
-      selectColony.cb((<any>ColonyName)[selectColony.coloniesModel[0].name.toUpperCase()]);
-    }
+    selectColony.cb((<any>ColonyName)[selectColony.coloniesModel[0].name.toUpperCase()]);
 
     game.deferredActions.pop()!.execute(); // howToPay
-
     const selectSpace = game.deferredActions.pop()!.execute() as SelectSpace;
 
     const openColonies = game.colonies.filter((colony) => colony.isActive);
