@@ -28,11 +28,11 @@ describe('TitanAirScrapping', function() {
 
     const orOptions = card.action(player) as OrOptions;
     expect(orOptions instanceof OrOptions).is.true;
-        orOptions!.options[0].cb();
+    orOptions!.options[0].cb();
 
-        expect(player.getTerraformRating()).to.eq(21);
-        expect(player.getResourcesOnCard(card)).to.eq(5);
-        expect(card.getVictoryPoints()).to.eq(2);
+    expect(player.getTerraformRating()).to.eq(21);
+    expect(player.getResourcesOnCard(card)).to.eq(5);
+    expect(card.getVictoryPoints()).to.eq(2);
   });
 
   it('Should act automatically when only one action possible', function() {

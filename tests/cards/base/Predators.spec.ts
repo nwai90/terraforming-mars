@@ -46,10 +46,10 @@ describe('Predators', function() {
     const selectCard = game.deferredActions.pop()!.execute() as SelectCard<ICard>;
     expect(selectCard.cards).has.lengthOf(2);
     selectCard.cb([selectCard.cards[0]]);
-        game.deferredActions.pop()!.execute(); // Add animal to predators
+    game.deferredActions.pop()!.execute(); // Add animal to predators
 
-        expect(card.resourceCount).to.eq(1);
-        expect(player.getResourcesOnCard(fish)).to.eq(0);
+    expect(card.resourceCount).to.eq(1);
+    expect(player.getResourcesOnCard(fish)).to.eq(0);
   });
 
   it('Respects pets', function() {
@@ -66,11 +66,11 @@ describe('Predators', function() {
     card.action(player);
     const selectCard = game.deferredActions.pop()!.execute() as SelectCard<ICard>;
     expect(selectCard).is.undefined; // Only one option: Fish
-        game.deferredActions.pop()!.execute(); // Add animal to predators
+    game.deferredActions.pop()!.execute(); // Add animal to predators
 
-        expect(card.resourceCount).to.eq(1);
-        expect(player2.getResourcesOnCard(fish)).to.eq(0);
-        expect(player2.getResourcesOnCard(pets)).to.eq(1);
+    expect(card.resourceCount).to.eq(1);
+    expect(player2.getResourcesOnCard(fish)).to.eq(0);
+    expect(player2.getResourcesOnCard(pets)).to.eq(1);
   });
 
   it('Respects Bioengineering Enclosure', function() {
@@ -87,11 +87,11 @@ describe('Predators', function() {
     card.action(player);
     const selectCard = game.deferredActions.pop()!.execute() as SelectCard<ICard>;
     expect(selectCard).is.undefined; // Only one option: Fish
-        game.deferredActions.pop()!.execute(); // Add animal to predators
+    game.deferredActions.pop()!.execute(); // Add animal to predators
 
-        expect(card.resourceCount).to.eq(1);
-        expect(player2.getResourcesOnCard(fish)).to.eq(0);
-        expect(player2.getResourcesOnCard(bioengineeringEnclosure)).to.eq(1);
+    expect(card.resourceCount).to.eq(1);
+    expect(player2.getResourcesOnCard(fish)).to.eq(0);
+    expect(player2.getResourcesOnCard(bioengineeringEnclosure)).to.eq(1);
   });
 
   it('Respects protected habitats', function() {

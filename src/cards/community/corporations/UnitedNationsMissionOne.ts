@@ -24,7 +24,7 @@ export class UnitedNationsMissionOne extends Card implements CorporationCard {
             b.megacredits(39).nbsp.tr(1);
             b.corpBox('effect', (ce) => {
               ce.vSpace();
-              ce.effect('When any player takes an action that increases TR, including this, gain 1 MC for each step.', (eb) => {
+              ce.effect('When any player takes an action or plays a card that increases TR, including this, gain 1 MC for each step.', (eb) => {
                 eb.tr(1).any.startEffect.megacredits(1);
               });
             });
@@ -43,7 +43,7 @@ export class UnitedNationsMissionOne extends Card implements CorporationCard {
 
       if (playerId !== undefined) {
         const player = game.getPlayerById(playerId);
-        if (game.phase === Phase.ACTION) player.megaCredits += 1;
+        if (game.phase === Phase.ACTION || game.phase === Phase.PRELUDES) player.megaCredits += 1;
       }
     }
 }

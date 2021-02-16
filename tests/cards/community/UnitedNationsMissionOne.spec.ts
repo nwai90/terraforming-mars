@@ -35,12 +35,12 @@ describe('UnitedNationsMissionOne', function() {
     expect(player.megaCredits).to.eq(2);
   });
 
-  it('Does not give MC during initial preludes phase', function() {
+  it('Gives MC during initial preludes phase', function() {
     game.phase = Phase.PRELUDES;
 
     const card = new UNMIContractor();
     card.play(player);
-    expect(player.megaCredits).to.eq(0); // no increase
+    expect(player.megaCredits).to.eq(3);
   });
 
   it('Does not give MC during turmoil phase', function() {

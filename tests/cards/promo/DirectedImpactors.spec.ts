@@ -70,10 +70,10 @@ describe('DirectedImpactors', function() {
     const selectHowToPay = game.deferredActions.peek()!.execute() as SelectHowToPay;
     selectHowToPay.cb({steel: 0, heat: 0, titanium: 1, megaCredits: 3, microbes: 0, floaters: 0} as HowToPay);
 
-        selectCard!.cb([card2]);
-        expect(card2.resourceCount).to.eq(1);
-        expect(player.megaCredits).to.eq(0);
-        expect(player.titanium).to.eq(0);
+    selectCard!.cb([card2]);
+    expect(card2.resourceCount).to.eq(1);
+    expect(player.megaCredits).to.eq(0);
+    expect(player.titanium).to.eq(0);
   });
 
   it('Can still spend resource even if temperature is max', function() {

@@ -31,11 +31,11 @@ describe('NitriteReducingBacteria', function() {
     const orOptions = card.action(player) as OrOptions;
     expect(orOptions instanceof OrOptions).is.true;
 
-        orOptions!.options[1].cb();
-        expect(card.resourceCount).to.eq(5);
+    orOptions!.options[1].cb();
+    expect(card.resourceCount).to.eq(5);
 
-        orOptions!.options[0].cb();
-        expect(card.resourceCount).to.eq(2);
-        expect(player.getTerraformRating()).to.eq(21);
+    orOptions!.options[0].cb();
+    expect(card.resourceCount).to.eq(2);
+    expect(player.getTerraformRating()).to.eq(21);
   });
 });

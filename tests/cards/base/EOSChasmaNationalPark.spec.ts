@@ -32,14 +32,14 @@ describe('EosChasmaNationalPark', function() {
     const action = card.play(player);
     expect(action instanceof SelectCard).is.true;
     player.playedCards.push(card);
-        action!.cb([birds]);
+    action!.cb([birds]);
 
-        expect(player.getResourcesOnCard(birds)).to.eq(1);
-        expect(player.plants).to.eq(3);
-        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
+    expect(player.getResourcesOnCard(birds)).to.eq(1);
+    expect(player.plants).to.eq(3);
+    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
 
-        player.getVictoryPoints();
-        expect(player.victoryPointsBreakdown.victoryPoints).to.eq(2);
+    player.getVictoryPoints();
+    expect(player.victoryPointsBreakdown.victoryPoints).to.eq(2);
   });
 
   it('Should play - single target', function() {

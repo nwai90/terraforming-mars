@@ -42,12 +42,12 @@ describe('ElectroCatapult', function() {
     expect(action instanceof OrOptions).is.true;
     expect(action!.options).has.lengthOf(2);
 
-        action!.options[0].cb();
-        expect(player.plants).to.eq(0);
-        expect(player.megaCredits).to.eq(7);
+    action!.options[0].cb();
+    expect(player.plants).to.eq(0);
+    expect(player.megaCredits).to.eq(7);
 
-        action!.options[1].cb();
-        expect(player.steel).to.eq(0);
-        expect(player.megaCredits).to.eq(14);
+    action!.options[1].cb();
+    expect(player.steel).to.eq(0);
+    expect(player.megaCredits).to.eq(14);
   });
 });
