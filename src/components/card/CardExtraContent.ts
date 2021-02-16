@@ -32,8 +32,8 @@ export const CardExtraContent = Vue.component('CardExtraContent', {
   template: `
         <div class="card-extra-content-container">
           <img v-if="lifeFound(card)" class="little-green-men" src="assets/martian.png" />
-          <div v-if="miningTileOnMetal(card,'steel')" class="mined-steel"/>
-          <div v-if="miningTileOnMetal(card,'titanium')" class="mined-titanium"/>
+          <div v-if="miningTileOnMetal(card,'steel')" class="mined-metal mined-steel"/>
+          <div v-if="miningTileOnMetal(card,'titanium')" class="mined-metal mined-titanium"/>
         </div>
     `,
 });

@@ -1833,24 +1833,20 @@ input[type="radio"]:checked + .filterDiv::after {
     left: 70px;
 }
 
-.mined-steel {
+.mined-metal {
     position: absolute;
     z-index: 1000;
-    top: 142px;
-    left: 64px;
-    width: 35px;
-    height: 35px;
-    border: 5px dashed #FFFACD;
-}
-
-.mined-titanium {
-    position: absolute;
-    z-index: 1000;
-    top: 142px;
-    left: 122px;
-    width: 35px;
-    height: 35px;
-    border: 5px dashed #FFFACD;
+    top: 147px;
+    width: 57px;
+    height: 38px;
+    background: url(./assets/misc/production.png);
+    background-size: 72px;
+    &.mined-steel {
+        left: 105px;
+    }
+    &.mined-titanium {
+        left: 69px;
+    }
 }
 
 .card-domed-crater {
