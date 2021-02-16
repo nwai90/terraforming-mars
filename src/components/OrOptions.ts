@@ -64,16 +64,6 @@ export const OrOptions = Vue.component('or-options', {
       throw new Error('no options provided for OrOptions');
     }
     this.playerinput.options.forEach((option: any, idx: number) => {
-      // Skip standard project if none is available and learner mode is off.
-      if (option.title === 'Standard projects' && option.enabled !== undefined ) {
-        if (option.enabled.every((p: boolean) => p === false)) {
-          const learnerModeOff = PreferencesManager.loadValue('learner_mode') === '0';
-          if (learnerModeOff) {
-            return;
-          }
-        }
-      }
-      
       const domProps: { [key: string]: any } = {
         name: 'selectOption' + unique,
         type: 'radio',
@@ -130,7 +120,22 @@ export const OrOptions = Vue.component('or-options', {
         ),
       );
       optionElements.push(subchildren[subchildren.length - 1]);
-      children.push(createElement('div', subchildren));
+
+      // Label that standard project will be skipped if none is available and learner mode is off.
+      let skippedStandardProject = false;
+      if (option.title === 'Standard projects' && option.enabled !== undefined ) {
+        if (option.enabled.every((p: boolean) => p === false)) {
+          const learnerModeOff = PreferencesManager.loadValue('learner_mode') === '0';
+          if (learnerModeOff) {
+            skippedStandardProject = true;
+          }
+        }
+      }
+      // Only push this orOption element if we are not skipping standard projects
+      if (!skippedStandardProject) {
+        children.push(createElement('div', subchildren));
+      }
+
       if (this.showsave && this.$data.selectedOption === idx) {
         children.push(
           createElement(
