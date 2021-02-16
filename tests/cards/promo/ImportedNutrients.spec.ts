@@ -37,7 +37,7 @@ describe('ImportedNutrients', function() {
     expect(player.plants).to.eq(4);
 
     expect(action).is.not.undefined;
-        action!.cb([decomposers]);
-        expect(player.getResourcesOnCard(decomposers)).to.eq(4);
+    action!.cb([decomposers]);
+    expect(player.getResourcesOnCard(decomposers)).to.eq(4);
   });
 });

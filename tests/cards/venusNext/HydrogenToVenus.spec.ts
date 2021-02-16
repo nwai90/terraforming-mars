@@ -38,9 +38,9 @@ describe('HydrogenToVenus', function() {
     const card3 = new ColonizerTrainingCamp();
     player.playedCards.push(card2, card3);
 
-        card.play(player) as SelectCard<ICard>;
-        expect(player.getResourcesOnCard(card2)).to.eq(1);
-        expect(game.getVenusScaleLevel()).to.eq(2);
+    card.play(player) as SelectCard<ICard>;
+    expect(player.getResourcesOnCard(card2)).to.eq(1);
+    expect(game.getVenusScaleLevel()).to.eq(2);
   });
 
   it('Should play with no venus cards', function() {

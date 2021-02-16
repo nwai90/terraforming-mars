@@ -40,7 +40,7 @@ describe('SymbioticFungus', function() {
     const action = card.action(player);
     expect(action).is.not.undefined;
 
-        action!.cb([player.playedCards[0]]);
-        expect(player.getResourcesOnCard(player.playedCards[0])).to.eq(1);
+    action!.cb([player.playedCards[0]]);
+    expect(player.getResourcesOnCard(player.playedCards[0])).to.eq(1);
   });
 });

@@ -52,8 +52,8 @@ describe('AerobrakedAmmoniaAsteroid', function() {
     expect(player.getProduction(Resources.PLANTS)).to.eq(1);
 
     expect(action).is.not.undefined;
-        action!.cb([selectedCard]);
+    action!.cb([selectedCard]);
 
-        expect(player.getResourcesOnCard(selectedCard)).to.eq(2);
+    expect(player.getResourcesOnCard(selectedCard)).to.eq(2);
   });
 });

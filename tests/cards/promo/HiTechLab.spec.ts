@@ -26,8 +26,8 @@ describe('HiTechLab', function() {
     const amount = card.action(player) as SelectAmount;
     expect(amount instanceof SelectAmount).is.true;
 
-        amount!.cb(3);
-        expect(player.getResource(Resources.ENERGY)).to.eq(2);
+    amount!.cb(3);
+    expect(player.getResource(Resources.ENERGY)).to.eq(2);
   });
 
   it('Should give victory points', function() {

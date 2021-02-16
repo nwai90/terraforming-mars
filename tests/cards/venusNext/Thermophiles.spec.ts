@@ -35,17 +35,17 @@ describe('Thermophiles', function() {
 
     const action = card.action(player);
     expect(action instanceof SelectCard).is.true;
-        action!.cb([card]);
-        expect(card.resourceCount).to.eq(1);
+    action!.cb([card]);
+    expect(card.resourceCount).to.eq(1);
 
-        player.addResourceTo(card);
+    player.addResourceTo(card);
 
-        const orOptions = card.action(player) as OrOptions;
-        expect(orOptions).is.not.undefined;
-        expect(orOptions instanceof OrOptions).is.true;
-        orOptions.options[0].cb();
-        expect(card.resourceCount).to.eq(0);
-        expect(game.getVenusScaleLevel()).to.eq(2);
+    const orOptions = card.action(player) as OrOptions;
+    expect(orOptions).is.not.undefined;
+    expect(orOptions instanceof OrOptions).is.true;
+    orOptions.options[0].cb();
+    expect(card.resourceCount).to.eq(0);
+    expect(game.getVenusScaleLevel()).to.eq(2);
   });
 
   it('Should act - single target', function() {
