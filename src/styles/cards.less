@@ -1833,6 +1833,22 @@ input[type="radio"]:checked + .filterDiv::after {
     left: 70px;
 }
 
+.mined-metal {
+    position: absolute;
+    z-index: 1000;
+    top: 147px;
+    width: 57px;
+    height: 38px;
+    background: url(./assets/misc/production.png);
+    background-size: 72px;
+    &.mined-steel {
+        left: 105px;
+    }
+    &.mined-titanium {
+        left: 69px;
+    }
+}
+
 .card-domed-crater {
     .content {
         .description {
