@@ -70,7 +70,7 @@ import {AquiferStandardProject} from './cards/base/standardProjects/AquiferStand
 import {AirScrappingStandardProject} from './cards/venusNext/AirScrappingStandardProject';
 import {Manutech} from './cards/venusNext/Manutech';
 import {LunaProjectOffice} from './cards/moon/LunaProjectOffice';
-import { UnitedNationsMissionOne } from './cards/community/corporations/UnitedNationsMissionOne';
+import {UnitedNationsMissionOne} from './cards/community/corporations/UnitedNationsMissionOne';
 
 export type PlayerId = string;
 

@@ -4,6 +4,7 @@ import {$t} from '../directives/i18n';
 import {Button} from '../components/common/Button';
 import {PlayerModel} from '../models/PlayerModel';
 import {PlayerInputModel} from '../models/PlayerInputModel';
+import {PreferencesManager} from './PreferencesManager';
 
 let unique: number = 0;
 
@@ -63,6 +64,16 @@ export const OrOptions = Vue.component('or-options', {
       throw new Error('no options provided for OrOptions');
     }
     this.playerinput.options.forEach((option: any, idx: number) => {
+      // Skip standard project if none is available and learner mode is off.
+      if (option.title === 'Standard projects' && option.enabled !== undefined ) {
+        if (option.enabled.every((p: boolean) => p === false)) {
+          const learnerModeOff = PreferencesManager.loadValue('learner_mode') === '0';
+          if (learnerModeOff) {
+            return;
+          }
+        }
+      }
+      
       const domProps: { [key: string]: any } = {
         name: 'selectOption' + unique,
         type: 'radio',
