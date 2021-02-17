@@ -972,10 +972,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       if (game.gameOptions.silverCubeVariant === true) {
         action.options.push(
           new SelectOption('Add 5 MC to temperature track', 'Select', () => {
-            game.temperatureSilverCubeBonusMC += 5;
-            game.log('${0} acted as World Government and placed 5 MC on temperature track', (b) => b.player(this));
             SilverCubeHandler.onTemperatureSilverCubeAdded(this, game);
-
             return undefined;
           }),
         );
@@ -993,10 +990,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       if (game.gameOptions.silverCubeVariant === true) {
         action.options.push(
           new SelectOption('Add 5 MC to oxygen track', 'Select', () => {
-            game.oxygenSilverCubeBonusMC += 5;
-            game.log('${0} acted as World Government and placed 5 MC on oxygen track', (b) => b.player(this));
             SilverCubeHandler.onOxygenSilverCubeAdded(this, game);
-
             return undefined;
           }),
         );
@@ -1014,10 +1008,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       if (game.gameOptions.silverCubeVariant === true) {
         action.options.push(
           new SelectOption('Add 5 MC to oceans track', 'Select', () => {
-            game.oceansSilverCubeBonusMC += 5;
-            game.log('${0} acted as World Government and placed 5 MC on oceans track', (b) => b.player(this));
             SilverCubeHandler.onOceanSilverCubeAdded(this, game);
-
             return undefined;
           }),
         );
@@ -1038,10 +1029,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       if (game.gameOptions.silverCubeVariant === true) {
         action.options.push(
           new SelectOption('Add 5 MC to Venus track', 'Select', () => {
-            game.venusSilverCubeBonusMC += 5;
-            game.log('${0} acted as World Government and placed 5 MC on Venus track', (b) => b.player(this));
             SilverCubeHandler.onVenusSilverCubeAdded(this, game);
-
             return undefined;
           }),
         );
