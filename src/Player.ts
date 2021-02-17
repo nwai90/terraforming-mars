@@ -37,6 +37,7 @@ import {SendDelegateToArea} from './deferredActions/SendDelegateToArea';
 import {DeferredAction} from './deferredActions/DeferredAction';
 import {SelectHowToPayDeferred} from './deferredActions/SelectHowToPayDeferred';
 import {SelectColony} from './inputs/SelectColony';
+import {SelectPartyToSendDelegate} from './inputs/SelectPartyToSendDelegate';
 import {SelectDelegate} from './inputs/SelectDelegate';
 import {SelectHowToPay} from './inputs/SelectHowToPay';
 import {SelectHowToPayForProjectCard} from './inputs/SelectHowToPayForProjectCard';
@@ -66,7 +67,6 @@ import {ConvertPlants} from './cards/base/standardActions/ConvertPlants';
 import {ConvertHeat} from './cards/base/standardActions/ConvertHeat';
 import {Manutech} from './cards/venusNext/Manutech';
 import {LunaProjectOffice} from './cards/moon/LunaProjectOffice';
-import {SelectPartyToSendDelegate} from './components/SelectPartyToSendDelegate';
 import {UnitedNationsMissionOne} from './cards/community/corporations/UnitedNationsMissionOne';
 import {SilverCubeHandler} from './community/SilverCubeHandler';
 
