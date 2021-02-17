@@ -133,6 +133,7 @@ export const SelectSpace = Vue.component('select-space', {
   },
   template: `<div>
     <confirm-dialog
+        class="dialog"
         message="Place your tile here?\n(This confirmation can be disabled in preferences)."
         ref="confirmation"
         v-on:accept="confirmPlacement"
