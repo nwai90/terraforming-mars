@@ -4,7 +4,7 @@ import {PlayerInput} from '../PlayerInput';
 import {PlayerInputTypes} from '../PlayerInputTypes';
 import {PartyName} from '../turmoil/parties/PartyName';
 
-export class SelectParty implements PlayerInput {
+export class SelectPartyToSendDelegate implements PlayerInput {
     public inputType: PlayerInputTypes = PlayerInputTypes.SELECT_PARTY_TO_SEND_DELEGATE;
     constructor(
         public title: string | Message,

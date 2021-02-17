@@ -71,6 +71,7 @@ import {AirScrappingStandardProject} from './cards/venusNext/AirScrappingStandar
 import {Manutech} from './cards/venusNext/Manutech';
 import {LunaProjectOffice} from './cards/moon/LunaProjectOffice';
 import { UnitedNationsMissionOne } from './cards/community/corporations/UnitedNationsMissionOne';
+import {SelectPartyToSendDelegate} from './components/SelectPartyToSendDelegate';
 
 export type PlayerId = string;
 
@@ -914,6 +915,9 @@ export class Player implements ISerializable<SerializedPlayer> {
     } else if (pi instanceof ShiftAresGlobalParameters) {
       // TODO(kberg): I'm sure there's some input validation required.
       const response: IAresGlobalParametersResponse = JSON.parse(input[0][0]);
+      pi.cb(response);
+    } else if (pi instanceof SelectPartyToSendDelegate) {
+      const response: PartyName = JSON.parse(input[0][0]);
       pi.cb(response);
     } else {
       throw new Error('Unsupported waitingFor');

@@ -40,7 +40,7 @@ import {MoonModel} from '../models/MoonModel';
 import {CardName} from '../CardName';
 import {Units} from '../Units';
 import {WaitingForModel} from '../models/WaitingForModel';
-import { SelectParty } from '../inputs/SelectPartyToSendDelegate';
+import {SelectPartyToSendDelegate} from '../inputs/SelectPartyToSendDelegate';
 
 export class Server {
   public static getGameModel(game: Game): GameHomeModel {
@@ -313,7 +313,7 @@ function getWaitingFor(
     playerInputModel.max = (waitingFor as SelectAmount).max;
     break;
   case PlayerInputTypes.SELECT_PARTY_TO_SEND_DELEGATE:
-    playerInputModel.availableParties = (waitingFor as SelectParty).availableParties;
+    playerInputModel.availableParties = (waitingFor as SelectPartyToSendDelegate).availableParties;
     if (game !== undefined) {
       playerInputModel.turmoil = getTurmoil(game);
     }

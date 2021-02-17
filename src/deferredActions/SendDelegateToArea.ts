@@ -1,5 +1,5 @@
 import {Player, PlayerId} from '../Player';
-import {SelectParty} from '../inputs/SelectPartyToSendDelegate';
+import {SelectPartyToSendDelegate} from '../inputs/SelectPartyToSendDelegate';
 import {DeferredAction, Priority} from './DeferredAction';
 import {SelectHowToPayDeferred} from './SelectHowToPayDeferred';
 import {NeutralPlayer} from '../turmoil/Turmoil';
@@ -42,7 +42,7 @@ export class SendDelegateToArea implements DeferredAction {
     const availableParties:Array<PartyName> = [];
     parties.forEach((party) => availableParties.push(party.name));
 
-    const sendDelegate = new SelectParty(this.title, 'Send delegate', availableParties, (partyName: PartyName) => {
+    const sendDelegate = new SelectPartyToSendDelegate(this.title, 'Send delegate', availableParties, (partyName: PartyName) => {
       if (this.options.cost) {
         this.player.game.defer(new SelectHowToPayDeferred(this.player, this.options.cost, {title: 'Select how to pay for send delegate action'}));
       }
