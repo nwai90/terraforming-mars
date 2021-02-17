@@ -42,13 +42,20 @@ export const SelectPartyToSendDelegate = Vue.component('select-party-to-send-del
     isDominant: function(partyName: PartyName): boolean {
       return partyName === this.playerinput.turmoil?.dominant;
     },
+    partyAvailableToSelect: function(partyName: PartyName): boolean {
+      if (this.playerinput.availableParties === undefined) {
+        return false;
+      } else {
+        return this.playerinput.availableParties.includes(partyName);
+      }
+    }
   },
   template: `
     <div class="wf-component wf-component--select-party">
         <div v-if="showtitle === true" class="nofloat wf-component-title">{{ $t(playerinput.title) }}</div>
         <div class="wf-component--list-party">
           <label v-for="party in playerinput.turmoil.parties" :key="party.name">
-              <input type="radio" v-model="selectedParty" :value="party.name" />
+              <input type="radio" v-model="selectedParty" :value="party.name" v-if="partyAvailableToSelect(party.name)"/>
               <party :party="party" :isDominant="isDominant(party.name)"/>
           </label>
         </div>
