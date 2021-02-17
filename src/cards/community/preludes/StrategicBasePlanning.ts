@@ -7,7 +7,6 @@ import {Tags} from '../../Tags';
 import {PlaceCityTile} from '../../../deferredActions/PlaceCityTile';
 import {SelectHowToPayDeferred} from '../../../deferredActions/SelectHowToPayDeferred';
 import {CardRenderer} from '../../render/CardRenderer';
-import {AltSecondaryTag} from '../../render/CardRenderItem';
 
 export class StrategicBasePlanning extends PreludeCard implements IProjectCard {
     constructor() {
@@ -18,7 +17,7 @@ export class StrategicBasePlanning extends PreludeCard implements IProjectCard {
         metadata: {
           cardNumber: 'Y16',
           renderData: CardRenderer.builder((b) => {
-            b.colonies(1).greenery().secondaryTag(AltSecondaryTag.OXYGEN).br;
+            b.colonies(1).city().br;
             b.minus().megacredits(6);
           }),
           description: 'Place a colony. Place a city tile. Pay 6 MC.',

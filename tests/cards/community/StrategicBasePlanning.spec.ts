@@ -32,15 +32,17 @@ describe('StrategicBasePlanning', function() {
 
     game.deferredActions.pop()!.execute(); // howToPay
     const selectSpace = game.deferredActions.pop()!.execute() as SelectSpace;
+    
+    if (selectSpace !== undefined) {
+      const openColonies = game.colonies.filter((colony) => colony.isActive);
+      expect(openColonies[0].colonies.find((c) => c === player.id)).is.not.undefined;
 
-    const openColonies = game.colonies.filter((colony) => colony.isActive);
-    expect(openColonies[0].colonies.find((c) => c === player.id)).is.not.undefined;
+      expect(selectSpace.cb(selectSpace.availableSpaces[0])).is.undefined;
+      expect(selectSpace.availableSpaces[0].player).to.eq(player);
+      expect(selectSpace.availableSpaces[0].tile).is.not.undefined;
+      expect(selectSpace.availableSpaces[0].tile!.tileType).to.eq(TileType.CITY);
 
-    expect(selectSpace.cb(selectSpace.availableSpaces[0])).is.undefined;
-    expect(selectSpace.availableSpaces[0].player).to.eq(player);
-    expect(selectSpace.availableSpaces[0].tile).is.not.undefined;
-    expect(selectSpace.availableSpaces[0].tile!.tileType).to.eq(TileType.CITY);
-
-    expect(player.megaCredits).to.eq(0);
+      expect(player.megaCredits).to.eq(0);
+    }
   });
 });

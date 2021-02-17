@@ -66,7 +66,7 @@ export const Milestone = Vue.component('milestone', {
                 </span>
                 <span v-for="spotPrice in getAvailableMilestoneSpots()" class="milestone-award-inline unpaid" v-if="isLearnerModeOn()">
                     <div class="milestone-award-price">{{spotPrice}}</div>
-                <span>
+                </span>
             </div>
             <div v-show="shouldShowList()">
                 <div title="press to show or hide the description" v-on:click.prevent="toggle(milestone)" v-for="milestone in milestones_list" :class=getClassForMilestoneTile(milestone)>

@@ -67,6 +67,7 @@ import {AddResourcesToCard} from './deferredActions/AddResourcesToCard';
 import {AmazonisBoard} from './boards/AmazonisBoard';
 import {ArabiaTerraBoard} from './boards/ArabiaTerraBoard';
 import {VastitasBorealisBoard} from './boards/VastitasBorealisBoard';
+import {SilverCubeHandler} from './community/SilverCubeHandler';
 
 export type GameId = string;
 
@@ -1105,11 +1106,8 @@ export class Game implements ISerializable<SerializedGame> {
     AresHandler.ifAres(this, (aresData) => {
       AresHandler.onOxygenChange(this, aresData);
     });
-
-    if (this.oxygenSilverCubeBonusMC > 0) {
-      player.setResource(Resources.MEGACREDITS, this.oxygenSilverCubeBonusMC);
-      this.oxygenSilverCubeBonusMC = 0;
-    }
+    
+    SilverCubeHandler.onOxygenIncrease(player, this);
 
     return undefined;
   }
@@ -1151,11 +1149,7 @@ export class Game implements ISerializable<SerializedGame> {
     }
 
     this.venusScaleLevel += steps * 2;
-
-    if (this.venusSilverCubeBonusMC > 0) {
-      player.setResource(Resources.MEGACREDITS, this.venusSilverCubeBonusMC);
-      this.venusSilverCubeBonusMC = 0;
-    }
+    SilverCubeHandler.onVenusIncrease(player, this);
 
     return undefined;
   }
@@ -1201,10 +1195,7 @@ export class Game implements ISerializable<SerializedGame> {
       AresHandler.onTemperatureChange(this, aresData);
     });
 
-    if (this.temperatureSilverCubeBonusMC > 0) {
-      player.setResource(Resources.MEGACREDITS, this.temperatureSilverCubeBonusMC);
-      this.temperatureSilverCubeBonusMC = 0;
-    }
+    SilverCubeHandler.onTemperatureIncrease(player, this);
 
     return undefined;
   }
@@ -1483,10 +1474,7 @@ export class Game implements ISerializable<SerializedGame> {
       AresHandler.onOceanPlaced(aresData, player);
     });
 
-    if (this.oceansSilverCubeBonusMC > 0) {
-      player.setResource(Resources.MEGACREDITS, this.oceansSilverCubeBonusMC);
-      this.oceansSilverCubeBonusMC = 0;
-    }
+    SilverCubeHandler.onOceanPlaced(player, this);
   }
 
   public removeTile(spaceId: string): void {

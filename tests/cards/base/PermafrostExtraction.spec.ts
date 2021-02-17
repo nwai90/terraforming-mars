@@ -23,7 +23,7 @@ describe('PermafrostExtraction', function() {
     expect(card.canPlay(player)).is.true;
 
     const action = card.play(player);
-        action!.cb(action!.availableSpaces[0]);
-        expect(game.board.getOceansOnBoard()).to.eq(1);
+    action!.cb(action!.availableSpaces[0]);
+    expect(game.board.getOceansOnBoard()).to.eq(1);
   });
 });

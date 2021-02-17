@@ -40,8 +40,8 @@ describe('CorroderSuits', function() {
     const action = card.play(player);
     expect(action instanceof SelectCard).is.true;
 
-        action!.cb([card2]);
-        expect(player.getResourcesOnCard(card2)).to.eq(1);
-        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
+    action!.cb([card2]);
+    expect(player.getResourcesOnCard(card2)).to.eq(1);
+    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
   });
 });

@@ -26,8 +26,8 @@ describe('DeuteriumExport', function() {
 
     const orOptions = card.action(player) as OrOptions;
     expect(orOptions instanceof OrOptions).is.true;
-        orOptions!.options[0].cb();
-        expect(card.resourceCount).to.eq(0);
-        expect(player.getProduction(Resources.ENERGY)).to.eq(1);
+    orOptions!.options[0].cb();
+    expect(card.resourceCount).to.eq(0);
+    expect(player.getProduction(Resources.ENERGY)).to.eq(1);
   });
 });

@@ -204,9 +204,9 @@ export const PlayerHome = Vue.component('player-home', {
   template: `
         <div id="player-home" :class="(player.turmoil ? 'with-turmoil': '')">
             <section>
-                <dialog id="dialog-default">
+                <dialog id="dialog-default" class="dialog">
                     <form method="dialog">
-                        <p class="title" v-i18n>Error with input</p>
+                        <p class="title title-white" v-i18n>Error with input</p>
                         <p id="dialog-default-message"></p>
                         <menu class="dialog-menu centered-content">
                             <button class="btn btn-lg btn-primary">OK</button>

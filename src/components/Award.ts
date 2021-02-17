@@ -65,7 +65,7 @@ export const Award = Vue.component('award', {
                 </span>
                 <span v-for="spotPrice in getAvailableAwardSpots()" class="milestone-award-inline unpaid" v-if="isLearnerModeOn()">
                     <div class="milestone-award-price">{{spotPrice}}</div>
-                <span>
+                </span>
             </div>
             
             <div v-show="shouldShowList()">

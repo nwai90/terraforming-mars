@@ -95,8 +95,8 @@ describe('StratosphericBirds', function() {
 
     // Pay with MC only: Can play
     SelectHowToPayForProjectCard.cb(card, {steel: 0, heat: 0, titanium: 0, megaCredits: 12, microbes: 0, floaters: 0});
-        game.deferredActions.pop()!.execute(); // Remove floater
-        expect(dirigibles.resourceCount).to.eq(0);
+    game.deferredActions.pop()!.execute(); // Remove floater
+    expect(dirigibles.resourceCount).to.eq(0);
   });
 
   it('Allow spending all floaters from Dirigibles if there\'s at least one other card with a floater', function() {
@@ -113,9 +113,9 @@ describe('StratosphericBirds', function() {
 
     // Spend all 3 floaters from Dirigibles to pay for the card
     selectHowToPayForCard.cb(card, {steel: 0, heat: 0, titanium: 0, megaCredits: 3, microbes: 0, floaters: 3});
-        game.deferredActions.pop()!.execute(); // Remove floater
-        expect(player.getResourcesOnCard(dirigibles)).to.eq(0);
-        expect(player.getResourcesOnCard(deuteriumExport)).to.eq(0);
-        expect(player.megaCredits).to.eq(0);
+    game.deferredActions.pop()!.execute(); // Remove floater
+    expect(player.getResourcesOnCard(dirigibles)).to.eq(0);
+    expect(player.getResourcesOnCard(deuteriumExport)).to.eq(0);
+    expect(player.megaCredits).to.eq(0);
   });
 });

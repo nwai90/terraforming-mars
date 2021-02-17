@@ -97,13 +97,13 @@ describe('AresHandler', function() {
 
     const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
     game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
-        game.deferredActions.peek()!.execute();
+    game.deferredActions.peek()!.execute();
 
-        // player who placed next to Nuclear zone, loses two money.
-        expect(player.megaCredits).is.eq(0);
+    // player who placed next to Nuclear zone, loses two money.
+    expect(player.megaCredits).is.eq(0);
 
-        // player who owns Nuclear zone doesn't get an adjacency bonus.
-        expect(otherPlayer.megaCredits).is.eq(0);
+    // player who owns Nuclear zone doesn't get an adjacency bonus.
+    expect(otherPlayer.megaCredits).is.eq(0);
   });
 
   it('Can\'t afford adjacency costs', function() {
@@ -190,11 +190,11 @@ describe('AresHandler', function() {
     expect(player.getTerraformRating()).eq(20);
 
     game.addTile(player, space.spaceType, space, {tileType: TileType.GREENERY});
-        game.deferredActions.peek()!.execute();
+    game.deferredActions.peek()!.execute();
 
-        expect(space.tile!.tileType).eq(TileType.GREENERY);
-        expect(player.megaCredits).is.eq(0);
-        expect(player.getTerraformRating()).eq(21);
+    expect(space.tile!.tileType).eq(TileType.GREENERY);
+    expect(player.megaCredits).is.eq(0);
+    expect(player.getTerraformRating()).eq(21);
   });
 
   it('cover severe hazard', function() {
@@ -204,11 +204,11 @@ describe('AresHandler', function() {
     expect(player.getTerraformRating()).eq(20);
 
     game.addTile(player, space.spaceType, space, {tileType: TileType.GREENERY});
-        game.deferredActions.peek()!.execute();
+    game.deferredActions.peek()!.execute();
 
-        expect(space.tile!.tileType).eq(TileType.GREENERY);
-        expect(player.megaCredits).is.eq(0);
-        expect(player.getTerraformRating()).eq(22);
+    expect(space.tile!.tileType).eq(TileType.GREENERY);
+    expect(player.megaCredits).is.eq(0);
+    expect(player.getTerraformRating()).eq(22);
   });
 
   it('erosion appears after the third ocean', function() {

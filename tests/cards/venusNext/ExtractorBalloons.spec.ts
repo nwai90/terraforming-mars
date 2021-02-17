@@ -27,8 +27,8 @@ describe('ExtractorBalloons', function() {
     const orOptions = card.action(player) as OrOptions;
     expect(orOptions instanceof OrOptions).is.true;
 
-        orOptions!.options[0].cb();
-        expect(card.resourceCount).to.eq(1);
-        expect(game.getVenusScaleLevel()).to.eq(2);
+    orOptions!.options[0].cb();
+    expect(card.resourceCount).to.eq(1);
+    expect(game.getVenusScaleLevel()).to.eq(2);
   });
 });

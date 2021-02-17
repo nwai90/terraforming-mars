@@ -33,9 +33,9 @@ describe('VenusianPlants', function() {
     const action = card.play(player);
     expect(action instanceof SelectCard).is.true;
 
-        action!.cb([card2]);
-        expect(player.getResourcesOnCard(card2)).to.eq(1);
-        expect(game.getVenusScaleLevel()).to.eq(18);
+    action!.cb([card2]);
+    expect(player.getResourcesOnCard(card2)).to.eq(1);
+    expect(game.getVenusScaleLevel()).to.eq(18);
   });
 
   it('Should play - single target', function() {
