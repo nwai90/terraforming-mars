@@ -64,13 +64,10 @@ import {MoonExpansion} from './moon/MoonExpansion';
 import {StandardProjectCard} from './cards/StandardProjectCard';
 import {ConvertPlants} from './cards/base/standardActions/ConvertPlants';
 import {ConvertHeat} from './cards/base/standardActions/ConvertHeat';
-import {AsteroidStandardProject} from './cards/base/standardProjects/AsteroidStandardProject';
-import {GreeneryStandardProject} from './cards/base/standardProjects/GreeneryStandardProject';
-import {AquiferStandardProject} from './cards/base/standardProjects/AquiferStandardProject';
-import {AirScrappingStandardProject} from './cards/venusNext/AirScrappingStandardProject';
 import {Manutech} from './cards/venusNext/Manutech';
 import {LunaProjectOffice} from './cards/moon/LunaProjectOffice';
-import { UnitedNationsMissionOne } from './cards/community/corporations/UnitedNationsMissionOne';
+import {UnitedNationsMissionOne} from './cards/community/corporations/UnitedNationsMissionOne';
+import {SilverCubeHandler} from './community/SilverCubeHandler';
 
 export type PlayerId = string;
 
@@ -977,16 +974,7 @@ export class Player implements ISerializable<SerializedPlayer> {
           new SelectOption('Add 5 MC to temperature track', 'Select', () => {
             game.temperatureSilverCubeBonusMC += 5;
             game.log('${0} acted as World Government and placed 5 MC on temperature track', (b) => b.player(this));
-
-            const asteroidStandard = new AsteroidStandardProject();
-
-            if (game.temperatureSilverCubeBonusMC >= asteroidStandard.cost) {
-              game.temperatureSilverCubeBonusMC = 0;
-              if (game.getTemperature() < constants.MAX_TEMPERATURE) {
-                game.increaseTemperature(this, 1);
-                game.log('${0} acted as World Government and increased temperature', (b) => b.player(this));
-              }
-            }
+            SilverCubeHandler.onTemperatureSilverCubeAdded(this, game);
 
             return undefined;
           }),
@@ -1007,16 +995,7 @@ export class Player implements ISerializable<SerializedPlayer> {
           new SelectOption('Add 5 MC to oxygen track', 'Select', () => {
             game.oxygenSilverCubeBonusMC += 5;
             game.log('${0} acted as World Government and placed 5 MC on oxygen track', (b) => b.player(this));
-
-            const greeneryStandard = new GreeneryStandardProject();
-
-            if (game.oxygenSilverCubeBonusMC >= greeneryStandard.cost) {
-              game.oxygenSilverCubeBonusMC = 0;
-              if (game.getOxygenLevel() < constants.MAX_OXYGEN_LEVEL) {
-                game.increaseOxygenLevel(this, 1);
-                game.log('${0} acted as World Government and increased oxygen level', (b) => b.player(this));
-              }
-            }
+            SilverCubeHandler.onOxygenSilverCubeAdded(this, game);
 
             return undefined;
           }),
@@ -1037,22 +1016,7 @@ export class Player implements ISerializable<SerializedPlayer> {
           new SelectOption('Add 5 MC to oceans track', 'Select', () => {
             game.oceansSilverCubeBonusMC += 5;
             game.log('${0} acted as World Government and placed 5 MC on oceans track', (b) => b.player(this));
-
-            const aquifer = new AquiferStandardProject();
-
-            if (game.oceansSilverCubeBonusMC >= aquifer.cost) {
-              game.oceansSilverCubeBonusMC = 0;
-              if (game.board.getOceansOnBoard() < constants.MAX_OCEAN_TILES) {
-                return new SelectSpace(
-                  'WGT: FhasAdd an ocean',
-                  game.board.getAvailableSpacesForOcean(this), (space) => {
-                    game.addOceanTile(this, space.id, SpaceType.OCEAN);
-                    game.log('${0} acted as World Government and placed an ocean', (b) => b.player(this));
-                    return undefined;
-                  },
-                );
-              }
-            }
+            SilverCubeHandler.onOceanSilverCubeAdded(this, game);
 
             return undefined;
           }),
@@ -1076,16 +1040,7 @@ export class Player implements ISerializable<SerializedPlayer> {
           new SelectOption('Add 5 MC to Venus track', 'Select', () => {
             game.venusSilverCubeBonusMC += 5;
             game.log('${0} acted as World Government and placed 5 MC on Venus track', (b) => b.player(this));
-
-            const airScrapping = new AirScrappingStandardProject();
-
-            if (game.venusSilverCubeBonusMC >= airScrapping.cost) {
-              game.venusSilverCubeBonusMC = 0;
-              if (game.getVenusScaleLevel() < constants.MAX_VENUS_SCALE) {
-                game.increaseVenusScaleLevel(this, 1);
-                game.log('${0} acted as World Government and increased Venus scale', (b) => b.player(this));
-              }
-            }
+            SilverCubeHandler.onVenusSilverCubeAdded(this, game);
 
             return undefined;
           }),
