@@ -20,14 +20,14 @@ export const Party = Vue.component('party', {
       return party.toLowerCase().split(' ').join('_');
     },
     getDominantClass: function(): string {
-      return this.isDominant ? ' player-token-new-leader' : '';
+      return 'select-party-leader-spot' + (this.isDominant ? ' dominance-marker' : '');
     }
   },
   template: `
     <div :class="'filterDiv party-container party-background--' + partyNameToCss(party.name)">
       <div :class="'board-party board-party--' + partyNameToCss(party.name)">
-        <div :class="'leader-spot leader-spot--'+partyNameToCss(party.name) + getDominantClass()">
-          <div class="leader-spot-in-send-delegate">
+        <div :class="getDominantClass()">
+          <div class="send-delegate-leader-spot">
             <div v-if="party.partyLeader" :class="['player-token', party.partyLeader]"></div>
           </div>
         </div>
