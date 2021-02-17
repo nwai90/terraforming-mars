@@ -914,7 +914,8 @@ export class Player implements ISerializable<SerializedPlayer> {
       const response: IAresGlobalParametersResponse = JSON.parse(input[0][0]);
       pi.cb(response);
     } else if (pi instanceof SelectPartyToSendDelegate) {
-      const party: PartyName = JSON.parse(input[0][0]);
+      this.checkInputLength(input, 1, 1);
+      const party: PartyName = (input[0][0]) as PartyName;
       if (party === undefined) {
         throw new Error('No party selected');
       }

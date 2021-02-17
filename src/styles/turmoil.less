@@ -213,7 +213,7 @@
     min-height: 118px;
 
     &.grid-in-send-delegate {
-        padding-top: 90px;
+        padding-top: 15px;
     }
 }
 
@@ -221,7 +221,6 @@
     width: 40px;
     height:40px;
     /*background: linear-gradient(transparent, rgba(0,0,0,.1));*/
-
 }
 
 .party-container {
@@ -319,6 +318,11 @@
         transform: scale(0.70);
         margin-top: 5px;
     }
+    .leader-spot-in-send-delegate {
+        transform: scale(0.70);
+        margin-top: 9px;
+        margin-left: 4px;
+    }
 }
 
 
@@ -360,6 +364,10 @@
 .label-5mc {
     width: 110px;
     margin: auto;
+}
+
+.count-in-send-delegate {
+    font-size: 22px;
 }
 
 .player-token {
@@ -630,7 +638,7 @@
 
 .selectable-party-name {
     position: absolute;
-    top: 208px;
+    top: 220px;
     left: 3px;
     transform: scale(0.9);
     text-align: center;
@@ -641,7 +649,7 @@ input[type="radio"]:checked + .party-container.filterDiv {
 }
 
 input[type="radio"]:checked + .party-container::after {
-    top: 246px;
+    top: 253px;
     left: 8px;
     width: 149px;
     background: #e28c22;

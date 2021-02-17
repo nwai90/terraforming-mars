@@ -3,6 +3,7 @@ import {Button} from '../components/common/Button';
 import {PlayerInputModel} from '../models/PlayerInputModel';
 import {Party} from '../components/Party';
 import {TranslateMixin} from './TranslateMixin';
+import { PartyName } from '../turmoil/parties/PartyName';
 
 export const SelectPartyToSendDelegate = Vue.component('select-party-to-send-delegate', {
   props: {
@@ -38,6 +39,9 @@ export const SelectPartyToSendDelegate = Vue.component('select-party-to-send-del
       }
       this.onsave(result);
     },
+    isDominant: function(partyName: PartyName): boolean {
+      return partyName === this.playerinput.turmoil?.dominant;
+    },
   },
   template: `
     <div class="wf-component wf-component--select-party">
@@ -45,7 +49,7 @@ export const SelectPartyToSendDelegate = Vue.component('select-party-to-send-del
         <div class="wf-component--list-party">
           <label v-for="party in playerinput.turmoil.parties" :key="party.name">
               <input type="radio" v-model="selectedParty" :value="party.name" />
-              <party :party="party" />
+              <party :party="party" :isDominant="isDominant(party.name)"/>
           </label>
         </div>
         <div v-if="showsave === true" class="nofloat">
