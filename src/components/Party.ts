@@ -9,7 +9,10 @@ export const Party = Vue.component('party', {
     },
     isDominant: {
       type: Object as () => boolean,
-    }, 
+    },
+    isAvailable: {
+      type: Object as () => boolean,
+    },
   },
   methods: {
     partyNameToCss: function(party: PartyName | undefined): string {
@@ -21,10 +24,13 @@ export const Party = Vue.component('party', {
     },
     getDominantClass: function(): string {
       return 'select-party-leader-spot' + (this.isDominant ? ' dominance-marker' : '');
+    },
+    getUnavailablePartyClass: function(): string {
+      return this.isAvailable ? '' : ' unavailable-party';
     }
   },
   template: `
-    <div :class="'filterDiv party-container party-background--' + partyNameToCss(party.name)">
+    <div :class="'filterDiv party-container party-background--' + partyNameToCss(party.name) + getUnavailablePartyClass()">
       <div :class="'board-party board-party--' + partyNameToCss(party.name)">
         <div :class="getDominantClass()">
           <div class="send-delegate-leader-spot">
