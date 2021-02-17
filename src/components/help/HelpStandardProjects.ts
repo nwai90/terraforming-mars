@@ -16,6 +16,7 @@ export const HelpStandardProjects = Vue.component('help-standard-projects', {
       projectList.push(CardName.GREENERY_STANDARD_PROJECT);
       projectList.push(CardName.CITY_STANDARD_PROJECT);
       projectList.push(CardName.AIR_SCRAPPING_STANDARD_PROJECT);
+      projectList.push(CardName.BUILD_COLONY_STANDARD_PROJECT);
       projectList.push(CardName.BUFFER_GAS_STANDARD_PROJECT);
       return projectList;
     },
