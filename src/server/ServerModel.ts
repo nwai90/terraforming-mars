@@ -40,6 +40,7 @@ import {MoonModel} from '../models/MoonModel';
 import {CardName} from '../CardName';
 import {Units} from '../Units';
 import {WaitingForModel} from '../models/WaitingForModel';
+import { SelectParty } from '../inputs/SelectPartyToSendDelegate';
 
 export class Server {
   public static getGameModel(game: Game): GameHomeModel {
@@ -242,6 +243,7 @@ function getWaitingFor(
     canUseHeat: undefined,
     players: undefined,
     availableSpaces: undefined,
+    availableParties: undefined,
     min: undefined,
     max: undefined,
     microbes: undefined,
@@ -307,6 +309,9 @@ function getWaitingFor(
   case PlayerInputTypes.SELECT_AMOUNT:
     playerInputModel.min = (waitingFor as SelectAmount).min;
     playerInputModel.max = (waitingFor as SelectAmount).max;
+    break;
+  case PlayerInputTypes.SELECT_PARTY_TO_SEND_DELEGATE:
+    playerInputModel.availableParties = (waitingFor as SelectParty).availableParties;
     break;
   case PlayerInputTypes.SELECT_DELEGATE:
     playerInputModel.players = (waitingFor as SelectDelegate).players.map(
