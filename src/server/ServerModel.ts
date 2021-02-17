@@ -129,7 +129,7 @@ export class Server {
       turmoil: turmoil,
       venusScaleLevel: game.getVenusScaleLevel(),
       victoryPointsBreakdown: player.getVictoryPoints(),
-      waitingFor: getWaitingFor(player, player.getWaitingFor()),
+      waitingFor: getWaitingFor(player, player.getWaitingFor(), game),
       silverCubeVariant: game.gameOptions.silverCubeVariant,
       temperatureSilverCubeBonusMC: game.temperatureSilverCubeBonusMC,
       oceansSilverCubeBonusMC: game.oceansSilverCubeBonusMC,
@@ -225,6 +225,7 @@ function getCorporationCard(player: Player): CardModel | undefined {
 function getWaitingFor(
   player: Player,
   waitingFor: PlayerInput | undefined,
+  game: Game | undefined,
 ): PlayerInputModel | undefined {
   if (waitingFor === undefined) {
     return undefined;
@@ -252,6 +253,7 @@ function getWaitingFor(
     payProduction: undefined,
     aresData: undefined,
     selectBlueCardAction: false,
+    turmoil: undefined,
   };
   switch (waitingFor.inputType) {
   case PlayerInputTypes.AND_OPTIONS:
@@ -260,7 +262,7 @@ function getWaitingFor(
     playerInputModel.options = [];
     if (waitingFor.options !== undefined) {
       for (const option of waitingFor.options) {
-        const subOption = getWaitingFor(player, option);
+        const subOption = getWaitingFor(player, option, game);
         if (subOption !== undefined) {
           playerInputModel.options.push(subOption);
         }
@@ -312,6 +314,9 @@ function getWaitingFor(
     break;
   case PlayerInputTypes.SELECT_PARTY_TO_SEND_DELEGATE:
     playerInputModel.availableParties = (waitingFor as SelectParty).availableParties;
+    if (game !== undefined) {
+      playerInputModel.turmoil = getTurmoil(game);
+    }
     break;
   case PlayerInputTypes.SELECT_DELEGATE:
     playerInputModel.players = (waitingFor as SelectDelegate).players.map(

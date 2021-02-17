@@ -43,9 +43,9 @@ export const SelectPartyToSendDelegate = Vue.component('select-party-to-send-del
     <div class="wf-component wf-component--select-party">
         <div v-if="showtitle === true" class="nofloat wf-component-title">{{ $t(playerinput.title) }}</div>
         <div class="wf-component--list-party">
-          <label v-for="party in (playerinput.availableParties || [])" :key="party">
-              <input type="radio" v-model="selectedParty" :value="party" />
-              <party :partyName="party"></party>
+          <label v-for="party in playerinput.turmoil.parties" :key="party.name">
+              <input type="radio" v-model="selectedParty" :value="party.name" />
+              <party :party="party"></party>
           </label>
         </div>
         <div v-if="showsave === true" class="nofloat">

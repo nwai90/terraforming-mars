@@ -211,6 +211,10 @@
     padding: 10px 7px 7px 9px;
     gap:0px;
     min-height: 118px;
+
+    &.grid-in-send-delegate {
+        padding-top: 90px;
+    }
 }
 
 .delegate-spot {
@@ -220,29 +224,30 @@
 
 }
 
-.party-box {
+.party-container {
     display: inline-block;
-    width: 162px;
-    height: 300px;
-    padding: 10px;
+    width: 164px;
+    height: 307px;
+    border: none;
+    border-radius: 0px;
     background: url(assets/turmoil_ui.png);
     &.party-background--mars_first {
-        background-position: -26px 306px;
+        background-position: -23px 316px;
     }
     &.party-background--scientists {
-        background-position: -196px 306px;
+        background-position: -193px 316px;
     }
     &.party-background--unity {
-        background-position: -366px 306px;
+        background-position: -363px 316px;
     }
     &.party-background--greens {
-        background-position: -536px 306px;
+        background-position: -533px 316px;
     }
     &.party-background--reds {
-        background-position: -706px 306px;
+        background-position: -703px 316px;
     }
     &.party-background--kelvinists {
-        background-position: -876px 306px;
+        background-position: -873px 316px;
     }
 }
 
@@ -620,4 +625,25 @@
     margin-bottom: 15px;
     background-repeat: no-repeat;
     background-position: 0px;
+}
+
+.selectable-party-name {
+    position: absolute;
+    top: 208px;
+    left: 3px;
+    transform: scale(0.9);
+    text-align: center;
+}
+
+input[type="radio"]:checked + .party-container.filterDiv {
+    box-shadow: none;
+}
+
+input[type="radio"]:checked + .party-container::after {
+    top: 246px;
+    left: 8px;
+    width: 149px;
+    background: #e28c22;
+    height: 47px;
+    border-bottom: none;
 }
