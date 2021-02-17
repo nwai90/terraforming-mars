@@ -8,10 +8,6 @@ export const Party = Vue.component('party', {
       type: Object as () => PartyModel,
     },
   },
-  data: function() {
-    return {
-    };
-  },
   methods: {
     partyNameToCss: function(party: PartyName | undefined): string {
       if (party === undefined) {

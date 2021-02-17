@@ -914,8 +914,11 @@ export class Player implements ISerializable<SerializedPlayer> {
       const response: IAresGlobalParametersResponse = JSON.parse(input[0][0]);
       pi.cb(response);
     } else if (pi instanceof SelectPartyToSendDelegate) {
-      const response: PartyName = JSON.parse(input[0][0]);
-      pi.cb(response);
+      const party: PartyName = JSON.parse(input[0][0]);
+      if (party === undefined) {
+        throw new Error('No party selected');
+      }
+      this.runInputCb(pi.cb(party));
     } else {
       throw new Error('Unsupported waitingFor');
     }

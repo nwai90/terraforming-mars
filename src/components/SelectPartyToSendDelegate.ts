@@ -19,7 +19,6 @@ export const SelectPartyToSendDelegate = Vue.component('select-party-to-send-del
       type: Boolean,
     },
   },
-  mixins: [TranslateMixin],
   data: function() {
     return {
       selectedParty: undefined as string | undefined,
@@ -29,6 +28,7 @@ export const SelectPartyToSendDelegate = Vue.component('select-party-to-send-del
     'Button': Button,
     'Party': Party,
   },
+  mixins: [TranslateMixin],
   methods: {
     saveData: function() {
       const result: string[][] = [];
@@ -45,7 +45,7 @@ export const SelectPartyToSendDelegate = Vue.component('select-party-to-send-del
         <div class="wf-component--list-party">
           <label v-for="party in playerinput.turmoil.parties" :key="party.name">
               <input type="radio" v-model="selectedParty" :value="party.name" />
-              <party :party="party"></party>
+              <party :party="party" />
           </label>
         </div>
         <div v-if="showsave === true" class="nofloat">
