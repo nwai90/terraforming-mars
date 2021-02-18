@@ -61,7 +61,7 @@ class BureaucratsPolicy01 implements Policy {
   action(player: Player) {
     const game = player.game;
     game.log('${0} used Turmoil Bureaucrats action', (b) => b.player(player));
-    game.defer(new SendDelegateToArea(player, 'Select where to send delegate', 1, undefined, undefined, false));
+    game.defer(new SendDelegateToArea(player, 'Select where to send delegate', {source: 'reserve'}));
     game.defer(new SelectHowToPayDeferred(player, 3, {title: 'Select how to pay for action'}));
     player.politicalAgendasActionUsedCount += 1;
 

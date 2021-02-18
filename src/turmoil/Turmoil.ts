@@ -297,7 +297,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
     }
 
     // Ruling Party changes
-    public setRulingParty(game: Game, colonyTradePenaltyActive: boolean, colonyTradeOffsetBonusActive: boolean): void {
+    public setRulingParty(game: Game, colonyTradePenaltyActive: boolean = false, colonyTradeOffsetBonusActive: boolean = false): void {
       if (this.rulingParty !== undefined) {
         // Cleanup previous party effects
         game.getPlayers().forEach((player) => {

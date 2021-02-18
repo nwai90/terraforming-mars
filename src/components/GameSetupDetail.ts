@@ -31,9 +31,6 @@ export const GameSetupDetail = Vue.component('game-setup-detail', {
         return 'game-config board-other map';
       }
     },
-    includeUnOfficialExpansions: function(): boolean {
-      return (this.gameOptions.aresExtension || this.gameOptions.communityCardsOption || this.isPoliticalAgendasOn() || this.isSocietyExpansionOn());
-    },
     isRandomMANone: function(): boolean {
       return this.gameOptions.randomMA === RandomMAOptionType.NONE;
     },
@@ -85,12 +82,6 @@ export const GameSetupDetail = Vue.component('game-setup-detail', {
               <div v-if="gameOptions.initialDraftVariant" class="game-config generic" v-i18n>Initial</div>
               <div v-if="gameOptions.draftVariant" class="game-config generic" v-i18n>Research phase</div>
               <div v-if="!gameOptions.initialDraftVariant && !gameOptions.draftVariant" class="game-config generic" v-i18n>Off</div>
-            </li>
-
-
-            <li v-if="gameOptions.turmoilExtension && gameOptions.removeNegativeGlobalEvents">
-              <div class="setup-item" v-i18n>Turmoil:</div>
-              <div class="game-config generic" v-i18n>No negative Turmoil event</div>
             </li>
 
             <li v-if="playerNumber === 1">
