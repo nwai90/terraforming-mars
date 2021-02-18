@@ -512,5 +512,6 @@ function getGameOptionsAsModel(options: GameOptions): GameOptionsModel {
     randomMA: options.randomMA,
     turmoilExtension: options.turmoilExtension,
     venusNextExtension: options.venusNextExtension,
+    requiresVenusTrackCompletion: options.requiresVenusTrackCompletion,
   };
 }
