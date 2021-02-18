@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import {MILESTONE_COST} from '../constants';
+import {MILESTONE_COST, MAX_MILESTONES} from '../constants';
 import {ClaimedMilestoneModel} from '../models/ClaimedMilestoneModel';
 import {PreferencesManager} from './PreferencesManager';
 
@@ -43,13 +43,8 @@ export const Milestone = Vue.component('milestone', {
       return 'ma-block ma-block-grayscale';
     },
     getAvailableMilestoneSpots: function(): Array<number> {
-      let numClaimedMilestones = 0;
-      this.milestones_list.forEach((milestone)=>{
-        if (milestone.player_name) {
-          numClaimedMilestones++;
-        }
-      })
-      return Array(3-numClaimedMilestones).fill(MILESTONE_COST)
+      const count = this.milestones_list.filter((milestone) => milestone.player_name).length;
+      return Array(MAX_MILESTONES - count).fill(MILESTONE_COST);
     },
     isLearnerModeOn: function(): boolean {
       return PreferencesManager.loadValue('learner_mode') === '1';

@@ -2,10 +2,10 @@ import {expect} from 'chai';
 import {Player} from '../../../src/Player';
 import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
 import {Game, GameOptions} from '../../../src/Game';
-import {OrOptions} from '../../../src/inputs/OrOptions';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
 import {ExperiencedMartians} from '../../../src/cards/community/preludes/ExperiencedMartians';
 import {Resources} from '../../../src/Resources';
+import {SelectPartyToSendDelegate} from '../../../src/inputs/SelectPartyToSendDelegate';
 
 describe('ExperiencedMartians', function() {
   let card : ExperiencedMartians; let player : Player; let game : Game;
@@ -23,8 +23,8 @@ describe('ExperiencedMartians', function() {
     card.play(player);
     expect(game.deferredActions).has.lengthOf(1);
 
-    const orOptions = game.deferredActions.pop()!.execute() as OrOptions;
-    orOptions.options[0].cb();
+    const selectParty = game.deferredActions.pop()!.execute() as SelectPartyToSendDelegate;
+    selectParty.cb(PartyName.MARS);
     game.deferredActions.peek();
 
     const turmoil = game.turmoil!;

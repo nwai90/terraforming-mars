@@ -6,10 +6,13 @@ import {ColorWithNeutral} from '../Color';
 import {IPayProductionModel} from './IPayProductionUnitsModel';
 import {IAresData} from '../ares/IAresData';
 import {Message} from '../Message';
+import {PartyName} from '../turmoil/parties/PartyName';
+import {TurmoilModel} from './TurmoilModel';
 
 export interface PlayerInputModel {
     amount: number | undefined;
     availableSpaces: Array<string> | undefined;
+    availableParties: Array<PartyName> | undefined;
     canUseHeat: boolean | undefined;
     canUseSteel: boolean | undefined;
     canUseTitanium: boolean | undefined;
@@ -30,4 +33,5 @@ export interface PlayerInputModel {
     payProduction?: IPayProductionModel;
     aresData?: IAresData;
     selectBlueCardAction: boolean;
+    turmoil?: TurmoilModel;
 }

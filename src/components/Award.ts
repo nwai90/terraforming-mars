@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import {AWARD_COSTS} from '../constants';
 import {FundedAwardModel} from '../models/FundedAwardModel';
 import {PreferencesManager} from './PreferencesManager';
 
@@ -41,14 +42,13 @@ export const Award = Vue.component('award', {
       return 'ma-block ma-block-grayscale';
     },
     getAvailableAwardSpots: function(): Array<number> {
-      const awardSpots = [8, 14, 20];
       let numFundedAwards = 0;
       this.awards_list.forEach((award)=>{
         if (award.player_name) {
           numFundedAwards++;
         }
-      })
-      return awardSpots.slice(numFundedAwards);
+      });
+      return AWARD_COSTS.slice(numFundedAwards);
     },
     isLearnerModeOn: function(): boolean {
       return PreferencesManager.loadValue('learner_mode') === '1';
@@ -67,7 +67,7 @@ export const Award = Vue.component('award', {
                     <div class="milestone-award-price">{{spotPrice}}</div>
                 </span>
             </div>
-            
+
             <div v-show="shouldShowList()">
                 <div title="press to show or hide the description" v-on:click.prevent="toggle(award)" v-for="award in awards_list" :class=getClassForAwardTile(award)>
                     <div class="ma-player" v-if="award.player_name"><i :title="award.player_name" :class="'board-cube board-cube--'+award.player_color" /></div>

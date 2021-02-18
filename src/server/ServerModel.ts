@@ -40,6 +40,7 @@ import {MoonModel} from '../models/MoonModel';
 import {CardName} from '../CardName';
 import {Units} from '../Units';
 import {WaitingForModel} from '../models/WaitingForModel';
+import {SelectPartyToSendDelegate} from '../inputs/SelectPartyToSendDelegate';
 
 export class Server {
   public static getGameModel(game: Game): GameHomeModel {
@@ -128,7 +129,7 @@ export class Server {
       turmoil: turmoil,
       venusScaleLevel: game.getVenusScaleLevel(),
       victoryPointsBreakdown: player.getVictoryPoints(),
-      waitingFor: getWaitingFor(player, player.getWaitingFor()),
+      waitingFor: getWaitingFor(player, player.getWaitingFor(), game),
       silverCubeVariant: game.gameOptions.silverCubeVariant,
       temperatureSilverCubeBonusMC: game.temperatureSilverCubeBonusMC,
       oceansSilverCubeBonusMC: game.oceansSilverCubeBonusMC,
@@ -224,6 +225,7 @@ function getCorporationCard(player: Player): CardModel | undefined {
 function getWaitingFor(
   player: Player,
   waitingFor: PlayerInput | undefined,
+  game: Game | undefined,
 ): PlayerInputModel | undefined {
   if (waitingFor === undefined) {
     return undefined;
@@ -242,6 +244,7 @@ function getWaitingFor(
     canUseHeat: undefined,
     players: undefined,
     availableSpaces: undefined,
+    availableParties: undefined,
     min: undefined,
     max: undefined,
     microbes: undefined,
@@ -250,6 +253,7 @@ function getWaitingFor(
     payProduction: undefined,
     aresData: undefined,
     selectBlueCardAction: false,
+    turmoil: undefined,
   };
   switch (waitingFor.inputType) {
   case PlayerInputTypes.AND_OPTIONS:
@@ -258,7 +262,7 @@ function getWaitingFor(
     playerInputModel.options = [];
     if (waitingFor.options !== undefined) {
       for (const option of waitingFor.options) {
-        const subOption = getWaitingFor(player, option);
+        const subOption = getWaitingFor(player, option, game);
         if (subOption !== undefined) {
           playerInputModel.options.push(subOption);
         }
@@ -308,6 +312,12 @@ function getWaitingFor(
   case PlayerInputTypes.SELECT_AMOUNT:
     playerInputModel.min = (waitingFor as SelectAmount).min;
     playerInputModel.max = (waitingFor as SelectAmount).max;
+    break;
+  case PlayerInputTypes.SELECT_PARTY_TO_SEND_DELEGATE:
+    playerInputModel.availableParties = (waitingFor as SelectPartyToSendDelegate).availableParties;
+    if (game !== undefined) {
+      playerInputModel.turmoil = getTurmoil(game);
+    }
     break;
   case PlayerInputTypes.SELECT_DELEGATE:
     playerInputModel.players = (waitingFor as SelectDelegate).players.map(
@@ -513,5 +523,6 @@ function getGameOptionsAsModel(options: GameOptions): GameOptionsModel {
     randomMA: options.randomMA,
     turmoilExtension: options.turmoilExtension,
     venusNextExtension: options.venusNextExtension,
+    requiresVenusTrackCompletion: options.requiresVenusTrackCompletion,
   };
 }
