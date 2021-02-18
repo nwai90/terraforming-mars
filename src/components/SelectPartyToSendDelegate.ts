@@ -3,7 +3,7 @@ import {Button} from '../components/common/Button';
 import {PlayerInputModel} from '../models/PlayerInputModel';
 import {Party} from '../components/Party';
 import {TranslateMixin} from './TranslateMixin';
-import { PartyName } from '../turmoil/parties/PartyName';
+import {PartyName} from '../turmoil/parties/PartyName';
 
 export const SelectPartyToSendDelegate = Vue.component('select-party-to-send-delegate', {
   props: {
