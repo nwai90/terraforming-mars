@@ -298,6 +298,12 @@ export const Preferences = Vue.component('preferences', {
                     </div>
                     <div class="preferences_panel_item">
                         <label class="form-switch">
+                            <input type="checkbox" v-on:change="updatePreferences" v-model="small_cards" />
+                            <i class="form-icon"></i> <span v-i18n>Smaller cards</span>
+                        </label>
+                    </div>
+                    <div class="preferences_panel_item">
+                        <label class="form-switch">
                             <input type="checkbox" v-on:change="updatePreferences" v-model="magnify_cards" />
                             <i class="form-icon"></i> <span v-i18n>Magnify cards on hover</span>
                         </label>
