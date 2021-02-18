@@ -111,6 +111,8 @@ export const Preferences = Vue.component('preferences', {
           PreferencesManager.preferencesValues.set(k, this.$data[k]);
           this[k] = val || 'en';
           PreferencesManager.preferencesValues.set(k, val || 'en');
+        } else if (k === 'small_cards') {
+          this[k] = true;
         } else {
           const boolVal = val !== '' ? val === '1' : this.$data[k];
           PreferencesManager.preferencesValues.set(k, val === '1');
@@ -137,8 +139,12 @@ export const Preferences = Vue.component('preferences', {
     },
     syncPreferences: function(): void {
       for (const k of PreferencesManager.keys) {
-        this.$data[k] = PreferencesManager.preferencesValues.get(k);
-        this.setPreferencesCSS(this.$data[k], k);
+        if (k === 'small_cards') {
+          this.setPreferencesCSS(true, k);
+        } else {
+          this.$data[k] = PreferencesManager.preferencesValues.get(k);
+          this.setPreferencesCSS(this.$data[k], k);
+        }
       }
     },
     getGenMarker: function(): string {
