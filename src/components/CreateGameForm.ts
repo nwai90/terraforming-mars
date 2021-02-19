@@ -882,6 +882,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
                 v-bind:promoCardsOption="promoCardsOption"
                 v-bind:communityCardsOption="communityCardsOption"
                 v-bind:aresExtension="aresExtension"
+                v-bind:moonExpansion="moonExpansion"
             ></corporations-filter>
 
             <colonies-filter

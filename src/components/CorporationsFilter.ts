@@ -53,6 +53,9 @@ export const CorporationsFilter = Vue.component('corporations-filter', {
     aresExtension: {
       type: Boolean,
     },
+    moonExpansion: {
+      type: Boolean,
+    },
   },
   data: function() {
     const cardsByModuleMap: Map<GameModule, Array<CardName>> =
@@ -70,6 +73,7 @@ export const CorporationsFilter = Vue.component('corporations-filter', {
         ...this.promoCardsOption ? cardsByModuleMap.get(GameModule.Promo)! : [],
         ...this.communityCardsOption ? cardsByModuleMap.get(GameModule.Community)! : [],
         ...this.aresExtension ? cardsByModuleMap.get(GameModule.Ares)! : [],
+        ...this.moonExpansion ? cardsByModuleMap.get(GameModule.Moon)! : [],
       ] as Array<CardName> | boolean /* v-model thinks this can be boolean */,
       corpsByModule: Array.from(cardsByModuleMap),
     };
@@ -153,22 +157,25 @@ export const CorporationsFilter = Vue.component('corporations-filter', {
     aresExtension: function(enabled) {
       enabled ? this.selectAll(GameModule.Ares) : this.selectNone(GameModule.Ares);
     },
+    moonExpansion: function(enabled) {
+      enabled ? this.selectAll(GameModule.Moon) : this.selectNone(GameModule.Moon);
+    },
   },
   template: `
     <div class="corporations-filter">
         <div class="corporations-filter-toolbox-cont">
             <h2>Corporations</h2>
             <div class="corporations-filter-toolbox corporations-filter-toolbox--topmost">
-                <a href="#" v-on:click.prevent="selectAll('All')">All</a> | 
-                <a href="#" v-on:click.prevent="selectNone('All')">None</a> | 
+                <a href="#" v-on:click.prevent="selectAll('All')">All</a> |
+                <a href="#" v-on:click.prevent="selectNone('All')">None</a> |
                 <a href="#" v-on:click.prevent="invertSelection('All')">Invert</a>
             </div>
         </div>
         <div class="corporations-filter-group" v-for="entry in corpsByModule" v-if="entry[1].length > 0">
             <div class="corporations-filter-toolbox-cont">
                 <div class="corporations-filter-toolbox">
-                    <a href="#" v-on:click.prevent="selectAll(entry[0])">All</a> | 
-                    <a href="#" v-on:click.prevent="selectNone(entry[0])">None</a> | 
+                    <a href="#" v-on:click.prevent="selectAll(entry[0])">All</a> |
+                    <a href="#" v-on:click.prevent="selectNone(entry[0])">None</a> |
                     <a href="#" v-on:click.prevent="invertSelection(entry[0])">Invert</a>
                 </div>
             </div>
@@ -176,7 +183,7 @@ export const CorporationsFilter = Vue.component('corporations-filter', {
                 <label class="form-checkbox">
                     <input type="checkbox" v-model="selectedCorporations" :value="corporation"/>
                     <i class="form-icon"></i>{{ corporation }}
-                </label>    
+                </label>
             </div>
         </div>
     </div>
