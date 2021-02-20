@@ -14,12 +14,12 @@ export const CardExtraContent = Vue.component('CardExtraContent', {
     lifeFound: function(card: CardModel): boolean {
       return card.name === CardName.SEARCH_FOR_LIFE && card.resources !== undefined && card.resources > 0;
     },
-    miningTileOnMetal: function(card: CardModel, metal: string): boolean {
+    isMiningTileOnMetal: function(card: CardModel, metal: string): boolean {
       const miningCard = [CardName.MINING_RIGHTS, CardName.MINING_AREA, CardName.MINING_RIGHTS_ARES, CardName.MINING_AREA_ARES];
       if (miningCard.includes(card.name)) {
-        if (metal === 'titanium') {
+        if (metal === Resources.TITANIUM) {
           return card.bonusResource === Resources.TITANIUM;
-        } else if (metal === 'steel') {
+        } else if (metal === Resources.STEEL) {
           return card.bonusResource === Resources.STEEL;
         }
       }
@@ -30,10 +30,10 @@ export const CardExtraContent = Vue.component('CardExtraContent', {
     },
   },
   template: `
-        <div class="card-extra-content-container">
-          <img v-if="lifeFound(card)" class="little-green-men" src="assets/martian.png" />
-          <div v-if="miningTileOnMetal(card,'steel')" class="mined-metal mined-steel"/>
-          <div v-if="miningTileOnMetal(card,'titanium')" class="mined-metal mined-titanium"/>
-        </div>
+    <div class="card-extra-content-container">
+      <div v-if="lifeFound(card)" class="little-green-men" />
+      <div v-if="isMiningTileOnMetal(card,'steel')" class="mined-metal mined-steel" />
+      <div v-if="isMiningTileOnMetal(card,'titanium')" class="mined-metal mined-titanium" />
+    </div>
     `,
 });
