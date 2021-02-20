@@ -7,23 +7,23 @@ export const HelpStandardProjects = Vue.component('help-standard-projects', {
     Card,
   },
   methods: {
-    getOfficialStandardProjectCards: function(): Array<string> {
-      const projectList = [];
-      projectList.push(CardName.SELL_PATENTS_STANDARD_PROJECT);
-      projectList.push(CardName.POWER_PLANT_STANDARD_PROJECT);
-      projectList.push(CardName.ASTEROID_STANDARD_PROJECT);
-      projectList.push(CardName.AQUIFER_STANDARD_PROJECT);
-      projectList.push(CardName.GREENERY_STANDARD_PROJECT);
-      projectList.push(CardName.CITY_STANDARD_PROJECT);
-      projectList.push(CardName.AIR_SCRAPPING_STANDARD_PROJECT);
-      projectList.push(CardName.BUILD_COLONY_STANDARD_PROJECT);
-      projectList.push(CardName.BUFFER_GAS_STANDARD_PROJECT);
-      return projectList;
-    },
+    getStandardProjects: () => [
+      CardName.SELL_PATENTS_STANDARD_PROJECT,
+      CardName.POWER_PLANT_STANDARD_PROJECT,
+      CardName.ASTEROID_STANDARD_PROJECT,
+      CardName.AQUIFER_STANDARD_PROJECT,
+      CardName.GREENERY_STANDARD_PROJECT,
+      CardName.CITY_STANDARD_PROJECT,
+      CardName.AIR_SCRAPPING_STANDARD_PROJECT,
+      CardName.BUFFER_GAS_STANDARD_PROJECT,
+      CardName.MOON_COLONY_STANDARD_PROJECT,
+      CardName.MOON_MINE_STANDARD_PROJECT,
+      CardName.MOON_ROAD_STANDARD_PROJECT,
+    ],
   },
   template: `
-    <div class="help-page-standard-projects-container">
-      <div class="cardbox" v-for="card in getOfficialStandardProjectCards()">
+    <div class="help-standard-projects-container">
+      <div class="cardbox" v-for="card in getStandardProjects()">
         <Card :card="{'name': card}" />
       </div>
     </div>

@@ -8,7 +8,7 @@ import {StartScreen} from './StartScreen';
 import {LoadGameForm} from './LoadGameForm';
 import {DebugUI} from './DebugUI';
 import {GameHomeModel} from '../models/GameHomeModel';
-import {HelpPage} from './help/HelpPage';
+import {Help} from './help/Help';
 
 import * as constants from '../constants';
 import * as raw_settings from '../genfiles/settings.json';
@@ -19,7 +19,7 @@ interface MainAppData {
             'empty' |
             'game-home' |
             'games-overview' |
-            'help-page' |
+            'help' |
             'load' |
             'player-home' |
             'start-screen' |
@@ -69,7 +69,7 @@ export const mainAppSettings = {
     'player-end': GameEnd,
     'games-overview': GamesOverview,
     'debug-ui': DebugUI,
-    'help-page': HelpPage,
+    'help': Help,
   },
   'methods': {
     changeLogPaused: function(value: boolean) {
@@ -173,8 +173,8 @@ export const mainAppSettings = {
       app.screen = 'load';
     } else if (currentPathname === '/debug-ui') {
       app.screen = 'debug-ui';
-    } else if (currentPathname === '/help-page') {
-      app.screen = 'help-page';
+    } else if (currentPathname === '/help') {
+      app.screen = 'help';
     } else {
       app.screen = 'start-screen';
     }

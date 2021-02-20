@@ -6,7 +6,7 @@ export const HelpPhases = Vue.component('help-phases', {
   methods: {
   },
   template: `
-    <div class="help-page-phases-container">
+    <div class="help-phases-container">
       <ul>
         <li>
           <input type="checkbox" id="initial-draft">
@@ -33,7 +33,7 @@ export const HelpPhases = Vue.component('help-phases', {
                 <li v-i18n>Select which corporation, 2 preludes and project cards to keep.</li>
                 <li v-i18n>In turn order, play the corporation and pay 3 mc for each of the project cards bought.</li>
                 <li>
-                  <span v-i18n>In turn order, play both preludes.</span> 
+                  <span v-i18n>In turn order, play both preludes.</span>
                   <div class="expansion-icon expansion-icon-prelude"></div>
                 </li>
               </ul>
@@ -50,11 +50,11 @@ export const HelpPhases = Vue.component('help-phases', {
             <li>
               <input type="checkbox" id="action-phase">
               <label for="action-phase" class="last">
-                <span v-i18n>Action phase</span> 
+                <span v-i18n>Action phase</span>
                 (<span v-i18n>Turmoil policy in effect</span>
                 <div class="expansion-icon expansion-icon-turmoil"></div>
-                ) 
-              </label> 
+                )
+              </label>
               <ul>
                 <li><span v-i18n>Take 1 or 2 actions (mandatory 2 actions if playing with fast mode):</span>
                   <ul>
@@ -66,11 +66,11 @@ export const HelpPhases = Vue.component('help-phases', {
                     <li v-i18n>claim milestone</li>
                     <li v-i18n>fund award</li>
                     <li>
-                      <span v-i18n>trade with 9 mc, 3 Ti, or 3 energy<span> 
+                      <span v-i18n>trade with 9 mc, 3 Ti, or 3 energy</span>
                       <div class="expansion-icon expansion-icon-colony"></div>
                     </li>
                     <li>
-                      <span v-i18n>send delegate: free from lobby, 5 mc from reserve<span> 
+                      <span v-i18n>send delegate: free from lobby, 5 mc from reserve</span>
                       <div class="expansion-icon expansion-icon-turmoil"></div>
                     </li>
                   </ul>
@@ -97,7 +97,7 @@ export const HelpPhases = Vue.component('help-phases', {
                     <li v-i18n>(If Venus Next is in use, the Venus track must be completed as well for solo mode victory.) </li>
                   </ul>
                 <li>
-                  <span v-i18n>ii. World Government Terraforming (start player chooses)</span> 
+                  <span v-i18n>ii. World Government Terraforming (start player chooses)</span>
                   <div class="expansion-icon expansion-icon-venus"></div>
                 </li>
                 <li><span v-i18n>iii. Colony production</span>
@@ -131,7 +131,7 @@ export const HelpPhases = Vue.component('help-phases', {
                     </li>
                   </ul>
                 </li>
-              <ul>
+              </ul>
             </li>
           </ul>
         </li>
@@ -142,7 +142,7 @@ export const HelpPhases = Vue.component('help-phases', {
             <li v-i18n>In turn order, convert plants to greeneries.</li>
             <li v-i18n>Assign awards</li>
             <li>
-              <span v-i18n> Score: TR + tiles + card + milestones + awards + (1 VP per chairman and party leader</span> 
+              <span v-i18n> Score: TR + tiles + card + milestones + awards + (1 VP per chairman and party leader</span>
               <div class="expansion-icon expansion-icon-turmoil"></div>)
             </li>
           </ul>
