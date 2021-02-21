@@ -137,12 +137,12 @@ const AGENDA_HTML: Map<BonusId | PolicyId, string> = new Map();
     <div class="resource-tag tag-plant party-resource-tag"></div>
     <div class="resource-tag tag-microbe party-resource-tag"></div>
     <div class="resource-tag tag-animal party-resource-tag"></div> : <div class="resource money">2</div>
-    </div>` );
+    </div>`);
   AGENDA_HTML.set('gp04',
     `<div class="policy-top-margin">
     <span class="money resource">5</span>
     <span class="red-arrow-3x"></span>3<span class="plant resource"></span> / 2<span class="microbe resource"></span>
-    </div>` );
+    </div>`);
   AGENDA_HTML.set('spb01',
     `<div class="resource money party-resource">1</div> / <div class="resource-tag tag-diverse party-resource-tag"></div>`);
   AGENDA_HTML.set('spb02',
@@ -231,28 +231,28 @@ const AGENDA_HTML: Map<BonusId | PolicyId, string> = new Map();
     </div>`);
   AGENDA_HTML.set('bp04', `<div class="policy-top-margin"><div class="resource-tag tag-earth"></div> : <div class="money resource">-3</div></div>`);
   AGENDA_HTML.set('tb01',
-  `<div class="resource money party-resource">1</div> / <div class="resource card card-small card-with-border"><div class="card-tag-req"></div></div>`);
+    `<div class="resource money party-resource">1</div> / <div class="resource card card-small card-with-border"><div class="card-tag-req"></div></div>`);
   AGENDA_HTML.set('tb02',
-  `<div class="resource money party-resource">1</div> / <div class="resource-tag tag-none party-resource-tag"></div>`);
+    `<div class="resource money party-resource">1</div> / <div class="resource-tag tag-none party-resource-tag"></div>`);
   AGENDA_HTML.set('tp01', `<div class="tags-requisite"><div class="resource-tag tag-wild party-resource-tag"></div></div>`);
   AGENDA_HTML.set('tp02',
-  `<div class="policy-top-margin">
-  <span class="money resource">10</span>
-  <span class="red-arrow"></span>
-  <div class="influence"></div>
-  </div>`);
+    `<div class="policy-top-margin">
+    <span class="money resource">10</span>
+    <span class="red-arrow"></span>
+    <div class="influence"></div>
+    </div>`);
   AGENDA_HTML.set('tp03',
-  `<div class="policy-top-margin">
-  <span class="money resource">10</span>
-  <span class="red-arrow"></span>
-  <div class="resource card card-small card-with-border">
-    <div class="card-tag-req"><div class="stretched-x">X</div></div>
-  </div>
-  </div>`);
+    `<div class="policy-top-margin">
+    <span class="money resource">10</span>
+    <span class="red-arrow"></span>
+    <div class="resource card card-small card-with-border">
+        <div class="card-tag-req"><div class="stretched-x">X</div></div>
+    </div>
+    </div>`);
   AGENDA_HTML.set('tp04',
-  `<div class="policy-top-margin">
-  <div class="trade"></div> : +1
-  </div>`);
+    `<div class="policy-top-margin">
+    <div class="trade"></div> : +1
+    </div>`);
   AGENDA_HTML.set('cb01', `<div class="resource money party-resource">8</div>`);
   AGENDA_HTML.set('cb02', `1 <div class="rating tile party-rating party-tile"></div>`);
   AGENDA_HTML.set('cp01',

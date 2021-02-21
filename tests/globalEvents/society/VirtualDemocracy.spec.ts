@@ -3,7 +3,7 @@ import {VirtualDemocracy} from '../../../src/turmoil/globalEvents/society/Virtua
 import {Game} from '../../../src/Game';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
 import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
-import {OrOptions} from '../../../src/inputs/OrOptions';
+import {SelectPartyToSendDelegate} from '../../../src/inputs/SelectPartyToSendDelegate';
 
 describe('VirtualDemocracy', function() {
   it('resolve play', function() {
@@ -25,8 +25,8 @@ describe('VirtualDemocracy', function() {
     expect(game.deferredActions).has.lengthOf(3);
 
     while (game.deferredActions.length > 0) {
-      const orOptions = game.deferredActions.pop()!.execute() as OrOptions;
-      orOptions.options[0].cb();
+      const selectParty = game.deferredActions.pop()!.execute() as SelectPartyToSendDelegate;
+      selectParty.cb(PartyName.MARS);
     }
 
     const marsFirst = turmoil.getPartyByName(PartyName.MARS)!;
