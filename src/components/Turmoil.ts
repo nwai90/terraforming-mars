@@ -155,7 +155,7 @@ const AGENDA_HTML: Map<BonusId | PolicyId, string> = new Map();
     `<div class="policy-top-margin">
     <div class="resource money">10</div>
     <span class="red-arrow"></span>
-    <div class="card-resource-trade-fleet"></div>
+    <div class="trade-fleet"></div>
     </div>`);
   AGENDA_HTML.set('spp03',
     `<div class="policy-top-margin"><div class="tile empty-tile-small"></div>ON MARS : -

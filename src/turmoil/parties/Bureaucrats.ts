@@ -49,7 +49,7 @@ class BureaucratsBonus02 implements Bonus {
 class BureaucratsPolicy01 implements Policy {
   isDefault = true;
   id = TurmoilPolicy.BUREAUCRATS_DEFAULT_POLICY;
-  description: string = 'Pay 3 MC to send a delegate from your reserve into any party';
+  description: string = 'Pay 3 MC to send a delegate from your reserve into any party (Turmoil Bureaucrats)';
 
   canAct(player: Player) {
     const turmoil: Turmoil = player.game.turmoil as Turmoil;
@@ -83,7 +83,7 @@ class BureaucratsPolicy02 implements Policy {
 
 class BureaucratsPolicy03 implements Policy {
   id = TurmoilPolicy.BUREAUCRATS_POLICY_3;
-  description: string = 'Pay 3 MC to place your player marker on a non-reserved area';
+  description: string = 'Pay 3 MC to place your player marker on a non-reserved area (Turmoil Bureaucrats)';
   isDefault = false;
 
   canAct(player: Player) {

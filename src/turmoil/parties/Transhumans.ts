@@ -52,7 +52,7 @@ class TranshumansPolicy01 implements Policy {
 
 class TranshumansPolicy02 implements Policy {
   id = TurmoilPolicy.TRANSHUMANS_POLICY_2;
-  description: string = 'Spend 10 MC to gain 1 influence';
+  description: string = 'Spend 10 MC to gain 1 influence (Turmoil Transhumans)';
   isDefault = false;
 
   canAct(player: Player) {
@@ -74,7 +74,7 @@ class TranshumansPolicy02 implements Policy {
 
 class TranshumansPolicy03 implements Policy {
   id = TurmoilPolicy.TRANSHUMANS_POLICY_3;
-  description: string = 'Spend 10 MC to play a card from hand, ignoring global requirements';
+  description: string = 'Spend 10 MC to play a card from hand, ignoring global requirements (Turmoil Transhumans)';
   isDefault = false;
 
   canAct(player: Player) {
