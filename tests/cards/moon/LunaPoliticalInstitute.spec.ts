@@ -3,9 +3,9 @@ import {Player} from '../../../src/Player';
 import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
 import {LunaPoliticalInstitute} from '../../../src/cards/moon/LunaPoliticalInstitute';
 import {expect} from 'chai';
+import {SelectPartyToSendDelegate} from '../../../src/inputs/SelectPartyToSendDelegate';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
-import {SelectPartyToSendDelegate} from '../../../src/inputs/SelectPartyToSendDelegate';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 

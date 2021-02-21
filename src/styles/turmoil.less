@@ -220,13 +220,13 @@
 .delegate-spot {
     width: 40px;
     height:40px;
-    /*background: linear-gradient(transparent, rgba(0,0,0,.1));*/
 }
 
 .party-container {
     display: inline-block;
     width: 164px;
     height: 307px;
+    margin: 15px 10px 10px 0px;
     border: none;
     box-shadow: none;
     border-radius: 0px;
@@ -621,6 +621,21 @@
     background-size: 84px 30px;
     display: inline-block;
     margin-bottom: -10px;
+}
+
+.turmoil-party-transition-arrow-grid {
+    position: absolute;
+    left: 130px;
+    top: 400px;
+
+    .turmoil-party-transition-arrow {
+        display: inline-block;
+        width: 70px;
+        height: 15px;
+        background-color: #444;
+        clip-path: polygon(30% 15%, 30% 40%, 100% 40%, 100% 60%, 30% 60%, 30% 85%, 0% 50%);
+        margin-right: 96px;
+    }
 }
 
 .red-arrow-3x {

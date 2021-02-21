@@ -1,4 +1,3 @@
-
 import {Message} from '../Message';
 import {PlayerInput} from '../PlayerInput';
 import {PlayerInputTypes} from '../PlayerInputTypes';
@@ -11,5 +10,5 @@ export class SelectPartyToSendDelegate implements PlayerInput {
         public buttonLabel: string = 'Send delegate',
         public availableParties: PartyName[],
         public cb: (party: PartyName) => undefined,
-        ) {}
+    ) {}
 }

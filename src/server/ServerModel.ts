@@ -329,6 +329,12 @@ function getWaitingFor(
       },
     );
     break;
+  case PlayerInputTypes.SELECT_PARTY_TO_SEND_DELEGATE:
+    playerInputModel.availableParties = (waitingFor as SelectPartyToSendDelegate).availableParties;
+    if (player.game !== undefined) {
+      playerInputModel.turmoil = getTurmoil(player.game);
+    }
+    break;
   case PlayerInputTypes.SELECT_PRODUCTION_TO_LOSE:
     const _player = (waitingFor as SelectProductionToLose).player;
     playerInputModel.payProduction = {

@@ -27,7 +27,7 @@ export const Party = Vue.component('party', {
     },
     getUnavailablePartyClass: function(): string {
       return this.isAvailable ? '' : ' unavailable-party';
-    }
+    },
   },
   template: `
     <div :class="'filterDiv party-container party-background--' + partyNameToCss(party.name) + getUnavailablePartyClass()">
@@ -45,7 +45,6 @@ export const Party = Vue.component('party', {
           </div>
         </div>
         <div :class="'selectable-party-name party-name party-name--'+partyNameToCss(party.name)" v-i18n>{{party.name}}</div>
-
       </div>
     </div>
     `,
