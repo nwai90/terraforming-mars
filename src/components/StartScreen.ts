@@ -34,7 +34,7 @@ export const StartScreen = Vue.component('start-screen', {
     </div>
     <a class="start-screen-link start-screen-link--new-game" href="/new-game" v-i18n>New game</a>
     <a class="start-screen-link start-screen-link--solo" href="/solo" v-i18n>Solo challenge</a>
-    <a class="start-screen-link start-screen-link--cards-list" href="https://ssimeonoff.github.io/cards-list" target="_blank" v-i18n>Cards list</a>
+    <a class="start-screen-link start-screen-link--cards-list" href="/cards" target="_blank" v-i18n>Cards list</a>
     <a class="start-screen-link start-screen-link--board-game" href="https://boardgamegeek.com/boardgame/167791/terraforming-mars" target="_blank" v-i18n>Board game</a>
     <a class="start-screen-link start-screen-link--about" href="https://www.notion.so/Community-Add-ons-98a78a03dc6b4006926bf14e046309c8" target="_blank" v-i18n>Documentation</a>
     <a class="start-screen-link start-screen-link--merch" href="https://teespring.com/stores/terraforming-guild" target="_blank" v-i18n>Fan merch</a>
