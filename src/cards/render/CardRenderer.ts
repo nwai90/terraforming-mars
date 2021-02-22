@@ -435,7 +435,7 @@ class Builder {
     return this;
   }
 
-  public moon(amount: number = 1): Builder {
+  public moon(amount: number = -1): Builder {
     this._addRowItem(new CardRenderItem(CardRenderItemType.MOON, amount));
     return this;
   }
