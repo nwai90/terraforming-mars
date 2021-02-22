@@ -477,7 +477,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       turmoil.delegateReserve = d.delegateReserve;
 
       // TODO(kberg): remove this test by 2021-02-01
-      turmoil.politicalAgendasData = PoliticalAgendas.deserialize(d.politicalAgendasData);
+      turmoil.politicalAgendasData = PoliticalAgendas.deserialize(d.politicalAgendasData, turmoil);
 
       d.parties.forEach((sp) => {
         const tp = turmoil.getPartyByName(sp.name);
