@@ -219,6 +219,7 @@ function getCorporationCard(player: Player): CardModel | undefined {
     cardType: CardType.CORPORATION,
     isDisabled: player.corporationCard.isDisabled,
     warning: player.corporationCard.warning,
+    discount: player.corporationCard.cardDiscount,
   } as CardModel;
 }
 
