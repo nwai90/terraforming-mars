@@ -135,6 +135,21 @@ export const PlayerTags = Vue.component('player-tags', {
         turmoil.politicalAgendas?.currentAgenda.policyId === TurmoilPolicy.UNITY_POLICY_4) {
         return true;
       }
+      if (tag === Tags.ENERGY &&
+        turmoil && turmoil.ruling === PartyName.EMPOWER &&
+        turmoil.politicalAgendas?.currentAgenda.policyId === TurmoilPolicy.EMPOWER_POLICY_4) {
+        return true;
+      }
+      if (tag === Tags.EVENT &&
+        turmoil && turmoil.ruling === PartyName.CENTRISTS &&
+        turmoil.politicalAgendas?.currentAgenda.policyId === TurmoilPolicy.CENTRISTS_POLICY_4) {
+        return true;
+      }
+      if (tag === Tags.EARTH &&
+        turmoil && turmoil.ruling === PartyName.BUREAUCRATS &&
+        turmoil.politicalAgendas?.currentAgenda.policyId === TurmoilPolicy.BUREAUCRATS_POLICY_4) {
+        return true;
+      }
 
       const iapetusColony = this.player.colonies.find((colony) => colony.name === ColonyName.IAPETUS);
       if (tag === 'all' &&
@@ -156,6 +171,18 @@ export const PlayerTags = Vue.component('player-tags', {
 
       if (tag === Tags.SPACE && this.player.turmoil?.ruling === PartyName.UNITY) {
         if (this.player.turmoil.politicalAgendas?.currentAgenda.policyId === TurmoilPolicy.UNITY_POLICY_4) discount += 2;
+      }
+
+      if (tag === Tags.ENERGY && this.player.turmoil?.ruling === PartyName.EMPOWER) {
+        if (this.player.turmoil.politicalAgendas?.currentAgenda.policyId === TurmoilPolicy.EMPOWER_POLICY_4) discount += 3;
+      }
+
+      if (tag === Tags.EVENT && this.player.turmoil?.ruling === PartyName.CENTRISTS) {
+        if (this.player.turmoil.politicalAgendas?.currentAgenda.policyId === TurmoilPolicy.CENTRISTS_POLICY_4) discount += 2;
+      }
+
+      if (tag === Tags.EARTH && this.player.turmoil?.ruling === PartyName.BUREAUCRATS) {
+        if (this.player.turmoil.politicalAgendas?.currentAgenda.policyId === TurmoilPolicy.BUREAUCRATS_POLICY_4) discount += 3;
       }
 
       const iapetusColony = this.player.colonies.find((colony) => colony.name === ColonyName.IAPETUS);
