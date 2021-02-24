@@ -106,6 +106,7 @@ export interface GameOptions {
   startingCorporations: number;
   shuffleMapOption: boolean;
   randomMA: RandomMAOptionType;
+  randomTurmoil: boolean;
   soloTR: boolean; // Solo victory by getting TR 63 by game end
   customCorporationsList: Array<CardName>;
   cardsBlackList: Array<CardName>;
@@ -135,6 +136,7 @@ const DEFAULT_GAME_OPTIONS: GameOptions = {
   preludeExtension: false,
   promoCardsOption: false,
   randomMA: RandomMAOptionType.NONE,
+  randomTurmoil: false,
   requiresMoonTrackCompletion: false,
   requiresVenusTrackCompletion: false,
   showTimers: true,

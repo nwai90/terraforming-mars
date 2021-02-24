@@ -23,6 +23,7 @@ export interface GameOptionsModel {
   solarPhaseOption: boolean,
   soloTR: boolean,
   randomMA: RandomMAOptionType,
+  randomTurmoil: boolean,
   turmoilExtension: boolean,
   venusNextExtension: boolean,
   requiresVenusTrackCompletion: boolean,

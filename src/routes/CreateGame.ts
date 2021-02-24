@@ -85,6 +85,7 @@ export class CreateGame extends Handler {
           startingCorporations: gameReq.startingCorporations,
           shuffleMapOption: gameReq.shuffleMapOption,
           randomMA: gameReq.randomMA,
+          randomTurmoil: gameReq.randomTurmoil,
           soloTR: gameReq.soloTR,
           customCorporationsList: gameReq.customCorporationsList,
           cardsBlackList: gameReq.cardsBlackList,

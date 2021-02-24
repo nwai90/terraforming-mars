@@ -28,6 +28,7 @@ export interface CreateGameModel {
     draftVariant: boolean;
     initialDraft: boolean;
     randomMA: RandomMAOptionType;
+    randomTurmoil: boolean;
     randomFirstPlayer: boolean;
     beginnerOption: boolean;
     venusNext: boolean;
@@ -94,6 +95,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       draftVariant: true,
       initialDraft: false,
       randomMA: RandomMAOptionType.NONE,
+      randomTurmoil: false,
       randomFirstPlayer: true,
       beginnerOption: false,
       venusNext: false,
@@ -299,6 +301,13 @@ export const CreateGameForm = Vue.component('create-game-form', {
     },
     societyExpansionToggle: function() {
       if (!this.isSocietyExpansionEnabled()) this.societyExpansion = false;
+      if (this.$data.societyExpansion === false) this.randomTurmoil = false;
+    },
+    isRandomTurmoilEnabled: function(): Boolean {
+      return this.societyExpansion;
+    },
+    randomTurmoilToggle: function() {
+      if (!this.isRandomTurmoilEnabled()) this.randomTurmoil = false;
     },
     isBeginnerToggleEnabled: function(): Boolean {
       return !(this.initialDraft || this.prelude || this.venusNext || this.colonies || this.turmoil);
@@ -325,6 +334,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       if (this.$data.turmoil === false) {
         this.politicalAgendasExtension = AgendaStyle.STANDARD;
         this.societyExpansion = false;
+        this.randomTurmoil = false;
       }
     },
     deselectVenusCompletion: function() {
@@ -413,6 +423,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       const draftVariant = component.draftVariant;
       const initialDraft = component.initialDraft;
       const randomMA = component.randomMA;
+      const randomTurmoil = component.randomTurmoil;
       const venusNext = component.venusNext;
       const colonies = component.colonies;
       const turmoil = component.turmoil;
@@ -508,6 +519,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
         clonedGamedId,
         initialDraft,
         randomMA,
+        randomTurmoil,
         shuffleMapOption,
         beginnerOption,
         randomFirstPlayer,
@@ -784,6 +796,13 @@ export const CreateGameForm = Vue.component('create-game-form', {
                             <label for="shuffleMap-checkbox">
                                     <span v-i18n>Board tiles</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#randomize-board-tiles" class="tooltip" target="_blank">&#9432;</a>
                             </label>
+
+                            <div v-if="isRandomTurmoilEnabled()">
+                                <input type="checkbox" v-model="randomTurmoil" id="randomTurmoil-checkbox" v-on:change="randomTurmoilToggle()">
+                                <label for="randomTurmoil-checkbox">
+                                    <span v-i18n>Turmoil</span>
+                                </label>
+                            </div>
 
                             <div class="create-game-subsection-label" v-i18n>Filter</div>
 

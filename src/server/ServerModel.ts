@@ -537,6 +537,7 @@ function getGameOptionsAsModel(options: GameOptions): GameOptionsModel {
     solarPhaseOption: options.solarPhaseOption,
     soloTR: options.soloTR,
     randomMA: options.randomMA,
+    randomTurmoil: options.randomTurmoil,
     turmoilExtension: options.turmoilExtension,
     venusNextExtension: options.venusNextExtension,
     requiresVenusTrackCompletion: options.requiresVenusTrackCompletion,
