@@ -32,5 +32,6 @@ export interface PlayerInputModel {
     payProduction?: IPayProductionModel;
     aresData?: IAresData;
     selectBlueCardAction: boolean;
+    showOwner?: boolean;
     turmoil?: TurmoilModel;
 }
