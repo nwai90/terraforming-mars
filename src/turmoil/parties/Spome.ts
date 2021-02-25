@@ -10,7 +10,6 @@ import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferr
 import {TurmoilPolicy} from '../TurmoilPolicy';
 import {DiscardCards} from '../../deferredActions/DiscardCards';
 import {Tags} from '../../cards/Tags';
-import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../constants';
 
 export class Spome extends Party implements IParty {
   name = PartyName.SPOME;
@@ -63,6 +62,7 @@ class SpomePolicy02 implements Policy {
   }
 
   action(player: Player) {
+    player.game.defer(new SelectHowToPayDeferred(player, 10, {title: 'Select how to pay for action'}));
     player.increaseFleetSize();
     player.turmoilPolicyActionUsed = true;
     player.game.log('${0} used Turmoil Spome action', (b) => b.player(player));
@@ -84,25 +84,25 @@ class SpomePolicy03 implements Policy {
 
 class SpomePolicy04 implements Policy {
   id = TurmoilPolicy.SPOME_POLICY_4;
-  description: string = 'Spend 4 MC to draw a planetary card (Turmoil Spome)';
+  description: string = 'Spend 10 MC to draw 2 planetary cards (Turmoil Spome)';
   isDefault = false;
 
   canAct(player: Player) {
-    return player.canAfford(4) && player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;
+    return player.canAfford(10) && player.turmoilPolicyActionUsed === false;
   }
 
   action(player: Player) {
     const game = player.game;
     game.log('${0} used Turmoil Spome action', (b) => b.player(player));
-    player.politicalAgendasActionUsedCount += 1;
+    player.turmoilPolicyActionUsed = true;
 
     game.defer(new SelectHowToPayDeferred(
       player,
-      4,
+      10,
       {
-        title: 'Select how to pay for Turmoil Unity action',
+        title: 'Select how to pay for Turmoil Spome action',
         afterPay: () => {
-          player.drawCard(1, {
+          player.drawCard(2, {
             include: (card) => card.tags.includes(Tags.VENUS) || card.tags.includes(Tags.EARTH) || card.tags.includes(Tags.JOVIAN),
           });
         },

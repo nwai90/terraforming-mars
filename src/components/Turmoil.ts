@@ -161,9 +161,13 @@ const AGENDA_HTML: Map<BonusId | PolicyId, string> = new Map();
     `<div class="policy-top-margin"><div class="tile empty-tile-small"></div>ON MARS : -
     <span class="resource card card-with-border"></span></div>`);
   AGENDA_HTML.set('spp04',
-    `<span class="money resource">4</span>
-    <span class="red-arrow-3x"></span>
-    <div class="resource card card-with-border policy-card-with-tag"><div class="card-icon tag-planetary"></div></div>`);
+    `<div class="policy-top-margin">
+    <div class="resource money">10</div>
+    <span class="red-arrow"></span>
+    <div class="resource card card-with-border policy-card-with-tag"><div class="card-icon tag-planetary"></div></div>
+    <div class="resource card card-with-border policy-card-with-tag"><div class="card-icon tag-planetary"></div></div>
+    </div>
+    `);
   AGENDA_HTML.set('eb01',
     `<div class="resource money party-resource">2</div> / <div class="resource-tag tag-power party-resource-tag"></div>`);
   AGENDA_HTML.set('eb02',

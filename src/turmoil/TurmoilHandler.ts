@@ -297,7 +297,7 @@ export class TurmoilHandler {
     }
 
     // PoliticalAgendas Populists P2 hook
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.MARS, TurmoilPolicy.POPULISTS_POLICY_2)) {
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.POPULISTS, TurmoilPolicy.POPULISTS_POLICY_2)) {
       const policy = POPULISTS_POLICY_2;
       policy.onCardPlayed(player, selectedCard);
     }
