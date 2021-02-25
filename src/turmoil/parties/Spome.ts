@@ -84,7 +84,7 @@ class SpomePolicy03 implements Policy {
 
 class SpomePolicy04 implements Policy {
   id = TurmoilPolicy.SPOME_POLICY_4;
-  description: string = 'Spend 10 MC to draw 2 planetary cards (Turmoil Spome)';
+  description: string = 'Pay 10 MC to draw 2 planetary cards (Turmoil Spome)';
   isDefault = false;
 
   canAct(player: Player) {

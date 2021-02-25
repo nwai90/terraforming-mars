@@ -7,6 +7,7 @@ import {Player} from '../Player';
 import {PlayerInput} from '../PlayerInput';
 import {Resources} from '../Resources';
 import {SpaceType} from '../SpaceType';
+import {GlobalEventDealer} from './globalEvents/GlobalEventDealer';
 import {BUREAUCRATS_POLICY_1} from './parties/Bureaucrats';
 import {CENTRISTS_POLICY_1, CENTRISTS_POLICY_3} from './parties/Centrists';
 import {EMPOWER_POLICY_1, EMPOWER_POLICY_2} from './parties/Empower';
@@ -21,6 +22,7 @@ import {SCIENTISTS_POLICY_1} from './parties/Scientists';
 import {SPOME_POLICY_2, SPOME_POLICY_3, SPOME_POLICY_4} from './parties/Spome';
 import {TRANSHUMANS_POLICY_2, TRANSHUMANS_POLICY_3} from './parties/Transhumans';
 import {UNITY_POLICY_2, UNITY_POLICY_3} from './parties/Unity';
+import {Turmoil} from './Turmoil';
 import {TurmoilPolicy} from './TurmoilPolicy';
 
 export class TurmoilHandler {
@@ -377,5 +379,15 @@ export class TurmoilHandler {
     if (turmoil !== undefined && turmoil.parties.find((p) => p.name === partyName) === undefined) {
       player.game.defer(new SelectHowToPayDeferred(player, SOCIETY_ADDITIONAL_CARD_COST, {title: 'Society: Select how to pay for card'}));
     }
+  }
+
+  public static randomizeGlobalEventDelegates(turmoil: Turmoil, dealer: GlobalEventDealer): void {
+    const topDelegates = turmoil.parties.map((party) => party.name).reduce((a, i) => a.concat(Array(10).fill(i)), [] as PartyName[]);
+    const bottomDelegates = turmoil.parties.map((party) => party.name).reduce((a, i) => a.concat(Array(10).fill(i)), [] as PartyName[]);
+    
+    dealer.globalEventsDeck.forEach((event) => {
+      event.currentDelegate = topDelegates.splice(Math.floor(Math.random() * topDelegates.length), 1)[0];
+      event.revealedDelegate = bottomDelegates.splice(Math.floor(Math.random() * bottomDelegates.length), 1)[0];
+    });
   }
 }

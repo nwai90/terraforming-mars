@@ -47,7 +47,7 @@ class TranshumansBonus02 implements Bonus {
 class TranshumansPolicy01 implements Policy {
   isDefault = true;
   id = TurmoilPolicy.TRANSHUMANS_DEFAULT_POLICY;
-  description: string = 'Cards with tag requirements cost 1 less tag to play';
+  description: string = 'Gain 1 wild tag for this generation';
 }
 
 class TranshumansPolicy02 implements Policy {

@@ -693,7 +693,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
                                 <input type="checkbox" v-model="silverCubeVariant" id="silverCube-checkbox">
                                 <label for="silverCube-checkbox" class="expansion-button">
                                     <div class="create-game-expansion-icon expansion-icon-silver-cube"></div>
-                                    <span v-i18n>Silver Cube</span>&nbsp;<a href="https://www.notion.so/Variants-32b53050f10a4cfbaea117c34d4f3a03#e13bc69e07e648fb86a6f23b7d3dc85b" class="tooltip" target="_blank">&#9432;</a>
+                                    <span v-i18n>Silver Cube</span>&nbsp;<a href="https://www.notion.so/Variants-32b53050f10a4cfbaea117c34d4f3a03#444114f07aca4d97a98c7597ce21c7db" class="tooltip" target="_blank">&#9432;</a>
                                 </label>
                             </template>
                         </div>
@@ -800,7 +800,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
                             <div v-if="isRandomTurmoilEnabled()">
                                 <input type="checkbox" v-model="randomTurmoil" id="randomTurmoil-checkbox" v-on:change="randomTurmoilToggle()">
                                 <label for="randomTurmoil-checkbox">
-                                    <span v-i18n>Turmoil</span>
+                                    <span v-i18n>Turmoil</span>&nbsp;<a href="https://www.notion.so/Variants-32b53050f10a4cfbaea117c34d4f3a03#db8ed5d103f14fc69ec3248ecddc1617" class="tooltip" target="_blank">&#9432;</a>
                                 </label>
                             </div>
 

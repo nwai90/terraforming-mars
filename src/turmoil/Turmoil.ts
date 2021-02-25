@@ -21,6 +21,7 @@ import {Populists} from './parties/Populists';
 import {Bureaucrats} from './parties/Bureaucrats';
 import {Transhumans} from './parties/Transhumans';
 import {Centrists} from './parties/Centrists';
+import {TurmoilHandler} from './TurmoilHandler';
 
 export type NeutralPlayer = 'NEUTRAL';
 
@@ -75,7 +76,8 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       chairman: PlayerId | 'NEUTRAL',
       dominantPartyName: PartyName,
       globalEventDealer: GlobalEventDealer,
-      societyExpansion: boolean) {
+      societyExpansion: boolean,
+      randomTurmoil: boolean = false) {
       this.rulingParty = this.getPartyByName(rulingPartyName);
       this.chairman = chairman;
       this.dominantParty = this.getPartyByName(dominantPartyName);
@@ -83,7 +85,18 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
 
       // Init parties
       if (societyExpansion) {
-        this.parties = ALL_SOCIETY_PARTIES.map((cf) => new cf.Factory());
+        if (randomTurmoil) {
+          // Randomly choose 6 of 12 parties
+          this.parties = ALL_DEFAULT_PARTIES.concat(ALL_SOCIETY_PARTIES).map((cf) => new cf.Factory())
+            .map((a) => ({sort: Math.random(), value: a}))
+            .sort((a, b) => a.sort - b.sort)
+            .map((a) => a.value)
+            .slice(0, 6);
+          this.rulingParty = this.getPartyByName(this.parties[0].name);
+          this.dominantParty = this.getPartyByName(this.parties[0].name);
+        } else {
+          this.parties = ALL_SOCIETY_PARTIES.map((cf) => new cf.Factory());
+        }
       } else {
         this.parties = ALL_DEFAULT_PARTIES.map((cf) => new cf.Factory());
       }
@@ -91,21 +104,18 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
 
     public static newInstance(game: Game, agendaStyle: AgendaStyle = AgendaStyle.STANDARD): Turmoil {
       const societyExpansion: boolean = game.gameOptions.societyExpansion;
+      const randomTurmoil: boolean = game.gameOptions.randomTurmoil;
       const dealer = GlobalEventDealer.newInstance(game);
 
       // The game begins with Greens / Spome in power and a Neutral chairman
       const rulingParty = societyExpansion ? PartyName.SPOME : PartyName.GREENS;
-      const turmoil = new Turmoil(rulingParty, 'NEUTRAL', rulingParty, dealer, societyExpansion);
+      const turmoil = new Turmoil(rulingParty, 'NEUTRAL', rulingParty, dealer, societyExpansion, randomTurmoil);
 
       game.log('A neutral delegate is the new chairman.');
-      game.log(rulingParty + ' are in power in the first generation.');
+      game.log(turmoil.rulingParty + ' are in power in the first generation.');
 
-      // Init parties
-      if (game.gameOptions.societyExpansion) {
-        turmoil.parties = ALL_SOCIETY_PARTIES.map((cf) => new cf.Factory());
-      } else {
-        turmoil.parties = ALL_DEFAULT_PARTIES.map((cf) => new cf.Factory());
-      }
+      // Society hook: Randomize top and bottom delegate for each event
+      if (randomTurmoil) TurmoilHandler.randomizeGlobalEventDelegates(turmoil, dealer);
 
       game.getPlayers().forEach((player) => {
         // Begin with one delegate in the lobby
@@ -464,9 +474,9 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       return result;
     }
 
-    public static deserialize(d: SerializedTurmoil, societyExpansion: boolean = false): Turmoil {
+    public static deserialize(d: SerializedTurmoil, societyExpansion: boolean = false, randomTurmoil: boolean = false): Turmoil {
       const dealer = GlobalEventDealer.deserialize(d.globalEventDealer);
-      const turmoil = new Turmoil(d.rulingParty, d.chairman || 'NEUTRAL', d.dominantParty, dealer, societyExpansion);
+      const turmoil = new Turmoil(d.rulingParty, d.chairman || 'NEUTRAL', d.dominantParty, dealer, societyExpansion, randomTurmoil);
 
       turmoil.lobby = new Set(d.lobby);
 

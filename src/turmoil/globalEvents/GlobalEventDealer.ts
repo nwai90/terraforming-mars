@@ -222,23 +222,31 @@ export class GlobalEventDealer implements ISerializable<SerializedGlobalEventDea
       if (game.gameOptions.venusNextExtension) events.push(...SOCIETY_VENUS_GLOBAL_EVENTS);
       if (game.gameOptions.coloniesExtension) events.push(...SOCIETY_COLONY_GLOBAL_EVENTS);
     } else {
-      events.push(...POSITIVE_GLOBAL_EVENTS);
-      events.push(...NEGATIVE_GLOBAL_EVENTS);
-
-      if (game.gameOptions.coloniesExtension) events.push(...COLONY_ONLY_NEGATIVE_GLOBAL_EVENTS);
-      if (game.gameOptions.coloniesExtension) events.push(...COLONY_ONLY_POSITIVE_GLOBAL_EVENTS);
-
-      if (game.gameOptions.venusNextExtension) events.push(...VENUS_POSITIVE_GLOBAL_EVENTS);
-
-      if (game.gameOptions.venusNextExtension && game.gameOptions.coloniesExtension) {
-        events.push(...VENUS_COLONY_NEGATIVE_GLOBAL_EVENTS);
-        events.push(...VENUS_COLONY_POSITIVE_GLOBAL_EVENTS);
-      }
+      this.addOfficialGlobalEventsToDeck(game, events);
     }
 
+    if (game.gameOptions.randomTurmoil) this.addOfficialGlobalEventsToDeck(game, events);
     globalEventsDeck = this.shuffle(events.map((cf) => new cf.Factory()));
+
+    if (game.gameOptions.randomTurmoil) globalEventsDeck = globalEventsDeck.slice(0, 36);
+
     return new GlobalEventDealer(globalEventsDeck, []);
   };
+
+  private static addOfficialGlobalEventsToDeck(game: Game, events: IGlobalEventFactory<IGlobalEvent>[]): void {
+    events.push(...POSITIVE_GLOBAL_EVENTS);
+    events.push(...NEGATIVE_GLOBAL_EVENTS);
+
+    if (game.gameOptions.coloniesExtension) events.push(...COLONY_ONLY_NEGATIVE_GLOBAL_EVENTS);
+    if (game.gameOptions.coloniesExtension) events.push(...COLONY_ONLY_POSITIVE_GLOBAL_EVENTS);
+
+    if (game.gameOptions.venusNextExtension) events.push(...VENUS_POSITIVE_GLOBAL_EVENTS);
+
+    if (game.gameOptions.venusNextExtension && game.gameOptions.coloniesExtension) {
+      events.push(...VENUS_COLONY_NEGATIVE_GLOBAL_EVENTS);
+      events.push(...VENUS_COLONY_POSITIVE_GLOBAL_EVENTS);
+    }
+  }
 
   private static shuffle(cards: Array<IGlobalEvent>): Array<IGlobalEvent> {
     const deck: Array<IGlobalEvent> = [];

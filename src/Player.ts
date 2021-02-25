@@ -703,8 +703,8 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     // PoliticalAgendas Transhumans P1 hook
-    if (PartyHooks.shouldApplyPolicy(this.game, PartyName.TRANSHUMANS, TurmoilPolicy.TRANSHUMANS_DEFAULT_POLICY)) {
-      if (tag === Tags.WILDCARD) tagCount += 1;
+    if (tag === Tags.WILDCARD && PartyHooks.shouldApplyPolicy(this.game, PartyName.TRANSHUMANS, TurmoilPolicy.TRANSHUMANS_DEFAULT_POLICY)) {
+      tagCount += 1;
     }
 
     if (includeTagSubstitutions) {

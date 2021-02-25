@@ -238,7 +238,7 @@ const AGENDA_HTML: Map<BonusId | PolicyId, string> = new Map();
     `<div class="resource money party-resource">1</div> / <div class="resource card card-small card-with-border"><div class="card-tag-req"></div></div>`);
   AGENDA_HTML.set('tb02',
     `<div class="resource money party-resource">1</div> / <div class="resource-tag tag-none party-resource-tag"></div>`);
-  AGENDA_HTML.set('tp01', `<div class="tags-requisite"><div class="resource-tag tag-wild party-resource-tag"></div></div>`);
+  AGENDA_HTML.set('tp01', `<div class="policy-top-margin"><div class="resource-tag tag-wild party-resource-tag"></div></div>`);
   AGENDA_HTML.set('tp02',
     `<div class="policy-top-margin">
     <span class="money resource">10</span>
