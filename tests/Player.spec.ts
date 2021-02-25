@@ -186,6 +186,8 @@ describe('Player', function() {
       turmoilPolicyActionUsed: false,
       politicalAgendasActionUsedCount: 0,
       hasTurmoilScienceTagBonus: false,
+      hasBureaucratsColonyTradePenalty: false,
+      hasTranshumansColonyTradeOffset: false,
       victoryPointsBreakdown: {
         terraformRating: 1,
         milestones: 2,

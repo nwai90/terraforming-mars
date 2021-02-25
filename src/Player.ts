@@ -136,19 +136,22 @@ export class Player implements ISerializable<SerializedPlayer> {
   public colonyTradeOffset: number = 0;
   public colonyTradeDiscount: number = 0;
   public colonyVictoryPoints: number = 0;
+  // PoliticalAgendas Bureaucrats P2
+  public hasBureaucratsColonyTradePenalty: boolean = false;
+  // PoliticalAgendas Transhumans P4
+  public hasTranshumansColonyTradeOffset: boolean = false;
 
   // Turmoil
   public turmoilPolicyActionUsed: boolean = false;
   public politicalAgendasActionUsedCount: number = 0;
-
   public victoryPointsBreakdown = new VictoryPointsBreakdown();
   public oceanBonus: number = constants.OCEAN_BONUS;
+  // PoliticalAgendas Scientists P4
+  public hasTurmoilScienceTagBonus: boolean = false;
 
   // Custom cards
   // Leavitt Station.
   public scienceTagCount: number = 0;
-  // PoliticalAgendas Scientists P4
-  public hasTurmoilScienceTagBonus: boolean = false;
   // Ecoline
   public plantsNeededForGreenery: number = 8;
   // Lawsuit
@@ -1245,15 +1248,21 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   private getMcTradeCost(): number {
-    return MC_TRADE_COST - this.colonyTradeDiscount;
+    let cost = MC_TRADE_COST - this.colonyTradeDiscount;
+    if (this.hasBureaucratsColonyTradePenalty) cost += 1;
+    return cost;
   }
 
   private getEnergyTradeCost(): number {
-    return ENERGY_TRADE_COST - this.colonyTradeDiscount;
+    let cost = ENERGY_TRADE_COST - this.colonyTradeDiscount;
+    if (this.hasBureaucratsColonyTradePenalty) cost += 1;
+    return cost;
   }
 
   private getTitaniumTradeCost(): number {
-    return TITANIUM_TRADE_COST - this.colonyTradeDiscount;
+    let cost = TITANIUM_TRADE_COST - this.colonyTradeDiscount;
+    if (this.hasBureaucratsColonyTradePenalty) cost += 1;
+    return cost;
   }
 
   private playPreludeCard(): PlayerInput {
@@ -2126,6 +2135,8 @@ export class Player implements ISerializable<SerializedPlayer> {
       colonyTradeOffset: this.colonyTradeOffset,
       colonyTradeDiscount: this.colonyTradeDiscount,
       colonyVictoryPoints: this.colonyVictoryPoints,
+      hasBureaucratsColonyTradePenalty: this.hasBureaucratsColonyTradePenalty,
+      hasTranshumansColonyTradeOffset: this.hasTranshumansColonyTradeOffset,
       // Turmoil
       turmoilPolicyActionUsed: this.turmoilPolicyActionUsed,
       politicalAgendasActionUsedCount: this.politicalAgendasActionUsedCount,
@@ -2175,6 +2186,9 @@ export class Player implements ISerializable<SerializedPlayer> {
     player.energyProduction = d.energyProduction;
     player.fleetSize = d.fleetSize;
     player.hasIncreasedTerraformRatingThisGeneration = d.hasIncreasedTerraformRatingThisGeneration;
+    player.hasTurmoilScienceTagBonus = d.hasTurmoilScienceTagBonus;
+    player.hasBureaucratsColonyTradePenalty = d.hasBureaucratsColonyTradePenalty;
+    player.hasTranshumansColonyTradeOffset = d.hasTranshumansColonyTradeOffset;
     player.heat = d.heat;
     player.heatProduction = d.heatProduction;
     player.heatProductionStepsIncreasedThisGeneration = d.heatProductionStepsIncreasedThisGeneration;

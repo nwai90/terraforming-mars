@@ -90,7 +90,9 @@ export abstract class Colony implements SerializedColony {
     }
 
     public trade(player: Player, bonusTradeOffset: number = 0, usesTradeFleet: boolean = true, decreaseTrackAfterTrade: boolean = true): void {
-      const tradeOffset = player.colonyTradeOffset + bonusTradeOffset;
+      let tradeOffset = player.colonyTradeOffset + bonusTradeOffset;
+      if (player.hasTranshumansColonyTradeOffset) tradeOffset += 1;
+
       const maxTrackPosition = Math.min(this.trackPosition + tradeOffset, MAX_COLONY_TRACK_POSITION);
       const steps = maxTrackPosition - this.trackPosition;
 

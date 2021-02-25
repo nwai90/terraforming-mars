@@ -17,8 +17,6 @@ import {AgendaStyle, PoliticalAgendasData, PoliticalAgendas} from './PoliticalAg
 import {CardName} from '../CardName';
 import {Spome} from './parties/Spome';
 import {Empower} from './parties/Empower';
-import {PartyHooks} from './parties/PartyHooks';
-import {TurmoilPolicy} from './TurmoilPolicy';
 import {Populists} from './parties/Populists';
 import {Bureaucrats} from './parties/Bureaucrats';
 import {Transhumans} from './parties/Transhumans';
@@ -249,13 +247,11 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       }
 
       // 3 - New Government
-      const colonyTradePenaltyActive = PartyHooks.shouldApplyPolicy(game, PartyName.BUREAUCRATS, TurmoilPolicy.BUREAUCRATS_POLICY_2);
-      const colonyTradeOffsetBonusActive = PartyHooks.shouldApplyPolicy(game, PartyName.TRANSHUMANS, TurmoilPolicy.TRANSHUMANS_POLICY_4);
       this.rulingParty = this.dominantParty;
 
       // 3.a - Ruling Policy change
       if (this.rulingParty) {
-        this.setRulingParty(game, colonyTradePenaltyActive, colonyTradeOffsetBonusActive);
+        this.setRulingParty(game);
       }
 
       // 3.b - New dominant party
@@ -297,13 +293,13 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
     }
 
     // Ruling Party changes
-    public setRulingParty(game: Game, colonyTradePenaltyActive: boolean = false, colonyTradeOffsetBonusActive: boolean = false): void {
+    public setRulingParty(game: Game): void {
       if (this.rulingParty !== undefined) {
         // Cleanup previous party effects
         game.getPlayers().forEach((player) => {
           player.hasTurmoilScienceTagBonus = false;
-          if (colonyTradePenaltyActive) player.colonyTradeDiscount += 1;
-          if (colonyTradeOffsetBonusActive) player.colonyTradeOffset -= 1;
+          player.hasBureaucratsColonyTradePenalty = false;
+          player.hasTranshumansColonyTradeOffset = false;
         });
 
         // Change the chairman

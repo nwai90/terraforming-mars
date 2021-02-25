@@ -76,7 +76,7 @@ class BureaucratsPolicy02 implements Policy {
 
   apply(game: Game) {
     game.getPlayers().forEach((player) => {
-      player.colonyTradeDiscount -= 1;
+      player.hasBureaucratsColonyTradePenalty = true;
     });
   }
 }

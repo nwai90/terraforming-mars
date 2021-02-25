@@ -100,7 +100,7 @@ class TranshumansPolicy04 implements Policy {
 
   apply(game: Game) {
     game.getPlayers().forEach((player) => {
-      player.colonyTradeOffset += 1;
+      player.hasTranshumansColonyTradeOffset = true;
     });
   }
 }

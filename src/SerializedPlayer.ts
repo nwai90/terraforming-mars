@@ -29,6 +29,8 @@ export interface SerializedPlayer {
     handicap: number;
     hasIncreasedTerraformRatingThisGeneration: boolean;
     hasTurmoilScienceTagBonus: boolean;
+    hasBureaucratsColonyTradePenalty: boolean;
+    hasTranshumansColonyTradeOffset: boolean;
     heat: number;
     heatProduction: number;
     id: string;
