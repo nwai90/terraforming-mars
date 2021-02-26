@@ -702,20 +702,9 @@ export class Player implements ISerializable<SerializedPlayer> {
       tagCount += this.scienceTagCount;
     }
 
-    // PoliticalAgendas Scientists P4 hook
-    if (tag === Tags.SCIENCE && this.hasTurmoilScienceTagBonus) {
-      tagCount += 1;
-    }
-
     // PoliticalAgendas Transhumans P1 hook
     if (PartyHooks.shouldApplyPolicy(this.game, PartyName.TRANSHUMANS, TurmoilPolicy.TRANSHUMANS_DEFAULT_POLICY)) {
-      if (tag === Tags.VENUS) {
-        if (this.game.gameOptions.venusNextExtension) tagCount += 1;
-      } else if (tag === Tags.MOON) {
-        if (this.game.gameOptions.moonExpansion) tagCount += 1;
-      } else {
-        tagCount += 1;
-      }
+      if (tag === Tags.WILDCARD) tagCount += 1;
     }
 
     if (includeTagSubstitutions) {
