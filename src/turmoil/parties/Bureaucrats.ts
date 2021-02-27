@@ -18,7 +18,7 @@ export class Bureaucrats extends Party implements IParty {
   name = PartyName.BUREAUCRATS;
   description = 'Advocates a rigorous system of checks and balances.';
   bonuses = [BUREAUCRATS_BONUS_1, BUREAUCRATS_BONUS_2];
-  policies = [BUREAUCRATS_POLICY_1, BUREAUCRATS_POLICY_2, BUREAUCRATS_POLICY_3, BUREAUCRATS_POLICY_4];
+  policies = [BUREAUCRATS_DEFAULT_POLICY, BUREAUCRATS_POLICY_2, BUREAUCRATS_POLICY_3, BUREAUCRATS_POLICY_4];
 }
 
 class BureaucratsBonus01 implements Bonus {
@@ -110,7 +110,7 @@ class BureaucratsPolicy04 implements Policy {
 
 export const BUREAUCRATS_BONUS_1 = new BureaucratsBonus01();
 export const BUREAUCRATS_BONUS_2 = new BureaucratsBonus02();
-export const BUREAUCRATS_POLICY_1 = new BureaucratsPolicy01();
+export const BUREAUCRATS_DEFAULT_POLICY = new BureaucratsPolicy01();
 export const BUREAUCRATS_POLICY_2 = new BureaucratsPolicy02();
 export const BUREAUCRATS_POLICY_3 = new BureaucratsPolicy03();
 export const BUREAUCRATS_POLICY_4 = new BureaucratsPolicy04();

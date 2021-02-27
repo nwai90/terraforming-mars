@@ -3,7 +3,7 @@ import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {TestingUtils, setCustomGameOptions, TestPlayers} from '../../TestingUtils';
-import {Scientists, SCIENTISTS_BONUS_1, SCIENTISTS_BONUS_2, SCIENTISTS_POLICY_1, SCIENTISTS_POLICY_4} from '../../../src/turmoil/parties/Scientists';
+import {Scientists, SCIENTISTS_BONUS_1, SCIENTISTS_BONUS_2, SCIENTISTS_DEFAULT_POLICY, SCIENTISTS_POLICY_4} from '../../../src/turmoil/parties/Scientists';
 import {SearchForLife} from '../../../src/cards/base/SearchForLife';
 import {Research} from '../../../src/cards/base/Research';
 import {GeneRepair} from '../../../src/cards/base/GeneRepair';
@@ -40,7 +40,7 @@ describe('Scientists', function() {
   it('Ruling policy 1: Pay 10 MC to draw 3 cards', function() {
     TestingUtils.setRulingPartyAndRulingPolicy(game, turmoil, scientists, scientists.policies[0].id);
 
-    const scientistsPolicy = SCIENTISTS_POLICY_1;
+    const scientistsPolicy = SCIENTISTS_DEFAULT_POLICY;
     player.megaCredits = 10;
     expect(scientistsPolicy.canAct(player)).to.be.true;
 

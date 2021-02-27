@@ -15,7 +15,7 @@ export class Spome extends Party implements IParty {
   name = PartyName.SPOME;
   description = 'Believes that space is limitless and wants to explore every direction.';
   bonuses = [SPOME_BONUS_1, SPOME_BONUS_2];
-  policies = [SPOME_POLICY_1, SPOME_POLICY_2, SPOME_POLICY_3, SPOME_POLICY_4];
+  policies = [SPOME_DEFAULT_POLICY, SPOME_POLICY_2, SPOME_POLICY_3, SPOME_POLICY_4];
 }
 
 class SpomeBonus01 implements Bonus {
@@ -115,7 +115,7 @@ class SpomePolicy04 implements Policy {
 
 export const SPOME_BONUS_1 = new SpomeBonus01();
 export const SPOME_BONUS_2 = new SpomeBonus02();
-export const SPOME_POLICY_1 = new SpomePolicy01();
+export const SPOME_DEFAULT_POLICY = new SpomePolicy01();
 export const SPOME_POLICY_2 = new SpomePolicy02();
 export const SPOME_POLICY_3 = new SpomePolicy03();
 export const SPOME_POLICY_4 = new SpomePolicy04();

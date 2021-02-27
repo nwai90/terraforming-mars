@@ -8,17 +8,17 @@ import {PlayerInput} from '../PlayerInput';
 import {Resources} from '../Resources';
 import {SpaceType} from '../SpaceType';
 import {GlobalEventDealer} from './globalEvents/GlobalEventDealer';
-import {BUREAUCRATS_POLICY_1} from './parties/Bureaucrats';
-import {CENTRISTS_POLICY_1, CENTRISTS_POLICY_3} from './parties/Centrists';
-import {EMPOWER_POLICY_1, EMPOWER_POLICY_2} from './parties/Empower';
+import {BUREAUCRATS_DEFAULT_POLICY} from './parties/Bureaucrats';
+import {CENTRISTS_DEFAULT_POLICY, CENTRISTS_POLICY_3} from './parties/Centrists';
+import {EMPOWER_DEFAULT_POLICY, EMPOWER_POLICY_2} from './parties/Empower';
 import {GREENS_POLICY_2, GREENS_POLICY_3, GREENS_POLICY_4} from './parties/Greens';
-import {KELVINISTS_POLICY_1, KELVINISTS_POLICY_3, KELVINISTS_POLICY_4} from './parties/Kelvinists';
+import {KELVINISTS_DEFAULT_POLICY, KELVINISTS_POLICY_3, KELVINISTS_POLICY_4} from './parties/Kelvinists';
 import {MARS_FIRST_POLICY_2, MARS_FIRST_POLICY_4} from './parties/MarsFirst';
 import {PartyHooks} from './parties/PartyHooks';
 import {PartyName} from './parties/PartyName';
 import {POPULISTS_POLICY_2, POPULISTS_POLICY_3, POPULISTS_POLICY_4} from './parties/Populists';
 import {REDS_POLICY_2, REDS_POLICY_3} from './parties/Reds';
-import {SCIENTISTS_POLICY_1} from './parties/Scientists';
+import {SCIENTISTS_DEFAULT_POLICY} from './parties/Scientists';
 import {SPOME_POLICY_2, SPOME_POLICY_3, SPOME_POLICY_4} from './parties/Spome';
 import {TRANSHUMANS_POLICY_2, TRANSHUMANS_POLICY_3} from './parties/Transhumans';
 import {UNITY_POLICY_2, UNITY_POLICY_3} from './parties/Unity';
@@ -31,7 +31,7 @@ export class TurmoilHandler {
   public static addPlayerAction(player: Player, options: PlayerInput[]): void {
     // Turmoil Scientists action
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.SCIENTISTS)) {
-      const scientistsPolicy = SCIENTISTS_POLICY_1;
+      const scientistsPolicy = SCIENTISTS_DEFAULT_POLICY;
 
       if (scientistsPolicy.canAct(player)) {
         options.push(
@@ -46,7 +46,7 @@ export class TurmoilHandler {
 
     // Turmoil Kelvinists action
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.KELVINISTS)) {
-      const kelvinistsPolicy = KELVINISTS_POLICY_1;
+      const kelvinistsPolicy = KELVINISTS_DEFAULT_POLICY;
 
       if (kelvinistsPolicy.canAct(player)) {
         options.push(
@@ -181,7 +181,7 @@ export class TurmoilHandler {
 
     // Turmoil Empower action
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.EMPOWER, TurmoilPolicy.EMPOWER_DEFAULT_POLICY)) {
-      const empowerPolicy = EMPOWER_POLICY_1;
+      const empowerPolicy = EMPOWER_DEFAULT_POLICY;
 
       if (empowerPolicy.canAct(player)) {
         options.push(
@@ -196,7 +196,7 @@ export class TurmoilHandler {
 
     // Turmoil Bureaucrats action
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.BUREAUCRATS, TurmoilPolicy.BUREAUCRATS_DEFAULT_POLICY)) {
-      const bureaucratsPolicy = BUREAUCRATS_POLICY_1;
+      const bureaucratsPolicy = BUREAUCRATS_DEFAULT_POLICY;
 
       if (bureaucratsPolicy.canAct(player)) {
         options.push(
@@ -256,7 +256,7 @@ export class TurmoilHandler {
 
     // Turmoil Centrists action
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.CENTRISTS, TurmoilPolicy.CENTRISTS_DEFAULT_POLICY)) {
-      const centristsPolicy = CENTRISTS_POLICY_1;
+      const centristsPolicy = CENTRISTS_DEFAULT_POLICY;
 
       if (centristsPolicy.canAct(player)) {
         options.push(

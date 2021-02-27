@@ -15,7 +15,7 @@ export class Transhumans extends Party implements IParty {
   name = PartyName.TRANSHUMANS;
   description = 'Seeks to foster growth by pushing the boundaries of human limits.';
   bonuses = [TRANSHUMANS_BONUS_1, TRANSHUMANS_BONUS_2];
-  policies = [TRANSHUMANS_POLICY_1, TRANSHUMANS_POLICY_2, TRANSHUMANS_POLICY_3, TRANSHUMANS_POLICY_4];
+  policies = [TRANSHUMANS_DEFAULT_POLICY, TRANSHUMANS_POLICY_2, TRANSHUMANS_POLICY_3, TRANSHUMANS_POLICY_4];
 }
 
 class TranshumansBonus01 implements Bonus {
@@ -107,7 +107,7 @@ class TranshumansPolicy04 implements Policy {
 
 export const TRANSHUMANS_BONUS_1 = new TranshumansBonus01();
 export const TRANSHUMANS_BONUS_2 = new TranshumansBonus02();
-export const TRANSHUMANS_POLICY_1 = new TranshumansPolicy01();
+export const TRANSHUMANS_DEFAULT_POLICY = new TranshumansPolicy01();
 export const TRANSHUMANS_POLICY_2 = new TranshumansPolicy02();
 export const TRANSHUMANS_POLICY_3 = new TranshumansPolicy03();
 export const TRANSHUMANS_POLICY_4 = new TranshumansPolicy04();

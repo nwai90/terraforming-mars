@@ -22,7 +22,7 @@ export class Unity extends Party implements IParty {
   name = PartyName.UNITY;
   description: string = 'Wants to see humanity prosper in the whole solar system.';
   bonuses = [UNITY_BONUS_1, UNITY_BONUS_2];
-  policies = [UNITY_POLICY_1, UNITY_POLICY_2, UNITY_POLICY_3, UNITY_POLICY_4];
+  policies = [UNITY_DEFAULT_POLICY, UNITY_POLICY_2, UNITY_POLICY_3, UNITY_POLICY_4];
 }
 
 class UnityBonus01 implements Bonus {
@@ -158,7 +158,7 @@ class UnityPolicy04 implements Policy {
 
 export const UNITY_BONUS_1 = new UnityBonus01();
 export const UNITY_BONUS_2 = new UnityBonus02();
-export const UNITY_POLICY_1 = new UnityPolicy01();
+export const UNITY_DEFAULT_POLICY = new UnityPolicy01();
 export const UNITY_POLICY_2 = new UnityPolicy02();
 export const UNITY_POLICY_3 = new UnityPolicy03();
 export const UNITY_POLICY_4 = new UnityPolicy04();

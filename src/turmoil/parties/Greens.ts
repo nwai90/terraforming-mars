@@ -26,7 +26,7 @@ export class Greens extends Party implements IParty {
   name = PartyName.GREENS;
   description = 'Wants to see a new Earth as soon as possible.';
   bonuses = [GREENS_BONUS_1, GREENS_BONUS_2];
-  policies = [GREENS_POLICY_1, GREENS_POLICY_2, GREENS_POLICY_3, GREENS_POLICY_4];
+  policies = [GREENS_DEFAULT_POLICY, GREENS_POLICY_2, GREENS_POLICY_3, GREENS_POLICY_4];
 }
 
 class GreensBonus01 implements Bonus {
@@ -157,7 +157,7 @@ class GreensPolicy04 implements Policy {
 
 export const GREENS_BONUS_1 = new GreensBonus01();
 export const GREENS_BONUS_2 = new GreensBonus02();
-export const GREENS_POLICY_1 = new GreensPolicy01();
+export const GREENS_DEFAULT_POLICY = new GreensPolicy01();
 export const GREENS_POLICY_2 = new GreensPolicy02();
 export const GREENS_POLICY_3 = new GreensPolicy03();
 export const GREENS_POLICY_4 = new GreensPolicy04();

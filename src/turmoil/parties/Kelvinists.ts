@@ -13,7 +13,7 @@ export class Kelvinists extends Party implements IParty {
   name = PartyName.KELVINISTS;
   description = 'Pushes for rapid terraforming, usually employing a heat-first strategy.';
   bonuses = [KELVINISTS_BONUS_1, KELVINISTS_BONUS_2];
-  policies = [KELVINISTS_POLICY_1, KELVINISTS_POLICY_2, KELVINISTS_POLICY_3, KELVINISTS_POLICY_4];
+  policies = [KELVINISTS_DEFAULT_POLICY, KELVINISTS_POLICY_2, KELVINISTS_POLICY_3, KELVINISTS_POLICY_4];
 }
 
 class KelvinistsBonus01 implements Bonus {
@@ -109,7 +109,7 @@ class KelvinistsPolicy04 implements Policy {
 
 export const KELVINISTS_BONUS_1 = new KelvinistsBonus01();
 export const KELVINISTS_BONUS_2 = new KelvinistsBonus02();
-export const KELVINISTS_POLICY_1 = new KelvinistsPolicy01();
+export const KELVINISTS_DEFAULT_POLICY = new KelvinistsPolicy01();
 export const KELVINISTS_POLICY_2 = new KelvinistsPolicy02();
 export const KELVINISTS_POLICY_3 = new KelvinistsPolicy03();
 export const KELVINISTS_POLICY_4 = new KelvinistsPolicy04();

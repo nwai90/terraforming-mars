@@ -14,7 +14,7 @@ export class Scientists extends Party implements IParty {
   name = PartyName.SCIENTISTS;
   description: string = 'Tech is the door to the future, and Scientists will do anything to open it.';
   bonuses = [SCIENTISTS_BONUS_1, SCIENTISTS_BONUS_2];
-  policies = [SCIENTISTS_POLICY_1, SCIENTISTS_POLICY_2, SCIENTISTS_POLICY_3, SCIENTISTS_POLICY_4];
+  policies = [SCIENTISTS_DEFAULT_POLICY, SCIENTISTS_POLICY_2, SCIENTISTS_POLICY_3, SCIENTISTS_POLICY_4];
 }
 
 class ScientistsBonus01 implements Bonus {
@@ -97,7 +97,7 @@ class ScientistsPolicy04 implements Policy {
 
 export const SCIENTISTS_BONUS_1 = new ScientistsBonus01();
 export const SCIENTISTS_BONUS_2 = new ScientistsBonus02();
-export const SCIENTISTS_POLICY_1 = new ScientistsPolicy01();
+export const SCIENTISTS_DEFAULT_POLICY = new ScientistsPolicy01();
 export const SCIENTISTS_POLICY_2 = new ScientistsPolicy02();
 export const SCIENTISTS_POLICY_3 = new ScientistsPolicy03();
 export const SCIENTISTS_POLICY_4 = new ScientistsPolicy04();

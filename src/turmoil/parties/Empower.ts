@@ -15,7 +15,7 @@ export class Empower extends Party implements IParty {
   name = PartyName.EMPOWER;
   description = 'Champions efficient energy utilization for sustainable growth.';
   bonuses = [EMPOWER_BONUS_1, EMPOWER_BONUS_2];
-  policies = [EMPOWER_POLICY_1, EMPOWER_POLICY_2, EMPOWER_POLICY_3, EMPOWER_POLICY_4];
+  policies = [EMPOWER_DEFAULT_POLICY, EMPOWER_POLICY_2, EMPOWER_POLICY_3, EMPOWER_POLICY_4];
 }
 
 class EmpowerBonus01 implements Bonus {
@@ -103,7 +103,7 @@ class EmpowerPolicy04 implements Policy {
 
 export const EMPOWER_BONUS_1 = new EmpowerBonus01();
 export const EMPOWER_BONUS_2 = new EmpowerBonus02();
-export const EMPOWER_POLICY_1 = new EmpowerPolicy01();
+export const EMPOWER_DEFAULT_POLICY = new EmpowerPolicy01();
 export const EMPOWER_POLICY_2 = new EmpowerPolicy02();
 export const EMPOWER_POLICY_3 = new EmpowerPolicy03();
 export const EMPOWER_POLICY_4 = new EmpowerPolicy04();

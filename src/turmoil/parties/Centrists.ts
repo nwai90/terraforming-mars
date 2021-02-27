@@ -17,7 +17,7 @@ export class Centrists extends Party implements IParty {
   name = PartyName.CENTRISTS;
   description = 'Strives for equality and teamwork to achieve a greater good.';
   bonuses = [CENTRISTS_BONUS_1, CENTRISTS_BONUS_2];
-  policies = [CENTRISTS_POLICY_1, CENTRISTS_POLICY_2, CENTRISTS_POLICY_3, CENTRISTS_POLICY_4];
+  policies = [CENTRISTS_DEFAULT_POLICY, CENTRISTS_POLICY_2, CENTRISTS_POLICY_3, CENTRISTS_POLICY_4];
 }
 
 class CentristsBonus01 implements Bonus {
@@ -114,7 +114,7 @@ class CentristsPolicy04 implements Policy {
 
 export const CENTRISTS_BONUS_1 = new CentristsBonus01();
 export const CENTRISTS_BONUS_2 = new CentristsBonus02();
-export const CENTRISTS_POLICY_1 = new CentristsPolicy01();
+export const CENTRISTS_DEFAULT_POLICY = new CentristsPolicy01();
 export const CENTRISTS_POLICY_2 = new CentristsPolicy02();
 export const CENTRISTS_POLICY_3 = new CentristsPolicy03();
 export const CENTRISTS_POLICY_4 = new CentristsPolicy04();

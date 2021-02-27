@@ -19,7 +19,7 @@ export class MarsFirst extends Party implements IParty {
   name = PartyName.MARS;
   description = 'Focused on Martian development and independence.';
   bonuses = [MARS_FIRST_BONUS_1, MARS_FIRST_BONUS_2];
-  policies = [MARS_FIRST_POLICY_1, MARS_FIRST_POLICY_2, MARS_FIRST_POLICY_3, MARS_FIRST_POLICY_4];
+  policies = [MARS_FIRST_DEFAULT_POLICY, MARS_FIRST_POLICY_2, MARS_FIRST_POLICY_3, MARS_FIRST_POLICY_4];
 }
 
 // TODO(nwai90): Mars First bonus IDs start with 'm' and policies start with 'mp'.
@@ -111,7 +111,7 @@ class MarsFirstPolicy04 implements Policy {
 
 export const MARS_FIRST_BONUS_1 = new MarsFirstBonus01();
 export const MARS_FIRST_BONUS_2 = new MarsFirstBonus02();
-export const MARS_FIRST_POLICY_1 = new MarsFirstPolicy01();
+export const MARS_FIRST_DEFAULT_POLICY = new MarsFirstPolicy01();
 export const MARS_FIRST_POLICY_2 = new MarsFirstPolicy02();
 export const MARS_FIRST_POLICY_3 = new MarsFirstPolicy03();
 export const MARS_FIRST_POLICY_4 = new MarsFirstPolicy04();

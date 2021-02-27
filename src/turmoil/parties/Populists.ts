@@ -13,7 +13,7 @@ export class Populists extends Party implements IParty {
   name = PartyName.POPULISTS;
   description = 'Wishes to curb excessive capitalism and corporate greed.';
   bonuses = [POPULISTS_BONUS_1, POPULISTS_BONUS_2];
-  policies = [POPULISTS_POLICY_1, POPULISTS_POLICY_2, POPULISTS_POLICY_3, POPULISTS_POLICY_4];
+  policies = [POPULISTS_DEFAULT_POLICY, POPULISTS_POLICY_2, POPULISTS_POLICY_3, POPULISTS_POLICY_4];
 }
 
 class PopulistsBonus01 implements Bonus {
@@ -91,7 +91,7 @@ class PopulistsPolicy04 implements Policy {
 
 export const POPULISTS_BONUS_1 = new PopulistsBonus01();
 export const POPULISTS_BONUS_2 = new PopulistsBonus02();
-export const POPULISTS_POLICY_1 = new PopulistsPolicy01();
+export const POPULISTS_DEFAULT_POLICY = new PopulistsPolicy01();
 export const POPULISTS_POLICY_2 = new PopulistsPolicy02();
 export const POPULISTS_POLICY_3 = new PopulistsPolicy03();
 export const POPULISTS_POLICY_4 = new PopulistsPolicy04();

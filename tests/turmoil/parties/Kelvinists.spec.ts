@@ -4,7 +4,7 @@ import {Game} from '../../../src/Game';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {ISpace} from '../../../src/boards/ISpace';
 import {TestingUtils, setCustomGameOptions, TestPlayers} from '../../TestingUtils';
-import {Kelvinists, KELVINISTS_BONUS_1, KELVINISTS_BONUS_2, KELVINISTS_POLICY_1, KELVINISTS_POLICY_3} from '../../../src/turmoil/parties/Kelvinists';
+import {Kelvinists, KELVINISTS_BONUS_1, KELVINISTS_BONUS_2, KELVINISTS_DEFAULT_POLICY, KELVINISTS_POLICY_3} from '../../../src/turmoil/parties/Kelvinists';
 import {TileType} from '../../../src/TileType';
 import {Resources} from '../../../src/Resources';
 
@@ -40,7 +40,7 @@ describe('Kelvinists', function() {
   it('Ruling policy 1: Pay 10 MC to increase your Energy and Heat production 1 step', function() {
     TestingUtils.setRulingPartyAndRulingPolicy(game, turmoil, kelvinists, kelvinists.policies[0].id);
 
-    const kelvinistsPolicy = KELVINISTS_POLICY_1;
+    const kelvinistsPolicy = KELVINISTS_DEFAULT_POLICY;
     kelvinistsPolicy.action(player);
 
     game.deferredActions.runNext();
