@@ -31,257 +31,99 @@ export class TurmoilHandler {
   public static addPlayerAction(player: Player, options: PlayerInput[]): void {
     // Turmoil Scientists action
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.SCIENTISTS)) {
-      const scientistsPolicy = SCIENTISTS_DEFAULT_POLICY;
-
-      if (scientistsPolicy.canAct(player)) {
-        options.push(
-          new SelectOption(
-            scientistsPolicy.description,
-            'Pay',
-            () => scientistsPolicy.action(player),
-          ),
-        );
-      }
+      this.addPartyActionToActionsList(player, SCIENTISTS_DEFAULT_POLICY, options);
     }
 
     // Turmoil Kelvinists action
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.KELVINISTS)) {
-      const kelvinistsPolicy = KELVINISTS_DEFAULT_POLICY;
-
-      if (kelvinistsPolicy.canAct(player)) {
-        options.push(
-          new SelectOption(
-            kelvinistsPolicy.description,
-            'Pay',
-            () => kelvinistsPolicy.action(player),
-          ),
-        );
-      }
+      this.addPartyActionToActionsList(player, KELVINISTS_DEFAULT_POLICY, options);
     }
 
     // Turmoil Kelvinists action
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.KELVINISTS, 'kp03')) {
-      const kelvinistsPolicy = KELVINISTS_POLICY_3;
-
-      if (kelvinistsPolicy.canAct(player)) {
-        options.push(
-          new SelectOption(
-            kelvinistsPolicy.description,
-            'Pay',
-            () => kelvinistsPolicy.action(player),
-          ),
-        );
-      }
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.KELVINISTS, TurmoilPolicy.KELVINISTS_POLICY_3)) {
+      this.addPartyActionToActionsList(player, KELVINISTS_POLICY_3, options);
     }
 
     // Turmoil Greens action
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.GREENS, TurmoilPolicy.GREENS_POLICY_4)) {
-      const greensPolicy = GREENS_POLICY_4;
-
-      if (greensPolicy.canAct(player)) {
-        options.push(
-          new SelectOption(
-            greensPolicy.description,
-            'Pay',
-            () => greensPolicy.action(player),
-          ),
-        );
-      }
+      this.addPartyActionToActionsList(player, GREENS_POLICY_4, options);
     }
 
     // Turmoil Mars First action
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.MARS, TurmoilPolicy.MARS_FIRST_POLICY_4)) {
-      const marsFirstPolicy = MARS_FIRST_POLICY_4;
-
-      if (marsFirstPolicy.canAct(player)) {
-        options.push(
-          new SelectOption(
-            marsFirstPolicy.description,
-            'Pay',
-            () => marsFirstPolicy.action(player),
-          ),
-        );
-      }
+      this.addPartyActionToActionsList(player, MARS_FIRST_POLICY_4, options);
     }
 
     // Turmoil Unity action
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.UNITY, TurmoilPolicy.UNITY_POLICY_2)) {
-      const unityPolicy = UNITY_POLICY_2;
-
-      if (unityPolicy.canAct(player)) {
-        options.push(
-          new SelectOption(
-            unityPolicy.description,
-            'Pay',
-            () => unityPolicy.action(player),
-          ),
-        );
-      }
+      this.addPartyActionToActionsList(player, UNITY_POLICY_2, options);
     }
 
     // Turmoil Unity action
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.UNITY, TurmoilPolicy.UNITY_POLICY_3)) {
-      const unityPolicy = UNITY_POLICY_3;
-
-      if (unityPolicy.canAct(player)) {
-        options.push(
-          new SelectOption(
-            unityPolicy.description,
-            'Pay',
-            () => unityPolicy.action(player),
-          ),
-        );
-      }
+      this.addPartyActionToActionsList(player, UNITY_POLICY_3, options);
     }
 
     // Turmoil Reds action
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS, TurmoilPolicy.REDS_POLICY_3)) {
-      const redsPolicy = REDS_POLICY_3;
-
-      if (redsPolicy.canAct(player)) {
-        options.push(
-          new SelectOption(
-            redsPolicy.description,
-            'Pay',
-            () => redsPolicy.action(player),
-          ),
-        );
-      }
+      this.addPartyActionToActionsList(player, REDS_POLICY_3, options);
     }
 
     // Turmoil Spome action
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.SPOME, TurmoilPolicy.SPOME_POLICY_2)) {
-        const spomePolicy = SPOME_POLICY_2;
-  
-        if (spomePolicy.canAct(player)) {
-          options.push(
-            new SelectOption(
-              spomePolicy.description,
-              'Pay',
-              () => spomePolicy.action(player),
-            ),
-          );
-        }
+        this.addPartyActionToActionsList(player, SPOME_POLICY_2, options);
       }
 
     // Turmoil Spome action
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.SPOME, TurmoilPolicy.SPOME_POLICY_4)) {
-      const spomePolicy = SPOME_POLICY_4;
-
-      if (spomePolicy.canAct(player)) {
-        options.push(
-          new SelectOption(
-            spomePolicy.description,
-            'Pay',
-            () => spomePolicy.action(player),
-          ),
-        );
-      }
+      this.addPartyActionToActionsList(player, SPOME_POLICY_4, options);
     }
 
     // Turmoil Empower action
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.EMPOWER, TurmoilPolicy.EMPOWER_DEFAULT_POLICY)) {
-      const empowerPolicy = EMPOWER_DEFAULT_POLICY;
-
-      if (empowerPolicy.canAct(player)) {
-        options.push(
-          new SelectOption(
-            empowerPolicy.description,
-            'Pay',
-            () => empowerPolicy.action(player),
-          ),
-        );
-      }
+      this.addPartyActionToActionsList(player, EMPOWER_DEFAULT_POLICY, options);
     }
 
     // Turmoil Bureaucrats action
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.BUREAUCRATS, TurmoilPolicy.BUREAUCRATS_DEFAULT_POLICY)) {
-      const bureaucratsPolicy = BUREAUCRATS_DEFAULT_POLICY;
-
-      if (bureaucratsPolicy.canAct(player)) {
-        options.push(
-          new SelectOption(
-            bureaucratsPolicy.description,
-            'Send delegate',
-            () => bureaucratsPolicy.action(player),
-          ),
-        );
-      }
+      this.addPartyActionToActionsList(player, BUREAUCRATS_DEFAULT_POLICY, options, 'Send delegate');
     }
 
     // Turmoil Populists action
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.POPULISTS, TurmoilPolicy.POPULISTS_POLICY_3)) {
-      const populistsPolicy = POPULISTS_POLICY_3;
-
-      if (populistsPolicy.canAct(player)) {
-        options.push(
-          new SelectOption(
-            populistsPolicy.description,
-            'Select',
-            () => populistsPolicy.action(player),
-          ),
-        );
-      }
+      this.addPartyActionToActionsList(player, POPULISTS_POLICY_3, options, 'Select');
     }
 
     // Turmoil Transhumans action
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.TRANSHUMANS, TurmoilPolicy.TRANSHUMANS_POLICY_2)) {
-      const transhumansPolicy = TRANSHUMANS_POLICY_2;
-
-      if (transhumansPolicy.canAct(player)) {
-        options.push(
-          new SelectOption(
-            transhumansPolicy.description,
-            'Pay',
-            () => transhumansPolicy.action(player),
-          ),
-        );
-      }
+      this.addPartyActionToActionsList(player, TRANSHUMANS_POLICY_2, options);
     }
 
     // Turmoil Transhumans action
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.TRANSHUMANS, TurmoilPolicy.TRANSHUMANS_POLICY_3)) {
-      const transhumansPolicy = TRANSHUMANS_POLICY_3;
-
-      if (transhumansPolicy.canAct(player)) {
-        options.push(
-          new SelectOption(
-            transhumansPolicy.description,
-            'Pay',
-            () => transhumansPolicy.action(player),
-          ),
-        );
-      }
+      this.addPartyActionToActionsList(player, TRANSHUMANS_POLICY_3, options);
     }
 
     // Turmoil Centrists action
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.CENTRISTS, TurmoilPolicy.CENTRISTS_DEFAULT_POLICY)) {
-      const centristsPolicy = CENTRISTS_DEFAULT_POLICY;
-
-      if (centristsPolicy.canAct(player)) {
-        options.push(
-          new SelectOption(
-            centristsPolicy.description,
-            'Select',
-            () => centristsPolicy.action(player),
-          ),
-        );
-      }
+      this.addPartyActionToActionsList(player, CENTRISTS_DEFAULT_POLICY, options, 'Select');
     }
 
     // Turmoil Centrists action
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.CENTRISTS, TurmoilPolicy.CENTRISTS_POLICY_3)) {
-      const centristsPolicy = CENTRISTS_POLICY_3;
+      this.addPartyActionToActionsList(player, CENTRISTS_POLICY_3, options, 'Select');
+    }
+  }
 
-      if (centristsPolicy.canAct(player)) {
-        options.push(
-          new SelectOption(
-            centristsPolicy.description,
-            'Select',
-            () => centristsPolicy.action(player),
-          ),
-        );
-      }
+  public static addPartyActionToActionsList(player: Player, policy: any, options: PlayerInput[], title: string = 'Pay'): void {
+    if (policy.canAct(player)) {
+      options.push(
+        new SelectOption(
+          policy.description,
+          title,
+          () => policy.action(player),
+        ),
+      );
     }
   }
 
