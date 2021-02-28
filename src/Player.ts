@@ -1960,9 +1960,9 @@ export class Player implements ISerializable<SerializedPlayer> {
         if (shouldApplyCentristsTax) {
           sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area from lobby (2 MC)', {cost: 2});
         }
-      } else if (this.isCorporation(CardName.INCITE) && this.canAfford(inciteLobbyingCost) && this.game.turmoil!.getDelegates(this.id) > 0) {
+      } else if (this.isCorporation(CardName.INCITE) && this.canAfford(inciteLobbyingCost) && this.game.turmoil!.getDelegatesInReserve(this.id) > 0) {
         sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (' + inciteLobbyingCost + ' MC)', {cost: inciteLobbyingCost});
-      } else if (this.canAfford(lobbyingCost) && this.game.turmoil!.getDelegates(this.id) > 0) {
+      } else if (this.canAfford(lobbyingCost) && this.game.turmoil!.getDelegatesInReserve(this.id) > 0) {
         sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (' + lobbyingCost + ' MC)', {cost: lobbyingCost});
       }
 

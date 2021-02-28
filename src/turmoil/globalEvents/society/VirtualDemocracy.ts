@@ -17,7 +17,7 @@ export class VirtualDemocracy implements IGlobalEvent {
         const amount = Math.min(citiesCount, 5);
 
         const playerHasLobbyDelegate = turmoil.lobby.has(player.id);
-        let availablePlayerDelegates = turmoil.getDelegates(player.id);
+        let availablePlayerDelegates = turmoil.getDelegatesInReserve(player.id);
         if (playerHasLobbyDelegate) availablePlayerDelegates += 1;
 
         const qty = Math.min(amount, availablePlayerDelegates);

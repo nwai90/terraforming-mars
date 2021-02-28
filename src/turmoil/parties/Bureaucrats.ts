@@ -53,7 +53,7 @@ class BureaucratsPolicy01 implements Policy {
 
   canAct(player: Player) {
     const turmoil: Turmoil = player.game.turmoil as Turmoil;
-    const hasDelegateInReserve = turmoil.getDelegates(player.id) >= 1;
+    const hasDelegateInReserve = turmoil.getDelegatesInReserve(player.id) >= 1;
 
     return player.canAfford(3) && hasDelegateInReserve && player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;
   }
