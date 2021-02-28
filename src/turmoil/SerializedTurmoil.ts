@@ -1,7 +1,6 @@
-import {IGlobalEvent} from './globalEvents/IGlobalEvent';
 import {GlobalEventName} from './globalEvents/GlobalEventName';
 import {PartyName} from './parties/PartyName';
-import {SerializedGlobalEventDealer} from './globalEvents/SerializedGlobalEventDealer';
+import {SerializedGlobalEvent, SerializedGlobalEventDealer} from './globalEvents/SerializedGlobalEventDealer';
 import {SerializedPoliticalAgendasData} from './PoliticalAgendas';
 import {NeutralPlayer} from './Turmoil';
 import {PlayerId} from '../Player';
@@ -21,9 +20,10 @@ export interface SerializedTurmoil {
     parties: Array<SerializedParty>;
     playersInfluenceBonus: Array<[string, number]>;
     globalEventDealer: SerializedGlobalEventDealer;
-    distantGlobalEvent: GlobalEventName | undefined;
-    comingGlobalEvent: GlobalEventName | undefined;
+    distantGlobalEvent: SerializedGlobalEvent | undefined;
+    comingGlobalEvent: SerializedGlobalEvent | undefined;
     // TODO(kberg): By 2021-03-01, IGlobalEvent.
-    currentGlobalEvent?: IGlobalEvent | GlobalEventName;
+    currentGlobalEvent?: SerializedGlobalEvent | GlobalEventName;
     politicalAgendasData: SerializedPoliticalAgendasData | undefined;
+    globalEventDelegatesRandomisationDone: boolean;
 }

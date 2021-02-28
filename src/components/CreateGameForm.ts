@@ -797,6 +797,13 @@ export const CreateGameForm = Vue.component('create-game-form', {
                                     <span v-i18n>Board tiles</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#randomize-board-tiles" class="tooltip" target="_blank">&#9432;</a>
                             </label>
 
+                            <div v-if="isRandomTurmoilEnabled()">
+                                <input type="checkbox" v-model="randomTurmoil" id="randomTurmoil-checkbox" v-on:change="randomTurmoilToggle()">
+                                <label for="randomTurmoil-checkbox">
+                                    <span v-i18n>Turmoil</span>&nbsp;<a href="https://www.notion.so/Variants-32b53050f10a4cfbaea117c34d4f3a03#db8ed5d103f14fc69ec3248ecddc1617" class="tooltip" target="_blank">&#9432;</a>
+                                </label>
+                            </div>
+
                             <div class="create-game-subsection-label" v-i18n>Filter</div>
 
                             <input type="checkbox" v-model="showCorporationList" id="customCorps-checkbox">

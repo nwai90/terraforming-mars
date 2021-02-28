@@ -37,7 +37,7 @@ import {SolarFlare} from './SolarFlare';
 import {VenusInfrastructure} from './VenusInfrastructure';
 import {CloudSocieties} from './CloudSocieties';
 import {MicrogravityHealthProblems} from './MicrogravityHealthProblems';
-import {SerializedGlobalEventDealer} from './SerializedGlobalEventDealer';
+import {SerializedGlobalEvent, SerializedGlobalEventDealer} from './SerializedGlobalEventDealer';
 import {ISerializable} from '../../ISerializable';
 import {FermiSolution} from './society/FermiSolution';
 import {OperationDaedalus} from './society/OperationDaedalus';
@@ -75,6 +75,7 @@ import {AtmosphericCompression} from './society/AtmosphericCompression';
 import {WoodlandInitiatives} from './society/WoodlandInitiatives';
 import {ThermalFusion} from './society/ThermalFusion';
 import {BloomingVale} from './society/BloomingVale';
+import {PartyName} from '../parties/PartyName';
 
 export interface IGlobalEventFactory<T> {
     globalEventName: GlobalEventName;
@@ -265,18 +266,28 @@ export class GlobalEventDealer implements ISerializable<SerializedGlobalEventDea
 
   public serialize(): SerializedGlobalEventDealer {
     return {
-      deck: this.globalEventsDeck.map((card) => card.name),
-      discarded: this.discardedGlobalEvents.map((card) => card.name),
+      deck: this.globalEventsDeck.map((card) => {
+        return {name: card.name, currentDelegate: card.currentDelegate, revealedDelegate: card.revealedDelegate};
+      }),
+      discarded: this.discardedGlobalEvents.map((card) => {
+        return {name: card.name, currentDelegate: card.currentDelegate, revealedDelegate: card.revealedDelegate};
+      }),
     };
   }
 
   public static deserialize(d: SerializedGlobalEventDealer): GlobalEventDealer {
-    const deck = d.deck.map((element: GlobalEventName) => {
-      return getGlobalEventByName(element)!;
+    const deck = d.deck.map((element: SerializedGlobalEvent) => {
+      const event = getGlobalEventByName(element.name!) as IGlobalEvent;
+      event.currentDelegate = element.currentDelegate as PartyName;
+      event.revealedDelegate = element.revealedDelegate as PartyName;
+      return event;
     });
 
-    const discardPile = d.discarded.map((element: GlobalEventName) => {
-      return getGlobalEventByName(element)!;
+    const discardPile = d.discarded.map((element: SerializedGlobalEvent) => {
+      const event = getGlobalEventByName(element.name!) as IGlobalEvent;
+      event.currentDelegate = element.currentDelegate as PartyName;
+      event.revealedDelegate = element.revealedDelegate as PartyName;
+      return event;
     });
     return new GlobalEventDealer(deck, discardPile);
   }
