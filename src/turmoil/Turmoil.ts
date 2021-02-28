@@ -22,6 +22,7 @@ import {Bureaucrats} from './parties/Bureaucrats';
 import {Transhumans} from './parties/Transhumans';
 import {Centrists} from './parties/Centrists';
 import {TurmoilHandler} from './TurmoilHandler';
+import {SerializedGlobalEvent} from './globalEvents/SerializedGlobalEventDealer';
 
 export type NeutralPlayer = 'NEUTRAL';
 
@@ -70,6 +71,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
     public comingGlobalEvent: IGlobalEvent | undefined;
     public currentGlobalEvent: IGlobalEvent | undefined;
     public politicalAgendasData: PoliticalAgendasData = UNINITIALIZED_POLITICAL_AGENDAS_DATA;
+    public globalEventDelegatesRandomisationDone: boolean = false;
 
     private constructor(
       rulingPartyName: PartyName,
@@ -125,7 +127,10 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       game.log(turmoil.rulingParty + ' are in power in the first generation.');
 
       // Society hook: Randomize top and bottom delegate for each event the first time this is called
-      if (randomTurmoil && game.lastSaveId === 0) TurmoilHandler.randomizeGlobalEventDelegates(turmoil, dealer);
+      if (randomTurmoil && turmoil.globalEventDelegatesRandomisationDone === false) {
+        TurmoilHandler.randomizeGlobalEventDelegates(turmoil, dealer);
+        turmoil.globalEventDelegatesRandomisationDone = true;
+      }
 
       game.getPlayers().forEach((player) => {
         // Begin with one delegate in the lobby
@@ -474,12 +479,13 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
         }),
         playersInfluenceBonus: Array.from(this.playersInfluenceBonus.entries()),
         globalEventDealer: this.globalEventDealer.serialize(),
-        distantGlobalEvent: this.distantGlobalEvent?.name,
-        comingGlobalEvent: this.comingGlobalEvent?.name,
+        distantGlobalEvent: {name: this.distantGlobalEvent?.name, currentDelegate: this.distantGlobalEvent?.currentDelegate, revealedDelegate: this.distantGlobalEvent?.revealedDelegate},
+        comingGlobalEvent: {name: this.comingGlobalEvent?.name, currentDelegate: this.comingGlobalEvent?.currentDelegate, revealedDelegate: this.comingGlobalEvent?.revealedDelegate},
         politicalAgendasData: PoliticalAgendas.serialize(this.politicalAgendasData),
+        globalEventDelegatesRandomisationDone: this.globalEventDelegatesRandomisationDone,
       };
       if (this.currentGlobalEvent !== undefined) {
-        result.currentGlobalEvent = this.currentGlobalEvent.name;
+        result.currentGlobalEvent = {name: this.currentGlobalEvent?.name, currentDelegate: this.currentGlobalEvent?.currentDelegate, revealedDelegate: this.currentGlobalEvent?.revealedDelegate};
       }
       return result;
     }
@@ -505,6 +511,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       });
 
       turmoil.playersInfluenceBonus = new Map<string, number>(d.playersInfluenceBonus);
+      turmoil.globalEventDelegatesRandomisationDone = d.globalEventDelegatesRandomisationDone;
 
       function globalEventName(object: any): string {
         function instanceOfIGlobalEvent(object: any): object is IGlobalEvent {
@@ -522,13 +529,19 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       }
 
       if (d.distantGlobalEvent) {
-        turmoil.distantGlobalEvent = getGlobalEventByName(d.distantGlobalEvent);
+        turmoil.distantGlobalEvent = getGlobalEventByName(d.distantGlobalEvent.name!) as IGlobalEvent;
+        turmoil.distantGlobalEvent.currentDelegate = d.distantGlobalEvent.currentDelegate as PartyName;
+        turmoil.distantGlobalEvent.revealedDelegate = d.distantGlobalEvent.revealedDelegate as PartyName;
       }
       if (d.comingGlobalEvent) {
-        turmoil.comingGlobalEvent = getGlobalEventByName(d.comingGlobalEvent);
+        turmoil.comingGlobalEvent = getGlobalEventByName(d.comingGlobalEvent.name!) as IGlobalEvent;
+        turmoil.comingGlobalEvent.currentDelegate = d.comingGlobalEvent.currentDelegate as PartyName;
+        turmoil.comingGlobalEvent.revealedDelegate = d.comingGlobalEvent.revealedDelegate as PartyName;
       }
       if (d.currentGlobalEvent) {
-        turmoil.currentGlobalEvent = getGlobalEventByName(globalEventName(d.currentGlobalEvent));
+        turmoil.currentGlobalEvent = getGlobalEventByName(globalEventName(d.currentGlobalEvent)) as IGlobalEvent;
+        turmoil.currentGlobalEvent.currentDelegate = (d.currentGlobalEvent as SerializedGlobalEvent).currentDelegate as PartyName;
+        turmoil.currentGlobalEvent.revealedDelegate = (d.currentGlobalEvent as SerializedGlobalEvent).revealedDelegate as PartyName;
       }
 
       return turmoil;

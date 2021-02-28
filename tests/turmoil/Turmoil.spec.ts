@@ -238,19 +238,18 @@ describe('Turmoil', function() {
       'playersInfluenceBonus': [],
       'globalEventDealer': {
         'deck': [
-          'Solar Flare',
-          'Spin-Off Products',
-          'Dry Deserts',
-          'Mud Slides',
-          'Productivity'],
-        'discarded': ['Pandemic']},
-      'distantGlobalEvent': 'Eco Sabotage',
-      'comingGlobalEvent': 'Celebrity Leaders',
+          {'name': 'Solar Flare', 'currentDelegate': 'Kelvinists', 'revealedDelegate': 'Unity'},
+          {'name': 'Spin-Off Products', 'currentDelegate': 'Scientists', 'revealedDelegate': 'Greens'},
+          {'name': 'Dry Deserts', 'currentDelegate': 'Unity', 'revealedDelegate': 'Reds'},
+          {'name': 'Mud Slides', 'currentDelegate': 'Greens', 'revealedDelegate': 'Kelvinists'},
+          {'name': 'Productivity', 'currentDelegate': 'Mars First', 'revealedDelegate': 'Scientists'}],
+        'discarded': [{'name': 'Pandemic', 'currentDelegate': 'Mars First', 'revealedDelegate': 'Greens'}]},
+      'distantGlobalEvent': {'name': 'Eco Sabotage', 'currentDelegate': 'Reds', 'revealedDelegate': 'Greens'},
+      'comingGlobalEvent': {'name': 'Celebrity Leaders', 'currentDelegate': 'Greens', 'revealedDelegate': 'Unity'},
       'politicalAgendasData': {'thisAgenda': {'bonusId': 'none', 'policyId': 'none'}},
     };
     const s: SerializedTurmoil = JSON.parse(JSON.stringify(json));
     const t = Turmoil.deserialize(s);
-
     expect(t.distantGlobalEvent!.name).eq('Eco Sabotage');
     expect(t.distantGlobalEvent!.revealedDelegate).eq('Greens');
     expect(t.comingGlobalEvent!.name).eq('Celebrity Leaders');
