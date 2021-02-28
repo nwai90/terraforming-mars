@@ -11,7 +11,7 @@ import {Game} from '../Game';
 import {GlobalEventDealer, getGlobalEventByName} from './globalEvents/GlobalEventDealer';
 import {IGlobalEvent} from './globalEvents/IGlobalEvent';
 import {ISerializable} from '../ISerializable';
-import {SerializedTurmoil} from './SerializedTurmoil';
+import {SerializedParty, SerializedTurmoil} from './SerializedTurmoil';
 import {PLAYER_DELEGATES_COUNT} from '../constants';
 import {AgendaStyle, PoliticalAgendasData, PoliticalAgendas} from './PoliticalAgendas';
 import {CardName} from '../CardName';
@@ -77,7 +77,8 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       dominantPartyName: PartyName,
       globalEventDealer: GlobalEventDealer,
       societyExpansion: boolean,
-      randomTurmoil: boolean = false) {
+      randomTurmoil: boolean = false,
+      parties: SerializedParty[] | undefined = undefined) {
       this.rulingParty = this.getPartyByName(rulingPartyName);
       this.chairman = chairman;
       this.dominantParty = this.getPartyByName(dominantPartyName);
@@ -86,14 +87,23 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       // Init parties
       if (societyExpansion) {
         if (randomTurmoil) {
-          // Randomly choose 6 of 12 parties
-          this.parties = ALL_DEFAULT_PARTIES.concat(ALL_SOCIETY_PARTIES).map((cf) => new cf.Factory())
-            .map((a) => ({sort: Math.random(), value: a}))
-            .sort((a, b) => a.sort - b.sort)
-            .map((a) => a.value)
-            .slice(0, 6);
-          this.rulingParty = this.getPartyByName(this.parties[0].name);
-          this.dominantParty = this.getPartyByName(this.parties[0].name);
+          if (parties === undefined) {
+            // Randomly choose 6 of 12 parties the first time this is called
+            this.parties = ALL_DEFAULT_PARTIES.concat(ALL_SOCIETY_PARTIES).map((cf) => new cf.Factory())
+              .map((a) => ({sort: Math.random(), value: a}))
+              .sort((a, b) => a.sort - b.sort)
+              .map((a) => a.value)
+              .slice(0, 6);
+
+            this.rulingParty = this.getPartyByName(this.parties[0].name);
+            this.dominantParty = this.getPartyByName(this.parties[0].name);
+          } else {
+            // Used when deserializing
+            this.parties = parties.map((party) => this.getPartyByName(party.name));
+            this.rulingParty = this.getPartyByName(rulingPartyName);
+            this.dominantParty = this.getPartyByName(dominantPartyName);
+          }
+
         } else {
           this.parties = ALL_SOCIETY_PARTIES.map((cf) => new cf.Factory());
         }
@@ -114,8 +124,8 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       game.log('A neutral delegate is the new chairman.');
       game.log(turmoil.rulingParty + ' are in power in the first generation.');
 
-      // Society hook: Randomize top and bottom delegate for each event
-      if (randomTurmoil) TurmoilHandler.randomizeGlobalEventDelegates(turmoil, dealer);
+      // Society hook: Randomize top and bottom delegate for each event the first time this is called
+      if (randomTurmoil && game.lastSaveId === 0) TurmoilHandler.randomizeGlobalEventDelegates(turmoil, dealer);
 
       game.getPlayers().forEach((player) => {
         // Begin with one delegate in the lobby
@@ -476,7 +486,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
 
     public static deserialize(d: SerializedTurmoil, societyExpansion: boolean = false, randomTurmoil: boolean = false): Turmoil {
       const dealer = GlobalEventDealer.deserialize(d.globalEventDealer);
-      const turmoil = new Turmoil(d.rulingParty, d.chairman || 'NEUTRAL', d.dominantParty, dealer, societyExpansion, randomTurmoil);
+      const turmoil = new Turmoil(d.rulingParty, d.chairman || 'NEUTRAL', d.dominantParty, dealer, societyExpansion, randomTurmoil, d.parties);
 
       turmoil.lobby = new Set(d.lobby);
 
@@ -510,8 +520,6 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
           return object;
         }
       }
-
-      turmoil.playersInfluenceBonus = new Map<string, number>(d.playersInfluenceBonus);
 
       if (d.distantGlobalEvent) {
         turmoil.distantGlobalEvent = getGlobalEventByName(d.distantGlobalEvent);
