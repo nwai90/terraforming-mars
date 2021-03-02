@@ -1221,7 +1221,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     // PoliticalAgendas Centrists P4 hook
-    if (card.tags.includes(Tags.EVENT) && PartyHooks.shouldApplyPolicy(this.game, PartyName.CENTRISTS, TurmoilPolicy.CENTRISTS_POLICY_4)) {
+    if (card.cardType === CardType.EVENT && PartyHooks.shouldApplyPolicy(this.game, PartyName.CENTRISTS, TurmoilPolicy.CENTRISTS_POLICY_4)) {
       cost -= 2;
     }
 
