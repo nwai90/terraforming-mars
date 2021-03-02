@@ -76,7 +76,7 @@ class CentristsPolicy03 implements Policy {
 
   canAct(player: Player) {
     if (player.game.gameOptions.coloniesExtension === false) return false;
-    if (player.getFleetSize() === player.tradesThisTurn) return false;
+    if (player.getFleetSize() === player.tradesThisGeneration) return false;
 
     const openColonies = player.game.colonies.filter((colony) => colony.isActive && colony.visitor === undefined);
     return player.turmoilPolicyActionUsed === false && openColonies.length > 0;

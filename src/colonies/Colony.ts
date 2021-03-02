@@ -28,6 +28,7 @@ import {SelectSpace} from '../inputs/SelectSpace';
 import {ISpace} from '../boards/ISpace';
 import {SpaceBonus} from '../SpaceBonus';
 import {Phase} from '../Phase';
+import {Game} from '../Game';
 
 export enum ShouldIncreaseTrack { YES, NO, ASK }
 
@@ -53,11 +54,20 @@ export abstract class Colony implements SerializedColony {
     public shouldIncreaseTrack: ShouldIncreaseTrack = ShouldIncreaseTrack.YES;
 
 
-    public endGeneration(): void {
+    public endGeneration(game: Game): void {
       if (this.isActive) {
         this.increaseTrack();
       }
-      this.visitor = undefined;
+      // Syndicate Pirate Raids hook. If it is in effect, then only the syndicate pirate raider will
+      // retrieve their fleets.
+      // See Player.ts for the other half of this effect, and Game.ts which disables it.
+      if (game.syndicatePirateRaider) {
+        if (game.syndicatePirateRaider === this.visitor) {
+          this.visitor = undefined;
+        }
+      } else {
+        this.visitor = undefined;
+      }
     }
 
     public increaseTrack(value: number = 1): void {
@@ -130,7 +140,7 @@ export abstract class Colony implements SerializedColony {
 
       if (usesTradeFleet) {
         this.visitor = player.id;
-        player.tradesThisTurn++;
+        player.tradesThisGeneration++;
       }
 
       if (decreaseTrackAfterTrade) {

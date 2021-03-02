@@ -51,6 +51,7 @@ export interface SerializedGame {
     researchedPlayers: Array<PlayerId>;
     seed: number
     someoneHasRemovedOtherPlayersPlants: boolean;
+    syndicatePirateRaider: PlayerId | undefined;
     temperature: number;
     turmoil?: SerializedTurmoil;
     unDraftedCards: Array<[PlayerId, Array<CardName>]>;

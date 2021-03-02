@@ -128,7 +128,7 @@ export class Server {
       titaniumProduction: player.getProduction(Resources.TITANIUM),
       titaniumValue: player.getTitaniumValue(),
       totalSpend: player.totalSpend,
-      tradesThisTurn: player.tradesThisTurn,
+      tradesThisGeneration: player.tradesThisGeneration,
       turmoil: turmoil,
       venusScaleLevel: game.getVenusScaleLevel(),
       victoryPointsBreakdown: player.getVictoryPoints(),
@@ -437,7 +437,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
             player.getActionsThisGeneration()
         ),
         fleetSize: player.getFleetSize(),
-        tradesThisTurn: player.tradesThisTurn,
+        tradesThisGeneration: player.tradesThisGeneration,
         turmoil: turmoil,
         selfReplicatingRobotsCards: player.getSelfReplicatingRobotsCards(),
         needsToDraft: player.needsToDraft,

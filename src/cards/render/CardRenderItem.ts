@@ -20,6 +20,11 @@ export enum AltSecondaryTag {
   ARES = 'ares',
 }
 
+export interface ItemOptions {
+  size?: CardRenderItemSize;
+  amount?: number;
+}
+
 export class CardRenderItem {
   // TODO (chosta): use child classes to describe special behavior
   public anyPlayer?: boolean; // activated for any player
@@ -42,5 +47,15 @@ export class CardRenderItem {
     if (Math.abs(this.amount) > 5) {
       this.showDigit = true;
     }
+  }
+  public withOptions(options: ItemOptions | undefined): CardRenderItem {
+    if (options === undefined) {
+      return this;
+    }
+    this.size = options.size;
+    if (options.amount !== undefined) {
+      this.amount = options.amount;
+    }
+    return this;
   }
 }
