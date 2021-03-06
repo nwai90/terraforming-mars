@@ -364,22 +364,20 @@ export abstract class Colony implements SerializedColony {
         break;
 
       case ColonyBenefit.WGT_RAISE_GLOBAL_PARAMETER:
-        game.defer(new DeferredAction(player, () => {
-            game.phase = Phase.SOLAR;
-            return undefined;
-        }));
-
         if (quantity === 0) {
             game.defer(new DeferredAction(player, () => {
+                game.phase = Phase.SOLAR;
                 game.log('${0} acted as World Government and increased temperature', (b) => b.player(player));
                 game.increaseTemperature(player, 1);
                 return undefined;
             }));
         } else if (quantity === 1) {
+            game.phase = Phase.SOLAR;
             game.log('${0} acted as World Government and placed an ocean', (b) => b.player(player));
             game.defer(new PlaceOceanTile(player, 'Select ocean space for ' + this.name + ' colony'));
         } else if (quantity === 2) {
             game.defer(new DeferredAction(player, () => {
+                game.phase = Phase.SOLAR;
                 game.log('${0} acted as World Government and increased oxygen level', (b) => b.player(player));
                 game.increaseOxygenLevel(player, 1);
                 return undefined;
@@ -390,7 +388,7 @@ export abstract class Colony implements SerializedColony {
             game.phase = Phase.ACTION;
             return undefined;
         }));
-        
+
         break;
 
       case ColonyBenefit.GAIN_MC_FOR_EARTH_TAGS:
