@@ -23,8 +23,8 @@ class PopulistsBonus01 implements Bonus {
 
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
-      const amountLost = Math.floor(Math.max(player.megaCredits - 40, 0) / 5);
-      player.setResource(Resources.MEGACREDITS, amountLost);
+      const amount = Math.floor(Math.max(player.megaCredits - 40, 0) / 5);
+      player.setResource(Resources.MEGACREDITS, -amount);
     });
   }
 }

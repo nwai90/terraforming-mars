@@ -39,10 +39,10 @@ export class PlanetFederation implements IGlobalEvent {
           );
 
           const gainMc = new SelectOption(
-            'Gain 4 MC',
+            'Gain 5 MC',
             'Select',
             () => {
-              player.setResource(Resources.MEGACREDITS, 4, game, undefined, true);
+              player.setResource(Resources.MEGACREDITS, 5, game, undefined, true);
               return undefined;
             },
           );
