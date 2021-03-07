@@ -3,7 +3,7 @@ import {WaterImportFromEuropa} from '../../../src/cards/base/WaterImportFromEuro
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {Player} from '../../../src/Player';
-import {TestingUtils, TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('WaterImportFromEuropa', function() {
   let card : WaterImportFromEuropa; let player : Player; let game : Game;
@@ -38,12 +38,5 @@ describe('WaterImportFromEuropa', function() {
     const selectOcean = game.deferredActions.peek()!.execute() as SelectSpace;
     selectOcean.cb(selectOcean.availableSpaces[0]);
     expect(player.getTerraformRating()).to.eq(21);
-  });
-
-  it('Can act if can pay even after oceans are maxed', function() {
-    TestingUtils.maxOutOceans(player);
-    player.megaCredits = 12;
-
-    expect(card.canAct(player)).is.true;
   });
 });

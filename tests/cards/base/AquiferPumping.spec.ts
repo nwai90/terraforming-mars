@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {AquiferPumping} from '../../../src/cards/base/AquiferPumping';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestingUtils, TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestingUtils';
 
 describe('AquiferPumping', function() {
   let card : AquiferPumping; let player : Player; let game : Game;
@@ -28,12 +28,5 @@ describe('AquiferPumping', function() {
 
   it('Cannot act if not enough to pay', function() {
     expect(card.canAct(player)).is.not.true;
-  });
-
-  it('Can act if can pay even after oceans are maxed', function() {
-    TestingUtils.maxOutOceans(player);
-    player.megaCredits = 8;
-
-    expect(card.canAct(player)).is.true;
   });
 });
