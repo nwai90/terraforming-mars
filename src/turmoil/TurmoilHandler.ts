@@ -1,5 +1,6 @@
 import {IProjectCard} from '../cards/IProjectCard';
 import {SOCIETY_ADDITIONAL_CARD_COST} from '../constants';
+import {DiscardCards} from '../deferredActions/DiscardCards';
 import {SelectHowToPayDeferred} from '../deferredActions/SelectHowToPayDeferred';
 import {GlobalParameter} from '../GlobalParameter';
 import {SelectOption} from '../inputs/SelectOption';
@@ -205,6 +206,7 @@ export class TurmoilHandler {
     // PoliticalAgendas Scientists P3 hook
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.SCIENTISTS, TurmoilPolicy.SCIENTISTS_POLICY_3)) {
       player.drawCard(steps);
+      player.game.defer(new DiscardCards(player, steps, 'Turmoil Scientists - Select ' + steps + ' card(s) to discard'));
     }
 
     // PoliticalAgendas Spome P1 hook

@@ -79,7 +79,7 @@ class ScientistsPolicy02 implements Policy {
 
 class ScientistsPolicy03 implements Policy {
   id = TurmoilPolicy.SCIENTISTS_POLICY_3;
-  description: string = 'When you raise a global parameter, draw a card per step raised';
+  description: string = 'When you raise a global parameter, draw and discard a card per step raised';
   isDefault = false;
 }
 

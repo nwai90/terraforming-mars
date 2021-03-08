@@ -51,7 +51,6 @@ const AGENDA_HTML: Map<BonusId | PolicyId, string> = new Map();
   AGENDA_HTML.set('gb02',
     `<div class="resource money party-resource">2</div> /
     <div class="tile greenery-tile greenery-tile-small"></div>`);
-
   AGENDA_HTML.set('mfp01',
     `<div class="policy-top-margin"><div class="tile empty-tile-small"></div> :
     <span class="steel resource"></span></div>`);
@@ -76,10 +75,10 @@ const AGENDA_HTML: Map<BonusId | PolicyId, string> = new Map();
     <div class="tile temperature-tile req-tile-small"></div>
     : ± 2</span>`);
   AGENDA_HTML.set('sp03', `<span>
-    <div class="tile oxygen-tile req-tile-small" style="margin: 10px -5px;"></div>
-    <div class="tile ocean-tile req-tile-small"></div>
-    <div class="tile temperature-tile req-tile-small"></div>
-    : <div class="resource card card-with-border"></div></span>`);
+    <div class="tile oxygen-tile req-tile-small" style="margin: 10px -10px; transform: scale(0.7)"></div>
+    <div class="tile ocean-tile req-tile-small" style="margin: 10px -2px; transform: scale(0.7)"></div>
+    <div class="tile temperature-tile req-tile-small" style="margin: 10px -2px; transform: scale(0.7)"></div>
+    : +<div class="resource card card-with-border card-mini"></div>-<div class="resource card card-with-border card-mini""></div></span>`);
   AGENDA_HTML.set('sp04', `<div class="tags-requisite"><div class="resource-tag tag-science party-resource-tag"></div></div>`);
   AGENDA_HTML.set('up01',
     `<div class="policy-top-margin"><div class="resource titanium"></div> :
@@ -183,10 +182,10 @@ const AGENDA_HTML: Map<BonusId | PolicyId, string> = new Map();
     `<div class="policy-top-margin"><div class="tile empty-tile-small"></div> :
     <span class="energy resource"></span></div>`);
   AGENDA_HTML.set('ep03',
-    `<div class="policy-top-margin">
+    `<div>
         +/- <div class="production-box">
             <div class="energy production"></div>
-        </div> : <span class="energy resource"></span>
+        </div> : 2 <span class="energy resource"></span>
     </div>`);
   AGENDA_HTML.set('ep04', `<div class="policy-top-margin"><div class="resource-tag tag-power"></div> : <div class="money resource">-3</div></div>`);
   AGENDA_HTML.set('pb01',

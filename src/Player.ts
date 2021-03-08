@@ -369,8 +369,8 @@ export class Player implements ISerializable<SerializedPlayer> {
       this.energyProduction = Math.max(0, this.energyProduction + amount);
 
       if (PartyHooks.shouldApplyPolicy(this.game, PartyName.EMPOWER, TurmoilPolicy.EMPOWER_POLICY_3)) {
-        this.setResource(Resources.ENERGY, Math.abs(amount));
-      }      
+        this.setResource(Resources.ENERGY, 2);
+      }
     }
 
     if (resource === Resources.HEAT) {

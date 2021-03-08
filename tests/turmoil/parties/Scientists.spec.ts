@@ -59,16 +59,16 @@ describe('Scientists', function() {
     expect(card.canPlay(player)).to.be.true;
   });
 
-  it('Ruling policy 3: When you raise a global parameter, draw a card per step raised', function() {
+  it('Ruling policy 3: When you raise a global parameter, draw and discard a card per step raised', function() {
     TestingUtils.setRulingPartyAndRulingPolicy(game, turmoil, scientists, scientists.policies[2].id);
 
     game.increaseOxygenLevel(player, 1);
-    game.deferredActions.runNext();
-    expect(player.cardsInHand).has.lengthOf(1);
+    TestingUtils.runAllActions(game);
+    expect(player.cardsInHand).has.lengthOf(0);
 
     game.increaseTemperature(player, 2);
-    game.deferredActions.runNext();
-    expect(player.cardsInHand).has.lengthOf(3);
+    TestingUtils.runAllActions(game);
+    expect(player.cardsInHand).has.lengthOf(0);
   });
 
   it('Ruling policy 4: Cards with Science tag requirements may be played with 1 less Science tag', function() {
