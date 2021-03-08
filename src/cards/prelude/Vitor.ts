@@ -44,9 +44,10 @@ export class Vitor extends Card implements CorporationCard {
 
   public initialAction(player: Player) {
     // Awards are disabled for 1 player games
-    if (player.game.isSoloMode()) {
-      return;
-    }
+    if (player.game.isSoloMode()) return;
+    // For Colosseum mode, if there are more than 3 Vitors
+    if (player.game.allAwardsFunded()) return;
+
     const freeAward = new OrOptions();
     freeAward.title = 'Select award to fund';
     freeAward.buttonLabel = 'Confirm';
