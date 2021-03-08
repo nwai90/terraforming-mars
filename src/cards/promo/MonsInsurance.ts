@@ -41,4 +41,33 @@ export class MonsInsurance extends Card implements CorporationCard {
     player.game.monsInsuranceOwner = player.id;
     return undefined;
   }
+
+  public static resolveMonsInsurance(victim: Player) {
+    const game = victim.game;
+
+    if (game.monsInsuranceOwner !== undefined && game.monsInsuranceOwner !== victim.id) {
+      if (game.gameOptions.colosseumVariant === true) {
+        game.getPlayers().filter((player) => player.id !== victim.id).forEach((player) => {
+          this.payoutAndLogInsurance(player, victim);
+        });
+      } else {
+        const monsInsuranceOwner: Player = game.getPlayerById(game.monsInsuranceOwner);
+        this.payoutAndLogInsurance(monsInsuranceOwner, victim);
+      }
+    }
+  }
+
+  private static payoutAndLogInsurance(insurer: Player, victim: Player): void {
+    const retribution: number = Math.min(insurer.megaCredits, 3);
+    insurer.setResource(Resources.MEGACREDITS, -3);
+    victim.setResource(Resources.MEGACREDITS, retribution);
+
+    if (retribution > 0) {
+      insurer.game.log('${0} received ${1} MC from ${2} owner (${3})', (b) =>
+        b.player(victim)
+          .number(retribution)
+          .cardName(CardName.MONS_INSURANCE)
+          .player(insurer));
+    }
+  }
 }

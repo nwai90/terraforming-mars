@@ -54,6 +54,7 @@ export class TestingUtils {
       shuffleMapOption: false,
       promoCardsOption: false,
       communityCardsOption: false,
+      colosseumVariant: false,
       undoOption: false,
       showTimers: false,
       startingCorporations: 2,

@@ -84,6 +84,7 @@ export class GameHandler extends Handler {
           moonExpansion: gameReq.moonExpansion,
           promoCardsOption: gameReq.promoCardsOption,
           communityCardsOption: gameReq.communityCardsOption,
+          colosseumVariant: gameReq.colosseumVariant,
           solarPhaseOption: gameReq.solarPhaseOption,
           silverCubeVariant: gameReq.silverCubeVariant,
 

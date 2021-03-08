@@ -35,15 +35,24 @@ export class UnitedNationsMissionOne extends Card implements CorporationCard {
 
     public play(player: Player) {
       player.game.unitedNationsMissionOneOwner = player.id;
+      UnitedNationsMissionOne.onTRIncrease(player.game, true);
       return undefined;
     }
 
-    public static onTRIncrease(game: Game) {
+    public static onTRIncrease(game: Game, shouldAwardMc: boolean = false) {
       const playerId = game.unitedNationsMissionOneOwner;
 
       if (playerId !== undefined) {
-        const player = game.getPlayerById(playerId);
-        if (game.phase === Phase.ACTION || game.phase === Phase.PRELUDES) player.megaCredits += 1;
+        if (game.gameOptions.colosseumVariant === true) {
+          game.getPlayers().forEach((player) => {
+            if (player.corporationCard === undefined) return;
+            if (shouldAwardMc && playerId === player.id) return;
+            if (shouldAwardMc || game.phase === Phase.ACTION || game.phase === Phase.PRELUDES) player.megaCredits += 1;
+          });
+        } else {
+          const player = game.getPlayerById(playerId);
+          if (game.phase === Phase.ACTION || game.phase === Phase.PRELUDES) player.megaCredits += 1;
+        }
       }
     }
 }

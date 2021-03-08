@@ -49,6 +49,7 @@ export interface CreateGameModel {
     shuffleMapOption: boolean;
     promoCardsOption: boolean;
     communityCardsOption: boolean;
+    colosseumVariant: boolean;
     aresExtension: boolean;
     politicalAgendasExtension: AgendaStyle;
     societyExpansion: boolean;
@@ -125,6 +126,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       shuffleMapOption: false,
       promoCardsOption: false,
       communityCardsOption: false,
+      colosseumVariant: false,
       aresExtension: false,
       politicalAgendasExtension: AgendaStyle.STANDARD,
       societyExpansion: false,
@@ -437,6 +439,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       const seed = component.seed;
       const promoCardsOption = component.promoCardsOption;
       const communityCardsOption = component.communityCardsOption;
+      const colosseumVariant = component.colosseumVariant;
       const aresExtension = component.aresExtension;
       const politicalAgendasExtension = this.politicalAgendasExtension;
       const societyExpansion = component.societyExpansion;
@@ -472,7 +475,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       if (customCorporationsList.length > 0) {
         const neededCorpsCount = players.length * startingCorporations;
 
-        if (customCorporationsList.length < neededCorpsCount) {
+        if (customCorporationsList.length < neededCorpsCount && component.colosseumVariant === false) {
           window.alert(translateTextWithParams('Must select at least ${0} corporations', [neededCorpsCount.toString()]));
           return;
         }
@@ -507,6 +510,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
         silverCubeVariant,
         promoCardsOption,
         communityCardsOption,
+        colosseumVariant: colosseumVariant,
         aresExtension: aresExtension,
         politicalAgendasExtension: politicalAgendasExtension,
         societyExpansion: societyExpansion,
@@ -643,6 +647,12 @@ export const CreateGameForm = Vue.component('create-game-form', {
                             <label for="ares-checkbox" class="expansion-button">
                                 <div class="create-game-expansion-icon expansion-icon-ares"></div>
                                 <span v-i18n>Ares</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Ares" class="tooltip" target="_blank">&#9432;</a>
+                            </label>
+
+                            <input type="checkbox" name="colosseumVariant" id="colosseum-checkbox" v-model="colosseumVariant">
+                            <label for="colosseum-checkbox" class="expansion-button">
+                                <div class="create-game-expansion-icon expansion-icon-colosseum"></div>
+                                <span v-i18n>Colosseum</span>&nbsp;<a href="https://www.notion.so/Variants-32b53050f10a4cfbaea117c34d4f3a03#49dca5ee729b4bbea7e1e8f03f52c76f" class="tooltip" target="_blank">&#9432;</a>
                             </label>
 
                             <input type="checkbox" name="community" id="communityCards-checkbox" v-model="communityCardsOption">

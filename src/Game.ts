@@ -102,6 +102,7 @@ export interface GameOptions {
   moonExpansion: boolean;
 
   // Variants
+  colosseumVariant: boolean;
   draftVariant: boolean;
   initialDraftVariant: boolean;
   startingCorporations: number;
@@ -124,6 +125,7 @@ const DEFAULT_GAME_OPTIONS: GameOptions = {
   cardsBlackList: [],
   clonedGamedId: undefined,
   coloniesExtension: false,
+  colosseumVariant: false,
   communityCardsOption: false,
   corporateEra: true,
   customColoniesList: [],
@@ -315,7 +317,7 @@ export class Game implements ISerializable<SerializedGame> {
     // Setup custom corporation list
     let corporationCards = game.dealer.corporationCards;
 
-    const minCorpsRequired = players.length * gameOptions.startingCorporations;
+    const minCorpsRequired = gameOptions.colosseumVariant ? 1 : players.length * gameOptions.startingCorporations;
     if (gameOptions.customCorporationsList && gameOptions.customCorporationsList.length >= minCorpsRequired) {
       const customCorporationCards: CorporationCard[] = [];
       for (const corp of gameOptions.customCorporationsList) {
@@ -341,7 +343,13 @@ export class Game implements ISerializable<SerializedGame> {
         GameSetup.setStartingProductions(player);
       }
 
-      if (!player.beginner ||
+      if (gameOptions.colosseumVariant) {
+        const corpCard = corporationCards[0];
+        player.dealtCorporationCards.push(corpCard);
+
+        if (gameOptions.initialDraftVariant === false) this.dealProjectCards(player, dealer, game);
+        if (gameOptions.preludeExtension) this.dealPreludeCards(player, dealer);
+      } else if (!player.beginner ||
         // Bypass beginner choice if any extension is choosen
         gameOptions.preludeExtension ||
         gameOptions.venusNextExtension ||
@@ -356,16 +364,8 @@ export class Game implements ISerializable<SerializedGame> {
             throw new Error('No corporation card dealt for player');
           }
         }
-        if (gameOptions.initialDraftVariant === false) {
-          for (let i = 0; i < 10; i++) {
-            player.dealtProjectCards.push(dealer.dealCard(game));
-          }
-        }
-        if (gameOptions.preludeExtension) {
-          for (let i = 0; i < 4; i++) {
-            player.dealtPreludeCards.push(dealer.dealPreludeCard());
-          }
-        }
+        if (gameOptions.initialDraftVariant === false) this.dealProjectCards(player, dealer, game);
+        if (gameOptions.preludeExtension) this.dealPreludeCards(player, dealer);
       } else {
         game.playerHasPickedCorporationCard(player, new BeginnerCorporation());
       }
@@ -387,6 +387,18 @@ export class Game implements ISerializable<SerializedGame> {
     }
 
     return game;
+  }
+
+  private static dealProjectCards(player: Player, dealer: Dealer, game: Game): void {
+    for (let i = 0; i < 10; i++) {
+      player.dealtProjectCards.push(dealer.dealCard(game));
+    }
+  }
+
+  private static dealPreludeCards(player: Player, dealer: Dealer): void {
+    for (let i = 0; i < 4; i++) {
+      player.dealtPreludeCards.push(dealer.dealPreludeCard());
+    }
   }
 
   public save(): void {

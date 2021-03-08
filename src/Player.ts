@@ -69,6 +69,7 @@ import {Manutech} from './cards/venusNext/Manutech';
 import {LunaProjectOffice} from './cards/moon/LunaProjectOffice';
 import {UnitedNationsMissionOne} from './cards/community/corporations/UnitedNationsMissionOne';
 import {SilverCubeHandler} from './community/SilverCubeHandler';
+import {MonsInsurance} from './cards/promo/MonsInsurance';
 
 export type PlayerId = string;
 
@@ -300,21 +301,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     throw new Error('Resource ' + resource + ' not found');
   }
 
-  private resolveMonsInsurance() {
-    if (this.game.monsInsuranceOwner !== undefined && this.game.monsInsuranceOwner !== this.id) {
-      const monsInsuranceOwner: Player = this.game.getPlayerById(this.game.monsInsuranceOwner);
-      const retribution: number = Math.min(monsInsuranceOwner.megaCredits, 3);
-      this.megaCredits += retribution;
-      monsInsuranceOwner.setResource(Resources.MEGACREDITS, -3);
-      if (retribution > 0) {
-        this.game.log('${0} received ${1} MC from ${2} owner (${3})', (b) =>
-          b.player(this)
-            .number(retribution)
-            .cardName(CardName.MONS_INSURANCE)
-            .player(monsInsuranceOwner));
-      }
-    }
-  }
+  
 
   public setResource(resource: Resources, amount : number = 1, game? : Game, fromPlayer? : Player, globalEvent? : boolean) {
     if (resource === Resources.MEGACREDITS) this.megaCredits = Math.max(0, this.megaCredits + amount);
@@ -355,7 +342,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
     // Mons Insurance hook
     if (game !== undefined && amount < 0 && fromPlayer !== undefined && fromPlayer !== this) {
-      this.resolveMonsInsurance();
+      MonsInsurance.resolveMonsInsurance(this);
     }
   }
 
@@ -408,7 +395,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
     // Mons Insurance hook
     if (game !== undefined && amount < 0 && fromPlayer !== undefined && fromPlayer !== this) {
-      this.resolveMonsInsurance();
+      MonsInsurance.resolveMonsInsurance(this);
     }
   };
 
@@ -590,7 +577,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       card.resourceCount = Math.max(card.resourceCount - count, 0);
       // Mons Insurance hook
       if (game !== undefined && removingPlayer !== undefined) {
-        if (removingPlayer !== this) this.resolveMonsInsurance();
+        if (removingPlayer !== this) MonsInsurance.resolveMonsInsurance(this);
 
         if (shouldLogAction) {
           game.log('${0} removed ${1} resource(s) from ${2}\'s ${3}', (b) =>

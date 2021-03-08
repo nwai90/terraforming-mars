@@ -8,6 +8,7 @@ export interface GameOptionsModel {
   boardName: BoardName,
   cardsBlackList: Array<CardName>;
   coloniesExtension: boolean,
+  colosseumVariant: boolean,
   communityCardsOption: boolean,
   corporateEra: boolean,
   draftVariant: boolean,
