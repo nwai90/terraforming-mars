@@ -68,6 +68,7 @@ import {AmazonisBoard} from './boards/AmazonisBoard';
 import {ArabiaTerraBoard} from './boards/ArabiaTerraBoard';
 import {VastitasBorealisBoard} from './boards/VastitasBorealisBoard';
 import {SilverCubeHandler} from './community/SilverCubeHandler';
+import {MilestoneAwardSelector} from './MilestoneAwardSelector';
 
 export type GameId = string;
 
@@ -278,7 +279,7 @@ export class Game implements ISerializable<SerializedGame> {
       game.aresData = AresSetup.initialData(gameOptions.aresExtension, gameOptions.aresHazards, players);
     }
 
-    const milestonesAwards = GameSetup.chooseMilestonesAndAwards(gameOptions);
+    const milestonesAwards = MilestoneAwardSelector.chooseMilestonesAndAwards(gameOptions);
     game.milestones = milestonesAwards.milestones;
     game.awards = milestonesAwards.awards;
 
@@ -1325,6 +1326,9 @@ export class Game implements ISerializable<SerializedGame> {
                   space.player === player,
     ).length;
   }
+
+  // addTile applies to the Mars board, but not the Moon board, see MoonExpansion.addTile for placing
+  // a tile on The Moon.
   public addTile(
     player: Player, spaceType: SpaceType,
     space: ISpace, tile: ITile): void {
@@ -1649,6 +1653,10 @@ export class Game implements ISerializable<SerializedGame> {
 
     const awards: Array<IAward> = [];
     d.awards.forEach((element: IAward) => {
+      // TODO(kberg): remove by 2021-03-30
+      if (element.name === 'Entrepeneur') {
+        element.name = 'Entrepreneur';
+      }
       ALL_AWARDS.forEach((award: IAward) => {
         if (award.name === element.name) {
           awards.push(award);
