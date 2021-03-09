@@ -3,7 +3,6 @@ import {Player} from '../../../Player';
 import {PreludeCard} from '../../prelude/PreludeCard';
 import {IProjectCard} from '../../IProjectCard';
 import {CardName} from '../../../CardName';
-import {ALL_DEFAULT_PARTIES, ALL_SOCIETY_PARTIES} from '../../../turmoil/Turmoil';
 import {SelectOption} from '../../../inputs/SelectOption';
 import {OrOptions} from '../../../inputs/OrOptions';
 import {DeferredAction} from '../../../deferredActions/DeferredAction';
@@ -32,19 +31,15 @@ export class ByElection extends PreludeCard implements IProjectCard {
   }
   public play(player: Player) {
     const turmoil = player.game.turmoil;
-    if (turmoil === undefined) {
-      return;
-    }
+    if (turmoil === undefined) return;
+
     turmoil.addInfluenceBonus(player);
     const setRulingParty = new OrOptions();
-
     setRulingParty.title = 'Select new ruling party';
-    let availableParties = ALL_DEFAULT_PARTIES;
-    if (player.game.gameOptions.societyExpansion === true) availableParties = ALL_SOCIETY_PARTIES;
 
-    setRulingParty.options = [...availableParties.map((p) => new SelectOption(
-      p.partyName, 'Select', () => {
-        turmoil.rulingParty = turmoil.getPartyByName(p.partyName);
+    setRulingParty.options = [...turmoil.parties.map((p) => new SelectOption(
+      p.name, 'Select', () => {
+        turmoil.rulingParty = turmoil.getPartyByName(p.name);
         PoliticalAgendas.setNextAgenda(turmoil, player.game);
 
         return undefined;
