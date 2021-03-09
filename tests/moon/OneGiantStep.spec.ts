@@ -1,13 +1,23 @@
 import {expect} from 'chai';
 import {CoreMine} from '../../src/cards/moon/CoreMine';
 import {ResearchNetwork} from '../../src/cards/prelude/ResearchNetwork';
+import {Game} from '../../src/Game';
 import {OneGiantStep} from '../../src/moon/OneGiantStep';
+import {setCustomGameOptions} from '../TestingUtils';
+import {TestPlayer} from '../TestPlayer';
 import {TestPlayers} from '../TestPlayers';
 
 describe('OneGiantStep', () => {
+  let milestone: OneGiantStep; let player: TestPlayer; let otherPlayer: TestPlayer;
+
+  beforeEach(() => {
+    milestone = new OneGiantStep();
+    player = TestPlayers.BLUE.newPlayer();
+    otherPlayer = TestPlayers.PINK.newPlayer();
+    Game.newInstance('id', [player, otherPlayer], player, setCustomGameOptions({moonExpansion: true}));
+  });
+
   it('Standard test', () => {
-    const milestone = new OneGiantStep();
-    const player = TestPlayers.BLUE.newPlayer();
     expect(milestone.canClaim(player)).is.not.true;
     player.playedCards = [
       new CoreMine(),
@@ -29,8 +39,6 @@ describe('OneGiantStep', () => {
   });
 
   it('Wildcard counts', () => {
-    const milestone = new OneGiantStep();
-    const player = TestPlayers.BLUE.newPlayer();
     player.playedCards = [
       new CoreMine(),
       new CoreMine(),

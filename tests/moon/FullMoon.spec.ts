@@ -1,13 +1,23 @@
 import {expect} from 'chai';
 import {CoreMine} from '../../src/cards/moon/CoreMine';
 import {ResearchNetwork} from '../../src/cards/prelude/ResearchNetwork';
+import {Game} from '../../src/Game';
 import {FullMoon} from '../../src/moon/FullMoon';
+import {setCustomGameOptions} from '../TestingUtils';
+import {TestPlayer} from '../TestPlayer';
 import {TestPlayers} from '../TestPlayers';
 
 describe('FullMoon', () => {
+  let award: FullMoon; let player: TestPlayer; let otherPlayer: TestPlayer;
+
+  beforeEach(() => {
+    award = new FullMoon();
+    player = TestPlayers.BLUE.newPlayer();
+    otherPlayer = TestPlayers.PINK.newPlayer();
+    Game.newInstance('id', [player, otherPlayer], player, setCustomGameOptions({moonExpansion: true}));
+  });
+
   it('Standard test', () => {
-    const award = new FullMoon();
-    const player = TestPlayers.BLUE.newPlayer();
     expect(award.getScore(player)).eq(0);
     player.playedCards = [
       new CoreMine(),
@@ -21,8 +31,6 @@ describe('FullMoon', () => {
   });
 
   it('Wildcard counts', () => {
-    const award = new FullMoon();
-    const player = TestPlayers.BLUE.newPlayer();
     player.playedCards = [
       new CoreMine(),
       new CoreMine(),
