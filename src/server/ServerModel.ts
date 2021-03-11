@@ -66,6 +66,7 @@ export class Server {
       actionsTakenThisRound: player.actionsTakenThisRound,
       actionsThisGeneration: Array.from(player.getActionsThisGeneration()),
       aresData: game.aresData,
+      availableBlueCardActionCount: player.getAvailableBlueActionCount(),
       awards: getAwards(game),
       cardCost: player.cardCost,
       cardsInHand: getCards(player, player.cardsInHand, {showNewCost: true}),
@@ -455,6 +456,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
         oceansSilverCubeBonusMC: game.oceansSilverCubeBonusMC,
         oxygenSilverCubeBonusMC: game.oxygenSilverCubeBonusMC,
         venusSilverCubeBonusMC: game.venusSilverCubeBonusMC,
+        availableBlueCardActionCount: player.getAvailableBlueActionCount(),
     } as unknown as PlayerModel;
   });
 }

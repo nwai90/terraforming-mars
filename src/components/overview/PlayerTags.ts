@@ -10,6 +10,7 @@ import {PartyName} from '../../turmoil/parties/PartyName';
 import {TurmoilPolicy} from '../../turmoil/TurmoilPolicy';
 import {ColonyName} from '../../colonies/ColonyName';
 import {CardModel} from '../../models/CardModel';
+import {PreferencesManager} from '../PreferencesManager';
 
 type InterfaceTagsType = Tags | SpecialTags | 'all' | 'separator';
 
@@ -215,12 +216,27 @@ export const PlayerTags = Vue.component('player-tags', {
 
       return 0;
     },
+    getAvailableBlueActionCount: function(): number {
+      return this.player.availableBlueCardActionCount;
+    },
+    isLearnerModeOff: function(): boolean {
+      return PreferencesManager.loadBooleanValue('learner_mode') === false;
+    },
   },
   template: `
         <div class="player-tags">
             <div class="player-tags-main">
                 <tag-count :tag="'vp'" :count="getVpCount()" :size="'big'" :type="'main'" />
                 <tag-count :tag="'tr'" :count="getTR()" :size="'big'" :type="'main'"/>
+
+                <div v-if="isLearnerModeOff()" class="tag-display tooltip tooltip-top" data-tooltip="The number of available active card actions">
+                    <div class="tag-count tag-action-card">
+                    <div class="blue-stripe"></div>
+                    <div class="red-arrow"></div>
+                    </div>
+                    <span class="tag-count-display">{{ getAvailableBlueActionCount() }}</span>
+                </div>
+
                 <div class="tag-and-discount">
                   <PlayerTagDiscount v-if="hasTagDiscount('all')" :amount="getTagDiscountAmount('all')" :color="player.color" />
                   <tag-count :tag="'cards'" :count="getCardCount()" :size="'big'" :type="'main'"/>

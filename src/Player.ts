@@ -927,6 +927,13 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
   }
 
+  public getAvailableBlueActionCount(): number {
+    let count = this.getPlayableActionCards().length;
+    if (this.game.gameOptions.fastModeOption) count += this.remainingStallActionsCount;
+
+    return count;
+  }
+
   public getPlayableActionCards(): Array<ICard> {
     const result: Array<ICard> = [];
 
