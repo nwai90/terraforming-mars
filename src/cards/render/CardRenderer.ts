@@ -314,8 +314,8 @@ class Builder {
     return this;
   }
 
-  public hazardTile(): Builder {
-    this._addRowItem(new CardRenderItem(CardRenderItemType.HAZARD_TILE));
+  public hazardTile(amount: number = 1): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.HAZARD_TILE, amount));
     return this;
   }
 

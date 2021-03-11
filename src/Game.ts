@@ -209,6 +209,8 @@ export class Game implements ISerializable<SerializedGame> {
   public someoneHasRemovedOtherPlayersPlants: boolean = false;
   // United Nations Mission One community corp
   public unitedNationsMissionOneOwner: PlayerId | undefined = undefined;
+  // Athena community corp
+  public athenaOwner: PlayerId | undefined = undefined;
   // Syndicate Pirate Raids
   public syndicatePirateRaider: PlayerId | undefined = undefined;
 
@@ -412,6 +414,7 @@ export class Game implements ISerializable<SerializedGame> {
   public serialize(): SerializedGame {
     const result: SerializedGame = {
       activePlayer: this.activePlayer,
+      athenaOwner: this.athenaOwner,
       awards: this.awards,
       board: this.board.serialize(),
       claimedMilestones: serializeClaimedMilestones(this.claimedMilestones),
@@ -1731,6 +1734,7 @@ export class Game implements ISerializable<SerializedGame> {
     game.initialDraftIteration = d.initialDraftIteration;
     game.monsInsuranceOwner = d.monsInsuranceOwner;
     game.unitedNationsMissionOneOwner = d.unitedNationsMissionOneOwner;
+    game.athenaOwner = d.athenaOwner;
     game.someoneHasRemovedOtherPlayersPlants = d.someoneHasRemovedOtherPlayersPlants;
     game.temperatureSilverCubeBonusMC = d.temperatureSilverCubeBonusMC;
     game.oceansSilverCubeBonusMC = d.oceansSilverCubeBonusMC;

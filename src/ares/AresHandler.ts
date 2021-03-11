@@ -219,6 +219,7 @@ export class AresHandler {
 
     if (cost.production > 0) {
       // TODO(kberg): don't send interrupt if total is available.
+      if (player.isCorporation(CardName.ATHENA)) return;
       player.game.defer(new SelectProductionToLoseDeferred(player, cost.production));
     }
     if (cost.megacredits > 0) {
@@ -274,6 +275,7 @@ export class AresHandler {
     default:
       return;
     }
+
     player.increaseTerraformRatingSteps(steps);
     player.game.log('${0}\'s TR increases ${1} step(s) for removing ${2}', (b) => b.player(player).number(steps).string(TileType.toString(initialTileType)));
   }

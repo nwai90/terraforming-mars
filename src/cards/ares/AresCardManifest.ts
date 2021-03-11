@@ -1,6 +1,7 @@
 import {CardName} from '../../CardName';
 import {GameModule} from '../../GameModule';
 import {CardManifest} from '../CardManifest';
+import {Athena} from './Athena';
 import {BioengineeringEnclosure} from './BioengineeringEnclosure';
 import {BiofertilizerFacility} from './BiofertilizerFacility';
 import {ButterflyEffect} from './ButterflyEffect';
@@ -68,5 +69,6 @@ export const ARES_CARD_MANIFEST = new CardManifest({
   ],
   corporationCards: [
     {cardName: CardName.ERIS, Factory: Eris},
+    {cardName: CardName.ATHENA, Factory: Athena},
   ],
 });

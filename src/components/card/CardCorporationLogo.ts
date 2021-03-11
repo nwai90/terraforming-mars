@@ -160,6 +160,8 @@ export const CardCorporationLogo = Vue.component('CardCorporationLogo', {
         return '<div class="card-the-archaic-foundation-institute-logo"></div>';
       case CardName.ERIS:
         return '<div class="card-eris-logo">Eris</div>';
+      case CardName.ATHENA:
+        return '<div class="card-athena-logo">Athena</div>';
       case CardName.COLONIAL_ONE:
         return '<div class="card-colonial-one-logo">Colonial One</div>';
       case CardName.HOTSPRINGS:

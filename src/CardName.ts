@@ -473,6 +473,7 @@ export enum CardName {
     MIDAS = 'Midas',
     COLONIAL_ONE = 'Colonial One',
     ERIS = 'Eris',
+    ATHENA = 'Athena',
     HOTSPRINGS = 'Hotsprings',
     JUNK_VENTURES = 'Junk Ventures',
     ARISTARCHUS = 'Aristarchus',

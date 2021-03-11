@@ -20,6 +20,7 @@ import {SerializedMoonData} from './moon/SerializedMoonData';
 export interface SerializedGame {
     activePlayer: PlayerId;
     aresData?: IAresData;
+    athenaOwner: PlayerId | undefined;
     awards: Array<IAward>;
     board: SerializedBoard;
     claimedMilestones: Array<SerializedClaimedMilestone>;
