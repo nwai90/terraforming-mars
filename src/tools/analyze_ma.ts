@@ -46,7 +46,6 @@ function calc(params: URLSearchParams): string {
 
   if (params.get('venus') === 'true') {
     options.venusNextExtension = true;
-    options.includeVenusMA = true;
   }
 
   if (params.get('ares') === 'true') {
@@ -90,7 +89,6 @@ function simpleGameOptions(): GameOptions {
     undoOption: false,
     showTimers: false,
     fastModeOption: false,
-    showOtherPlayersVP: false,
     corporateEra: false,
     coloniesExtension: false,
     preludeExtension: false,
@@ -100,7 +98,6 @@ function simpleGameOptions(): GameOptions {
     aresHazards: false,
     politicalAgendasExtension: AgendaStyle.STANDARD,
     solarPhaseOption: false,
-    removeNegativeGlobalEventsOption: false,
     draftVariant: false,
     initialDraftVariant: false,
     startingCorporations: 0,
@@ -116,8 +113,11 @@ function simpleGameOptions(): GameOptions {
     boardName: BoardName.ORIGINAL,
     venusNextExtension: false,
     aresExtension: false,
-    includeVenusMA: false,
     moonExpansion: false,
+    silverCubeVariant: false,
+    societyExpansion: false,
+    randomTurmoil: false,
+    colosseumVariant: false,
     randomMA: RandomMAOptionType.NONE,
   };
 }
