@@ -21,8 +21,9 @@ describe('UnitedNationsMissionOne', function() {
     player.corporationCard = card;
   });
 
-  it('Sets property correctly', function() {
+  it('Initializes correctly', function() {
     expect(game.unitedNationsMissionOneOwner).to.eq(player.id);
+    expect(player.getTerraformRating()).to.eq(21);
   });
 
   it('Gains 1 MC whenever any player raises TR during action phase', function() {

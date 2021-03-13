@@ -35,6 +35,7 @@ export class UnitedNationsMissionOne extends Card implements CorporationCard {
 
     public play(player: Player) {
       player.game.unitedNationsMissionOneOwner = player.id;
+      player.increaseTerraformRating();
       UnitedNationsMissionOne.onTRIncrease(player.game, true);
       return undefined;
     }
