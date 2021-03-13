@@ -70,6 +70,7 @@ import {LunaProjectOffice} from './cards/moon/LunaProjectOffice';
 import {UnitedNationsMissionOne} from './cards/community/corporations/UnitedNationsMissionOne';
 import {SilverCubeHandler} from './community/SilverCubeHandler';
 import {MonsInsurance} from './cards/promo/MonsInsurance';
+import {GlobalParameter} from './GlobalParameter';
 
 export type PlayerId = string;
 
@@ -545,17 +546,17 @@ export class Player implements ISerializable<SerializedPlayer> {
     } else return 0;
   }
 
-  public getRequirementsBonus(venusOnly?: boolean): number {
+  public getRequirementsBonus(parameter: GlobalParameter): number {
     let requirementsBonus: number = 0;
     if (
       this.corporationCard !== undefined &&
           this.corporationCard.getRequirementBonus !== undefined) {
-      requirementsBonus += this.corporationCard.getRequirementBonus(this, venusOnly);
+      requirementsBonus += this.corporationCard.getRequirementBonus(this, parameter);
     }
     for (const playedCard of this.playedCards) {
       if (playedCard.getRequirementBonus !== undefined &&
-          playedCard.getRequirementBonus(this)) {
-        requirementsBonus += playedCard.getRequirementBonus(this);
+          playedCard.getRequirementBonus(this, parameter)) {
+        requirementsBonus += playedCard.getRequirementBonus(this, parameter);
       }
     }
 
