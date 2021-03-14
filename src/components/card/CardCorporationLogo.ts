@@ -174,6 +174,8 @@ export const CardCorporationLogo = Vue.component('CardCorporationLogo', {
         return '<div class="card-labour-union-logo">Labour Union</div>';
       case CardName.UNITED_NATIONS_MISSION_ONE:
         return '<span class="card-unmo-logo">UNITED NATIONS<br/>MISSION ONE</span>';
+      case CardName.BEGINNER_CORPORATION:
+        return '<span class="card-beginner-corp-logo">Beginner<br/>Corporation</span>';
       }
       return '';
     },
