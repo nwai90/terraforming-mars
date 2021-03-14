@@ -4,7 +4,7 @@ import {MicroMills} from '../../../src/cards/base/MicroMills';
 import {Hotsprings} from '../../../src/cards/community/corporations/Hotsprings';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('Hotsprings', function() {
   let card : Hotsprings; let player : Player;

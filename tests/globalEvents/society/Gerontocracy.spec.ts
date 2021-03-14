@@ -3,7 +3,7 @@ import {Gerontocracy} from '../../../src/turmoil/globalEvents/society/Gerontocra
 import {Game} from '../../../src/Game';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {StanfordTorus} from '../../../src/cards/promo/StanfordTorus';
 import {NoctisCity} from '../../../src/cards/base/NoctisCity';
 

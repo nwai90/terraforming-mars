@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {AquiferPumping} from '../../../src/cards/base/AquiferPumping';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('AquiferPumping', function() {
   let card : AquiferPumping; let player : Player; let game : Game;

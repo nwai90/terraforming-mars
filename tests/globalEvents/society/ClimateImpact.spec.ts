@@ -3,7 +3,7 @@ import {ClimateImpact} from '../../../src/turmoil/globalEvents/society/ClimateIm
 import {Game} from '../../../src/Game';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('ClimateImpact', function() {
   it('resolve play', function() {

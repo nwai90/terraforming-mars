@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {TradeInfrastructure} from '../../../src/cards/community/preludes/TradeInfrastructure';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {Game} from '../../../src/Game';
 
 describe('TradeInfrastructure', function() {

@@ -2,7 +2,8 @@ import {expect} from 'chai';
 import {VirtualDemocracy} from '../../../src/turmoil/globalEvents/society/VirtualDemocracy';
 import {Game} from '../../../src/Game';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
-import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {SelectPartyToSendDelegate} from '../../../src/inputs/SelectPartyToSendDelegate';
 
 describe('VirtualDemocracy', function() {
@@ -10,7 +11,7 @@ describe('VirtualDemocracy', function() {
     const card = new VirtualDemocracy();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
-    const game = Game.newInstance('foobar', [player, player2], player, setCustomGameOptions({turmoilExtension: true}));
+    const game = Game.newInstance('foobar', [player, player2], player, TestingUtils.setCustomGameOptions({turmoilExtension: true}));
     const turmoil = game.turmoil!
 
     turmoil.dominantParty = turmoil.getPartyByName(PartyName.REDS)!;

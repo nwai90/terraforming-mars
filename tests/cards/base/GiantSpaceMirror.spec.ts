@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {GiantSpaceMirror} from '../../../src/cards/base/GiantSpaceMirror';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('GiantSpaceMirror', function() {
   it('Should play', function() {

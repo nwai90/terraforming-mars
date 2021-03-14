@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Renationalisation} from '../../../src/turmoil/globalEvents/society/Renationalisation';
 import {Game} from '../../../src/Game';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {DustSeals} from '../../../src/cards/base/DustSeals';
 import {RadSuits} from '../../../src/cards/base/RadSuits';
 import {ArchaeBacteria} from '../../../src/cards/base/ArchaeBacteria';

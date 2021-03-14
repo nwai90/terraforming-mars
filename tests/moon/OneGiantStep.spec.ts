@@ -3,7 +3,7 @@ import {CoreMine} from '../../src/cards/moon/CoreMine';
 import {ResearchNetwork} from '../../src/cards/prelude/ResearchNetwork';
 import {Game} from '../../src/Game';
 import {OneGiantStep} from '../../src/moon/OneGiantStep';
-import {setCustomGameOptions} from '../TestingUtils';
+import {TestingUtils} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
 import {TestPlayers} from '../TestPlayers';
 
@@ -14,7 +14,7 @@ describe('OneGiantStep', () => {
     milestone = new OneGiantStep();
     player = TestPlayers.BLUE.newPlayer();
     otherPlayer = TestPlayers.PINK.newPlayer();
-    Game.newInstance('id', [player, otherPlayer], player, setCustomGameOptions({moonExpansion: true}));
+    Game.newInstance('id', [player, otherPlayer], player, TestingUtils.setCustomGameOptions({moonExpansion: true}));
   });
 
   it('Standard test', () => {

@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {DysonSwarmConstruction} from '../../../src/turmoil/globalEvents/society/DysonSwarmConstruction';
 import {Game} from '../../../src/Game';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
 import {Satellites} from '../../../src/cards/base/Satellites';
 

@@ -3,7 +3,7 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {BotanicalHarvest} from '../../../src/cards/community/preludes/BotanicalHarvest';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('BotanicalHarvest', function() {
   let card : BotanicalHarvest; let player : Player; let game: Game;

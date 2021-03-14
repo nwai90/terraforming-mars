@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Aristarchus} from '../../../src/cards/community/corporations/Aristarchus';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('Aristarchus', function() {
   let card : Aristarchus; let player : Player;

@@ -3,7 +3,7 @@ import {UniversalRoom} from '../../../src/turmoil/globalEvents/society/Universal
 import {Game} from '../../../src/Game';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {DomedCrater} from '../../../src/cards/base/DomedCrater';
 
 describe('UniversalRoom', function() {

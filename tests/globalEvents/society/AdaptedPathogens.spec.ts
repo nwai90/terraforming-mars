@@ -3,7 +3,7 @@ import {AdaptedPathogens} from '../../../src/turmoil/globalEvents/society/Adapte
 import {Game} from '../../../src/Game';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {Decomposers} from '../../../src/cards/base/Decomposers';
 import {ICard} from '../../../src/cards/ICard';
 import {SelectCard} from '../../../src/inputs/SelectCard';

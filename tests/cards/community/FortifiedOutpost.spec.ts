@@ -4,7 +4,7 @@ import {Game} from '../../../src/Game';
 import {FortifiedOutpost} from '../../../src/cards/community/preludes/FortifiedOutpost';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {TileType} from '../../../src/TileType';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('FortifiedOutpost', function() {
   let card : FortifiedOutpost; let player : Player; let game : Game;

@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {PowerPlant} from '../../../src/cards/base/PowerPlant';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('PowerPlant', function() {
   it('Should play', function() {

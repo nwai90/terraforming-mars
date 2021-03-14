@@ -3,7 +3,7 @@ import {BloomingVale} from '../../../src/turmoil/globalEvents/society/BloomingVa
 import {Game} from '../../../src/Game';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('BloomingVale', function() {
   it('resolve play', function() {

@@ -1,12 +1,13 @@
 import {expect} from 'chai';
 import {Game} from '../src/Game';
-import {setCustomGameOptions, TestPlayers} from './TestingUtils';
 import {AgendaStyle, PoliticalAgendas} from '../src/turmoil/PoliticalAgendas';
 import {PartyName} from '../src/turmoil/parties/PartyName';
 import {Player} from '../src/Player';
 import {Turmoil} from '../src/turmoil/Turmoil';
 import {ChoosePoliticalAgenda} from '../src/deferredActions/ChoosePoliticaAgenda';
 import {OrOptions} from '../src/inputs/OrOptions';
+import {TestingUtils} from './TestingUtils';
+import {TestPlayers} from './TestPlayers';
 
 describe('PoliticalAgendas', () => {
   let player : Player; let player2 : Player; let game : Game; let turmoil: Turmoil;
@@ -17,7 +18,7 @@ describe('PoliticalAgendas', () => {
   });
 
   it('deserialize legacy', () => {
-    const gameOptions = setCustomGameOptions();
+    const gameOptions = TestingUtils.setCustomGameOptions();
     game = Game.newInstance('foobar', [player, player2], player, gameOptions);
     turmoil = game.turmoil!;
     turmoil.rulingParty = turmoil.getPartyByName(PartyName.MARS);
@@ -58,7 +59,7 @@ describe('PoliticalAgendas', () => {
   });
 
   it('in chairman mode, incoming chairman can choose to set ruling bonus or policy', () => {
-    const gameOptions = setCustomGameOptions({politicalAgendasExtension: AgendaStyle.CHAIRMAN});
+    const gameOptions = TestingUtils.setCustomGameOptions({politicalAgendasExtension: AgendaStyle.CHAIRMAN});
     game = Game.newInstance('foobar', [player, player2], player, gameOptions);
     turmoil = game.turmoil!;
     turmoil.sendDelegateToParty(player.id, PartyName.MARS, game);

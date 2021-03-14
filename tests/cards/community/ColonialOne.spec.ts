@@ -2,7 +2,8 @@ import {expect} from 'chai';
 import {ColonialOne} from '../../../src/cards/community/corporations/ColonialOne';
 import {Player} from '../../../src/Player';
 import {Game, GameOptions} from '../../../src/Game';
-import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {SelectColony} from '../../../src/inputs/SelectColony';
 import {ColonyName} from '../../../src/colonies/ColonyName';
@@ -15,7 +16,7 @@ describe('ColonialOne', function() {
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
 
-    const gameOptions = setCustomGameOptions({coloniesExtension: true}) as GameOptions;
+    const gameOptions = TestingUtils.setCustomGameOptions({coloniesExtension: true}) as GameOptions;
     game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
 
     card.play(player);

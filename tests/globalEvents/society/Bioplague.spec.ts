@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Bioplague} from '../../../src/turmoil/globalEvents/society/Bioplague';
 import {Game} from '../../../src/Game';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {Livestock} from '../../../src/cards/base/Livestock';
 
 describe('Bioplague', function() {

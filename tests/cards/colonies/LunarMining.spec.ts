@@ -4,7 +4,7 @@ import {LunarMining} from '../../../src/cards/colonies/LunarMining';
 import {SpaceHotels} from '../../../src/cards/prelude/SpaceHotels';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('LunarMining', function() {
   it('Should play', function() {

@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {SocialNihilism} from '../../../src/turmoil/globalEvents/society/SocialNihilism';
 import {Game} from '../../../src/Game';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('SocialNihilism', function() {
   it('resolve play', function() {

@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {PowerGeneration} from '../../../src/cards/prelude/PowerGeneration';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 
 describe('PowerGeneration', function() {

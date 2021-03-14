@@ -3,7 +3,8 @@ import {FermiSolution} from '../../../src/turmoil/globalEvents/society/FermiSolu
 import {Game} from '../../../src/Game';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
-import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {Resources} from '../../../src/Resources';
 import {Luna} from '../../../src/colonies/Luna';
 
@@ -12,7 +13,7 @@ describe('FermiSolution', function() {
     const card = new FermiSolution();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
-    const game = Game.newInstance('foobar', [player, player2], player, setCustomGameOptions({coloniesExtension: true}));
+    const game = Game.newInstance('foobar', [player, player2], player, TestingUtils.setCustomGameOptions({coloniesExtension: true}));
     const turmoil = Turmoil.newInstance(game);
 
     turmoil.dominantParty = turmoil.getPartyByName(PartyName.REDS)!;

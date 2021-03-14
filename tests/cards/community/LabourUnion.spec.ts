@@ -5,7 +5,7 @@ import {LabourUnion} from '../../../src/cards/community/corporations/LabourUnion
 import {DiscardCards} from '../../../src/deferredActions/DiscardCards';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('LabourUnion', function() {
   let card : LabourUnion; let player : Player; let game: Game;

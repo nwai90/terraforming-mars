@@ -4,7 +4,7 @@ import {TectonicStressPower} from '../../../src/cards/base/TectonicStressPower';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('TectonicStressPower', function() {
   let card : TectonicStressPower; let player : Player;

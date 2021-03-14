@@ -3,14 +3,15 @@ import {ColonizationIncentives} from '../../../src/turmoil/globalEvents/society/
 import {Game} from '../../../src/Game';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
-import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {Luna} from '../../../src/colonies/Luna';
 
 describe('ColonizationIncentives', function() {
   it('resolve play', function() {
     const card = new ColonizationIncentives();
     const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player, setCustomGameOptions({coloniesExtension: true}));
+    const game = Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions({coloniesExtension: true}));
     const turmoil = Turmoil.newInstance(game);
 
     turmoil.dominantParty = turmoil.getPartyByName(PartyName.REDS)!;

@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Biofuels} from '../../../src/cards/prelude/Biofuels';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('Biofuels', function() {
   it('Should play', function() {

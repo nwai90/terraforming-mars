@@ -3,7 +3,7 @@ import {WaterImportFromEuropa} from '../../../src/cards/base/WaterImportFromEuro
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('WaterImportFromEuropa', function() {
   let card : WaterImportFromEuropa; let player : Player; let game : Game;

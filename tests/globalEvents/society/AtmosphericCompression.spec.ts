@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {AtmosphericCompression} from '../../../src/turmoil/globalEvents/society/AtmosphericCompression';
 import {Game} from '../../../src/Game';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {VenusGovernor} from '../../../src/cards/venusNext/VenusGovernor';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
 

@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {LuxuryFoods} from '../../../src/cards/venusNext/LuxuryFoods';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('LuxuryFoods', function() {
   it('Should play', function() {

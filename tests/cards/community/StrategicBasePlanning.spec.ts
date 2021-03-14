@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import {Player} from '../../../src/Player';
-import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {Game, GameOptions} from '../../../src/Game';
 import {ColonyName} from '../../../src/colonies/ColonyName';
 import {SelectColony} from '../../../src/inputs/SelectColony';
@@ -17,7 +18,7 @@ describe('StrategicBasePlanning', function() {
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
 
-    const gameOptions = setCustomGameOptions({coloniesExtension: true}) as GameOptions;
+    const gameOptions = TestingUtils.setCustomGameOptions({coloniesExtension: true}) as GameOptions;
     game = Game.newInstance('foobar', [player, player2], player, gameOptions);
     game.colonies.push(new Iapetus()); // ensure an open colony is always available
   });

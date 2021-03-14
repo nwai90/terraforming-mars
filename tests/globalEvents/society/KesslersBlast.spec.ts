@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {KesslersBlast} from '../../../src/turmoil/globalEvents/society/KesslersBlast';
 import {Game} from '../../../src/Game';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {EarthOffice} from '../../../src/cards/base/EarthOffice';
 
 describe('KesslersBlast', function() {

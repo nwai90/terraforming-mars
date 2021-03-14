@@ -2,11 +2,11 @@ import {expect} from 'chai';
 import {Eris} from '../../../src/cards/ares/Eris';
 import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestingUtils';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {_AresHazardPlacement} from '../../../src/ares/AresHazards';
 import {ARES_OPTIONS_WITH_HAZARDS} from '../../ares/AresTestHelper';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('Eris', function() {
   let card : Eris; let player : Player; let game : Game;

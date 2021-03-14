@@ -3,7 +3,7 @@ import {FuelFactory} from '../../../src/cards/base/FuelFactory';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('FuelFactory', function() {
   let card : FuelFactory; let player : Player;

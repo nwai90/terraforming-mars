@@ -4,7 +4,7 @@ import {MiningQuota} from '../../../src/cards/venusNext/MiningQuota';
 import {SisterPlanetSupport} from '../../../src/cards/venusNext/SisterPlanetSupport';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('MiningQuota', function() {
   it('Should play', function() {

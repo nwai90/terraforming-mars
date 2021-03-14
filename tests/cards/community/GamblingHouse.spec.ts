@@ -3,7 +3,8 @@ import {GamblingHouse} from '../../../src/cards/community/preludes/GamblingHouse
 import {AlliedBanks} from '../../../src/cards/prelude/AlliedBanks';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
+import {TestingUtils} from '../../TestingUtils';
 
 describe('GamblingHouse', function() {
   let card : GamblingHouse; let player : Player; let game : Game;
@@ -12,7 +13,7 @@ describe('GamblingHouse', function() {
     card = new GamblingHouse();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    const gameOptions = setCustomGameOptions({preludeExtension: true});
+    const gameOptions = TestingUtils.setCustomGameOptions({preludeExtension: true});
     game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
   });
 

@@ -3,7 +3,7 @@ import {ExhaltSpecies} from '../../../src/turmoil/globalEvents/society/ExhaltSpe
 import {Game} from '../../../src/Game';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {SmallAnimals} from '../../../src/cards/base/SmallAnimals';
 import {ICard} from '../../../src/cards/ICard';
 import {SelectCard} from '../../../src/inputs/SelectCard';

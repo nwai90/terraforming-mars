@@ -4,7 +4,7 @@ import {ArtificialPhotosynthesis} from '../../../src/cards/base/ArtificialPhotos
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('ArtificialPhotosynthesis', function() {
   it('Should play', function() {

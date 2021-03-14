@@ -3,7 +3,7 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {GeothermalVent} from '../../../src/cards/community/preludes/GeothermalVent';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('GeothermalVent', function() {
   let card : GeothermalVent; let player : Player; let game: Game;

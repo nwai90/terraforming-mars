@@ -3,7 +3,7 @@ import {ClosedBiospheres} from '../../../src/turmoil/globalEvents/society/Closed
 import {Game} from '../../../src/Game';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {Resources} from '../../../src/Resources';
 
 describe('ClosedBiospheres', function() {

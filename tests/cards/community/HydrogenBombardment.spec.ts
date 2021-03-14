@@ -1,7 +1,8 @@
 import {expect} from 'chai';
 import {Player} from '../../../src/Player';
 import {Game, GameOptions} from '../../../src/Game';
-import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {HydrogenBombardment} from '../../../src/cards/community/preludes/HydrogenBombardment';
 import {Resources} from '../../../src/Resources';
 
@@ -13,7 +14,7 @@ describe('HydrogenBombardment', function() {
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
 
-    const gameOptions = setCustomGameOptions() as GameOptions;
+    const gameOptions = TestingUtils.setCustomGameOptions() as GameOptions;
     game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
   });
 

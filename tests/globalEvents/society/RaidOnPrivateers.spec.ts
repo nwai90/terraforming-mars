@@ -3,7 +3,7 @@ import {RaidOnPrivateers} from '../../../src/turmoil/globalEvents/society/RaidOn
 import {Game} from '../../../src/Game';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {LunaGovernor} from '../../../src/cards/colonies/LunaGovernor';
 import {VenusGovernor} from '../../../src/cards/venusNext/VenusGovernor';
 import {EarthOffice} from '../../../src/cards/base/EarthOffice';

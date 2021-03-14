@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {GenomeControl} from '../../../src/turmoil/globalEvents/society/GenomeControl';
 import {Game} from '../../../src/Game';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {VestaShipyard} from '../../../src/cards/base/VestaShipyard';
 import {DustSeals} from '../../../src/cards/base/DustSeals';
 import {SearchForLife} from '../../../src/cards/base/SearchForLife';

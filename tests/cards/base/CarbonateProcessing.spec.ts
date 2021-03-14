@@ -3,7 +3,7 @@ import {CarbonateProcessing} from '../../../src/cards/base/CarbonateProcessing';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('CarbonateProcessing', function() {
   let card : CarbonateProcessing; let player : Player;

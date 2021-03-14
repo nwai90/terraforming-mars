@@ -3,7 +3,7 @@ import {SoilFactory} from '../../../src/cards/base/SoilFactory';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('SoilFactory', function() {
   let card : SoilFactory; let player : Player;

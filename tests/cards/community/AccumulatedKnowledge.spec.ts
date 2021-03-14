@@ -3,7 +3,7 @@ import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {AccumulatedKnowledge} from '../../../src/cards/community/preludes/AccumulatedKnowledge';
 import {OrOptions} from '../../../src/inputs/OrOptions';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('AccumulatedKnowledge', function() {
   let card : AccumulatedKnowledge; let player : Player; let game: Game;

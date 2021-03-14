@@ -1,7 +1,8 @@
 import {expect} from 'chai';
 import {Player} from '../../../src/Player';
 import {Game, GameOptions} from '../../../src/Game';
-import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {Tags} from '../../../src/cards/Tags';
 import {NitrateReducers} from '../../../src/cards/community/preludes/NitrateReducers';
 import {Resources} from '../../../src/Resources';
@@ -14,7 +15,7 @@ describe('NitrateReducers', function() {
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
 
-    const gameOptions = setCustomGameOptions() as GameOptions;
+    const gameOptions = TestingUtils.setCustomGameOptions() as GameOptions;
     Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
   });
 

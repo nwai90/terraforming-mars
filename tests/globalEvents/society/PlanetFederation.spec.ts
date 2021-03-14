@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {PlanetFederation} from '../../../src/turmoil/globalEvents/society/PlanetFederation';
 import {Game} from '../../../src/Game';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {VenusGovernor} from '../../../src/cards/venusNext/VenusGovernor';
 import {LunaGovernor} from '../../../src/cards/colonies/LunaGovernor';
 import {EarthOffice} from '../../../src/cards/base/EarthOffice';

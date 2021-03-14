@@ -3,7 +3,7 @@ import {BuildingIndustries} from '../../../src/cards/base/BuildingIndustries';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('BuildingIndustries', function() {
   let card : BuildingIndustries; let player : Player;

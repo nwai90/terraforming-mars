@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {WoodlandInitiatives} from '../../../src/turmoil/globalEvents/society/WoodlandInitiatives';
 import {Game} from '../../../src/Game';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
 
 describe('WoodlandInitiatives', function() {

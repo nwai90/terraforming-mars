@@ -6,7 +6,8 @@ import {Game} from '../../../src/Game';
 import {Phase} from '../../../src/Phase';
 import {Player} from '../../../src/Player';
 import {Election} from '../../../src/turmoil/globalEvents/Election';
-import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('UnitedNationsMissionOne', function() {
   let card : UnitedNationsMissionOne; let player : Player; let player2 : Player; let game: Game;
@@ -15,7 +16,7 @@ describe('UnitedNationsMissionOne', function() {
     card = new UnitedNationsMissionOne();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, player2], player, setCustomGameOptions());
+    game = Game.newInstance('foobar', [player, player2], player, TestingUtils.setCustomGameOptions());
 
     card.play(player);
     player.corporationCard = card;

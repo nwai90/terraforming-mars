@@ -3,7 +3,7 @@ import {MetaSpirituality} from '../../../src/turmoil/globalEvents/society/MetaSp
 import {Game} from '../../../src/Game';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {DustSeals} from '../../../src/cards/base/DustSeals';
 import {MicroMills} from '../../../src/cards/base/MicroMills';
 import {Hackers} from '../../../src/cards/base/Hackers';

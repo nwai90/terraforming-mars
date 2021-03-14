@@ -3,7 +3,7 @@ import {DutyFreeSpace} from '../../../src/turmoil/globalEvents/society/DutyFreeS
 import {Game} from '../../../src/Game';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {FloatingHabs} from '../../../src/cards/venusNext/FloatingHabs';
 import {ExtractorBalloons} from '../../../src/cards/venusNext/ExtractorBalloons';
 

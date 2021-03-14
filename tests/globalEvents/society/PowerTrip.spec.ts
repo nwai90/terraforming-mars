@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {PowerTrip} from '../../../src/turmoil/globalEvents/society/PowerTrip';
 import {Game} from '../../../src/Game';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {PowerPlant} from '../../../src/cards/base/PowerPlant';
 
 describe('PowerTrip', function() {

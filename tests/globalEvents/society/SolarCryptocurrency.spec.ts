@@ -3,7 +3,7 @@ import {SolarCryptocurrency} from '../../../src/turmoil/globalEvents/society/Sol
 import {Game} from '../../../src/Game';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {Resources} from '../../../src/Resources';
 
 describe('SolarCryptocurrency', function() {

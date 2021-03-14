@@ -2,11 +2,11 @@ import {expect} from 'chai';
 import {Athena} from '../../../src/cards/ares/Athena';
 import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestingUtils';
 import {_AresHazardPlacement} from '../../../src/ares/AresHazards';
 import {ARES_OPTIONS_WITH_HAZARDS} from '../../ares/AresTestHelper';
 import {HAZARD_TILES} from '../../../src/ares/AresHandler';
 import {SpaceType} from '../../../src/SpaceType';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('Athena', function() {
   let card : Athena; let player : Player; let player2 : Player; let game : Game;

@@ -3,7 +3,7 @@ import {BusinessNetwork} from '../../../src/cards/base/BusinessNetwork';
 import {MirandaResort} from '../../../src/cards/base/MirandaResort';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('MirandaResort', function() {
   it('Should play', function() {

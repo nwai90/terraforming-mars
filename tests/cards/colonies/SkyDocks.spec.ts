@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {SkyDocks} from '../../../src/cards/colonies/SkyDocks';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('SkyDocks', function() {
   it('Should play', function() {

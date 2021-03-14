@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {PhaetonRescue} from '../../../src/turmoil/globalEvents/society/PhaetonRescue';
 import {Game} from '../../../src/Game';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {Mine} from '../../../src/cards/base/Mine';
 import {MedicalLab} from '../../../src/cards/base/MedicalLab';
 import {Luna} from '../../../src/colonies/Luna';

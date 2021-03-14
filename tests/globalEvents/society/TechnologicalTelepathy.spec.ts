@@ -3,7 +3,7 @@ import {TechnologicalTelepathy} from '../../../src/turmoil/globalEvents/society/
 import {Game} from '../../../src/Game';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {Research} from '../../../src/cards/base/Research';
 
 describe('TechnologicalTelepathy', function() {

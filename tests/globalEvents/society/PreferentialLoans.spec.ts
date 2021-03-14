@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {PreferentialLoans} from '../../../src/turmoil/globalEvents/society/PreferentialLoans';
 import {Game} from '../../../src/Game';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {Resources} from '../../../src/Resources';
 
 describe('PreferentialLoans', function() {
