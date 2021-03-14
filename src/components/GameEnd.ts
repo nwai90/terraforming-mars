@@ -170,8 +170,8 @@ export const GameEnd = Vue.component('game-end', {
                                 <td v-if="player.moon !== undefined">{{ p.victoryPointsBreakdown.moonMines }}</td>
                                 <td>{{ p.victoryPointsBreakdown.victoryPoints }}</td>
                                 <td class="game-end-total">{{ p.victoryPointsBreakdown.total }}</td>
-                                <td class="game-end-mc">{{ p.megaCredits }}M€</td>
-                                <td v-if="player.gameOptions.showTimers" class="game-end-timer">{{ getTimer(p) }}</td>
+                                <td>{{ p.megaCredits }}</td>
+                                <td v-if="player.gameOptions.showTimers">{{ getTimer(p) }}</td>
                             </tr>
                         </tbody>
                     </table>
