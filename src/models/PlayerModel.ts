@@ -70,6 +70,7 @@ export interface PlayerModel {
     researchedPlayers: Array<Color>;
     selfReplicatingRobotsCards: Array<CardModel>;
     spaces: Array<SpaceModel>;
+    spectatorId?: string;
     steel: number;
     steelProduction: number;
     steelValue: number;

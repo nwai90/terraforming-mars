@@ -36,6 +36,7 @@ import {SelectDelegate} from '../inputs/SelectDelegate';
 import {SelectColony} from '../inputs/SelectColony';
 import {SelectProductionToLose} from '../inputs/SelectProductionToLose';
 import {ShiftAresGlobalParameters} from '../inputs/ShiftAresGlobalParameters';
+import {SpectatorModel} from '../models/SpectatorModel';
 import {MoonModel} from '../models/MoonModel';
 import {CardName} from '../CardName';
 import {Units} from '../Units';
@@ -118,6 +119,7 @@ export class Server {
       researchedPlayers: game.getResearchedPlayers(),
       selfReplicatingRobotsCards: player.getSelfReplicatingRobotsCards(),
       spaces: getSpaces(game.board),
+      spectatorId: game.spectatorId,
       steel: player.steel,
       steelProduction: player.getProduction(Resources.STEEL),
       steelValue: player.getSteelValue(),
@@ -139,6 +141,12 @@ export class Server {
       oceansSilverCubeBonusMC: game.oceansSilverCubeBonusMC,
       oxygenSilverCubeBonusMC: game.oxygenSilverCubeBonusMC,
       venusSilverCubeBonusMC: game.venusSilverCubeBonusMC,
+    };
+  }
+
+  public static getSpectatorModel(game: Game): SpectatorModel {
+    return {
+      generation: game.generation,
     };
   }
 
