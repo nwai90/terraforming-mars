@@ -11,54 +11,54 @@ import {CardRenderDynamicVictoryPoints} from '../../render/CardRenderDynamicVict
 import {Card} from '../../Card';
 
 export class AgricolaInc extends Card implements CorporationCard {
-    constructor() {
-      super({
-        cardType: CardType.CORPORATION,
-        name: CardName.AGRICOLA_INC,
-        tags: [Tags.PLANT],
-        startingMegaCredits: 40,
+  constructor() {
+    super({
+      cardType: CardType.CORPORATION,
+      name: CardName.AGRICOLA_INC,
+      tags: [Tags.PLANT],
+      startingMegaCredits: 40,
 
-        metadata: {
-          cardNumber: 'R36',
-          description: 'You start with 1 plant production, 1 MC production and 40 MC.',
-          renderData: CardRenderer.builder((b) => {
-            b.br.br;
-            b.production((pb) => pb.megacredits(1).plants(1)).nbsp.megacredits(40);
-            b.corpBox('effect', (ce) => {
-              ce.text('Effect: At game end, score -2 / 0 / 1 / 2 VP PER TAG TYPE for 0 / 1-2 / 3-4 / 5+ tags.', CardRenderItemSize.SMALL, true);
-            });
-          }),
-          victoryPoints: CardRenderDynamicVictoryPoints.questionmark(),
-        },
-      });
-    }
+      metadata: {
+        cardNumber: 'R36',
+        description: 'You start with 1 plant production, 1 MC production and 40 MC.',
+        renderData: CardRenderer.builder((b) => {
+          b.br.br;
+          b.production((pb) => pb.megacredits(1).plants(1)).nbsp.megacredits(40);
+          b.corpBox('effect', (ce) => {
+            ce.text('Effect: At game end, score -2 / 0 / 1 / 2 VP PER TAG TYPE for 0 / 1-2 / 3-4 / 5+ tags.', CardRenderItemSize.SMALL, true);
+          });
+        }),
+        victoryPoints: CardRenderDynamicVictoryPoints.questionmark(),
+      },
+    });
+  }
 
-    public play(player: Player) {
-      player.addProduction(Resources.MEGACREDITS, 1);
-      player.addProduction(Resources.PLANTS, 1);
+  public play(player: Player) {
+    player.addProduction(Resources.MEGACREDITS, 1);
+    player.addProduction(Resources.PLANTS, 1);
 
-      return undefined;
-    }
+    return undefined;
+  }
 
-    public getVictoryPoints(player: Player): number {
-      const scorableTags : Array<Tags> = [Tags.CITY, Tags.EARTH, Tags.ENERGY, Tags.JOVIAN, Tags.MICROBE, Tags.PLANT, Tags.SCIENCE, Tags.SPACE, Tags.BUILDING, Tags.ANIMAL];
-      if (player.game.gameOptions.venusNextExtension) scorableTags.push(Tags.VENUS);
+  public getVictoryPoints(player: Player): number {
+    const scorableTags : Array<Tags> = [Tags.CITY, Tags.EARTH, Tags.ENERGY, Tags.JOVIAN, Tags.MICROBE, Tags.PLANT, Tags.SCIENCE, Tags.SPACE, Tags.BUILDING, Tags.ANIMAL];
+    if (player.game.gameOptions.venusNextExtension) scorableTags.push(Tags.VENUS);
 
-      const playerTags : ITagCount[] = player.getAllTags();
-      let points = 0;
+    const playerTags : ITagCount[] = player.getAllTags();
+    let points = 0;
 
-      scorableTags.forEach((tag) => {
-        const tagData = playerTags.find((data) => data.tag === tag);
+    scorableTags.forEach((tag) => {
+      const tagData = playerTags.find((data) => data.tag === tag);
 
-        if (tagData === undefined) {
-          points -= 2;
-        } else if (tagData.count === 3 || tagData.count === 4) {
-          points += 1;
-        } else if (tagData.count > 4) {
-          points += 2;
-        }
-      });
+      if (tagData === undefined) {
+        points -= 2;
+      } else if (tagData.count === 3 || tagData.count === 4) {
+        points += 1;
+      } else if (tagData.count > 4) {
+        points += 2;
+      }
+    });
 
-      return points;
-    }
+    return points;
+  }
 }

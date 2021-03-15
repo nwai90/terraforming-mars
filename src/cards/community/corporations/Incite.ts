@@ -9,48 +9,48 @@ import {CardRenderItemSize} from '../../render/CardRenderItemSize';
 import {Card} from '../../Card';
 
 export class Incite extends Card implements CorporationCard {
-    constructor() {
-      super({
-        cardType: CardType.CORPORATION,
-        name: CardName.INCITE,
-        tags: [Tags.SCIENCE],
-        initialActionText: 'Place 2 delegates in one party',
-        startingMegaCredits: 32,
+  constructor() {
+    super({
+      cardType: CardType.CORPORATION,
+      name: CardName.INCITE,
+      tags: [Tags.SCIENCE],
+      initialActionText: 'Place 2 delegates in one party',
+      startingMegaCredits: 32,
 
-        metadata: {
-          cardNumber: 'R37',
-          description: 'You start with 32 MC. As your first action, place two delegates in one party.',
-          renderData: CardRenderer.builder((b) => {
-            b.br.br;
-            b.megacredits(32).nbsp.delegates(2);
-            b.corpBox('effect', (ce) => {
-              ce.vSpace(CardRenderItemSize.LARGE);
-              ce.effect(undefined, (eb) => {
-                eb.startEffect.influence(1);
-              });
-              ce.vSpace(CardRenderItemSize.SMALL);
-              ce.effect('You have +1 influence. When you send a delegate using the lobbying action, you pay 2 MC less for it.', (eb) => {
-                eb.delegates(1).startEffect.megacredits(-2);
-              });
+      metadata: {
+        cardNumber: 'R37',
+        description: 'You start with 32 MC. As your first action, place two delegates in one party.',
+        renderData: CardRenderer.builder((b) => {
+          b.br.br;
+          b.megacredits(32).nbsp.delegates(2);
+          b.corpBox('effect', (ce) => {
+            ce.vSpace(CardRenderItemSize.LARGE);
+            ce.effect(undefined, (eb) => {
+              eb.startEffect.influence(1);
             });
-          }),
-        },
-      });
+            ce.vSpace(CardRenderItemSize.SMALL);
+            ce.effect('You have +1 influence. When you send a delegate using the lobbying action, you pay 2 MC less for it.', (eb) => {
+              eb.delegates(1).startEffect.megacredits(-2);
+            });
+          });
+        }),
+      },
+    });
+  }
+
+  public play(player: Player) {
+    if (player.game.turmoil) {
+      player.game.turmoil.addInfluenceBonus(player);
+    }
+    return undefined;
+  }
+
+  public initialAction(player: Player) {
+    if (player.game.turmoil) {
+      const title = 'Incite first action - Select where to send two delegates';
+      player.game.defer(new SendDelegateToArea(player, title, {count: 2, source: 'reserve'}));
     }
 
-    public play(player: Player) {
-      if (player.game.turmoil) {
-        player.game.turmoil.addInfluenceBonus(player);
-      }
-      return undefined;
-    }
-
-    public initialAction(player: Player) {
-      if (player.game.turmoil) {
-        const title = 'Incite first action - Select where to send two delegates';
-        player.game.defer(new SendDelegateToArea(player, title, {count: 2, source: 'reserve'}));
-      }
-
-      return undefined;
-    }
+    return undefined;
+  }
 }
