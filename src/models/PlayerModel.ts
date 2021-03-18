@@ -84,6 +84,7 @@ export interface PlayerModel {
     totalSpend: number;
     tradesThisGeneration: number;
     turmoil: TurmoilModel | undefined;
+    undoCount: number;
     venusScaleLevel: number;
     victoryPointsBreakdown: VictoryPointsBreakdown;
     waitingFor: PlayerInputModel | undefined;

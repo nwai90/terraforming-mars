@@ -109,12 +109,8 @@ export const PlayerHome = Vue.component('player-home', {
       highlightActive: boolean,
     ): string => {
       const classes = ['highlighter_box'];
-
       if (highlightActive) {
-        if (
-          player.needsToDraft ||
-                    (player.needsToDraft === undefined && player.isActive)
-        ) {
+        if (player.needsToDraft || (player.needsToDraft === undefined && player.isActive)) {
           classes.push('player_is_active');
         }
         classes.push(playerColorClass(player.color, 'bg'));
