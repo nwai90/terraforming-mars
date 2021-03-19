@@ -116,7 +116,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   public actionsThisGeneration: Set<CardName> = new Set();
   public lastCardPlayed: IProjectCard | undefined;
   private corporationInitialActionDone: boolean = false;
-  public remainingStallActionsCount: number = 5;
+  public remainingStallActionsCount: number = 2;
 
   // Cards
   public dealtCorporationCards: Array<CorporationCard> = [];
@@ -1663,7 +1663,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   private stallOption(): PlayerInput {
-    return new SelectOption('End Turn (' + this.remainingStallActionsCount + '/5 remaining)', 'End', () => {
+    return new SelectOption('End Turn (' + this.remainingStallActionsCount + '/2 remaining)', 'End', () => {
       this.actionsTakenThisRound = 1;
       this.remainingStallActionsCount -= 1;
       this.game.log('${0} ended turn', (b) => b.player(this));
