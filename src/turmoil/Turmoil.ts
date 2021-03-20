@@ -123,8 +123,8 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       const rulingParty = societyExpansion ? PartyName.SPOME : PartyName.GREENS;
       const turmoil = new Turmoil(rulingParty, 'NEUTRAL', rulingParty, dealer, societyExpansion, randomTurmoil);
 
-      game.log('A neutral delegate is the new chairman.');
-      game.log(turmoil.rulingParty + ' are in power in the first generation.');
+      game.log('A neutral delegate is the new chairman');
+      game.log(turmoil.rulingParty.name + ' are in power in the first generation');
 
       // Society hook: Randomize top and bottom delegate for each event the first time this is called
       if (randomTurmoil && turmoil.globalEventDelegatesRandomisationDone === false) {
@@ -354,7 +354,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
           player.increaseTerraformRatingSteps(steps);
           game.log('${0} is the new chairman and gained ${1} TR', (b) => b.player(player).number(steps));
         } else {
-          game.log('A neutral delegate is the new chairman.');
+          game.log('A neutral delegate is the new chairman');
         }
       }
     }
