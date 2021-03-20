@@ -99,7 +99,7 @@
     "Decrease your MC production 2 steps and increase your heat production and Energy production 2 steps each.": "Obniż swoją produkcję MC o 2 poziomy i podnieś swoją produkcję ciepła i energii o 2 poziomy.",
 
     "Optimal Aerobraking": "Optymalne Hamowanie Aerodynamiczne",
-    "Effect: When you play a Space Event, you gain 3 MC and 3 heat.": "Efekt trwały: Gdy zagrywasz kartę wydarzenia z symbolem przestrzeni kosmicznej, otrzymujesz 3 MC i 3 jednostki ciepła.",
+    "Effect: When you play a Space Event, gain 3 MC and 3 heat.": "Efekt trwały: Gdy zagrywasz kartę wydarzenia z symbolem przestrzeni kosmicznej, otrzymujesz 3 MC i 3 jednostki ciepła.",
 
     "Underground City": "Podziemne miasto",
     "Place a City tile. Decrease your Energy production 2 steps and increase your steel production 2 steps.": "Umieść na planszy obszar miasta. Obniż swoją produkcję energii o 2 poziomy i podnieś swoją produkcję stali o 2 poziomy.",
@@ -221,7 +221,7 @@
     "Increase your MC production 2 steps.": "Podnieś swoją produkcję MC o 2 poziomy.",
 
     "Electro Catapult": "Katapulta Orbitalna",
-    "Action: Spend 1 plant or 1 steel to gain 7MC.": "Akcja: Wydaj 1 jednostkę roślinności albo stali, żeby otrzymać 7 MC.",
+    "Action: Spend 1 plant or 1 steel to gain 7 MC.": "Akcja: Wydaj 1 jednostkę roślinności albo stali, żeby otrzymać 7 MC.",
     "Oxygen must be 8% or less. Decrease your energy production 1 step.": "Poziom Tlenu musi być równy albo niższy niż 8%. Obniż swoją produkcję energii o 1 poziom.",
 
     "Earth Catapult": "Katapulta Międzyplanetarna",
@@ -337,7 +337,7 @@
     "Action: Spend 4 energy to gain 1 titanium and increase oxygen 1 step.": "Akcja: Wydaj 4 jednostki energii, żeby otrzymać 1 jednostkę tytanu i podnieść Poziom Tlenu o 1%.",
 
     "Earth Office": "Biuro na Ziemi",
-    "Effect: When you play an Earth card, you pay 3 MC less for it.": "Efekt trwały: Gdy zagrywasz kartę z symbolem Ziemi, płacisz za nią o 3 MC mniej.",
+    "Effect: When you play an Earth tag, you pay 3 MC less for it.": "Efekt trwały: Gdy zagrywasz kartę z symbolem Ziemi, płacisz za nią o 3 MC mniej.",
 
     "Acquired Company": "Przejęcie Firmy",
     "Increase your MC production 3 steps.": "Podnieś swoją produkcję MC o 3 poziomy.",
@@ -349,7 +349,7 @@
     "Requires 12% oxygen. Gain 2 plants. Place a City tile. Decrease your Energy production 1 step and increase your MC production 4 steps.": "Poziom Tlenu musi być równy albo wyższy niż 12%. Obniż swoją produkcję energii o 1 poziom. Podnieś swoją produkcję MC o 4 poziomy. Otrzymujesz 2 jednostki roślinności. Umieść na planszy obszar miasta.",
 
     "Media Group": "Grupa Medialna",
-    "Effect: After you play an event card, you gain 3MC.": "Efekt trwały: Gdy zagrywasz kartę wydarzenia, otrzymujesz 3 MC.",
+    "Effect: When you play an event card, gain 3 MC.": "Efekt trwały: Gdy zagrywasz kartę wydarzenia, otrzymujesz 3 MC.",
 
     "Business Network": "Sieć Kontaktów",
     "Action: Look at the top card and either buy it or discard it": "AKCJA: PODEJRZYJ WIERZCHNIĄ KARTĘ Z TALII PROJEKTÓW, A NASTĘPNIE KUP JĄ ALBO ODRZUĆ",

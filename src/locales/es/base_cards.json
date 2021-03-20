@@ -136,7 +136,7 @@
     "Decrease your MC production 2 steps and increase your heat production and Energy production 2 steps each.": "Reduce tu producción de M€ en 2 e incrementa tu producción de calor y producción de energía 2 niveles cada una.",
 
     "Optimal Aerobraking": "Aerofreno Óptimo",
-    "Effect: When you play a Space Event, you gain 3 MC and 3 heat.": "Efecto: al jugar un evento tipo espacio obtienes 3 M€ y 3 de calor.",
+    "Effect: When you play a Space Event, gain 3 MC and 3 heat.": "Efecto: al jugar un evento tipo espacio obtienes 3 M€ y 3 de calor.",
 
     "Underground City": "Ciudad Subterránea",
     "Place a City tile. Decrease your Energy production 2 steps and increase your steel production 2 steps.": "Coloca una loseta de ciudad. Reduce tu producción de energía 2 niveles e incrementa tu producción de acero 2 niveles.",
@@ -259,7 +259,7 @@
     "Increase your MC production 2 steps.": "Aumenta tu producción de M€ en 2 niveles.",
 
     "Electro Catapult": "Catapulta Eléctrica",
-    "Action: Spend 1 plant or 1 steel to gain 7MC.": "Acción: gasta 1 planta o 1 de acero para obtener 7 M€.",
+    "Action: Spend 1 plant or 1 steel to gain 7 MC.": "Acción: gasta 1 planta o 1 de acero para obtener 7 M€.",
     "Oxygen must be 8% or less. Decrease your energy production 1 step.": "El oxígeno debe ser 8% o inferior. Reduce tu producción de energía 1 nivel.",
 
     "Earth Catapult": "Catapulta Terrestre",
@@ -372,8 +372,8 @@
     "Action: Spend 4 energy to gain 1 titanium and increase oxygen 1 step.": "Acción: gasta 4 de energía para obtener 1 de titanio e incrementar el oxígeno 1 nivel.",
 
     "Earth Office": "Sucursal en la Tierra",
-    "Effect: When you play an Earth card, you pay 3 MC less for it.": "Efecto: al jugar una carta tipo Tierra, paga 3 M€ menos por ella.",
-    "When you play an Earth card, you pay 3 MC less for it.": "al jugar una carta tipo Tierra, paga 3 M€ menos por ella.",
+    "Effect: When you play an Earth tag, you pay 3 MC less for it.": "Efecto: al jugar una carta tipo Tierra, paga 3 M€ menos por ella.",
+    "When you play an Earth tag, you pay 3 MC less for it.": "al jugar una carta tipo Tierra, paga 3 M€ menos por ella.",
 
     "Acquired Company": "Adquisición de Empresa",
 
@@ -384,7 +384,7 @@
     "Requires 12% oxygen. Gain 2 plants. Place a City tile. Decrease your Energy production 1 step and increase your MC production 4 steps.": "Requiere 12% de oxígeno. Reduce tu producción de energía 1 nivel y aumenta tu producción de M€ en 4. Obtén 2 plantas y coloca una loseta de ciudad.",
 
     "Media Group": "Grupo de Comunicación",
-    "Effect: After you play an event card, you gain 3MC.": "Efecto: aal jugar una carta de evento, obtienes 3 M€.",
+    "Effect: When you play an event card, gain 3 MC.": "Efecto: aal jugar una carta de evento, obtienes 3 M€.",
 
     "Business Network": "Red Empresarial",
     "Decrease your MC production 1 step.": "Reduce tu producción de M€ 1 nivel.",

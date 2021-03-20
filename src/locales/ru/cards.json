@@ -105,7 +105,7 @@
     "Decrease your MC production 2 steps and increase your heat production and Energy production 2 steps each.": "Снизьте свой доход на 2 и повысьте своё производство тепла и производство энергии на 2.",
 
     "Optimal Aerobraking": "Оптимальное аэроторможение",
-    "Effect: When you play a Space Event, you gain 3 MC and 3 heat.": "Свойство: когда вы играете карту события с символом космоса, вы получаете 3 MC и 3 тепла.",
+    "Effect: When you play a Space Event, gain 3 MC and 3 heat.": "Свойство: когда вы играете карту события с символом космоса, вы получаете 3 MC и 3 тепла.",
 
     "Underground City": "Подземный город",
     "Place a City tile. Decrease your Energy production 2 steps and increase your steel production 2 steps.": "Постройте город. Снизьте своё производство энергии на 2 и повысьте своё производство стали на 2.",
@@ -225,7 +225,7 @@
     "Increase your MC production 2 steps.": "Повысьте свой доход на 2.",
 
     "Electro Catapult": "Электрическая катапульта",
-    "Action: Spend 1 plant or 1 steel to gain 7MC.": "Действие: потратьте 1 растение или сталь, чтобы получить 7 MC.",
+    "Action: Spend 1 plant or 1 steel to gain 7 MC.": "Действие: потратьте 1 растение или сталь, чтобы получить 7 MC.",
     "Oxygen must be 8% or less. Decrease your energy production 1 step.": "Уровень кислорода должен быть 8% или ниже. Снизьте своё производство энергии на 1.",
 
     "Earth Catapult": "Катапульта на Земле",
@@ -338,7 +338,7 @@
     "Action: Spend 4 energy to gain 1 titanium and increase oxygen 1 step.": "Действие: потратьте 4 энергии, чтобы получить 1 титан и повысить уровень кислорода на 1.",
 
     "Earth Office": "Офис на Земле",
-    "Effect: When you play an Earth card, you pay 3 MC less for it.": "Свойство: когда вы играете карту с символом Земли, вы платите на 3 MC меньше.",
+    "Effect: When you play an Earth tag, you pay 3 MC less for it.": "Свойство: когда вы играете карту с символом Земли, вы платите на 3 MC меньше.",
 
     "Acquired Company": "Приобретённая компания",
 
@@ -349,7 +349,7 @@
     "Requires 12% oxygen. Gain 2 plants. Place a City tile. Decrease your Energy production 1 step and increase your MC production 4 steps.": "Уровень кислорода должен быть 12%. Получите 2 растения и постройте город. Снизьте своё производство энергии на 1 и повысьте свой доход на 4.",
 
     "Media Group": "Медиа-холдинг",
-    "Effect: After you play an event card, you gain 3MC.": "Свойство: когда вы сыграли карту события, получите 3 MC.",
+    "Effect: When you play an event card, gain 3 MC.": "Свойство: когда вы сыграли карту события, получите 3 MC.",
 
     "Business Network": "Коммерческая сеть",
     "Action: Look at the top card and either buy it or discard it": "Посмотрите верхнюю карту добора и купите её или сбросьте",

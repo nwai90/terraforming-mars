@@ -98,7 +98,7 @@
     "Decrease your MC production 2 steps and increase your heat production and Energy production 2 steps each.": "Senke deine M€-Produktion um 2. Erhöhe deine Wärme- und Energie-Produktion um je 2.",
 
     "Optimal Aerobraking": "Optimale Atmosphärenbremsung",
-    "Effect: When you play a Space Event, you gain 3 MC and 3 heat.": "EFFEKT: Wenn du ein Weltraumereignis spielst, erhältst du 3 M€ und 3 Wärme.",
+    "Effect: When you play a Space Event, gain 3 MC and 3 heat.": "EFFEKT: Wenn du ein Weltraumereignis spielst, erhältst du 3 M€ und 3 Wärme.",
 
     "Underground City": "Unterirdische Stadt",
     "Place a City tile. Decrease your Energy production 2 steps and increase your steel production 2 steps.": "Platziere eine Staadtplättchen. Senke deine Energie-Produktion um 2 und erhöhe deine Stahl-Produktion um 2.",
@@ -217,7 +217,7 @@
     "Increase your MC production 2 steps.": "Erhöhe deine M€-Produktion um 2.",
 
     "Electro Catapult": "Elektro-Katapult",
-    "Action: Spend 1 plant or 1 steel to gain 7MC.": "AKTION: Verbrauche 1 Pflanze oder 1 Stahl, um 7 M€ zu erhalten.",
+    "Action: Spend 1 plant or 1 steel to gain 7 MC.": "AKTION: Verbrauche 1 Pflanze oder 1 Stahl, um 7 M€ zu erhalten.",
     "Oxygen must be 8% or less. Decrease your energy production 1 step.": "Sauerstoffgehalt muss 8% oder weniger sein. Senke deine Energie-Produktion um 1.",
 
     "Earth Catapult": "Erd-Katapult",
@@ -340,7 +340,7 @@
     "Requires 12% oxygen. Gain 2 plants. Place a City tile. Decrease your Energy production 1 step and increase your MC production 4 steps.": "Benötigt Sauerstoffgehalt von 12% oder mehr. Erhalte 2 Pflanzen. Platziere ein Stadtplättchen. Senke deine Energie-Produktion um 1. Erhöhe deine M€-Produktion um 4.",
 
     "Media Group": "Mediengruppe",
-    "Effect: After you play an event card, you gain 3MC.": "EFFEKT: Nachdem du eine Ereigniskarte ausgespielt hast, erhältst du 3 M€.",
+    "Effect: When you play an event card, gain 3 MC.": "EFFEKT: Nachdem du eine Ereigniskarte ausgespielt hast, erhältst du 3 M€.",
 
     "Business Network": "Wirtschaftsnetzwerk",
     "Decrease your MC production 1 step.": "Senke deine M€-Produktion um 1.",
