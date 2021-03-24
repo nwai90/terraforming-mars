@@ -58,7 +58,7 @@ export class GMOContract extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    TurmoilHandler.handleSocietyPayment(player, PartyName.SCIENTISTS);
+    TurmoilHandler.handleSocietyPayment(player, PartyName.GREENS);
     return undefined;
   }
 }
