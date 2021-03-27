@@ -11,6 +11,7 @@ export const CardCorporationLogo = Vue.component('CardCorporationLogo', {
     getHtmlContent: function(): string {
       const title: CardName = this.title;
       // TODO(chosta): refactor to include only the exceptions and DRY the code
+
       switch (title) {
       case CardName.APHRODITE:
         return '<div class="card-aphrodite-logo">APHRODITE</div>';
@@ -176,6 +177,8 @@ export const CardCorporationLogo = Vue.component('CardCorporationLogo', {
         return '<span class="card-unmo-logo">UNITED NATIONS<br/>MISSION ONE</span>';
       case CardName.BEGINNER_CORPORATION:
         return '<span class="card-beginner-corp-logo">Beginner<br/>Corporation</span>';
+      case CardName.CURIOSITY_II:
+        return '<div class="card-curiosity-ii-logo">Curiosity II</div>';
       }
       return '';
     },

@@ -11,29 +11,28 @@ function getAllTranslations() {
   let translationDir = '';
 
   const dirs = fs.readdirSync(pathToTranslationsDir);
-  for (let idx = 0; idx < dirs.length; idx++) {
-    const lang = dirs[idx];
+  dirs.forEach((lang) => {
     const localeDir = path.join(pathToTranslationsDir, lang);
     if (lang.length === 2 && fs.statSync(localeDir).isDirectory()) {
       translationDir = path.resolve(path.join(pathToTranslationsDir, lang));
 
       const files = fs.readdirSync(translationDir);
-      for (let idx = 0; idx < files.length; idx++) {
-        const file = files[idx];
-
-        if ( file === undefined || ! file.endsWith('.json')) continue;
+      files.forEach((file) => {
+        if ( file === undefined || ! file.endsWith('.json')) return;
 
         const dataJson = JSON.parse(fs.readFileSync(path.join(translationDir, file), 'utf8'));
 
         for (const phrase in dataJson) {
-          if (translations[phrase] === undefined) {
-            translations[phrase] = {};
+          if (dataJson.hasOwnProperty(phrase)) {
+            if (translations[phrase] === undefined) {
+              translations[phrase] = {};
+            }
+            translations[phrase][lang] = dataJson[phrase];
           }
-          translations[phrase][lang] = dataJson[phrase];
         }
-      }
+      });
     }
-  }
+  });
 
   return translations;
 }
@@ -59,22 +58,22 @@ function getWaitingForTimeout() {
 }
 
 function getLogLength() {
-    if (process.env.LOG_LENGTH) {
-	return Number(process.env.LOG_LENGTH);
-    }
-    return 50;
+  if (process.env.LOG_LENGTH) {
+    return Number(process.env.LOG_LENGTH);
+  }
+  return 50;
 }
 
 if (!fs.existsSync('src/genfiles')) {
-    fs.mkdirSync('src/genfiles');
+  fs.mkdirSync('src/genfiles');
 }
 
 fs.writeFileSync('src/genfiles/settings.json', JSON.stringify({
-    version: generateAppVersion(),
-    waitingForTimeout: getWaitingForTimeout(),
-    logLength: getLogLength()
+  version: generateAppVersion(),
+  waitingForTimeout: getWaitingForTimeout(),
+  logLength: getLogLength(),
 }));
 
 fs.writeFileSync('src/genfiles/translations.json', JSON.stringify(
-    getAllTranslations(),
+  getAllTranslations(),
 ));

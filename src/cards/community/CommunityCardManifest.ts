@@ -2,6 +2,7 @@ import {CardName} from '../../CardName';
 import {GameModule} from '../../GameModule';
 import {CardManifest} from '../CardManifest';
 import {AgricolaInc} from './corporations/AgricolaInc';
+import {CuriosityII} from './corporations/CuriosityII';
 import {Incite} from './corporations/Incite';
 import {Playwrights} from './corporations/Playwrights';
 import {ProjectWorkshop} from './corporations/ProjectWorkshop';
@@ -40,6 +41,7 @@ export const COMMUNITY_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.PROJECT_WORKSHOP, Factory: ProjectWorkshop},
     {cardName: CardName.INCITE, Factory: Incite, compatibility: GameModule.Turmoil},
     {cardName: CardName.PLAYWRIGHTS, Factory: Playwrights},
+    {cardName: CardName.CURIOSITY_II, Factory: CuriosityII},
     {cardName: CardName.MIDAS, Factory: Midas},
     {cardName: CardName.COLONIAL_ONE, Factory: ColonialOne, compatibility: GameModule.Colonies},
     {cardName: CardName.HOTSPRINGS, Factory: Hotsprings},

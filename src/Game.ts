@@ -1418,7 +1418,6 @@ export class Game implements ISerializable<SerializedGame> {
       });
     });
 
-
     AresHandler.ifAres(this, () => {
       AresHandler.grantBonusForRemovingHazard(player, initialTileTypeForAres);
     });
