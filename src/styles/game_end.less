@@ -1,5 +1,5 @@
 body {
-    background: rgb(50,53,59);
+    background: rgb(53,57,63);
 }
 
 .game_end_success, .game_end_fail {
@@ -57,7 +57,7 @@ body {
         height: 36px;
         background-size: 30px 36px;
         vertical-align: middle;
-        filter: drop-shadow(0px 0px 1px black);
+        filter: drop-shadow(0px 0px 1px black) brightness(0.8);
     }
     .table-city-tile {
         background-image: url(./assets/tiles/city.png);
@@ -83,6 +83,7 @@ body {
         background-size: 46px 38px;
     }
     .vp {
+        font-family: 'Prototype';
         font-size: 18px;
         color: black;
         font-weight: normal !important;
@@ -106,6 +107,8 @@ body {
         border: 1px groove darkgray;
         font-family: Prototype;
         cursor: context-menu;
+        text-shadow: none;
+        font-weight: bold;
     }
     .mc-icon {
         background-image: url(assets/resources/megacredit.png);
@@ -116,6 +119,7 @@ body {
         position: relative;
         vertical-align: sub;
         text-shadow: none;
+        background-repeat: no-repeat;
     }
     .mc-icon::after {
         position: absolute;
@@ -190,5 +194,5 @@ body {
 }
 
 .game-end-total {
-  border-right: 0.05rem solid #7b7b7b ;
+  border-right: 0.05rem solid #7b7b7b !important;
 }
