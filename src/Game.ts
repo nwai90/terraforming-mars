@@ -784,7 +784,7 @@ export class Game implements ISerializable<SerializedGame> {
       // Solo games continue until the designated generation end even if Mars is already terraformed
       return this.generation === this.lastSoloGeneration();
     }
-    return this.marsIsTerraformed() || this.getTemperature() > -30;
+    return this.marsIsTerraformed();
   }
 
   private gotoProductionPhase(): void {
