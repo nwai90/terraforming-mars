@@ -8,6 +8,7 @@ import {Card} from '../../Card';
 import {LogHelper} from '../../../LogHelper';
 import {DrawCards} from '../../../deferredActions/DrawCards';
 import {DeferredAction} from '../../../deferredActions/DeferredAction';
+import {Dealer} from '../../../Dealer';
 
 export class JunkVentures extends Card implements CorporationCard {
   constructor() {
@@ -56,7 +57,7 @@ export class JunkVentures extends Card implements CorporationCard {
   public action(player: Player) {
     const game = player.game;
     const dealer = game.dealer;
-    dealer.discarded = dealer.shuffleCards(dealer.discarded);
+    dealer.discarded = Dealer.shuffle(dealer.discarded);
 
     const drawnCards = dealer.discarded.splice(0, 3);
     game.defer(new DeferredAction(player, () => DrawCards.choose(player, drawnCards, {keepMax: 1})));
