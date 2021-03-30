@@ -26,7 +26,7 @@ export class LavaFlows extends Card implements IProjectCard {
         b.temperature(2).br;
         b.tile(TileType.LAVA_FLOWS, true, false).asterix();
       }),
-      description: 'Raise temperature 2 steps and place this tile ON EITHER THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS.',
+      description: 'Raise temperature 2 steps and place this tile on a VOLCANIC AREA',
     }) {
     super({
       cardType: CardType.EVENT,
