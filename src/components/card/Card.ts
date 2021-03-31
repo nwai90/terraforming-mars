@@ -3,7 +3,6 @@ import Vue from 'vue';
 import {ICard} from '../../cards/ICard';
 import {CardModel} from '../../models/CardModel';
 import {CardTitle} from './CardTitle';
-import {CardNumber} from './CardNumber';
 import {CardResourceCounter} from './CardResourceCounter';
 import {CardCost} from './CardCost';
 import {CardExtraContent} from './CardExtraContent';
@@ -19,7 +18,6 @@ import {CardRequirements} from '../../cards/CardRequirements';
 import {PreferencesManager} from '../PreferencesManager';
 import {OwnerModel} from '../../components/SelectCard';
 
-
 export const Card = Vue.component('card', {
   components: {
     CardTitle,
@@ -29,7 +27,6 @@ export const Card = Vue.component('card', {
     CardExpansion,
     CardTags,
     CardContent,
-    CardNumber,
   },
   props: {
     'card': {
@@ -110,9 +107,6 @@ export const Card = Vue.component('card', {
     getCardType: function(): CardType | undefined {
       return this.getCard()?.cardType;
     },
-    getCardNumber: function(): string | undefined {
-      return this.getCardMetadata()?.cardNumber;
-    },
     getCardClasses: function(card: CardModel): string {
       const classes = ['card-container', 'filterDiv', 'hover-hide-res'];
       classes.push('card-' + card.name.toLowerCase().replace(/ /g, '-'));
@@ -154,7 +148,6 @@ export const Card = Vue.component('card', {
                 </div>
                 <CardTitle :title="card.name" :type="getCardType()"/>
                 <CardContent v-if="getCardMetadata() !== undefined" :metadata="getCardMetadata()" :requirements="getCardRequirements()" :isCorporation="isCorporationCard()"/>
-                <CardNumber v-if="getCardMetadata() !== undefined" :number="getCardNumber()"/>
             </div>
             <CardExpansion :expansion="getCardExpansion()" :isCorporation="isCorporationCard()"/>
             <CardResourceCounter v-if="card.resources !== undefined" :amount="getResourceAmount(card)" />

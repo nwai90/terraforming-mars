@@ -13,7 +13,6 @@ export class PreferencesManager {
       'lang',
       'enable_sounds',
       'smooth_scrolling',
-      'show_card_number',
       'show_tile_confirmation',
       'show_discount_on_cards',
       'learner_mode',
