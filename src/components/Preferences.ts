@@ -75,12 +75,10 @@ export const Preferences = Vue.component('preferences', {
       'hide_top_bar': false as boolean | unknown[],
       'small_cards': true as boolean | unknown[],
       'magnify_cards': true as boolean | unknown[],
-      'magnify_card_descriptions': true as boolean | unknown[],
       'show_alerts': true as boolean | unknown[],
       'lang': 'en',
       'langs': LANGUAGES,
       'enable_sounds': false as boolean | unknown[],
-      'smooth_scrolling': false as boolean | unknown[],
       'show_tile_confirmation': false as boolean | unknown[],
       'show_discount_on_cards': true as boolean | unknown[],
       'learner_mode': true as boolean | unknown[],
@@ -312,12 +310,6 @@ export const Preferences = Vue.component('preferences', {
                     </div>
                     <div class="preferences_panel_item">
                         <label class="form-switch">
-                            <input type="checkbox" v-on:change="updatePreferences" v-model="magnify_card_descriptions" />
-                            <i class="form-icon"></i> <span v-i18n>Magnify card descriptions on hover</span>
-                        </label>
-                    </div>
-                    <div class="preferences_panel_item">
-                        <label class="form-switch">
                             <input type="checkbox" v-on:change="updatePreferences" v-model="show_alerts" />
                             <i class="form-icon"></i> <span v-i18n>Show in-game alerts</span>
                         </label>
@@ -326,12 +318,6 @@ export const Preferences = Vue.component('preferences', {
                         <label class="form-switch">
                             <input type="checkbox" v-on:change="updatePreferences" v-model="enable_sounds" />
                             <i class="form-icon"></i> <span v-i18n>Enable sounds</span>
-                        </label>
-                    </div>
-                    <div class="preferences_panel_item">
-                        <label class="form-switch">
-                            <input type="checkbox" v-on:change="updatePreferences" v-model="smooth_scrolling" />
-                            <i class="form-icon"></i> <span v-i18n>Smooth hotkey scrolling</span>
                         </label>
                     </div>
                     <div class="preferences_panel_item">

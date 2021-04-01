@@ -99,8 +99,7 @@ export const PlayerHome = Vue.component('player-home', {
         const el = document.getElementById('shortkey-' + idSuffix);
         if (el) {
           event.preventDefault();
-          const scrollingSpeed = PreferencesManager.loadValue('smooth_scrolling') === '1' ? 'smooth' : 'auto';
-          el.scrollIntoView({block: 'center', inline: 'center', behavior: scrollingSpeed});
+          el.scrollIntoView({block: 'center', inline: 'center', behavior: 'auto'});
         }
       }
     },
