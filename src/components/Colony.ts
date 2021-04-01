@@ -20,8 +20,7 @@ export const Colony = Vue.component('colony', {
       return colony.trackPosition * 56 + 27;
     },
     getColonyXPosition: (index: number): number => {
-      const offset: number = 5;
-      return index * 56 + 27 + offset;
+      return index * 56 + 16;
     },
     getCubeYPosition: (
       colony: ColonyModel,
