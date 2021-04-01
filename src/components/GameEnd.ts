@@ -183,8 +183,8 @@ export const GameEnd = Vue.component('game-end', {
                             <h5 class="efficiency" v-i18n>Efficiency: <span>{{ getEfficiencyScore(p) }}</span></h5>
                             <div v-for="v in p.victoryPointsBreakdown.detailsCards">
                               <div class="game-end-column-row">
-                                <div class="game-end-column-text">{{v.split(':', 2)[0]}}</div>
-                                <div class="game-end-column-vp">{{v.split(':', 2)[1]}}</div>
+                                <div class="game-end-column-text">{{v.cardName}}</div>
+                                <div class="game-end-column-vp">{{v.victoryPoint}}</div>
                               </div>
                             </div>
                             <div v-for="v in p.victoryPointsBreakdown.detailsMilestones">
