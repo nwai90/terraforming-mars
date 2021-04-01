@@ -20,15 +20,21 @@ export const Colony = Vue.component('colony', {
       return colony.trackPosition * 56 + 27;
     },
     getColonyXPosition: (index: number): number => {
-      return index * 56 + 16;
+      const offset: number = 5;
+      return index * 56 + 27 + offset;
     },
     getCubeYPosition: (
       colony: ColonyModel,
       isColonyCube = false,
     ): number => {
-      if (colony.name === ColonyName.IAPETUS || colony.name === ColonyName.LEAVITT) {
+      if (colony.name === ColonyName.IAPETUS) {
         if (isColonyCube) return 184;
         return 189;
+      }
+
+      if (colony.name === ColonyName.LEAVITT) {
+        if (isColonyCube) return 184;
+        return 192;
       }
 
       if (colony.name === ColonyName.TITANIA) {
