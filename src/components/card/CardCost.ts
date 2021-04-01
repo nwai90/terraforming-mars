@@ -19,8 +19,8 @@ export const CardCost = Vue.component('CardCost', {
       return classes.join(' ');
     },
     displayTwoCosts: function(): boolean {
-      const hideDiscount = PreferencesManager.loadBooleanValue('hide_discount_on_cards');
-      return this.newCost !== undefined && this.newCost !== this.amount && !hideDiscount;
+      const showDiscount = PreferencesManager.loadValue('show_discount_on_cards') === '1';
+      return this.newCost !== undefined && this.newCost !== this.amount && showDiscount;
     },
   },
   template: `
