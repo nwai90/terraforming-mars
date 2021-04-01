@@ -139,8 +139,8 @@ export const GameEnd = Vue.component('game-end', {
                             <tr v-i18n>
                                 <th><div class="card-delegate"></div></th>
                                 <th><div class="tr"></div></th>
-                                <th><div class="m-and-a" title="Milestones points">M</div></th>
-                                <th><div class="m-and-a" title="Awards points">A</div></th>
+                                <th><div class="table-milestones-tile"" title="Milestones points"></div></th>
+                                <th><div class="table-awards-tile"" title="Awards points"></div></th>
                                 <th><div class="table-forest-tile"></div></th>
                                 <th><div class="table-city-tile"></div></th>
                                 <th v-if="player.moon !== undefined"><div class="table-moon-road"></div></th>
