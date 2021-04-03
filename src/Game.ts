@@ -70,6 +70,7 @@ import {VastitasBorealisBoard} from './boards/VastitasBorealisBoard';
 import {SilverCubeHandler} from './community/SilverCubeHandler';
 import {MilestoneAwardSelector} from './MilestoneAwardSelector';
 import {BoardType} from './boards/BoardType';
+import {Multiset} from './utils/Multiset';
 
 export type GameId = string;
 export type SpectatorId = string;
@@ -1383,8 +1384,9 @@ export class Game implements ISerializable<SerializedGame> {
     // Part 5. Collect the bonuses
     if (this.phase !== Phase.SOLAR) {
       if (!coveringExistingTile) {
-        space.bonus.forEach((spaceBonus) => {
-          this.grantSpaceBonus(player, spaceBonus);
+        const bonuses = new Multiset(space.bonus);
+        bonuses.entries().forEach(([bonus, count]) => {
+          this.grantSpaceBonus(player, bonus, count);
         });
       }
 
@@ -1425,34 +1427,34 @@ export class Game implements ISerializable<SerializedGame> {
     LogHelper.logTilePlacement(player, space, tile.tileType);
   }
 
-  public grantSpaceBonus(player: Player, spaceBonus: SpaceBonus) {
+  public grantSpaceBonus(player: Player, spaceBonus: SpaceBonus, count: number = 1) {
     if (spaceBonus === SpaceBonus.DRAW_CARD) {
-      player.drawCard();
+      player.drawCard(count);
     } else if (spaceBonus === SpaceBonus.PLANT) {
-      player.plants++;
+      player.plants += count;
     } else if (spaceBonus === SpaceBonus.STEEL) {
-      player.steel++;
+      player.steel += count;
     } else if (spaceBonus === SpaceBonus.TITANIUM) {
-      player.titanium++;
+      player.titanium += count;
     } else if (spaceBonus === SpaceBonus.HEAT) {
-      player.heat++;
+      player.heat += count;
     } else if (spaceBonus === SpaceBonus.ANIMAL) {
       const animalCards = player.getResourceCards(ResourceType.ANIMAL);
 
       if (animalCards.length === 1) {
-        player.addResourceTo(animalCards[0], 1);
-        LogHelper.logAddResource(player, animalCards[0]);
+        player.addResourceTo(animalCards[0], count);
+        LogHelper.logAddResource(player, animalCards[0], count);
       } else if (animalCards.length > 1) {
-        this.defer(new AddResourcesToCard(player, ResourceType.ANIMAL));
+        this.defer(new AddResourcesToCard(player, ResourceType.ANIMAL, {count: count}));
       }
     } else if (spaceBonus === SpaceBonus.MICROBE) {
       const microbeCards = player.getResourceCards(ResourceType.MICROBE);
 
       if (microbeCards.length === 1) {
-        player.addResourceTo(microbeCards[0], 1);
-        LogHelper.logAddResource(player, microbeCards[0]);
+        player.addResourceTo(microbeCards[0], count);
+        LogHelper.logAddResource(player, microbeCards[0], count);
       } else if (microbeCards.length > 1) {
-        this.defer(new AddResourcesToCard(player, ResourceType.MICROBE));
+        this.defer(new AddResourcesToCard(player, ResourceType.MICROBE, {count: count}));
       }
     }
   }
