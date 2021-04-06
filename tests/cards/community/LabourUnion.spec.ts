@@ -19,7 +19,7 @@ describe('LabourUnion', function() {
     player.corporationCard = card;
   });
 
-  it('Must discard down to 8 cards at generation end', function() {
+  it('Must discard down to 6 cards at generation end', function() {
     for (let i = 0; i < 10; i++) {
       player.cardsInHand.push(game.dealer.dealCard(game));
     }
