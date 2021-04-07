@@ -86,12 +86,13 @@ export class DrawCards<T extends undefined | SelectCard<IProjectCard>> implement
           new SelectHowToPayDeferred(player, selected.length * player.cardCost, {
             title: 'Select how to pay for cards',
             afterPay: () => {
-              this.keep(player, selected, LogType.BOUGHT);
+              this.keep(player, selected, options.logDrawnCard ? LogType.DREW_VERBOSE : LogType.BOUGHT);
               this.discard(player, selected, cards);
             },
           }));
-      } else if (options.logDrawnCard === true) {
-        this.keep(player, selected, LogType.DREW_VERBOSE);
+      } else if (selected.length === 0 && cards.length === 1 && options.logDrawnCard === true) {
+        // Leavitt colony: Log the discarded card
+        player.game.log('${0} discarded ${1}', (b) => b.player(player).card(cards[0]));
         this.discard(player, selected, cards);
       } else {
         this.keep(player, selected, options.paying ? LogType.BOUGHT : LogType.DREW);
