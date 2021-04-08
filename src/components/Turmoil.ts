@@ -130,8 +130,8 @@ const AGENDA_HTML: Map<BonusId | PolicyId, string> = new Map();
     <div class="resource card card-with-border policy-card-with-tag"><div class="card-icon tag-space"></div></div>
     <div class="bonus-text">Spend 4 MC to draw a Space card</div>`);
   AGENDA_HTML.set('up04',
-  `<div class="policy-top-margin"><div class="resource-tag tag-space"></div> : <div class="money resource">-2</div></div>
-  <div class="bonus-text">When you play a Space tag, you pay 2 MC less for it</div>`);
+    `<div class="policy-top-margin"><div class="resource-tag tag-space"></div> : <div class="money resource">-2</div></div>
+    <div class="bonus-text">When you play a Space tag, you pay 2 MC less for it</div>`);
   AGENDA_HTML.set('kp01',
     `<span class="money resource">10</span>
     <span class="red-arrow-infinity"></span>
@@ -141,8 +141,8 @@ const AGENDA_HTML: Map<BonusId | PolicyId, string> = new Map();
     </div>
     <div class="bonus-text">Pay 10 MC to increase your Energy and Heat production 1 step</div>`);
   AGENDA_HTML.set('kp02',
-  `<div class="tile temperature-tile req-tile-small" style="margin-right:5px;"></div> : <span class="money resource">3</span>
-  <div class="bonus-text">When you raise temperature, gain 3 MC per step raised</div>`);
+    `<div class="tile temperature-tile req-tile-small" style="margin-right:5px;"></div> : <span class="money resource">3</span>
+    <div class="bonus-text">When you raise temperature, gain 3 MC per step raised</div>`);
   AGENDA_HTML.set('kp03',
     `6 <span class="heat resource"></span>
     <span class="red-arrow-infinity"></span>
