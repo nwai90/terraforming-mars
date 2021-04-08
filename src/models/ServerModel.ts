@@ -247,6 +247,7 @@ function getWaitingFor(
     availableParties: undefined,
     min: undefined,
     max: undefined,
+    maxByDefault: undefined,
     microbes: undefined,
     floaters: undefined,
     coloniesModel: undefined,
@@ -315,6 +316,7 @@ function getWaitingFor(
   case PlayerInputTypes.SELECT_AMOUNT:
     playerInputModel.min = (waitingFor as SelectAmount).min;
     playerInputModel.max = (waitingFor as SelectAmount).max;
+    playerInputModel.maxByDefault = (waitingFor as SelectAmount).maxByDefault;
     break;
   case PlayerInputTypes.SELECT_PARTY_TO_SEND_DELEGATE:
     playerInputModel.availableParties = (waitingFor as SelectPartyToSendDelegate).availableParties;

@@ -51,7 +51,7 @@ export const Award = Vue.component('award', {
       return AWARD_COSTS.slice(numFundedAwards);
     },
     isLearnerModeOn: function(): boolean {
-      return PreferencesManager.loadValue('learner_mode') === '1';
+      return PreferencesManager.loadBooleanValue('learner_mode');
     },
   },
   template: `
