@@ -91,7 +91,7 @@ class EmpowerPolicy02 implements Policy {
 
 class EmpowerPolicy03 implements Policy {
   id = TurmoilPolicy.EMPOWER_POLICY_3;
-  description: string = 'When you gain or lose energy production, gain 2 energy resources';
+  description: string = 'When you gain or lose energy production, gain 2 energy';
   isDefault = false;
 }
 
