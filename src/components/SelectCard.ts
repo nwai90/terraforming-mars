@@ -112,9 +112,6 @@ export const SelectCard = Vue.component('select-card', {
       }
       return undefined;
     },
-    buttonLabel: function(): string {
-      return this.playerinput.buttonLabel + ' ' + this.cardsSelected();
-    },
   },
   template: `<div class="wf-component wf-component--select-card">
         <div v-if="showtitle === true" class="nofloat wf-component-title">{{ $t(playerinput.title) }}</div>
@@ -128,7 +125,7 @@ export const SelectCard = Vue.component('select-card', {
         </label>
         <div v-if="hasCardWarning()" class="card-warning">{{ $t(warning) }}</div>
         <div v-if="showsave === true" class="nofloat">
-            <Button :disabled="isOptionalToManyCards() && cardsSelected() === 0" type="submit" :onClick="saveData" :title="buttonLabel()" />
+            <Button :disabled="isOptionalToManyCards() && cardsSelected() === 0" type="submit" :onClick="saveData" :title="playerinput.buttonLabel" />
             <Button :disabled="isOptionalToManyCards() && cardsSelected() > 0" v-if="isOptionalToManyCards()" :onClick="saveData" type="submit" :title="$t('Skip this action')" />
         </div>
     </div>`,
