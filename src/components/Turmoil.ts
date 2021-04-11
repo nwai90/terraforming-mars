@@ -377,7 +377,7 @@ const AGENDA_HTML: Map<BonusId | PolicyId, string> = new Map();
     <span class="red-arrow"></span>
     <div class="trade"></div>
     </div>
-    <div class="bonus-text">Trade with any colony tile for free</div>`);
+    <div class="bonus-text" style="margin-top:10px">Trade with any colony tile for free</div>`);
   AGENDA_HTML.set('cp04',
     `<div class="policy-top-margin"><div class="resource-tag tag-event"></div> : <div class="money resource">-2</div></div>
     <div class="bonus-text">When you play an Event card, you pay 2 MC less for it</div>`);
