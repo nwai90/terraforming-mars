@@ -307,10 +307,10 @@ const AGENDA_HTML: Map<BonusId | PolicyId, string> = new Map();
     </div>
     <div class="bonus-text">Pay 3 MC to send a delegate from your reserve into any party</div>`);
   AGENDA_HTML.set('bp02',
-    `<div class="policy-top-margin">
+    `<div class="policy-top-margin" style="margin-top:15px">
     <div class="trade"></div> : <div class="trade-discount">+1</div>
     </div>
-    <div class="bonus-text">When you trade, you must pay 1 additional resource for it</div>`);
+    <div class="bonus-text" style="margin-top:10px">When you trade, you must pay 1 additional resource for it</div>`);
   AGENDA_HTML.set('bp03',
     `<div class="policy-top-margin">
     <span class="money resource">3</span>
