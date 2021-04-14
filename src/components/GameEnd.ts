@@ -180,7 +180,7 @@ export const GameEnd = Vue.component('game-end', {
                             <div class="game-end-winer-scorebreak-player-title">
                                 <div :class="'game-end-player ' + getEndGamePlayerRowColorClass(p.color)"><a :href="'/player?id='+p.id+'&noredirect'">{{p.name}}</a></div>
                             </div>
-                            <h5 class="efficiency" v-i18n>Efficiency: <span>{{ getEfficiencyScore(p) }}</span></h5>
+                            <h5 class="efficiency" v-i18n><a href="https://www.notion.so/Variants-32b53050f10a4cfbaea117c34d4f3a03#e2c9ecc0a1cc4a20a2201d429b677aa6" target="_blank">Efficiency</a>: <span>{{ getEfficiencyScore(p) }}</span></h5>
                             <div v-for="v in p.victoryPointsBreakdown.detailsCards">
                               <div class="game-end-column-row">
                                 <div class="game-end-column-text">{{v.cardName}}</div>
