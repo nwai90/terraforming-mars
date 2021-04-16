@@ -1,26 +1,26 @@
 import Vue from 'vue';
-import {Callisto} from '../colonies/Callisto';
-import {Ceres} from '../colonies/Ceres';
-import {Colony} from '../colonies/Colony';
-import {Europa} from '../colonies/Europa';
-import {Ganymede} from '../colonies/Ganymede';
-import {Io} from '../colonies/Io';
-import {Luna} from '../colonies/Luna';
-import {Miranda} from '../colonies/Miranda';
-import {Pluto} from '../colonies/Pluto';
-import {Titan} from '../colonies/Titan';
-import {Triton} from '../colonies/Triton';
-import {Enceladus} from '../colonies/Enceladus';
-import {ColonyName} from '../colonies/ColonyName';
-import {Iapetus} from '../cards/community/colonies/Iapetus';
-import {Mercury} from '../cards/community/colonies/Mercury';
-import {Hygiea} from '../cards/community/colonies/Hygiea';
-import {Titania} from '../cards/community/colonies/Titania';
-import {Venus} from '../cards/community/colonies/Venus';
-import {Leavitt} from '../cards/community/colonies/Leavitt';
-import {Pallas} from '../cards/community/colonies/Pallas';
-import {Deimos} from '../cards/community/colonies/Deimos';
-import {Terra} from '../cards/community/colonies/Terra';
+import {Callisto} from '../../colonies/Callisto';
+import {Ceres} from '../../colonies/Ceres';
+import {Colony} from '../../colonies/Colony';
+import {Europa} from '../../colonies/Europa';
+import {Ganymede} from '../../colonies/Ganymede';
+import {Io} from '../../colonies/Io';
+import {Luna} from '../../colonies/Luna';
+import {Miranda} from '../../colonies/Miranda';
+import {Pluto} from '../../colonies/Pluto';
+import {Titan} from '../../colonies/Titan';
+import {Triton} from '../../colonies/Triton';
+import {Enceladus} from '../../colonies/Enceladus';
+import {ColonyName} from '../../colonies/ColonyName';
+import {Iapetus} from '../../cards/community/colonies/Iapetus';
+import {Mercury} from '../../cards/community/colonies/Mercury';
+import {Hygiea} from '../../cards/community/colonies/Hygiea';
+import {Titania} from '../../cards/community/colonies/Titania';
+import {Venus} from '../../cards/community/colonies/Venus';
+import {Leavitt} from '../../cards/community/colonies/Leavitt';
+import {Pallas} from '../../cards/community/colonies/Pallas';
+import {Deimos} from '../../cards/community/colonies/Deimos';
+import {Terra} from '../../cards/community/colonies/Terra';
 
 const officialColonies: Array<Colony> = [
   new Callisto(),
@@ -140,14 +140,14 @@ export const ColoniesFilter = Vue.component('colonies-filter', {
             <label class="form-checkbox" v-for="colony in officialColonies">
                 <input type="checkbox" v-model="selectedColonies" :value="colony"/>
                 <i class="form-icon"></i><span v-i18n>{{ colony.name }} - ({{ colony.description }})</span>
-            </label> 
+            </label>
         </div>
         <div class="colonies-filter-list">
             <h2 v-i18n>Community</h2>
             <label class="form-checkbox" v-for="colony in communityColonies">
                 <input type="checkbox" v-model="selectedColonies" :value="colony"/>
                 <i class="form-icon"></i><span v-i18n>{{ colony.name }} - ({{ colony.description }})</span>
-            </label> 
+            </label>
         </div>
     </div>
     `,
