@@ -1,73 +1,72 @@
 {
-  "name": "terraforming-mars",
-  "version": "1.0.0",
-  "description": "Terraforming Mars Game",
-  "private": true,
-  "dependencies": {
-    "@types/node": "^10.17.47",
-    "@types/pg": "^7.14.7",
-    "@types/sqlite3": "^3.1.6",
-    "@typescript-eslint/eslint-plugin": "^4.8.2",
-    "@typescript-eslint/parser": "^4.8.2",
-    "compression-webpack-plugin": "^7.1.2",
-    "console-stamp": "3.0.0-rc4.2",
-    "dialog-polyfill": "^0.5.1",
-    "dotenv": "^8.2.0",
-    "eslint": "^6.6.0",
-    "eslint-config-google": "^0.14.0",
-    "eslint-plugin-vue": "^6.2.2",
-    "js-beautify": "^1.13.0",
-    "less": "^3.10.3",
-    "mnemonist": "^0.38.1",
-    "pg": "^8.2.1",
-    "spectre.css": "^0.5.8",
-    "sqlite3": "^5.0.0",
-    "typescript": "^4.1.2",
-    "vue": "2.6.10",
-    "vue-template-compiler": "2.6.10",
-    "webpack": "^5.25.0",
-    "webpack-cli": "^4.5.0"
-  },
-  "devDependencies": {
-    "@istanbuljs/nyc-config-typescript": "^0.1.3",
-    "@types/chai": "^4.2.11",
-    "@types/mocha": "^5.2.6",
-    "@vue/test-utils": "^1.1.1",
-    "chai": "^4.2.0",
-    "jsdom": "^16.4.0",
-    "mocha": "^8.3.2",
-    "nyc": "^14.1.1"
-  },
-  "nyc": {
-    "extends": "@istanbuljs/nyc-config-typescript"
-  },
-  "scripts": {
-    "build": "npm run compile && npm run templates && npm run webpack && npm run lint",
-    "prebuild": "npm run makeJson && npm run makeCss",
-    "clean": "rm -r ./build/ ./src/genfiles/ || true",
-    "compile": "tsc --build src/tsconfig.json",
-    "precompile": "npm run makeJson",
-    "cover": "nyc mocha --file build/tests/utils/Vue.js --recursive build/tests",
-    "precover": "tsc --build tests/tsconfig.json",
-    "fix": "eslint --fix src tests --ext ts",
-    "lint": "eslint --cache src tests --ext ts",
-    "makeCss": "lessc src/styles/common.less build/styles.css",
-    "makeJson": "node make_static_json.js",
-    "start": "node build/src/server.js",
-    "templates": "node compile-vue-templates.js && tsc --build tsconfig-vue.json",
-    "test": "mocha --file build/tests/utils/Vue.js --recursive build/tests",
-    "pretest": "npm run prebuild && tsc --build tests/tsconfig.json",
-    "watch": "WATCH_IT=1 npm run webpack",
-    "webpack": "webpack --config webpack.config.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/bafolts/terraforming-mars.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/bafolts/terraforming-mars/issues"
-  },
-  "homepage": "https://github.com/bafolts/terraforming-mars#readme"
-}
+    "name": "terraforming-mars",
+    "version": "1.0.0",
+    "description": "Terraforming Mars Game",
+    "private": true,
+    "dependencies": {
+      "@types/node": "^10.17.47",
+      "@types/pg": "^7.14.7",
+      "@types/sqlite3": "^3.1.6",
+      "@typescript-eslint/eslint-plugin": "^4.8.2",
+      "@typescript-eslint/parser": "^4.8.2",
+      "compression-webpack-plugin": "^7.1.2",
+      "console-stamp": "3.0.0-rc4.2",
+      "dialog-polyfill": "^0.5.1",
+      "dotenv": "^8.2.0",
+      "eslint-config-google": "^0.14.0",
+      "less": "^3.10.3",
+      "mnemonist": "^0.38.1",
+      "pg": "^8.2.1",
+      "spectre.css": "^0.5.8",
+      "sqlite3": "^5.0.0",
+      "typescript": "^4.1.2",
+      "vue": "2.6.10",
+      "vue-template-compiler": "2.6.10",
+      "webpack": "^5.25.0",
+      "webpack-cli": "^4.5.0"
+    },
+    "devDependencies": {
+      "@istanbuljs/nyc-config-typescript": "^0.1.3",
+      "@types/chai": "^4.2.11",
+      "@types/mocha": "^5.2.6",
+      "@vue/test-utils": "^1.1.1",
+      "chai": "^4.2.0",
+      "eslint": "^6.6.0",
+      "eslint-plugin-vue": "^6.2.2",
+      "js-beautify": "^1.13.0",
+      "jsdom": "^16.4.0",
+      "mocha": "^8.3.2",
+      "nyc": "^14.1.1"
+    },
+    "nyc": {
+      "extends": "@istanbuljs/nyc-config-typescript"
+    },
+    "scripts": {
+      "build": "npm run compile && npm run webpack && npm run lint",
+      "prebuild": "npm run makeJson && npm run makeCss",
+      "clean": "rm -r ./build/ ./src/genfiles/ || true",
+      "compile": "tsc --build src/tsconfig.json",
+      "precompile": "npm run makeJson",
+      "cover": "nyc mocha --file build/tests/utils/Vue.js --recursive build/tests",
+      "precover": "tsc --build tests/tsconfig.json",
+      "fix": "eslint --fix src tests --ext ts",
+      "lint": "eslint --cache src/*.ts src/components/**/*.ts src/database/**/*.ts",
+      "makeCss": "lessc src/styles/common.less build/styles.css",
+      "makeJson": "node make_static_json.js",
+      "start": "node build/src/server.js",
+      "test": "mocha --file build/tests/utils/Vue.js --recursive build/tests",
+      "pretest": "npm run prebuild && tsc --build tests/tsconfig.json",
+      "watch": "WATCH_IT=1 npm run webpack",
+      "webpack": "webpack --config webpack.config.js"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/bafolts/terraforming-mars.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+      "url": "https://github.com/bafolts/terraforming-mars/issues"
+    },
+    "homepage": "https://github.com/bafolts/terraforming-mars#readme"
+  }
