@@ -37,18 +37,20 @@ export class WildlifeDome extends Card implements IProjectCard {
     const turmoil = player.game.turmoil;
 
     if (turmoil !== undefined) {
-      if (turmoil.parties.find((p) => p.name === PartyName.GREENS)) {
-        const canPlaceTile = player.game.board.getAvailableSpacesForGreenery(player).length > 0;
+      const canPlaceTile = player.game.board.getAvailableSpacesForGreenery(player).length > 0;
+
+      if (turmoil.parties.find((p) => p.name === PartyName.GREENS)) {  
         const meetsPartyRequirements = turmoil.canPlay(player, PartyName.GREENS);
         const oxygenMaxed = player.game.getOxygenLevel() === MAX_OXYGEN_LEVEL;
 
         if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !oxygenMaxed) {
-          return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, true, false, false, true) && meetsPartyRequirements && canPlaceTile;
+          return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, {steel: true, microbes: true}) && meetsPartyRequirements && canPlaceTile;
         }
 
         return meetsPartyRequirements && canPlaceTile;
       }
-      return player.canAfford(player.getCardCost(this) + SOCIETY_ADDITIONAL_CARD_COST, true, false, false, true);
+
+      return player.canAfford(player.getCardCost(this) + SOCIETY_ADDITIONAL_CARD_COST, {steel: true, microbes: true}) && canPlaceTile;
     }
     return false;
   }

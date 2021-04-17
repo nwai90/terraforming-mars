@@ -42,7 +42,7 @@ export class CulturalMetropolis extends Card implements IProjectCard {
       if (turmoil.parties.find((p) => p.name === PartyName.UNITY)) {
         return turmoil.canPlay(player, PartyName.UNITY) && player.getProduction(Resources.ENERGY) >= 1 && (turmoil.getDelegatesInReserve(player.id) > 1 || (turmoil.getDelegatesInReserve(player.id) === 1 && turmoil.lobby.has(player.id)));
       }
-      return player.canAfford(player.getCardCost(this) + SOCIETY_ADDITIONAL_CARD_COST, true);
+      return player.canAfford(player.getCardCost(this) + SOCIETY_ADDITIONAL_CARD_COST, {steel: true});
     }
     return false;
   }
