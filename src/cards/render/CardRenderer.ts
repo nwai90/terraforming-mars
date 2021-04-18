@@ -454,6 +454,7 @@ class Builder {
     return this;
   }
 
+  // TODO(kberg): Replace moon road image with JUST a road, and add an altsecondary tag to support it.
   public moonRoad(options?: ItemOptions): Builder {
     this._addRowItem(new CardRenderItem(CardRenderItemType.MOON_ROAD).withOptions(options));
     return this;
@@ -611,7 +612,7 @@ class Builder {
     return this;
   }
 
-  public tile(tile: TileType, hasSymbol: boolean, isAres: boolean = false): Builder {
+  public tile(tile: TileType, hasSymbol: boolean = false, isAres: boolean = false): Builder {
     this._addTile(tile, hasSymbol, isAres);
     return this;
   }
