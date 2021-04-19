@@ -305,8 +305,6 @@ export class Player implements ISerializable<SerializedPlayer> {
     throw new Error('Resource ' + resource + ' not found');
   }
 
-  
-
   public setResource(resource: Resources, amount : number = 1, game? : Game, fromPlayer? : Player, globalEvent? : boolean) {
     if (resource === Resources.MEGACREDITS) this.megaCredits = Math.max(0, this.megaCredits + amount);
     if (resource === Resources.STEEL) this.steel = Math.max(0, this.steel + amount);
@@ -1413,7 +1411,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     if (howToPay.megaCredits > this.megaCredits) {
-      throw new Error('Do not have enough mega credits');
+      throw new Error('Do not have enough M€');
     }
 
     totalToPay += howToPay.megaCredits;
@@ -1607,7 +1605,7 @@ export class Player implements ISerializable<SerializedPlayer> {
               {
                 title: 'Select how to pay ' + mcTradeAmount + ' for colony trade',
                 afterPay: () => {
-                  this.game.log('${0} spent ${1} MC to trade with ${2}', (b) => b.player(this).number(mcTradeAmount).colony(colony));
+                  this.game.log('${0} spent ${1} M€ to trade with ${2}', (b) => b.player(this).number(mcTradeAmount).colony(colony));
                   colony.trade(this);
                 },
               },
