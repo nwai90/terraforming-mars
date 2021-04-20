@@ -15,7 +15,7 @@ import {LogHelper} from '../../LogHelper';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 import {AltSecondaryTag} from '../render/CardRenderItem';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {Size} from '../render/Size';
 
 export class Eris extends Card implements CorporationCard {
     constructor() {
@@ -34,7 +34,7 @@ export class Eris extends Card implements CorporationCard {
               b.megacredits(46).nbsp.cards(1).secondaryTag(AltSecondaryTag.ARES);
               b.corpBox('action', (ce) => {
                 ce.action('Place a new hazard tile adjacent to NO OTHER TILE, OR remove a hazard tile to gain 1 TR.', (eb) => {
-                  eb.empty().startAction.plus().hazardTile().slash().minus().hazardTile().colon().tr(1, CardRenderItemSize.SMALL);
+                  eb.empty().startAction.plus().hazardTile().slash().minus().hazardTile().colon().tr(1, Size.SMALL);
                 });
               });
             }),

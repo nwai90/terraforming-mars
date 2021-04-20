@@ -8,7 +8,7 @@ import {PlaceHazardTile} from '../../deferredActions/PlaceHazardTile';
 import {ISpace} from '../../boards/ISpace';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {Size} from '../render/Size';
 
 export class Athena extends Card implements CorporationCard {
     constructor() {
@@ -25,7 +25,7 @@ export class Athena extends Card implements CorporationCard {
             renderData: CardRenderer.builder((b) => {
               b.megacredits(62).hazardTile(2);
               b.corpBox('effect', (ce) => {
-                ce.vSpace(CardRenderItemSize.SMALL);
+                ce.vSpace(Size.SMALL);
                 ce.effect('You do not lose production when placing adjacent to hazard tiles.', (eb) => {
                   eb.startEffect.hazardTile().asterix();
                 });

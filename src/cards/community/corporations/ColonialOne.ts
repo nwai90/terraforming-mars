@@ -13,7 +13,7 @@ import {ColonyModel} from '../../../models/ColonyModel';
 import {DeferredAction} from '../../../deferredActions/DeferredAction';
 import {Card} from '../../Card';
 import {CardRenderer} from '../../render/CardRenderer';
-import {CardRenderItemSize} from '../../render/CardRenderItemSize';
+import {Size} from '../../render/Size';
 
 export class ColonialOne extends Card implements CorporationCard {
   constructor() {
@@ -31,12 +31,12 @@ export class ColonialOne extends Card implements CorporationCard {
           b.br.br;
           b.megacredits(35).tradeFleet().fighter(3);
           b.corpBox('action', (ce) => {
-            ce.vSpace(CardRenderItemSize.LARGE);
+            ce.vSpace(Size.LARGE);
             ce.action(undefined, (eb) => {
-              eb.empty().startAction.text('+/-', CardRenderItemSize.LARGE).colonies(1, CardRenderItemSize.SMALL).text(' TRACK', CardRenderItemSize.SMALL);
+              eb.empty().startAction.text('+/-', Size.LARGE).colonies(1, Size.SMALL).text(' TRACK', Size.SMALL);
             });
             ce.action('Increase or decrease any colony tile track 1 step, or spend 1 fighter resource on this card to trade for free.', (eb) => {
-              eb.or(CardRenderItemSize.MEDIUM).nbsp.fighter().startAction.trade();
+              eb.or(Size.MEDIUM).nbsp.fighter().startAction.trade();
             });
           });
         }),

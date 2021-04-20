@@ -3,7 +3,7 @@ import {Player} from '../../../Player';
 import {CardName} from '../../../CardName';
 import {CardType} from '../../CardType';
 import {CardRenderer} from '../../render/CardRenderer';
-import {CardRenderItemSize} from '../../render/CardRenderItemSize';
+import {Size} from '../../render/Size';
 import {Card} from '../../Card';
 import {LogHelper} from '../../../LogHelper';
 import {DrawCards} from '../../../deferredActions/DrawCards';
@@ -26,7 +26,7 @@ export class JunkVentures extends Card implements CorporationCard {
           b.br.br;
           b.megacredits(40).text('DECK: ').minus().cards(3);
           b.corpBox('action', (cb) => {
-            cb.text('ACTION: SHUFFLE THE DISCARD PILE, THEN DRAW 3 CARDS FROM IT. KEEP 1 AND DISCARD THE OTHER 2.', CardRenderItemSize.SMALL, true);
+            cb.text('ACTION: SHUFFLE THE DISCARD PILE, THEN DRAW 3 CARDS FROM IT. KEEP 1 AND DISCARD THE OTHER 2.', Size.SMALL, true);
           });
         }),
       },

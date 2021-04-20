@@ -6,7 +6,7 @@ import {CardName} from '../../../CardName';
 import {ITagCount} from '../../../ITagCount';
 import {CardType} from '../../CardType';
 import {CardRenderer} from '../../render/CardRenderer';
-import {CardRenderItemSize} from '../../render/CardRenderItemSize';
+import {Size} from '../../render/Size';
 import {CardRenderDynamicVictoryPoints} from '../../render/CardRenderDynamicVictoryPoints';
 import {Card} from '../../Card';
 
@@ -25,7 +25,7 @@ export class AgricolaInc extends Card implements CorporationCard {
           b.br.br;
           b.production((pb) => pb.megacredits(1).plants(1)).nbsp.megacredits(40);
           b.corpBox('effect', (ce) => {
-            ce.text('Effect: At game end, score -2 / 0 / 1 / 2 VP PER TAG TYPE for 0 / 1-2 / 3-4 / 5+ tags.', CardRenderItemSize.SMALL, true);
+            ce.text('Effect: At game end, score -2 / 0 / 1 / 2 VP PER TAG TYPE for 0 / 1-2 / 3-4 / 5+ tags.', Size.SMALL, true);
           });
         }),
         victoryPoints: CardRenderDynamicVictoryPoints.questionmark(),

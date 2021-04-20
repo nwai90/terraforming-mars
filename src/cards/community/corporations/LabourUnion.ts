@@ -6,7 +6,7 @@ import {CardRenderer} from '../../render/CardRenderer';
 import {Card} from '../../Card';
 import {Player} from '../../../Player';
 import {DiscardCards} from '../../../deferredActions/DiscardCards';
-import {CardRenderItemSize} from '../../render/CardRenderItemSize';
+import {Size} from '../../render/Size';
 
 export class LabourUnion extends Card implements CorporationCard {
   constructor() {
@@ -22,15 +22,15 @@ export class LabourUnion extends Card implements CorporationCard {
         renderData: CardRenderer.builder((b) => {
           b.megacredits(55);
           b.corpBox('effect', (ce) => {
-            ce.vSpace(CardRenderItemSize.LARGE);
+            ce.vSpace(Size.LARGE);
             ce.effect(undefined, (eb) => {
               eb.plate('Standard projects').startEffect.megacredits(-4);
             });
             ce.vSpace();
             ce.effect('Standard Projects cost 4 MC less. At generation end, discard down to 6 cards.', (eb) => {
-              eb.cards(1).startEffect.text('MAX 6 AT GEN END', CardRenderItemSize.SMALL);
+              eb.cards(1).startEffect.text('MAX 6 AT GEN END', Size.SMALL);
             });
-            ce.vSpace(CardRenderItemSize.SMALL);
+            ce.vSpace(Size.SMALL);
           });
         }),
       },
