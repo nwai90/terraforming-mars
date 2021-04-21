@@ -18,6 +18,10 @@ export enum AltSecondaryTag {
   // 'blue' => used in Project Workshop
   BLUE = 'blue',
   ARES = 'ares',
+
+  MOON_MINING_RATE = 'moon-mine',
+  MOON_COLONY_RATE = 'moon-colony',
+  MOON_LOGISTICS_RATE = 'moon-road',
 }
 
 export interface ItemOptions {
