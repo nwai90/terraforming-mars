@@ -67,7 +67,7 @@ describe('PoliticalAgendas', () => {
     turmoil.sendDelegateToParty(player.id, PartyName.MARS, game);
 
     turmoil.endGeneration(game);
-    expect(game.deferredActions).has.lengthOf(1);
+    expect(game.deferredActions).has.lengthOf(2);
 
     const action = game.deferredActions.peek() as ChoosePoliticalAgenda;
     expect(action instanceof ChoosePoliticalAgenda).is.true;

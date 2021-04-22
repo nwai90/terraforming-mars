@@ -23,6 +23,7 @@ import {Transhumans} from './parties/Transhumans';
 import {Centrists} from './parties/Centrists';
 import {TurmoilHandler} from './TurmoilHandler';
 import {SerializedGlobalEvent} from './globalEvents/SerializedGlobalEventDealer';
+import {DeferredAction} from '../deferredActions/DeferredAction';
 
 export type NeutralPlayer = 'NEUTRAL';
 
@@ -370,7 +371,12 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
           const player = game.getPlayerById(this.chairman);
           // Tempest Consultancy Hook (gains an additional TR when they become chairman)
           const steps = player.corporationCard?.name === CardName.TEMPEST_CONSULTANCY ? 2 :1;
-          player.increaseTerraformRatingSteps(steps);
+
+          game.defer(new DeferredAction(player, () => {
+            player.increaseTerraformRatingSteps(steps)
+            return undefined;
+          }));
+
           game.log('${0} is the new chairman and gained ${1} TR', (b) => b.player(player).number(steps));
         } else {
           game.log('A neutral delegate is the new chairman');
