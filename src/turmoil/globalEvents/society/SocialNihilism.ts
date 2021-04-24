@@ -14,7 +14,7 @@ export class SocialNihilism implements IGlobalEvent {
     public resolve(game: Game, turmoil: Turmoil) {
       game.getPlayers().forEach((player) => {
         const totalCount = player.getCitiesCount() + player.getColoniesCount() - turmoil.getPlayerInfluence(player);
-        if (totalCount > 0) player.setResource(Resources.MEGACREDITS, -totalCount * 2, game, undefined, true);
+        if (totalCount > 0) player.addResource(Resources.MEGACREDITS, -totalCount * 2, {log: true});
       });
     }
 }

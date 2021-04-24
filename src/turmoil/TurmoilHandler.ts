@@ -194,7 +194,7 @@ export class TurmoilHandler {
     if (parameter === GlobalParameter.TEMPERATURE) {
       // PoliticalAgendas Kelvinists P2 hook
       if (PartyHooks.shouldApplyPolicy(player.game, PartyName.KELVINISTS, TurmoilPolicy.KELVINISTS_POLICY_2)) {
-        player.setResource(Resources.MEGACREDITS, steps * 3);
+        player.addResource(Resources.MEGACREDITS, steps * 3);
       }
     }
 
@@ -212,7 +212,7 @@ export class TurmoilHandler {
     // PoliticalAgendas Spome P1 hook
     if (parameter === GlobalParameter.VENUS) {
       if (PartyHooks.shouldApplyPolicy(player.game, PartyName.SPOME, TurmoilPolicy.SPOME_DEFAULT_POLICY)) {
-        player.setResource(Resources.MEGACREDITS, steps * 2);
+        player.addResource(Resources.MEGACREDITS, steps * 2);
       }
     }
   }

@@ -26,7 +26,7 @@ class EmpowerBonus01 implements Bonus {
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
       const tagCount = player.getTagCount(Tags.ENERGY, false, false);
-      player.setResource(Resources.MEGACREDITS, tagCount);
+      player.addResource(Resources.MEGACREDITS, tagCount);
     });
   }
 }
@@ -39,7 +39,7 @@ class EmpowerBonus02 implements Bonus {
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
       const energyProduction = player.getProduction(Resources.ENERGY);
-      player.setResource(Resources.MEGACREDITS, energyProduction);
+      player.addResource(Resources.MEGACREDITS, energyProduction);
     });
   }
 }
@@ -62,8 +62,8 @@ class EmpowerPolicy01 implements Policy {
           'Select amount of energy to gain',
           'Gain energy',
           (amount: number) => {
-            player.setResource(Resources.MEGACREDITS, -amount);
-            player.setResource(Resources.ENERGY, amount);
+            player.addResource(Resources.MEGACREDITS, -amount);
+            player.addResource(Resources.ENERGY, amount);
             player.game.log('${0} used Turmoil Empower action', (b) => b.player(player));
             player.game.log('${0} spent ${1} MC to gain ${2} energy', (b) => b.player(player).number(amount).number(amount));
             return undefined;
@@ -85,7 +85,7 @@ class EmpowerPolicy02 implements Policy {
   isDefault = false;
 
   onTilePlaced(player: Player) {
-    player.setResource(Resources.ENERGY);
+    player.addResource(Resources.ENERGY);
   }
 }
 

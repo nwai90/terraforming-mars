@@ -14,7 +14,7 @@ export class FermiSolution implements IGlobalEvent {
     public resolve(game: Game, turmoil: Turmoil) {
       game.getPlayers().forEach((player) => {
         const coloniesCount = player.getColoniesCount();
-        player.addProduction(Resources.MEGACREDITS, -coloniesCount, game, undefined, true);
+        player.addProduction(Resources.MEGACREDITS, -coloniesCount, {log: true});
         player.drawCard(turmoil.getPlayerInfluence(player));
       });
     }

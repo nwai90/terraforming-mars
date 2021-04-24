@@ -16,7 +16,7 @@ describe('DuskLaserMining', function() {
   });
 
   it('Can\'t play if not enough science tags', function() {
-    player.addProduction(Resources.ENERGY);
+    player.addProduction(Resources.ENERGY, 1);
     expect(card.canPlay(player)).is.not.true;
   });
 
@@ -27,7 +27,7 @@ describe('DuskLaserMining', function() {
 
   it('Should play', function() {
     player.playedCards.push(new Research());
-    player.addProduction(Resources.ENERGY);
+    player.addProduction(Resources.ENERGY, 1);
     expect(card.canPlay(player)).is.true;
 
     card.play(player);

@@ -33,7 +33,7 @@ export class Hotsprings extends Card implements CorporationCard {
   }
 
   public play(player: Player) {
-    player.setResource(Resources.HEAT, 5);
+    player.addResource(Resources.HEAT, 5);
     return undefined;
   }
 

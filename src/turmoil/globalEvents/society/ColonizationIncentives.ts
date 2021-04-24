@@ -14,10 +14,10 @@ export class ColonizationIncentives implements IGlobalEvent {
     public resolve(game: Game, turmoil: Turmoil) {
       game.getPlayers().forEach((player) => {  
         const coloniesCount = Math.min(player.getColoniesCount(), 5);
-        if (coloniesCount > 0) player.setResource(Resources.MEGACREDITS, coloniesCount * 2, game, undefined, true);
+        if (coloniesCount > 0) player.addResource(Resources.MEGACREDITS, coloniesCount * 2, {log: true});
 
         const influence = turmoil.getPlayerInfluence(player);
-        if (influence > 0) player.setResource(Resources.ENERGY, influence * 3, game, undefined, true);
+        if (influence > 0) player.addResource(Resources.ENERGY, influence * 3, {log: true});
       });
     }
 }

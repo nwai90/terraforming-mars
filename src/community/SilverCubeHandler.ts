@@ -12,28 +12,28 @@ import {SpaceType} from "../SpaceType";
 export class SilverCubeHandler {
   public static onTemperatureIncrease(player: Player, game: Game): void {
     if (game.temperatureSilverCubeBonusMC > 0) {
-      player.setResource(Resources.MEGACREDITS, game.temperatureSilverCubeBonusMC);
+      player.addResource(Resources.MEGACREDITS, game.temperatureSilverCubeBonusMC);
       game.temperatureSilverCubeBonusMC = 0;
     }
   }
 
   public static onOxygenIncrease(player: Player, game: Game): void {
     if (game.oxygenSilverCubeBonusMC > 0) {
-      player.setResource(Resources.MEGACREDITS, game.oxygenSilverCubeBonusMC);
+      player.addResource(Resources.MEGACREDITS, game.oxygenSilverCubeBonusMC);
       game.oxygenSilverCubeBonusMC = 0;
     }
   }
   
   public static onOceanPlaced(player: Player, game: Game): void {
     if (game.oceansSilverCubeBonusMC > 0) {
-      player.setResource(Resources.MEGACREDITS, game.oceansSilverCubeBonusMC);
+      player.addResource(Resources.MEGACREDITS, game.oceansSilverCubeBonusMC);
       game.oceansSilverCubeBonusMC = 0;
     }
   }
 
   public static onVenusIncrease(player: Player, game: Game): void {
     if (game.venusSilverCubeBonusMC > 0) {
-      player.setResource(Resources.MEGACREDITS, game.venusSilverCubeBonusMC);
+      player.addResource(Resources.MEGACREDITS, game.venusSilverCubeBonusMC);
       game.venusSilverCubeBonusMC = 0;
     }
   }

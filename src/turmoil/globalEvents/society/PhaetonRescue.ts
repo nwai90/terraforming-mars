@@ -15,7 +15,7 @@ export class PhaetonRescue implements IGlobalEvent {
     public resolve(game: Game, turmoil: Turmoil) {
       game.getPlayers().forEach((player) => {
         const tagCount = Math.min(Math.floor(player.getTagCount(Tags.BUILDING) / 2), 5) + turmoil.getPlayerInfluence(player);
-        if (tagCount > 0) player.setResource(Resources.STEEL, tagCount, game, undefined, true);
+        if (tagCount > 0) player.addResource(Resources.STEEL, tagCount, {log: true});
       });
 
       game.colonies.forEach((colony) => {

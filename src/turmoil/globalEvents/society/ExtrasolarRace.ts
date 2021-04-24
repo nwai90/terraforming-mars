@@ -17,7 +17,7 @@ export class ExtrasolarRace implements IGlobalEvent {
         const powerTagsCount = player.getTagCount(Tags.ENERGY);
 
         if (powerTagsCount + turmoil.getPlayerInfluence(player) >= 3) {
-          player.addProduction(Resources.TITANIUM, 1, game, undefined, true);
+          player.addProduction(Resources.TITANIUM, 1, {log: true});
         }
       });
     }

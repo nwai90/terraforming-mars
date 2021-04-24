@@ -19,7 +19,7 @@ export class BloomingVale implements IGlobalEvent {
         }).length;
 
         const amount = Math.min(greeneryCount, 5) + turmoil.getPlayerInfluence(player);
-        player.setResource(Resources.PLANTS, amount, game, undefined, true);
+        player.addResource(Resources.PLANTS, amount, {log: true});
       });
     }
 }

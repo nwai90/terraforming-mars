@@ -17,7 +17,7 @@ export class PowerTrip implements IGlobalEvent {
         player.energy = 0;
 
         const powerTagsCount = Math.min(player.getTagCount(Tags.ENERGY), 5) + turmoil.getPlayerInfluence(player);
-        if (powerTagsCount > 0) player.setResource(Resources.MEGACREDITS, powerTagsCount * 2, game, undefined, true);
+        if (powerTagsCount > 0) player.addResource(Resources.MEGACREDITS, powerTagsCount * 2, {log: true});
       });
     }
 }

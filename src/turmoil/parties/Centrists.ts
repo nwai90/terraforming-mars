@@ -27,7 +27,7 @@ class CentristsBonus01 implements Bonus {
 
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
-      player.setResource(Resources.MEGACREDITS, 8);
+      player.addResource(Resources.MEGACREDITS, 8);
     });
   }
 }
@@ -56,7 +56,7 @@ class CentristsPolicy01 implements Policy {
   action(player: Player) {
     player.game.log('${0} used Turmoil Centrists action', (b) => b.player(player));
     LogHelper.logGainStandardResource(player, Resources.MEGACREDITS, 6);
-    player.setResource(Resources.MEGACREDITS, 6);
+    player.addResource(Resources.MEGACREDITS, 6);
     player.turmoilPolicyActionUsed = true;
 
     return undefined;

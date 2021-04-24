@@ -24,7 +24,7 @@ export class PlanetFederation implements IGlobalEvent {
             'Gain 3 steel',
             'Select',
             () => {
-              player.setResource(Resources.STEEL, 3, game, undefined, true);
+              player.addResource(Resources.STEEL, 3, {log: true});
               return undefined;
             },
           );
@@ -33,7 +33,7 @@ export class PlanetFederation implements IGlobalEvent {
             'Gain 2 titanium',
             'Select',
             () => {
-              player.setResource(Resources.TITANIUM, 2, game, undefined, true);
+              player.addResource(Resources.TITANIUM, 2, {log: true});
               return undefined;
             },
           );
@@ -42,7 +42,7 @@ export class PlanetFederation implements IGlobalEvent {
             'Gain 5 MC',
             'Select',
             () => {
-              player.setResource(Resources.MEGACREDITS, 5, game, undefined, true);
+              player.addResource(Resources.MEGACREDITS, 5, {log: true});
               return undefined;
             },
           );

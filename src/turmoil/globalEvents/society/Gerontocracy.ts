@@ -15,7 +15,7 @@ export class Gerontocracy implements IGlobalEvent {
       game.getPlayers().forEach((player) => {
         const amount = player.getCitiesCount() + turmoil.getPlayerInfluence(player);
         if (amount >= 4) {
-          player.setResource(Resources.MEGACREDITS, 10, game, undefined, true);
+          player.addResource(Resources.MEGACREDITS, 10, {log: true});
         }
       });
     }

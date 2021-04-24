@@ -26,8 +26,8 @@ export class MartianLumberYard extends PreludeCard implements IProjectCard {
     public play(player: Player) {
       player.addProduction(Resources.STEEL);
       player.addProduction(Resources.PLANTS);
-      player.setResource(Resources.STEEL, 2);
-      player.setResource(Resources.PLANTS, 3);
+      player.addResource(Resources.STEEL, 2);
+      player.addResource(Resources.PLANTS, 3);
       return undefined;
     }
 }

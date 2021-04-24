@@ -14,14 +14,14 @@ export class ClosedBiospheres implements IGlobalEvent {
     public resolve(game: Game, turmoil: Turmoil) {
       game.getPlayers().forEach((player) => {
         if (player.getProduction(Resources.PLANTS) > 0) {
-          player.addProduction(Resources.PLANTS, -1, game, undefined, true);
+          player.addProduction(Resources.PLANTS, -1, {log: true});
         }
 
         if (player.getProduction(Resources.MEGACREDITS) > -5) {
-          player.addProduction(Resources.MEGACREDITS, -1, game, undefined, true);
+          player.addProduction(Resources.MEGACREDITS, -1, {log: true});
         }
 
-        player.setResource(Resources.PLANTS, turmoil.getPlayerInfluence(player), game, undefined, true);
+        player.addResource(Resources.PLANTS, turmoil.getPlayerInfluence(player), {log: true});
       });
     }
 }

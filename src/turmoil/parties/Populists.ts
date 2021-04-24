@@ -24,7 +24,7 @@ class PopulistsBonus01 implements Bonus {
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
       const amount = Math.floor(Math.max(player.megaCredits - 40, 0) / 5);
-      player.setResource(Resources.MEGACREDITS, -amount);
+      player.addResource(Resources.MEGACREDITS, -amount);
     });
   }
 }
@@ -37,7 +37,7 @@ class PopulistsBonus02 implements Bonus {
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
       const amount = Math.floor(player.cardsInHand.length / 8) * 2;
-      player.setResource(Resources.MEGACREDITS, -amount);
+      player.addResource(Resources.MEGACREDITS, -amount);
     });
   }
 }
@@ -55,7 +55,7 @@ class PopulistsPolicy02 implements Policy {
 
   onCardPlayed(player: Player, card: IProjectCard) {
     if (card.getVictoryPoints !== undefined && card.getVictoryPoints(player) > 0) {
-      player.setResource(Resources.MEGACREDITS, -2);
+      player.addResource(Resources.MEGACREDITS, -2);
     }
   }
 }
@@ -85,7 +85,7 @@ class PopulistsPolicy04 implements Policy {
   isDefault = false;
 
   onTilePlaced(player: Player) {
-    player.setResource(Resources.MEGACREDITS, 3);
+    player.addResource(Resources.MEGACREDITS, 3);
   }
 }
 

@@ -24,7 +24,7 @@ export class ConnectedCommunities implements IGlobalEvent {
         if (hasThreeConnectedTiles) player.increaseTerraformRating();
 
         const influence = turmoil.getPlayerInfluence(player);
-        if (influence > 0) player.addProduction(Resources.MEGACREDITS, influence, game, undefined, true);
+        if (influence > 0) player.addProduction(Resources.MEGACREDITS, influence, {log: true});
       });
     }
 }

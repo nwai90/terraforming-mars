@@ -18,7 +18,7 @@ export class ControlledTectonics implements IGlobalEvent {
       game.getPlayers().forEach((player) => {
         const venusTagCount = player.getTagCount(Tags.VENUS, false, false);
         const amount = Math.min(venusTagCount, 5) + turmoil.getPlayerInfluence(player);
-        player.setResource(Resources.HEAT, amount * 2, game, undefined, true);
+        player.addResource(Resources.HEAT, amount * 2, {log: true});
       });
     }
 }

@@ -25,7 +25,7 @@ class SpomeBonus01 implements Bonus {
 
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
-      player.setResource(Resources.MEGACREDITS, player.getDistinctTagCount(false));
+      player.addResource(Resources.MEGACREDITS, player.getDistinctTagCount(false));
     });
   }
 }
@@ -41,7 +41,7 @@ class SpomeBonus02 implements Bonus {
         .filter((res) => player.getResource(res) > 0).length;
       const nonStandardResources = new Set(player.getCardsWithResources().map((card) => card.resourceType)).size;
 
-      player.setResource(Resources.MEGACREDITS, standardResources + nonStandardResources);
+      player.addResource(Resources.MEGACREDITS, standardResources + nonStandardResources);
     });
   }
 }

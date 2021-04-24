@@ -20,7 +20,7 @@ export class DutyFreeSpace implements IGlobalEvent {
           && card.resourceCount > 0).length;
 
         const amount = Math.min(floaterCardsWithResourcesCount, 5) + turmoil.getPlayerInfluence(player);
-        player.setResource(Resources.MEGACREDITS, amount * 2, game, undefined, true);
+        player.addResource(Resources.MEGACREDITS, amount * 2, {log: true});
       });
     }
 }

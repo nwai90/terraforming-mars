@@ -26,7 +26,7 @@ class TranshumansBonus01 implements Bonus {
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
       const amount = player.playedCards.filter((card) => card.requirements !== undefined).length;
-      player.setResource(Resources.MEGACREDITS, amount);
+      player.addResource(Resources.MEGACREDITS, amount);
     });
   }
 }
@@ -39,7 +39,7 @@ class TranshumansBonus02 implements Bonus {
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
       const amount = player.getNoTagsCount();
-      player.setResource(Resources.MEGACREDITS, amount * 2);
+      player.addResource(Resources.MEGACREDITS, amount * 2);
     });
   }
 }

@@ -16,7 +16,7 @@ export class SolarCryptocurrency implements IGlobalEvent {
         const energyProduction = Math.min(player.getProduction(Resources.ENERGY), 5);
         const amount = energyProduction + turmoil.getPlayerInfluence(player);
         if (amount > 0) {
-          player.setResource(Resources.MEGACREDITS, amount * 2, game, undefined, true);
+          player.addResource(Resources.MEGACREDITS, amount * 2, {log: true});
         }
       });
     }

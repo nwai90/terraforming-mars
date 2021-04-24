@@ -45,7 +45,7 @@ export class VitalColony extends PreludeCard implements IProjectCard {
         return undefined;
       }));
 
-      player.setResource(Resources.MEGACREDITS, -5);
+      player.addResource(Resources.MEGACREDITS, -5);
       return undefined;
     }
 }

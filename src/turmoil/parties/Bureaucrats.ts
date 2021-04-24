@@ -29,7 +29,7 @@ class BureaucratsBonus01 implements Bonus {
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
       const amount = player.getPlayedEventsCount();
-      player.setResource(Resources.MEGACREDITS, amount);
+      player.addResource(Resources.MEGACREDITS, amount);
     });
   }
 }

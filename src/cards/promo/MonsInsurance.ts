@@ -59,8 +59,8 @@ export class MonsInsurance extends Card implements CorporationCard {
 
   private static payoutAndLogInsurance(insurer: Player, victim: Player): void {
     const retribution: number = Math.min(insurer.megaCredits, 3);
-    insurer.setResource(Resources.MEGACREDITS, -3);
-    victim.setResource(Resources.MEGACREDITS, retribution);
+    insurer.addResource(Resources.MEGACREDITS, -3);
+    victim.addResource(Resources.MEGACREDITS, retribution);
 
     if (retribution > 0) {
       insurer.game.log('${0} received ${1} M€ from ${2} owner (${3})', (b) =>

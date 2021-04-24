@@ -26,7 +26,7 @@ export class BotanicalHarvest extends PreludeCard implements IProjectCard {
     public play(player: Player) {
       player.game.increaseOxygenLevel(player, 1);
       player.addProduction(Resources.PLANTS);
-      player.setResource(Resources.PLANTS, 5);
+      player.addResource(Resources.PLANTS, 5);
       return undefined;
     }
 }

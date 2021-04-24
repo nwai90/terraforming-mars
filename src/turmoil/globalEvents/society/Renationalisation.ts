@@ -17,7 +17,7 @@ export class Renationalisation implements IGlobalEvent {
         const setsCount = Math.floor(player.playedCards.filter((card) => card.cardType === CardType.AUTOMATED).length / 3);
 
         const amount = Math.max(Math.min(setsCount, 5) - turmoil.getPlayerInfluence(player), 0);
-        player.setResource(Resources.MEGACREDITS, amount * -4, game, undefined, true);
+        player.addResource(Resources.MEGACREDITS, amount * -4, {log: true});
       });
     }
 }

@@ -14,8 +14,8 @@ export class OperationDaedalus implements IGlobalEvent {
     public resolve(game: Game, turmoil: Turmoil) {
       game.getPlayers().forEach((player) => {
         const coloniesCount = Math.min(player.getColoniesCount(), 5) + turmoil.getPlayerInfluence(player);
-        if (coloniesCount > 0) player.setResource(Resources.TITANIUM, coloniesCount, game, undefined, true);
-        player.setResource(Resources.MEGACREDITS, -5, game, undefined, true);
+        if (coloniesCount > 0) player.addResource(Resources.TITANIUM, coloniesCount, {log: true});
+        player.addResource(Resources.MEGACREDITS, -5, {log: true});
       });
     }
 }

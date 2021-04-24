@@ -73,6 +73,7 @@ import {PlaceMoonMineTile} from './moon/PlaceMoonMineTile';
 import {PlaceMoonColonyTile} from './moon/PlaceMoonColonyTile';
 import {PlaceMoonRoadTile} from './moon/PlaceMoonRoadTile';
 import {GlobalParameter} from './GlobalParameter';
+import {GlobalEventName} from './turmoil/globalEvents/GlobalEventName';
 
 export type PlayerId = string;
 
@@ -308,50 +309,54 @@ export class Player implements ISerializable<SerializedPlayer> {
     throw new Error('Resource ' + resource + ' not found');
   }
 
-  public setResource(resource: Resources, amount : number = 1, game? : Game, fromPlayer? : Player, globalEvent? : boolean) {
+  public addResource(resource: Resources, amount: number = 1, options? : { log: boolean, from? : Player | GlobalEventName}) {
     if (resource === Resources.MEGACREDITS) this.megaCredits = Math.max(0, this.megaCredits + amount);
     if (resource === Resources.STEEL) this.steel = Math.max(0, this.steel + amount);
+
     if (resource === Resources.TITANIUM) this.titanium = Math.max(0, this.titanium + amount);
     if (resource === Resources.PLANTS) this.plants = Math.max(0, this.plants + amount);
     if (resource === Resources.ENERGY) this.energy = Math.max(0, this.energy + amount);
     if (resource === Resources.HEAT) this.heat = Math.max(0, this.heat + amount);
 
-    const modifier = amount > 0 ? 'increased' : 'decreased';
+    if (options?.log === true) {
+      const modifier = amount > 0 ? 'increased' : 'decreased';
 
-    if (game !== undefined && fromPlayer !== undefined && amount < 0) {
-      if (fromPlayer !== this && this.removingPlayers.includes(fromPlayer.id) === false) {
-        this.removingPlayers.push(fromPlayer.id);
+      if (options?.from !== undefined && options.from instanceof Player && amount < 0) {
+        const from: Player = options.from;
+        if (from !== this && this.removingPlayers.includes(from.id) === false) {
+          this.removingPlayers.push(from.id);
+        }
+
+        this.game.log('${0}\'s ${1} amount ${2} by ${3} by ${4}', (b) =>
+          b.player(this)
+            .string(resource)
+            .string(modifier)
+            .number(Math.abs(amount))
+            .player(from));
       }
 
-      // Crash site cleanup hook
-      if (fromPlayer !== this && resource === Resources.PLANTS && amount < 0) {
-        game.someoneHasRemovedOtherPlayersPlants = true;
+      // Global event logging
+      if (options?.from !== undefined && ! (options.from instanceof Player) && amount !== 0) {
+        this.game.log('${0}\'s ${1} amount ${2} by ${3} by Global Event', (b) =>
+          b.player(this)
+            .string(resource)
+            .string(modifier)
+            .number(Math.abs(amount)));
       }
-
-      game.log('${0}\'s ${1} amount ${2} by ${3} by ${4}', (b) =>
-        b.player(this)
-          .string(resource)
-          .string(modifier)
-          .number(Math.abs(amount))
-          .player(fromPlayer));
     }
 
-    // Global event logging
-    if (game !== undefined && globalEvent && amount !== 0) {
-      game.log('${0}\'s ${1} amount ${2} by ${3} by Global Event', (b) =>
-        b.player(this)
-          .string(resource)
-          .string(modifier)
-          .number(Math.abs(amount)));
+    // Crash site cleanup hook
+    if (options?.from !== this && resource === Resources.PLANTS && amount < 0) {
+      this.game.someoneHasRemovedOtherPlayersPlants = true;
     }
 
     // Mons Insurance hook
-    if (game !== undefined && amount < 0 && fromPlayer !== undefined && fromPlayer !== this) {
+    if (amount < 0 && options?.from !== undefined && options.from !== this) {
       MonsInsurance.resolveMonsInsurance(this);
     }
   }
 
-  public addProduction(resource: Resources, amount : number = 1, game? : Game, fromPlayer? : Player, globalEvent? : boolean) {
+  public addProduction(resource: Resources, amount : number = 1, options? : { log: boolean, from? : Player | GlobalEventName}) {
     if (resource === Resources.MEGACREDITS) this.megaCreditProduction = Math.max(-5, this.megaCreditProduction + amount);
     if (resource === Resources.STEEL) this.steelProduction = Math.max(0, this.steelProduction + amount);
     if (resource === Resources.TITANIUM) this.titaniumProduction = Math.max(0, this.titaniumProduction + amount);
@@ -361,7 +366,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       this.energyProduction = Math.max(0, this.energyProduction + amount);
 
       if (PartyHooks.shouldApplyPolicy(this.game, PartyName.EMPOWER, TurmoilPolicy.EMPOWER_POLICY_3)) {
-        this.setResource(Resources.ENERGY, 2);
+        this.addResource(Resources.ENERGY, 2);
       }
     }
 
@@ -370,47 +375,49 @@ export class Player implements ISerializable<SerializedPlayer> {
       if (amount > 0) this.heatProductionStepsIncreasedThisGeneration += amount; // Hotsprings hook
     }
 
-    const modifier = amount > 0 ? 'increased' : 'decreased';
-
-    // Gaining production from multiplier cards
-    if (game !== undefined && fromPlayer === undefined && amount > 0) {
-      game.log('${0}\'s ${1} production ${2} by ${3}', (b) =>
-        b.player(this)
-          .string(resource)
-          .string(modifier)
-          .number(Math.abs(amount)));
-    }
-
-    // Production reduced by other players
-    if (game !== undefined && fromPlayer !== undefined && amount < 0) {
-      if (fromPlayer !== this && this.removingPlayers.includes(fromPlayer.id) === false) {
-        this.removingPlayers.push(fromPlayer.id);
+    if (options?.log === true) {
+      const modifier = amount > 0 ? 'increased' : 'decreased';
+      // Gaining production from multiplier cards
+      if (options?.from === undefined && amount > 0) {
+        this.game.log('${0}\'s ${1} production ${2} by ${3}', (b) =>
+          b.player(this)
+            .string(resource)
+            .string(modifier)
+            .number(Math.abs(amount)));
       }
-      game.log('${0}\'s ${1} production ${2} by ${3} by ${4}', (b) =>
-        b.player(this)
-          .string(resource)
-          .string(modifier)
-          .number(Math.abs(amount))
-          .player(fromPlayer));
-    }
 
-    // Global event logging
-    if (game !== undefined && globalEvent && amount !== 0) {
-      game.log('${0}\'s ${1} production ${2} by ${3} by Global Event', (b) =>
-        b.player(this)
-          .string(resource)
-          .string(modifier)
-          .number(Math.abs(amount)));
+      // Production reduced by other players
+      if (options?.from !== undefined && options.from instanceof Player && amount < 0) {
+        const from: Player = options.from;
+        if (from !== this && this.removingPlayers.includes(from.id) === false) {
+          this.removingPlayers.push(from.id);
+        }
+        this.game.log('${0}\'s ${1} production ${2} by ${3} by ${4}', (b) =>
+          b.player(this)
+            .string(resource)
+            .string(modifier)
+            .number(Math.abs(amount))
+            .player(from));
+      }
+
+      // Global event logging
+      if (options?.from !== undefined && ! (options.from instanceof Player) && amount !== 0) {
+        this.game.log('${0}\'s ${1} production ${2} by ${3} by Global Event', (b) =>
+          b.player(this)
+            .string(resource)
+            .string(modifier)
+            .number(Math.abs(amount)));
+      }
+
+      // Mons Insurance hook
+      if (amount < 0 && options.from !== undefined && options.from !== this) {
+        MonsInsurance.resolveMonsInsurance(this);
+      }
     }
 
     // Manutech hook
     if (this.isCorporation(CardName.MANUTECH)) {
       Manutech.onProductionGain(this, resource, amount);
-    }
-
-    // Mons Insurance hook
-    if (game !== undefined && amount < 0 && fromPlayer !== undefined && fromPlayer !== this) {
-      MonsInsurance.resolveMonsInsurance(this);
     }
   };
 
@@ -442,29 +449,29 @@ export class Player implements ISerializable<SerializedPlayer> {
       this.getProduction(Resources.HEAT) + units.heat >= 0;
   }
 
-  public adjustProduction(units: Units, game?: Game, fromPlayer?: Player) {
+  public adjustProduction(units: Units, options?: {log: boolean, from?: Player}) {
     if (units.megacredits !== undefined) {
-      this.addProduction(Resources.MEGACREDITS, units.megacredits, game, fromPlayer);
+      this.addProduction(Resources.MEGACREDITS, units.megacredits, options);
     }
 
     if (units.steel !== undefined) {
-      this.addProduction(Resources.STEEL, units.steel, game, fromPlayer);
+      this.addProduction(Resources.STEEL, units.steel, options);
     }
 
     if (units.titanium !== undefined) {
-      this.addProduction(Resources.TITANIUM, units.titanium, game, fromPlayer);
+      this.addProduction(Resources.TITANIUM, units.titanium, options);
     }
 
     if (units.plants !== undefined) {
-      this.addProduction(Resources.PLANTS, units.plants, game, fromPlayer);
+      this.addProduction(Resources.PLANTS, units.plants, options);
     }
 
     if (units.energy !== undefined) {
-      this.addProduction(Resources.ENERGY, units.energy, game, fromPlayer);
+      this.addProduction(Resources.ENERGY, units.energy, options);
     }
 
     if (units.heat !== undefined) {
-      this.addProduction(Resources.HEAT, units.heat, game, fromPlayer);
+      this.addProduction(Resources.HEAT, units.heat, options);
     }
   }
 
