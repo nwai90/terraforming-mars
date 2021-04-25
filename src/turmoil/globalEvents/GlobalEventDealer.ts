@@ -186,6 +186,12 @@ export const SOCIETY_COLONY_GLOBAL_EVENTS: Array<IGlobalEventFactory<IGlobalEven
   {globalEventName: GlobalEventName.PHAETON_RESCUE, Factory: PhaetonRescue},
   {globalEventName: GlobalEventName.SMUGGLING_ACTIVITY, Factory: SmugglingActivity},
 ]
+// When renaming, add the rename here and add a TODO (like the example below)
+// And remember to add a test in GlobalEventDealer.spec.ts
+const RENAMED_GLOBAL_EVENTS = [
+  // TODO(bafolts): remove after 2021-05-08
+  {globalEventName: 'Miners Of Strike', Factory: MinersOnStrike},
+];
 
 const ALL_EVENTS = [
   ...POSITIVE_GLOBAL_EVENTS,
@@ -198,10 +204,11 @@ const ALL_EVENTS = [
   ...SOCIETY_GLOBAL_EVENTS,
   ...SOCIETY_VENUS_GLOBAL_EVENTS,
   ...SOCIETY_COLONY_GLOBAL_EVENTS,
+  ...RENAMED_GLOBAL_EVENTS,
 ];
 
 // Function to return a global event object by its name
-export function getGlobalEventByName(globalEventName: string): IGlobalEvent | undefined {
+export function getGlobalEventByName(globalEventName: GlobalEventName): IGlobalEvent | undefined {
   const globalEventFactory = ALL_EVENTS.find((globalEventFactory) => globalEventFactory.globalEventName === globalEventName);
 
   if (globalEventFactory !== undefined) return new globalEventFactory.Factory();
