@@ -24,13 +24,20 @@ export const GameSetupDetail = Vue.component('game-setup-detail', {
       return (this.gameOptions.societyExpansion === true);
     },
     getBoardColorClass: function(boardName: string): string {
-      if (boardName === BoardName.ORIGINAL) {
+      switch (boardName) {
+      case BoardName.ORIGINAL:
         return 'game-config board-tharsis map';
-      } else if (boardName === BoardName.HELLAS) {
+      case BoardName.HELLAS:
         return 'game-config board-hellas map';
-      } else if (boardName === BoardName.ELYSIUM) {
+      case BoardName.ELYSIUM:
         return 'game-config board-elysium map';
-      } else {
+      case BoardName.AMAZONIS:
+        return 'game-config board-amazonis map';
+      case BoardName.ARABIA_TERRA:
+        return 'game-config board-arabia_terra map';
+      case BoardName.VASTITAS_BOREALIS:
+        return 'game-config board-vastitas_borealis map';
+      default:
         return 'game-config board-other map';
       }
     },
