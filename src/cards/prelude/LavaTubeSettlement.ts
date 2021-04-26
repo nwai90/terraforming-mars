@@ -52,7 +52,7 @@ export class LavaTubeSettlement extends Card implements IProjectCard {
     player.addProduction(Resources.ENERGY, -1);
     player.game.defer(new PlaceCityTile(
       player,
-      'Select either Tharsis Tholus, Ascraeus Mons, Pavonis Mons or Arsia Mons',
+      'Select a volcanic area to place this tile on',
       this.getSpacesForCity(player),
     ));
     return undefined;

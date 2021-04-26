@@ -3,7 +3,6 @@ import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {SpaceType} from '../../SpaceType';
 import {Player} from '../../Player';
-import {SpaceName} from '../../SpaceName';
 import {TileType} from '../../TileType';
 import {ISpace} from '../../boards/ISpace';
 import {SelectSpace} from '../../inputs/SelectSpace';
@@ -38,39 +37,19 @@ export class LavaFlows extends Card implements IProjectCard {
   }
 
   public static getVolcanicSpaces(player: Player): Array<ISpace> {
-    if (player.game.gameOptions.boardName === BoardName.ORIGINAL) {
-      return player.game.board.getSpaces(SpaceType.LAND, player)
-        .filter((space) => space.tile === undefined && (space.player === undefined || space.player === player))
-        .filter((space) => space.id === SpaceName.THARSIS_THOLUS ||
-                                   space.id === SpaceName.ASCRAEUS_MONS ||
-                                   space.id === SpaceName.ARSIA_MONS ||
-                                   space.id === SpaceName.PAVONIS_MONS);
-    } else if (player.game.gameOptions.boardName === BoardName.ELYSIUM) {
-      return player.game.board.getSpaces(SpaceType.LAND, player)
-        .filter((space) => space.tile === undefined && (space.player === undefined || space.player === player))
-        .filter((space) => space.id === SpaceName.HECATES_THOLUS ||
-                               space.id === SpaceName.ELYSIUM_MONS ||
-                               space.id === SpaceName.ARSIA_MONS_ELYSIUM ||
-                               space.id === SpaceName.OLYMPUS_MONS);
-    } else if (player.game.gameOptions.boardName === BoardName.AMAZONIS) {
-      return player.game.board.getSpaces(SpaceType.LAND, player)
-        .filter((space) => space.tile === undefined && (space.player === undefined || space.player === player))
-        .filter((space) => space.id === SpaceName.ALBOR_THOLUS ||
-                               space.id === SpaceName.ANSERIS_MONS ||
-                               space.id === SpaceName.PINDUS_MONS ||
-                               space.id === SpaceName.ULYSSES_THOLUS);        
-    } else if (player.game.gameOptions.boardName === BoardName.TERRA_CIMMERIA) {
-        return player.game.board.getSpaces(SpaceType.LAND, player)
-          .filter((space) => space.tile === undefined && (space.player === undefined || space.player === player))
-          .filter((space) => space.id === SpaceName.ALBOR_THOLUS_TERRACIMMERIA ||
-                                 space.id === SpaceName.APOLLINARIS_MONS ||
-                                 space.id === SpaceName.HADRIACUS_MONS ||
-                                 space.id === SpaceName.TYRRHENUS_MONS);
-     } else {
-      return player.game.board.getSpaces(SpaceType.LAND, player)
-        .filter((space) => space.tile === undefined && (space.player === undefined || space.player === player));
+    const board = player.game.board;
+    const boardsWithVolcanicSpaces = [BoardName.ORIGINAL, BoardName.ELYSIUM, BoardName.AMAZONIS, BoardName.TERRA_CIMMERIA];
+
+    const landSpaces = board.getSpaces(SpaceType.LAND, player);
+    const unoccupiedLandSpaces = landSpaces.filter((space) => space.tile === undefined && (space.player === undefined || space.player === player));
+
+    if (boardsWithVolcanicSpaces.includes(player.game.gameOptions.boardName)) {
+      return unoccupiedLandSpaces.filter((space) => board.getVolcanicSpaceIds().includes(space.id));
+    } else {
+      return unoccupiedLandSpaces;
     }
   }
+
   public canPlay(player: Player): boolean {
     const canPlaceTile = LavaFlows.getVolcanicSpaces(player).length > 0;
     const remainingTemperatureSteps = (MAX_TEMPERATURE - player.game.getTemperature()) / 2;
@@ -82,9 +61,10 @@ export class LavaFlows extends Card implements IProjectCard {
 
     return canPlaceTile;
   }
+
   public play(player: Player) {
     player.game.increaseTemperature(player, 2);
-    return new SelectSpace('Select either Tharsis Tholus, Ascraeus Mons, Pavonis Mons or Arsia Mons', LavaFlows.getVolcanicSpaces(player), (space: ISpace) => {
+    return new SelectSpace('Select a volcanic area to place this tile on', LavaFlows.getVolcanicSpaces(player), (space: ISpace) => {
       player.game.addTile(player, SpaceType.LAND, space, {tileType: TileType.LAVA_FLOWS});
       space.adjacency = this.adjacencyBonus;
       return undefined;
