@@ -244,6 +244,7 @@ export namespace MilestoneAwardSelector {
       case BoardName.AMAZONIS:
       case BoardName.ARABIA_TERRA:
       case BoardName.VASTITAS_BOREALIS:
+      case BoardName.TERRA_CIMMERIA:
         drawnMilestonesAndAwards.milestones.push(...ORIGINAL_MILESTONES);
         drawnMilestonesAndAwards.awards.push(...ORIGINAL_AWARDS);
         break;

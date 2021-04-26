@@ -67,6 +67,7 @@ import {AddResourcesToCard} from './deferredActions/AddResourcesToCard';
 import {AmazonisBoard} from './boards/AmazonisBoard';
 import {ArabiaTerraBoard} from './boards/ArabiaTerraBoard';
 import {VastitasBorealisBoard} from './boards/VastitasBorealisBoard';
+import {TerraCimmeriaBoard} from './boards/TerraCimmeriaBoard';
 import {SilverCubeHandler} from './community/SilverCubeHandler';
 import {MilestoneAwardSelector} from './MilestoneAwardSelector';
 import {BoardType} from './boards/BoardType';
@@ -1444,6 +1445,8 @@ export class Game implements ISerializable<SerializedGame> {
       player.steel += count;
     } else if (spaceBonus === SpaceBonus.TITANIUM) {
       player.titanium += count;
+    } else if (spaceBonus === SpaceBonus.POWER) {
+      player.energy += count;
     } else if (spaceBonus === SpaceBonus.HEAT) {
       player.heat += count;
     } else if (spaceBonus === SpaceBonus.ANIMAL) {
@@ -1626,6 +1629,8 @@ export class Game implements ISerializable<SerializedGame> {
       board = ArabiaTerraBoard.deserialize(d.board, playersForBoard);
     } else if (gameOptions.boardName === BoardName.VASTITAS_BOREALIS) {
       board = VastitasBorealisBoard.deserialize(d.board, playersForBoard);
+    } else if (gameOptions.boardName === BoardName.TERRA_CIMMERIA) {
+      board = TerraCimmeriaBoard.deserialize(d.board, playersForBoard);
     } else {
       board = OriginalBoard.deserialize(d.board, playersForBoard);
     }

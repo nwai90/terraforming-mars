@@ -58,7 +58,7 @@ export class GameHandler extends Handler {
 
         if (gameReq.board === 'random') {
           let boards = Object.values(BoardName);
-          const communityBoards = [BoardName.AMAZONIS, BoardName.ARABIA_TERRA, BoardName.VASTITAS_BOREALIS];
+          const communityBoards = [BoardName.AMAZONIS, BoardName.ARABIA_TERRA, BoardName.VASTITAS_BOREALIS, BoardName.TERRA_CIMMERIA];
           if (!gameReq.communityCardsOption) boards = boards.filter((b) => !communityBoards.includes(b));
 
           gameReq.board = boards[Math.floor(Math.random() * boards.length)];

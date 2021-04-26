@@ -117,6 +117,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
         BoardName.AMAZONIS,
         BoardName.ARABIA_TERRA,
         BoardName.VASTITAS_BOREALIS,
+        BoardName.TERRA_CIMMERIA,
         'random',
       ],
       seed: Math.random(),
@@ -367,6 +368,8 @@ export const CreateGameForm = Vue.component('create-game-form', {
         return 'create-game-board-hexagon create-game-arabia_terra';
       } else if (boardName === BoardName.VASTITAS_BOREALIS) {
         return 'create-game-board-hexagon create-game-vastitas_borealis';
+      } else if (boardName === BoardName.TERRA_CIMMERIA) {
+        return 'create-game-board-hexagon create-game-terra_cimmeria';
       } else {
         return 'create-game-board-hexagon create-game-random';
       }

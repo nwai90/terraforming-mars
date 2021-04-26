@@ -26,4 +26,8 @@ export enum SpaceName {
     ALBA_FOSSAE = '12',
     CERANIUS_FOSSAE = '21',
     ALBA_MONS = '22',
+    ALBOR_THOLUS_TERRACIMMERIA = '05',
+    APOLLINARIS_MONS = '27',
+    HADRIACUS_MONS = '38',
+    TYRRHENUS_MONS = '21',
 }

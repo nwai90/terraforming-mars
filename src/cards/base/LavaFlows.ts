@@ -59,7 +59,14 @@ export class LavaFlows extends Card implements IProjectCard {
                                space.id === SpaceName.ANSERIS_MONS ||
                                space.id === SpaceName.PINDUS_MONS ||
                                space.id === SpaceName.ULYSSES_THOLUS);        
-    } else {
+    } else if (player.game.gameOptions.boardName === BoardName.TERRA_CIMMERIA) {
+        return player.game.board.getSpaces(SpaceType.LAND, player)
+          .filter((space) => space.tile === undefined && (space.player === undefined || space.player === player))
+          .filter((space) => space.id === SpaceName.ALBOR_THOLUS_TERRACIMMERIA ||
+                                 space.id === SpaceName.APOLLINARIS_MONS ||
+                                 space.id === SpaceName.HADRIACUS_MONS ||
+                                 space.id === SpaceName.TYRRHENUS_MONS);
+     } else {
       return player.game.board.getSpaces(SpaceType.LAND, player)
         .filter((space) => space.tile === undefined && (space.player === undefined || space.player === player));
     }

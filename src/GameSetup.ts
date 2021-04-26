@@ -13,6 +13,7 @@ import {Random} from './Random';
 import {AmazonisBoard} from './boards/AmazonisBoard';
 import {ArabiaTerraBoard} from './boards/ArabiaTerraBoard';
 import {VastitasBorealisBoard} from './boards/VastitasBorealisBoard';
+import {TerraCimmeriaBoard} from './boards/TerraCimmeriaBoard';
 
 export class GameSetup {
   // Function to construct the board and milestones/awards list
@@ -27,6 +28,8 @@ export class GameSetup {
       return ArabiaTerraBoard.newInstance(shuffle, rng, includeVenus, erodedSpaces);
     } else if (boardName === BoardName.VASTITAS_BOREALIS) {
       return VastitasBorealisBoard.newInstance(shuffle, rng, includeVenus, erodedSpaces);
+    } else if (boardName === BoardName.TERRA_CIMMERIA) {
+      return TerraCimmeriaBoard.newInstance(shuffle, rng, includeVenus, erodedSpaces);
     } else {
       return OriginalBoard.newInstance(shuffle, rng, includeVenus, erodedSpaces);
     }
