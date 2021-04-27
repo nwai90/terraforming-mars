@@ -10,6 +10,7 @@ import {TurmoilPolicy} from '../TurmoilPolicy';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {Turmoil} from '../Turmoil';
 import {PlayProjectCard} from '../../deferredActions/PlayProjectCard';
+import {DeferredAction} from '../../deferredActions/DeferredAction';
 
 export class Transhumans extends Party implements IParty {
   name = PartyName.TRANSHUMANS;
@@ -86,8 +87,16 @@ class TranshumansPolicy03 implements Policy {
 
     game.log('${0} used Turmoil Transhumans action', (b) => b.player(player));
     game.defer(new SelectHowToPayDeferred(player, 10, {title: 'Select how to pay for action'}));
+    game.defer(new DeferredAction(player, () => {
+      player.turmoilPolicyActionUsed = true;
+      return undefined;
+    }));
+
     game.defer(new PlayProjectCard(player));
-    player.turmoilPolicyActionUsed = true;
+    game.defer(new DeferredAction(player, () => {
+      player.turmoilPolicyActionUsed = false;
+      return undefined;
+    }));
 
     return undefined;
   }

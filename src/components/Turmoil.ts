@@ -342,7 +342,7 @@ const AGENDA_HTML: Map<BonusId | PolicyId, string> = new Map();
   AGENDA_HTML.set('tp03',
     `<div class="policy-top-margin">
     <span class="money resource">10</span>
-    <span class="red-arrow"></span>
+    <span class="red-arrow-infinity"></span>
     <div class="resource card card-small card-with-border">
         <div class="card-tag-req"><div class="stretched-x">X</div></div>
     </div>
