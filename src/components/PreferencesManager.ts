@@ -1,5 +1,4 @@
 export const preferences = [
-  'hide_hand',
   'hide_awards_and_milestones',
   'hide_top_bar',
   'small_cards',

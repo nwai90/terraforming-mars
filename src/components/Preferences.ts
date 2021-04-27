@@ -70,7 +70,6 @@ export const Preferences = Vue.component('preferences', {
         'preferences_panel_open': false,
         'gamesetup_detail_open': false,
       },
-      'hide_hand': false as boolean | unknown[],
       'hide_awards_and_milestones': false as boolean | unknown[],
       'hide_top_bar': false as boolean | unknown[],
       'small_cards': true as boolean | unknown[],
@@ -284,12 +283,6 @@ export const Preferences = Vue.component('preferences', {
             <div class="preferences_item preferences_item--settings">
                 <i class="preferences_icon preferences_icon--settings" :class="{'preferences_item--is-active': ui.preferences_panel_open}" v-on:click="ui.preferences_panel_open = !ui.preferences_panel_open"></i>
                 <div class="preferences_panel" v-if="ui.preferences_panel_open">
-                    <div class="preferences_panel_item">
-                        <label class="form-switch">
-                            <input type="checkbox" v-on:change="updatePreferences" v-model="hide_hand" />
-                            <i class="form-icon"></i> <span v-i18n>Hide cards in hand</span>
-                        </label>
-                    </div>
                     <div class="preferences_panel_item">
                         <label class="form-switch">
                             <input type="checkbox" v-on:change="updatePreferences" v-model="hide_awards_and_milestones" />
