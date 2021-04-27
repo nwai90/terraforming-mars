@@ -95,14 +95,14 @@ export const SelectSpace = Vue.component('select-space', {
       return spaces;
     },
     hideDialog: function(hide: boolean) {
-      PreferencesManager.saveValue('show_tile_confirmation', hide === true ? '0' : '1');
+      PreferencesManager.save('show_tile_confirmation', hide);
     },
     onTileSelected: function(tile: HTMLElement) {
       this.selectedTile = tile;
       this.disableAvailableSpaceAnimation();
       this.animateSpace(tile, true);
       tile.classList.remove('board-space--available');
-      const displayTileConfirmation = PreferencesManager.loadValue('show_tile_confirmation') === '0';
+      const displayTileConfirmation = PreferencesManager.load('show_tile_confirmation') === '0';
       if (displayTileConfirmation) {
         this.confirmPlacement();
       } else {

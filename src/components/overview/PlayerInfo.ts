@@ -59,7 +59,7 @@ export const PlayerInfo = Vue.component('player-info', {
       return this.player.color === this.activePlayer.color;
     },
   },
-  template: ` 
+  template: `
       <div :class="getClasses()">
         <div class="player-info-top">
             <div :class="getNameAndIconClasses()">

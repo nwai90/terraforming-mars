@@ -220,7 +220,7 @@ export const PlayerTags = Vue.component('player-tags', {
       return this.player.availableBlueCardActionCount;
     },
     isLearnerModeOff: function(): boolean {
-      return PreferencesManager.loadBooleanValue('learner_mode') === false;
+      return PreferencesManager.loadBoolean('learner_mode') === false;
     },
   },
   template: `
