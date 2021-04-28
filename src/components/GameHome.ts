@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import {SimpleGameModel} from '../models/SimpleGameModel';
+import {GameHomeModel} from '../models/GameHomeModel';
 import {Button} from '../components/common/Button';
 import {playerColorClass} from '../utils/utils';
 import {GameSetupDetail} from '../components/GameSetupDetail';
@@ -24,7 +24,7 @@ const DEFAULT_COPIED_PLAYER_ID = '-1';
 export const GameHome = Vue.component('game-home', {
   props: {
     game: {
-      type: Object as () => SimpleGameModel | undefined,
+      type: Object as () => GameHomeModel | undefined,
     },
   },
   components: {
