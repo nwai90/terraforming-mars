@@ -60,8 +60,11 @@ export const GameHome = Vue.component('game-home', {
     getPlayerCubeColorClass: function(color: string): string {
       return playerColorClass(color.toLowerCase(), 'bg');
     },
-    getHref: function(playerId: string): string {
-      return `/player?id=${playerId}`;
+    getHref: function(id: string): string {
+      if (id[0] === 's') {
+        return `/spectator?id=${id}`;
+      }
+      return `/player?id=${id}`;
     },
     copyUrl: function(playerId: string): void {
       copyToClipboard(window.location.origin + this.getHref(playerId));
@@ -69,6 +72,9 @@ export const GameHome = Vue.component('game-home', {
     },
     isPlayerUrlCopied: function(playerId: string): boolean {
       return playerId === this.urlCopiedPlayerId;
+    },
+    getSpectatorId: function(): string {
+      return this.game?.spectatorId ?? '';
     },
   },
   template: `
@@ -82,6 +88,13 @@ export const GameHome = Vue.component('game-home', {
             <span class="player-name"><a :href="getHref(player.id)">{{player.name}}</a></span>
             <Button title="copy" size="tiny" :onClick="_=>copyUrl(player.id)"/>
             <span v-if="isPlayerUrlCopied(player.id)" class="copied-notice">Playable link for {{player.name}} copied to clipboard <span class="dismissed" @click="setCopiedIdToDefault" >dismiss</span></span>
+          </li>
+
+          <br>
+          <li v-if="game !== undefined && game.spectatorId !== undefined">
+            <span class="player-name"><a :href="getHref(getSpectatorId())">Spectator</a></span>
+            <Button title="copy" size="tiny" :onClick="_=>copyUrl(getSpectatorId())"/>
+            <span v-if="isPlayerUrlCopied(getSpectatorId())" class="copied-notice">Spectator link copied to clipboard <span class="dismissed" @click="setCopiedIdToDefault" >dismiss</span></span>
           </li>
         </ul>
 

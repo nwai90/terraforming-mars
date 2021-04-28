@@ -54,6 +54,7 @@ export class Server {
       })),
       gameOptions: getGameOptionsAsModel(game.gameOptions),
       lastSoloGeneration: game.lastSoloGeneration(),
+      spectatorId: game.spectatorId,
     };
   }
 
@@ -145,7 +146,28 @@ export class Server {
 
   public static getSpectatorModel(game: Game): SpectatorModel {
     return {
+      aresData: game.aresData,
+      awards: getAwards(game),
+      colonies: getColonies(game),
+      coloniesCount: getColonies(game).length,
+      color: Color.NEUTRAL,
+      deckSize: game.dealer.getDeckSize(),
+      draftedPlayers: game.getDraftedPlayers(),
+      gameOptions: getGameOptionsAsModel(game.gameOptions),
       generation: game.generation,
+      id: game.spectatorId as string,
+      lastSoloGeneration: game.lastSoloGeneration(),
+      milestones: getMilestones(game),
+      oceans: game.board.getOceansOnBoard(),
+      oxygenLevel: game.getOxygenLevel(),
+      passedPlayers: game.getPassedPlayers(),
+      phase: game.phase,
+      players: getPlayers(game.getPlayers(), game),
+      researchedPlayers: game.getResearchedPlayers(),
+      temperature: game.getTemperature(),
+      turmoil: getTurmoil(game),
+      spaces: getSpaces(game.board),
+      venusScaleLevel: game.getVenusScaleLevel(),
     };
   }
 }

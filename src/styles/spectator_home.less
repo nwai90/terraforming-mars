@@ -1,0 +1,46 @@
+.spectator-container {
+    display: flex;
+    flex-flow: row wrap;
+  }
+  
+  .spectator-column_shortcut {
+    width: 50px;
+    background-color: brown;
+  }
+  
+  .spectator-column_info { 
+    display: flex;
+    flex-flow: column;
+    margin-left: 5px;
+    margin-right: 20px;
+  
+    .row_log {
+      .spectator_log_block{
+        margin-top: 10px;
+      }
+    }
+  
+    .row_player_boards {
+  
+      .players-overview{
+        margin-top: 0px;
+      }
+      .player-info {
+        flex-flow: row wrap;
+        .icon-first-player {
+          left: -10px;
+        }
+        .player-tags {
+          padding-top: 10px;
+        }
+      }
+    }
+  }
+  
+  .column_main {
+    max-width: 1200px;
+  
+    .component-filter {
+      display: flex;
+    }
+  }

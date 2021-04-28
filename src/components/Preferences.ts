@@ -81,6 +81,7 @@ export const Preferences = Vue.component('preferences', {
       'show_tile_confirmation': false as boolean | unknown[],
       'show_discount_on_cards': true as boolean | unknown[],
       'learner_mode': true as boolean | unknown[],
+      'spectator_tab': 'board',
     };
   },
   methods: {
@@ -196,6 +197,9 @@ export const Preferences = Vue.component('preferences', {
         return `${rulingPartyName}`;
       }
     },
+    isNotSpectator: function(): boolean {
+      return this.player_color !== Color.NEUTRAL;
+    },
     getSilverCubeDiscountForTemperature: function(): string {
       return `${this.temperatureSilverCubeBonusMC}`;
     },
@@ -237,15 +241,16 @@ export const Preferences = Vue.component('preferences', {
                     <div v-if="silverCubeVariant" class="resource money silver_cube_mc" v-html="getSilverCubeDiscountForVenus()"></div>
                   </div>
                 </div>
-                <div class="preferences_item preferences_player">
+
+                <div class="preferences_item preferences_player" v-if="isNotSpectator()">
                   <div class="preferences_player_inner" :class="'player_bg_color_' + player_color"></div>
                 </div>
-                <a  href="#board">
+                <a href="#board" v-if="isNotSpectator()">
                     <div class="preferences_item preferences_item_shortcut">
                         <i class="preferences_icon preferences_icon--board"></i>
                     </div>
                 </a>
-                <a  href="#actions">
+                <a href="#actions" v-if="isNotSpectator()">
                     <div class="preferences_item preferences_item_shortcut">
                         <i class="preferences_icon preferences_icon--actions"></i>
                     </div>
@@ -255,7 +260,7 @@ export const Preferences = Vue.component('preferences', {
                         <i class="preferences_icon preferences_icon--cards"><slot></slot></i>
                     </div>
                 </a>
-                <a v-if="coloniesCount > 0" href="#colonies">
+                <a v-if="coloniesCount > 0 && isNotSpectator()" href="#colonies">
                     <div class="preferences_item preferences_item_shortcut">
                         <i class="preferences_icon preferences_icon--colonies"></i>
                     </div>

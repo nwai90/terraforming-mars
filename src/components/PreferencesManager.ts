@@ -12,6 +12,7 @@ export const preferences = [
   'show_tile_confirmation',
   'show_discount_on_cards',
   'learner_mode',
+  'spectator_tab',
 ] as const;
 
 export type Key = typeof preferences[number];

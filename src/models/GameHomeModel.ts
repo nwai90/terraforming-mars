@@ -1,6 +1,6 @@
 
 import {Color} from '../Color';
-import {GameId} from '../Game';
+import {GameId, SpectatorId} from '../Game';
 import {Phase} from '../Phase';
 import {PlayerId} from '../Player';
 import {GameOptionsModel} from '../models/GameOptionsModel';
@@ -12,6 +12,7 @@ export interface GameHomeModel {
     players: Array<GameHomePlayerModel>;
     gameOptions: GameOptionsModel;
     lastSoloGeneration: number;
+    spectatorId: SpectatorId | undefined;
 }
 
 interface GameHomePlayerModel {

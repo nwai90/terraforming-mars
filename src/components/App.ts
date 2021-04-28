@@ -5,6 +5,7 @@ import {GamesOverview} from './GamesOverview';
 import {PlayerHome} from './PlayerHome';
 import {SpectatorHome} from './SpectatorHome';
 import {PlayerModel} from '../models/PlayerModel';
+import {SpectatorModel} from '../models/SpectatorModel';
 import {StartScreen} from './StartScreen';
 import {LoadGameForm} from './LoadGameForm';
 import {DebugUI} from './DebugUI';
@@ -37,6 +38,7 @@ interface MainAppData {
      * a refactor.
      */
     player?: PlayerModel;
+    spectator?: SpectatorModel;
     playerkey: number;
     settings: typeof raw_settings;
     isServerSideRequestInProgress: boolean;
@@ -148,6 +150,31 @@ export const mainAppSettings = {
       xhr.responseType = 'json';
       xhr.send();
     },
+    updateSpectator: function() {
+      const xhr = new XMLHttpRequest();
+      const app = this as unknown as typeof mainAppSettings.data;
+
+      xhr.open('GET', '/api/spectator' + window.location.search);
+      xhr.onerror = function() {
+        alert('Error getting game data');
+      };
+      xhr.onload = () => {
+        if (xhr.status === 200) {
+          app.spectator = xhr.response as SpectatorModel;
+          app.playerkey++;
+          app.screen = 'spectator-home';
+          window.history.replaceState(
+            xhr.response,
+            `${constants.APP_NAME} - Game`,
+            '/spectator?id=' + app.spectator.id,
+          );
+        } else {
+          alert('Unexpected server response');
+        }
+      };
+      xhr.responseType = 'json';
+      xhr.send();
+    },
   },
   'mounted': function() {
     document.title = constants.APP_NAME;
@@ -190,7 +217,7 @@ export const mainAppSettings = {
     } else if (currentPathname === '/help') {
       app.screen = 'help';
     } else if (currentPathname === '/spectator') {
-      app.screen = 'spectator-home';
+      app.updateSpectator();
     } else {
       app.screen = 'start-screen';
     }
