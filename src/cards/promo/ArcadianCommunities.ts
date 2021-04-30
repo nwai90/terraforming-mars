@@ -39,9 +39,7 @@ export class ArcadianCommunities extends Card implements IActionCard, Corporatio
       player.game.board.getAvailableSpacesOnLand(player),
       (foundSpace: ISpace) => {
         foundSpace.player = player;
-
-        player.game.log('${0} placed a Community (player marker)', (b) => b.player(player));
-
+        this.logMarkerPlacement(player, foundSpace);
         return undefined;
       },
     );
@@ -57,6 +55,7 @@ export class ArcadianCommunities extends Card implements IActionCard, Corporatio
       player.game.board.getAvailableSpacesForMarker(player),
       (foundSpace: ISpace) => {
         foundSpace.player = player;
+        this.logMarkerPlacement(player, foundSpace);
         return undefined;
       },
     );
@@ -65,5 +64,14 @@ export class ArcadianCommunities extends Card implements IActionCard, Corporatio
   public play(player: Player) {
     player.steel = 10;
     return undefined;
+  }
+
+  private logMarkerPlacement(player: Player, space: ISpace): void {
+    const offset: number = Math.abs(space.y - 4);
+    const row: number = space.y + 1;
+    const position: number = space.x - offset + 1;
+
+    player.game.log('${0} placed a Community (player marker) on row ${1} position ${2}', (b) =>
+      b.player(player).number(row).number(position));
   }
 }
