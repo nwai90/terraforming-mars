@@ -210,7 +210,7 @@ export const PlayerHome = Vue.component('player-home', {
               :lastSoloGeneration = "player.lastSoloGeneration"
               >
                 <div class="deck-size">{{ player.deckSize }}</div>
-            </preferences>
+            </sidebar>
 
             <div v-if="player.corporationCard">
 

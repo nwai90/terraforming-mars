@@ -6,7 +6,7 @@ import {OtherPlayer} from './OtherPlayer';
 import * as raw_settings from '../genfiles/settings.json';
 import {Milestone} from './Milestone';
 import {Award} from './Award';
-import {Preferences} from './Preferences';
+import {Sidebar} from './Sidebar';
 import {PlayerModel} from '../models/PlayerModel';
 import {PreferencesManager} from './PreferencesManager';
 import {Board} from './Board';
@@ -45,7 +45,7 @@ export const SpectatorHome = Vue.component('spectator-home', {
     'other-player': OtherPlayer,
     'milestone': Milestone,
     'award': Award,
-    'preferences': Preferences,
+    'sidebar': Sidebar,
   },
   methods: {
     getFleetsCountRange: function(player: PlayerModel): Array<number> {
@@ -74,7 +74,7 @@ export const SpectatorHome = Vue.component('spectator-home', {
   },
   template: `<div id="spectator-home" class="spectator-container">
     <template>
-      <preferences v-trim-whitespace
+      <sidebar v-trim-whitespace
         :acting_player="false"
         :player_color="spectator.color"
         :generation="spectator.generation"
@@ -88,7 +88,7 @@ export const SpectatorHome = Vue.component('spectator-home', {
         :playerNumber = "spectator.players.length"
         :lastSoloGeneration = "spectator.lastSoloGeneration">
           <div class="deck-size">{{ spectator.deckSize }}</div>
-      </preferences>
+      </sidebar>
       <div class="spectator-column_info">
         <div class="row_log">
           <div class="player_home_block--log player_home_block--hide_log spectator_log_block">
