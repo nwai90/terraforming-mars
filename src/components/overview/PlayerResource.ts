@@ -85,7 +85,7 @@ export const PlayerResource = Vue.component('player-resource', {
         return 'resource_item_stock_count resource-count-green-text';
       }
 
-      if (this.type === Resources.HEAT) {
+      if (this.type === Resources.HEAT && this.corporationCard !== undefined) {
         let totalHeat: number = count;
 
         if (this.corporationCard.name === CardName.STORMCRAFT_INCORPORATED && this.corporationCard.resources !== undefined) {
