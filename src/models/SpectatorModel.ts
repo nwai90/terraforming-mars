@@ -32,4 +32,9 @@ export interface SpectatorModel {
   temperature: number;
   turmoil: TurmoilModel | undefined;
   venusScaleLevel: number;
+  silverCubeVariant: boolean;
+  temperatureSilverCubeBonusMC: number;
+  oceansSilverCubeBonusMC: number;
+  oxygenSilverCubeBonusMC: number;
+  venusSilverCubeBonusMC: number;
 }

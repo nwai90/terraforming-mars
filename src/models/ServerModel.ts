@@ -168,6 +168,11 @@ export class Server {
       turmoil: getTurmoil(game),
       spaces: getSpaces(game.board),
       venusScaleLevel: game.getVenusScaleLevel(),
+      silverCubeVariant: game.gameOptions.silverCubeVariant,
+      temperatureSilverCubeBonusMC: game.temperatureSilverCubeBonusMC,
+      oceansSilverCubeBonusMC: game.oceansSilverCubeBonusMC,
+      oxygenSilverCubeBonusMC: game.oxygenSilverCubeBonusMC,
+      venusSilverCubeBonusMC: game.venusSilverCubeBonusMC,
     };
   }
 }

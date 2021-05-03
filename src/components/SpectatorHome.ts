@@ -86,6 +86,11 @@ export const SpectatorHome = Vue.component('spectator-home', {
         :turmoil = "spectator.turmoil"
         :gameOptions = "spectator.gameOptions"
         :playerNumber = "spectator.players.length"
+        :silverCubeVariant = "spectator.silverCubeVariant"
+        :temperatureSilverCubeBonusMC = "spectator.temperatureSilverCubeBonusMC"
+        :oceansSilverCubeBonusMC = "spectator.oceansSilverCubeBonusMC"
+        :oxygenSilverCubeBonusMC = "spectator.oxygenSilverCubeBonusMC"
+        :venusSilverCubeBonusMC = "spectator.venusSilverCubeBonusMC"
         :lastSoloGeneration = "spectator.lastSoloGeneration">
           <div class="deck-size">{{ spectator.deckSize }}</div>
       </sidebar>
