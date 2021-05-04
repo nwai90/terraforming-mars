@@ -11,6 +11,16 @@ describe('SisterPlanetSupport', function() {
     Game.newInstance('foobar', [player], player);
 
     expect(card.canPlay(player)).is.not.true;
+
+    player.tagsForTest = {venus: 1};
+    expect(card.canPlay(player)).is.not.true;
+
+    player.tagsForTest = {earth: 1};
+    expect(card.canPlay(player)).is.not.true;
+
+    player.tagsForTest = {venus: 1, earth: 1};
+    expect(card.canPlay(player)).is.true;
+
     const action = card.play(player);
     expect(action).is.undefined;
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(3);

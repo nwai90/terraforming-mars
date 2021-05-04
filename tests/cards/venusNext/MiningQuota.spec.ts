@@ -1,5 +1,4 @@
 import {expect} from 'chai';
-import {ResearchNetwork} from '../../../src/cards/prelude/ResearchNetwork';
 import {MiningQuota} from '../../../src/cards/venusNext/MiningQuota';
 import {SisterPlanetSupport} from '../../../src/cards/venusNext/SisterPlanetSupport';
 import {Game} from '../../../src/Game';
@@ -14,8 +13,28 @@ describe('MiningQuota', function() {
 
     player.playedCards.push(new SisterPlanetSupport);
     expect(card.canPlay(player)).is.not.true;
-    player.playedCards.push(new ResearchNetwork());
+
+    player.tagsForTest = {venus: 1};
+    expect(card.canPlay(player)).is.not.true;
+
+    player.tagsForTest = {earth: 1};
+    expect(card.canPlay(player)).is.not.true;
+
+    player.tagsForTest = {jovian: 1};
+    expect(card.canPlay(player)).is.not.true;
+
+    player.tagsForTest = {venus: 1, earth: 1};
+    expect(card.canPlay(player)).is.not.true;
+
+    player.tagsForTest = {jovian: 1, earth: 1};
+    expect(card.canPlay(player)).is.not.true;
+
+    player.tagsForTest = {venus: 1, jovian: 1};
+    expect(card.canPlay(player)).is.not.true;
+
+    player.tagsForTest = {venus: 1, jovian: 1, earth: 1};
     expect(card.canPlay(player)).is.true;
+
     const action = card.play(player);
     expect(action).is.undefined;
     expect(player.getProduction(Resources.STEEL)).to.eq(2);
