@@ -29,7 +29,7 @@ export class SulphurEatingBacteria extends Card implements IActionCard, IResourc
             eb.empty().startAction.microbes(1);
           }).br;
           b.or().br;
-          b.action('Spend any number of Microbes here to gain triple amount of MC.', (eb) => {
+          b.action('Spend any number of Microbes here to gain triple amount of M€.', (eb) => {
             eb.text('x').microbes(1).startAction.megacredits(3).multiplier;
           });
         }),

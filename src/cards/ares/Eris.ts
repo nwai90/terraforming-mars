@@ -28,7 +28,7 @@ export class Eris extends Card implements CorporationCard {
     
           metadata: {
             cardNumber: 'R47',
-            description: 'You start with 46 MC. As your first action, draw an Ares card.',
+            description: 'You start with 46 M€. As your first action, draw an Ares card.',
             renderData: CardRenderer.builder((b) => {
               b.br.br;
               b.megacredits(46).nbsp.cards(1).secondaryTag(AltSecondaryTag.ARES);

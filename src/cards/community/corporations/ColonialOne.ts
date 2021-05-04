@@ -26,7 +26,7 @@ export class ColonialOne extends Card implements CorporationCard {
 
       metadata: {
         cardNumber: 'R42',
-        description: 'You start with 35 MC and 1 extra trade fleet. Add 3 fighter resources to this card.',
+        description: 'You start with 35 M€ and 1 extra trade fleet. Add 3 fighter resources to this card.',
         renderData: CardRenderer.builder((b) => {
           b.br.br;
           b.megacredits(35).tradeFleet().fighter(3);

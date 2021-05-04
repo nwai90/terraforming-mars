@@ -8,7 +8,7 @@ import {SpaceType} from '../../../SpaceType';
 
 export class ConnectedCommunities implements IGlobalEvent {
     public name = GlobalEventName.CONNECTED_COMMUNITIES;
-    public description = 'Gain 1 TR if you have at least 3 connected tiles. Increase MC production 1 step for each influence.';
+    public description = 'Gain 1 TR if you have at least 3 connected tiles. Increase M€ production 1 step for each influence.';
     public revealedDelegate = PartyName.CENTRISTS;
     public currentDelegate = PartyName.POPULISTS;
 

@@ -18,7 +18,7 @@ export class LabourUnion extends Card implements CorporationCard {
 
       metadata: {
         cardNumber: 'R51',
-        description: 'You start with 55 MC.',
+        description: 'You start with 55 M€.',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(55);
           b.corpBox('effect', (ce) => {
@@ -27,7 +27,7 @@ export class LabourUnion extends Card implements CorporationCard {
               eb.plate('Standard projects').startEffect.megacredits(-4);
             });
             ce.vSpace();
-            ce.effect('Standard Projects cost 4 MC less. At generation end, discard down to 6 cards.', (eb) => {
+            ce.effect('Standard Projects cost 4 M€ less. At generation end, discard down to 6 cards.', (eb) => {
               eb.cards(1).startEffect.text('MAX 6 AT GEN END', Size.SMALL);
             });
             ce.vSpace(Size.SMALL);

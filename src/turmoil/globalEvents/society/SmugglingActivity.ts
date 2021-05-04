@@ -8,7 +8,7 @@ import {Tags} from '../../../cards/Tags';
 
 export class SmugglingActivity implements IGlobalEvent {
     public name = GlobalEventName.SMUGGLING_ACTIVITY;
-    public description = 'Gain 2 MC for each Jovian tag (max 5) and influence. Increase all colony tracks 1 step.';
+    public description = 'Gain 2 M€ for each Jovian tag (max 5) and influence. Increase all colony tracks 1 step.';
     public revealedDelegate = PartyName.CENTRISTS;
     public currentDelegate = PartyName.BUREAUCRATS;
 

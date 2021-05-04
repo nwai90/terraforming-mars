@@ -7,7 +7,7 @@ import {Resources} from '../../../Resources';
 
 export class ColonizationIncentives implements IGlobalEvent {
     public name = GlobalEventName.COLONIZATION_INCENTIVES;
-    public description = 'Gain 2 MC for each colony (max 5). Gain 3 energy for each influence.';
+    public description = 'Gain 2 M€ for each colony (max 5). Gain 3 energy for each influence.';
     public revealedDelegate = PartyName.EMPOWER;
     public currentDelegate = PartyName.POPULISTS;
 

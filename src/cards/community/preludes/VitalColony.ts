@@ -19,7 +19,7 @@ export class VitalColony extends PreludeCard implements IProjectCard {
             b.colonies(1).colonyPlacementBonus().br;
             b.minus().megacredits(5);
           }),
-          description: 'Place a colony. Gain its placement bonus a second time. Pay 5 MC.',
+          description: 'Place a colony. Gain its placement bonus a second time. Pay 5 M€.',
         },
       });
     }

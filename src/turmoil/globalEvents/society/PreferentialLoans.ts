@@ -7,7 +7,7 @@ import {Resources} from '../../../Resources';
 
 export class PreferentialLoans implements IGlobalEvent {
     public name = GlobalEventName.PREFERENTIAL_LOANS;
-    public description = 'Decrease MC production 1 step for each set of 5 TR over 10 (max 5 sets), then reduced by influence. Gain 10 MC.';
+    public description = 'Decrease M€ production 1 step for each set of 5 TR over 10 (max 5 sets), then reduced by influence. Gain 10 M€.';
     public revealedDelegate = PartyName.POPULISTS;
     public currentDelegate = PartyName.CENTRISTS;
 

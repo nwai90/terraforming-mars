@@ -8,7 +8,7 @@ import {CardType} from '../../../cards/CardType';
 
 export class Renationalisation implements IGlobalEvent {
     public name = GlobalEventName.RENATIONALISATION;
-    public description = 'Lose 4 MC for every set of 3 automated cards in play (max 5 sets), then reduced by influence.';
+    public description = 'Lose 4 M€ for every set of 3 automated cards in play (max 5 sets), then reduced by influence.';
     public revealedDelegate = PartyName.CENTRISTS;
     public currentDelegate = PartyName.POPULISTS;
 

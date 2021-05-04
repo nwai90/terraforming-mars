@@ -23,7 +23,7 @@ export class Centrists extends Party implements IParty {
 class CentristsBonus01 implements Bonus {
   id = 'cb01';
   isDefault = true;
-  description = 'Gain 8 MC';
+  description = 'Gain 8 M€';
 
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
@@ -47,7 +47,7 @@ class CentristsBonus02 implements Bonus {
 class CentristsPolicy01 implements Policy {
   isDefault = true;
   id = TurmoilPolicy.CENTRISTS_DEFAULT_POLICY;
-  description: string = 'Gain 6 MC (Turmoil Centrists)';
+  description: string = 'Gain 6 M€ (Turmoil Centrists)';
 
   canAct(player: Player) {
     return player.turmoilPolicyActionUsed === false;
@@ -65,7 +65,7 @@ class CentristsPolicy01 implements Policy {
 
 class CentristsPolicy02 implements Policy {
   id = TurmoilPolicy.CENTRISTS_POLICY_2;
-  description: string = 'Delegates cost 2 MC more to place';
+  description: string = 'Delegates cost 2 M€ more to place';
   isDefault = false;
 }
 
@@ -108,7 +108,7 @@ class CentristsPolicy03 implements Policy {
 
 class CentristsPolicy04 implements Policy {
   id = TurmoilPolicy.CENTRISTS_POLICY_4;
-  description: string = 'When you play an Event card, you pay 2 MC less for it';
+  description: string = 'When you play an Event card, you pay 2 M€ less for it';
   isDefault = false;
 }
 

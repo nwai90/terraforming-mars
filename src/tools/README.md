@@ -23,7 +23,7 @@ Result will be something like this:
 ```
 Effect: When you play an animal or plant tag, including<br> this, add 1 animal<br> to this card.
     missing ru
-You start with 3 MC production and 44 MC.
+You start with 3 M€ production and 44 M€.
     missing ru
     missing cn
 ...

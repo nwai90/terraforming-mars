@@ -1075,7 +1075,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     if (game.getTemperature() < constants.MAX_TEMPERATURE) {
       if (game.gameOptions.silverCubeVariant === true) {
         action.options.push(
-          new SelectOption('Add 5 MC to temperature track', 'Select', () => {
+          new SelectOption('Add 5 M€ to temperature track', 'Select', () => {
             SilverCubeHandler.onTemperatureSilverCubeAdded(this, game);
             return undefined;
           }),
@@ -1093,7 +1093,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     if (game.getOxygenLevel() < constants.MAX_OXYGEN_LEVEL) {
       if (game.gameOptions.silverCubeVariant === true) {
         action.options.push(
-          new SelectOption('Add 5 MC to oxygen track', 'Select', () => {
+          new SelectOption('Add 5 M€ to oxygen track', 'Select', () => {
             SilverCubeHandler.onOxygenSilverCubeAdded(this, game);
             return undefined;
           }),
@@ -1111,7 +1111,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     if (game.board.getOceansOnBoard() < constants.MAX_OCEAN_TILES) {
       if (game.gameOptions.silverCubeVariant === true) {
         action.options.push(
-          new SelectOption('Add 5 MC to oceans track', 'Select', () => {
+          new SelectOption('Add 5 M€ to oceans track', 'Select', () => {
             SilverCubeHandler.onOceanSilverCubeAdded(this, game);
             return undefined;
           }),
@@ -1132,7 +1132,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     if (game.getVenusScaleLevel() < constants.MAX_VENUS_SCALE && game.gameOptions.venusNextExtension) {
       if (game.gameOptions.silverCubeVariant === true) {
         action.options.push(
-          new SelectOption('Add 5 MC to Venus track', 'Select', () => {
+          new SelectOption('Add 5 M€ to Venus track', 'Select', () => {
             SilverCubeHandler.onVenusSilverCubeAdded(this, game);
             return undefined;
           }),
@@ -1237,7 +1237,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         return undefined;
       }, cardsToKeep, cardsToKeep,
       false, undefined, false,
-      ), () => { },
+      ),
     );
   }
 
@@ -1811,7 +1811,7 @@ export class Player implements ISerializable<SerializedPlayer> {
           return undefined;
         }),
       );
-      this.setWaitingFor(action, () => {});
+      this.setWaitingFor(action);
       return;
     }
 
@@ -2094,12 +2094,12 @@ export class Player implements ISerializable<SerializedPlayer> {
         sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (from lobby)');
 
         if (shouldApplyCentristsTax) {
-          sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area from lobby (2 MC)', {cost: 2});
+          sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area from lobby (2 M€)', {cost: 2});
         }
       } else if (this.isCorporation(CardName.INCITE) && this.canAfford(inciteLobbyingCost) && this.game.turmoil!.getDelegatesInReserve(this.id) > 0) {
-        sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (' + inciteLobbyingCost + ' MC)', {cost: inciteLobbyingCost});
+        sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (' + inciteLobbyingCost + ' M€)', {cost: inciteLobbyingCost});
       } else if (this.canAfford(lobbyingCost) && this.game.turmoil!.getDelegatesInReserve(this.id) > 0) {
-        sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (' + lobbyingCost + ' MC)', {cost: lobbyingCost});
+        sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (' + lobbyingCost + ' M€)', {cost: lobbyingCost});
       }
 
       if (sendDelegate) {
@@ -2175,8 +2175,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   public getWaitingFor(): PlayerInput | undefined {
     return this.waitingFor;
   }
-
-  public setWaitingFor(input: PlayerInput, cb: () => void): void {
+  public setWaitingFor(input: PlayerInput, cb: () => void = () => {}): void {
     this.timer.start();
     this.waitingFor = input;
     this.waitingForCb = cb;

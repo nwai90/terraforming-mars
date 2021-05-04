@@ -42,7 +42,7 @@ export class SilverCubeHandler {
     const asteroidStandard = new AsteroidStandardProject();
 
     game.temperatureSilverCubeBonusMC += 5;
-    game.log('${0} acted as World Government and placed 5 MC on temperature track', (b) => b.player(player));
+    game.log('${0} acted as World Government and placed 5 M€ on temperature track', (b) => b.player(player));
 
     if (game.temperatureSilverCubeBonusMC >= asteroidStandard.cost) {
       game.temperatureSilverCubeBonusMC = 0;
@@ -57,7 +57,7 @@ export class SilverCubeHandler {
     const greeneryStandard = new GreeneryStandardProject();
 
     game.oxygenSilverCubeBonusMC += 5;
-    game.log('${0} acted as World Government and placed 5 MC on oxygen track', (b) => b.player(player));
+    game.log('${0} acted as World Government and placed 5 M€ on oxygen track', (b) => b.player(player));
 
     if (game.oxygenSilverCubeBonusMC >= greeneryStandard.cost) {
       game.oxygenSilverCubeBonusMC = 0;
@@ -72,7 +72,7 @@ export class SilverCubeHandler {
     const aquifer = new AquiferStandardProject();
 
     game.oceansSilverCubeBonusMC += 5;
-    game.log('${0} acted as World Government and placed 5 MC on oceans track', (b) => b.player(player));
+    game.log('${0} acted as World Government and placed 5 M€ on oceans track', (b) => b.player(player));
 
     if (game.oceansSilverCubeBonusMC >= aquifer.cost) {
       game.oceansSilverCubeBonusMC = 0;
@@ -93,7 +93,7 @@ export class SilverCubeHandler {
     const airScrapping = new AirScrappingStandardProject();
 
     game.venusSilverCubeBonusMC += 5;
-    game.log('${0} acted as World Government and placed 5 MC on Venus track', (b) => b.player(player));
+    game.log('${0} acted as World Government and placed 5 M€ on Venus track', (b) => b.player(player));
 
     if (game.venusSilverCubeBonusMC >= airScrapping.cost) {
       game.venusSilverCubeBonusMC = 0;

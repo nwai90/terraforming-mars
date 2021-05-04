@@ -8,7 +8,7 @@ import {Tags} from '../../../cards/Tags';
 
 export class RaidOnPrivateers implements IGlobalEvent {
     public name = GlobalEventName.RAID_ON_PRIVATEERS;
-    public description = 'Lose 5 MC if you have 4 or more planetary tags, reduced by influence.';
+    public description = 'Lose 5 M€ if you have 4 or more planetary tags, reduced by influence.';
     public revealedDelegate = PartyName.POPULISTS;
     public currentDelegate = PartyName.CENTRISTS;
 

@@ -11,7 +11,7 @@ import {SelectOption} from '../../../inputs/SelectOption';
 
 export class PlanetFederation implements IGlobalEvent {
     public name = GlobalEventName.PLANET_FEDERATION;
-    public description = 'Gain 3 steel, 2 titanium or 5 MC if you have at least 5 planetary tags. Influence counts as planetary tags.';
+    public description = 'Gain 3 steel, 2 titanium or 5 M€ if you have at least 5 planetary tags. Influence counts as planetary tags.';
     public revealedDelegate = PartyName.CENTRISTS;
     public currentDelegate = PartyName.EMPOWER;
 
@@ -39,7 +39,7 @@ export class PlanetFederation implements IGlobalEvent {
           );
 
           const gainMc = new SelectOption(
-            'Gain 5 MC',
+            'Gain 5 M€',
             'Select',
             () => {
               player.addResource(Resources.MEGACREDITS, 5, {log: true});

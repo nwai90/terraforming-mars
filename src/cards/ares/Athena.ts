@@ -21,7 +21,7 @@ export class Athena extends Card implements CorporationCard {
     
           metadata: {
             cardNumber: 'R52',
-            description: 'You start with 62 MC. As your first action, place 2 hazard tiles adjacent to no other tiles.',
+            description: 'You start with 62 M€. As your first action, place 2 hazard tiles adjacent to no other tiles.',
             renderData: CardRenderer.builder((b) => {
               b.megacredits(62).hazardTile(2);
               b.corpBox('effect', (ce) => {

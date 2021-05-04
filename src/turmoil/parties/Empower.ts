@@ -21,7 +21,7 @@ export class Empower extends Party implements IParty {
 class EmpowerBonus01 implements Bonus {
   id = 'eb01';
   isDefault = true;
-  description = 'Gain 2 MC for each Power tag you have';
+  description = 'Gain 2 M€ for each Power tag you have';
 
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
@@ -33,7 +33,7 @@ class EmpowerBonus01 implements Bonus {
 
 class EmpowerBonus02 implements Bonus {
   id = 'eb02';
-  description = 'Gain 1 MC for each Energy production you have';
+  description = 'Gain 1 M€ for each Energy production you have';
   isDefault = false;
 
   grant(game: Game) {
@@ -47,7 +47,7 @@ class EmpowerBonus02 implements Bonus {
 class EmpowerPolicy01 implements Policy {
   isDefault = true;
   id = TurmoilPolicy.EMPOWER_DEFAULT_POLICY;
-  description: string = 'Spend X MC to gain X energy (Turmoil Empower)';
+  description: string = 'Spend X M€ to gain X energy (Turmoil Empower)';
 
   canAct(player: Player) {
     return player.canAfford(1) && player.turmoilPolicyActionUsed === false;
@@ -65,7 +65,7 @@ class EmpowerPolicy01 implements Policy {
             player.addResource(Resources.MEGACREDITS, -amount);
             player.addResource(Resources.ENERGY, amount);
             player.game.log('${0} used Turmoil Empower action', (b) => b.player(player));
-            player.game.log('${0} spent ${1} MC to gain ${2} energy', (b) => b.player(player).number(amount).number(amount));
+            player.game.log('${0} spent ${1} M€ to gain ${2} energy', (b) => b.player(player).number(amount).number(amount));
             return undefined;
           },
           1,
@@ -97,7 +97,7 @@ class EmpowerPolicy03 implements Policy {
 
 class EmpowerPolicy04 implements Policy {
   id = TurmoilPolicy.EMPOWER_POLICY_4;
-  description: string = 'When you play a Power tag, you pay 3 MC less for it';
+  description: string = 'When you play a Power tag, you pay 3 M€ less for it';
   isDefault = false;
 }
 

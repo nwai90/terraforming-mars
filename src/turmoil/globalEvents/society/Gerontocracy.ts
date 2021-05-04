@@ -7,7 +7,7 @@ import {Resources} from '../../../Resources';
 
 export class Gerontocracy implements IGlobalEvent {
     public name = GlobalEventName.GERONTOCRACY;
-    public description = 'Gain 10 MC if you have at least 4 cities. Influence counts as cities.';
+    public description = 'Gain 10 M€ if you have at least 4 cities. Influence counts as cities.';
     public revealedDelegate = PartyName.CENTRISTS;
     public currentDelegate = PartyName.TRANSHUMANS;
 

@@ -22,7 +22,7 @@ export class Transhumans extends Party implements IParty {
 class TranshumansBonus01 implements Bonus {
   id = 'tb01';
   isDefault = true;
-  description = 'Gain 1 MC for each card with requirements you have played';
+  description = 'Gain 1 M€ for each card with requirements you have played';
 
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
@@ -34,7 +34,7 @@ class TranshumansBonus01 implements Bonus {
 
 class TranshumansBonus02 implements Bonus {
   id = 'tb02';
-  description = 'Gain 2 MC for each card with no tags you have played';
+  description = 'Gain 2 M€ for each card with no tags you have played';
   isDefault = false;
 
   grant(game: Game) {
@@ -53,7 +53,7 @@ class TranshumansPolicy01 implements Policy {
 
 class TranshumansPolicy02 implements Policy {
   id = TurmoilPolicy.TRANSHUMANS_POLICY_2;
-  description: string = 'Spend 10 MC to gain 1 influence (Turmoil Transhumans)';
+  description: string = 'Spend 10 M€ to gain 1 influence (Turmoil Transhumans)';
   isDefault = false;
 
   canAct(player: Player) {
@@ -75,7 +75,7 @@ class TranshumansPolicy02 implements Policy {
 
 class TranshumansPolicy03 implements Policy {
   id = TurmoilPolicy.TRANSHUMANS_POLICY_3;
-  description: string = 'Spend 10 MC to play a card from hand, ignoring global requirements (Turmoil Transhumans)';
+  description: string = 'Spend 10 M€ to play a card from hand, ignoring global requirements (Turmoil Transhumans)';
   isDefault = false;
 
   canAct(player: Player) {

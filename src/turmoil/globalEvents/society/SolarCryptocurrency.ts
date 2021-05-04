@@ -7,7 +7,7 @@ import {Resources} from '../../../Resources';
 
 export class SolarCryptocurrency implements IGlobalEvent {
     public name = GlobalEventName.SOLAR_CRYPTOCURRENCY;
-    public description = 'Gain 2 MC for each energy production (max 5) and influence.';
+    public description = 'Gain 2 M€ for each energy production (max 5) and influence.';
     public revealedDelegate = PartyName.EMPOWER;
     public currentDelegate = PartyName.TRANSHUMANS;
 

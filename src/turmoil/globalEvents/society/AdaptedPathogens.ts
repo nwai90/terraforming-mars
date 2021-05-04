@@ -10,7 +10,7 @@ import {ResourceType} from '../../../ResourceType';
 
 export class AdaptedPathogens implements IGlobalEvent {
     public name = GlobalEventName.ADAPTED_PATHOGENS;
-    public description = 'Gain 2 MC for each microbe tag (max 5). Add 1 microbe to a card for each influence.';
+    public description = 'Gain 2 M€ for each microbe tag (max 5). Add 1 microbe to a card for each influence.';
     public revealedDelegate = PartyName.POPULISTS;
     public currentDelegate = PartyName.SPOME;
 

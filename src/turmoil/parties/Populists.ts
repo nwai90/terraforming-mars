@@ -19,7 +19,7 @@ export class Populists extends Party implements IParty {
 class PopulistsBonus01 implements Bonus {
   id = 'pb01';
   isDefault = true;
-  description = 'Lose 1 MC for every 5 MC you have over 40';
+  description = 'Lose 1 M€ for every 5 M€ you have over 40';
 
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
@@ -31,7 +31,7 @@ class PopulistsBonus01 implements Bonus {
 
 class PopulistsBonus02 implements Bonus {
   id = 'pb02';
-  description = 'Lose 2 MC for every 8 cards you have in hand';
+  description = 'Lose 2 M€ for every 8 cards you have in hand';
   isDefault = false;
 
   grant(game: Game) {
@@ -50,7 +50,7 @@ class PopulistsPolicy01 implements Policy {
 
 class PopulistsPolicy02 implements Policy {
   id = TurmoilPolicy.POPULISTS_POLICY_2;
-  description: string = 'When you play a card with NON-NEGATIVE VP, lose 2 MC or as much as possible';
+  description: string = 'When you play a card with NON-NEGATIVE VP, lose 2 M€ or as much as possible';
   isDefault = false;
 
   onCardPlayed(player: Player, card: IProjectCard) {
@@ -81,7 +81,7 @@ class PopulistsPolicy03 implements Policy {
 
 class PopulistsPolicy04 implements Policy {
   id = TurmoilPolicy.POPULISTS_POLICY_4;
-  description: string = 'When you place a tile, gain 3 MC';
+  description: string = 'When you place a tile, gain 3 M€';
   isDefault = false;
 
   onTilePlaced(player: Player) {

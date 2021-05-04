@@ -20,7 +20,7 @@ export class StrategicBasePlanning extends PreludeCard implements IProjectCard {
             b.colonies(1).city().br;
             b.minus().megacredits(6);
           }),
-          description: 'Place a colony. Place a city tile. Pay 6 MC.',
+          description: 'Place a colony. Place a city tile. Pay 6 M€.',
         },
       });
     }

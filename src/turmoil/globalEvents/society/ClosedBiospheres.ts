@@ -7,7 +7,7 @@ import {Resources} from '../../../Resources';
 
 export class ClosedBiospheres implements IGlobalEvent {
     public name = GlobalEventName.CLOSED_BIOSPHERES;
-    public description = 'Decrease plant and MC production 1 step. Gain 1 plant for each influence.';
+    public description = 'Decrease plant and M€ production 1 step. Gain 1 plant for each influence.';
     public revealedDelegate = PartyName.SPOME;
     public currentDelegate = PartyName.POPULISTS;
 

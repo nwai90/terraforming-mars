@@ -18,7 +18,7 @@ export class NitrateReducers extends PreludeCard implements IProjectCard {
             b.cards(2).secondaryTag(Tags.MICROBE).br;
             b.production((pb) => pb.megacredits(3));
           }),
-          description: 'Draw 2 microbe cards. Increase your MC production 3 steps.',
+          description: 'Draw 2 microbe cards. Increase your M€ production 3 steps.',
         },
       });
     }

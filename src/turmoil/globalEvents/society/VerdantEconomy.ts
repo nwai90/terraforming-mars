@@ -8,7 +8,7 @@ import {Tags} from '../../../cards/Tags';
 
 export class VerdantEconomy implements IGlobalEvent {
     public name = GlobalEventName.VERDANT_ECONOMY;
-    public description = 'Gain 2 MC for each plant tag (max 5) and influence.';
+    public description = 'Gain 2 M€ for each plant tag (max 5) and influence.';
     public revealedDelegate = PartyName.CENTRISTS;
     public currentDelegate = PartyName.TRANSHUMANS;
 

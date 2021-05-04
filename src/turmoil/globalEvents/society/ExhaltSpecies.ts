@@ -10,7 +10,7 @@ import {ResourceType} from '../../../ResourceType';
 
 export class ExhaltSpecies implements IGlobalEvent {
     public name = GlobalEventName.EXHALT_SPECIES;
-    public description = 'Gain 2 MC for each animal tag (max 5). Add 1 animal to a card for each influence.';
+    public description = 'Gain 2 M€ for each animal tag (max 5). Add 1 animal to a card for each influence.';
     public revealedDelegate = PartyName.SPOME;
     public currentDelegate = PartyName.BUREAUCRATS;
 

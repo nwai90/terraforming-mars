@@ -24,7 +24,7 @@ export class Bureaucrats extends Party implements IParty {
 class BureaucratsBonus01 implements Bonus {
   id = 'bb01';
   isDefault = true;
-  description = 'Gain 1 MC for each Event card you have played';
+  description = 'Gain 1 M€ for each Event card you have played';
 
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
@@ -49,7 +49,7 @@ class BureaucratsBonus02 implements Bonus {
 class BureaucratsPolicy01 implements Policy {
   isDefault = true;
   id = TurmoilPolicy.BUREAUCRATS_DEFAULT_POLICY;
-  description: string = 'Pay 3 MC to send a delegate from your reserve into any party (Turmoil Bureaucrats)';
+  description: string = 'Pay 3 M€ to send a delegate from your reserve into any party (Turmoil Bureaucrats)';
 
   canAct(player: Player) {
     const turmoil: Turmoil = player.game.turmoil as Turmoil;
@@ -83,7 +83,7 @@ class BureaucratsPolicy02 implements Policy {
 
 class BureaucratsPolicy03 implements Policy {
   id = TurmoilPolicy.BUREAUCRATS_POLICY_3;
-  description: string = 'Pay 3 MC to place your player marker on a non-reserved area (Turmoil Bureaucrats)';
+  description: string = 'Pay 3 M€ to place your player marker on a non-reserved area (Turmoil Bureaucrats)';
   isDefault = false;
 
   canAct(player: Player) {
@@ -104,7 +104,7 @@ class BureaucratsPolicy03 implements Policy {
 
 class BureaucratsPolicy04 implements Policy {
   id = TurmoilPolicy.BUREAUCRATS_POLICY_4;
-  description: string = 'When you play an Earth tag, you pay 3 MC less for it';
+  description: string = 'When you play an Earth tag, you pay 3 M€ less for it';
   isDefault = false;
 }
 

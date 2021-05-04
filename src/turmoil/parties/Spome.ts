@@ -21,7 +21,7 @@ export class Spome extends Party implements IParty {
 class SpomeBonus01 implements Bonus {
   id = 'spb01';
   isDefault = true;
-  description = 'Gain 1 MC for each different tag you have';
+  description = 'Gain 1 M€ for each different tag you have';
 
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
@@ -32,7 +32,7 @@ class SpomeBonus01 implements Bonus {
 
 class SpomeBonus02 implements Bonus {
   id = 'spb02';
-  description = 'Gain 1 MC for each type of resource you have';
+  description = 'Gain 1 M€ for each type of resource you have';
   isDefault = false;
 
   grant(game: Game) {
@@ -49,12 +49,12 @@ class SpomeBonus02 implements Bonus {
 class SpomePolicy01 implements Policy {
   isDefault = true;
   id = TurmoilPolicy.SPOME_DEFAULT_POLICY;
-  description: string = 'When you raise Venus, gain 2 MC per step raised';
+  description: string = 'When you raise Venus, gain 2 M€ per step raised';
 }
 
 class SpomePolicy02 implements Policy {
   id = TurmoilPolicy.SPOME_POLICY_2;
-  description: string = 'Pay 10 MC to gain a trade fleet (Turmoil Spome)';
+  description: string = 'Pay 10 M€ to gain a trade fleet (Turmoil Spome)';
   isDefault = false;
 
   canAct(player: Player) {
@@ -84,7 +84,7 @@ class SpomePolicy03 implements Policy {
 
 class SpomePolicy04 implements Policy {
   id = TurmoilPolicy.SPOME_POLICY_4;
-  description: string = 'Pay 10 MC to draw 2 planetary cards (Turmoil Spome)';
+  description: string = 'Pay 10 M€ to draw 2 planetary cards (Turmoil Spome)';
   isDefault = false;
 
   canAct(player: Player) {

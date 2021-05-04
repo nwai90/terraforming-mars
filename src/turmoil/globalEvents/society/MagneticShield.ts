@@ -8,7 +8,7 @@ import {Tags} from '../../../cards/Tags';
 
 export class MagneticShield implements IGlobalEvent {
     public name = GlobalEventName.MAGNETIC_SHIELD;
-    public description = 'Lose 4 MC for each Power tag (max 5), then reduced by influence.';
+    public description = 'Lose 4 M€ for each Power tag (max 5), then reduced by influence.';
     public revealedDelegate = PartyName.EMPOWER;
     public currentDelegate = PartyName.TRANSHUMANS;
 

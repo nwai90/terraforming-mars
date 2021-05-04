@@ -10,7 +10,7 @@ import {DrawCards} from '../../../deferredActions/DrawCards';
 
 export class UniversalRoom implements IGlobalEvent {
     public name = GlobalEventName.UNIVERSAL_ROOM;
-    public description = 'Gain 2 MC for each City tag (max 5). Draw and discard 1 card for each influence.';
+    public description = 'Gain 2 M€ for each City tag (max 5). Draw and discard 1 card for each influence.';
     public revealedDelegate = PartyName.TRANSHUMANS;
     public currentDelegate = PartyName.CENTRISTS;
 

@@ -8,7 +8,7 @@ import {ResourceType} from '../../../ResourceType';
 
 export class DutyFreeSpace implements IGlobalEvent {
     public name = GlobalEventName.DUTY_FREE_SPACE;
-    public description = 'Gain 2 MC for each card with at least one floater on it (max 5) and influence.';
+    public description = 'Gain 2 M€ for each card with at least one floater on it (max 5) and influence.';
     public revealedDelegate = PartyName.SPOME;
     public currentDelegate = PartyName.BUREAUCRATS;
 

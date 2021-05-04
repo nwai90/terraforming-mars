@@ -7,7 +7,7 @@ import {Resources} from '../../../Resources';
 
 export class SocialNihilism implements IGlobalEvent {
     public name = GlobalEventName.SOCIAL_NIHILISM;
-    public description = 'Lose 2 MC for each City tile and colony (no limit), then reduced by influence.';
+    public description = 'Lose 2 M€ for each City tile and colony (no limit), then reduced by influence.';
     public revealedDelegate = PartyName.TRANSHUMANS;
     public currentDelegate = PartyName.SPOME;
 

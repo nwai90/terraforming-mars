@@ -7,7 +7,7 @@ import {Resources} from '../../../Resources';
 
 export class FermiSolution implements IGlobalEvent {
     public name = GlobalEventName.FERMI_SOLUTION;
-    public description = 'Decrease MC production 1 step for each colony. Draw 1 card for each influence.';
+    public description = 'Decrease M€ production 1 step for each colony. Draw 1 card for each influence.';
     public revealedDelegate = PartyName.BUREAUCRATS;
     public currentDelegate = PartyName.SPOME;
 

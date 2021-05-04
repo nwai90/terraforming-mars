@@ -8,7 +8,7 @@ import {Tags} from '../../../cards/Tags';
 
 export class KesslersBlast implements IGlobalEvent {
     public name = GlobalEventName.KESSLERS_BLAST;
-    public description = 'Lose 4 MC for each Earth tag (max 5, then reduced by influence). Gain 2 titanium.';
+    public description = 'Lose 4 M€ for each Earth tag (max 5, then reduced by influence). Gain 2 titanium.';
     public revealedDelegate = PartyName.BUREAUCRATS;
     public currentDelegate = PartyName.CENTRISTS;
 

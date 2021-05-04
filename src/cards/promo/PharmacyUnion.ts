@@ -27,7 +27,7 @@ export class PharmacyUnion extends Card implements CorporationCard {
         cardNumber: 'R39',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(54).cards(1).secondaryTag(Tags.SCIENCE);
-          // blank space after MC is on purpose
+          // blank space after M€ is on purpose
           b.text('(You start with 54 M€ . Draw a Science card.)', Size.TINY, false, false);
           b.corpBox('effect', (ce) => {
             ce.vSpace(Size.LARGE);
@@ -95,7 +95,7 @@ export class PharmacyUnion extends Card implements CorporationCard {
                   game.log('${0} turned ${1} face down to gain 3 TR and lost ${2} M€', (b) => b.player(player).card(this).number(megaCreditsLost));
                   return undefined;
                 }),
-                new SelectOption('Add a disease to it and lose up to 4 MC, then remove a disease to gain 1 TR', 'Confirm', () => {
+                new SelectOption('Add a disease to it and lose up to 4 M€, then remove a disease to gain 1 TR', 'Confirm', () => {
                   const megaCreditsLost = Math.min(player.megaCredits, 4);
                   player.increaseTerraformRating();
                   player.megaCredits -= megaCreditsLost;

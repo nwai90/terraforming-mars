@@ -8,7 +8,7 @@ import {Tags} from '../../../cards/Tags';
 
 export class PowerTrip implements IGlobalEvent {
     public name = GlobalEventName.POWER_TRIP;
-    public description = 'Lose all energy. Gain 2 MC for each power tag (max 5) and influence.';
+    public description = 'Lose all energy. Gain 2 M€ for each power tag (max 5) and influence.';
     public revealedDelegate = PartyName.BUREAUCRATS;
     public currentDelegate = PartyName.EMPOWER;
 

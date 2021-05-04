@@ -21,7 +21,7 @@ export class FortifiedOutpost extends PreludeCard implements IProjectCard {
             b.city().greenery().secondaryTag(AltSecondaryTag.OXYGEN).br;
             b.minus().megacredits(10);
           }),
-          description: 'Place a city tile. Place a greenery tile. Pay 10 MC.',
+          description: 'Place a city tile. Place a greenery tile. Pay 10 M€.',
         },
       });
     }

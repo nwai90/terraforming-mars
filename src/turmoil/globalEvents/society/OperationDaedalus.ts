@@ -7,7 +7,7 @@ import {Resources} from '../../../Resources';
 
 export class OperationDaedalus implements IGlobalEvent {
     public name = GlobalEventName.OPERATION_DAEDALUS;
-    public description = 'Gain 1 titanium for each colony (max 5) and influence. Lose 5 MC.';
+    public description = 'Gain 1 titanium for each colony (max 5) and influence. Lose 5 M€.';
     public revealedDelegate = PartyName.EMPOWER;
     public currentDelegate = PartyName.SPOME;
 

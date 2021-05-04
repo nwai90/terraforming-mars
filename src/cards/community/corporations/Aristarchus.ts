@@ -16,13 +16,13 @@ export class Aristarchus extends Card implements CorporationCard {
 
       metadata: {
         cardNumber: 'R50',
-        description: 'You start with 33 MC.',
+        description: 'You start with 33 M€.',
         renderData: CardRenderer.builder((b) => {
           b.br.br.br.br.br;
           b.megacredits(33);
           b.corpBox('action', (ce) => {
             ce.vSpace();
-            ce.action('If you have exactly 0 MC, gain 10 MC', (eb) => {
+            ce.action('If you have exactly 0 M€, gain 10 M€', (eb) => {
               eb.empty().startAction.megacredits(10).asterix();
             });
           });
