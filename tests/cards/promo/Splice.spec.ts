@@ -54,7 +54,7 @@ describe('Splice', function() {
     expect(player2.megaCredits).to.eq(4);
   });
 
-  it('Should grant Recyclon a Microbe or 2MC', function() {
+  it('Should grant Recyclon a Microbe or 2 M€', function() {
     const card2 = new Recyclon();
     // Player 1 picks Splice
     const pi = player.getWaitingFor() as AndOptions;
@@ -67,21 +67,21 @@ describe('Splice', function() {
     pi2.options[1].cb([]);
     pi2.cb();
 
-    // Default resource on Recyclon and player2's MC
+    // Default resource on Recyclon and player2's M€
     expect(card2.resourceCount).to.eq(1);
     expect(player2.megaCredits).to.eq(38);
 
-    // Player 2 should have the option to pick a microbe or 2 MC
+    // Player 2 should have the option to pick a microbe or 2 M€
     const pi3 = player2.getWaitingFor() as OrOptions;
     expect(pi3.options).has.lengthOf(2);
     expect(pi3.options[0].title).to.eq('Add a microbe resource to this card');
-    expect(pi3.options[1].title).to.eq('Gain 2 MC');
+    expect(pi3.options[1].title).to.eq('Gain 2 M€');
 
     // Pick the microbe
     pi3.options[0].cb();
     expect(card2.resourceCount).to.eq(2);
 
-    // Pick 2 MC
+    // Pick 2 M€
     pi3.options[1].cb();
     expect(player2.megaCredits).to.eq(40);
   });
