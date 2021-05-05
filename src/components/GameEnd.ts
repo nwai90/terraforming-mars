@@ -187,6 +187,10 @@ export const GameEnd = Vue.component('game-end', {
                                 <div class="game-end-column-vp">{{v.victoryPoint}}</div>
                               </div>
                             </div>
+                            <div class="game-end-column-row">
+                              <div class="game-end-column-vp">&nbsp;</div>
+                              <div class="game-end-column-text">&nbsp;</div>
+                            </div>
                             <div v-for="v in p.victoryPointsBreakdown.detailsMilestones">
                               <div class="game-end-column-row">
                                 <div class="game-end-column-text">{{v.split(':', 2)[0]}}</div>
