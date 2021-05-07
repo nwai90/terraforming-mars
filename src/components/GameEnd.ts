@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import {PlayerModel, PublicPlayerModel} from '../models/PlayerModel';
+import {PlayerModel} from '../models/PlayerModel';
 import {Board} from './Board';
 import {LogPanel} from './LogPanel';
 import {Button} from '../components/common/Button';
@@ -28,11 +28,11 @@ export const GameEnd = Vue.component('game-end', {
     getEndGamePlayerRowColorClass: function(color: string): string {
       return playerColorClass(color.toLowerCase(), 'bg_transparent');
     },
-    getTimer: function(p: PublicPlayerModel): string {
+    getTimer: function(p: PlayerModel): string {
       return Timer.toString(p.timer);
     },
     getSortedPlayers: function() {
-      this.player.players.sort(function(a:PublicPlayerModel, b:PublicPlayerModel) {
+      this.player.players.sort(function(a:PlayerModel, b:PlayerModel) {
         if (a.victoryPointsBreakdown.total < b.victoryPointsBreakdown.total) return -1;
         if (a.victoryPointsBreakdown.total > b.victoryPointsBreakdown.total) return 1;
         if (a.megaCredits < b.megaCredits) return -1;
@@ -44,7 +44,7 @@ export const GameEnd = Vue.component('game-end', {
     getWinners: function() {
       const sortedPlayers = this.getSortedPlayers();
       const firstWinner = sortedPlayers[0];
-      const winners: PublicPlayerModel[] = [firstWinner];
+      const winners: PlayerModel[] = [firstWinner];
       for (let i = 1; i < sortedPlayers.length; i++) {
         if (sortedPlayers[i].victoryPointsBreakdown.total === firstWinner.victoryPointsBreakdown.total &&
                     sortedPlayers[i].megaCredits === firstWinner.megaCredits) {
