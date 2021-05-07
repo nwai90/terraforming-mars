@@ -101,7 +101,7 @@ generateVueClass(
 generateVueClass(
   'src/components/LogPanel',
   require('./build/src/components/LogPanel').LogPanel,
-  ['cards', 'messages', 'globalEventNames'],
+  ['cards', 'messages'],
 );
 generateVueClass(
   'src/components/Milestone',
