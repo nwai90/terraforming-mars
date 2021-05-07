@@ -95,7 +95,7 @@ export const SelectSpace = Vue.component('select-space', {
       return spaces;
     },
     hideDialog: function(hide: boolean) {
-      PreferencesManager.save('show_tile_confirmation', hide);
+      PreferencesManager.save('show_tile_confirmation', !hide);
     },
     onTileSelected: function(tile: HTMLElement) {
       this.selectedTile = tile;
