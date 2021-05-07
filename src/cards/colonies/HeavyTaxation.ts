@@ -28,6 +28,10 @@ export class HeavyTaxation extends Card implements IProjectCard {
     });
   }
 
+  public canPlay(player: Player): boolean {
+    return player.getTagCount(Tags.EARTH) >= 2;
+  }
+
   public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, 2);
     player.megaCredits += 4;

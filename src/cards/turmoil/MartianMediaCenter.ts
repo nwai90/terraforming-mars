@@ -35,6 +35,13 @@ export class MartianMediaCenter extends Card implements IProjectCard {
     });
   }
 
+  public canPlay(player: Player): boolean {
+    if (player.game.turmoil !== undefined) {
+      return player.game.turmoil.canPlay(player, PartyName.MARS);
+    }
+    return false;
+  }
+
   public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, 2);
     return undefined;

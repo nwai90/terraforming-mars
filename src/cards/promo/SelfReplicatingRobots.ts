@@ -48,6 +48,10 @@ export class SelfReplicatingRobots extends Card implements IProjectCard {
       return 0;
     }
 
+    public canPlay(player: Player): boolean {
+      return player.getTagCount(Tags.SCIENCE) >= 2;
+    }
+
     public play() {
       return undefined;
     }

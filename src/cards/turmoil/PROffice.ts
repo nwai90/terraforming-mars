@@ -32,13 +32,15 @@ export class PROffice extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player): boolean {
-    if (!super.canPlay(player)) {
-      return false;
+    if (player.game.turmoil !== undefined) {
+      const meetsPartyRequirements = player.game.turmoil.canPlay(player, PartyName.UNITY);
+      if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
+        return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST) && meetsPartyRequirements;
+      }
+
+      return meetsPartyRequirements;
     }
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST);
-    }
-    return true;
+    return false;
   }
 
   public play(player: Player) {

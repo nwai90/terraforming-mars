@@ -26,6 +26,10 @@ export class MiningQuota extends Card {
     });
   };
 
+  public canPlay(player: Player): boolean {
+    return player.checkMultipleTagPresence([Tags.VENUS, Tags.EARTH, Tags.JOVIAN]);
+  }
+
   public play(player: Player) {
     player.addProduction(Resources.STEEL, 2);
     return undefined;

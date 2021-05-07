@@ -29,6 +29,10 @@ export class SpaceHotels extends Card implements IProjectCard {
     });
   }
 
+  public canPlay(player: Player): boolean {
+    return player.getTagCount(Tags.EARTH) >= 2;
+  }
+
   public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, 4);
     return undefined;

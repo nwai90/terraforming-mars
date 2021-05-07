@@ -45,15 +45,13 @@ export class JovianLanterns extends Card implements IProjectCard, IResourceCard 
   public resourceCount: number = 0;
 
   public canPlay(player: Player): boolean {
-    if (!super.canPlay(player)) {
-      return false;
-    }
+    const meetsTagRequirements = player.getTagCount(Tags.JOVIAN) >= 1;
 
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST);
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST) && meetsTagRequirements;
     }
 
-    return true;
+    return meetsTagRequirements;
   }
 
   public canAct(player: Player): boolean {

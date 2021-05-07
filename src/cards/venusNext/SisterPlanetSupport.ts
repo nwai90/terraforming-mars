@@ -25,7 +25,9 @@ export class SisterPlanetSupport extends Card {
       },
     });
   };
-
+  public canPlay(player: Player): boolean {
+    return player.checkMultipleTagPresence([Tags.VENUS, Tags.EARTH]);
+  }
   public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, 3);
     return undefined;

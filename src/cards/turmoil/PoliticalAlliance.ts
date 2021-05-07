@@ -28,13 +28,16 @@ export class PoliticalAlliance extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player): boolean {
-    if (!super.canPlay(player)) {
-      return false;
+    if (player.game.turmoil !== undefined) {
+      const parties = player.game.turmoil.parties.filter((party) => party.partyLeader === player.id);
+      const meetsPartyLeaderRequirements = parties.length > 1;
+
+      if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
+        return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST) && meetsPartyLeaderRequirements;
+      }
+      return meetsPartyLeaderRequirements;
     }
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST);
-    }
-    return true;
+    return false;
   }
 
   public play(player: Player) {

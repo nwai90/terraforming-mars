@@ -24,6 +24,9 @@ export class AtalantaPlanitiaLab extends Card {
     });
   };
 
+  public canPlay(player: Player): boolean {
+    return player.getTagCount(Tags.SCIENCE) >= 3;
+  }
   public play(player: Player) {
     player.drawCard(2);
     return undefined;

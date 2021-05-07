@@ -46,6 +46,10 @@ export class MartianZoo extends Card implements IProjectCard, IResourceCard {
     }
   }
 
+  public canPlay(player: Player): boolean {
+    return player.game.getCitiesInPlay() >= 2;
+  }
+
   public canAct(): boolean {
     return this.resourceCount > 0;
   }
