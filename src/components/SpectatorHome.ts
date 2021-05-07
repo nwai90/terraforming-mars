@@ -61,6 +61,10 @@ export const SpectatorHome = Vue.component('spectator-home', {
     getCurrentSpectatorTab(): string {
       return this.spectator_tab === '' ? 'board' : this.spectator_tab;
     },
+    getSpectatorHomeClass(spectator: SpectatorModel): string {
+      if (spectator.turmoil) return 'spectator-container with-turmoil';
+      return 'spectator-container';
+    },
     forceRerender() {
       const root = this.$root as unknown as typeof mainAppSettings.methods;
       root.updateSpectator();
@@ -72,7 +76,7 @@ export const SpectatorHome = Vue.component('spectator-home', {
   beforeDestroy() {
     window.clearInterval(ui_update_timeout_id);
   },
-  template: `<div id="spectator-home" class="spectator-container">
+  template: `<div id="spectator-home" :class="getSpectatorHomeClass(spectator)">
     <template>
       <sidebar v-trim-whitespace
         :acting_player="false"
