@@ -95,6 +95,7 @@ export class Server {
       isActive: player.id === game.activePlayer,
       isSoloModeWin: game.isSoloModeWin(),
       lastSoloGeneration: game.lastSoloGeneration(),
+      marsIsTerraformed: game.marsIsTerraformed(),
       megaCredits: player.megaCredits,
       megaCreditProduction: player.getProduction(Resources.MEGACREDITS),
       milestones: getMilestones(game),

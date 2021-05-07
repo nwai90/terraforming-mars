@@ -1,11 +1,9 @@
-
 import Vue from 'vue';
 import * as constants from '../constants';
 import {BoardSpace} from './BoardSpace';
 import {IAresData} from '../ares/IAresData';
 import {SpaceModel} from '../models/SpaceModel';
 import {SpaceType} from '../SpaceType';
-import {PreferencesManager} from './PreferencesManager';
 // @ts-ignore
 import {$t} from '../directives/i18n';
 import {SpaceId} from '../boards/ISpace';
@@ -14,10 +12,6 @@ import {TranslateMixin} from './TranslateMixin';
 class GlobalParamLevel {
   constructor(public value: number, public isActive: boolean, public strValue: string) {
   }
-}
-
-class AlertDialog {
-    static shouldAlert = true;
 }
 
 export const Board = Vue.component('board', {
@@ -43,9 +37,6 @@ export const Board = Vue.component('board', {
     temperature: {
       type: Number,
     },
-    shouldNotify: {
-      type: Boolean,
-    },
     aresExtension: {
       type: Boolean,
     },
@@ -60,12 +51,6 @@ export const Board = Vue.component('board', {
     return {
       'constants': constants,
       'isTileHidden': false,
-    };
-  },
-  mounted: function() {
-    if (this.marsIsTerraformed() && this.shouldNotify && AlertDialog.shouldAlert && PreferencesManager.load('show_alerts') === '1') {
-      alert('Mars is Terraformed!');
-      AlertDialog.shouldAlert = false;
     };
   },
   mixins: [TranslateMixin],
@@ -134,18 +119,6 @@ export const Board = Vue.component('board', {
         css += 'val-is-active';
       }
       return css;
-    },
-    marsIsTerraformed: function() {
-      const temperatureMaxed = this.temperature === constants.MAX_TEMPERATURE;
-      const oceansMaxed = this.oceans_count === constants.MAX_OCEAN_TILES;
-      const oxygenMaxed = this.oxygen_level === constants.MAX_OXYGEN_LEVEL;
-      const venusMaxed = this.venusScaleLevel === constants.MAX_VENUS_SCALE;
-
-      if (this.venusNextExtension) {
-        return temperatureMaxed && oceansMaxed && oxygenMaxed && venusMaxed;
-      } else {
-        return temperatureMaxed && oceansMaxed && oxygenMaxed;
-      }
     },
     getGameBoardClassName: function():string {
       return this.venusNextExtension ? 'board-cont board-with-venus' : 'board-cont board-without-venus';

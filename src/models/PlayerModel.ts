@@ -47,6 +47,7 @@ export interface PlayerModel {
     isActive: boolean;
     isSoloModeWin: boolean;
     lastSoloGeneration: number,
+    marsIsTerraformed: boolean;
     megaCredits: number;
     megaCreditProduction: number;
     milestones: Array<ClaimedMilestoneModel>;

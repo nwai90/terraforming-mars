@@ -217,8 +217,7 @@ export const GameEnd = Vue.component('game-end', {
                         :boardName ="player.gameOptions.boardName"
                         :oceans_count="player.oceans"
                         :oxygen_level="player.oxygenLevel"
-                        :temperature="player.temperature"
-                        :shouldNotify="false"></board>
+                        :temperature="player.temperature"></board>
                 </div>
                 <div class="game_end_block--log game-end-column">
                   <log-panel :color="player.color" :generation="player.generation" :id="player.id" :lastSoloGeneration="player.lastSoloGeneration" :players="player.players"></log-panel>                
