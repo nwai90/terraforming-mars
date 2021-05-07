@@ -188,13 +188,13 @@ export const Sidebar = Vue.component('sidebar', {
     getRulingParty: function(): string {
       const rulingPartyName = this.turmoil.ruling;
       if (rulingPartyName === PartyName.MARS) {
-        return `Mars`;
+        return 'Mars';
       } else if (rulingPartyName === PartyName.SCIENTISTS) {
-        return `Science`;
+        return 'Science';
       } else if (rulingPartyName === PartyName.KELVINISTS) {
-        return `Kelvin`;
+        return 'Kelvin';
       } else {
-        return `${rulingPartyName}`;
+        return rulingPartyName as string;
       }
     },
     isNotSpectator: function(): boolean {
