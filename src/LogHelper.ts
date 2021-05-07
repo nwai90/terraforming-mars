@@ -102,11 +102,7 @@ export class LogHelper {
     const options = privateMessage ? {reservedFor: player} : {};
 
     player.game.log(message, (b) => {
-      if (privateMessage === false) {
-        b.player(player);
-      } else {
-        b.string('You');
-      }
+      b.player(player);
       for (const card of cards) {
         if (typeof card === 'string') {
           b.cardName(card);
