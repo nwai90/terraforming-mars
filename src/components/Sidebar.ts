@@ -296,12 +296,6 @@ export const Sidebar = Vue.component('sidebar', {
                     </div>
                     <div class="preferences_panel_item">
                         <label class="form-switch">
-                            <input type="checkbox" v-on:change="updatePreferences" v-model="hide_top_bar" />
-                            <i class="form-icon"></i> <span v-i18n>Hide sticky top bar</span>
-                        </label>
-                    </div>
-                    <div class="preferences_panel_item">
-                        <label class="form-switch">
                             <input type="checkbox" v-on:change="updatePreferences" v-model="magnify_cards" />
                             <i class="form-icon"></i> <span v-i18n>Magnify cards on hover</span>
                         </label>
