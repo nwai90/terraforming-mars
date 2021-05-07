@@ -262,9 +262,7 @@ export class GlobalEventDealer implements ISerializable<SerializedGlobalEventDea
   }
 
   public draw(): IGlobalEvent | undefined {
-    const globalEvent = this.globalEventsDeck.pop();
-    if (globalEvent) return globalEvent;
-    return undefined;
+    return this.globalEventsDeck.pop();
   }
 
   public serialize(): SerializedGlobalEventDealer {
