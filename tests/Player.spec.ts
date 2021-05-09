@@ -20,6 +20,7 @@ import {Units} from '../src/Units';
 import {SelfReplicatingRobots} from '../src/cards/promo/SelfReplicatingRobots';
 import {OrOptions} from '../src/inputs/OrOptions';
 import {GameLoader} from '../src/database/GameLoader';
+import {GlobalEventName} from '../src/turmoil/globalEvents/GlobalEventName';
 
 describe('Player', function() {
   it('should initialize with right defaults', function() {
@@ -604,4 +605,42 @@ it('adds resources', () => {
   // makes no change
   player.addResource(Resources.MEGACREDITS, 0);
   expect(player.megaCredits).eq(1);
+});
+
+it('addResource logging', () => {
+  const player = TestPlayers.BLUE.newPlayer();
+  const game = Game.newInstance('foobar', [player], player);
+
+  const log = game.gameLog;
+  log.length = 0; // Empty it out.
+
+  player.addResource(Resources.MEGACREDITS, 12, {log: false});
+  expect(log.length).eq(0);
+
+  player.addResource(Resources.MEGACREDITS, 12, {log: true});
+  const logEntry = log[0];
+  expect(TestingUtils.formatLogMessage(logEntry)).eq('blue\'s megacredits amount increased by 12');
+});
+
+it('addResource logging from player', () => {
+  const player = TestPlayers.BLUE.newPlayer();
+  const player2 = TestPlayers.RED.newPlayer();
+  const game = Game.newInstance('foobar', [player, player2], player);
+
+  player.addResource(Resources.MEGACREDITS, -5, {log: true, from: player2});
+
+  const log = game.gameLog;
+  const logEntry = log[log.length - 1];
+  expect(TestingUtils.formatLogMessage(logEntry)).eq('blue\'s megacredits amount decreased by 5 by red');
+});
+
+it('addResource logging from global event', () => {
+  const player = TestPlayers.BLUE.newPlayer();
+  const game = Game.newInstance('foobar', [player], player);
+
+  player.addResource(Resources.MEGACREDITS, 12, {log: true, from: GlobalEventName.ASTEROID_MINING});
+
+  const log = game.gameLog;
+  const logEntry = log[log.length - 1];
+  expect(TestingUtils.formatLogMessage(logEntry)).eq('blue\'s megacredits amount increased by 12 by Global Event');
 });
