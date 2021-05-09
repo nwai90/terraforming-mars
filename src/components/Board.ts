@@ -4,8 +4,6 @@ import {BoardSpace} from './BoardSpace';
 import {IAresData} from '../ares/IAresData';
 import {SpaceModel} from '../models/SpaceModel';
 import {SpaceType} from '../SpaceType';
-// @ts-ignore
-import {$t} from '../directives/i18n';
 import {SpaceId} from '../boards/ISpace';
 import {TranslateMixin} from './TranslateMixin';
 
