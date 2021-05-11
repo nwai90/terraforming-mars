@@ -373,8 +373,8 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
           const steps = player.corporationCard?.name === CardName.TEMPEST_CONSULTANCY ? 2 :1;
 
           game.defer(new DeferredAction(player, () => {
-            player.increaseTerraformRatingSteps(steps)
-            game.log('${0} is the new chairman and gained ${1} TR', (b) => b.player(player).number(steps));
+            player.increaseTerraformRatingSteps(steps);
+            game.log('${0} is the new chairman and gains ${1} TR', (b) => b.player(player).number(steps));
             return undefined;
           }));
 
