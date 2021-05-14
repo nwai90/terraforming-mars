@@ -54,10 +54,10 @@ export const GamesOverview = Vue.component('games-overview', {
           if (result instanceof Object) {
             Vue.set((vueApp as any).games, gameId, result);
           } else {
-            alert('Unexpected response fetching game \'+gameId+\' from API');
+            alert('Unexpected response fetching game' + gameId + ' from API');
           }
         } else {
-          alert('Unexpected response fetching game \'+gameId+\' from API');
+          alert('Unexpected response fetching game' + gameId + ' from API');
         }
       };
       xhr.responseType = 'json';
