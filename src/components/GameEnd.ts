@@ -5,6 +5,7 @@ import {LogPanel} from './LogPanel';
 import {Button} from '../components/common/Button';
 import {playerColorClass} from '../utils/utils';
 import {Timer} from '../Timer';
+import {ScoreChart} from '../components/ScoreChart';
 
 import * as constants from '../constants';
 
@@ -23,6 +24,7 @@ export const GameEnd = Vue.component('game-end', {
     'board': Board,
     'log-panel': LogPanel,
     'Button': Button,
+    'score-chart': ScoreChart,
   },
   methods: {
     getEndGamePlayerRowColorClass: function(color: string): string {
@@ -175,6 +177,9 @@ export const GameEnd = Vue.component('game-end', {
                     </table>
                     <br/>
                     <h2 v-i18n>Victory points details</h2>
+
+                    <score-chart :players="player.players" :generation="player.generation" :animation="true"></score-chart>
+
                     <div class="game-end-flexrow">
                         <div v-for="p in getSortedPlayers()" class="game-end-column">
                             <div class="game-end-winer-scorebreak-player-title">
@@ -206,6 +211,7 @@ export const GameEnd = Vue.component('game-end', {
                         </div>
                     </div>
                 </div>
+
                 <div class="game-end-flexrow">
                 <div class="game_end_block--board game-end-column">
                     <h2 v-i18n>Final situation on the board</h2>

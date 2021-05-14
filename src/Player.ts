@@ -172,6 +172,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
   // Stats
   public totalSpend: number = 0;
+  public endGenerationScores: Array<number> = [];
 
   constructor(
     public name: string,
@@ -2230,6 +2231,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       timer: this.timer.serialize(),
       // Stats
       totalSpend: this.totalSpend,
+      endGenerationScores: this.endGenerationScores,
     };
     if (this.lastCardPlayed !== undefined) {
       result.lastCardPlayed = this.lastCardPlayed.name;
@@ -2249,6 +2251,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     player.colonyTradeOffset = d.colonyTradeOffset;
     player.colonyVictoryPoints = d.colonyVictoryPoints;
     player.corporationInitialActionDone = d.corporationInitialActionDone;
+    player.endGenerationScores = d.endGenerationScores;
     player.energy = d.energy;
     player.energyProduction = d.energyProduction;
     player.fleetSize = d.fleetSize;

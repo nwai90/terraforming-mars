@@ -34,6 +34,7 @@ export interface PlayerModel {
     deckSize: number;
     draftedCards: Array<CardModel>;
     draftedPlayers: Array<Color>;
+    endGenerationScores: Array<number>;
     energy: number;
     energyProduction: number;
     fleetSize: number;

@@ -210,6 +210,7 @@ describe('Player', function() {
       corporationCard: undefined,
       hasIncreasedTerraformRatingThisGeneration: false,
       terraformRatingAtGenerationStart: 20,
+      endGenerationScores: [],
       megaCredits: 1,
       megaCreditProduction: 2,
       steel: 3,

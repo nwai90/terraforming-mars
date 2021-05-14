@@ -836,11 +836,22 @@ export class Game implements ISerializable<SerializedGame> {
     // Resolve Turmoil deferred actions
     if (this.deferredActions.length > 0) {
       this.resolveTurmoilDeferredActions();
+      this.updateEndGenerationScores();
       return;
     }
 
+    // Track player score stats
+    this.updateEndGenerationScores();
+
     this.phase = Phase.INTERGENERATION;
     this.goToDraftOrResearch();
+  }
+
+  private updateEndGenerationScores(): void {
+    this.getPlayers().forEach((player) => {
+      player.getVictoryPoints();
+      player.endGenerationScores.push(player.victoryPointsBreakdown.total);
+    });
   }
 
   private resolveTurmoilDeferredActions() {
@@ -1114,6 +1125,8 @@ export class Game implements ISerializable<SerializedGame> {
 
     // If no players can place greeneries we are done
     if (players.length === 0) {
+      // Track player score stats
+      this.updateEndGenerationScores();
       this.gotoEndGame();
       return;
     }

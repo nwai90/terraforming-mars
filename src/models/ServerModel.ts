@@ -82,6 +82,7 @@ export class Server {
       deckSize: game.dealer.getDeckSize(),
       draftedCards: getCards(player, player.draftedCards, {showNewCost: true}),
       draftedPlayers: game.getDraftedPlayers(),
+      endGenerationScores: player.endGenerationScores,
       energy: player.energy,
       energyProduction: player.getProduction(Resources.ENERGY),
       fleetSize: player.getFleetSize(),
@@ -436,6 +437,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
     return {
         color: player.color,
         corporationCard: getCorporationCard(player),
+        endGenerationScores: player.endGenerationScores,
         energy: player.energy,
         energyProduction: player.getProduction(Resources.ENERGY),
         // TODO(kberg): strictly speaking, game options shouldn't be necessary on the

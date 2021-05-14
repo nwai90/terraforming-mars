@@ -11,6 +11,7 @@ import {PlayerModel} from '../models/PlayerModel';
 import {PreferencesManager} from './PreferencesManager';
 import {Board} from './Board';
 import {Colony} from './Colony';
+import {ScoreChart} from '../components/ScoreChart';
 import {mainAppSettings} from './App';
 
 let ui_update_timeout_id: number | undefined;
@@ -46,6 +47,7 @@ export const SpectatorHome = Vue.component('spectator-home', {
     'milestone': Milestone,
     'award': Award,
     'sidebar': Sidebar,
+    'score-chart': ScoreChart,
   },
   methods: {
     getFleetsCountRange: function(player: PlayerModel): Array<number> {
@@ -115,20 +117,32 @@ export const SpectatorHome = Vue.component('spectator-home', {
             <label for="radio-board" v-on:click="toggleSpectatorTab('board')">
                 <span v-i18n>Board</span>
             </label>
+
+            <template v-if="spectator.players.length > 1">
+              <input type="radio" name="spectator-tab" id="radio-milestones-awards">
+              <label for="radio-milestones-awards" v-on:click="toggleSpectatorTab('milestonesawards')">
+                  <span v-i18n>Milestones & Awards</span>
+              </label>
+            </template>
+
+            <template v-if="spectator.colonies.length > 0">
+              <input type="radio" name="spectator-tab" id="radio-colonies">
+              <label for="radio-colonies" v-on:click="toggleSpectatorTab('colonies')">
+                  <span v-i18n>Colonies</span>
+              </label>
+            </template>
+
             <template v-if="spectator.turmoil">
               <input type="radio" name="spectator-tab" id="radio-turmoil">
               <label for="radio-turmoil" v-on:click="toggleSpectatorTab('turmoil')">
                   <span v-i18n>Turmoil</span>
               </label>
             </template>
-            <input type="radio" name="spectator-tab" id="radio-milestones-awards">
-            <label for="radio-milestones-awards" v-on:click="toggleSpectatorTab('milestonesawards')">
-                <span v-i18n>Milestones & Awards</span>
-            </label>
-            <template v-if="spectator.colonies.length > 0">
-              <input type="radio" name="spectator-tab" id="radio-colonies">
-              <label for="radio-colonies" v-on:click="toggleSpectatorTab('colonies')">
-                  <span v-i18n>Colonies</span>
+
+            <template v-if="spectator.players.length > 1">
+              <input type="radio" name="spectator-tab" id="radio-scorechart">
+              <label for="radio-scorechart" v-on:click="toggleSpectatorTab('scorechart')">
+                  <span v-i18n>Scores</span>
               </label>
             </template>
           </div>
@@ -156,6 +170,10 @@ export const SpectatorHome = Vue.component('spectator-home', {
           </div>
           
           <turmoil v-if="spectator.turmoil && getCurrentSpectatorTab() === 'turmoil'" :turmoil="spectator.turmoil"></turmoil>
+
+          <div v-if="spectator.players.length > 1 && getCurrentSpectatorTab() === 'scorechart'">
+            <score-chart :players="spectator.players" :generation="spectator.generation" :animation="false"></score-chart>
+          </div>
           
           <div v-if="spectator.players.length > 1 && getCurrentSpectatorTab() === 'milestonesawards'" class="player_home_block--milestones-and-awards">
               <milestone :milestones_list="spectator.milestones" />

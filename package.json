@@ -9,6 +9,7 @@
     "@types/sqlite3": "^3.1.6",
     "@typescript-eslint/eslint-plugin": "^4.8.2",
     "@typescript-eslint/parser": "^4.8.2",
+    "chart.js": "^3.2.0",
     "compression-webpack-plugin": "^7.1.2",
     "console-stamp": "3.0.0-rc4.2",
     "dialog-polyfill": "^0.5.1",
