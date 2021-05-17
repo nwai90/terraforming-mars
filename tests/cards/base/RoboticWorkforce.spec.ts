@@ -164,7 +164,7 @@ describe('RoboticWorkforce', function() {
         return;
       }
 
-      // Create new players, set all productions to 2 and place some tiles
+      // Create new players and place some tiles
       player = TestPlayers.BLUE.newPlayer();
       redPlayer = TestPlayers.RED.newPlayer();
       game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
@@ -174,6 +174,9 @@ describe('RoboticWorkforce', function() {
       game.addOceanTile(player, '32');
       game.addOceanTile(player, '33');
       game.addOceanTile(player, '34');
+
+      // Set megacredits to 20 and set all productions to 2
+      player.megaCredits = 20;
       for (const prod of productions) {
         player.addProduction(prod, 2);
         expect(player.getProduction(prod)).to.eq(2);
