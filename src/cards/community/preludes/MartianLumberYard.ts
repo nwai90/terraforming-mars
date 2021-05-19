@@ -5,12 +5,14 @@ import {CardName} from '../../../CardName';
 import {Tags} from '../../Tags';
 import {Resources} from '../../../Resources';
 import {CardRenderer} from '../../render/CardRenderer';
+import {Units} from '../../../Units';
 
 export class MartianLumberYard extends PreludeCard implements IProjectCard {
     constructor() {
       super({
         name: CardName.MARTIAN_LUMBER_YARD,
         tags: [Tags.BUILDING],
+        productionBox: Units.of({plants: 1, steel: 1}),
 
         metadata: {
           cardNumber: 'Y14',

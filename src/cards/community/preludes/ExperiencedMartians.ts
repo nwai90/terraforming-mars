@@ -6,12 +6,14 @@ import {CardName} from '../../../CardName';
 import {Resources} from '../../../Resources';
 import {SendDelegateToArea} from '../../../deferredActions/SendDelegateToArea';
 import {CardRenderer} from '../../render/CardRenderer';
+import {Units} from '../../../Units';
 
 export class ExperiencedMartians extends PreludeCard implements IProjectCard {
     constructor() {
       super({
         name: CardName.EXPERIENCED_MARTIANS,
         tags: [Tags.BUILDING],
+        productionBox: Units.of({plants: 1, heat: 1}),
 
         metadata: {
           cardNumber: 'Y10',

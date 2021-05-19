@@ -12,6 +12,7 @@ import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {SOCIETY_ADDITIONAL_CARD_COST} from '../../constants';
 import {TurmoilHandler} from '../../turmoil/TurmoilHandler';
+import {Units} from '../../Units';
 
 export class MartianMediaCenter extends Card implements IProjectCard {
   constructor() {
@@ -20,6 +21,7 @@ export class MartianMediaCenter extends Card implements IProjectCard {
       name: CardName.MARTIAN_MEDIA_CENTER,
       tags: [Tags.BUILDING],
       cost: 7,
+      productionBox: Units.of({megacredits: 2}),
 
       requirements: CardRequirements.builder((b) => b.party(PartyName.MARS)),
       metadata: {
