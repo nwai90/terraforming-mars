@@ -5,6 +5,7 @@ import {ClaimedMilestoneModel} from './ClaimedMilestoneModel';
 import {ColonyModel} from './ColonyModel';
 import {FundedAwardModel} from './FundedAwardModel';
 import {GameOptionsModel} from './GameOptionsModel';
+import {MoonModel} from './MoonModel';
 import {PlayerModel} from './PlayerModel';
 import {SpaceModel} from './SpaceModel';
 import {TurmoilModel} from './TurmoilModel';
@@ -22,6 +23,7 @@ export interface SpectatorModel {
   id: string; // SpectatorID
   lastSoloGeneration: number;
   milestones: Array<ClaimedMilestoneModel>;
+  moon: MoonModel | undefined;
   oceans: number;
   oxygenLevel: number;
   passedPlayers: Array<Color>;

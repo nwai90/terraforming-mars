@@ -90,6 +90,7 @@ export const SpectatorHome = Vue.component('spectator-home', {
         :oceans = "spectator.oceans"
         :venus = "spectator.venusScaleLevel"
         :turmoil = "spectator.turmoil"
+        :moonData="spectator.moon"
         :gameOptions = "spectator.gameOptions"
         :playerNumber = "spectator.players.length"
         :silverCubeVariant = "spectator.silverCubeVariant"

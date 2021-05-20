@@ -209,6 +209,7 @@ export const PlayerHome = Vue.component('player-home', {
               :oceans = "player.oceans"
               :venus = "player.venusScaleLevel"
               :turmoil = "player.turmoil"
+              :moonData="player.moon"
               :gameOptions = "player.gameOptions"
               :playerNumber = "player.players.length"
               :silverCubeVariant = "player.silverCubeVariant"

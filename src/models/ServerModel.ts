@@ -160,6 +160,7 @@ export class Server {
       id: game.spectatorId as string,
       lastSoloGeneration: game.lastSoloGeneration(),
       milestones: getMilestones(game),
+      moon: MoonModel.serialize(game),
       oceans: game.board.getOceansOnBoard(),
       oxygenLevel: game.getOxygenLevel(),
       passedPlayers: game.getPassedPlayers(),
