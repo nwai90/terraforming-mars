@@ -335,7 +335,16 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public addResource(resource: Resources, amount: number = 1, options? : { log: boolean, from? : Player | GlobalEventName}) {
-    const delta = (amount >= 0) ? amount : Math.max(amount, -this.getResource(resource));
+    const playerAmount = this.getResource(resource);
+    const delta = (amount >= 0) ? amount : Math.max(amount, -playerAmount);
+
+    // Error handling for invalid state of negative amount
+    if (delta !== amount && options?.from === undefined) {
+      this.game.logIllegalState(
+        `Adjusting ${amount} ${resource} when player has ${playerAmount}`,
+        {player: {color: this.color, id: this.id, name: this.name}, resource, amount},
+      );
+    }
 
     if (resource === Resources.MEGACREDITS) this.megaCredits += delta;
     else if (resource === Resources.STEEL) this.steel += delta;
@@ -348,7 +357,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     if (options?.log === true) {
-      this.logUnitDelta(resource, amount, 'amount', options.from);
+      this.logUnitDelta(resource, delta, 'amount', options.from);
     }
 
     if (options?.from instanceof Player) {

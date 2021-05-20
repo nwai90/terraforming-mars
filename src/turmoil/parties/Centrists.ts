@@ -7,7 +7,6 @@ import {Bonus} from '../Bonus';
 import {Policy} from '../Policy';
 import {Player} from '../../Player';
 import {TurmoilPolicy} from '../TurmoilPolicy';
-import {LogHelper} from '../../LogHelper';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {ColonyName} from '../../colonies/ColonyName';
 import {SelectColony} from '../../inputs/SelectColony';
@@ -27,7 +26,7 @@ class CentristsBonus01 implements Bonus {
 
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
-      player.addResource(Resources.MEGACREDITS, 8);
+      player.addResource(Resources.MEGACREDITS, 8, {log: true});
     });
   }
 }
@@ -55,8 +54,7 @@ class CentristsPolicy01 implements Policy {
 
   action(player: Player) {
     player.game.log('${0} used Turmoil Centrists action', (b) => b.player(player));
-    LogHelper.logGainStandardResource(player, Resources.MEGACREDITS, 6);
-    player.addResource(Resources.MEGACREDITS, 6);
+    player.addResource(Resources.MEGACREDITS, 6, {log: true});
     player.turmoilPolicyActionUsed = true;
 
     return undefined;

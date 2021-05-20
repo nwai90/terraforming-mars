@@ -593,6 +593,8 @@ it('addResourceTo with Mons Insurance hook does not remove when no credits', () 
 
 it('adds resources', () => {
   const player = TestPlayers.BLUE.newPlayer();
+  Game.newInstance('x', [player], player);
+
   player.megaCredits = 10;
   // adds any positive amount
   player.addResource(Resources.MEGACREDITS, 12);
@@ -631,6 +633,7 @@ it('addResource logging from player', () => {
   const player2 = TestPlayers.RED.newPlayer();
   const game = Game.newInstance('foobar', [player, player2], player);
 
+  player.megaCredits = 5;
   player.addResource(Resources.MEGACREDITS, -5, {log: true, from: player2});
 
   const log = game.gameLog;

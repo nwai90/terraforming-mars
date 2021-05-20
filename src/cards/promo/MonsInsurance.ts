@@ -59,7 +59,7 @@ export class MonsInsurance extends Card implements CorporationCard {
 
   private static payoutAndLogInsurance(insurer: Player, victim: Player): void {
     const retribution: number = Math.min(insurer.megaCredits, 3);
-    insurer.addResource(Resources.MEGACREDITS, -3);
+    insurer.addResource(Resources.MEGACREDITS, -retribution);
     victim.addResource(Resources.MEGACREDITS, retribution);
 
     if (retribution > 0) {

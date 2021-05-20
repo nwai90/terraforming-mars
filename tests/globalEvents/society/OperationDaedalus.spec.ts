@@ -20,6 +20,7 @@ describe('OperationDaedalus', function() {
     turmoil.dominantParty.delegates.push(player.id);
 
     player.megaCredits = 5;
+    player2.megaCredits = 5;
 
     card.resolve(game, turmoil);
     expect(player.titanium).to.eq(1);
