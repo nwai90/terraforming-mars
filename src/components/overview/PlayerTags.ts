@@ -233,6 +233,11 @@ export const PlayerTags = Vue.component('player-tags', {
         <div class="player-tags">
             <div class="player-tags-main">
                 <tag-count :tag="'vp'" :count="getVpCount()" :size="'big'" :type="'main'" />
+
+                <div v-if="isEscapeVelocityOn()" class="tag-display tooltip tooltip-top" data-tooltip="Escape Velocity penalty">
+                  <tag-count :tag="'escape'" :count="getEscapeVelocityPenalty()" :size="'big'" :type="'main'"/>
+                </div>
+
                 <tag-count :tag="'tr'" :count="getTR()" :size="'big'" :type="'main'"/>
 
                 <div v-if="isLearnerModeOn()" class="tag-display tooltip tooltip-top" data-tooltip="The number of available active card actions">
@@ -246,10 +251,6 @@ export const PlayerTags = Vue.component('player-tags', {
                 <div class="tag-and-discount">
                   <PlayerTagDiscount v-if="hasTagDiscount('all')" :amount="getTagDiscountAmount('all')" :color="player.color" />
                   <tag-count :tag="'cards'" :count="getCardCount()" :size="'big'" :type="'main'"/>
-                </div>
-
-                <div v-if="isEscapeVelocityOn()" class="tag-display tooltip tooltip-top" data-tooltip="Escape Velocity penalty">
-                  <tag-count :tag="'escape'" :count="getEscapeVelocityPenalty()" :size="'big'" :type="'main'"/>
                 </div>
             </div>
             <div class="player-tags-secondary">
