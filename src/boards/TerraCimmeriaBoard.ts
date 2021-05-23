@@ -24,9 +24,9 @@ export class TerraCimmeriaBoard extends Board {
     // y=2
     builder.land().land(PLANT).land(POWER, POWER, POWER).land().land(PLANT).land(PLANT).land(PLANT);
     // y=3
-    builder.land(STEEL, STEEL).land(PLANT, PLANT).land().land(POWER).land().land().land(DRAW_CARD).land();
+    builder.land(STEEL, STEEL).land(PLANT, PLANT).land().land(POWER, POWER).land().land().land(DRAW_CARD).land();
     // y=4
-    builder.land().land(POWER).land(POWER).land(STEEL).land(STEEL)
+    builder.land().land(PLANT, POWER).land(POWER, POWER).land(STEEL).land(STEEL)
       .land(DRAW_CARD).land().land(STEEL).ocean(DRAW_CARD);
     // y=5
     builder.land(DRAW_CARD, DRAW_CARD).land().land(TITANIUM).land().land().land(STEEL, STEEL).land().land(STEEL, STEEL);
