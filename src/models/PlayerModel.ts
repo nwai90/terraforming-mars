@@ -17,6 +17,7 @@ import {MoonModel} from './MoonModel';
 export interface PlayerModel {
     actionsTakenThisRound: number;
     actionsThisGeneration: Array<string>;
+    actionsTakenThisGame: number;
     aresData: IAresData | undefined;
     availableBlueCardActionCount: number;
     awards: Array<FundedAwardModel>;

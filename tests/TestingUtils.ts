@@ -70,6 +70,10 @@ export class TestingUtils {
       societyExpansion: false,
       moonExpansion: false,
       requiresMoonTrackCompletion: false,
+      escapeVelocityMode: false,
+      escapeVelocityThreshold: undefined,
+      escapeVelocityPeriod: undefined,
+      escapeVelocityPenalty: undefined,
     };
 
     return Object.assign(defaultOptions, options);

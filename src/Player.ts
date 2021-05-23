@@ -173,6 +173,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   // Stats
   public totalSpend: number = 0;
   public endGenerationScores: Array<number> = [];
+  public actionsTakenThisGame: number = 0;
 
   constructor(
     public name: string,
@@ -535,6 +536,22 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     MoonExpansion.calculateVictoryPoints(this);
+
+    // Escape velocity VP penalty
+    if (this.game.gameOptions.escapeVelocityMode) {
+      const threshold = this.game.gameOptions.escapeVelocityThreshold;
+      const period = this.game.gameOptions.escapeVelocityPeriod;
+      const penaltyPerMin = this.game.gameOptions.escapeVelocityPenalty ?? 1;
+      const elapsedTimeInMinutes = this.timer.getElapsedTimeInMinutes();
+      if (threshold !== undefined && period !== undefined && elapsedTimeInMinutes > threshold) {
+        const overTimeInMinutes = Math.max(elapsedTimeInMinutes - threshold - (this.actionsTakenThisGame * (constants.BONUS_SECONDS_PER_ACTION/60)), 0);
+        // Don't lose more VP that what is available
+        this.victoryPointsBreakdown.updateTotal();
+        const totalBeforeEscapeVelocity = this.victoryPointsBreakdown.total;
+        const penaltyTotal = Math.min(penaltyPerMin * Math.floor(overTimeInMinutes / period), totalBeforeEscapeVelocity);
+        this.victoryPointsBreakdown.setVictoryPoints('escapeVelocity penalty', -penaltyTotal, 'Escape Velocity Penalty');
+      }
+    }
 
     this.victoryPointsBreakdown.updateTotal();
     return this.victoryPointsBreakdown;
@@ -1959,6 +1976,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       );
       this.setWaitingFor(initialActionOrPass, () => {
         this.actionsTakenThisRound++;
+        this.actionsTakenThisGame++;
         this.takeAction();
       });
       return;
@@ -1966,6 +1984,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
     this.setWaitingFor(this.getActions(), () => {
       this.actionsTakenThisRound++;
+      this.actionsTakenThisGame++;
       this.takeAction();
     });
   }
@@ -2245,6 +2264,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       // Stats
       totalSpend: this.totalSpend,
       endGenerationScores: this.endGenerationScores,
+      actionsTakenThisGame: this.actionsTakenThisGame,
     };
     if (this.lastCardPlayed !== undefined) {
       result.lastCardPlayed = this.lastCardPlayed.name;
@@ -2256,6 +2276,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     const player = new Player(d.name, d.color, d.beginner, Number(d.handicap), d.id);
     const cardFinder = new CardFinder();
 
+    player.actionsTakenThisGame = d.actionsTakenThisGame;
     player.actionsTakenThisRound = d.actionsTakenThisRound;
     player.canUseHeatAsMegaCredits = d.canUseHeatAsMegaCredits;
     player.cardCost = d.cardCost;

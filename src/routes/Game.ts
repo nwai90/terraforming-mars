@@ -100,6 +100,10 @@ export class GameHandler extends Handler {
           customColoniesList: gameReq.customColoniesList,
           requiresVenusTrackCompletion: gameReq.requiresVenusTrackCompletion,
           requiresMoonTrackCompletion: gameReq.requiresMoonTrackCompletion,
+          escapeVelocityMode: gameReq.escapeVelocityMode,
+          escapeVelocityThreshold: gameReq.escapeVelocityThreshold,
+          escapeVelocityPeriod: gameReq.escapeVelocityPeriod,
+          escapeVelocityPenalty: gameReq.escapeVelocityPenalty,
         };
 
         if (gameOptions.clonedGamedId !== undefined && !gameOptions.clonedGamedId.startsWith('#')) {

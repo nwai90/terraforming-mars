@@ -166,9 +166,11 @@ export const GameEnd = Vue.component('game-end', {
                                 <th v-if="player.moon !== undefined"><div class="table-moon-colony"></div></th>
                                 <th v-if="player.moon !== undefined"><div class="table-moon-mine"></div></th>
                                 <th><div class="vp">VP</div></th>
+                                <th v-if="player.gameOptions.escapeVelocityMode" class="clock-icon tooltip tooltip-top" data-tooltip="Escape Velocity penalty">&#x23F3;</th>
                                 <th class="game-end-total"><div class="game-end-total-column">Total</div></th>
                                 <th><div class="mc-icon"></div></th>
                                 <th v-if="player.gameOptions.showTimers" class="game-end-clock">&#x1F551;</th>
+                                <th><div class="table-red-arrow tooltip tooltip-top" data-tooltip="Actions taken this game"></div></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -186,9 +188,11 @@ export const GameEnd = Vue.component('game-end', {
                                 <td v-if="player.moon !== undefined">{{ p.victoryPointsBreakdown.moonColonies }}</td>
                                 <td v-if="player.moon !== undefined">{{ p.victoryPointsBreakdown.moonMines }}</td>
                                 <td>{{ p.victoryPointsBreakdown.victoryPoints }}</td>
+                                <td v-if="player.gameOptions.escapeVelocityMode">{{ p.victoryPointsBreakdown.escapeVelocity }}</td>
                                 <td class="game-end-total">{{ p.victoryPointsBreakdown.total }}</td>
                                 <td>{{ p.megaCredits }}</td>
                                 <td v-if="player.gameOptions.showTimers">{{ getTimer(p) }}</td>
+                                <td><div class="game-end-timer">{{ p.actionsTakenThisGame }}</div></td>
                             </tr>
                         </tbody>
                     </table>

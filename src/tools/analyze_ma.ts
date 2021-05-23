@@ -113,6 +113,10 @@ function simpleGameOptions(): GameOptions {
     customColoniesList: [],
     requiresVenusTrackCompletion: false, // Venus must be completed to end the game
     requiresMoonTrackCompletion: false, // Moon must be completed to end the game
+    escapeVelocityMode: false,
+    escapeVelocityThreshold: undefined,
+    escapeVelocityPeriod: undefined,
+    escapeVelocityPenalty: undefined,
 
     // The options that can change, should be parameters.
     boardName: BoardName.ORIGINAL,

@@ -64,6 +64,10 @@ export interface CreateGameModel {
     requiresVenusTrackCompletion: boolean;
     requiresMoonTrackCompletion: boolean;
     seededGame: boolean;
+    escapeVelocityMode: boolean;
+    escapeVelocityThreshold: number;
+    escapeVelocityPeriod: number;
+    escapeVelocityPenalty: number;
 }
 
 export interface NewPlayerModel {
@@ -142,6 +146,10 @@ export const CreateGameForm = Vue.component('create-game-form', {
       allOfficialExpansions: false,
       requiresVenusTrackCompletion: false,
       requiresMoonTrackCompletion: false,
+      escapeVelocityMode: false,
+      escapeVelocityThreshold: 30,
+      escapeVelocityPeriod: 2,
+      escapeVelocityPenalty: 1,
     };
   },
   components: {
@@ -458,6 +466,11 @@ export const CreateGameForm = Vue.component('create-game-form', {
       const randomFirstPlayer = component.randomFirstPlayer;
       const requiresVenusTrackCompletion = component.requiresVenusTrackCompletion;
       const requiresMoonTrackCompletion = component.requiresMoonTrackCompletion;
+      const escapeVelocityMode = component.escapeVelocityMode;
+      const escapeVelocityThreshold = component.escapeVelocityMode ? component.escapeVelocityThreshold : undefined;
+      const escapeVelocityPeriod = component.escapeVelocityMode ? component.escapeVelocityPeriod : undefined;
+      const escapeVelocityPenalty = component.escapeVelocityMode ? component.escapeVelocityPenalty : undefined;
+
       let clonedGamedId: undefined | GameId = undefined;
 
       // Check custom colony count
@@ -534,6 +547,10 @@ export const CreateGameForm = Vue.component('create-game-form', {
         randomFirstPlayer,
         requiresVenusTrackCompletion,
         requiresMoonTrackCompletion,
+        escapeVelocityMode,
+        escapeVelocityThreshold,
+        escapeVelocityPeriod,
+        escapeVelocityPenalty,
       }, undefined, 4);
       return dataToSend;
     },
@@ -756,14 +773,41 @@ export const CreateGameForm = Vue.component('create-game-form', {
                                 <span v-i18n>Allow undo</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#allow-undo" class="tooltip" target="_blank">&#9432;</a>
                             </label>
 
+                            <input type="checkbox" v-model="seededGame" id="seeded-checkbox">
+                            <label for="seeded-checkbox">
+                                <span v-i18n>Set Predefined Game</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#set-predefined-game" class="tooltip" target="_blank">&#9432;</a>
+                            </label>
+
+                            <div class="create-game-subsection-label" v-i18n>Time</div>
+
                             <input type="checkbox" v-model="showTimers" id="timer-checkbox">
                             <label for="timer-checkbox">
                                 <span v-i18n>Show timers</span>
                             </label>
 
-                            <input type="checkbox" v-model="seededGame" id="seeded-checkbox">
-                            <label for="seeded-checkbox">
-                                <span v-i18n>Set Predefined Game</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#set-predefined-game" class="tooltip" target="_blank">&#9432;</a>
+                            <input type="checkbox" v-model="fastModeOption" id="fastMode-checkbox">
+                            <label for="fastMode-checkbox" v-if="playersCount > 1">
+                               <span v-i18n>Fast mode</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#fast-mode" class="tooltip" target="_blank">&#9432;</a>
+                            </label>
+
+                            <input type="checkbox" v-model="escapeVelocityMode" id="escapevelocity-checkbox">
+                            <label for="escapevelocity-checkbox">
+                                <div class="create-game-expansion-icon expansion-icon-escape-velocity"></div>
+                                <span v-i18n>Escape Velocity</span>&nbsp;<a href="https://www.notion.so/Escape-Velocity-ce1d115deeca484db16226dd247a31e7" class="tooltip" target="_blank">&#9432;</a>
+                            </label>
+
+                            <label for="escapeThreshold-checkbox" v-show="escapeVelocityMode">
+                              <span v-i18n>After&nbsp;</span>
+                              <input type="number" class="create-game-corporations-count" value="30" step="5" min="0" :max="180" v-model="escapeVelocityThreshold" id="escapeThreshold-checkbox">
+                              <span v-i18n>&nbsp;min</span>
+                            </label>
+
+                            <label for="escapePeriod-checkbox" v-show="escapeVelocityMode">
+                              <span v-i18n>Reduce&nbsp;</span>
+                              <input type="number" class="create-game-corporations-count" value="1" min="1" :max="10" v-model="escapeVelocityPenalty" id="escapePeriod-checkbox">
+                              <span v-i18n>&nbsp;VP every&nbsp;</span>
+                              <input type="number" class="create-game-corporations-count" value="2" min="1" :max="10" v-model="escapeVelocityPeriod" id="escapePeriod-checkbox">
+                              <span v-i18n>&nbsp;min</span>
                             </label>
 
                             <div v-if="seededGame">
@@ -865,11 +909,6 @@ export const CreateGameForm = Vue.component('create-game-form', {
                                     <span v-i18n>Moon Terraforming</span> &nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#moon-terraforming" class="tooltip" target="_blank">&#9432;</a>
                                 </label>
                             </template>
-                            
-                            <input type="checkbox" v-model="fastModeOption" id="fastMode-checkbox">
-                            <label for="fastMode-checkbox">
-                                <span v-i18n>Fast mode</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#fast-mode" class="tooltip" target="_blank">&#9432;</a>
-                            </label>
 
                             <input type="checkbox" v-model="beginnerOption" id="beginnerOption-checkbox">
                             <label for="beginnerOption-checkbox">

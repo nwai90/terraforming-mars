@@ -94,6 +94,11 @@ export const GameSetupDetail = Vue.component('game-setup-detail', {
               <div v-if="!gameOptions.initialDraftVariant && !gameOptions.draftVariant" class="game-config generic" v-i18n>Off</div>
             </li>
 
+            <li v-if="gameOptions.escapeVelocityMode">
+              <div class="create-game-expansion-icon expansion-icon-escape-velocity"></div>
+              <span>After {{gameOptions.escapeVelocityThreshold}} min, reduce {{gameOptions.escapeVelocityPenalty}} VP every {{gameOptions.escapeVelocityPeriod}} min.</span>
+            </li>
+
             <li v-if="playerNumber === 1">
               <div class="setup-item" v-i18n>Solo:</div>
               <div class="game-config generic" v-i18n>{{ this.lastSoloGeneration }} Gens</div>

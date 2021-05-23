@@ -64,6 +64,7 @@ export class Server {
 
     return {
       actionsTakenThisRound: player.actionsTakenThisRound,
+      actionsTakenThisGame: player.actionsTakenThisGame,
       actionsThisGeneration: Array.from(player.getActionsThisGeneration()),
       aresData: game.aresData,
       availableBlueCardActionCount: player.getAvailableBlueActionCount(),
@@ -483,6 +484,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
         needsToDraft: player.needsToDraft,
         deckSize: game.dealer.getDeckSize(),
         actionsTakenThisRound: player.actionsTakenThisRound,
+        actionsTakenThisGame: player.actionsTakenThisGame,
         remainingStallActionsCount: player.remainingStallActionsCount,
         passedPlayers: game.getPassedPlayers(),
         draftedPlayers: game.getDraftedPlayers(),
@@ -569,6 +571,10 @@ function getGameOptionsAsModel(options: GameOptions): GameOptionsModel {
     communityCardsOption: options.communityCardsOption,
     corporateEra: options.corporateEra,
     draftVariant: options.draftVariant,
+    escapeVelocityMode: options.escapeVelocityMode,
+    escapeVelocityThreshold: options.escapeVelocityThreshold,
+    escapeVelocityPeriod: options.escapeVelocityPeriod,
+    escapeVelocityPenalty: options.escapeVelocityPenalty,
     fastModeOption: options.fastModeOption,
     initialDraftVariant: options.initialDraftVariant,
     moonExpansion: options.moonExpansion,

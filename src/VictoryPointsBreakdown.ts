@@ -1,4 +1,4 @@
-export type VictoryPoints = 'terraformRating' | 'milestones' | 'awards' | 'greenery' | 'city' | 'moon colony' | 'moon mine' | 'moon road' | 'victoryPoints';
+export type VictoryPoints = 'terraformRating' | 'milestones' | 'awards' | 'greenery' | 'city' | 'escapeVelocity penalty' | 'moon colony' | 'moon mine' | 'moon road' | 'victoryPoints';
 
 export class VictoryPointsBreakdown {
     public terraformRating: number = 0;
@@ -6,6 +6,7 @@ export class VictoryPointsBreakdown {
     public awards: number = 0;
     public greenery: number = 0;
     public city: number = 0;
+    public escapeVelocity: number = 0;
     public moonColonies: number = 0;
     public moonMines: number = 0;
     public moonRoads: number = 0;
@@ -22,6 +23,7 @@ export class VictoryPointsBreakdown {
       this.total += this.awards;
       this.total += this.greenery;
       this.total += this.city;
+      this.total += this.escapeVelocity;
       this.total += this.moonColonies;
       this.total += this.moonMines;
       this.total += this.moonRoads;
@@ -46,6 +48,9 @@ export class VictoryPointsBreakdown {
         break;
       case 'city':
         this.city += points;
+        break;
+      case 'escapeVelocity penalty':
+        this.escapeVelocity += points;
         break;
       case 'victoryPoints':
         this.victoryPoints += points;

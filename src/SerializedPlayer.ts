@@ -7,6 +7,7 @@ import {SerializedTimer} from './SerializedTimer';
 
 export interface SerializedPlayer {
     actionsTakenThisRound: number;
+    actionsTakenThisGame: number;
     actionsThisGeneration: Array<CardName>;
     beginner: boolean;
     canUseHeatAsMegaCredits: boolean;
