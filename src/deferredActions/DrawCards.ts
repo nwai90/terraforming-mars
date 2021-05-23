@@ -59,7 +59,7 @@ export class DrawCards<T extends undefined | SelectCard<IProjectCard>> implement
       LogHelper.logDrawnCards(player, cards);
     } else {
       player.game.log('${0} ${1} ${2} card(s)', (b) => b.player(player).string(logType).number(cards.length));
-      LogHelper.logDrawnCards(player, cards, /* privateMessage */ true);
+      if (cards.length > 0) LogHelper.logDrawnCards(player, cards, /* privateMessage */ true);
     }
     return undefined;
   }
