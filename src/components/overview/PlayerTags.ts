@@ -219,8 +219,14 @@ export const PlayerTags = Vue.component('player-tags', {
     getAvailableBlueActionCount: function(): number {
       return this.player.availableBlueCardActionCount;
     },
-    isLearnerModeOff: function(): boolean {
-      return PreferencesManager.loadBoolean('learner_mode') === false;
+    isLearnerModeOn: function(): boolean {
+      return PreferencesManager.loadBoolean('learner_mode') === true;
+    },
+    isEscapeVelocityOn: function(): boolean {
+      return this.player.gameOptions.escapeVelocityMode;
+    },
+    getEscapeVelocityPenalty: function(): number {
+      return this.player.victoryPointsBreakdown.escapeVelocity;
     },
   },
   template: `
@@ -229,7 +235,7 @@ export const PlayerTags = Vue.component('player-tags', {
                 <tag-count :tag="'vp'" :count="getVpCount()" :size="'big'" :type="'main'" />
                 <tag-count :tag="'tr'" :count="getTR()" :size="'big'" :type="'main'"/>
 
-                <div v-if="isLearnerModeOff()" class="tag-display tooltip tooltip-top" data-tooltip="The number of available active card actions">
+                <div v-if="isLearnerModeOn()" class="tag-display tooltip tooltip-top" data-tooltip="The number of available active card actions">
                     <div class="tag-count tag-action-card">
                     <div class="blue-stripe"></div>
                     <div class="red-arrow"></div>
@@ -240,6 +246,10 @@ export const PlayerTags = Vue.component('player-tags', {
                 <div class="tag-and-discount">
                   <PlayerTagDiscount v-if="hasTagDiscount('all')" :amount="getTagDiscountAmount('all')" :color="player.color" />
                   <tag-count :tag="'cards'" :count="getCardCount()" :size="'big'" :type="'main'"/>
+                </div>
+
+                <div v-if="isEscapeVelocityOn()" class="tag-display tooltip tooltip-top" data-tooltip="Escape Velocity penalty">
+                  <tag-count :tag="'escape'" :count="getEscapeVelocityPenalty()" :size="'big'" :type="'main'"/>
                 </div>
             </div>
             <div class="player-tags-secondary">
