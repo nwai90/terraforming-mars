@@ -7,6 +7,8 @@ import {playerColorClass} from '../utils/utils';
 import {Timer} from '../Timer';
 import {ScoreChart} from '../components/ScoreChart';
 
+import * as htmlToImage from 'html-to-image';
+
 import * as constants from '../constants';
 
 export const GameEnd = Vue.component('game-end', {
@@ -87,6 +89,18 @@ export const GameEnd = Vue.component('game-end', {
       value = (playerScore - dummyPlayerScore) / dummyPlayerScore;
       return '+' + value.toFixed(2).toString();
     },
+    captureTable: function(elementID: string): void {
+      const tableElement = document.getElementById(elementID);
+      if (tableElement !== null) {
+        tableElement.querySelectorAll('text').forEach((tag) => (tag.style.fontFamily = 'Prototype'));
+        htmlToImage.toJpeg(tableElement, {quality: 0.95, width: 1500}).then(function(dataUrl) {
+          const link = document.createElement('a');
+          link.download = 'Rebalanced-mars_Game_Result.jpeg';
+          link.href = dataUrl;
+          link.click();
+        });
+      }
+    },
   },
   template: `
         <div id="game-end" class="game_end_cont">
@@ -134,7 +148,10 @@ export const GameEnd = Vue.component('game-end', {
                 <div v-if="!isSoloGame() || player.isSoloModeWin" class="game-end-winer-announcement">
                     <span v-for="p in getWinners()"><span :class="'log-player ' + getEndGamePlayerRowColorClass(p.color)">{{ p.name }}</span></span> won!
                 </div>
-                <div class="game_end_victory_points">
+
+                <Button title="Save game result as image" size="tiny" class="save-image-button" :onClick="_=>captureTable('game-result')"/>
+
+                <div class="game_end_victory_points" id="game-result">
                     <h2 v-i18n>Victory points breakdown after<span> {{player.generation}} </span>generations</h2>
                     <table class="table game_end_table">
                         <thead>
