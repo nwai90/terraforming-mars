@@ -1945,6 +1945,12 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     const corporationCard = this.corporationCard;
+
+    // Vitor check
+    if (this.isCorporation(CardName.VITOR) && this.game.allAwardsFunded()) {
+      this.corporationInitialActionDone = true;
+    }
+
     if (corporationCard !== undefined &&
           corporationCard.initialAction !== undefined &&
           corporationCard.initialActionText !== undefined &&
