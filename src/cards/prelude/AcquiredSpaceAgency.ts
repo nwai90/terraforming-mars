@@ -15,7 +15,7 @@ export class AcquiredSpaceAgency extends PreludeCard {
           b.titanium(6, false).br.br; // double break intentional
           b.cards(2).secondaryTag(Tags.SPACE);
         }),
-        description: 'Gain 6 titanium. Reveal cards until you reveal two cards with Space Tags. Take them into your hand, discard the rest.',
+        description: 'Gain 6 titanium. Reveal cards until you reveal two cards with Space tags. Take them into your hand and discard the rest.',
       },
     });
   }

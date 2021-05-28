@@ -32,6 +32,7 @@ import {FortifiedOutpost} from './preludes/FortifiedOutpost';
 import {GamblingHouse} from './preludes/GamblingHouse';
 import {LabourUnion} from './corporations/LabourUnion';
 import {UnitedNationsMissionOne} from './corporations/UnitedNationsMissionOne';
+import {AbandonedSteelForge} from './preludes/AbandonedSteelForge';
 
 export const COMMUNITY_CARD_MANIFEST = new CardManifest({
   module: GameModule.Community,
@@ -135,6 +136,10 @@ export const COMMUNITY_CARD_MANIFEST = new CardManifest({
     {
       cardName: CardName.GAMBLING_HOUSE,
       Factory: GamblingHouse,
+    },
+    {
+      cardName: CardName.ABANDONED_STEEL_FORGE,
+      Factory: AbandonedSteelForge,
     },
   ],
 });

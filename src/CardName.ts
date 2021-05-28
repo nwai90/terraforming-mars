@@ -502,6 +502,7 @@ export enum CardName {
     MARTIAN_LUMBER_YARD = 'Martian Lumber Yard',
     FORTIFIED_OUTPOST = 'Fortified Outpost',
     GAMBLING_HOUSE = 'Gambling House',
+    ABANDONED_STEEL_FORGE = 'Abandoned Steel Forge',
 
     // Community colonies
     SCIENCE_TAG_BLANK_CARD = '',
