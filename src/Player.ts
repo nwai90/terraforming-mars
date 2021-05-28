@@ -1532,6 +1532,9 @@ export class Player implements ISerializable<SerializedPlayer> {
 
     for (const somePlayer of this.game.getPlayers()) {
       if (somePlayer.corporationCard !== undefined && somePlayer.corporationCard.onCardPlayed !== undefined) {
+        // For Colosseum variant, only trigger the effect once for each player (e.g. Vitor receives only 3 MC)
+        if (this.game.gameOptions.colosseumVariant && somePlayer.color !== this.color) continue;
+
         const actionFromPlayedCard: OrOptions | void = somePlayer.corporationCard.onCardPlayed(this, selectedCard);
         if (actionFromPlayedCard !== undefined) {
           this.game.defer(new DeferredAction(
