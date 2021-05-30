@@ -2,6 +2,7 @@ import {expect} from 'chai';
 import {StanfordTorus} from '../../../src/cards/promo/StanfordTorus';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
+import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('StanfordTorus', function() {
@@ -11,7 +12,9 @@ describe('StanfordTorus', function() {
     card = new StanfordTorus();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, redPlayer], player);
+    const gameOptions = TestingUtils.setCustomGameOptions();
+
+    Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
   });
 
   it('Should play', function() {

@@ -10,8 +10,8 @@ import {SerializedBoard} from './SerializedBoard';
 import {Random} from '../Random';
 
 export class HellasBoard extends Board {
-  public static newInstance(shuffle: boolean, rng: Random, includeVenus: boolean, erodedSpaces: Array<string> = []): HellasBoard {
-    const builder = new BoardBuilder(includeVenus);
+  public static newInstance(shuffle: boolean, rng: Random, includeVenus: boolean, includePromo: boolean, erodedSpaces: Array<string> = []): HellasBoard {
+    const builder = new BoardBuilder(includeVenus, includePromo);
 
     const PLANT = SpaceBonus.PLANT;
     const STEEL = SpaceBonus.STEEL;

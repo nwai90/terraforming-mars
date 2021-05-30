@@ -8,8 +8,8 @@ import {Random} from "../Random";
 import {ISpace} from "./ISpace";
 
 export class AmazonisBoard extends Board {
-  public static newInstance(shuffle: boolean, rng: Random, includeVenus: boolean, erodedSpaces: Array<string> = []): AmazonisBoard {
-    const builder = new BoardBuilder(includeVenus);
+  public static newInstance(shuffle: boolean, rng: Random, includeVenus: boolean, includePromo: boolean, erodedSpaces: Array<string> = []): AmazonisBoard {
+    const builder = new BoardBuilder(includeVenus, includePromo);
 
     const PLANT = SpaceBonus.PLANT;
     const STEEL = SpaceBonus.STEEL;

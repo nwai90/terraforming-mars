@@ -41,6 +41,9 @@ export const Board = Vue.component('board', {
     aresData: {
       type: Object as () => IAresData | undefined,
     },
+    promoCardsOption: {
+      type: Boolean,
+    },
   },
   components: {
     'board-space': BoardSpace,
@@ -139,7 +142,7 @@ export const Board = Vue.component('board', {
         <div class="board-outer-spaces">
             <board-space :space="getSpaceById('01')" text="Ganymede Colony"></board-space>
             <board-space :space="getSpaceById('02')" text="Phobos Space Haven"></board-space>
-            <board-space :space="getSpaceById('69')" text="Stanford Torus"></board-space>
+            <board-space :space="getSpaceById('69')" text="Stanford Torus" v-if="promoCardsOption"></board-space>
             <board-space :space="getSpaceById('70')" text="Luna Metropolis" v-if="venusNextExtension"></board-space>
             <board-space :space="getSpaceById('71')" text="Dawn City" v-if="venusNextExtension"></board-space>
             <board-space :space="getSpaceById('72')" text="Stratopolis" v-if="venusNextExtension"></board-space>

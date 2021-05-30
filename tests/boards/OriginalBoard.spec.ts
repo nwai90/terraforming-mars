@@ -5,7 +5,7 @@ import {SpaceType} from '../../src/SpaceType';
 
 describe('OriginalBoard', function() {
   it('has error with input while calling getAdjacentSpaces', function() {
-    const board = OriginalBoard.newInstance(false, new Random(0), false);
+    const board = OriginalBoard.newInstance(false, new Random(0), false, false);
     expect(function() {
       board.getAdjacentSpaces({
         x: 0,

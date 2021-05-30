@@ -275,7 +275,7 @@ export class Game implements ISerializable<SerializedGame> {
 
     const rng = new Random(seed);
     const initialErodedSpaces: Array<string> = [];
-    const board = GameSetup.newBoard(gameOptions.boardName, gameOptions.shuffleMapOption, rng, gameOptions.venusNextExtension, initialErodedSpaces);
+    const board = GameSetup.newBoard(gameOptions.boardName, gameOptions.shuffleMapOption, rng, gameOptions.venusNextExtension, gameOptions.promoCardsOption, initialErodedSpaces);
     const cardFinder = new CardFinder();
     const cardLoader = new CardLoader(gameOptions);
     const dealer = Dealer.newInstance(cardLoader);

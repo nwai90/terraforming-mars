@@ -7,8 +7,8 @@ import {Player} from '../Player';
 import {Random} from '../Random';
 
 export class ElysiumBoard extends Board {
-  public static newInstance(shuffle: boolean, rng: Random, includeVenus: boolean, erodedSpaces: Array<string> = []): ElysiumBoard {
-    const builder = new BoardBuilder(includeVenus);
+  public static newInstance(shuffle: boolean, rng: Random, includeVenus: boolean, includePromo: boolean, erodedSpaces: Array<string> = []): ElysiumBoard {
+    const builder = new BoardBuilder(includeVenus, includePromo);
 
     const PLANT = SpaceBonus.PLANT;
     const STEEL = SpaceBonus.STEEL;

@@ -17,7 +17,7 @@ export class BoardBuilder {
     private spaces: Array<ISpace> = [];
     private unshufflableSpaces: Array<number> = [];
 
-    constructor(private includeVenus: boolean) {
+    constructor(private includeVenus: boolean, private includePromo: boolean) {
       this.spaces.push(Space.colony(SpaceName.GANYMEDE_COLONY));
       this.spaces.push(Space.colony(SpaceName.PHOBOS_SPACE_HAVEN));
     }
@@ -54,7 +54,8 @@ export class BoardBuilder {
         }
       }
 
-      this.spaces.push(Space.colony(SpaceName.STANFORD_TORUS));
+      if (this.includePromo) this.spaces.push(Space.colony(SpaceName.STANFORD_TORUS));
+
       if (this.includeVenus) {
         this.spaces.push(
           Space.colony(SpaceName.DAWN_CITY),

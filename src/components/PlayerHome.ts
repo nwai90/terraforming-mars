@@ -236,6 +236,7 @@ export const PlayerHome = Vue.component('player-home', {
                         :temperature="player.temperature"
                         :aresExtension="player.gameOptions.aresExtension"
                         :aresData="player.aresData"
+                        :promoCardsOption="player.gameOptions.promoCardsOption"
                         id="shortkey-board"></board>
 
                     <turmoil v-if="player.turmoil" :turmoil="player.turmoil"></turmoil>
@@ -385,7 +386,8 @@ export const PlayerHome = Vue.component('player-home', {
                           :venusScaleLevel="player.venusScaleLevel"
                           :boardName ="player.gameOptions.boardName"
                           :aresExtension="player.gameOptions.aresExtension"
-                          :aresData="player.aresData">
+                          :aresData="player.aresData"
+                          :promoCardsOption="player.gameOptions.promoCardsOption">
                         </board>
 
                         <turmoil v-if="player.turmoil" :turmoil="player.turmoil"></turmoil>

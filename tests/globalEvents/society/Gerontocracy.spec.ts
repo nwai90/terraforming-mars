@@ -6,12 +6,15 @@ import {PartyName} from '../../../src/turmoil/parties/PartyName';
 import {TestPlayers} from '../../TestPlayers';
 import {StanfordTorus} from '../../../src/cards/promo/StanfordTorus';
 import {NoctisCity} from '../../../src/cards/base/NoctisCity';
+import {TestingUtils} from '../../TestingUtils';
 
 describe('Gerontocracy', function() {
   it('resolve play', function() {
     const card = new Gerontocracy();
     const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player);
+    const gameOptions = TestingUtils.setCustomGameOptions();
+
+    const game = Game.newInstance('foobar', [player], player, gameOptions);
     const turmoil = Turmoil.newInstance(game);
 
     turmoil.dominantParty = turmoil.getPartyByName(PartyName.REDS)!;

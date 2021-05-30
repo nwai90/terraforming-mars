@@ -17,21 +17,21 @@ import {TerraCimmeriaBoard} from './boards/TerraCimmeriaBoard';
 
 export class GameSetup {
   // Function to construct the board and milestones/awards list
-  public static newBoard(boardName: BoardName, shuffle: boolean, rng: Random, includeVenus: boolean, erodedSpaces: Array<string>): Board {
+  public static newBoard(boardName: BoardName, shuffle: boolean, rng: Random, includeVenus: boolean, includePromo: boolean, erodedSpaces: Array<string>): Board {
     if (boardName === BoardName.ELYSIUM) {
-      return ElysiumBoard.newInstance(shuffle, rng, includeVenus, erodedSpaces);
+      return ElysiumBoard.newInstance(shuffle, rng, includeVenus, includePromo, erodedSpaces);
     } else if (boardName === BoardName.HELLAS) {
-      return HellasBoard.newInstance(shuffle, rng, includeVenus, erodedSpaces);
+      return HellasBoard.newInstance(shuffle, rng, includeVenus, includePromo, erodedSpaces);
     } else if (boardName === BoardName.AMAZONIS) {
-      return AmazonisBoard.newInstance(shuffle, rng, includeVenus, erodedSpaces);
+      return AmazonisBoard.newInstance(shuffle, rng, includeVenus, includePromo, erodedSpaces);
     } else if (boardName === BoardName.ARABIA_TERRA) {
-      return ArabiaTerraBoard.newInstance(shuffle, rng, includeVenus, erodedSpaces);
+      return ArabiaTerraBoard.newInstance(shuffle, rng, includeVenus, includePromo, erodedSpaces);
     } else if (boardName === BoardName.VASTITAS_BOREALIS) {
-      return VastitasBorealisBoard.newInstance(shuffle, rng, includeVenus, erodedSpaces);
+      return VastitasBorealisBoard.newInstance(shuffle, rng, includeVenus, includePromo, erodedSpaces);
     } else if (boardName === BoardName.TERRA_CIMMERIA) {
-      return TerraCimmeriaBoard.newInstance(shuffle, rng, includeVenus, erodedSpaces);
+      return TerraCimmeriaBoard.newInstance(shuffle, rng, includeVenus, includePromo, erodedSpaces);
     } else {
-      return OriginalBoard.newInstance(shuffle, rng, includeVenus, erodedSpaces);
+      return OriginalBoard.newInstance(shuffle, rng, includeVenus, includePromo, erodedSpaces);
     }
   }
 

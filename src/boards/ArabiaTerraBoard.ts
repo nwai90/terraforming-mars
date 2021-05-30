@@ -6,8 +6,8 @@ import {BoardBuilder} from "./BoardBuilder";
 import {SerializedBoard} from "./SerializedBoard";
 
 export class ArabiaTerraBoard extends Board {
-  public static newInstance(shuffle: boolean, rng: Random, includeVenus: boolean, erodedSpaces: Array<string> = []): ArabiaTerraBoard {
-    const builder = new BoardBuilder(includeVenus);
+  public static newInstance(shuffle: boolean, rng: Random, includeVenus: boolean, includePromo: boolean, erodedSpaces: Array<string> = []): ArabiaTerraBoard {
+    const builder = new BoardBuilder(includeVenus, includePromo);
 
     const PLANT = SpaceBonus.PLANT;
     const STEEL = SpaceBonus.STEEL;

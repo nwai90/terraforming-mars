@@ -52,7 +52,7 @@ export class TestingUtils {
       solarPhaseOption: false,
       silverCubeVariant: false,
       shuffleMapOption: false,
-      promoCardsOption: false,
+      promoCardsOption: true,
       communityCardsOption: false,
       colosseumVariant: false,
       undoOption: false,
