@@ -1,11 +1,11 @@
 import {expect} from 'chai';
 import {AntiGravityTechnology} from '../../../src/cards/base/AntiGravityTechnology';
 import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('AntiGravityTechnology', function() {
-  let card : AntiGravityTechnology; let player : Player;
+  let card : AntiGravityTechnology; let player : TestPlayer;
 
   beforeEach(function() {
     card = new AntiGravityTechnology();

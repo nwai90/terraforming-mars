@@ -152,6 +152,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   public turmoilPolicyActionUsed: boolean = false;
   public politicalAgendasActionUsedCount: number = 0;
   public victoryPointsBreakdown = new VictoryPointsBreakdown();
+
   public oceanBonus: number = constants.OCEAN_BONUS;
   // PoliticalAgendas Scientists P4
   public hasTurmoilScienceTagBonus: boolean = false;
@@ -477,31 +478,30 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public getVictoryPoints(): VictoryPointsBreakdown {
-    // Reset victory points
-    this.victoryPointsBreakdown = new VictoryPointsBreakdown();
+    const victoryPointsBreakdown = new VictoryPointsBreakdown();
 
     // Victory points from corporations
     if (this.corporationCard !== undefined && this.corporationCard.getVictoryPoints !== undefined) {
-      this.victoryPointsBreakdown.setVictoryPoints('victoryPoints', this.corporationCard.getVictoryPoints(this), this.corporationCard.name);
+      victoryPointsBreakdown.setVictoryPoints('victoryPoints', this.corporationCard.getVictoryPoints(this), this.corporationCard.name);
     }
 
     // Victory points from cards
     for (const playedCard of this.playedCards) {
       if (playedCard.getVictoryPoints !== undefined) {
-        this.victoryPointsBreakdown.setVictoryPoints('victoryPoints', playedCard.getVictoryPoints(this), playedCard.name);
+        victoryPointsBreakdown.setVictoryPoints('victoryPoints', playedCard.getVictoryPoints(this), playedCard.name);
       }
     }
 
     // Victory points from TR
-    this.victoryPointsBreakdown.setVictoryPoints('terraformRating', this.terraformRating);
+    victoryPointsBreakdown.setVictoryPoints('terraformRating', this.terraformRating);
 
     // Victory points from awards
-    this.giveAwards();
+    this.giveAwards(victoryPointsBreakdown);
 
     // Victory points from milestones
     for (const milestone of this.game.claimedMilestones) {
       if (milestone.player !== undefined && milestone.player.id === this.id) {
-        this.victoryPointsBreakdown.setVictoryPoints('milestones', 5, 'Claimed '+milestone.milestone.name+' milestone');
+        victoryPointsBreakdown.setVictoryPoints('milestones', 5, 'Claimed '+milestone.milestone.name+' milestone');
       }
     }
 
@@ -509,7 +509,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     this.game.board.spaces.forEach((space) => {
       // Victory points for greenery tiles
       if (space.tile && space.tile.tileType === TileType.GREENERY && space.player !== undefined && space.player.id === this.id) {
-        this.victoryPointsBreakdown.setVictoryPoints('greenery', 1);
+        victoryPointsBreakdown.setVictoryPoints('greenery', 1);
       }
 
       // Victory points for greenery tiles adjacent to cities
@@ -517,7 +517,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         const adjacent = this.game.board.getAdjacentSpaces(space);
         for (const adj of adjacent) {
           if (adj.tile && adj.tile.tileType === TileType.GREENERY) {
-            this.victoryPointsBreakdown.setVictoryPoints('city', 1);
+            victoryPointsBreakdown.setVictoryPoints('city', 1);
           }
         }
       }
@@ -527,15 +527,15 @@ export class Player implements ISerializable<SerializedPlayer> {
     const includeTurmoilVP : boolean = this.game.gameIsOver() || this.game.phase === Phase.END;
 
     if (includeTurmoilVP && this.game.gameOptions.turmoilExtension && this.game.turmoil) {
-      this.victoryPointsBreakdown.setVictoryPoints('victoryPoints', this.game.turmoil.getPlayerVictoryPoints(this), 'Turmoil Points');
+      victoryPointsBreakdown.setVictoryPoints('victoryPoints', this.game.turmoil.getPlayerVictoryPoints(this), 'Turmoil Points');
     }
 
     // Titania Colony VP
     if (this.colonyVictoryPoints > 0) {
-      this.victoryPointsBreakdown.setVictoryPoints('victoryPoints', this.colonyVictoryPoints, 'Colony VP');
+      victoryPointsBreakdown.setVictoryPoints('victoryPoints', this.colonyVictoryPoints, 'Colony VP');
     }
 
-    MoonExpansion.calculateVictoryPoints(this);
+    MoonExpansion.calculateVictoryPoints(this, victoryPointsBreakdown);
 
     // Escape velocity VP penalty
     if (this.game.gameOptions.escapeVelocityMode) {
@@ -546,15 +546,15 @@ export class Player implements ISerializable<SerializedPlayer> {
       if (threshold !== undefined && period !== undefined && elapsedTimeInMinutes > threshold) {
         const overTimeInMinutes = Math.max(elapsedTimeInMinutes - threshold - (this.actionsTakenThisGame * (constants.BONUS_SECONDS_PER_ACTION/60)), 0);
         // Don't lose more VP that what is available
-        this.victoryPointsBreakdown.updateTotal();
-        const totalBeforeEscapeVelocity = this.victoryPointsBreakdown.total;
+        victoryPointsBreakdown.updateTotal();
+        const totalBeforeEscapeVelocity = victoryPointsBreakdown.total;
         const penaltyTotal = Math.min(penaltyPerMin * Math.floor(overTimeInMinutes / period), totalBeforeEscapeVelocity);
-        this.victoryPointsBreakdown.setVictoryPoints('escapeVelocity penalty', -penaltyTotal, 'Escape Velocity Penalty');
+        victoryPointsBreakdown.setVictoryPoints('escapeVelocity penalty', -penaltyTotal, 'Escape Velocity Penalty');
       }
     }
 
-    this.victoryPointsBreakdown.updateTotal();
-    return this.victoryPointsBreakdown;
+    victoryPointsBreakdown.updateTotal();
+    return victoryPointsBreakdown;
   }
 
   public cardIsInEffect(cardName: CardName): boolean {
@@ -1698,7 +1698,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     });
   }
 
-  private giveAwards(): void {
+  private giveAwards(vpb: VictoryPointsBreakdown): void {
     this.game.fundedAwards.forEach((fundedAward) => {
       // Awards are disabled for 1 player games
       if (this.game.isSoloMode()) return;
@@ -1710,19 +1710,19 @@ export class Player implements ISerializable<SerializedPlayer> {
 
       // We have one rank 1 player
       if (fundedAward.award.getScore(players[0]) > fundedAward.award.getScore(players[1])) {
-        if (players[0].id === this.id) this.victoryPointsBreakdown.setVictoryPoints('awards', 5, '1st place for '+fundedAward.award.name+' award (funded by '+fundedAward.player.name+')');
+        if (players[0].id === this.id) vpb.setVictoryPoints('awards', 5, '1st place for '+fundedAward.award.name+' award (funded by '+fundedAward.player.name+')');
         players.shift();
 
         if (players.length > 1) {
           // We have one rank 2 player
           if (fundedAward.award.getScore(players[0]) > fundedAward.award.getScore(players[1])) {
-            if (players[0].id === this.id) this.victoryPointsBreakdown.setVictoryPoints('awards', 2, '2nd place for '+fundedAward.award.name+' award (funded by '+fundedAward.player.name+')');
+            if (players[0].id === this.id) vpb.setVictoryPoints('awards', 2, '2nd place for '+fundedAward.award.name+' award (funded by '+fundedAward.player.name+')');
 
           // We have at least two rank 2 players
           } else {
             const score = fundedAward.award.getScore(players[0]);
             while (players.length > 0 && fundedAward.award.getScore(players[0]) === score) {
-              if (players[0].id === this.id) this.victoryPointsBreakdown.setVictoryPoints('awards', 2, '2nd place for '+fundedAward.award.name+' award (funded by '+fundedAward.player.name+')');
+              if (players[0].id === this.id) vpb.setVictoryPoints('awards', 2, '2nd place for '+fundedAward.award.name+' award (funded by '+fundedAward.player.name+')');
               players.shift();
             }
           }
@@ -1732,7 +1732,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       } else {
         const score = fundedAward.award.getScore(players[0]);
         while (players.length > 0 && fundedAward.award.getScore(players[0]) === score) {
-          if (players[0].id === this.id) this.victoryPointsBreakdown.setVictoryPoints('awards', 5, '1st place for '+fundedAward.award.name+' award (funded by '+fundedAward.player.name+')');
+          if (players[0].id === this.id) vpb.setVictoryPoints('awards', 5, '1st place for '+fundedAward.award.name+' award (funded by '+fundedAward.player.name+')');
           players.shift();
         }
       }
@@ -2249,7 +2249,6 @@ export class Player implements ISerializable<SerializedPlayer> {
       turmoilPolicyActionUsed: this.turmoilPolicyActionUsed,
       politicalAgendasActionUsedCount: this.politicalAgendasActionUsedCount,
       hasTurmoilScienceTagBonus: this.hasTurmoilScienceTagBonus,
-      victoryPointsBreakdown: this.victoryPointsBreakdown,
       oceanBonus: this.oceanBonus,
       // Custom cards
       // Leavitt Station.
@@ -2323,7 +2322,6 @@ export class Player implements ISerializable<SerializedPlayer> {
     player.tradesThisGeneration = d.tradesThisTurn;
     player.turmoilPolicyActionUsed = d.turmoilPolicyActionUsed;
     player.politicalAgendasActionUsedCount = d.politicalAgendasActionUsedCount;
-    player.victoryPointsBreakdown = d.victoryPointsBreakdown;
 
     player.lastCardPlayed = d.lastCardPlayed !== undefined ?
       cardFinder.getProjectCardByName(d.lastCardPlayed) :
