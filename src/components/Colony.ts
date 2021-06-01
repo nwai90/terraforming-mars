@@ -168,6 +168,9 @@ export const Colony = Vue.component('colony', {
     getTerra: (): string => {
       return ColonyName.TERRA;
     },
+    getKuiper: (): string => {
+      return ColonyName.KUIPER;
+    },
     getClassForColonyPlacementBonus: (colony: ColonyModel, index: number): string => {
       if (colony.colonies.length > index) return 'filter: grayscale(1) opacity(0.5)';
       return '';
@@ -218,6 +221,8 @@ export const Colony = Vue.component('colony', {
       <div v-if="colony.name === getTerra()" style="display:inline-block;margin-bottom:10px;">
         <div class="resource money">1</div> / 3&nbsp;<span class="tag tag-earth red-outline" style="transform:scale(0.8);margin-top:-4px;"></span>
       </div>
+
+      <div v-if="colony.name === getKuiper()" class="resource money">1</div>
       
       <span v-if="colony.name === getLeavitt()" style="display: inline-block;margin-left: 10px;font-size: 14px;">REVEAL TOP CARD OF DECK.</span>
       <span v-if="colony.name === getLeavitt()"><br></span>
@@ -257,6 +262,7 @@ export const Colony = Vue.component('colony', {
       <div v-if="colony.name === getMiranda()" class="resource animal" style="margin-left:20px;"></div>
       <div v-if="colony.name === getPluto()" class="resource card card-with-border" style="margin-left:20px;transform: scale(0.8);margin-top: -8px;"></div>
       <div v-if="colony.name === getEuropa() || colony.name === getDeimos()" style="height: 20px; visibility: hidden;display: block;" />
+      <div v-if="colony.name === getKuiper()" class="resource asteroid" style="margin-left:20px;"></div>
       <div v-if="colony.name !== getEuropa() && colony.name !== getMercury() && colony.name !== getIapetus() && colony.name !== getHygiea() && colony.name !== getTitania() && colony.name !== getVenus() && colony.name !== getLeavitt() && colony.name !== getPallas() && colony.name !== getDeimos() && colony.name !== getTerra()" class="white-x"></div>
       <div v-if="colony.name === getIapetus()" class="white-x" style="margin-left:-32px; top:-2px"></div>
       <div v-if="colony.name === getTitania()" class="white-x" style="margin-left:56px;"></div>
@@ -303,15 +309,15 @@ export const Colony = Vue.component('colony', {
 
     <div v-if="colony.name === getEnceladus()" class="colony-grid-container">
       <div :style="getClassForColonyPlacementBonus(colony, 0)">
-        <div class="colony-placement-bonus triple-res resource microbe white-x white-x--3"></div>
+        <div class="colony-placement-bonus multiple-res resource microbe white-x white-x--3"></div>
       </div>
 
       <div :style="getClassForColonyPlacementBonus(colony, 1)">
-        <div class="colony-placement-bonus triple-res resource microbe white-x white-x--3"></div>
+        <div class="colony-placement-bonus multiple-res resource microbe white-x white-x--3"></div>
       </div>
 
       <div :style="getClassForColonyPlacementBonus(colony, 2)">
-        <div class="colony-placement-bonus triple-res resource microbe white-x white-x--3"></div>
+        <div class="colony-placement-bonus multiple-res resource microbe white-x white-x--3"></div>
       </div>
 
       <div></div>
@@ -454,15 +460,15 @@ export const Colony = Vue.component('colony', {
 
     <div v-if="colony.name === getTriton()" class="colony-grid-container">
       <div :style="getClassForColonyPlacementBonus(colony, 0)">
-        <div class="colony-placement-bonus resource triple-res titanium white-x white-x--3"></div>
+        <div class="colony-placement-bonus resource multiple-res titanium white-x white-x--3"></div>
       </div>
 
       <div :style="getClassForColonyPlacementBonus(colony, 1)">
-        <div class="colony-placement-bonus resource triple-res titanium white-x white-x--3"></div>
+        <div class="colony-placement-bonus resource multiple-res titanium white-x white-x--3"></div>
       </div>
 
       <div :style="getClassForColonyPlacementBonus(colony, 2)">
-        <div class="colony-placement-bonus resource triple-res titanium white-x white-x--3"></div>
+        <div class="colony-placement-bonus resource multiple-res titanium white-x white-x--3"></div>
       </div>
       <div></div>
       <div></div>
@@ -705,15 +711,15 @@ export const Colony = Vue.component('colony', {
 
   <div v-if="colony.name === getTitan()" class="colony-grid-container">
     <div :style="getClassForColonyPlacementBonus(colony, 0)">
-      <div class="colony-placement-bonus triple-res resource floater white-x white-x--3"></div>
+      <div class="colony-placement-bonus multiple-res resource floater white-x white-x--3"></div>
     </div>
 
     <div :style="getClassForColonyPlacementBonus(colony, 1)">
-      <div class="colony-placement-bonus triple-res resource floater white-x white-x--3"></div>
+      <div class="colony-placement-bonus multiple-res resource floater white-x white-x--3"></div>
     </div>
 
     <div :style="getClassForColonyPlacementBonus(colony, 2)">
-      <div class="colony-placement-bonus triple-res resource floater white-x white-x--3"></div>
+      <div class="colony-placement-bonus multiple-res resource floater white-x white-x--3"></div>
     </div>
     <div></div>
     <div></div>
@@ -748,6 +754,34 @@ export const Colony = Vue.component('colony', {
     <div>2</div>
     <div>3</div>
   </div>
+
+  <div v-if="colony.name === getKuiper()" class="colony-grid-container">
+      <div :style="getClassForColonyPlacementBonus(colony, 0)">
+        <div class="colony-placement-bonus multiple-res resource asteroid white-x white-x--2"></div>
+      </div>
+
+      <div :style="getClassForColonyPlacementBonus(colony, 1)">
+        <div class="colony-placement-bonus multiple-res resource asteroid white-x white-x--2"></div>
+      </div>
+
+      <div :style="getClassForColonyPlacementBonus(colony, 2)">
+        <div class="colony-placement-bonus multiple-res resource asteroid white-x white-x--2"></div>
+      </div>
+
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <div v-if="colony.name === getKuiper()" class="colony-grid-container2">
+      <div>0</div>
+      <div>1</div>
+      <div>1</div>
+      <div>1</div>
+      <div>2</div>
+      <div>2</div>
+      <div>3</div>
+    </div>
 
   </div>
 </div>

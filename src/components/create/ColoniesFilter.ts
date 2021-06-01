@@ -21,6 +21,7 @@ import {Leavitt} from '../../cards/community/colonies/Leavitt';
 import {Pallas} from '../../cards/community/colonies/Pallas';
 import {Deimos} from '../../cards/community/colonies/Deimos';
 import {Terra} from '../../cards/community/colonies/Terra';
+import {Kuiper} from '../../cards/community/colonies/Kuiper';
 
 const officialColonies: Array<Colony> = [
   new Callisto(),
@@ -46,6 +47,7 @@ const communityColonies: Array<Colony> = [
   new Pallas(),
   new Deimos(),
   new Terra(),
+  new Kuiper(),
 ];
 
 export const ColoniesFilter = Vue.component('colonies-filter', {

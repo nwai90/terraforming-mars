@@ -1472,10 +1472,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       });
 
       // Check for Venus colony
-      if (selectedCard.tags.includes(Tags.VENUS)) {
-        const venusColony = this.game.colonies.find((colony) => colony.name === ColonyName.VENUS);
-        if (venusColony) venusColony.isActive = true;
-      }
+      this.game.activateVenusColony(selectedCard);
     }
 
     if (selectedCard.cardType !== CardType.PROXY) {

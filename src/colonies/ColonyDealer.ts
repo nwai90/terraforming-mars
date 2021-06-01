@@ -22,6 +22,7 @@ import {Deimos} from '../cards/community/colonies/Deimos';
 import {Terra} from '../cards/community/colonies/Terra';
 import {GameOptions} from '../Game';
 import {SerializedColony} from '../SerializedColony';
+import {Kuiper} from '../cards/community/colonies/Kuiper';
 
 export interface IColonyFactory<T> {
     colonyName: ColonyName;
@@ -53,6 +54,7 @@ export const COMMUNITY_COLONIES_TILES: Array<IColonyFactory<Colony>> = [
   {colonyName: ColonyName.PALLAS, Factory: Pallas},
   {colonyName: ColonyName.DEIMOS, Factory: Deimos},
   {colonyName: ColonyName.TERRA, Factory: Terra},
+  {colonyName: ColonyName.KUIPER, Factory: Kuiper},
 ];
 
 // Function to return a card object by its name
@@ -103,6 +105,7 @@ export class ColonyDealer {
       const venusNextExtension: boolean = gameOptions.venusNextExtension;
       const turmoilExtension: boolean = gameOptions.turmoilExtension;
       const aresExtension: boolean = gameOptions.aresExtension;
+      const promoCardsOption: boolean = gameOptions.promoCardsOption;
 
       let count: number = players + 2;
       let colonyTiles = ALL_COLONIES_TILES;
@@ -110,6 +113,7 @@ export class ColonyDealer {
       if (!venusNextExtension) colonyTiles = colonyTiles.filter((c) => c.colonyName !== ColonyName.VENUS);
       if (!turmoilExtension) colonyTiles = colonyTiles.filter((c) => c.colonyName !== ColonyName.PALLAS);
       if (!aresExtension) colonyTiles = colonyTiles.filter((c) => c.colonyName !== ColonyName.DEIMOS);
+      if (!promoCardsOption) colonyTiles = colonyTiles.filter((c) => c.colonyName !== ColonyName.KUIPER);
 
       if (allowList.length === 0) {
         colonyTiles.forEach((e) => allowList.push(e.colonyName));

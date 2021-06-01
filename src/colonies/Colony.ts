@@ -155,7 +155,6 @@ export abstract class Colony implements SerializedColony {
       return this.giveBonus(player, this.colonyBonusType!, this.colonyBonusQuantity!, this.colonyBonusResource, isGiveColonyBonus);
     }
 
-
     public giveBonus(player: Player, bonusType: ColonyBenefit, quantity: number, resource: Resources | undefined, isGiveColonyBonus: boolean = false): undefined | PlayerInput {
       const game = player.game;
 

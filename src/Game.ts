@@ -699,13 +699,16 @@ export class Game implements ISerializable<SerializedGame> {
       });
 
       // Check for Venus colony
-      if (corporationCard.tags.includes(Tags.VENUS)) {
-        const venusColony = this.colonies.find((colony) => colony.name === ColonyName.VENUS);
-        if (venusColony) venusColony.isActive = true;
-      }
+      this.activateVenusColony(corporationCard);
     }
 
     this.playerIsFinishedWithResearchPhase(player);
+  }
+
+  public activateVenusColony(card: CorporationCard | IProjectCard): void {
+    const venusColony = this.colonies.find((colony) => colony.name === ColonyName.VENUS);
+    if (venusColony === undefined || venusColony.isActive) return;
+    if (card.tags.includes(Tags.VENUS)) venusColony.isActive = true;
   }
 
   private pickCorporationCard(player: Player): PlayerInput {
