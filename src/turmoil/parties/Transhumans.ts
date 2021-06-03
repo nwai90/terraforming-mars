@@ -24,10 +24,13 @@ class TranshumansBonus01 implements Bonus {
   isDefault = true;
   description = 'Gain 1 M€ for each card with requirements you have played';
 
+  getScore(player: Player) {
+    return player.playedCards.filter((card) => card.requirements !== undefined).length;
+  }
+
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
-      const amount = player.playedCards.filter((card) => card.requirements !== undefined).length;
-      player.addResource(Resources.MEGACREDITS, amount);
+      player.addResource(Resources.MEGACREDITS, this.getScore(player));
     });
   }
 }
@@ -37,10 +40,13 @@ class TranshumansBonus02 implements Bonus {
   description = 'Gain 2 M€ for each card with no tags you have played';
   isDefault = false;
 
+  getScore(player: Player) {
+    return player.getNoTagsCount() * 2;
+  }
+
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
-      const amount = player.getNoTagsCount();
-      player.addResource(Resources.MEGACREDITS, amount * 2);
+      player.addResource(Resources.MEGACREDITS, this.getScore(player));
     });
   }
 }

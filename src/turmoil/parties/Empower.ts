@@ -23,10 +23,13 @@ class EmpowerBonus01 implements Bonus {
   isDefault = true;
   description = 'Gain 2 M€ for each Power tag you have';
 
+  getScore(player: Player) {
+    return player.getTagCount(Tags.ENERGY, false, false) * 2;
+  }
+
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
-      const tagCount = player.getTagCount(Tags.ENERGY, false, false);
-      player.addResource(Resources.MEGACREDITS, tagCount);
+      player.addResource(Resources.MEGACREDITS, this.getScore(player));
     });
   }
 }
@@ -36,10 +39,13 @@ class EmpowerBonus02 implements Bonus {
   description = 'Gain 1 M€ for each Energy production you have';
   isDefault = false;
 
+  getScore(player: Player) {
+    return player.getProduction(Resources.ENERGY);
+  }
+
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
-      const energyProduction = player.getProduction(Resources.ENERGY);
-      player.addResource(Resources.MEGACREDITS, energyProduction);
+      player.addResource(Resources.MEGACREDITS, this.getScore(player));
     });
   }
 }

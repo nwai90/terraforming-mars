@@ -26,10 +26,13 @@ class BureaucratsBonus01 implements Bonus {
   isDefault = true;
   description = 'Gain 1 M€ for each Event card you have played';
 
+  getScore(player: Player) {
+    return player.getPlayedEventsCount();
+  }
+
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
-      const amount = player.getPlayedEventsCount();
-      player.addResource(Resources.MEGACREDITS, amount);
+      player.addResource(Resources.MEGACREDITS, this.getScore(player));
     });
   }
 }
@@ -38,6 +41,10 @@ class BureaucratsBonus02 implements Bonus {
   id = 'bb02';
   description = 'Mark all card actions as used this generation';
   isDefault = false;
+
+  getScore(player: Player) {
+    return player.getPlayableActionCards().length * -1;
+  }
 
   grant(game: Game) {
     game.getPlayers().forEach((player) => {

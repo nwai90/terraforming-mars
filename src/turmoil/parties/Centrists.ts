@@ -24,9 +24,13 @@ class CentristsBonus01 implements Bonus {
   isDefault = true;
   description = 'Gain 8 M€';
 
+  getScore(_player: Player) {
+    return 8;
+  }
+
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
-      player.addResource(Resources.MEGACREDITS, 8, {log: true});
+      player.addResource(Resources.MEGACREDITS, this.getScore(player), {log: true});
     });
   }
 }
@@ -35,6 +39,10 @@ class CentristsBonus02 implements Bonus {
   id = 'cb02';
   description = 'Gain 1 TR';
   isDefault = false;
+
+  getScore(_player: Player) {
+    return 1;
+  }
 
   grant(game: Game) {
     game.getPlayers().forEach((player) => {

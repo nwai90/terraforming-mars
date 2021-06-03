@@ -23,9 +23,13 @@ class SpomeBonus01 implements Bonus {
   isDefault = true;
   description = 'Gain 1 M€ for each different tag you have';
 
+  getScore(player: Player) {
+    return player.getDistinctTagCount(false);
+  }
+
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
-      player.addResource(Resources.MEGACREDITS, player.getDistinctTagCount(false));
+      player.addResource(Resources.MEGACREDITS, this.getScore(player));
     });
   }
 }
@@ -35,13 +39,17 @@ class SpomeBonus02 implements Bonus {
   description = 'Gain 1 M€ for each type of resource you have';
   isDefault = false;
 
+  getScore(player: Player) {
+    const standardResources = [Resources.MEGACREDITS, Resources.STEEL, Resources.TITANIUM, Resources.PLANTS, Resources.ENERGY, Resources.HEAT]
+        .filter((res) => player.getResource(res) > 0).length;
+    const nonStandardResources = new Set(player.getCardsWithResources().map((card) => card.resourceType)).size;
+
+    return standardResources + nonStandardResources;
+  }
+
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
-      const standardResources = [Resources.MEGACREDITS, Resources.STEEL, Resources.TITANIUM, Resources.PLANTS, Resources.ENERGY, Resources.HEAT]
-        .filter((res) => player.getResource(res) > 0).length;
-      const nonStandardResources = new Set(player.getCardsWithResources().map((card) => card.resourceType)).size;
-
-      player.addResource(Resources.MEGACREDITS, standardResources + nonStandardResources);
+      player.addResource(Resources.MEGACREDITS, this.getScore(player));
     });
   }
 }

@@ -21,10 +21,13 @@ class PopulistsBonus01 implements Bonus {
   isDefault = true;
   description = 'Lose 1 M€ for every 5 M€ you have over 40';
 
+  getScore(player: Player) {
+    return Math.floor(Math.max(player.megaCredits - 40, 0) / 5) * -1;
+  }
+
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
-      const amount = Math.floor(Math.max(player.megaCredits - 40, 0) / 5);
-      player.addResource(Resources.MEGACREDITS, -amount);
+      player.addResource(Resources.MEGACREDITS, this.getScore(player));
     });
   }
 }
@@ -34,10 +37,13 @@ class PopulistsBonus02 implements Bonus {
   description = 'Lose 2 M€ for every 8 cards you have in hand';
   isDefault = false;
 
+  getScore(player: Player) {
+    return Math.floor(player.cardsInHand.length / 8) * -2;
+  }
+
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
-      const amount = Math.floor(player.cardsInHand.length / 8) * 2;
-      player.addResource(Resources.MEGACREDITS, -amount);
+      player.addResource(Resources.MEGACREDITS, this.getScore(player));
     });
   }
 }
