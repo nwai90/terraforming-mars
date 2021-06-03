@@ -35,7 +35,9 @@ export class LavaTubeSettlement extends Card implements IProjectCard {
   }
 
   private getSpacesForCity(player: Player) {
-    if (player.game.gameOptions.boardName === BoardName.HELLAS) {
+    const boardName = player.game.gameOptions.boardName;
+
+    if (boardName === BoardName.HELLAS || boardName === BoardName.ARABIA_TERRA) {
       // https://boardgamegeek.com/thread/1953628/article/29627211#29627211
       return player.game.board.getAvailableSpacesForCity(player);
     }

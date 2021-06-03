@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {BoardName} from '../../../src/boards/BoardName';
 import {LavaTubeSettlement} from '../../../src/cards/prelude/LavaTubeSettlement';
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
@@ -51,5 +52,32 @@ describe('LavaTubeSettlement', function() {
     expect(selectSpace.availableSpaces[0].tile && selectSpace.availableSpaces[0].tile.tileType).to.eq(TileType.CITY);
     expect(selectSpace.availableSpaces[0].player).to.eq(player);
     expect(player.getProduction(Resources.ENERGY)).to.eq(0);
+  });
+
+  it('Can place city on any land space for Hellas', function() {
+    const gameOptions = TestingUtils.setCustomGameOptions({boardName: BoardName.HELLAS});
+    const redPlayer = TestPlayers.RED.newPlayer();
+    game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
+
+    player.megaCredits = 6; // For South pole space
+    player.addProduction(Resources.ENERGY, 1);
+    expect(card.canPlay(player)).is.true;
+
+    card.play(player);
+    const selectSpace = game.deferredActions.peek()!.execute() as SelectSpace;
+    expect(selectSpace.availableSpaces.length).to.eq(49);
+  });
+
+  it('Can place city on any land space for Arabia Terra', function() {
+    const gameOptions = TestingUtils.setCustomGameOptions({boardName: BoardName.ARABIA_TERRA});
+    const redPlayer = TestPlayers.RED.newPlayer();
+    game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
+
+    player.addProduction(Resources.ENERGY, 1);
+    expect(card.canPlay(player)).is.true;
+
+    card.play(player);
+    const selectSpace = game.deferredActions.peek()!.execute() as SelectSpace;
+    expect(selectSpace.availableSpaces.length).to.eq(49);
   });
 });

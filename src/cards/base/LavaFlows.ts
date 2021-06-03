@@ -38,7 +38,7 @@ export class LavaFlows extends Card implements IProjectCard {
 
   public static getVolcanicSpaces(player: Player): Array<ISpace> {
     const board = player.game.board;
-    const boardsWithVolcanicSpaces = [BoardName.ORIGINAL, BoardName.ELYSIUM, BoardName.AMAZONIS, BoardName.TERRA_CIMMERIA];
+    const boardsWithVolcanicSpaces = [BoardName.ORIGINAL, BoardName.ELYSIUM, BoardName.AMAZONIS, BoardName.TERRA_CIMMERIA, BoardName.VASTITAS_BOREALIS];
 
     const landSpaces = board.getSpaces(SpaceType.LAND, player);
     const unoccupiedLandSpaces = landSpaces.filter((space) => space.tile === undefined && (space.player === undefined || space.player === player));
