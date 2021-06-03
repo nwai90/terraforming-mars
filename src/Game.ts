@@ -72,6 +72,7 @@ import {SilverCubeHandler} from './community/SilverCubeHandler';
 import {MilestoneAwardSelector} from './MilestoneAwardSelector';
 import {BoardType} from './boards/BoardType';
 import {Multiset} from './utils/Multiset';
+import {VictoryPointsBreakdown} from './VictoryPointsBreakdown';
 
 export type GameId = string;
 export type SpectatorId = string;
@@ -860,8 +861,8 @@ export class Game implements ISerializable<SerializedGame> {
 
   private updateEndGenerationScores(): void {
     this.getPlayers().forEach((player) => {
-      player.getVictoryPoints();
-      player.endGenerationScores.push(player.victoryPointsBreakdown.total);
+      const playerScore: VictoryPointsBreakdown = player.getVictoryPoints();
+      player.endGenerationScores.push(playerScore.total);
     });
   }
 
