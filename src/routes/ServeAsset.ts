@@ -92,8 +92,8 @@ export class ServeAsset extends Handler {
   private toFile(urlPath: string, encodings: Set<Encoding>): { file?: string, encoding?: Encoding } {
     switch (urlPath) {
     case 'assets/index.html':
-    case 'assets/Prototype.ttf':
-    case 'assets/BattleStar.ttf':
+    case 'assets/fonts/Prototype.ttf':
+    case 'assets/fonts/BattleStar.ttf':
       return {file: urlPath};
 
     case 'styles.css':

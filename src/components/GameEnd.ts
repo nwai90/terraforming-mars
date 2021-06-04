@@ -111,7 +111,7 @@ export const GameEnd = Vue.component('game-end', {
                         <div class="game_end_success">
                             <h2 v-i18n>You win!</h2>
                             <div class="game_end_solo_img">
-                                <img src="/assets/solo_win.png" />
+                                <img src="/assets/misc/solo_win.png" />
                             </div>
                             <div class="game_end_notice" v-i18n>
                                 But it isn't the reason to stop making Mars better.
