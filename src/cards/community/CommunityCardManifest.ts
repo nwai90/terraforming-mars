@@ -33,10 +33,13 @@ import {GamblingHouse} from './preludes/GamblingHouse';
 import {LabourUnion} from './corporations/LabourUnion';
 import {UnitedNationsMissionOne} from './corporations/UnitedNationsMissionOne';
 import {AbandonedSteelForge} from './preludes/AbandonedSteelForge';
+import {PerseveranceLanding} from './PerseveranceLanding';
 
 export const COMMUNITY_CARD_MANIFEST = new CardManifest({
   module: GameModule.Community,
-  projectCards: [],
+  projectCards: [
+    {cardName: CardName.PERSEVERANCE_LANDING, Factory: PerseveranceLanding},
+  ],
   corporationCards: [
     {cardName: CardName.AGRICOLA_INC, Factory: AgricolaInc},
     {cardName: CardName.PROJECT_WORKSHOP, Factory: ProjectWorkshop},

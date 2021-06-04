@@ -466,6 +466,9 @@ export enum CardName {
     BIO_PRINTING_FACILITY = 'Bio Printing Facility',
     BACTOVIRAL_RESEARCH = 'Bactoviral Research',
 
+    // Community cards
+    PERSEVERANCE_LANDING = 'Perseverance Landing',
+
     // Community corps
     AGRICOLA_INC = 'Agricola Inc',
     CURIOSITY_II = 'Curiosity II',

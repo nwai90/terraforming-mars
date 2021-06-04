@@ -111,6 +111,9 @@ const TILE_CLASSES: Map<TileType, Classes> = new Map([
   [TileType.SOLAR_FARM, {
     tile: 'card-tile-solar-farm',
   }],
+  [TileType.PERSEVERANCE_LANDING, {
+    symbol: 'card-tile-symbol-perseverance-landing',
+  }],
 ]);
 
 export const CardRenderTileComponent = Vue.component('CardRenderTileComponent', {
