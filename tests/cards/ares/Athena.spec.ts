@@ -4,9 +4,9 @@ import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {_AresHazardPlacement} from '../../../src/ares/AresHazards';
 import {ARES_OPTIONS_WITH_HAZARDS} from '../../ares/AresTestHelper';
-import {HAZARD_TILES} from '../../../src/ares/AresHandler';
 import {SpaceType} from '../../../src/SpaceType';
 import {TestPlayers} from '../../TestPlayers';
+import {HAZARD_TILES} from '../../../src/TileType';
 
 describe('Athena', function() {
   let card : Athena; let player : Player; let player2 : Player; let game : Game;
@@ -32,7 +32,7 @@ describe('Athena', function() {
   });
 
   it('Can place next to hazard tiles without incurring production loss', function() {
-    const hazardSpace = game.board.spaces.find((space) => space.tile && HAZARD_TILES.includes(space.tile.tileType))!;
+    const hazardSpace = game.board.spaces.find((space) => space.tile && HAZARD_TILES.has(space.tile.tileType))!;
     const adjacentEmptySpace = game.board.getAdjacentSpaces(hazardSpace).find((space) => space.tile === undefined && space.spaceType === SpaceType.LAND)!;
     game.addGreenery(player, adjacentEmptySpace.id);
     expect(game.deferredActions).has.lengthOf(0);

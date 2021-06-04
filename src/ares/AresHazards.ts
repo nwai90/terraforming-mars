@@ -4,8 +4,7 @@ import {LogHelper} from '../LogHelper';
 import {Phase} from '../Phase';
 import {Player} from '../Player';
 import {SpaceType} from '../SpaceType';
-import {TileType} from '../TileType';
-import {HAZARD_TILES} from './AresHandler';
+import {HAZARD_TILES, TileType} from '../TileType';
 import {IAresData, IHazardConstraint} from './IAresData';
 
 /**
@@ -23,13 +22,13 @@ export class _AresHazardPlacement {
   }
 
   public static getAllLandSpacesAdjacentToHazards(game: Game): ISpace[] {
-    const hazardTiles = game.board.spaces.filter((space) => space.tile && HAZARD_TILES.includes(space.tile.tileType));
+    const hazardTiles = game.board.spaces.filter((space) => space.tile && HAZARD_TILES.has(space.tile.tileType));
     const landSpacesAdjacentToHazards = hazardTiles.map((tile) => game.board.getAdjacentSpaces(tile).filter((space) => space.spaceType === SpaceType.LAND && space.tile === undefined));
     return landSpacesAdjacentToHazards.reduce((s1, s2) => s1.concat(s2)).filter((value, index, space) => space.indexOf(value) === index);
   }
 
   public static getHazardsCount(game: Game): number {
-    return game.board.spaces.filter((space) => space.tile && HAZARD_TILES.includes(space.tile.tileType)).length;
+    return game.board.spaces.filter((space) => space.tile && HAZARD_TILES.has(space.tile.tileType)).length;
   }
 
   public static makeSevere(game: Game, from: TileType, to: TileType) {

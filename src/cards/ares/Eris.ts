@@ -9,13 +9,13 @@ import {PlaceHazardTile} from '../../deferredActions/PlaceHazardTile';
 import {ISpace} from '../../boards/ISpace';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
-import {HAZARD_TILES} from '../../ares/AresHandler';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {LogHelper} from '../../LogHelper';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 import {AltSecondaryTag} from '../render/CardRenderItem';
 import {Size} from '../render/Size';
+import {HAZARD_TILES} from '../../TileType';
 
 export class Eris extends Card implements CorporationCard {
     constructor() {
@@ -115,7 +115,7 @@ export class Eris extends Card implements CorporationCard {
 
     private getAllUnprotectedHazardSpaces(game: Game): Array<ISpace> {
       return game.board.spaces.filter(
-          (space) => space.tile && HAZARD_TILES.includes(space.tile.tileType) && space.tile.protectedHazard === false,
+          (space) => space.tile && HAZARD_TILES.has(space.tile.tileType) && space.tile.protectedHazard === false,
       );
     }
 }
