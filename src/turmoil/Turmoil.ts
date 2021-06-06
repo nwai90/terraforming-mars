@@ -24,6 +24,7 @@ import {Centrists} from './parties/Centrists';
 import {TurmoilHandler} from './TurmoilHandler';
 import {SerializedGlobalEvent} from './globalEvents/SerializedGlobalEventDealer';
 import {DeferredAction} from '../deferredActions/DeferredAction';
+import {MarsCoalition} from '../cards/community/corporations/MarsCoalition';
 
 export type NeutralPlayer = 'NEUTRAL';
 
@@ -193,6 +194,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
         }
         party.sendDelegate(playerId, game);
         this.checkDominantParty(party);
+        MarsCoalition.applyDominantPartyPolicy(game);
       } else {
         throw 'Party not found';
       }
@@ -205,6 +207,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
         this.delegateReserve.push(playerId);
         party.removeDelegate(playerId, game);
         this.checkDominantParty(party);
+        MarsCoalition.applyDominantPartyPolicy(game);
       } else {
         throw 'Party not found';
       }

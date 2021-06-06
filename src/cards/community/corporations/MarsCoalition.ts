@@ -30,6 +30,7 @@ import {GlobalParameter} from '../../../GlobalParameter';
 import {Resources} from '../../../Resources';
 import {SendDelegateToArea} from '../../../deferredActions/SendDelegateToArea';
 import {Size} from '../../render/Size';
+import {Game} from '../../../Game';
 
 export class MarsCoalition extends Card implements CorporationCard {
   constructor() {
@@ -211,6 +212,27 @@ export class MarsCoalition extends Card implements CorporationCard {
         if (parameter === GlobalParameter.VENUS) player.addResource(Resources.MEGACREDITS, steps * 2);
         break;
       default:
+        break;
+    }
+  }
+
+  public static applyDominantPartyPolicy(game: Game): void {
+    const marsCoalitionPlayer = game.getPlayers().find((player) => player.isCorporation(CardName.MARS_COALITION));
+    if (marsCoalitionPlayer === undefined) return;
+
+    const dominantPartyPolicy = MarsCoalition.getDominantPartyPolicyId(marsCoalitionPlayer);
+
+    switch (dominantPartyPolicy) {
+      case TurmoilPolicy.SCIENTISTS_POLICY_4:
+        marsCoalitionPlayer.hasTurmoilScienceTagBonus = true;
+        break;
+      case TurmoilPolicy.TRANSHUMANS_POLICY_4:
+        marsCoalitionPlayer.hasTranshumansColonyTradeOffset = true;
+        break;
+      default:
+        // Reset properties whenever dominant party changes during the generation
+        marsCoalitionPlayer.hasTurmoilScienceTagBonus = false;
+        marsCoalitionPlayer.hasTranshumansColonyTradeOffset = false;
         break;
     }
   }
