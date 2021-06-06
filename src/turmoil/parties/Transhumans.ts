@@ -11,6 +11,7 @@ import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferr
 import {Turmoil} from '../Turmoil';
 import {PlayProjectCard} from '../../deferredActions/PlayProjectCard';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
+import {MarsCoalition} from '../../cards/community/corporations/MarsCoalition';
 
 export class Transhumans extends Party implements IParty {
   name = PartyName.TRANSHUMANS;
@@ -62,18 +63,19 @@ class TranshumansPolicy02 implements Policy {
   description: string = 'Spend 10 M€ to gain 1 influence (Turmoil Transhumans)';
   isDefault = false;
 
-  canAct(player: Player) {
-    return player.canAfford(10) && player.turmoilPolicyActionUsed === false;
+  canAct(player: Player, isDominantPartyAction: boolean = false) {
+    const hasActionsRemaining = isDominantPartyAction ? player.dominantPartyActionUsedCount === 0 : player.turmoilPolicyActionUsed === false;
+    return player.canAfford(10) && hasActionsRemaining;
   }
 
-  action(player: Player) {
+  action(player: Player, isDominantPartyAction: boolean = false) {
     const game = player.game;
     const turmoil: Turmoil = player.game.turmoil as Turmoil;
 
     game.log('${0} used Turmoil Transhumans action', (b) => b.player(player));
     game.defer(new SelectHowToPayDeferred(player, 10, {title: 'Select how to pay for action'}));
     turmoil.addInfluenceBonus(player);
-    player.turmoilPolicyActionUsed = true;
+    MarsCoalition.handleSingleUsePolicyLogic(player, isDominantPartyAction);
 
     return undefined;
   }
@@ -84,23 +86,28 @@ class TranshumansPolicy03 implements Policy {
   description: string = 'Spend 10 M€ to play a card from hand, ignoring global requirements (Turmoil Transhumans)';
   isDefault = false;
 
-  canAct(player: Player) {
-    return player.canAfford(10) && player.turmoilPolicyActionUsed === false;
+  canAct(player: Player, isDominantPartyAction: boolean = false) {
+    const hasActionsRemaining = isDominantPartyAction ? player.dominantPartyActionUsedCount === 0 : player.turmoilPolicyActionUsed === false;
+    return player.canAfford(10) && hasActionsRemaining;
   }
 
-  action(player: Player) {
+  action(player: Player, isDominantPartyAction: boolean = false) {
     const game = player.game;
 
     game.log('${0} used Turmoil Transhumans action', (b) => b.player(player));
     game.defer(new SelectHowToPayDeferred(player, 10, {title: 'Select how to pay for action'}));
     game.defer(new DeferredAction(player, () => {
-      player.turmoilPolicyActionUsed = true;
+      MarsCoalition.handleSingleUsePolicyLogic(player, isDominantPartyAction);
       return undefined;
     }));
 
     game.defer(new PlayProjectCard(player));
     game.defer(new DeferredAction(player, () => {
-      player.turmoilPolicyActionUsed = false;
+      if (isDominantPartyAction) {
+        player.dominantPartyActionUsedCount = 0;
+      } else {
+        player.turmoilPolicyActionUsed = false;
+      }
       return undefined;
     }));
 

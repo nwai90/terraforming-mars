@@ -9,6 +9,7 @@ import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferr
 import {Player} from '../../Player';
 import {Policy} from '../Policy';
 import {TurmoilPolicy} from '../TurmoilPolicy';
+import {MarsCoalition} from '../../cards/community/corporations/MarsCoalition';
 
 export class Scientists extends Party implements IParty {
   name = PartyName.SCIENTISTS;
@@ -54,11 +55,12 @@ class ScientistsPolicy01 implements Policy {
   id = TurmoilPolicy.SCIENTISTS_DEFAULT_POLICY;
   description: string = 'Pay 10 M€ to draw 3 cards (Turmoil Scientists)';
 
-  canAct(player: Player) {
-    return player.canAfford(10) && player.turmoilPolicyActionUsed === false;
+  canAct(player: Player, isDominantPartyAction: boolean = false) {
+    const hasActionsRemaining = isDominantPartyAction ? player.dominantPartyActionUsedCount === 0 : player.turmoilPolicyActionUsed === false;
+    return player.canAfford(10) && hasActionsRemaining;
   }
 
-  action(player: Player) {
+  action(player: Player, isDominantPartyAction: boolean = false) {
     const game = player.game;
     game.log('${0} used Turmoil Scientists action', (b) => b.player(player));
     game.defer(new SelectHowToPayDeferred(
@@ -68,7 +70,7 @@ class ScientistsPolicy01 implements Policy {
         title: 'Select how to pay for Turmoil Scientists action',
         afterPay: () => {
           player.drawCard(3);
-          player.turmoilPolicyActionUsed = true;
+          MarsCoalition.handleSingleUsePolicyLogic(player, isDominantPartyAction);
         },
       },
     ));

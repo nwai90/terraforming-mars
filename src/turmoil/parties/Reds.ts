@@ -13,6 +13,7 @@ import {RemoveOceanTile} from '../../deferredActions/RemoveOceanTile';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {TurmoilPolicy} from '../TurmoilPolicy';
+import {MarsCoalition} from '../../cards/community/corporations/MarsCoalition';
 
 export class Reds extends Party implements IParty {
   name = PartyName.REDS;
@@ -118,7 +119,7 @@ class RedsPolicy03 implements Policy {
   description: string = 'Pay 4 M€ to reduce a non-maxed global parameter 1 step (do not gain any track bonuses)';
   isDefault = false;
 
-  canAct(player: Player) {
+  canAct(player: Player, isDominantPartyAction: boolean = false) {
     const game = player.game;
     if (game.marsIsTerraformed()) return false;
 
@@ -131,13 +132,14 @@ class RedsPolicy03 implements Policy {
       return false;
     }
 
-    return player.canAfford(4) && player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;
+    const hasActionsRemaining = isDominantPartyAction ? player.dominantPartyActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES : player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;
+    return player.canAfford(4) && hasActionsRemaining;
   }
 
-  action(player: Player) {
+  action(player: Player, isDominantPartyAction: boolean = false) {
     const game = player.game;
     game.log('${0} used Turmoil Reds action', (b) => b.player(player));
-    player.politicalAgendasActionUsedCount += 1;
+    MarsCoalition.handleTripleUsePolicyLogic(player, isDominantPartyAction);
 
     game.defer(new SelectHowToPayDeferred(
       player,

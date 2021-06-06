@@ -20,6 +20,7 @@ import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferr
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../constants';
 import {TurmoilPolicy} from '../TurmoilPolicy';
+import {MarsCoalition} from '../../cards/community/corporations/MarsCoalition';
 
 export class Greens extends Party implements IParty {
   name = PartyName.GREENS;
@@ -102,14 +103,15 @@ class GreensPolicy04 implements Policy {
   description: string = 'Spend 5 M€ to gain 3 plants or add 2 microbes to any card (Turmoil Greens)';
   isDefault = false;
 
-  canAct(player: Player) {
-    return player.canAfford(5) && player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;
+  canAct(player: Player, isDominantPartyAction: boolean = false) {
+    const hasActionsRemaining = isDominantPartyAction ? player.dominantPartyActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES : player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;
+    return player.canAfford(5) && hasActionsRemaining;
   }
 
-  action(player: Player) {
+  action(player: Player, isDominantPartyAction: boolean = false) {
     const game = player.game;
     game.log('${0} used Turmoil Greens action', (b) => b.player(player));
-    player.politicalAgendasActionUsedCount += 1;
+    MarsCoalition.handleTripleUsePolicyLogic(player, isDominantPartyAction);
 
     game.defer(new SelectHowToPayDeferred(
       player,

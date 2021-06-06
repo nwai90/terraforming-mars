@@ -31,6 +31,7 @@ import {Resources} from '../../../Resources';
 import {SendDelegateToArea} from '../../../deferredActions/SendDelegateToArea';
 import {Size} from '../../render/Size';
 import {Game} from '../../../Game';
+import {IParty} from '../../../turmoil/parties/IParty';
 
 export class MarsCoalition extends Card implements CorporationCard {
   constructor() {
@@ -185,12 +186,12 @@ export class MarsCoalition extends Card implements CorporationCard {
   }
 
   public static addPartyActionToActionsList(player: Player, policy: any, options: PlayerInput[], title: string = 'Pay'): void {
-    if (policy.canAct(player)) {
+    if (policy.canAct(player, true)) {
       options.push(
         new SelectOption(
           policy.description,
           title,
-          () => policy.action(player),
+          () => policy.action(player, true),
         ),
       );
     }
@@ -216,9 +217,18 @@ export class MarsCoalition extends Card implements CorporationCard {
     }
   }
 
-  public static applyDominantPartyPolicy(game: Game): void {
+  public static applyDominantPartyPolicy(game: Game, previousDominantParty: IParty): void {
     const marsCoalitionPlayer = game.getPlayers().find((player) => player.isCorporation(CardName.MARS_COALITION));
     if (marsCoalitionPlayer === undefined) return;
+
+    // Reset count only if the dominant party switched
+    const turmoil = game.turmoil as Turmoil;
+    const currentDominantParty = turmoil.dominantParty as IParty;
+    if (previousDominantParty.name !== currentDominantParty.name) marsCoalitionPlayer.dominantPartyActionUsedCount = 0;
+
+    const currentRulingParty = turmoil.rulingParty as IParty;
+    const staticAgendas = turmoil.politicalAgendasData.staticAgendas as Map<PartyName, Agenda>;
+    const currentRulingPolicy = staticAgendas.get(currentRulingParty.name)!.policyId;
 
     const dominantPartyPolicy = MarsCoalition.getDominantPartyPolicyId(marsCoalitionPlayer);
 
@@ -231,9 +241,25 @@ export class MarsCoalition extends Card implements CorporationCard {
         break;
       default:
         // Reset properties whenever dominant party changes during the generation
-        marsCoalitionPlayer.hasTurmoilScienceTagBonus = false;
-        marsCoalitionPlayer.hasTranshumansColonyTradeOffset = false;
+        if (currentRulingPolicy !== TurmoilPolicy.SCIENTISTS_POLICY_4) marsCoalitionPlayer.hasTurmoilScienceTagBonus = false;
+        if (currentRulingPolicy !== TurmoilPolicy.TRANSHUMANS_POLICY_4) marsCoalitionPlayer.hasTranshumansColonyTradeOffset = false;
         break;
+    }
+  }
+
+  public static handleSingleUsePolicyLogic(player: Player, isDominantPartyAction: boolean) {
+    if (isDominantPartyAction) {
+      player.dominantPartyActionUsedCount += 1;
+    } else {
+      player.turmoilPolicyActionUsed = true;
+    }
+  }
+
+  public static handleTripleUsePolicyLogic(player: Player, isDominantPartyAction: boolean) {
+    if (isDominantPartyAction) {
+      player.dominantPartyActionUsedCount += 1;
+    } else {
+      player.politicalAgendasActionUsedCount += 1;
     }
   }
 }

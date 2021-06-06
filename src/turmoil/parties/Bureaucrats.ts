@@ -13,6 +13,7 @@ import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {LandClaim} from '../../cards/base/LandClaim';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
+import {MarsCoalition} from '../../cards/community/corporations/MarsCoalition';
 
 export class Bureaucrats extends Party implements IParty {
   name = PartyName.BUREAUCRATS;
@@ -58,19 +59,21 @@ class BureaucratsPolicy01 implements Policy {
   id = TurmoilPolicy.BUREAUCRATS_DEFAULT_POLICY;
   description: string = 'Pay 3 M€ to send a delegate from your reserve into any party (Turmoil Bureaucrats)';
 
-  canAct(player: Player) {
+  canAct(player: Player, isDominantPartyAction: boolean = false) {
     const turmoil: Turmoil = player.game.turmoil as Turmoil;
     const hasDelegateInReserve = turmoil.getDelegatesInReserve(player.id) >= 1;
+    const hasActionsRemaining = isDominantPartyAction ? player.dominantPartyActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES : player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;
 
-    return player.canAfford(3) && hasDelegateInReserve && player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;
+    return player.canAfford(3) && hasDelegateInReserve && hasActionsRemaining;
   }
 
-  action(player: Player) {
+  action(player: Player, isDominantPartyAction: boolean = false) {
     const game = player.game;
     game.log('${0} used Turmoil Bureaucrats action', (b) => b.player(player));
     game.defer(new SendDelegateToArea(player, 'Select where to send delegate', {source: 'reserve'}));
     game.defer(new SelectHowToPayDeferred(player, 3, {title: 'Select how to pay for action'}));
-    player.politicalAgendasActionUsedCount += 1;
+
+    MarsCoalition.handleTripleUsePolicyLogic(player, isDominantPartyAction);
 
     return undefined;
   }
@@ -93,17 +96,18 @@ class BureaucratsPolicy03 implements Policy {
   description: string = 'Pay 3 M€ to place your player marker on a non-reserved area (Turmoil Bureaucrats)';
   isDefault = false;
 
-  canAct(player: Player) {
-    return player.canAfford(3) && player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;
+  canAct(player: Player, isDominantPartyAction: boolean = false) {
+    const hasActionsRemaining = isDominantPartyAction ? player.dominantPartyActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES : player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;
+    return player.canAfford(3) && hasActionsRemaining;
   }
 
-  action(player: Player) {
+  action(player: Player, isDominantPartyAction: boolean = false) {
     const game = player.game;
 
     game.log('${0} used Turmoil Bureaucrats action', (b) => b.player(player));
     game.defer(new SelectHowToPayDeferred(player, 3, {title: 'Select how to pay for action'}));
     game.defer(new DeferredAction(player, () => LandClaim.selectSpaceForClaim(player)));
-    player.politicalAgendasActionUsedCount += 1;
+    MarsCoalition.handleTripleUsePolicyLogic(player, isDominantPartyAction);
 
     return undefined;
   }

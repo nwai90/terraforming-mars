@@ -248,6 +248,7 @@ describe('Player', function() {
       colonyVictoryPoints: 104,
       turmoilPolicyActionUsed: false,
       politicalAgendasActionUsedCount: 0,
+      dominantPartyActionUsedCount: 0,
       hasTurmoilScienceTagBonus: false,
       hasBureaucratsColonyTradePenalty: false,
       hasTranshumansColonyTradeOffset: false,

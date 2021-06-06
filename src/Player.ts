@@ -152,6 +152,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   // Turmoil
   public turmoilPolicyActionUsed: boolean = false;
   public politicalAgendasActionUsedCount: number = 0;
+  public dominantPartyActionUsedCount: number = 0; // Mars Coalition
   public victoryPointsBreakdown = new VictoryPointsBreakdown();
 
   public oceanBonus: number = constants.OCEAN_BONUS;
@@ -1064,6 +1065,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
     this.turmoilPolicyActionUsed = false;
     this.politicalAgendasActionUsedCount = 0;
+    this.dominantPartyActionUsedCount = 0;
     this.megaCredits += this.megaCreditProduction + this.terraformRating;
     this.heat += this.energy;
     this.heat += this.heatProduction;
@@ -2250,6 +2252,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       // Turmoil
       turmoilPolicyActionUsed: this.turmoilPolicyActionUsed,
       politicalAgendasActionUsedCount: this.politicalAgendasActionUsedCount,
+      dominantPartyActionUsedCount: this.dominantPartyActionUsedCount,
       hasTurmoilScienceTagBonus: this.hasTurmoilScienceTagBonus,
       oceanBonus: this.oceanBonus,
       // Custom cards
@@ -2324,6 +2327,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     player.tradesThisGeneration = d.tradesThisTurn;
     player.turmoilPolicyActionUsed = d.turmoilPolicyActionUsed;
     player.politicalAgendasActionUsedCount = d.politicalAgendasActionUsedCount;
+    player.dominantPartyActionUsedCount = d.dominantPartyActionUsedCount;
 
     player.lastCardPlayed = d.lastCardPlayed !== undefined ?
       cardFinder.getProjectCardByName(d.lastCardPlayed) :
