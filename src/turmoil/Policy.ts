@@ -12,7 +12,7 @@ export interface Policy {
   isDefault: boolean;
   onTilePlaced?: (player: Player, space: ISpace) => void;
   onCardPlayed?: (player: Player, card: IProjectCard) => void;
-  action?: (player: Player) => OrOptions | undefined;
-  canAct?: (player: Player) => boolean;
+  action?: (player: Player, isDominantPartyAction: boolean) => OrOptions | undefined;
+  canAct?: (player: Player, isDominantPartyAction: boolean) => boolean;
   apply?: (game: Game) => void;
 }

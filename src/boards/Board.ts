@@ -222,7 +222,7 @@ export abstract class Board {
   }
 
   public canPlaceTile(space: ISpace): boolean {
-    return space.tile === undefined && space.spaceType === SpaceType.LAND && space.bonus.includes(SpaceBonus.RESTRICTED) === false;;
+    return space.tile === undefined && space.spaceType === SpaceType.LAND && space.bonus.includes(SpaceBonus.RESTRICTED) === false;
   }
 
   public static isCitySpace(space: ISpace): boolean {

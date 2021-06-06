@@ -1,5 +1,5 @@
 import * as constants from './constants';
-import {DEFAULT_FLOATERS_VALUE, DEFAULT_MICROBES_VALUE, ENERGY_TRADE_COST, MAX_FLEET_SIZE, MC_TRADE_COST, MILESTONE_COST, REDS_RULING_POLICY_COST, TITANIUM_TRADE_COST} from './constants';
+import {DEFAULT_FLOATERS_VALUE, DEFAULT_MICROBES_VALUE, ENERGY_TRADE_COST, MAX_FLEET_SIZE, MC_TRADE_COST, MILESTONE_COST, POLITICAL_AGENDAS_MAX_ACTION_USES, REDS_RULING_POLICY_COST, TITANIUM_TRADE_COST} from './constants';
 import {AndOptions} from './inputs/AndOptions';
 import {Aridor} from './cards/colonies/Aridor';
 import {Board} from './boards/Board';
@@ -151,6 +151,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   // Turmoil
   public turmoilPolicyActionUsed: boolean = false;
   public politicalAgendasActionUsedCount: number = 0;
+  public dominantPartyActionUsedCount: number = 0; // Mars Coalition
   public victoryPointsBreakdown = new VictoryPointsBreakdown();
 
   public oceanBonus: number = constants.OCEAN_BONUS;
@@ -1063,6 +1064,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
     this.turmoilPolicyActionUsed = false;
     this.politicalAgendasActionUsedCount = 0;
+    this.dominantPartyActionUsedCount = 0;
     this.megaCredits += this.megaCreditProduction + this.terraformRating;
     this.heat += this.energy;
     this.heat += this.heatProduction;
@@ -2248,6 +2250,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       // Turmoil
       turmoilPolicyActionUsed: this.turmoilPolicyActionUsed,
       politicalAgendasActionUsedCount: this.politicalAgendasActionUsedCount,
+      dominantPartyActionUsedCount: this.dominantPartyActionUsedCount,
       hasTurmoilScienceTagBonus: this.hasTurmoilScienceTagBonus,
       oceanBonus: this.oceanBonus,
       // Custom cards
@@ -2322,6 +2325,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     player.tradesThisGeneration = d.tradesThisTurn;
     player.turmoilPolicyActionUsed = d.turmoilPolicyActionUsed;
     player.politicalAgendasActionUsedCount = d.politicalAgendasActionUsedCount;
+    player.dominantPartyActionUsedCount = d.dominantPartyActionUsedCount;
 
     player.lastCardPlayed = d.lastCardPlayed !== undefined ?
       cardFinder.getProjectCardByName(d.lastCardPlayed) :
@@ -2429,5 +2433,15 @@ export class Player implements ISerializable<SerializedPlayer> {
     });
 
     return colonyTilesAlreadyBuiltOn < this.game.colonies.length;
+  }
+
+  public canUseSingleTurmoilAction(isDominantPartyAction: boolean): boolean {
+    if (isDominantPartyAction) return this.dominantPartyActionUsedCount === 0;
+    return this.turmoilPolicyActionUsed === false;
+  }
+
+  public canUseTripleTurmoilAction(isDominantPartyAction: boolean): boolean {
+    if (isDominantPartyAction) return this.dominantPartyActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;
+    return this.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;
   }
 }

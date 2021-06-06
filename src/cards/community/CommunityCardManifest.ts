@@ -34,6 +34,7 @@ import {LabourUnion} from './corporations/LabourUnion';
 import {UnitedNationsMissionOne} from './corporations/UnitedNationsMissionOne';
 import {AbandonedSteelForge} from './preludes/AbandonedSteelForge';
 import {PerseveranceLanding} from './PerseveranceLanding';
+import {MarsCoalition} from './corporations/MarsCoalition';
 
 export const COMMUNITY_CARD_MANIFEST = new CardManifest({
   module: GameModule.Community,
@@ -53,6 +54,7 @@ export const COMMUNITY_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.ARISTARCHUS, Factory: Aristarchus},
     {cardName: CardName.LABOUR_UNION, Factory: LabourUnion},
     {cardName: CardName.UNITED_NATIONS_MISSION_ONE, Factory: UnitedNationsMissionOne},
+    {cardName: CardName.MARS_COALITION, Factory: MarsCoalition},
   ],
   preludeCards: [
     {cardName: CardName.RESEARCH_GRANT, Factory: ResearchGrant},

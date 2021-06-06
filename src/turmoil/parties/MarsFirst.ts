@@ -12,8 +12,8 @@ import {Policy} from '../Policy';
 import {Phase} from '../../Phase';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {IProjectCard} from '../../cards/IProjectCard';
-import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../constants';
 import {TurmoilPolicy} from '../TurmoilPolicy';
+import {MarsCoalition} from '../../cards/community/corporations/MarsCoalition';
 
 export class MarsFirst extends Party implements IParty {
   name = PartyName.MARS;
@@ -89,14 +89,14 @@ class MarsFirstPolicy04 implements Policy {
   description: string = 'Spend 4 M€ to draw a Building card (Turmoil Mars First)';
   isDefault = false;
 
-  canAct(player: Player) {
-    return player.canAfford(4) && player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;
+  canAct(player: Player, isDominantPartyAction: boolean = false) {
+    return player.canAfford(4) && player.canUseTripleTurmoilAction(isDominantPartyAction);
   }
 
-  action(player: Player) {
+  action(player: Player, isDominantPartyAction: boolean = false) {
     const game = player.game;
     game.log('${0} used Turmoil Mars First action', (b) => b.player(player));
-    player.politicalAgendasActionUsedCount += 1;
+    MarsCoalition.handleTripleUsePolicyLogic(player, isDominantPartyAction);
 
     game.defer(new SelectHowToPayDeferred(
       player,

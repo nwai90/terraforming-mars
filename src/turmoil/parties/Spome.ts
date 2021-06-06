@@ -10,6 +10,7 @@ import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferr
 import {TurmoilPolicy} from '../TurmoilPolicy';
 import {DiscardCards} from '../../deferredActions/DiscardCards';
 import {Tags} from '../../cards/Tags';
+import {MarsCoalition} from '../../cards/community/corporations/MarsCoalition';
 
 export class Spome extends Party implements IParty {
   name = PartyName.SPOME;
@@ -65,14 +66,16 @@ class SpomePolicy02 implements Policy {
   description: string = 'Pay 10 M€ to gain a trade fleet (Turmoil Spome)';
   isDefault = false;
 
-  canAct(player: Player) {
-    return player.megaCredits >= 10 && player.turmoilPolicyActionUsed === false;
+  canAct(player: Player, isDominantPartyAction: boolean = false) {
+    return player.megaCredits >= 10 && player.canUseSingleTurmoilAction(isDominantPartyAction);
   }
 
-  action(player: Player) {
+  action(player: Player, isDominantPartyAction: boolean = false) {
     player.game.defer(new SelectHowToPayDeferred(player, 10, {title: 'Select how to pay for action'}));
     player.increaseFleetSize();
-    player.turmoilPolicyActionUsed = true;
+
+    MarsCoalition.handleSingleUsePolicyLogic(player, isDominantPartyAction);
+
     player.game.log('${0} used Turmoil Spome action', (b) => b.player(player));
     return undefined;
   }
@@ -95,14 +98,15 @@ class SpomePolicy04 implements Policy {
   description: string = 'Pay 10 M€ to draw 2 planetary cards (Turmoil Spome)';
   isDefault = false;
 
-  canAct(player: Player) {
-    return player.canAfford(10) && player.turmoilPolicyActionUsed === false;
+  canAct(player: Player, isDominantPartyAction: boolean = false) {
+    return player.canAfford(10) && player.canUseSingleTurmoilAction(isDominantPartyAction);
   }
 
-  action(player: Player) {
+  action(player: Player, isDominantPartyAction: boolean = false) {
     const game = player.game;
     game.log('${0} used Turmoil Spome action', (b) => b.player(player));
-    player.turmoilPolicyActionUsed = true;
+
+    MarsCoalition.handleSingleUsePolicyLogic(player, isDominantPartyAction);
 
     game.defer(new SelectHowToPayDeferred(
       player,

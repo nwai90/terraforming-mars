@@ -24,6 +24,7 @@ import {Centrists} from './parties/Centrists';
 import {TurmoilHandler} from './TurmoilHandler';
 import {SerializedGlobalEvent} from './globalEvents/SerializedGlobalEventDealer';
 import {DeferredAction} from '../deferredActions/DeferredAction';
+import {MarsCoalition} from '../cards/community/corporations/MarsCoalition';
 
 export type NeutralPlayer = 'NEUTRAL';
 
@@ -181,7 +182,9 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       partyName: PartyName,
       game: Game,
       source: 'lobby' | 'reserve' = 'lobby'): void {
+      const previousDominantParty = game.turmoil?.dominantParty as IParty;
       const party = this.getPartyByName(partyName);
+
       if (party) {
         if (playerId !== 'NEUTRAL' && this.lobby.has(playerId) && source === 'lobby') {
           this.lobby.delete(playerId);
@@ -193,6 +196,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
         }
         party.sendDelegate(playerId, game);
         this.checkDominantParty(party);
+        MarsCoalition.applyDominantPartyPolicy(game, previousDominantParty);
       } else {
         throw 'Party not found';
       }
@@ -200,11 +204,14 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
 
     // Use to remove a delegate from a specific party
     public removeDelegateFromParty(playerId: PlayerId | NeutralPlayer, partyName: PartyName, game: Game): void {
+      const previousDominantParty = game.turmoil?.dominantParty as IParty;
       const party = this.getPartyByName(partyName);
+
       if (party) {
         this.delegateReserve.push(playerId);
         party.removeDelegate(playerId, game);
         this.checkDominantParty(party);
+        MarsCoalition.applyDominantPartyPolicy(game, previousDominantParty);
       } else {
         throw 'Party not found';
       }

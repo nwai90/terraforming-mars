@@ -484,6 +484,7 @@ export enum CardName {
     UNITED_NATIONS_MISSION_ONE = 'United Nations Mission One',
     PLAYWRIGHTS = 'Playwrights',
     PROJECT_WORKSHOP = 'Project Workshop',
+    MARS_COALITION = 'Mars Coalition',
 
     // Community preludes
     VALUABLE_GASES = 'Valuable Gases',

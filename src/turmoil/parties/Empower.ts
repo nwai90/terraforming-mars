@@ -10,6 +10,7 @@ import {TurmoilPolicy} from '../TurmoilPolicy';
 import {Tags} from '../../cards/Tags';
 import {SelectAmount} from '../../inputs/SelectAmount';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
+import {MarsCoalition} from '../../cards/community/corporations/MarsCoalition';
 
 export class Empower extends Party implements IParty {
   name = PartyName.EMPOWER;
@@ -55,11 +56,11 @@ class EmpowerPolicy01 implements Policy {
   id = TurmoilPolicy.EMPOWER_DEFAULT_POLICY;
   description: string = 'Spend X M€ to gain X energy (Turmoil Empower)';
 
-  canAct(player: Player) {
-    return player.canAfford(1) && player.turmoilPolicyActionUsed === false;
+  canAct(player: Player, isDominantPartyAction: boolean = false) {
+    return player.canAfford(1) && player.canUseSingleTurmoilAction(isDominantPartyAction);
   }
 
-  action(player: Player) {
+  action(player: Player, isDominantPartyAction: boolean = false) {
     const availableMC = player.spendableMegacredits();
 
     player.game.defer(
@@ -80,7 +81,8 @@ class EmpowerPolicy01 implements Policy {
       ),
     );
 
-    player.turmoilPolicyActionUsed = true;
+    MarsCoalition.handleSingleUsePolicyLogic(player, isDominantPartyAction);
+
     return undefined;
   }
 }

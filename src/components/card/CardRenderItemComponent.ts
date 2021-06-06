@@ -240,6 +240,11 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
         classes.push('card-plate');
       }
 
+      // grey background
+      if (this.item.isGreyPlate) {
+        classes.push('card-plate-grey');
+      }
+
       // size and text
       if (this.item.text !== undefined) {
         classes.push(`card-text-size--${this.item.size}`);
@@ -290,7 +295,7 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
         classes.push(`card-tag-${this.item.secondaryTag}`);
         result += '<div class="' + generateClassString(classes) + '"></div>';
       }
-      if (this.item.isPlate || this.item.text !== undefined) {
+      if (this.item.isPlate || this.item.isGreyPlate || this.item.text !== undefined) {
         result += this.item.text || 'n/a';
       }
       if (this.item.type === CardRenderItemType.NO_TAGS || this.item.type === CardRenderItemType.MULTIPLIER_WHITE) {

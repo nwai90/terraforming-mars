@@ -11,6 +11,7 @@ import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {ColonyName} from '../../colonies/ColonyName';
 import {SelectColony} from '../../inputs/SelectColony';
 import {ColonyModel} from '../../models/ColonyModel';
+import {MarsCoalition} from '../../cards/community/corporations/MarsCoalition';
 
 export class Centrists extends Party implements IParty {
   name = PartyName.CENTRISTS;
@@ -56,14 +57,14 @@ class CentristsPolicy01 implements Policy {
   id = TurmoilPolicy.CENTRISTS_DEFAULT_POLICY;
   description: string = 'Gain 6 M€ (Turmoil Centrists)';
 
-  canAct(player: Player) {
-    return player.turmoilPolicyActionUsed === false;
+  canAct(player: Player, isDominantPartyAction: boolean = false) {
+    return player.canUseSingleTurmoilAction(isDominantPartyAction);
   }
 
-  action(player: Player) {
+  action(player: Player, isDominantPartyAction: boolean = false) {
     player.game.log('${0} used Turmoil Centrists action', (b) => b.player(player));
     player.addResource(Resources.MEGACREDITS, 6, {log: true});
-    player.turmoilPolicyActionUsed = true;
+    MarsCoalition.handleSingleUsePolicyLogic(player, isDominantPartyAction);
 
     return undefined;
   }
@@ -80,15 +81,15 @@ class CentristsPolicy03 implements Policy {
   description: string = 'Trade with any colony tile for free (Turmoil Centrists)';
   isDefault = false;
 
-  canAct(player: Player) {
+  canAct(player: Player, isDominantPartyAction: boolean = false) {
     if (player.game.gameOptions.coloniesExtension === false) return false;
     if (player.getFleetSize() === player.tradesThisGeneration) return false;
 
     const openColonies = player.game.colonies.filter((colony) => colony.isActive && colony.visitor === undefined);
-    return player.turmoilPolicyActionUsed === false && openColonies.length > 0;
+    return openColonies.length > 0 && player.canUseSingleTurmoilAction(isDominantPartyAction);
   }
 
-  action(player: Player) {
+  action(player: Player, isDominantPartyAction: boolean = false) {
     const game = player.game;
     game.log('${0} used Turmoil Centrists action', (b) => b.player(player));
 
@@ -107,7 +108,8 @@ class CentristsPolicy03 implements Policy {
       return undefined;
     })));
 
-    player.turmoilPolicyActionUsed = true;
+    MarsCoalition.handleSingleUsePolicyLogic(player, isDominantPartyAction);
+
     return undefined;
   }
 }

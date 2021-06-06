@@ -39,6 +39,7 @@ export class CardRenderItem {
   public isUppercase?: boolean; // for uppercase text
   public isBold?: boolean; // for bold text
   public isPlate?: boolean; // used to mark plate a.k.a. text with golden background
+  public isGreyPlate?: boolean; // used to mark plate a.k.a. text with grey background
   public size?: Size;
   // adding tag dependency (top right bubble)
   public secondaryTag?: Tags | AltSecondaryTag;

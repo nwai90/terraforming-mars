@@ -592,6 +592,15 @@ class Builder {
     return this;
   }
 
+  public greyPlate(text: string): Builder {
+    const item = new CardRenderItem(CardRenderItemType.PLATE);
+    item.text = text;
+    item.isGreyPlate = true;
+    item.isBold = true;
+    this._addRowItem(item);
+    return this;
+  }
+
   public text(text: string, size: Size = Size.MEDIUM, uppercase: boolean = false, isBold: boolean = true): Builder {
     const item = new CardRenderItem(CardRenderItemType.TEXT);
     item.text = text;

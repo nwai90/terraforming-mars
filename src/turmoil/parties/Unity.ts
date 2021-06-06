@@ -8,7 +8,6 @@ import {Bonus} from '../Bonus';
 import {Policy} from '../Policy';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {Player} from '../../Player';
-import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../constants';
 import {ICard} from '../../cards/ICard';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {OrOptions} from '../../inputs/OrOptions';
@@ -16,6 +15,7 @@ import {SelectCard} from '../../inputs/SelectCard';
 import {SelectOption} from '../../inputs/SelectOption';
 import {ResourceType} from '../../ResourceType';
 import {TurmoilPolicy} from '../TurmoilPolicy';
+import {MarsCoalition} from '../../cards/community/corporations/MarsCoalition';
 
 export class Unity extends Party implements IParty {
   name = PartyName.UNITY;
@@ -68,14 +68,14 @@ class UnityPolicy02 implements Policy {
   description: string = 'Spend 4 M€ to gain 2 titanium or add 2 floaters to any card (Turmoil Unity)';
   isDefault = false;
 
-  canAct(player: Player) {
-    return player.canAfford(4) && player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;
+  canAct(player: Player, isDominantPartyAction: boolean = false) {
+    return player.canAfford(4) && player.canUseTripleTurmoilAction(isDominantPartyAction);
   }
 
-  action(player: Player) {
+  action(player: Player, isDominantPartyAction: boolean = false) {
     const game = player.game;
     game.log('${0} used Turmoil Unity action', (b) => b.player(player));
-    player.politicalAgendasActionUsedCount += 1;
+    MarsCoalition.handleTripleUsePolicyLogic(player, isDominantPartyAction);
 
     game.defer(new SelectHowToPayDeferred(
       player,
@@ -128,14 +128,14 @@ class UnityPolicy03 implements Policy {
   description: string = 'Spend 4 M€ to draw a Space card (Turmoil Unity)';
   isDefault = false;
 
-  canAct(player: Player) {
-    return player.canAfford(4) && player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;
+  canAct(player: Player, isDominantPartyAction: boolean = false) {
+    return player.canAfford(4) && player.canUseTripleTurmoilAction(isDominantPartyAction);
   }
 
-  action(player: Player) {
+  action(player: Player, isDominantPartyAction: boolean = false) {
     const game = player.game;
     game.log('${0} used Turmoil Unity action', (b) => b.player(player));
-    player.politicalAgendasActionUsedCount += 1;
+    MarsCoalition.handleTripleUsePolicyLogic(player, isDominantPartyAction);
 
     game.defer(new SelectHowToPayDeferred(
       player,

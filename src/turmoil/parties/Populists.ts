@@ -8,6 +8,7 @@ import {Policy} from '../Policy';
 import {Player} from '../../Player';
 import {TurmoilPolicy} from '../TurmoilPolicy';
 import {IProjectCard} from '../../cards/IProjectCard';
+import {MarsCoalition} from '../../cards/community/corporations/MarsCoalition';
 
 export class Populists extends Party implements IParty {
   name = PartyName.POPULISTS;
@@ -71,15 +72,16 @@ class PopulistsPolicy03 implements Policy {
   description: string = 'Draw 2 cards if your Terraform Rating was raised this generation (Turmoil Populists)';
   isDefault = false;
 
-  canAct(player: Player) {
-    return player.hasIncreasedTerraformRatingThisGeneration && player.turmoilPolicyActionUsed === false;
+  canAct(player: Player, isDominantPartyAction: boolean = false) {
+    return player.hasIncreasedTerraformRatingThisGeneration && player.canUseSingleTurmoilAction(isDominantPartyAction);
   }
 
-  action(player: Player) {
+  action(player: Player, isDominantPartyAction: boolean = false) {
     const game = player.game;
     game.log('${0} used Turmoil Populists action', (b) => b.player(player));
     player.drawCard(2);
-    player.turmoilPolicyActionUsed = true;
+
+    MarsCoalition.handleSingleUsePolicyLogic(player, isDominantPartyAction);
 
     return undefined;
   }
