@@ -1436,7 +1436,7 @@ export class Game implements ISerializable<SerializedGame> {
         AresHandler.earnAdjacencyBonuses(aresData, player, space);
       });
 
-      TurmoilHandler.resolveTilePlacementBonuses(player, spaceType);
+      TurmoilHandler.resolveTilePlacementBonuses(player, space);
 
       if (arcadianCommunityBonus) {
         this.defer(new GainResources(player, Resources.MEGACREDITS, {count: 3}));

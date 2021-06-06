@@ -1,3 +1,4 @@
+import {ISpace} from '../boards/ISpace';
 import {MarsCoalition} from '../cards/community/corporations/MarsCoalition';
 import {IProjectCard} from '../cards/IProjectCard';
 import {SOCIETY_ADDITIONAL_CARD_COST} from '../constants';
@@ -8,7 +9,6 @@ import {SelectOption} from '../inputs/SelectOption';
 import {Player} from '../Player';
 import {PlayerInput} from '../PlayerInput';
 import {Resources} from '../Resources';
-import {SpaceType} from '../SpaceType';
 import {GlobalEventDealer} from './globalEvents/GlobalEventDealer';
 import {BUREAUCRATS_DEFAULT_POLICY} from './parties/Bureaucrats';
 import {CENTRISTS_DEFAULT_POLICY, CENTRISTS_POLICY_3} from './parties/Centrists';
@@ -166,8 +166,8 @@ export class TurmoilHandler {
     }
   }
 
-  public static resolveTilePlacementBonuses(player: Player, spaceType: SpaceType): void {
-    PartyHooks.applyMarsFirstRulingPolicy(player, spaceType);
+  public static resolveTilePlacementBonuses(player: Player, space: ISpace): void {
+    PartyHooks.applyMarsFirstRulingPolicy(player, space);
 
     // PoliticalAgendas Greens P2 hook
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.GREENS, TurmoilPolicy.GREENS_POLICY_2)) {
