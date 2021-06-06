@@ -2,7 +2,7 @@ import * as http from 'http';
 import {Handler} from './Handler';
 import {IContext} from './IHandler';
 import {Database} from '../database/Database';
-import {BoardName} from '../boards/BoardName';
+import {BoardName, BoardRandomOption} from '../boards/BoardName';
 import {Cloner} from '../database/Cloner';
 import {GameLoader} from '../database/GameLoader';
 import {Game} from '../Game';
@@ -56,11 +56,11 @@ export class GameHandler extends Handler {
           }
         }
 
-        if (gameReq.board === 'random') {
-          let boards = Object.values(BoardName);
-          const communityBoards = [BoardName.AMAZONIS, BoardName.ARABIA_TERRA, BoardName.VASTITAS_BOREALIS, BoardName.TERRA_CIMMERIA];
-          if (!gameReq.communityCardsOption) boards = boards.filter((b) => !communityBoards.includes(b));
-
+        if (gameReq.board === BoardRandomOption.RANDOM_OFFICIAL) {
+          const officialBoards = [BoardName.ORIGINAL, BoardName.HELLAS, BoardName.ELYSIUM];
+          gameReq.board = officialBoards[Math.floor(Math.random() * officialBoards.length)];
+        } else if (gameReq.board === BoardRandomOption.RANDOM_ALL) {
+          const boards = Object.values(BoardName);
           gameReq.board = boards[Math.floor(Math.random() * boards.length)];
         }
 

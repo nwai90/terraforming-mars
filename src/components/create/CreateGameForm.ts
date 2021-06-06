@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import {Color} from '../../Color';
-import {BoardName} from '../../boards/BoardName';
+import {BoardName, BoardRandomOption} from '../../boards/BoardName';
 import {CardName} from '../../CardName';
 import {CorporationsFilter} from './CorporationsFilter';
 import {translateTextWithParams} from '../../directives/i18n';
@@ -41,8 +41,8 @@ export interface CreateGameModel {
     showColoniesList: boolean;
     showCardsBlackList: boolean;
     isSoloModePage: boolean;
-    board: BoardName | 'random';
-    boards: Array<BoardName | 'random'>;
+    board: BoardName | BoardRandomOption;
+    boards: Array<BoardName| BoardRandomOption>;
     seed: number;
     solarPhaseOption: boolean;
     silverCubeVariant: boolean;
@@ -118,11 +118,12 @@ export const CreateGameForm = Vue.component('create-game-form', {
         BoardName.ORIGINAL,
         BoardName.HELLAS,
         BoardName.ELYSIUM,
+        BoardRandomOption.RANDOM_OFFICIAL,
         BoardName.AMAZONIS,
         BoardName.ARABIA_TERRA,
         BoardName.VASTITAS_BOREALIS,
         BoardName.TERRA_CIMMERIA,
-        'random',
+        BoardRandomOption.RANDOM_ALL,
       ],
       seed: Math.random(),
       seededGame: false,

@@ -37,6 +37,8 @@ export const GameSetupDetail = Vue.component('game-setup-detail', {
         return 'game-config board-arabia_terra map';
       case BoardName.VASTITAS_BOREALIS:
         return 'game-config board-vastitas_borealis map';
+      case BoardName.TERRA_CIMMERIA:
+        return 'game-config board-terra_cimmeria map';
       default:
         return 'game-config board-other map';
       }

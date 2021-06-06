@@ -7,3 +7,8 @@ export enum BoardName {
     VASTITAS_BOREALIS = 'v. borealis',
     TERRA_CIMMERIA = 't. cimmeria',
 }
+
+export enum BoardRandomOption {
+    RANDOM_OFFICIAL = 'random official',
+    RANDOM_ALL = 'random all',
+}
