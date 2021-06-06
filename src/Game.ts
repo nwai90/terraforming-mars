@@ -1615,7 +1615,7 @@ export class Game implements ISerializable<SerializedGame> {
   public discardForCost(toPlace: TileType) {
     const card = this.dealer.dealCard(this);
     this.dealer.discard(card);
-    this.log('Drew and discarded ${0} to place a ${1}', (b) => b.card(card).number(card.cost).tileType(toPlace));
+    this.log('Drew and discarded ${0} (cost ${1}) to place a ${2}', (b) => b.card(card).number(card.cost).tileType(toPlace));
     return card.cost;
   }
 
