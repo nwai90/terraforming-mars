@@ -58,8 +58,7 @@ class CentristsPolicy01 implements Policy {
   description: string = 'Gain 6 M€ (Turmoil Centrists)';
 
   canAct(player: Player, isDominantPartyAction: boolean = false) {
-    const hasActionsRemaining = isDominantPartyAction ? player.dominantPartyActionUsedCount === 0 : player.turmoilPolicyActionUsed === false;
-    return hasActionsRemaining;
+    return player.canUseSingleTurmoilAction(isDominantPartyAction);
   }
 
   action(player: Player, isDominantPartyAction: boolean = false) {
@@ -87,8 +86,7 @@ class CentristsPolicy03 implements Policy {
     if (player.getFleetSize() === player.tradesThisGeneration) return false;
 
     const openColonies = player.game.colonies.filter((colony) => colony.isActive && colony.visitor === undefined);
-    const hasActionsRemaining = isDominantPartyAction ? player.dominantPartyActionUsedCount === 0 : player.turmoilPolicyActionUsed === false;
-    return hasActionsRemaining && openColonies.length > 0;
+    return openColonies.length > 0 && player.canUseSingleTurmoilAction(isDominantPartyAction);
   }
 
   action(player: Player, isDominantPartyAction: boolean = false) {

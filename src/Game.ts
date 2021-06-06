@@ -73,7 +73,6 @@ import {MilestoneAwardSelector} from './MilestoneAwardSelector';
 import {BoardType} from './boards/BoardType';
 import {Multiset} from './utils/Multiset';
 import {VictoryPointsBreakdown} from './VictoryPointsBreakdown';
-import {MarsCoalition} from './cards/community/corporations/MarsCoalition';
 
 export type GameId = string;
 export type SpectatorId = string;
@@ -1189,7 +1188,6 @@ export class Game implements ISerializable<SerializedGame> {
 
     if (this.phase !== Phase.SOLAR) {
       TurmoilHandler.onGlobalParameterIncrease(player, GlobalParameter.OXYGEN, steps);
-      MarsCoalition.onGlobalParameterIncrease(player, GlobalParameter.OXYGEN, steps);
       player.increaseTerraformRatingSteps(steps);
     }
     if (this.oxygenLevel < 8 && this.oxygenLevel + steps >= 8) {
@@ -1234,7 +1232,6 @@ export class Game implements ISerializable<SerializedGame> {
       }
 
       TurmoilHandler.onGlobalParameterIncrease(player, GlobalParameter.VENUS, steps);
-      MarsCoalition.onGlobalParameterIncrease(player, GlobalParameter.VENUS, steps);
       player.increaseTerraformRatingSteps(steps);
     }
 
@@ -1277,7 +1274,6 @@ export class Game implements ISerializable<SerializedGame> {
       }
 
       TurmoilHandler.onGlobalParameterIncrease(player, GlobalParameter.TEMPERATURE, steps);
-      MarsCoalition.onGlobalParameterIncrease(player, GlobalParameter.TEMPERATURE, steps);
       player.increaseTerraformRatingSteps(steps);
     }
 
@@ -1536,7 +1532,6 @@ export class Game implements ISerializable<SerializedGame> {
     });
     if (this.phase !== Phase.SOLAR) {
       TurmoilHandler.onGlobalParameterIncrease(player, GlobalParameter.OCEANS);
-      MarsCoalition.onGlobalParameterIncrease(player, GlobalParameter.OCEANS);
       player.increaseTerraformRating();
     }
     AresHandler.ifAres(this, (aresData) => {

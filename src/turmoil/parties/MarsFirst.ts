@@ -12,7 +12,6 @@ import {Policy} from '../Policy';
 import {Phase} from '../../Phase';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {IProjectCard} from '../../cards/IProjectCard';
-import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../constants';
 import {TurmoilPolicy} from '../TurmoilPolicy';
 import {MarsCoalition} from '../../cards/community/corporations/MarsCoalition';
 
@@ -91,8 +90,7 @@ class MarsFirstPolicy04 implements Policy {
   isDefault = false;
 
   canAct(player: Player, isDominantPartyAction: boolean = false) {
-    const hasActionsRemaining = isDominantPartyAction ? player.dominantPartyActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES : player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;
-    return player.canAfford(4) && hasActionsRemaining;
+    return player.canAfford(4) && player.canUseTripleTurmoilAction(isDominantPartyAction);
   }
 
   action(player: Player, isDominantPartyAction: boolean = false) {

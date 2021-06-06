@@ -18,7 +18,6 @@ import {ResourceType} from '../../ResourceType';
 import {Phase} from '../../Phase';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
-import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../constants';
 import {TurmoilPolicy} from '../TurmoilPolicy';
 import {MarsCoalition} from '../../cards/community/corporations/MarsCoalition';
 
@@ -104,8 +103,7 @@ class GreensPolicy04 implements Policy {
   isDefault = false;
 
   canAct(player: Player, isDominantPartyAction: boolean = false) {
-    const hasActionsRemaining = isDominantPartyAction ? player.dominantPartyActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES : player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;
-    return player.canAfford(5) && hasActionsRemaining;
+    return player.canAfford(5) && player.canUseTripleTurmoilAction(isDominantPartyAction);
   }
 
   action(player: Player, isDominantPartyAction: boolean = false) {

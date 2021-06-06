@@ -7,7 +7,6 @@ import {Bonus} from '../Bonus';
 import {Policy} from '../Policy';
 import {Player} from '../../Player';
 import {TurmoilPolicy} from '../TurmoilPolicy';
-import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../constants';
 import {Turmoil} from '../Turmoil';
 import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
@@ -61,10 +60,8 @@ class BureaucratsPolicy01 implements Policy {
 
   canAct(player: Player, isDominantPartyAction: boolean = false) {
     const turmoil: Turmoil = player.game.turmoil as Turmoil;
-    const hasDelegateInReserve = turmoil.getDelegatesInReserve(player.id) >= 1;
-    const hasActionsRemaining = isDominantPartyAction ? player.dominantPartyActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES : player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;
-
-    return player.canAfford(3) && hasDelegateInReserve && hasActionsRemaining;
+    const hasDelegateInReserve = turmoil.getDelegatesInReserve(player.id) >= 1;    
+    return player.canAfford(3) && hasDelegateInReserve && player.canUseTripleTurmoilAction(isDominantPartyAction);
   }
 
   action(player: Player, isDominantPartyAction: boolean = false) {
@@ -97,8 +94,7 @@ class BureaucratsPolicy03 implements Policy {
   isDefault = false;
 
   canAct(player: Player, isDominantPartyAction: boolean = false) {
-    const hasActionsRemaining = isDominantPartyAction ? player.dominantPartyActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES : player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;
-    return player.canAfford(3) && hasActionsRemaining;
+    return player.canAfford(3) && player.canUseTripleTurmoilAction(isDominantPartyAction);
   }
 
   action(player: Player, isDominantPartyAction: boolean = false) {

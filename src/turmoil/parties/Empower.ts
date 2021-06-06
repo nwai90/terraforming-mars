@@ -57,8 +57,7 @@ class EmpowerPolicy01 implements Policy {
   description: string = 'Spend X M€ to gain X energy (Turmoil Empower)';
 
   canAct(player: Player, isDominantPartyAction: boolean = false) {
-    const hasActionsRemaining = isDominantPartyAction ? player.dominantPartyActionUsedCount === 0 : player.turmoilPolicyActionUsed === false;
-    return player.canAfford(1) && hasActionsRemaining;
+    return player.canAfford(1) && player.canUseSingleTurmoilAction(isDominantPartyAction);
   }
 
   action(player: Player, isDominantPartyAction: boolean = false) {

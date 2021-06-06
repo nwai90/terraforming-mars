@@ -56,8 +56,7 @@ class ScientistsPolicy01 implements Policy {
   description: string = 'Pay 10 M€ to draw 3 cards (Turmoil Scientists)';
 
   canAct(player: Player, isDominantPartyAction: boolean = false) {
-    const hasActionsRemaining = isDominantPartyAction ? player.dominantPartyActionUsedCount === 0 : player.turmoilPolicyActionUsed === false;
-    return player.canAfford(10) && hasActionsRemaining;
+    return player.canAfford(10) && player.canUseSingleTurmoilAction(isDominantPartyAction);
   }
 
   action(player: Player, isDominantPartyAction: boolean = false) {

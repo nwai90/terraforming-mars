@@ -1,3 +1,4 @@
+import {MarsCoalition} from '../cards/community/corporations/MarsCoalition';
 import {IProjectCard} from '../cards/IProjectCard';
 import {SOCIETY_ADDITIONAL_CARD_COST} from '../constants';
 import {DiscardCards} from '../deferredActions/DiscardCards';
@@ -114,6 +115,9 @@ export class TurmoilHandler {
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.CENTRISTS, TurmoilPolicy.CENTRISTS_POLICY_3)) {
       this.addPartyActionToActionsList(player, CENTRISTS_POLICY_3, options, 'Select');
     }
+
+    // Mars Coalition
+    MarsCoalition.addPlayerAction(player, options);
   }
 
   public static addPartyActionToActionsList(player: Player, policy: any, options: PlayerInput[], title: string = 'Pay'): void {
@@ -215,6 +219,9 @@ export class TurmoilHandler {
         player.addResource(Resources.MEGACREDITS, steps * 2);
       }
     }
+
+    // Mars Coalition hook
+    MarsCoalition.onGlobalParameterIncrease(player, parameter, steps);
   }
 
   public static handleSocietyPayment(player: Player, partyName: PartyName): void {

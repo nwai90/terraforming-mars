@@ -73,8 +73,7 @@ class PopulistsPolicy03 implements Policy {
   isDefault = false;
 
   canAct(player: Player, isDominantPartyAction: boolean = false) {
-    const hasActionsRemaining = isDominantPartyAction ? player.dominantPartyActionUsedCount === 0 : player.turmoilPolicyActionUsed === false;
-    return player.hasIncreasedTerraformRatingThisGeneration && hasActionsRemaining;
+    return player.hasIncreasedTerraformRatingThisGeneration && player.canUseSingleTurmoilAction(isDominantPartyAction);
   }
 
   action(player: Player, isDominantPartyAction: boolean = false) {

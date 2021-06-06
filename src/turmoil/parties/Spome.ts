@@ -67,8 +67,7 @@ class SpomePolicy02 implements Policy {
   isDefault = false;
 
   canAct(player: Player, isDominantPartyAction: boolean = false) {
-    const hasActionsRemaining = isDominantPartyAction ? player.dominantPartyActionUsedCount === 0 : player.turmoilPolicyActionUsed === false;
-    return player.megaCredits >= 10 && hasActionsRemaining;
+    return player.megaCredits >= 10 && player.canUseSingleTurmoilAction(isDominantPartyAction);
   }
 
   action(player: Player, isDominantPartyAction: boolean = false) {
@@ -100,8 +99,7 @@ class SpomePolicy04 implements Policy {
   isDefault = false;
 
   canAct(player: Player, isDominantPartyAction: boolean = false) {
-    const hasActionsRemaining = isDominantPartyAction ? player.dominantPartyActionUsedCount === 0 : player.turmoilPolicyActionUsed === false;
-    return player.canAfford(10) && hasActionsRemaining;
+    return player.canAfford(10) && player.canUseSingleTurmoilAction(isDominantPartyAction);
   }
 
   action(player: Player, isDominantPartyAction: boolean = false) {

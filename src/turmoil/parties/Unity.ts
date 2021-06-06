@@ -8,7 +8,6 @@ import {Bonus} from '../Bonus';
 import {Policy} from '../Policy';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {Player} from '../../Player';
-import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../constants';
 import {ICard} from '../../cards/ICard';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {OrOptions} from '../../inputs/OrOptions';
@@ -70,8 +69,7 @@ class UnityPolicy02 implements Policy {
   isDefault = false;
 
   canAct(player: Player, isDominantPartyAction: boolean = false) {
-    const hasActionsRemaining = isDominantPartyAction ? player.dominantPartyActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES : player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;
-    return player.canAfford(4) && hasActionsRemaining;
+    return player.canAfford(4) && player.canUseTripleTurmoilAction(isDominantPartyAction);
   }
 
   action(player: Player, isDominantPartyAction: boolean = false) {
@@ -131,8 +129,7 @@ class UnityPolicy03 implements Policy {
   isDefault = false;
 
   canAct(player: Player, isDominantPartyAction: boolean = false) {
-    const hasActionsRemaining = isDominantPartyAction ? player.dominantPartyActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES : player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;
-    return player.canAfford(4) && hasActionsRemaining;
+    return player.canAfford(4) && player.canUseTripleTurmoilAction(isDominantPartyAction);
   }
 
   action(player: Player, isDominantPartyAction: boolean = false) {

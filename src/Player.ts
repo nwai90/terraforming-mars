@@ -1,5 +1,5 @@
 import * as constants from './constants';
-import {DEFAULT_FLOATERS_VALUE, DEFAULT_MICROBES_VALUE, ENERGY_TRADE_COST, MAX_FLEET_SIZE, MC_TRADE_COST, MILESTONE_COST, REDS_RULING_POLICY_COST, TITANIUM_TRADE_COST} from './constants';
+import {DEFAULT_FLOATERS_VALUE, DEFAULT_MICROBES_VALUE, ENERGY_TRADE_COST, MAX_FLEET_SIZE, MC_TRADE_COST, MILESTONE_COST, POLITICAL_AGENDAS_MAX_ACTION_USES, REDS_RULING_POLICY_COST, TITANIUM_TRADE_COST} from './constants';
 import {AndOptions} from './inputs/AndOptions';
 import {Aridor} from './cards/colonies/Aridor';
 import {Board} from './boards/Board';
@@ -77,7 +77,6 @@ import {LogHelper} from './LogHelper';
 import {UndoActionOption} from './inputs/UndoActionOption';
 import {LawSuit} from './cards/promo/LawSuit';
 import {CrashSiteCleanup} from './cards/promo/CrashSiteCleanup';
-import {MarsCoalition} from './cards/community/corporations/MarsCoalition';
 
 export type PlayerId = string;
 
@@ -2034,7 +2033,6 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     TurmoilHandler.addPlayerAction(this, action.options);
-    MarsCoalition.addPlayerAction(this, action.options);
 
     if (this.getPlayableActionCards().length > 0) {
       action.options.push(
@@ -2435,5 +2433,15 @@ export class Player implements ISerializable<SerializedPlayer> {
     });
 
     return colonyTilesAlreadyBuiltOn < this.game.colonies.length;
+  }
+
+  public canUseSingleTurmoilAction(isDominantPartyAction: boolean): boolean {
+    if (isDominantPartyAction) return this.dominantPartyActionUsedCount === 0;
+    return this.turmoilPolicyActionUsed === false;
+  }
+
+  public canUseTripleTurmoilAction(isDominantPartyAction: boolean): boolean {
+    if (isDominantPartyAction) return this.dominantPartyActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;
+    return this.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;
   }
 }
