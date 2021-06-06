@@ -32,6 +32,7 @@ import {SendDelegateToArea} from '../../../deferredActions/SendDelegateToArea';
 import {Size} from '../../render/Size';
 import {Game} from '../../../Game';
 import {IParty} from '../../../turmoil/parties/IParty';
+import {PolicyId} from '../../../turmoil/Policy';
 
 export class MarsCoalition extends Card implements CorporationCard {
   constructor() {
@@ -263,5 +264,34 @@ export class MarsCoalition extends Card implements CorporationCard {
     } else {
       player.politicalAgendasActionUsedCount += 1;
     }
+  }
+
+  public static shouldIncreaseMetalValue(player: Player, partyName: PartyName.MARS | PartyName.UNITY, policyId?: PolicyId): boolean {
+    if (!player.isCorporation(CardName.MARS_COALITION)) return false;
+
+    const game = player.game;
+    if (!game.gameOptions.turmoilExtension) return false;
+    if (game.phase !== Phase.ACTION) return false;
+
+    const turmoil = game.turmoil;
+    if (turmoil === undefined) return false;
+
+    const dominantParty = turmoil.dominantParty;
+    if (dominantParty === undefined) return false;
+
+    // Set the default policy if not given
+    if (policyId === undefined) policyId = dominantParty.policies[0].id;
+    let currentPolicyId: PolicyId;
+
+    if (turmoil.politicalAgendasData === undefined) {
+      currentPolicyId = dominantParty.policies[0].id;
+    } else if (partyName === PartyName.MARS) {
+      currentPolicyId = turmoil.politicalAgendasData.staticAgendas?.get(PartyName.MARS)?.policyId as PolicyId;
+    } else {
+      // partyName === PartyName.UNITY
+      currentPolicyId = turmoil.politicalAgendasData.staticAgendas?.get(PartyName.UNITY)?.policyId as PolicyId;
+    }
+
+    return dominantParty.name === partyName && currentPolicyId === policyId;
   }
 }

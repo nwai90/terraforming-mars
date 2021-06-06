@@ -77,6 +77,7 @@ import {LogHelper} from './LogHelper';
 import {UndoActionOption} from './inputs/UndoActionOption';
 import {LawSuit} from './cards/promo/LawSuit';
 import {CrashSiteCleanup} from './cards/promo/CrashSiteCleanup';
+import {MarsCoalition} from './cards/community/corporations/MarsCoalition';
 
 export type PlayerId = string;
 
@@ -217,6 +218,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
   public getTitaniumValue(): number {
     if (PartyHooks.shouldApplyPolicy(this.game, PartyName.UNITY)) return this.titaniumValue + 1;
+    if (MarsCoalition.shouldIncreaseMetalValue(this, PartyName.UNITY)) return this.titaniumValue + 1;
     return this.titaniumValue;
   }
 
@@ -236,6 +238,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
   public getSteelValue(): number {
     if (PartyHooks.shouldApplyPolicy(this.game, PartyName.MARS, TurmoilPolicy.MARS_FIRST_POLICY_3)) return this.steelValue + 1;
+    if (MarsCoalition.shouldIncreaseMetalValue(this, PartyName.MARS, TurmoilPolicy.MARS_FIRST_POLICY_3)) return this.steelValue + 1;
     return this.steelValue;
   }
 
