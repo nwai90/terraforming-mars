@@ -77,6 +77,7 @@ import {LogHelper} from './LogHelper';
 import {UndoActionOption} from './inputs/UndoActionOption';
 import {LawSuit} from './cards/promo/LawSuit';
 import {CrashSiteCleanup} from './cards/promo/CrashSiteCleanup';
+import {MarsCoalition} from './cards/community/corporations/MarsCoalition';
 
 export type PlayerId = string;
 
@@ -2031,6 +2032,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     TurmoilHandler.addPlayerAction(this, action.options);
+    MarsCoalition.addPlayerAction(this, action.options);
 
     if (this.getPlayableActionCards().length > 0) {
       action.options.push(
