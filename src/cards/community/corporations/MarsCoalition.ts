@@ -76,6 +76,8 @@ export class MarsCoalition extends Card implements CorporationCard {
 
   public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
     if (cardOwner.id !== activePlayer.id || cardOwner.game.phase === Phase.SOLAR) return;
+    if (!cardOwner.isCorporation(CardName.MARS_COALITION)) return;
+
     const dominantPartyPolicy = MarsCoalition.getDominantPartyPolicyId(activePlayer);
 
     switch (dominantPartyPolicy) {
