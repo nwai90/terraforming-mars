@@ -33,6 +33,7 @@ import {Size} from '../../render/Size';
 import {Game} from '../../../Game';
 import {IParty} from '../../../turmoil/parties/IParty';
 import {PolicyId} from '../../../turmoil/Policy';
+import {Tags} from '../../Tags';
 
 export class MarsCoalition extends Card implements CorporationCard {
   constructor() {
@@ -118,6 +119,8 @@ export class MarsCoalition extends Card implements CorporationCard {
     }
   }
 
+  /* Most methods below are modified copies of existing logic in core files. It's fine to isolate them here
+  for now since they behave quite differently to check dominant party instead of ruling party and apply resets */
   private static getDominantPartyPolicyId(activePlayer: Player) : string | undefined {
     const turmoil = activePlayer.game.turmoil as Turmoil;
     const staticAgendas = turmoil.politicalAgendasData.staticAgendas as Map<PartyName, Agenda>;
@@ -293,5 +296,54 @@ export class MarsCoalition extends Card implements CorporationCard {
     }
 
     return dominantParty.name === partyName && currentPolicyId === policyId;
+  }
+
+  public static applyDominantPartyCardDiscounts(player: Player, card: IProjectCard, cost: number): number {
+    if (!player.isCorporation(CardName.MARS_COALITION)) return cost;
+    const dominantPartyPolicy = this.getDominantPartyPolicyId(player);
+
+    if (card.tags.includes(Tags.SPACE) && dominantPartyPolicy === TurmoilPolicy.UNITY_POLICY_4) {
+      // PoliticalAgendas Unity P4 hook
+      cost -= 2;
+    } else if (card.tags.includes(Tags.ENERGY) && dominantPartyPolicy === TurmoilPolicy.EMPOWER_POLICY_4) {
+      // PoliticalAgendas Empower P4 hook
+      cost -= 3;
+    } else if (card.tags.includes(Tags.EARTH) && dominantPartyPolicy === TurmoilPolicy.BUREAUCRATS_POLICY_4) {
+      // PoliticalAgendas Bureaucrats P4 hook
+      const earthTagCount = card.tags.filter((tag) => tag === Tags.EARTH).length;
+      cost -= earthTagCount * 3;
+    } else if (card.cardType === CardType.EVENT && dominantPartyPolicy === TurmoilPolicy.CENTRISTS_POLICY_4) {
+      // PoliticalAgendas Centrists P4 hook
+      cost -= 2;
+    }
+
+    return cost;
+  }
+
+  public static getRequirementsBonus(player: Player, requirementsBonus: number): number {
+    if (!player.isCorporation(CardName.MARS_COALITION)) return requirementsBonus;
+    const dominantPartyPolicy = this.getDominantPartyPolicyId(player);
+
+    // PoliticalAgendas Scientists P2 hook
+    if (dominantPartyPolicy === TurmoilPolicy.SCIENTISTS_POLICY_2) requirementsBonus += 2;
+
+    // PoliticalAgendas Transhumans P3 hook
+    if (dominantPartyPolicy === TurmoilPolicy.TRANSHUMANS_POLICY_3 && player.turmoilPolicyActionUsed === true) {
+      requirementsBonus += 50;
+    }
+
+    return requirementsBonus;
+  }
+
+  public static checkBonusWildTag(player: Player, tag: Tags, tagCount: number): number {
+    if (!player.isCorporation(CardName.MARS_COALITION)) return tagCount;
+    const dominantPartyPolicy = this.getDominantPartyPolicyId(player);
+
+    // PoliticalAgendas Transhumans P1 hook
+    if (tag === Tags.WILDCARD && dominantPartyPolicy === TurmoilPolicy.TRANSHUMANS_DEFAULT_POLICY) {
+      tagCount += 1;
+    }
+
+    return tagCount;
   }
 }

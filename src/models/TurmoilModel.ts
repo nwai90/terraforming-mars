@@ -30,6 +30,7 @@ export interface PartyModel {
   description: string;
   partyLeader: Color | undefined;
   delegates: Array<DelegatesModel>;
+  rulingPolicy: string | undefined;
 }
 
 export interface DelegatesModel {
@@ -205,6 +206,7 @@ function getParties(game: Game): Array<PartyModel> {
         description: party.description,
         partyLeader: partyLeader,
         delegates: delegates,
+        rulingPolicy: game.turmoil?.politicalAgendasData.staticAgendas?.get(party.name)?.policyId,
       };
     });
   }

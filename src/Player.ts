@@ -657,6 +657,8 @@ export class Player implements ISerializable<SerializedPlayer> {
       requirementsBonus += 50;
     }
 
+    requirementsBonus = MarsCoalition.getRequirementsBonus(this, requirementsBonus);
+
     return requirementsBonus;
   }
 
@@ -788,6 +790,8 @@ export class Player implements ISerializable<SerializedPlayer> {
     if (tag === Tags.WILDCARD && PartyHooks.shouldApplyPolicy(this.game, PartyName.TRANSHUMANS, TurmoilPolicy.TRANSHUMANS_DEFAULT_POLICY)) {
       tagCount += 1;
     }
+
+    tagCount = MarsCoalition.checkBonusWildTag(this, tag, tagCount);
 
     if (includeTagSubstitutions) {
       // Earth Embassy hook
@@ -1327,6 +1331,8 @@ export class Player implements ISerializable<SerializedPlayer> {
     if (card.cardType === CardType.EVENT && PartyHooks.shouldApplyPolicy(this.game, PartyName.CENTRISTS, TurmoilPolicy.CENTRISTS_POLICY_4)) {
       cost -= 2;
     }
+
+    cost = MarsCoalition.applyDominantPartyCardDiscounts(this, card, cost);
 
     return Math.max(cost, 0);
   }
