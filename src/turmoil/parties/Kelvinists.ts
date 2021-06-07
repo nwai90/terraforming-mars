@@ -8,6 +8,7 @@ import {Policy} from '../Policy';
 import {Player} from '../../Player';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {TurmoilPolicy} from '../TurmoilPolicy';
+import {MAX_TEMPERATURE} from '../../constants';
 
 export class Kelvinists extends Party implements IParty {
   name = PartyName.KELVINISTS;
@@ -89,7 +90,7 @@ class KelvinistsPolicy03 implements Policy {
   isDefault = false;
 
   canAct(player: Player) {
-    return player.heat >= 6;
+    return player.heat >= 6 && player.game.getTemperature() < MAX_TEMPERATURE;
   }
 
   action(player: Player) {
