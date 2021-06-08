@@ -11,7 +11,6 @@ import {TurmoilPolicy} from '../../turmoil/TurmoilPolicy';
 import {ColonyName} from '../../colonies/ColonyName';
 import {CardModel} from '../../models/CardModel';
 import {PreferencesManager} from '../PreferencesManager';
-import {TurmoilModel} from '../../models/TurmoilModel';
 import {CardName} from '../../CardName';
 
 type InterfaceTagsType = Tags | SpecialTags | 'all' | 'separator';
@@ -132,11 +131,11 @@ export const PlayerTags = Vue.component('player-tags', {
         }
       }
 
-      const turmoil = this.player.turmoil as TurmoilModel;
-      const rulingParty = turmoil.ruling;
-      const rulingPartyPolicyId = turmoil.politicalAgendas?.currentAgenda.policyId;
-      const dominantParty = turmoil.dominant;
-      const dominantPartyPolicyId = turmoil.parties.find((party) => party.name === dominantParty)?.rulingPolicy;
+      const turmoil = this.player.turmoil;
+      const rulingParty = turmoil?.ruling;
+      const rulingPartyPolicyId = turmoil?.politicalAgendas?.currentAgenda.policyId;
+      const dominantParty = turmoil?.dominant;
+      const dominantPartyPolicyId = turmoil?.parties.find((party) => party.name === dominantParty)?.rulingPolicy;
       const isMarsCoalition = this.player.corporationCard?.name === CardName.MARS_COALITION;
 
       switch (tag) {
@@ -178,30 +177,30 @@ export const PlayerTags = Vue.component('player-tags', {
         }
       }
 
-      const turmoil = this.player.turmoil as TurmoilModel;
-      const rulingPartyPolicyId = turmoil.politicalAgendas?.currentAgenda.policyId;
-      const dominantParty = turmoil.dominant;
-      const dominantPartyPolicyId = turmoil.parties.find((party) => party.name === dominantParty)?.rulingPolicy;
+      const turmoil = this.player.turmoil;
+      const rulingPartyPolicyId = turmoil?.politicalAgendas?.currentAgenda.policyId;
+      const dominantParty = turmoil?.dominant;
+      const dominantPartyPolicyId = turmoil?.parties.find((party) => party.name === dominantParty)?.rulingPolicy;
       const isMarsCoalition = this.player.corporationCard?.name === CardName.MARS_COALITION;
 
       switch (tag) {
       case Tags.SPACE:
-        if ((isMarsCoalition && dominantPartyPolicyId === TurmoilPolicy.UNITY_POLICY_4) || (turmoil.ruling === PartyName.UNITY && rulingPartyPolicyId === TurmoilPolicy.UNITY_POLICY_4)) {
+        if ((isMarsCoalition && dominantPartyPolicyId === TurmoilPolicy.UNITY_POLICY_4) || (turmoil?.ruling === PartyName.UNITY && rulingPartyPolicyId === TurmoilPolicy.UNITY_POLICY_4)) {
           discount += 2;
         }
         break;
       case Tags.ENERGY:
-        if ((isMarsCoalition && dominantPartyPolicyId === TurmoilPolicy.EMPOWER_POLICY_4) || (turmoil.ruling === PartyName.EMPOWER && rulingPartyPolicyId === TurmoilPolicy.EMPOWER_POLICY_4)) {
+        if ((isMarsCoalition && dominantPartyPolicyId === TurmoilPolicy.EMPOWER_POLICY_4) || (turmoil?.ruling === PartyName.EMPOWER && rulingPartyPolicyId === TurmoilPolicy.EMPOWER_POLICY_4)) {
           discount += 3;
         }
         break;
       case Tags.EVENT:
-        if ((isMarsCoalition && dominantPartyPolicyId === TurmoilPolicy.CENTRISTS_POLICY_4) || (turmoil.ruling === PartyName.CENTRISTS && rulingPartyPolicyId === TurmoilPolicy.CENTRISTS_POLICY_4)) {
+        if ((isMarsCoalition && dominantPartyPolicyId === TurmoilPolicy.CENTRISTS_POLICY_4) || (turmoil?.ruling === PartyName.CENTRISTS && rulingPartyPolicyId === TurmoilPolicy.CENTRISTS_POLICY_4)) {
           discount += 2;
         }
         break;
       case Tags.EARTH:
-        if ((isMarsCoalition && dominantPartyPolicyId === TurmoilPolicy.BUREAUCRATS_POLICY_4) || (turmoil.ruling === PartyName.BUREAUCRATS && rulingPartyPolicyId === TurmoilPolicy.BUREAUCRATS_POLICY_4)) {
+        if ((isMarsCoalition && dominantPartyPolicyId === TurmoilPolicy.BUREAUCRATS_POLICY_4) || (turmoil?.ruling === PartyName.BUREAUCRATS && rulingPartyPolicyId === TurmoilPolicy.BUREAUCRATS_POLICY_4)) {
           discount += 3;
         }
         break;
