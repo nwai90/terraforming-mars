@@ -105,7 +105,7 @@ export class LogHelper {
     }, options);
   }
 
-  static logDraftedCards(player: Player, draftedCards: Array<ICard> | Array<CardName>, passedCards: Array<ICard> | Array<CardName>, target: string) {
+  static logDraftedCards(player: Player, draftedCards: Array<ICard>, passedCards: Array<ICard>, target: string) {
     // If |this.count| equals 3, for instance, this generates "${0} drew ${1}, ${2} and ${3}"
     let message = '${0} drafted';
     let i = 0, offset = 1;
@@ -145,19 +145,11 @@ export class LogHelper {
       b.string('You');
       // Card drafted
       for (const card of draftedCards) {
-        if (typeof card === 'string') {
-          b.cardName(card);
-        } else {
-          b.card(card);
-        }
+        b.card(card);
       }
       // Card passed
       for (const card of passedCards) {
-        if (typeof card === 'string') {
-          b.cardName(card);
-        } else {
-          b.card(card);
-        }
+        b.card(card);
       }
       // Target
       b.string(target);
