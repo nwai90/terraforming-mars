@@ -180,7 +180,7 @@ export const LogPanel = Vue.component('log-panel', {
         }
         if (message.type !== undefined && message.message !== undefined) {
           message.message = $t(message.message);
-          return logEntryBullet + message.message.replace(/\$\{([0-9]{1})\}/gi, (_match, idx) => {
+          return logEntryBullet + message.message.replace(/\$\{(\d{1,2})\}/gi, (_match, idx) => {
             return this.messageDataToHTML(message.data[idx]);
           });
         }

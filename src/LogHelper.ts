@@ -5,6 +5,7 @@ import {ICard} from './cards/ICard';
 import {ISpace} from './boards/ISpace';
 import {TileType} from './TileType';
 import {Colony} from './colonies/Colony';
+import {LogType} from './deferredActions/DrawCards';
 
 export class LogHelper {
   static logAddResource(player: Player, card: ICard, qty: number = 1): void {
@@ -73,9 +74,9 @@ export class LogHelper {
     });
   }
 
-  static logDrawnCards(player: Player, cards: Array<ICard> | Array<CardName>, privateMessage: boolean = false) {
+  static logDrawnCards(player: Player, cards: Array<ICard> | Array<CardName>, privateMessage: boolean = false, logType: LogType = LogType.DREW) {
     // If |this.count| equals 3, for instance, this generates "${0} drew ${1}, ${2} and ${3}"
-    let message = '${0} drew ';
+    let message = '${0} ' + logType + ' ';
     if (cards.length === 0) {
       message += 'no cards';
     } else {
@@ -93,7 +94,7 @@ export class LogHelper {
     const options = privateMessage ? {reservedFor: player} : {};
 
     player.game.log(message, (b) => {
-      b.player(player);
+      privateMessage ? b.string('You') : b.player(player);
       for (const card of cards) {
         if (typeof card === 'string') {
           b.cardName(card);
@@ -102,5 +103,64 @@ export class LogHelper {
         }
       }
     }, options);
+  }
+
+  static logDraftedCards(player: Player, draftedCards: Array<ICard> | Array<CardName>, passedCards: Array<ICard> | Array<CardName>, target: string) {
+    // If |this.count| equals 3, for instance, this generates "${0} drew ${1}, ${2} and ${3}"
+    let message = '${0} drafted';
+    let i = 0, offset = 1;
+
+    if (draftedCards.length === 0) {
+      message += ' no cards';
+    } else {
+      for (let length = draftedCards.length; i < length; i++) {
+        message += ' ${' + (i + offset) + '}';
+      }
+    }
+
+    message += ', passing ';
+
+    i = 0;
+    offset += draftedCards.length;
+
+    if (passedCards.length === 0) {
+      message += 'no cards';
+    } else {
+      for (let length = passedCards.length; i < length; i++) {
+        if (i > 0) {
+          if (i < length - 1) {
+            message += ', ';
+          } else {
+            message += ' and ';
+          }
+        }
+        message += '${' + (i + offset) + '}';
+      }
+    }
+    // Add target for passing card to
+    if (target !== undefined) message += ' to ${' + (i + offset) + '}';
+
+    player.game.log(message, (b) => {
+      // Active player
+      b.string('You');
+      // Card drafted
+      for (const card of draftedCards) {
+        if (typeof card === 'string') {
+          b.cardName(card);
+        } else {
+          b.card(card);
+        }
+      }
+      // Card passed
+      for (const card of passedCards) {
+        if (typeof card === 'string') {
+          b.cardName(card);
+        } else {
+          b.card(card);
+        }
+      }
+      // Target
+      b.string(target);
+    }, {reservedFor: player});
   }
 }

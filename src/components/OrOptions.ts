@@ -104,7 +104,7 @@ export const OrOptions = Vue.component('or-options', {
             }
             this.onsave(copy);
           },
-          false,
+          option.buttonLabel === 'Sell',
           false,
         ),
       );
@@ -131,7 +131,7 @@ export const OrOptions = Vue.component('or-options', {
       if (showOption) {
         children.push(createElement('div', subchildren));
 
-        if (this.showsave && this.$data.selectedOption === idx) {
+        if (this.showsave && this.$data.selectedOption === idx && option.buttonLabel !== 'Sell') {
           children.push(
             createElement(
               'div',

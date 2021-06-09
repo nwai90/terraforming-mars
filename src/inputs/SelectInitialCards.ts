@@ -6,6 +6,8 @@ import {Player} from '../Player';
 import {PlayerInput} from '../PlayerInput';
 import {PlayerInputTypes} from '../PlayerInputTypes';
 import {SelectCard} from './SelectCard';
+import {LogType} from '../deferredActions/DrawCards';
+import {LogHelper} from '../LogHelper';
 
 export class SelectInitialCards extends AndOptions implements PlayerInput {
     public inputType = PlayerInputTypes.SELECT_INITIAL_CARDS;
@@ -23,6 +25,7 @@ export class SelectInitialCards extends AndOptions implements PlayerInput {
           'Select corporation', undefined, player.dealtCorporationCards,
           (foundCards: Array<CorporationCard>) => {
             corporation = foundCards[0];
+            LogHelper.logDrawnCards(player, foundCards, true, LogType.KEPT);
             return undefined;
           },
         ),
@@ -34,6 +37,7 @@ export class SelectInitialCards extends AndOptions implements PlayerInput {
             'Select 2 Prelude cards', undefined, player.dealtPreludeCards,
             (preludeCards: Array<IProjectCard>) => {
               player.preludeCardsInHand.push(...preludeCards);
+              LogHelper.logDrawnCards(player, preludeCards, true, LogType.KEPT);
               return undefined;
             }, 2, 2,
           ),
@@ -45,6 +49,7 @@ export class SelectInitialCards extends AndOptions implements PlayerInput {
           'Select initial cards to buy', undefined, player.dealtProjectCards,
           (foundCards: Array<IProjectCard>) => {
             player.cardsInHand.push(...foundCards);
+            LogHelper.logDrawnCards(player, foundCards, true, LogType.BOUGHT);
             return undefined;
           }, 10, 0,
         ),

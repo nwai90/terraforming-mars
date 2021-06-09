@@ -1255,6 +1255,7 @@ export class Player implements ISerializable<SerializedPlayer> {
           this.draftedCards.push(card);
           cards = cards.filter((c) => c !== card);
         });
+        LogHelper.logDraftedCards(this, foundCards, cards.map((card) => card.name), playerName);
         this.game.playerIsFinishedWithDraftingPhase(initialDraft, this, cards);
         return undefined;
       }, cardsToKeep, cardsToKeep,
