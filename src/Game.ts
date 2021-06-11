@@ -820,6 +820,7 @@ export class Game implements ISerializable<SerializedGame> {
     });
 
     if (this.gameIsOver()) {
+      this.log('Final greenery placement', (b) => b.forNewGeneration());
       this.gotoFinalGreeneryPlacement();
       return;
     }
@@ -1124,21 +1125,22 @@ export class Game implements ISerializable<SerializedGame> {
     this.gotoFinalGreeneryPlacement();
   }
 
-  private gotoFinalGreeneryPlacement(): void {
-    this.log('Final greenery placement', (b) => b.forNewGeneration());
-
-    const players: Player[] = [];
+  public gotoFinalGreeneryPlacement(): void {
+    const playersWithEnoughPlants: Player[] = [];
 
     this.players.forEach((player) => {
-      if (this.canPlaceGreenery(player)) {
-        players.push(player);
+      if (this.canPlaceGreenery(player) || (player.isCorporation(CardName.PHILARES) && !this.donePlayers.has(player.id))) {
+        // Allow conversion attempt if a player can place greeneries
+        // Always give Philares the opportunity if it is not done yet
+        // This allows Philares to be marked as done by player.takeActionForFinalGreenery
+        playersWithEnoughPlants.push(player);
       } else {
         this.donePlayers.add(player.id);
       }
     });
 
     // If no players can place greeneries we are done
-    if (players.length === 0) {
+    if (playersWithEnoughPlants.length === 0) {
       // Track player score stats
       this.updateEndGenerationScores();
       this.gotoEndGame();
@@ -1150,7 +1152,7 @@ export class Game implements ISerializable<SerializedGame> {
     // greenery and the player needs enough plants
     let firstPlayer: Player | undefined = this.first;
     while (
-      firstPlayer !== undefined && players.includes(firstPlayer) === false
+      firstPlayer !== undefined && playersWithEnoughPlants.includes(firstPlayer) === false
     ) {
       firstPlayer = this.getPlayerAfter(firstPlayer);
     }
