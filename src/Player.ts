@@ -256,8 +256,9 @@ export class Player implements ISerializable<SerializedPlayer> {
     return this.terraformRating;
   }
 
-  public decreaseTerraformRating() {
+  public decreaseTerraformRating(log: boolean = false) {
     this.terraformRating--;
+    if (log) LogHelper.logGlobalEventTRDecrease(this);
   }
 
   public increaseTerraformRating() {
@@ -290,8 +291,9 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
   }
 
-  public decreaseTerraformRatingSteps(value: number) {
+  public decreaseTerraformRatingSteps(value: number, log: boolean = false) {
     this.terraformRating -= value;
+    if (log) LogHelper.logGlobalEventTRDecrease(this, value);
   }
 
   public setTerraformRating(value: number) {

@@ -11,7 +11,8 @@ export class WarOnEarth implements IGlobalEvent {
     public currentDelegate = PartyName.KELVINISTS;
     public resolve(game: Game, turmoil: Turmoil) {
       game.getPlayers().forEach((player) => {
-        player.decreaseTerraformRatingSteps(4 - turmoil.getPlayerInfluence(player));
+        const steps = Math.max(0, 4 - turmoil.getPlayerInfluence(player));
+        player.decreaseTerraformRatingSteps(steps, true);
       });
     }
 }

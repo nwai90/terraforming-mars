@@ -95,7 +95,7 @@ export const GameEnd = Vue.component('game-end', {
         tableElement.querySelectorAll('text').forEach((tag) => (tag.style.fontFamily = 'Prototype'));
         htmlToImage.toJpeg(tableElement, {quality: 0.95, width: 1500}).then(function(dataUrl) {
           const link = document.createElement('a');
-          link.download = 'Rebalanced-mars_Game_Result.jpeg';
+          link.download = 'Terraforming_Mars_Game_Result.jpeg';
           link.href = dataUrl;
           link.click();
         });
