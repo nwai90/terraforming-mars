@@ -45,7 +45,10 @@ export class GameLogs {
       // for most recent generation pull last 50 log messages
       if (generation === null || Number(generation) === game.generation) {
         logs = game.gameLog.filter(messagesForPlayer).slice(-50);
-      } else { // pull all logs for generation
+        // if generation = 0, pull all logs for that player
+      } else if (Number(generation) === 0) {
+        logs = game.gameLog.filter(messagesForPlayer);
+      } else { // pull all logs for specific generation
         logs = this.getLogsForGeneration(game.gameLog, Number(generation)).filter(messagesForPlayer);
       }
 

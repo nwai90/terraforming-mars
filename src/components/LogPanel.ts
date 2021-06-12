@@ -189,6 +189,20 @@ export const LogPanel = Vue.component('log-panel', {
       }
       return '';
     },
+    messageToPlainText: function(message: LogMessage) {
+      try {
+        if (message.type !== undefined && message.message !== undefined) {
+          const parsedMessage = message.message.replace(/\$\{(\d{1,2})\}/gi, (_match, idx) => {
+            return this.messageDataToHTML(message.data[idx]).replace(/<(.|\n)*?>/g, '');
+          });
+          if (message.playerId !== undefined) return '(' + parsedMessage + ')';
+          return parsedMessage;
+        }
+      } catch (err) {
+        return this.safeMessage(message);
+      }
+      return '';
+    },
     messageClicked: function(message: LogMessage) {
       const datas = message.data;
 
@@ -230,6 +244,47 @@ export const LogPanel = Vue.component('log-panel', {
         this.getLogsForGeneration(gen);
       }
       this.selectedGeneration = gen;
+    },
+    downloadLog: function(): void {
+      const messages = this.messages;
+      if (logRequest !== undefined) {
+        logRequest.abort();
+        logRequest = undefined;
+      }
+
+      const xhr = new XMLHttpRequest();
+      logRequest = xhr;
+      xhr.open('GET', `/api/game/logs?id=${this.players[0].spectatorId ?? this.id}&generation=${0}`);
+      xhr.onerror = () => {
+        console.error('error updating messages, unable to reach server');
+      };
+      xhr.onload = () => {
+        if (xhr.status === 200) {
+          messages.splice(0, messages.length);
+          messages.push(...xhr.response);
+          const allMessages = xhr.response as Array<LogMessage>;
+
+          let plainifiedLog: string = '';
+          allMessages.forEach((message) => {
+            plainifiedLog += this.messageToPlainText(message) + '\n';
+          });
+
+          const blob = new Blob([plainifiedLog], {type: 'text/plain'});
+          const link = document.createElement('a');
+          link.href = window.URL.createObjectURL(blob);
+
+          const dateFormat = require('dateformat');
+          const date = dateFormat(new Date(), 'isoDateTime');
+          link.download = 'game-log' + date;
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        } else {
+          console.error(`error updating messages, response code ${xhr.status}`);
+        }
+      };
+      xhr.responseType = 'json';
+      xhr.send();
     },
     getLogsForGeneration: function(generation: number): void {
       const messages = this.messages;
@@ -318,6 +373,10 @@ export const LogPanel = Vue.component('log-panel', {
             </div>
           </div>
           <span class="label-additional" v-if="players.length === 1"><span :class="lastGenerationClass">of {{this.lastSoloGeneration}}</span></span>
+
+          <span style="margin-bottom:-20px">
+            <Button title="💾 Save Log" size="big" class="save-image-button" :onClick="_=>downloadLog()"/>
+          </span>
         </div>
         <div class="panel log-panel">
           <div id="logpanel-scrollable" class="panel-body">

@@ -247,7 +247,7 @@ export const GameEnd = Vue.component('game-end', {
                         :temperature="player.temperature"></board>
                 </div>
                 <div class="game_end_block--log game-end-column">
-                  <log-panel :color="player.color" :generation="player.generation" :id="player.id" :lastSoloGeneration="player.lastSoloGeneration" :players="player.players"></log-panel>                
+                  <log-panel :color="player.color" :generation="player.generation" :id="player.id" :lastSoloGeneration="player.lastSoloGeneration" :players="player.players"></log-panel>
                 </div>
               </div>
             </div>
