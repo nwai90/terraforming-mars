@@ -41,10 +41,12 @@ describe('MarsCoalition', function() {
     const turmoil = game.turmoil!;
 
     // Make Greens ruling, and Scientists dominant
+    // Send 3 delegates to override any existing party that might get 2 delegates during setup
     turmoil.rulingParty = new Greens();
     turmoil.setRulingParty(game);
 
     const scientists = turmoil.getPartyByName(PartyName.SCIENTISTS)!;
+    turmoil.sendDelegateToParty(player.id, scientists.name, game);
     turmoil.sendDelegateToParty(player.id, scientists.name, game);
     turmoil.sendDelegateToParty(player.id, scientists.name, game);
 
