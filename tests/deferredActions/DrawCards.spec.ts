@@ -15,7 +15,7 @@ describe('DrawCards', function() {
   let player: Player; let dealer: Dealer;
   const cards = [new AICentral(), new Asteroid(), new CapitalAres()];
 
-  beforeEach(function() {
+  beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     Game.newInstance('foobar', [player, redPlayer], player);

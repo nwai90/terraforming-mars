@@ -9,7 +9,7 @@ import {TileType} from '../../../src/TileType';
 describe('PerseveranceLanding', function() {
   let card : PerseveranceLanding; let player : Player;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new PerseveranceLanding();
     player = TestPlayers.BLUE.newPlayer();
     Game.newInstance('foobar', [player], player);

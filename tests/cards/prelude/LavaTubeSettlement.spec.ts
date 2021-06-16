@@ -14,7 +14,7 @@ import {TestPlayers} from '../../TestPlayers';
 describe('LavaTubeSettlement', function() {
   let card : LavaTubeSettlement; let player : Player; let game : Game;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new LavaTubeSettlement();
     player = TestPlayers.BLUE.newPlayer();
     game = Game.newInstance('foobar', [player], player);

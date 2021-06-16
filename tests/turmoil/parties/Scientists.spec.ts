@@ -12,7 +12,7 @@ import {GeneRepair} from '../../../src/cards/base/GeneRepair';
 describe('Scientists', function() {
   let player : Player; let game : Game; let turmoil: Turmoil; let scientists: Scientists;
 
-  beforeEach(function() {
+  beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
     const gameOptions = TestingUtils.setCustomGameOptions();
     game = Game.newInstance('foobar', [player], player, gameOptions);

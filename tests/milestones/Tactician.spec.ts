@@ -29,7 +29,7 @@ import {TestPlayers} from '../TestPlayers';
 describe('Tactician', function() {
   let milestone : Tactician; let player : Player;
 
-  beforeEach(function() {
+  beforeEach(() => {
     milestone = new Tactician();
     player = TestPlayers.BLUE.newPlayer();
   });

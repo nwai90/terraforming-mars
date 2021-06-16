@@ -10,7 +10,7 @@ import {SelectSpace} from '../../../src/inputs/SelectSpace';
 describe('BlackPolarDust', function() {
   let card : BlackPolarDust; let player : Player; let game : Game;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new BlackPolarDust();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

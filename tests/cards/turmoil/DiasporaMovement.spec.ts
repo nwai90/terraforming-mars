@@ -14,7 +14,7 @@ import {TestPlayers} from '../../TestPlayers';
 describe('DiasporaMovement', function() {
   let card : DiasporaMovement; let player : Player; let player2 : Player; let game : Game; let turmoil: Turmoil; let reds: IParty;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new DiasporaMovement();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();

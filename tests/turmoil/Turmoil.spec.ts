@@ -31,7 +31,7 @@ import {GreeneryStandardProject} from '../../src/cards/base/standardProjects/Gre
 describe('Turmoil', function() {
   let player : TestPlayer; let player2 : Player; let game : Game; let turmoil: Turmoil;
 
-  beforeEach(function() {
+  beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
     const gameOptions = TestingUtils.setCustomGameOptions();

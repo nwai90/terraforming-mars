@@ -8,7 +8,7 @@ import {TestPlayers} from '../../TestPlayers';
 describe('RadChemFactory', function() {
   let card : RadChemFactory; let player : Player;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new RadChemFactory();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

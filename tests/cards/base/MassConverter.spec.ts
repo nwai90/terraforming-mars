@@ -9,7 +9,7 @@ import {TestPlayers} from '../../TestPlayers';
 describe('MassConverter', function() {
   let card : MassConverter; let player : Player;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new MassConverter();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

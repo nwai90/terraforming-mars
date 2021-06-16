@@ -12,7 +12,7 @@ import {TestPlayers} from '../../TestPlayers';
 describe('AirRaid', function() {
   let card : AirRaid; let player : Player; let player2 : Player; let corpo: StormCraftIncorporated;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new AirRaid();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();

@@ -11,7 +11,7 @@ import {TestPlayers} from '../../TestPlayers';
 describe('OrbitalCleanup', function() {
   let card : OrbitalCleanup; let player : Player;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new OrbitalCleanup();
     player = TestPlayers.BLUE.newPlayer();
     Game.newInstance('id', [player], player);

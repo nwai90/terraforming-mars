@@ -10,7 +10,7 @@ import {Resources} from '../../../src/Resources';
 describe('Reds', function() {
   let player : Player; let secondPlayer : Player; let game : Game; let turmoil: Turmoil; let reds: Reds;
 
-  beforeEach(function() {
+  beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
     secondPlayer = TestPlayers.RED.newPlayer();
     const gameOptions = TestingUtils.setCustomGameOptions();

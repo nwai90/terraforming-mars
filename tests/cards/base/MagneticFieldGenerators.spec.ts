@@ -8,7 +8,7 @@ import {TestPlayers} from '../../TestPlayers';
 describe('MagneticFieldGenerators', function() {
   let card : MagneticFieldGenerators; let player : Player;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new MagneticFieldGenerators();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

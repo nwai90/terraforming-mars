@@ -10,7 +10,7 @@ import {VitalColony} from '../../../src/cards/community/preludes/VitalColony';
 describe('VitalColony', function() {
   let card : VitalColony; let player : Player; let game : Game;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new VitalColony();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

@@ -9,7 +9,7 @@ import {TestPlayers} from '../../TestPlayers';
 describe('CrashSiteCleanup', function() {
   let card : CrashSiteCleanup; let player : Player;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new CrashSiteCleanup();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

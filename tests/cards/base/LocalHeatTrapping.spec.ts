@@ -11,7 +11,7 @@ import {TestPlayers} from '../../TestPlayers';
 describe('LocalHeatTrapping', function() {
   let card : LocalHeatTrapping; let player : Player;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new LocalHeatTrapping();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

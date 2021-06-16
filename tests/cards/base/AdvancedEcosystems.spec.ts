@@ -11,7 +11,7 @@ import {TestPlayers} from '../../TestPlayers';
 describe('AdvancedEcosystems', function() {
   let card : AdvancedEcosystems; let player : TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new AdvancedEcosystems();
     player = TestPlayers.BLUE.newPlayer();
     Game.newInstance('foobar', [player], player);

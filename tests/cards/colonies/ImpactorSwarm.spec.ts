@@ -8,7 +8,7 @@ import {TestPlayers} from '../../TestPlayers';
 describe('ImpactorSwarm', function() {
   let card : ImpactorSwarm; let player : Player; let player2 : Player; let game : Game;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new ImpactorSwarm();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();

@@ -9,7 +9,7 @@ import {Resources} from '../../../src/Resources';
 describe('HydrogenBombardment', function() {
   let card : HydrogenBombardment; let player : Player; let game : Game;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new HydrogenBombardment();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

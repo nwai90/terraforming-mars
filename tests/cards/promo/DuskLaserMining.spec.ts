@@ -9,7 +9,7 @@ import {TestPlayers} from '../../TestPlayers';
 describe('DuskLaserMining', function() {
   let card : DuskLaserMining; let player : Player;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new DuskLaserMining();
     player = TestPlayers.BLUE.newPlayer();
     Game.newInstance('foobar', [player], player);

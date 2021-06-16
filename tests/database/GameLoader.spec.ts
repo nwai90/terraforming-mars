@@ -36,7 +36,7 @@ describe('GameLoader', function() {
       return database;
     };
   });
-  beforeEach(function() {
+  beforeEach(() => {
     (GameLoader.getInstance() as GameLoader).reset();
   });
   after(function() {

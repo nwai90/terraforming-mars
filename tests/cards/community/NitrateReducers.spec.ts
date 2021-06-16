@@ -10,7 +10,7 @@ import {Resources} from '../../../src/Resources';
 describe('NitrateReducers', function() {
   let card : NitrateReducers; let player : Player;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new NitrateReducers();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

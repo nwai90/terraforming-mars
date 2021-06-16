@@ -12,7 +12,7 @@ describe('BioengineeringEnclosure', function() {
   let card : BioengineeringEnclosure; let player : Player; let game : Game;
   let animalHost: IProjectCard = new Birds();
 
-  beforeEach(function() {
+  beforeEach(() => {
     animalHost = new Birds();
     card = new BioengineeringEnclosure();
     player = TestPlayers.BLUE.newPlayer();

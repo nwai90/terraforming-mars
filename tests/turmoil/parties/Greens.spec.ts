@@ -16,7 +16,7 @@ import {OrOptions} from '../../../src/inputs/OrOptions';
 describe('Greens', function() {
   let player : Player; let game : Game; let turmoil: Turmoil; let greens: Greens;
 
-  beforeEach(function() {
+  beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
     const gameOptions = TestingUtils.setCustomGameOptions();
     game = Game.newInstance('foobar', [player], player, gameOptions);

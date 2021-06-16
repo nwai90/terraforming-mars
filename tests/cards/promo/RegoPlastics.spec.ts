@@ -7,7 +7,7 @@ import {Game} from '../../../src/Game';
 describe('RegoPlastics', function() {
   let card : RegoPlastics; let player : Player;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new RegoPlastics();
     player = TestPlayers.BLUE.newPlayer();
     Game.newInstance('foobar', [player], player);

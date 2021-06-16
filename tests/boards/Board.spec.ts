@@ -14,7 +14,7 @@ import {Random} from '../../src/Random';
 describe('Board', function() {
   let board : OriginalBoard; let player : Player; let player2 : Player;
 
-  beforeEach(function() {
+  beforeEach(() => {
     board = OriginalBoard.newInstance(false, new Random(0), false, false);
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();

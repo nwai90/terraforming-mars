@@ -11,7 +11,7 @@ import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 describe('LavaFlowsAres', function() {
   let card : LavaFlowsAres; let player : Player; let game : Game;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new LavaFlowsAres();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

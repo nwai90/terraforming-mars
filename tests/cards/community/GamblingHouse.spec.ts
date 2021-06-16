@@ -9,7 +9,7 @@ import {TestingUtils} from '../../TestingUtils';
 describe('GamblingHouse', function() {
   let card : GamblingHouse; let player : Player; let game : Game;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new GamblingHouse();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

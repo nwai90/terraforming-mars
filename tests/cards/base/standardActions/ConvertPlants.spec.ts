@@ -11,7 +11,7 @@ import {Reds} from '../../../../src/turmoil/parties/Reds';
 describe('ConvertPlants', function() {
   let card: ConvertPlants; let player: Player;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new ConvertPlants();
     player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();

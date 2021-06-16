@@ -13,7 +13,7 @@ import {BoardType} from '../../../src/boards/BoardType';
 describe('MiningGuild', function() {
   let card : MiningGuild; let player : Player; let player2 : Player; let game: Game;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new MiningGuild();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();

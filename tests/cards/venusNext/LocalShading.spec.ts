@@ -8,7 +8,7 @@ import {TestPlayers} from '../../TestPlayers';
 describe('LocalShading', function() {
   let card : LocalShading; let player : Player;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new LocalShading();
     player = TestPlayers.BLUE.newPlayer();
   });

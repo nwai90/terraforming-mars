@@ -11,7 +11,7 @@ import {Tags} from '../../../src/cards/Tags';
 describe('MarsFirst', function() {
   let player : Player; let game : Game; let turmoil: Turmoil; let marsFirst: MarsFirst;
 
-  beforeEach(function() {
+  beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
     const gameOptions = TestingUtils.setCustomGameOptions();
     game = Game.newInstance('foobar', [player], player, gameOptions);

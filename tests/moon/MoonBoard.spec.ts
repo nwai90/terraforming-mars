@@ -6,7 +6,7 @@ import {MoonSpaces} from '../../src/moon/MoonSpaces';
 describe('MoonBoard', function() {
   let board : MoonBoard;
 
-  beforeEach(function() {
+  beforeEach(() => {
     board = MoonBoard.newInstance();
   });
 

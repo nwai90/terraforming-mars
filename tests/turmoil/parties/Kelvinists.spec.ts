@@ -12,7 +12,7 @@ import {Resources} from '../../../src/Resources';
 describe('Kelvinists', function() {
   let player : Player; let game : Game; let turmoil: Turmoil; let kelvinists: Kelvinists;
 
-  beforeEach(function() {
+  beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
     const gameOptions = TestingUtils.setCustomGameOptions();
     game = Game.newInstance('foobar', [player], player, gameOptions);

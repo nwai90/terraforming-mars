@@ -8,7 +8,7 @@ import {TestPlayers} from '../../TestPlayers';
 describe('Hackers', function() {
   let card : Hackers; let player : Player;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Hackers();
     player = TestPlayers.BLUE.newPlayer();
     Game.newInstance('foobar', [player], player);

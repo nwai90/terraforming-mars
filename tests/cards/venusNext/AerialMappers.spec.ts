@@ -11,7 +11,7 @@ import {TestPlayers} from '../../TestPlayers';
 describe('AerialMappers', function() {
   let card : AerialMappers; let player : Player;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new AerialMappers();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

@@ -12,7 +12,7 @@ import {TestPlayers} from '../../TestPlayers';
 describe('Cultural Metropolis', function() {
   let card : CulturalMetropolis; let player : Player; let player2 : Player; let game : Game; let turmoil: Turmoil; ;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new CulturalMetropolis();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();

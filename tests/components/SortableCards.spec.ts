@@ -28,7 +28,7 @@ describe('SortableCards', function() {
   after(function() {
     (global as any).localStorage = undefined;
   });
-  beforeEach(function() {
+  beforeEach(() => {
     expectedStorage = {};
   });
   it('allows sorting after initial loading with no local storage', async function() {

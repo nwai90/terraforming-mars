@@ -14,7 +14,7 @@ import {TestPlayers} from '../../TestPlayers';
 describe('MaxwellBase', function() {
   let card : MaxwellBase; let player : Player; let game : Game;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new MaxwellBase();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

@@ -12,7 +12,7 @@ import {TestPlayers} from '../../TestPlayers';
 describe('SelfReplicatingRobots', function() {
   let card : SelfReplicatingRobots; let player : Player;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new SelfReplicatingRobots();
     player = TestPlayers.BLUE.newPlayer();
     Game.newInstance('foobar', [player], player);

@@ -11,7 +11,7 @@ import {Reds} from '../../../../src/turmoil/parties/Reds';
 describe('ConvertHeat', function() {
   let card: ConvertHeat; let player: Player;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new ConvertHeat();
     player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();

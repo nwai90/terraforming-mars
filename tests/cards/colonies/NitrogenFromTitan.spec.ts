@@ -11,7 +11,7 @@ import {TestPlayers} from '../../TestPlayers';
 describe('NitrogenFromTitan', function() {
   let card : NitrogenFromTitan; let player : Player; let game : Game;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new NitrogenFromTitan();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

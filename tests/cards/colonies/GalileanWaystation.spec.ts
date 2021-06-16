@@ -12,7 +12,7 @@ import {TestPlayers} from '../../TestPlayers';
 describe('GalileanWaystation', function() {
   let card : GalileanWaystation; let player : Player; let player2: Player;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new GalileanWaystation();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();

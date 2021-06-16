@@ -10,7 +10,7 @@ import {TestPlayers} from '../TestPlayers';
 describe('SnowCover', function() {
   let card : SnowCover; let player : Player; let player2: Player; let game : Game; let turmoil: Turmoil;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new SnowCover();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();

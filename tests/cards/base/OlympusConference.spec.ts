@@ -13,7 +13,7 @@ import {TestPlayers} from '../../TestPlayers';
 describe('OlympusConference', function() {
   let card : OlympusConference; let player : TestPlayer; let game : Game;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new OlympusConference();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

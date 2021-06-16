@@ -17,7 +17,7 @@ describe('Landlord', () => {
   let player: Player; let otherPlayer: Player; let game : Game;
   const award = new Landlord();
 
-  beforeEach(function() {
+  beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
     otherPlayer = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, otherPlayer], player, ARES_OPTIONS_NO_HAZARDS);

@@ -9,7 +9,7 @@ import {TestPlayers} from '../../TestPlayers';
 describe('ButterflyEffect', function() {
   let card: ButterflyEffect; let player: Player; let game: Game;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new ButterflyEffect();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

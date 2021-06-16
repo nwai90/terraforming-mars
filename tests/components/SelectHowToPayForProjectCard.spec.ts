@@ -32,7 +32,7 @@ describe('SelectHowToPayForProjectCard', function() {
   after(function() {
     (global as any).localStorage = undefined;
   });
-  beforeEach(function() {
+  beforeEach(() => {
     expectedStorage = {};
   });
   it('uses sort order for cards', async function() {

@@ -11,7 +11,7 @@ import {TestingUtils} from './../../TestingUtils';
 describe('CometAiming', function() {
   let card : CometAiming; let player : Player;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new CometAiming();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

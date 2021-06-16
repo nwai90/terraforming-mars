@@ -13,7 +13,7 @@ import {TestPlayers} from '../../TestPlayers';
 describe('ImportedHydrogen', function() {
   let card : ImportedHydrogen; let player : Player;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new ImportedHydrogen();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

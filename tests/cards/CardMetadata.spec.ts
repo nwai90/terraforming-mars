@@ -9,7 +9,7 @@ import {TestPlayers} from '../TestPlayers';
 describe('CardMetadata', function() {
   let player : Player;
 
-  beforeEach(function() {
+  beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     Game.newInstance('foobar', [player, redPlayer], player, TestingUtils.setCustomGameOptions({moonExpansion: true}));

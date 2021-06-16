@@ -13,7 +13,7 @@ import {TestPlayers} from '../../TestPlayers';
 describe('ProjectInspection', function() {
   let card : ProjectInspection; let player : Player; let restrictedArea: RestrictedArea;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new ProjectInspection();
     player = TestPlayers.BLUE.newPlayer();
     Game.newInstance('foobar', [player], player);

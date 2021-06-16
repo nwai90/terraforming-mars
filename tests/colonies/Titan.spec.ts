@@ -10,7 +10,7 @@ import {TestPlayers} from '../TestPlayers';
 describe('Titan', function() {
   let titan: Titan; let aerialMappers: AerialMappers; let player: Player; let player2: Player; let game: Game;
 
-  beforeEach(function() {
+  beforeEach(() => {
     titan = new Titan();
     aerialMappers = new AerialMappers();
     player = TestPlayers.BLUE.newPlayer();

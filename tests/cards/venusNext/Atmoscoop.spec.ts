@@ -15,7 +15,7 @@ import {TestPlayers} from '../../TestPlayers';
 describe('Atmoscoop', function() {
   let card : Atmoscoop; let player : Player; let game : Game; let dirigibles: Dirigibles; let floatingHabs: FloatingHabs;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Atmoscoop();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

@@ -12,7 +12,7 @@ import {TestPlayers} from './TestPlayers';
 describe('PoliticalAgendas', () => {
   let player : Player; let player2 : Player; let game : Game; let turmoil: Turmoil;
 
-  beforeEach(function() {
+  beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
   });

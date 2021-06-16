@@ -7,7 +7,7 @@ import {TestPlayers} from '../../TestPlayers';
 describe('BiosphereSupport', function() {
   let card : BiosphereSupport; let player : Player;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new BiosphereSupport();
     player = TestPlayers.BLUE.newPlayer();
   });

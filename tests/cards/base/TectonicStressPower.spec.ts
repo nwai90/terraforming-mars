@@ -9,7 +9,7 @@ import {TestPlayers} from '../../TestPlayers';
 describe('TectonicStressPower', function() {
   let card : TectonicStressPower; let player : TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new TectonicStressPower();
     player = TestPlayers.BLUE.newPlayer();
     Game.newInstance('foobar', [player], player);

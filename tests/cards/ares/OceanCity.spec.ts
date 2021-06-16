@@ -13,7 +13,7 @@ import {SpaceBonus} from '../../../src/SpaceBonus';
 describe('OceanCity', function() {
   let card: OceanCity; let player: Player; let game: Game;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new OceanCity();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

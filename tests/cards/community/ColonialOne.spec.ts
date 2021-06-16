@@ -11,7 +11,7 @@ import {ColonyName} from '../../../src/colonies/ColonyName';
 describe('ColonialOne', function() {
   let card : ColonialOne; let player : Player; let game : Game;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new ColonialOne();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

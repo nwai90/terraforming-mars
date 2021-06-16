@@ -21,7 +21,7 @@ describe('CardRequirements', function() {
   let player: Player; let player2: Player;
   const adaptationTechnology = new AdaptationTechnology();
 
-  beforeEach(function() {
+  beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
     const gameOptions = TestingUtils.setCustomGameOptions();

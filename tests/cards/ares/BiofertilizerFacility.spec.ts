@@ -17,7 +17,7 @@ describe('BiofertilizerFacility', function() {
   let scienceTagCard: IProjectCard = new AICentral();
   let microbeHost: IProjectCard = new Ants();
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new BiofertilizerFacility();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

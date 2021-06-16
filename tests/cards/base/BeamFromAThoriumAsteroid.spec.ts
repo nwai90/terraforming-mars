@@ -8,7 +8,7 @@ import {TestPlayers} from '../../TestPlayers';
 describe('BeamFromAThoriumAsteroid', function() {
   let card : BeamFromAThoriumAsteroid; let player : TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new BeamFromAThoriumAsteroid();
     player = TestPlayers.BLUE.newPlayer();
     Game.newInstance('foobar', [player], player);

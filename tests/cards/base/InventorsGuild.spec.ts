@@ -9,7 +9,7 @@ import {TestPlayers} from '../../TestPlayers';
 describe('InventorsGuild', function() {
   let card : InventorsGuild; let player : Player; let game : Game;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new InventorsGuild();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

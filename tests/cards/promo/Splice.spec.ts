@@ -12,7 +12,7 @@ import {TestPlayers} from '../../TestPlayers';
 describe('Splice', function() {
   let card : Splice; let player : Player; let player2 : Player;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Splice();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();

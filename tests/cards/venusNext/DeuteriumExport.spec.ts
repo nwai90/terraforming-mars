@@ -9,7 +9,7 @@ import {TestPlayers} from '../../TestPlayers';
 describe('DeuteriumExport', function() {
   let card : DeuteriumExport; let player : Player;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new DeuteriumExport();
     player = TestPlayers.BLUE.newPlayer();
     Game.newInstance('foobar', [player], player);

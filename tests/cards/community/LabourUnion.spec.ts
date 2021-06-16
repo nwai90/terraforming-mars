@@ -10,7 +10,7 @@ import {TestPlayers} from '../../TestPlayers';
 describe('LabourUnion', function() {
   let card : LabourUnion; let player : Player; let game: Game;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new LabourUnion();
     player = TestPlayers.BLUE.newPlayer();
     game = Game.newInstance('foobar', [player], player);

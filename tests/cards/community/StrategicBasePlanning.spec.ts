@@ -13,7 +13,7 @@ import {Iapetus} from '../../../src/cards/community/colonies/Iapetus';
 describe('StrategicBasePlanning', function() {
   let card : StrategicBasePlanning; let player : Player; let player2 : Player; let game : Game;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new StrategicBasePlanning();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();

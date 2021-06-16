@@ -8,7 +8,7 @@ import {TestPlayers} from '../../TestPlayers';
 describe('GeneRepair', function() {
   let card : GeneRepair; let player : TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new GeneRepair();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

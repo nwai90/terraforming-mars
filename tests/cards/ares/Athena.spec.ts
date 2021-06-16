@@ -11,7 +11,7 @@ import {HAZARD_TILES} from '../../../src/TileType';
 describe('Athena', function() {
   let card : Athena; let player : Player; let player2 : Player; let game : Game;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Athena();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();

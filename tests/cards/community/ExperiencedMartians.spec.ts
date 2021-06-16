@@ -11,7 +11,7 @@ import {SelectPartyToSendDelegate} from '../../../src/inputs/SelectPartyToSendDe
 describe('ExperiencedMartians', function() {
   let card : ExperiencedMartians; let player : Player; let game : Game;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new ExperiencedMartians();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
