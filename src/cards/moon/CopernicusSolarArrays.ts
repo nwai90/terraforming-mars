@@ -14,6 +14,7 @@ export class CopernicusSolarArrays extends MoonCard {
       cardType: CardType.AUTOMATED,
       tags: [Tags.ENERGY, Tags.SPACE],
       cost: 8,
+      reserveUnits: Units.of({titanium: 1}),
 
       metadata: {
 
@@ -27,8 +28,6 @@ export class CopernicusSolarArrays extends MoonCard {
           b.production((pb) => pb.energy(1));
         }),
       },
-    }, {
-      reserveUnits: Units.of({titanium: 1}),
     });
   };
 

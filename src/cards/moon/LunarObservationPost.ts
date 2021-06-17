@@ -19,6 +19,7 @@ export class LunarObservationPost extends MoonCard implements IActionCard {
       cost: 7,
       productionBox: Units.of({}),
       resourceType: ResourceType.DATA,
+      reserveUnits: Units.of({titanium: 1}),
       metadata: {
         description: 'Spend 1 titanium. 1 VP for every 3 data resources here.',
         cardNumber: 'M22',
@@ -31,8 +32,6 @@ export class LunarObservationPost extends MoonCard implements IActionCard {
         }),
         victoryPoints: CardRenderDynamicVictoryPoints.data(1, 3),
       },
-    }, {
-      reserveUnits: Units.of({titanium: 1}),
     });
   }
 
