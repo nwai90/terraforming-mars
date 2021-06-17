@@ -5,7 +5,7 @@ import {IMilestone} from "../IMilestone";
 
 export class Irrigator implements IMilestone {
   public name: string = 'Irrigator';
-  public description: string = 'Have at least 4 tiles adjacent to oceans'
+  public description: string = 'Have 4 tiles adjacent to oceans'
 
   public getScore(player: Player): number {
     return player.game.board.spaces.filter((space) =>

@@ -2,12 +2,12 @@ import {Tags} from "../../cards/Tags";
 import {Player} from "../../Player";
 import {IMilestone} from "../IMilestone";
 
-export class Electrician implements IMilestone {
-  public name: string = 'Electrician';
-  public description: string = 'Have 4 Power tags'
+export class Morningstar implements IMilestone {
+  public name: string = 'Morningstar';
+  public description: string = 'Have 4 Venus tags'
 
   public getScore(player: Player): number {
-    return player.getTagCount(Tags.ENERGY);
+    return player.getTagCount(Tags.VENUS);
   }
 
   public canClaim(player: Player): boolean {

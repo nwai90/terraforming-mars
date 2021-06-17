@@ -1,4 +1,9 @@
-import {ARES_AWARDS, Awards, ELYSIUM_AWARDS, HELLAS_AWARDS, MOON_AWARDS, ORIGINAL_AWARDS, VASTITAS_BOREALIS_AWARDS, VENUS_AWARDS} from './awards/Awards';
+import {Generator} from './awards/arabiaTerra/Generator';
+import {Highlander} from './awards/arabiaTerra/Highlander';
+import {Producer} from './awards/arabiaTerra/Producer';
+import {Purist} from './awards/arabiaTerra/Purist';
+import {Worker} from './awards/arabiaTerra/Worker';
+import {ARABIA_TERRA_AWARDS, ARES_AWARDS, Awards, ELYSIUM_AWARDS, HELLAS_AWARDS, MOON_AWARDS, ORIGINAL_AWARDS, VASTITAS_BOREALIS_AWARDS, VENUS_AWARDS} from './awards/Awards';
 import {Banker} from './awards/Banker';
 import {Benefactor} from './awards/Benefactor';
 import {Celebrity} from './awards/Celebrity';
@@ -23,6 +28,11 @@ import {Venuphile} from './awards/Venuphile';
 import {BoardName} from './boards/BoardName';
 import {GameOptions} from './Game';
 import {IDrawnMilestonesAndAwards} from './IDrawnMilestonesAndAwards';
+import {Frontrunner} from './milestones/arabiaTerra/Frontrunner';
+import {Herbalist} from './milestones/arabiaTerra/Herbalist';
+import {Morningstar} from './milestones/arabiaTerra/Morningstar';
+import {Protagonist} from './milestones/arabiaTerra/Protagonist';
+import {Researcher} from './milestones/arabiaTerra/Researcher';
 import {Builder} from './milestones/Builder';
 import {Diversifier} from './milestones/Diversifier';
 import {Ecologist} from './milestones/Ecologist';
@@ -32,7 +42,7 @@ import {Generalist} from './milestones/Generalist';
 import {Hoverlord} from './milestones/Hoverlord';
 import {IMilestone} from './milestones/IMilestone';
 import {Mayor} from './milestones/Mayor';
-import {ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, Milestones, MOON_MILESTONES, ORIGINAL_MILESTONES, VASTITAS_BOREALIS_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
+import {ARABIA_TERRA_MILESTONES, ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, Milestones, MOON_MILESTONES, ORIGINAL_MILESTONES, VASTITAS_BOREALIS_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
 import {Networker} from './milestones/Networker';
 import {Planner} from './milestones/Planner';
 import {PolarExplorer} from './milestones/PolarExplorer';
@@ -228,6 +238,46 @@ export namespace MilestoneAwardSelector {
       bind(Naturalist, Cultivator, 3);
       bind(Naturalist, Edgedancer, 1);
 
+      bind(Morningstar, Tycoon, 1);
+      bind(Morningstar, Hoverlord, 4);
+      bind(Morningstar, Venuphile, 9);
+      bind(Morningstar, Researcher, 1);
+
+      bind(Highlander, Mayor, 3);
+      bind(Highlander, Gardener, 3);
+      bind(Highlander, Landlord, 8);
+      bind(Highlander, DesertSettler, 6);
+      bind(Highlander, Cultivator, 8);
+
+      bind(Herbalist, Gardener, 8);
+      bind(Herbalist, PolarExplorer, 4);
+      bind(Herbalist, Irrigator, 3);
+
+      bind(Frontrunner, Ecologist, 1);
+      bind(Frontrunner, Tycoon, 1);
+      bind(Frontrunner, Diversifier, 1);
+      bind(Frontrunner, Tactician, 1);
+
+      bind(Generator, Specialist, 1);
+      bind(Generator, Energizer, 6);
+      bind(Generator, Thermalist, 6);
+      bind(Generator, Industrialist, 7);
+      bind(Generator, Contractor, 4);
+
+      bind(Protagonist, Terraformer, 8);
+      bind(Protagonist, Gardener, 2);
+
+      bind(Researcher, Scientist, 9);
+
+      bind(Producer, Generalist, 3);
+      bind(Producer, Smith, 2);
+
+      bind(Purist, Benefactor, 2);
+
+      bind(Worker, Tycoon, 6);
+      bind(Worker, Excentric, 5);
+      bind(Worker, Hoverlord, 2);
+
       return synergies;
     }
   }
@@ -294,7 +344,6 @@ export namespace MilestoneAwardSelector {
       switch (gameOptions.boardName) {
       case BoardName.ORIGINAL:
       case BoardName.AMAZONIS:
-      case BoardName.ARABIA_TERRA:
       case BoardName.TERRA_CIMMERIA:
         drawnMilestonesAndAwards.milestones.push(...ORIGINAL_MILESTONES);
         drawnMilestonesAndAwards.awards.push(...ORIGINAL_AWARDS);
@@ -302,6 +351,10 @@ export namespace MilestoneAwardSelector {
       case BoardName.VASTITAS_BOREALIS:
         drawnMilestonesAndAwards.milestones.push(...VASTITAS_BOREALIS_MILESTONES);
         drawnMilestonesAndAwards.awards.push(...VASTITAS_BOREALIS_AWARDS);
+        break;
+      case BoardName.ARABIA_TERRA:
+        drawnMilestonesAndAwards.milestones.push(...ARABIA_TERRA_MILESTONES);
+        drawnMilestonesAndAwards.awards.push(...ARABIA_TERRA_AWARDS);
         break;
       case BoardName.HELLAS:
         drawnMilestonesAndAwards.milestones.push(...HELLAS_MILESTONES);
@@ -363,8 +416,8 @@ export namespace MilestoneAwardSelector {
     const toName = (e: {name: string}) => e.name;
 
     // TODO: Add a game option to decide whether to include unofficial MAs or not
-    const candidateMilestones = [...ORIGINAL_MILESTONES, ...ELYSIUM_MILESTONES, ...HELLAS_MILESTONES, ...VASTITAS_BOREALIS_MILESTONES].map(toName);
-    const candidateAwards = [...ORIGINAL_AWARDS, ...ELYSIUM_AWARDS, ...HELLAS_AWARDS, ...VASTITAS_BOREALIS_AWARDS].map(toName);
+    const candidateMilestones = [...ORIGINAL_MILESTONES, ...ELYSIUM_MILESTONES, ...HELLAS_MILESTONES, ...VASTITAS_BOREALIS_MILESTONES, ...ARABIA_TERRA_MILESTONES].map(toName);
+    const candidateAwards = [...ORIGINAL_AWARDS, ...ELYSIUM_AWARDS, ...HELLAS_AWARDS, ...VASTITAS_BOREALIS_AWARDS, ...ARABIA_TERRA_AWARDS].map(toName);
 
     if (gameOptions.venusNextExtension) {
       candidateMilestones.push(...VENUS_MILESTONES.map(toName));

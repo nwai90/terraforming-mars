@@ -23,6 +23,11 @@ import {Smith} from './vastitasBorealis/Smith';
 import {Irrigator} from './vastitasBorealis/Irrigator';
 import {Capitalist} from './vastitasBorealis/Capitalist';
 import {Tradesman} from './vastitasBorealis/Tradesman';
+import {Frontrunner} from './arabiaTerra/Frontrunner';
+import {Herbalist} from './arabiaTerra/Herbalist';
+import {Morningstar} from './arabiaTerra/Morningstar';
+import {Protagonist} from './arabiaTerra/Protagonist';
+import {Researcher} from './arabiaTerra/Researcher';
 
 export const ORIGINAL_MILESTONES: Array<IMilestone> = [
   new Terraformer(),
@@ -53,12 +58,20 @@ export const HELLAS_MILESTONES: Array<IMilestone> = [
 ];
 
 export const VASTITAS_BOREALIS_MILESTONES: Array<IMilestone> = [
-    new Electrician(),
-    new Smith(),
-    new Tradesman(),
-    new Irrigator(),
-    new Capitalist(),
-  ];
+  new Electrician(),
+  new Smith(),
+  new Tradesman(),
+  new Irrigator(),
+  new Capitalist(),
+];
+
+export const ARABIA_TERRA_MILESTONES: Array<IMilestone> = [
+  new Frontrunner(),
+  new Herbalist(),
+  new Morningstar(),
+  new Protagonist(),
+  new Researcher(),
+];
 
 export const ARES_MILESTONES: Array<IMilestone> = [
   new Networker(),
@@ -74,9 +87,11 @@ export const ALL_MILESTONES: Array<IMilestone> = [
   ...ELYSIUM_MILESTONES,
   ...HELLAS_MILESTONES,
   ...VASTITAS_BOREALIS_MILESTONES,
+  ...ARABIA_TERRA_MILESTONES,
   ...VENUS_MILESTONES,
   ...ARES_MILESTONES,
-  ...MOON_MILESTONES];
+  ...MOON_MILESTONES,
+];
 
 export namespace Milestones {
   export const ALL = ALL_MILESTONES;

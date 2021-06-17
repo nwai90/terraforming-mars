@@ -23,6 +23,11 @@ import {Edgedancer} from './vastitasBorealis/Edgedancer';
 import {Hoarder} from './vastitasBorealis/Hoarder';
 import {Naturalist} from './vastitasBorealis/Naturalist';
 import {Voyager} from './vastitasBorealis/Voyager';
+import {Generator} from './arabiaTerra/Generator';
+import {Highlander} from './arabiaTerra/Highlander';
+import {Producer} from './arabiaTerra/Producer';
+import {Purist} from './arabiaTerra/Purist';
+import {Worker} from './arabiaTerra/Worker';
 
 export const ORIGINAL_AWARDS: Array<IAward> = [
   new Landlord(),
@@ -53,12 +58,20 @@ export const HELLAS_AWARDS: Array<IAward> = [
 ];
 
 export const VASTITAS_BOREALIS_AWARDS: Array<IAward> = [
-    new Adapter(),
-    new Edgedancer(),
-    new Hoarder(),
-    new Naturalist(),
-    new Voyager(),
-  ];
+  new Adapter(),
+  new Edgedancer(),
+  new Hoarder(),
+  new Naturalist(),
+  new Voyager(),
+];
+
+export const ARABIA_TERRA_AWARDS: Array<IAward> = [
+  new Generator(),
+  new Highlander(),
+  new Producer(),
+  new Purist(),
+  new Worker(),
+];
 
 export const ARES_AWARDS: Array<IAward> = [
   new Entrepreneur(),
@@ -77,6 +90,7 @@ export const ALL_AWARDS: Array<IAward> = [
   ...ARES_AWARDS,
   ...MOON_AWARDS,
   ...VASTITAS_BOREALIS_AWARDS,
+  ...ARABIA_TERRA_AWARDS,
 ];
 
 export namespace Awards {
