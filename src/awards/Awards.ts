@@ -18,6 +18,11 @@ import {Contractor} from './Contractor';
 import {Entrepreneur} from './Entrepreneur';
 import {FullMoon} from '../moon/FullMoon';
 import {LunarMagnate} from '../moon/LunarMagnate';
+import {Adapter} from './vastitasBorealis/Adapter';
+import {Edgedancer} from './vastitasBorealis/Edgedancer';
+import {Hoarder} from './vastitasBorealis/Hoarder';
+import {Naturalist} from './vastitasBorealis/Naturalist';
+import {Voyager} from './vastitasBorealis/Voyager';
 
 export const ORIGINAL_AWARDS: Array<IAward> = [
   new Landlord(),
@@ -47,6 +52,14 @@ export const HELLAS_AWARDS: Array<IAward> = [
   new Contractor(),
 ];
 
+export const VASTITAS_BOREALIS_AWARDS: Array<IAward> = [
+    new Adapter(),
+    new Edgedancer(),
+    new Hoarder(),
+    new Naturalist(),
+    new Voyager(),
+  ];
+
 export const ARES_AWARDS: Array<IAward> = [
   new Entrepreneur(),
 ];
@@ -62,7 +75,9 @@ export const ALL_AWARDS: Array<IAward> = [
   ...HELLAS_AWARDS,
   ...VENUS_AWARDS,
   ...ARES_AWARDS,
-  ...MOON_AWARDS];
+  ...MOON_AWARDS,
+  ...VASTITAS_BOREALIS_AWARDS,
+];
 
 export namespace Awards {
   export const ALL = ALL_AWARDS;

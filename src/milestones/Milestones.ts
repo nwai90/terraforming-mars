@@ -18,6 +18,11 @@ import {RimSettler} from './RimSettler';
 import {Networker} from './Networker';
 import {OneGiantStep} from '../moon/OneGiantStep';
 import {Lunarchitect} from '../moon/Lunarchitect';
+import {Electrician} from './vastitasBorealis/Electrician';
+import {Smith} from './vastitasBorealis/Smith';
+import {Irrigator} from './vastitasBorealis/Irrigator';
+import {Capitalist} from './vastitasBorealis/Capitalist';
+import {Tradesman} from './vastitasBorealis/Tradesman';
 
 export const ORIGINAL_MILESTONES: Array<IMilestone> = [
   new Terraformer(),
@@ -47,6 +52,14 @@ export const HELLAS_MILESTONES: Array<IMilestone> = [
   new RimSettler(),
 ];
 
+export const VASTITAS_BOREALIS_MILESTONES: Array<IMilestone> = [
+    new Electrician(),
+    new Smith(),
+    new Tradesman(),
+    new Irrigator(),
+    new Capitalist(),
+  ];
+
 export const ARES_MILESTONES: Array<IMilestone> = [
   new Networker(),
 ];
@@ -60,6 +73,7 @@ export const ALL_MILESTONES: Array<IMilestone> = [
   ...ORIGINAL_MILESTONES,
   ...ELYSIUM_MILESTONES,
   ...HELLAS_MILESTONES,
+  ...VASTITAS_BOREALIS_MILESTONES,
   ...VENUS_MILESTONES,
   ...ARES_MILESTONES,
   ...MOON_MILESTONES];
