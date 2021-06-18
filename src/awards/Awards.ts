@@ -28,6 +28,11 @@ import {Highlander} from './arabiaTerra/Highlander';
 import {Producer} from './arabiaTerra/Producer';
 import {Purist} from './arabiaTerra/Purist';
 import {Worker} from './arabiaTerra/Worker';
+import {Biologist} from './terraCimmeria/Biologist';
+import {Economizer} from './terraCimmeria/Economizer';
+import {Politician} from './terraCimmeria/Politician';
+import {Urbanist} from './terraCimmeria/Urbanist';
+import {Warmonger} from './terraCimmeria/Warmonger';
 
 export const ORIGINAL_AWARDS: Array<IAward> = [
   new Landlord(),
@@ -73,6 +78,14 @@ export const ARABIA_TERRA_AWARDS: Array<IAward> = [
   new Worker(),
 ];
 
+export const TERRA_CIMMERIA_AWARDS: Array<IAward> = [
+  new Biologist(),
+  new Economizer(),
+  new Politician(),
+  new Urbanist(),
+  new Warmonger(),
+];
+
 export const ARES_AWARDS: Array<IAward> = [
   new Entrepreneur(),
 ];
@@ -91,6 +104,7 @@ export const ALL_AWARDS: Array<IAward> = [
   ...MOON_AWARDS,
   ...VASTITAS_BOREALIS_AWARDS,
   ...ARABIA_TERRA_AWARDS,
+  ...TERRA_CIMMERIA_AWARDS,
 ];
 
 export namespace Awards {

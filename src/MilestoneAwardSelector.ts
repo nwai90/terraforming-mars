@@ -3,7 +3,7 @@ import {Highlander} from './awards/arabiaTerra/Highlander';
 import {Producer} from './awards/arabiaTerra/Producer';
 import {Purist} from './awards/arabiaTerra/Purist';
 import {Worker} from './awards/arabiaTerra/Worker';
-import {ARABIA_TERRA_AWARDS, ARES_AWARDS, Awards, ELYSIUM_AWARDS, HELLAS_AWARDS, MOON_AWARDS, ORIGINAL_AWARDS, VASTITAS_BOREALIS_AWARDS, VENUS_AWARDS} from './awards/Awards';
+import {ARABIA_TERRA_AWARDS, ARES_AWARDS, Awards, ELYSIUM_AWARDS, HELLAS_AWARDS, MOON_AWARDS, ORIGINAL_AWARDS, TERRA_CIMMERIA_AWARDS, VASTITAS_BOREALIS_AWARDS, VENUS_AWARDS} from './awards/Awards';
 import {Banker} from './awards/Banker';
 import {Benefactor} from './awards/Benefactor';
 import {Celebrity} from './awards/Celebrity';
@@ -20,6 +20,9 @@ import {Magnate} from './awards/Magnate';
 import {Miner} from './awards/Miner';
 import {Scientist} from './awards/Scientist';
 import {SpaceBaron} from './awards/SpaceBaron';
+import {Biologist} from './awards/terraCimmeria/Biologist';
+import {Economizer} from './awards/terraCimmeria/Economizer';
+import {Urbanist} from './awards/terraCimmeria/Urbanist';
 import {Thermalist} from './awards/Thermalist';
 import {Adapter} from './awards/vastitasBorealis/Adapter';
 import {Edgedancer} from './awards/vastitasBorealis/Edgedancer';
@@ -41,14 +44,18 @@ import {Gardener} from './milestones/Gardener';
 import {Generalist} from './milestones/Generalist';
 import {Hoverlord} from './milestones/Hoverlord';
 import {IMilestone} from './milestones/IMilestone';
+import {Legend} from './milestones/Legend';
 import {Mayor} from './milestones/Mayor';
-import {ARABIA_TERRA_MILESTONES, ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, Milestones, MOON_MILESTONES, ORIGINAL_MILESTONES, VASTITAS_BOREALIS_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
+import {ARABIA_TERRA_MILESTONES, ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, Milestones, MOON_MILESTONES, ORIGINAL_MILESTONES, TERRA_CIMMERIA_MILESTONES, VASTITAS_BOREALIS_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
 import {Networker} from './milestones/Networker';
 import {Planner} from './milestones/Planner';
 import {PolarExplorer} from './milestones/PolarExplorer';
 import {RimSettler} from './milestones/RimSettler';
 import {Specialist} from './milestones/Specialist';
 import {Tactician} from './milestones/Tactician';
+import {Collector} from './milestones/terraCimmeria/Collector';
+import {Pioneer} from './milestones/terraCimmeria/Pioneer';
+import {Spacefarer} from './milestones/terraCimmeria/Spacefarer';
 import {Terraformer} from './milestones/Terraformer';
 import {Tycoon} from './milestones/Tycoon';
 import {Irrigator} from './milestones/vastitasBorealis/Irrigator';
@@ -205,6 +212,7 @@ export namespace MilestoneAwardSelector {
       bind(Tradesman, Hoverlord, 6);
       bind(Tradesman, Excentric, 8);
       bind(Tradesman, Venuphile, 4);
+      bind(Tradesman, Biologist, 3);
 
       bind(Irrigator, Mayor, 3);
       bind(Irrigator, Gardener, 3);
@@ -213,6 +221,7 @@ export namespace MilestoneAwardSelector {
       bind(Irrigator, DesertSettler, 5);
       bind(Irrigator, EstateDealer, 9);
       bind(Irrigator, Cultivator, 4);
+      bind(Irrigator, Pioneer, 1);
 
       bind(Adapter, Ecologist, 2);
       bind(Adapter, Tactician, 3);
@@ -238,6 +247,7 @@ export namespace MilestoneAwardSelector {
       bind(Naturalist, Cultivator, 3);
       bind(Naturalist, Edgedancer, 1);
 
+      // Arabia Terra
       bind(Morningstar, Tycoon, 1);
       bind(Morningstar, Hoverlord, 4);
       bind(Morningstar, Venuphile, 9);
@@ -277,6 +287,43 @@ export namespace MilestoneAwardSelector {
       bind(Worker, Tycoon, 6);
       bind(Worker, Excentric, 5);
       bind(Worker, Hoverlord, 2);
+
+      // Terra Cimmeria
+      bind(Spacefarer, Generalist, 1);
+      bind(Spacefarer, Specialist, 1);
+      bind(Spacefarer, Tycoon, 2);
+      bind(Spacefarer, RimSettler, 4);
+      bind(Spacefarer, Magnate, 1);
+      bind(Spacefarer, SpaceBaron, 9);
+
+      bind(Pioneer, Mayor, 8);
+      bind(Pioneer, Gardener, 8);
+      bind(Pioneer, PolarExplorer, 8);
+      bind(Pioneer, Landlord, 6);
+      bind(Pioneer, DesertSettler, 6);
+      bind(Pioneer, EstateDealer, 3);
+
+      bind(Biologist, Ecologist, 4);
+      bind(Biologist, Excentric, 4);
+
+      bind(Urbanist, Mayor, 6);
+      bind(Urbanist, Gardener, 6);
+      bind(Urbanist, Landlord, 7);
+      bind(Urbanist, DesertSettler, 1);
+      bind(Urbanist, EstateDealer, 1);
+      bind(Urbanist, Cultivator, 7);
+      bind(Urbanist, Irrigator, 1);
+      bind(Urbanist, Pioneer, 2);
+
+      bind(Collector, Tycoon, 6);
+      bind(Collector, Legend, 6);
+      bind(Collector, Tactician, 2);
+      bind(Collector, Magnate, 2);
+
+      bind(Economizer, Planner, 2);
+      bind(Economizer, Tycoon, 2);
+      bind(Economizer, Excentric, 2);
+      bind(Economizer, Biologist, 2);
 
       return synergies;
     }
@@ -344,7 +391,6 @@ export namespace MilestoneAwardSelector {
       switch (gameOptions.boardName) {
       case BoardName.ORIGINAL:
       case BoardName.AMAZONIS:
-      case BoardName.TERRA_CIMMERIA:
         drawnMilestonesAndAwards.milestones.push(...ORIGINAL_MILESTONES);
         drawnMilestonesAndAwards.awards.push(...ORIGINAL_AWARDS);
         break;
@@ -355,6 +401,10 @@ export namespace MilestoneAwardSelector {
       case BoardName.ARABIA_TERRA:
         drawnMilestonesAndAwards.milestones.push(...ARABIA_TERRA_MILESTONES);
         drawnMilestonesAndAwards.awards.push(...ARABIA_TERRA_AWARDS);
+        break;
+      case BoardName.TERRA_CIMMERIA:
+        drawnMilestonesAndAwards.milestones.push(...TERRA_CIMMERIA_MILESTONES);
+        drawnMilestonesAndAwards.awards.push(...TERRA_CIMMERIA_AWARDS);
         break;
       case BoardName.HELLAS:
         drawnMilestonesAndAwards.milestones.push(...HELLAS_MILESTONES);

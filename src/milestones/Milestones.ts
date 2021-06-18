@@ -28,6 +28,11 @@ import {Herbalist} from './arabiaTerra/Herbalist';
 import {Morningstar} from './arabiaTerra/Morningstar';
 import {Protagonist} from './arabiaTerra/Protagonist';
 import {Researcher} from './arabiaTerra/Researcher';
+import {Collector} from './terraCimmeria/Collector';
+import {Firestarter} from './terraCimmeria/Firestarter';
+import {Gambler} from './terraCimmeria/Gambler';
+import {Spacefarer} from './terraCimmeria/Spacefarer';
+import {Pioneer} from './terraCimmeria/Pioneer';
 
 export const ORIGINAL_MILESTONES: Array<IMilestone> = [
   new Terraformer(),
@@ -73,6 +78,14 @@ export const ARABIA_TERRA_MILESTONES: Array<IMilestone> = [
   new Researcher(),
 ];
 
+export const TERRA_CIMMERIA_MILESTONES: Array<IMilestone> = [
+  new Collector(),
+  new Firestarter(),
+  new Pioneer(),
+  new Spacefarer(),
+  new Gambler(),
+];
+
 export const ARES_MILESTONES: Array<IMilestone> = [
   new Networker(),
 ];
@@ -88,6 +101,7 @@ export const ALL_MILESTONES: Array<IMilestone> = [
   ...HELLAS_MILESTONES,
   ...VASTITAS_BOREALIS_MILESTONES,
   ...ARABIA_TERRA_MILESTONES,
+  ...TERRA_CIMMERIA_MILESTONES,
   ...VENUS_MILESTONES,
   ...ARES_MILESTONES,
   ...MOON_MILESTONES,

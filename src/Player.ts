@@ -177,6 +177,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   public totalSpend: number = 0;
   public endGenerationScores: Array<number> = [];
   public actionsTakenThisGame: number = 0;
+  public totalDelegatesPlaced: number = 0;
 
   constructor(
     public name: string,
@@ -2293,6 +2294,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       totalSpend: this.totalSpend,
       endGenerationScores: this.endGenerationScores,
       actionsTakenThisGame: this.actionsTakenThisGame,
+      totalDelegatesPlaced: this.totalDelegatesPlaced,
     };
     if (this.lastCardPlayed !== undefined) {
       result.lastCardPlayed = this.lastCardPlayed.name;
@@ -2342,6 +2344,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     player.titanium = d.titanium;
     player.titaniumProduction = d.titaniumProduction;
     player.titaniumValue = d.titaniumValue;
+    player.totalDelegatesPlaced = d.totalDelegatesPlaced;
     player.tradesThisGeneration = d.tradesThisTurn;
     player.turmoilPolicyActionUsed = d.turmoilPolicyActionUsed;
     player.politicalAgendasActionUsedCount = d.politicalAgendasActionUsedCount;

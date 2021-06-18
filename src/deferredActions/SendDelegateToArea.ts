@@ -62,6 +62,7 @@ export class SendDelegateToArea implements DeferredAction {
         }
       }
 
+      this.player.totalDelegatesPlaced += numDelegateToSend;
       this.player.game.log('${0} sent ${1} delegate(s) in ${2} area', (b) => b.player(this.player).number(numDelegateToSend).party(turmoil.getPartyByName(partyName)));
       return undefined;
     });

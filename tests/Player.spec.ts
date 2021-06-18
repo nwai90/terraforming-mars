@@ -270,6 +270,7 @@ describe('Player', function() {
       removingPlayers: [],
       removedFromPlayCards: [],
       heatProductionStepsIncreasedThisGeneration: 0,
+      totalDelegatesPlaced: 0,
       name: 'player-blue',
       color: 'purple' as Color,
       beginner: true,
