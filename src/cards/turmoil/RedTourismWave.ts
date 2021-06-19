@@ -43,13 +43,14 @@ export class RedTourismWave extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    const amount = player.game.board.getEmptySpaces().filter((space) =>
-      player.game.board.getAdjacentSpaces(space).some((adj) =>
-        adj.tile !== undefined && adj.player === player,
-      ),
-    ).length;
+    const amount = RedTourismWave.getAdjacentEmptySpacesCount(player);
     player.addResource(Resources.MEGACREDITS, amount);
     TurmoilHandler.handleSocietyPayment(player, PartyName.REDS);
     return undefined;
+  }
+
+  public static getAdjacentEmptySpacesCount(player: Player) {
+    const board = player.game.board;
+    return board.getEmptySpaces().filter((space) => board.getAdjacentSpaces(space).some((adj) => adj.tile !== undefined && adj.player === player)).length;
   }
 }

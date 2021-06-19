@@ -33,6 +33,11 @@ import {Firestarter} from './terraCimmeria/Firestarter';
 import {Gambler} from './terraCimmeria/Gambler';
 import {Spacefarer} from './terraCimmeria/Spacefarer';
 import {Pioneer} from './terraCimmeria/Pioneer';
+import {Colonizer} from './amazonisPlanitia/Colonizer';
+import {Farmer} from './amazonisPlanitia/Farmer';
+import {Minimalist} from './amazonisPlanitia/Minimalist';
+import {Terran} from './amazonisPlanitia/Terran';
+import {Tropicalist} from './amazonisPlanitia/Tropicalist';
 
 export const ORIGINAL_MILESTONES: Array<IMilestone> = [
   new Terraformer(),
@@ -86,6 +91,14 @@ export const TERRA_CIMMERIA_MILESTONES: Array<IMilestone> = [
   new Gambler(),
 ];
 
+export const AMAZONIS_PLANITIA_MILESTONES: Array<IMilestone> = [
+  new Colonizer(),
+  new Farmer(),
+  new Minimalist(),
+  new Terran(),
+  new Tropicalist(),
+];
+
 export const ARES_MILESTONES: Array<IMilestone> = [
   new Networker(),
 ];
@@ -102,6 +115,7 @@ export const ALL_MILESTONES: Array<IMilestone> = [
   ...VASTITAS_BOREALIS_MILESTONES,
   ...ARABIA_TERRA_MILESTONES,
   ...TERRA_CIMMERIA_MILESTONES,
+  ...AMAZONIS_PLANITIA_MILESTONES,
   ...VENUS_MILESTONES,
   ...ARES_MILESTONES,
   ...MOON_MILESTONES,

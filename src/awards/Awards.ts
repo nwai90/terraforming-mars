@@ -33,6 +33,11 @@ import {Economizer} from './terraCimmeria/Economizer';
 import {Politician} from './terraCimmeria/Politician';
 import {Urbanist} from './terraCimmeria/Urbanist';
 import {Warmonger} from './terraCimmeria/Warmonger';
+import {Curator} from './amazonisPlanitia/Curator';
+import {Historian} from './amazonisPlanitia/Historian';
+import {Tourist} from './amazonisPlanitia/Tourist';
+import {Zoologist} from './amazonisPlanitia/Zoologist';
+import {Engineer} from './amazonisPlanitia/Engineer';
 
 export const ORIGINAL_AWARDS: Array<IAward> = [
   new Landlord(),
@@ -86,6 +91,14 @@ export const TERRA_CIMMERIA_AWARDS: Array<IAward> = [
   new Warmonger(),
 ];
 
+export const AMAZONIS_PLANITIA_AWARDS: Array<IAward> = [
+  new Curator(),
+  new Engineer(),
+  new Historian(),
+  new Tourist(),
+  new Zoologist(),
+];
+
 export const ARES_AWARDS: Array<IAward> = [
   new Entrepreneur(),
 ];
@@ -105,6 +118,7 @@ export const ALL_AWARDS: Array<IAward> = [
   ...VASTITAS_BOREALIS_AWARDS,
   ...ARABIA_TERRA_AWARDS,
   ...TERRA_CIMMERIA_AWARDS,
+  ...AMAZONIS_PLANITIA_AWARDS,
 ];
 
 export namespace Awards {

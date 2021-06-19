@@ -1,9 +1,14 @@
+import {Curator} from './awards/amazonisPlanitia/Curator';
+import {Engineer} from './awards/amazonisPlanitia/Engineer';
+import {Historian} from './awards/amazonisPlanitia/Historian';
+import {Tourist} from './awards/amazonisPlanitia/Tourist';
+import {Zoologist} from './awards/amazonisPlanitia/Zoologist';
 import {Generator} from './awards/arabiaTerra/Generator';
 import {Highlander} from './awards/arabiaTerra/Highlander';
 import {Producer} from './awards/arabiaTerra/Producer';
 import {Purist} from './awards/arabiaTerra/Purist';
 import {Worker} from './awards/arabiaTerra/Worker';
-import {ARABIA_TERRA_AWARDS, ARES_AWARDS, Awards, ELYSIUM_AWARDS, HELLAS_AWARDS, MOON_AWARDS, ORIGINAL_AWARDS, TERRA_CIMMERIA_AWARDS, VASTITAS_BOREALIS_AWARDS, VENUS_AWARDS} from './awards/Awards';
+import {AMAZONIS_PLANITIA_AWARDS, ARABIA_TERRA_AWARDS, ARES_AWARDS, Awards, ELYSIUM_AWARDS, HELLAS_AWARDS, MOON_AWARDS, ORIGINAL_AWARDS, TERRA_CIMMERIA_AWARDS, VASTITAS_BOREALIS_AWARDS, VENUS_AWARDS} from './awards/Awards';
 import {Banker} from './awards/Banker';
 import {Benefactor} from './awards/Benefactor';
 import {Celebrity} from './awards/Celebrity';
@@ -31,6 +36,11 @@ import {Venuphile} from './awards/Venuphile';
 import {BoardName} from './boards/BoardName';
 import {GameOptions} from './Game';
 import {IDrawnMilestonesAndAwards} from './IDrawnMilestonesAndAwards';
+import {Colonizer} from './milestones/amazonisPlanitia/Colonizer';
+import {Farmer} from './milestones/amazonisPlanitia/Farmer';
+import {Minimalist} from './milestones/amazonisPlanitia/Minimalist';
+import {Terran} from './milestones/amazonisPlanitia/Terran';
+import {Tropicalist} from './milestones/amazonisPlanitia/Tropicalist';
 import {Frontrunner} from './milestones/arabiaTerra/Frontrunner';
 import {Herbalist} from './milestones/arabiaTerra/Herbalist';
 import {Morningstar} from './milestones/arabiaTerra/Morningstar';
@@ -46,7 +56,7 @@ import {Hoverlord} from './milestones/Hoverlord';
 import {IMilestone} from './milestones/IMilestone';
 import {Legend} from './milestones/Legend';
 import {Mayor} from './milestones/Mayor';
-import {ARABIA_TERRA_MILESTONES, ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, Milestones, MOON_MILESTONES, ORIGINAL_MILESTONES, TERRA_CIMMERIA_MILESTONES, VASTITAS_BOREALIS_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
+import {AMAZONIS_PLANITIA_MILESTONES, ARABIA_TERRA_MILESTONES, ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, Milestones, MOON_MILESTONES, ORIGINAL_MILESTONES, TERRA_CIMMERIA_MILESTONES, VASTITAS_BOREALIS_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
 import {Networker} from './milestones/Networker';
 import {Planner} from './milestones/Planner';
 import {PolarExplorer} from './milestones/PolarExplorer';
@@ -58,6 +68,7 @@ import {Pioneer} from './milestones/terraCimmeria/Pioneer';
 import {Spacefarer} from './milestones/terraCimmeria/Spacefarer';
 import {Terraformer} from './milestones/Terraformer';
 import {Tycoon} from './milestones/Tycoon';
+import { Electrician } from './milestones/vastitasBorealis/Electrician';
 import {Irrigator} from './milestones/vastitasBorealis/Irrigator';
 import {Smith} from './milestones/vastitasBorealis/Smith';
 import {Tradesman} from './milestones/vastitasBorealis/Tradesman';
@@ -202,7 +213,7 @@ export namespace MilestoneAwardSelector {
 
       // Vastitas Borealis
       bind(Smith, Generalist, 2);
-      bind(Smith, Specialist, 5);
+      bind(Smith, Specialist, 3);
       bind(Smith, RimSettler, 3);
       bind(Smith, Miner, 8);
       bind(Smith, Industrialist, 5);
@@ -213,6 +224,7 @@ export namespace MilestoneAwardSelector {
       bind(Tradesman, Excentric, 8);
       bind(Tradesman, Venuphile, 4);
       bind(Tradesman, Biologist, 3);
+      bind(Tradesman, Zoologist, 4);
 
       bind(Irrigator, Mayor, 3);
       bind(Irrigator, Gardener, 3);
@@ -234,6 +246,7 @@ export namespace MilestoneAwardSelector {
       bind(Edgedancer, EstateDealer, 1);
       bind(Edgedancer, Cultivator, 4);
       bind(Edgedancer, Irrigator, 1);
+      bind(Edgedancer, Farmer, 3);
 
       bind(Naturalist, Terraformer, 3);
       bind(Naturalist, Gardener, 2);
@@ -262,6 +275,7 @@ export namespace MilestoneAwardSelector {
       bind(Herbalist, Gardener, 8);
       bind(Herbalist, PolarExplorer, 4);
       bind(Herbalist, Irrigator, 3);
+      bind(Herbalist, Farmer, 8);
 
       bind(Frontrunner, Ecologist, 1);
       bind(Frontrunner, Tycoon, 1);
@@ -324,6 +338,69 @@ export namespace MilestoneAwardSelector {
       bind(Economizer, Tycoon, 2);
       bind(Economizer, Excentric, 2);
       bind(Economizer, Biologist, 2);
+
+      // Amazonis Planitia
+      bind(Colonizer, Generalist, 1);
+      bind(Colonizer, Minimalist, 6);
+      bind(Colonizer, Smith, 1);
+      bind(Colonizer, Collector, 1);
+
+      bind(Terran, Specialist, 3);
+      bind(Terran, Tycoon, 2);
+      bind(Terran, Magnate, 1);
+
+      bind(Farmer, Gardener, 3);
+      bind(Farmer, Generalist, 1);
+      bind(Farmer, Ecologist, 4);
+      bind(Farmer, Landlord, 2);
+      bind(Farmer, DesertSettler, 2);
+      bind(Farmer, EstateDealer, 2);
+      bind(Farmer, Cultivator, 3);
+      bind(Farmer, Irrigator, 1);
+      bind(Farmer, Pioneer, 1);
+
+      bind(Tropicalist, Mayor, 6);
+      bind(Tropicalist, Gardener, 6);
+      bind(Tropicalist, DesertSettler, 1);
+      bind(Tropicalist, Irrigator, 4);
+      bind(Tropicalist, Edgedancer, 2);
+      bind(Tropicalist, Highlander, 4);
+      bind(Tropicalist, EstateDealer, 6);
+      bind(Tropicalist, Pioneer, 9);
+
+      bind(Historian, Terraformer, 3);
+      bind(Historian, Legend, 7);
+      bind(Historian, Benefactor, 4);
+
+      bind(Zoologist, Ecologist, 4);
+      bind(Zoologist, Excentric, 9);
+      bind(Zoologist, Economizer, 5);
+      bind(Zoologist, Adapter, 6);
+
+      bind(Curator, Tycoon, 8);
+      bind(Curator, Magnate, 8);
+      bind(Curator, Diversifier, 3);
+
+      bind(Tourist, Highlander, 1);
+
+      bind(Engineer, Banker, 4);
+      bind(Engineer, Miner, 9);
+      bind(Engineer, Thermalist, 1);
+      bind(Engineer, Industrialist, 8);
+      bind(Engineer, Magnate, 3);
+      bind(Engineer, Contractor, 6);
+      bind(Engineer, SpaceBaron, 8);
+      bind(Engineer, Builder, 9);
+      bind(Engineer, Tycoon, 4);
+      bind(Engineer, Generalist, 3);
+      bind(Engineer, Naturalist, 3);
+      bind(Engineer, Generator, 5);
+      bind(Engineer, Producer, 3);
+      bind(Engineer, Electrician, 3);
+      bind(Engineer, Smith, 9);
+      bind(Engineer, Spacefarer, 8);
+      bind(Engineer, Farmer, 4);
+      bind(Engineer, Terran, 6);
 
       return synergies;
     }
@@ -390,7 +467,6 @@ export namespace MilestoneAwardSelector {
     case RandomMAOptionType.NONE:
       switch (gameOptions.boardName) {
       case BoardName.ORIGINAL:
-      case BoardName.AMAZONIS:
         drawnMilestonesAndAwards.milestones.push(...ORIGINAL_MILESTONES);
         drawnMilestonesAndAwards.awards.push(...ORIGINAL_AWARDS);
         break;
@@ -405,6 +481,10 @@ export namespace MilestoneAwardSelector {
       case BoardName.TERRA_CIMMERIA:
         drawnMilestonesAndAwards.milestones.push(...TERRA_CIMMERIA_MILESTONES);
         drawnMilestonesAndAwards.awards.push(...TERRA_CIMMERIA_AWARDS);
+        break;
+      case BoardName.AMAZONIS:
+        drawnMilestonesAndAwards.milestones.push(...AMAZONIS_PLANITIA_MILESTONES);
+        drawnMilestonesAndAwards.awards.push(...AMAZONIS_PLANITIA_AWARDS);
         break;
       case BoardName.HELLAS:
         drawnMilestonesAndAwards.milestones.push(...HELLAS_MILESTONES);
