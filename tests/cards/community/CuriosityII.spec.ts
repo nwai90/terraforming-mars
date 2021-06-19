@@ -1,5 +1,6 @@
 import {expect} from 'chai';
 import {OceanSanctuary} from '../../../src/cards/ares/OceanSanctuary';
+import {RoverConstruction} from '../../../src/cards/base/RoverConstruction';
 import {CuriosityII} from '../../../src/cards/community/corporations/CuriosityII';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
@@ -74,5 +75,27 @@ describe('CuriosityII', function() {
 
     expect(player.cardsInHand).has.lengthOf(1);
     expect(player.megaCredits).to.eq(0);
+  });
+
+  it('Rover Construction triggers before corporation effect', function() {
+    player.cardsInHand = [];
+    player.megaCredits = 1; // not enough M€ to buy a card
+    player.playedCards.push(new RoverConstruction());
+
+    const nonEmptySpace = game.board.getAvailableSpacesOnLand(player).find((space) => space.bonus.length > 0)!;
+    game.addCityTile(player, nonEmptySpace.id);
+    expect(game.deferredActions.length).to.eq(2);
+
+    // Rover Construction
+    game.deferredActions.runNext();
+    expect(player.megaCredits).to.eq(3);
+
+    // Curiosity II
+    const orOptions = game.deferredActions.pop()!.execute() as OrOptions;
+
+    orOptions.options[0].cb(); // Pay 2 M€ to draw a card
+    TestingUtils.runAllActions(game);
+    expect(player.cardsInHand).has.lengthOf(1);
+    expect(player.megaCredits).to.eq(1);
   });
 });

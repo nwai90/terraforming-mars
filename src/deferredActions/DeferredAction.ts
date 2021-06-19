@@ -16,6 +16,7 @@ export enum Priority {
   LOSE_RESOURCE_OR_PRODUCTION,
   DECREASE_COLONY_TRACK_AFTER_TRADE,
   DISCARD_CARDS,
+  PAY_TO_DRAW_CARDS, // Curiosity II
 }
 
 export class DeferredAction {
