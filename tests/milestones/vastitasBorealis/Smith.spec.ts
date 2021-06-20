@@ -13,7 +13,7 @@ describe('Smith', () => {
   });
 
   it('Can claim with 6 steel and titanium production', () => {
-    player.addProduction(Resources.STEEL, 4);
+    player.addProduction(Resources.STEEL, 5);
     player.addProduction(Resources.TITANIUM, 2);
     expect(milestone.canClaim(player)).is.true;
   });
