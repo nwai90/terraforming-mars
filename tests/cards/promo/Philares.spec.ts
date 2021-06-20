@@ -17,7 +17,7 @@ import {TestPlayers} from '../../TestPlayers';
 describe('Philares', function() {
   let card : Philares;
   let philaresPlayer : TestPlayer;
-  let redPlayer: TestPlayer;
+  let otherPlayer: TestPlayer;
   let game: Game;
   let space: ISpace;
   let adjacentSpace: ISpace;
@@ -26,8 +26,10 @@ describe('Philares', function() {
   beforeEach(() => {
     card = new Philares();
     philaresPlayer = TestPlayers.BLUE.newPlayer();
-    redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [philaresPlayer, redPlayer], philaresPlayer);
+    otherPlayer = TestPlayers.RED.newPlayer();
+
+    // otherPlayer is first for the final placement test.
+    game = Game.newInstance('foobar', [otherPlayer, philaresPlayer], otherPlayer);
     game.board = EmptyBoard.newInstance();
     space = game.board.spaces[4];
     adjacentSpace = game.board.getAdjacentSpaces(space)[0];
@@ -51,19 +53,19 @@ describe('Philares', function() {
   });
 
   it('Has bonus when placing next to opponent', () => {
-    game.addTile(redPlayer, SpaceType.LAND, space, {tileType: TileType.GREENERY});
+    game.addTile(otherPlayer, SpaceType.LAND, space, {tileType: TileType.GREENERY});
     game.addTile(philaresPlayer, SpaceType.LAND, adjacentSpace, {tileType: TileType.GREENERY});
     expect(game.deferredActions).has.length(1);
   });
 
   it('Has bonus when opponent places next to you', () => {
     game.addTile(philaresPlayer, SpaceType.LAND, space, {tileType: TileType.GREENERY});
-    game.addTile(redPlayer, SpaceType.LAND, adjacentSpace, {tileType: TileType.GREENERY});
+    game.addTile(otherPlayer, SpaceType.LAND, adjacentSpace, {tileType: TileType.GREENERY});
     expect(game.deferredActions).has.length(1);
   });
 
   it('Placing ocean tile does not grant bonus', () => {
-    game.addTile(redPlayer, SpaceType.LAND, space, {tileType: TileType.GREENERY});
+    game.addTile(otherPlayer, SpaceType.LAND, space, {tileType: TileType.GREENERY});
     adjacentSpace.spaceType = SpaceType.OCEAN; // Make this space an ocean space.
     game.addTile(philaresPlayer, SpaceType.OCEAN, adjacentSpace, {tileType: TileType.OCEAN});
     expect(game.deferredActions).has.length(0);
@@ -71,7 +73,7 @@ describe('Philares', function() {
 
   it('Placing next to ocean tile does not grant bonus', () => {
     space.spaceType = SpaceType.OCEAN; // Make this space an ocean space.
-    game.addTile(redPlayer, SpaceType.OCEAN, space, {tileType: TileType.OCEAN});
+    game.addTile(otherPlayer, SpaceType.OCEAN, space, {tileType: TileType.OCEAN});
     game.addTile(philaresPlayer, SpaceType.LAND, adjacentSpace, {tileType: TileType.GREENERY});
     expect(game.deferredActions).has.length(0);
   });
@@ -81,13 +83,13 @@ describe('Philares', function() {
     expect(game.deferredActions).has.length(0);
 
     game.phase = Phase.SOLAR;
-    game.addTile(redPlayer, SpaceType.LAND, adjacentSpace, {tileType: TileType.GREENERY});
+    game.addTile(otherPlayer, SpaceType.LAND, adjacentSpace, {tileType: TileType.GREENERY});
     expect(game.deferredActions).has.length(0);
   });
 
   it('One tile one bonus', () => {
     game.addTile(philaresPlayer, SpaceType.LAND, space, {tileType: TileType.GREENERY});
-    game.addTile(redPlayer, SpaceType.LAND, adjacentSpace, {tileType: TileType.GREENERY});
+    game.addTile(otherPlayer, SpaceType.LAND, adjacentSpace, {tileType: TileType.GREENERY});
     expect(game.deferredActions).has.length(1);
 
     const options = game.deferredActions.pop()!.execute() as AndOptions;
@@ -100,7 +102,7 @@ describe('Philares', function() {
 
   it('One tile one bonus - player is greedy', () => {
     game.addTile(philaresPlayer, SpaceType.LAND, space, {tileType: TileType.GREENERY});
-    game.addTile(redPlayer, SpaceType.LAND, adjacentSpace, {tileType: TileType.GREENERY});
+    game.addTile(otherPlayer, SpaceType.LAND, adjacentSpace, {tileType: TileType.GREENERY});
     expect(game.deferredActions).has.length(1);
 
     const options = game.deferredActions.pop()!.execute() as AndOptions;
@@ -112,8 +114,8 @@ describe('Philares', function() {
   });
 
   it('Multiple bonuses when placing next to multiple opponent tiles', () => {
-    game.addTile(redPlayer, SpaceType.LAND, adjacentSpace, {tileType: TileType.GREENERY});
-    game.addTile(redPlayer, SpaceType.LAND, adjacentSpace2, {tileType: TileType.GREENERY});
+    game.addTile(otherPlayer, SpaceType.LAND, adjacentSpace, {tileType: TileType.GREENERY});
+    game.addTile(otherPlayer, SpaceType.LAND, adjacentSpace2, {tileType: TileType.GREENERY});
     game.addTile(philaresPlayer, SpaceType.LAND, space, {tileType: TileType.GREENERY});
     expect(game.deferredActions).has.length(1);
 
@@ -129,7 +131,7 @@ describe('Philares', function() {
   it('Multiple bonuses when opponent places next to multiple of your tiles', () => {
     game.addTile(philaresPlayer, SpaceType.LAND, adjacentSpace, {tileType: TileType.GREENERY});
     game.addTile(philaresPlayer, SpaceType.LAND, adjacentSpace2, {tileType: TileType.GREENERY});
-    game.addTile(redPlayer, SpaceType.LAND, space, {tileType: TileType.GREENERY});
+    game.addTile(otherPlayer, SpaceType.LAND, space, {tileType: TileType.GREENERY});
     expect(game.deferredActions).has.length(1);
 
     const options = game.deferredActions.pop()!.execute() as AndOptions;
@@ -142,8 +144,8 @@ describe('Philares', function() {
   });
 
   it('Two tiles two bonuses - player is greedy', () => {
-    game.addTile(redPlayer, SpaceType.LAND, adjacentSpace, {tileType: TileType.GREENERY});
-    game.addTile(redPlayer, SpaceType.LAND, adjacentSpace2, {tileType: TileType.GREENERY});
+    game.addTile(otherPlayer, SpaceType.LAND, adjacentSpace, {tileType: TileType.GREENERY});
+    game.addTile(otherPlayer, SpaceType.LAND, adjacentSpace2, {tileType: TileType.GREENERY});
     game.addTile(philaresPlayer, SpaceType.LAND, space, {tileType: TileType.GREENERY});
     expect(game.deferredActions).has.length(1);
 
@@ -157,10 +159,8 @@ describe('Philares', function() {
   });
 
   it('Can place final greenery if gains enough plants from earlier players placing adjacent greeneries', function() {
-    // Setup end game with player2 as the first player, and Philares player with a tile on space 36
-    game = Game.newInstance('foobar', [philaresPlayer, redPlayer], redPlayer);
-    game.addGreenery(philaresPlayer, '36');
-    philaresPlayer.pickedCorporationCard = card;
+    // Setup Philares with an existing greenery tile which otherPlayer will place its greenery adjacent to later
+    game.addGreenery(philaresPlayer, space.id);
 
     // Max out all global parameters
     (game as any).temperature = MAX_TEMPERATURE;
@@ -169,23 +169,36 @@ describe('Philares', function() {
 
     // Setup plants for endgame
     philaresPlayer.plants = 7;
-    redPlayer.plants = 8;
+    otherPlayer.plants = 8;
 
     // First player final greenery placement, done adjacent to one of Philares' tiles
     game.gotoFinalGreeneryPlacement();
-    const firstPlayerGreeneryPlacement = redPlayer.getWaitingFor() as OrOptions;
+    const firstPlayerGreeneryPlacement = otherPlayer.getWaitingFor() as OrOptions;
 
+    // Option 1 is 'Don't place a greenery'
     // Don't place a greenery using the callback; add it directly via game.addGreenery() instead
     // Workaround for test since the greenery placement option auto resolves deferred action
     firstPlayerGreeneryPlacement.options[1].cb();
-    game.addGreenery(redPlayer, '35');
+    game.addGreenery(otherPlayer, adjacentSpace.id);
     expect(game.deferredActions).has.lengthOf(1);
 
     // Philares player gains plant and can subsequently place a greenery
     philaresPlayer.takeActionForFinalGreenery();
     const philaresPlayerResourceSelection = philaresPlayer.getWaitingFor() as AndOptions;
+
+    // Option 3 is plants.
     philaresPlayerResourceSelection.options[3].cb(1);
     philaresPlayerResourceSelection.cb();
     expect(philaresPlayer.plants).to.eq(8);
+
+    // Clear any existing waitingFor
+    (philaresPlayer as any).waitingFor = undefined;
+    (philaresPlayer as any).waitingForCb = undefined;
+    game.gotoFinalGreeneryPlacement();
+
+    // Philares player places final greenery, after which the game ends
+    const finalGreeneryPlacement = philaresPlayer.getWaitingFor() as OrOptions;
+    finalGreeneryPlacement.options[1].cb();
+    expect(game.phase).eq(Phase.END);
   });
 });

@@ -1114,54 +1114,36 @@ export class Game implements ISerializable<SerializedGame> {
     this.phase = Phase.END;
   }
 
+  // Part of final greenery placement.
   public canPlaceGreenery(player: Player): boolean {
     return !this.donePlayers.has(player.id) &&
             player.plants >= player.plantsNeededForGreenery &&
             this.board.getAvailableSpacesForGreenery(player).length > 0;
   }
 
+  // Called when a player has chosen not to place any more greeneries.
   public playerIsDoneWithGame(player: Player): void {
     this.donePlayers.add(player.id);
     this.gotoFinalGreeneryPlacement();
   }
 
+  // Finds the next player who can place a final greenery.
+  // this.getPlayers returns in turn order -- a necessary rule for final greenery placement.
   public gotoFinalGreeneryPlacement(): void {
-    const playersWithEnoughPlants: Player[] = [];
+    for (const player of this.getPlayers()) {
+      if (this.donePlayers.has(player.id)) continue;
 
-    this.players.forEach((player) => {
-      if (this.canPlaceGreenery(player) || (player.isCorporation(CardName.PHILARES) && !this.donePlayers.has(player.id))) {
-        // Allow conversion attempt if a player can place greeneries
-        // Always give Philares the opportunity if it is not done yet
-        // This allows Philares to be marked as done by player.takeActionForFinalGreenery
-        playersWithEnoughPlants.push(player);
+      if (this.canPlaceGreenery(player)) {
+        this.startFinalGreeneryPlacement(player);
+        return;
+      } else if (player.getWaitingFor() !== undefined) {
+        return;
       } else {
         this.donePlayers.add(player.id);
       }
-    });
+    };
 
-    // If no players can place greeneries we are done
-    if (playersWithEnoughPlants.length === 0) {
-      // Track player score stats
-      this.updateEndGenerationScores();
-      this.gotoEndGame();
-      return;
-    }
-
-    // iterate through players in order and allow them to convert plants
-    // into greenery if possible, there needs to be spaces available for
-    // greenery and the player needs enough plants
-    let firstPlayer: Player | undefined = this.first;
-    while (
-      firstPlayer !== undefined && playersWithEnoughPlants.includes(firstPlayer) === false
-    ) {
-      firstPlayer = this.getPlayerAfter(firstPlayer);
-    }
-
-    if (firstPlayer !== undefined) {
-      this.startFinalGreeneryPlacement(firstPlayer);
-    } else {
-      throw new Error('Was no player left to place final greenery');
-    }
+    this.gotoEndGame();
   }
 
   private startFinalGreeneryPlacement(player: Player) {
