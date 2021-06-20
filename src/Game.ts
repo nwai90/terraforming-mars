@@ -1143,6 +1143,7 @@ export class Game implements ISerializable<SerializedGame> {
       }
     };
 
+    this.updateEndGenerationScores();
     this.gotoEndGame();
   }
 
