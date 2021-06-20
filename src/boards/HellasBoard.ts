@@ -3,11 +3,16 @@ import {SpaceName} from '../SpaceName';
 import {Board} from './Board';
 import {Player} from '../Player';
 import {ISpace} from './ISpace';
-import {HELLAS_BONUS_OCEAN_COST} from '../constants';
+import {HELLAS_BONUS_OCEAN_COST, MAX_OCEAN_TILES} from '../constants';
 import {SpaceType} from '../SpaceType';
 import {BoardBuilder} from './BoardBuilder';
 import {SerializedBoard} from './SerializedBoard';
 import {Random} from '../Random';
+import {Game} from '../Game';
+import {PlaceOceanTile} from '../deferredActions/PlaceOceanTile';
+import {SelectHowToPayDeferred} from '../deferredActions/SelectHowToPayDeferred';
+import {BoardName} from './BoardName';
+import {Color} from '../Color';
 
 export class HellasBoard extends Board {
   public static newInstance(shuffle: boolean, rng: Random, includeVenus: boolean, includePromo: boolean, erodedSpaces: Array<string> = []): HellasBoard {
@@ -77,5 +82,16 @@ export class HellasBoard extends Board {
 
   public getNoctisCitySpaceIds(): Array<string> {
     return [];
+  }
+
+  public static handleBonusOceanFromTilePlacement(game: Game, player: Player, space: ISpace) {
+    if (space.id === SpaceName.HELLAS_OCEAN_TILE &&
+        game.board.getOceansOnBoard() < MAX_OCEAN_TILES &&
+        game.gameOptions.boardName === BoardName.HELLAS) {
+      if (player.color !== Color.NEUTRAL) {
+        game.defer(new PlaceOceanTile(player, 'Select space for ocean from placement bonus'));
+        game.defer(new SelectHowToPayDeferred(player, HELLAS_BONUS_OCEAN_COST, {title: 'Select how to pay for placement bonus ocean'}));
+      }
+    }
   }
 }

@@ -3,11 +3,16 @@ import {SpaceName} from '../SpaceName';
 import {Board} from './Board';
 import {Player} from '../Player';
 import {ISpace} from './ISpace';
-import {VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST} from '../constants';
+import {MAX_TEMPERATURE, VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST} from '../constants';
 import {SpaceType} from '../SpaceType';
 import {BoardBuilder} from './BoardBuilder';
 import {SerializedBoard} from './SerializedBoard';
 import {Random} from '../Random';
+import {DeferredAction} from '../deferredActions/DeferredAction';
+import {SelectHowToPayDeferred} from '../deferredActions/SelectHowToPayDeferred';
+import {Game} from '../Game';
+import {BoardName} from './BoardName';
+import {Color} from '../Color';
 
 export class VastitasBorealisBoard extends Board {
   public static newInstance(shuffle: boolean, rng: Random, includeVenus: boolean, includePromo: boolean, erodedSpaces: Array<string> = []): VastitasBorealisBoard {
@@ -82,5 +87,14 @@ export class VastitasBorealisBoard extends Board {
 
   public getNoctisCitySpaceIds(): Array<string> {
     return [];
+  }
+
+  public static handleBonusTemperatureFromTilePlacement(game: Game, player: Player, space: ISpace) {
+    if (space.id === SpaceName.VASTITAS_BOREALIS_NORTH_POLE && game.getTemperature() < MAX_TEMPERATURE && game.gameOptions.boardName === BoardName.VASTITAS_BOREALIS) {
+      if (player.color !== Color.NEUTRAL) {
+        game.defer(new DeferredAction(player, () => game.increaseTemperature(player, 1)));
+        game.defer(new SelectHowToPayDeferred(player, VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST, {title: 'Select how to pay for placement bonus temperature'}));
+      }
+    }
   }
 }

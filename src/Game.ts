@@ -37,7 +37,6 @@ import {ResourceType} from './ResourceType';
 import {Resources} from './Resources';
 import {DeferredAction, Priority} from './deferredActions/DeferredAction';
 import {DeferredActionsQueue} from './deferredActions/DeferredActionsQueue';
-import {SelectHowToPayDeferred} from './deferredActions/SelectHowToPayDeferred';
 import {SelectInitialCards} from './inputs/SelectInitialCards';
 import {PlaceOceanTile} from './deferredActions/PlaceOceanTile';
 import {RemoveColonyFromGame} from './deferredActions/RemoveColonyFromGame';
@@ -46,7 +45,6 @@ import {SelectSpace} from './inputs/SelectSpace';
 import {SerializedGame} from './SerializedGame';
 import {SerializedPlayer} from './SerializedPlayer';
 import {SpaceBonus} from './SpaceBonus';
-import {SpaceName} from './SpaceName';
 import {SpaceType} from './SpaceType';
 import {Tags} from './cards/Tags';
 import {TileType} from './TileType';
@@ -1379,24 +1377,11 @@ export class Game implements ISerializable<SerializedGame> {
     });
 
     // Hellas special requirements ocean tile
-    if (space.id === SpaceName.HELLAS_OCEAN_TILE &&
-        this.board.getOceansOnBoard() < constants.MAX_OCEAN_TILES &&
-        this.gameOptions.boardName === BoardName.HELLAS) {
-      if (player.color !== Color.NEUTRAL) {
-        this.defer(new PlaceOceanTile(player, 'Select space for ocean from placement bonus'));
-        this.defer(new SelectHowToPayDeferred(player, 6, {title: 'Select how to pay for placement bonus ocean'}));
-      }
-    }
+    HellasBoard.handleBonusOceanFromTilePlacement(this, player, space);
+    // Vastitas Borealis special requirements temperature tile
+    VastitasBorealisBoard.handleBonusTemperatureFromTilePlacement(this, player, space);
 
     TurmoilHandler.resolveTilePlacementCosts(player);
-
-    // Vastitas Borealis special requirements temperature tile
-    if (space.id === SpaceName.VASTITAS_BOREALIS_NORTH_POLE && this.temperature < constants.MAX_TEMPERATURE && this.gameOptions.boardName === BoardName.VASTITAS_BOREALIS) {
-      if (player.color !== Color.NEUTRAL) {
-        this.defer(new DeferredAction(player, () => this.increaseTemperature(player, 1)));
-        this.defer(new SelectHowToPayDeferred(player, 3, {title: 'Select how to pay for placement bonus temperature'}));
-      }
-    }
 
     // Part 3. Setup for bonuses
     const arcadianCommunityBonus = space.player === player && player.isCorporation(CardName.ARCADIAN_COMMUNITIES);
