@@ -50,6 +50,7 @@ export interface CreateGameModel {
     promoCardsOption: boolean;
     communityCardsOption: boolean;
     colosseumVariant: boolean;
+    newOpsExpansion: boolean;
     aresExtension: boolean;
     politicalAgendasExtension: AgendaStyle;
     societyExpansion: boolean;
@@ -133,6 +134,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       promoCardsOption: false,
       communityCardsOption: false,
       colosseumVariant: false,
+      newOpsExpansion: false,
       aresExtension: false,
       politicalAgendasExtension: AgendaStyle.STANDARD,
       societyExpansion: false,
@@ -279,6 +281,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       } else {
         component.randomMA = RandomMAOptionType.NONE;
         this.randomMA = RandomMAOptionType.NONE;
+        component.newOpsExpansion = false;
       }
     },
     getRandomMaOptionType: function(type: 'limited' | 'full'): RandomMAOptionType {
@@ -454,6 +457,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       const promoCardsOption = component.promoCardsOption;
       const communityCardsOption = component.communityCardsOption;
       const colosseumVariant = component.colosseumVariant;
+      const newOpsExpansion = component.newOpsExpansion;
       const aresExtension = component.aresExtension;
       const politicalAgendasExtension = this.politicalAgendasExtension;
       const societyExpansion = component.societyExpansion;
@@ -530,6 +534,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
         promoCardsOption,
         communityCardsOption,
         colosseumVariant: colosseumVariant,
+        newOpsExpansion: newOpsExpansion,
         aresExtension: aresExtension,
         politicalAgendasExtension: politicalAgendasExtension,
         societyExpansion: societyExpansion,
@@ -689,6 +694,14 @@ export const CreateGameForm = Vue.component('create-game-form', {
                                 <div class="create-game-expansion-icon expansion-icon-themoon"></div>
                                 <span v-i18n>The Moon</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/The-Moon" class="tooltip" target="_blank">&#9432;</a>
                             </label>
+
+                            <template v-if="!isSoloGame()">
+                                <input type="checkbox" name="newOps" id="newOps-checkbox" v-model="newOpsExpansion">
+                                <label for="newOps-checkbox" class="expansion-button">
+                                    <div class="create-game-expansion-icon expansion-icon-newOps"></div>
+                                    <span v-i18n>New Ops</span>&nbsp;<a href="https://www.notion.so/Variants-32b53050f10a4cfbaea117c34d4f3a03#2f170b2cd4a74cf8a71dc1b3d77e787a" class="tooltip" target="_blank">&#9432;</a>
+                                </label>
+                            </template>
 
                             <template v-if="turmoil">
                                 <input type="checkbox" name="politicalAgendas" id="politicalAgendas-checkbox" v-on:change="politicalAgendasExtensionToggle()">

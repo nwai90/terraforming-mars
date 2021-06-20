@@ -545,9 +545,8 @@ export namespace MilestoneAwardSelector {
 
     const toName = (e: {name: string}) => e.name;
 
-    // TODO: Add a game option to decide whether to include unofficial MAs or not
-    const candidateMilestones = [...ORIGINAL_MILESTONES, ...ELYSIUM_MILESTONES, ...HELLAS_MILESTONES, ...VASTITAS_BOREALIS_MILESTONES, ...ARABIA_TERRA_MILESTONES].map(toName);
-    const candidateAwards = [...ORIGINAL_AWARDS, ...ELYSIUM_AWARDS, ...HELLAS_AWARDS, ...VASTITAS_BOREALIS_AWARDS, ...ARABIA_TERRA_AWARDS].map(toName);
+    const candidateMilestones = [...ORIGINAL_MILESTONES, ...ELYSIUM_MILESTONES, ...HELLAS_MILESTONES].map(toName);
+    const candidateAwards = [...ORIGINAL_AWARDS, ...ELYSIUM_AWARDS, ...HELLAS_AWARDS].map(toName);
 
     if (gameOptions.venusNextExtension) {
       candidateMilestones.push(...VENUS_MILESTONES.map(toName));
@@ -561,6 +560,31 @@ export namespace MilestoneAwardSelector {
       candidateMilestones.push(...MOON_MILESTONES.map(toName));
       candidateAwards.push(...MOON_AWARDS.map(toName));
     }
+
+    if (gameOptions.newOpsExpansion) {
+      candidateMilestones.push(...AMAZONIS_PLANITIA_MILESTONES.map(toName));
+      candidateMilestones.push(...ARABIA_TERRA_MILESTONES.map(toName));
+      candidateMilestones.push(...TERRA_CIMMERIA_MILESTONES.map(toName));
+      candidateMilestones.push(...VASTITAS_BOREALIS_MILESTONES.map(toName));
+
+      candidateAwards.push(...AMAZONIS_PLANITIA_AWARDS.map(toName));
+      candidateAwards.push(...ARABIA_TERRA_AWARDS.map(toName));
+      candidateAwards.push(...TERRA_CIMMERIA_AWARDS.map(toName));
+      candidateAwards.push(...VASTITAS_BOREALIS_AWARDS.map(toName));
+    } else if (gameOptions.boardName === BoardName.AMAZONIS) {
+      candidateMilestones.push(...AMAZONIS_PLANITIA_MILESTONES.map(toName));
+      candidateAwards.push(...AMAZONIS_PLANITIA_AWARDS.map(toName));
+    } else if (gameOptions.boardName === BoardName.ARABIA_TERRA) {
+      candidateMilestones.push(...ARABIA_TERRA_MILESTONES.map(toName));
+      candidateAwards.push(...ARABIA_TERRA_AWARDS.map(toName));
+    } else if (gameOptions.boardName === BoardName.TERRA_CIMMERIA) {
+      candidateMilestones.push(...TERRA_CIMMERIA_MILESTONES.map(toName));
+      candidateAwards.push(...TERRA_CIMMERIA_AWARDS.map(toName));
+    } else if (gameOptions.boardName === BoardName.VASTITAS_BOREALIS) {
+      candidateMilestones.push(...VASTITAS_BOREALIS_MILESTONES.map(toName));
+      candidateAwards.push(...VASTITAS_BOREALIS_AWARDS.map(toName));
+    }
+
     const shuffledMilestones = shuffle(candidateMilestones);
     const shuffledAwards = shuffle(candidateAwards);
 

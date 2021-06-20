@@ -19,6 +19,7 @@ export interface GameOptionsModel {
   fastModeOption: boolean,
   initialDraftVariant: boolean,
   moonExpansion: boolean,
+  newOpsExpansion: boolean,
   preludeExtension: boolean,
   promoCardsOption: boolean,
   politicalAgendasExtension: AgendaStyle,

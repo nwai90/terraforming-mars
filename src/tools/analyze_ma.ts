@@ -127,6 +127,7 @@ function simpleGameOptions(): GameOptions {
     societyExpansion: false,
     randomTurmoil: false,
     colosseumVariant: false,
+    newOpsExpansion: false,
     randomMA: RandomMAOptionType.NONE,
   };
 }

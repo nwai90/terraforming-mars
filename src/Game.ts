@@ -111,6 +111,7 @@ export interface GameOptions {
   colosseumVariant: boolean;
   draftVariant: boolean;
   initialDraftVariant: boolean;
+  newOpsExpansion: boolean;
   startingCorporations: number;
   shuffleMapOption: boolean;
   randomMA: RandomMAOptionType;
@@ -148,6 +149,7 @@ const DEFAULT_GAME_OPTIONS: GameOptions = {
   fastModeOption: false,
   initialDraftVariant: false,
   moonExpansion: false,
+  newOpsExpansion: false,
   politicalAgendasExtension: AgendaStyle.STANDARD,
   societyExpansion: false,
   preludeExtension: false,
