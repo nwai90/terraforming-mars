@@ -42,9 +42,6 @@ export const GlobalParameterValue = Vue.component('global-parameter-value', {
         return '';
       }
     },
-    suffix: function(): string {
-      return this.param === GlobalParameter.OXYGEN ? '%' : '';
-    },
   },
   template: `
 <div>
@@ -54,7 +51,7 @@ export const GlobalParameterValue = Vue.component('global-parameter-value', {
       <img src="/assets/misc/checkmark.png" class="preferences_checkmark" :alt="$t('Completed!')">
     </div>
     <div v-else>
-      {{this.value}}{{this.suffix()}}
+      {{this.value}}
     </div>
   </div>
 </div>
