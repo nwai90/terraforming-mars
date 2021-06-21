@@ -50,13 +50,14 @@ import {Builder} from './milestones/Builder';
 import {Diversifier} from './milestones/Diversifier';
 import {Ecologist} from './milestones/Ecologist';
 import {Energizer} from './milestones/Energizer';
+import {Monument} from './milestones/fanmade/Monument';
 import {Gardener} from './milestones/Gardener';
 import {Generalist} from './milestones/Generalist';
 import {Hoverlord} from './milestones/Hoverlord';
 import {IMilestone} from './milestones/IMilestone';
 import {Legend} from './milestones/Legend';
 import {Mayor} from './milestones/Mayor';
-import {AMAZONIS_PLANITIA_MILESTONES, ARABIA_TERRA_MILESTONES, ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, Milestones, MOON_MILESTONES, ORIGINAL_MILESTONES, TERRA_CIMMERIA_MILESTONES, VASTITAS_BOREALIS_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
+import {AMAZONIS_PLANITIA_MILESTONES, ARABIA_TERRA_MILESTONES, ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, Milestones, MOON_MILESTONES, NEW_OPS_MILESTONES, ORIGINAL_MILESTONES, TERRA_CIMMERIA_MILESTONES, VASTITAS_BOREALIS_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
 import {Networker} from './milestones/Networker';
 import {Planner} from './milestones/Planner';
 import {PolarExplorer} from './milestones/PolarExplorer';
@@ -68,7 +69,7 @@ import {Pioneer} from './milestones/terraCimmeria/Pioneer';
 import {Spacefarer} from './milestones/terraCimmeria/Spacefarer';
 import {Terraformer} from './milestones/Terraformer';
 import {Tycoon} from './milestones/Tycoon';
-import { Electrician } from './milestones/vastitasBorealis/Electrician';
+import {Electrician} from './milestones/vastitasBorealis/Electrician';
 import {Irrigator} from './milestones/vastitasBorealis/Irrigator';
 import {Smith} from './milestones/vastitasBorealis/Smith';
 import {Tradesman} from './milestones/vastitasBorealis/Tradesman';
@@ -402,6 +403,10 @@ export namespace MilestoneAwardSelector {
       bind(Engineer, Farmer, 4);
       bind(Engineer, Terran, 6);
 
+      // New Ops
+      bind(Monument, Minimalist, 9);
+      bind(Monument, Planner, 2);
+
       return synergies;
     }
   }
@@ -566,6 +571,7 @@ export namespace MilestoneAwardSelector {
       candidateMilestones.push(...ARABIA_TERRA_MILESTONES.map(toName));
       candidateMilestones.push(...TERRA_CIMMERIA_MILESTONES.map(toName));
       candidateMilestones.push(...VASTITAS_BOREALIS_MILESTONES.map(toName));
+      candidateMilestones.push(...NEW_OPS_MILESTONES.map(toName));
 
       candidateAwards.push(...AMAZONIS_PLANITIA_AWARDS.map(toName));
       candidateAwards.push(...ARABIA_TERRA_AWARDS.map(toName));

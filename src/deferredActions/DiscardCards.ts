@@ -2,6 +2,7 @@ import {Player} from '../Player';
 import {SelectCard} from '../inputs/SelectCard';
 import {IProjectCard} from '../cards/IProjectCard';
 import {DeferredAction, Priority} from './DeferredAction';
+import {LogHelper} from '../LogHelper';
 
 export class DiscardCards implements DeferredAction {
   public priority = Priority.DISCARD_CARDS;
@@ -15,6 +16,7 @@ export class DiscardCards implements DeferredAction {
     if (this.player.cardsInHand.length <= this.count) {
       const cards = this.player.cardsInHand.splice(0, this.player.cardsInHand.length);
       cards.forEach((card) => this.player.game.dealer.discard(card));
+      LogHelper.logPlayerDiscardedCards(this.player, cards);
       return undefined;
     }
     return new SelectCard(
@@ -26,6 +28,7 @@ export class DiscardCards implements DeferredAction {
           this.player.cardsInHand.splice(this.player.cardsInHand.indexOf(card), 1);
           this.player.game.dealer.discard(card);
         }
+        LogHelper.logPlayerDiscardedCards(this.player, foundCards);
         return undefined;
       },
       this.count,

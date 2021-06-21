@@ -80,21 +80,7 @@ export class LogHelper {
 
   static logDrawnCards(player: Player, cards: Array<ICard> | Array<CardName>, privateMessage: boolean = false, logType: LogType = LogType.DREW) {
     // If |this.count| equals 3, for instance, this generates "${0} drew ${1}, ${2} and ${3}"
-    let message = '${0} ' + logType + ' ';
-    if (cards.length === 0) {
-      message += 'no cards';
-    } else {
-      for (let i = 0, length = cards.length; i < length; i++) {
-        if (i > 0) {
-          if (i < length - 1) {
-            message += ', ';
-          } else {
-            message += ' and ';
-          }
-        }
-        message += '${' + (i + 1) + '}';
-      }
-    }
+    const message = LogHelper.constructMessage('${0} ' + logType + ' ', cards);
     const options = privateMessage ? {reservedFor: player} : {};
 
     player.game.log(message, (b) => {
@@ -158,5 +144,42 @@ export class LogHelper {
       // Target
       b.string(target);
     }, {reservedFor: player});
+  }
+
+  static logPlayerDiscardedCards(player: Player, cards: Array<ICard> | Array<CardName>) {
+    // If |this.count| equals 3, for instance, this generates "${0} discarded ${1}, ${2} and ${3}"
+    const message = LogHelper.constructMessage('You discarded ', cards);
+
+    player.game.log(message, (b) => {
+      b.string('You');
+      for (const card of cards) {
+        if (typeof card === 'string') {
+          b.cardName(card);
+        } else {
+          b.card(card);
+        }
+      }
+    }, {reservedFor: player});
+  }
+
+  static constructMessage(leadingStr: string, cards: Array<ICard> | Array<CardName>): string {
+    let message = leadingStr;
+
+    if (cards.length === 0) {
+      message += 'no cards';
+    } else {
+      for (let i = 0, length = cards.length; i < length; i++) {
+        if (i > 0) {
+          if (i < length - 1) {
+            message += ', ';
+          } else {
+            message += ' and ';
+          }
+        }
+        message += '${' + (i + 1) + '}';
+      }
+    }
+
+    return message;
   }
 }

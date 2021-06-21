@@ -79,6 +79,7 @@ import {UndoActionOption} from './inputs/UndoActionOption';
 import {LawSuit} from './cards/promo/LawSuit';
 import {CrashSiteCleanup} from './cards/promo/CrashSiteCleanup';
 import {MarsCoalition} from './cards/community/corporations/MarsCoalition';
+import {Monument} from './milestones/fanmade/Monument';
 
 export type PlayerId = string;
 
@@ -1701,6 +1702,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         milestone: milestone,
       });
       this.game.defer(new SelectHowToPayDeferred(this, MILESTONE_COST, {title: 'Select how to pay for milestone'}));
+      if (milestone.name === 'Monument') Monument.discardCards(this);
       this.game.log('${0} claimed ${1} milestone', (b) => b.player(this).milestone(milestone));
       return undefined;
     });

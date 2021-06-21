@@ -38,6 +38,7 @@ import {Farmer} from './amazonisPlanitia/Farmer';
 import {Minimalist} from './amazonisPlanitia/Minimalist';
 import {Terran} from './amazonisPlanitia/Terran';
 import {Tropicalist} from './amazonisPlanitia/Tropicalist';
+import {Monument} from './fanmade/Monument';
 
 export const ORIGINAL_MILESTONES: Array<IMilestone> = [
   new Terraformer(),
@@ -99,6 +100,10 @@ export const AMAZONIS_PLANITIA_MILESTONES: Array<IMilestone> = [
   new Tropicalist(),
 ];
 
+export const NEW_OPS_MILESTONES: Array<IMilestone> = [
+  new Monument(),
+];
+
 export const ARES_MILESTONES: Array<IMilestone> = [
   new Networker(),
 ];
@@ -116,6 +121,7 @@ export const ALL_MILESTONES: Array<IMilestone> = [
   ...ARABIA_TERRA_MILESTONES,
   ...TERRA_CIMMERIA_MILESTONES,
   ...AMAZONIS_PLANITIA_MILESTONES,
+  ...NEW_OPS_MILESTONES,
   ...VENUS_MILESTONES,
   ...ARES_MILESTONES,
   ...MOON_MILESTONES,
