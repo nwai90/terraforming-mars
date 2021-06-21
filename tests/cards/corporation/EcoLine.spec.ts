@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {EcoLine} from '../../../src/cards/corporation/EcoLine';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
-import {ConvertPlants} from '../../../src/cards/base/standardActions/ConvertPlants';
+import {ConvertPlantsEcoline} from '../../../src/cards/base/standardActions/ConvertPlantsEcoline';
 import {Game} from '../../../src/Game';
 
 describe('EcoLine', function() {
@@ -16,7 +16,7 @@ describe('EcoLine', function() {
     expect(player.plants).to.eq(3);
     expect(player.plantsNeededForGreenery).to.eq(7);
 
-    const convert = new ConvertPlants();
+    const convert = new ConvertPlantsEcoline();
     expect(convert.canAct(player)).eq(false);
     player.plants = 7;
     expect(convert.canAct(player)).eq(true);

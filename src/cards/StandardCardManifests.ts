@@ -225,12 +225,14 @@ import {Zeppelins} from './base/Zeppelins';
 import {AquiferStandardProject} from './base/standardProjects/AquiferStandardProject';
 import {CityStandardProject} from './base/standardProjects/CityStandardProject';
 import {PowerPlantStandardProject} from './base/standardProjects/PowerPlantStandardProject';
+import {PowerPlantStandardProjectThorgate} from './base/standardProjects/PowerPlantStandardProjectThorgate';
 import {GreeneryStandardProject} from './base/standardProjects/GreeneryStandardProject';
 import {AsteroidStandardProject} from './base/standardProjects/AsteroidStandardProject';
 import {SellPatentsStandardProject} from './base/standardProjects/SellPatentsStandardProject';
 import {ConvertPlants} from './base/standardActions/ConvertPlants';
 import {ConvertHeat} from './base/standardActions/ConvertHeat';
 import {BufferGasStandardProject} from './prelude/BufferGasStandardProject';
+import {ConvertPlantsEcoline} from './base/standardActions/ConvertPlantsEcoline';
 
 export const BASE_CARD_MANIFEST = new CardManifest({
   module: GameModule.Base,
@@ -390,6 +392,7 @@ export const BASE_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.AQUIFER_STANDARD_PROJECT, Factory: AquiferStandardProject},
     {cardName: CardName.CITY_STANDARD_PROJECT, Factory: CityStandardProject},
     {cardName: CardName.POWER_PLANT_STANDARD_PROJECT, Factory: PowerPlantStandardProject},
+    {cardName: CardName.POWER_PLANT_STANDARD_PROJECT_THORGATE, Factory: PowerPlantStandardProjectThorgate},
     {cardName: CardName.GREENERY_STANDARD_PROJECT, Factory: GreeneryStandardProject},
     {cardName: CardName.ASTEROID_STANDARD_PROJECT, Factory: AsteroidStandardProject},
     {cardName: CardName.SELL_PATENTS_STANDARD_PROJECT, Factory: SellPatentsStandardProject},
@@ -397,6 +400,7 @@ export const BASE_CARD_MANIFEST = new CardManifest({
   ],
   standardActions: [
     {cardName: CardName.CONVERT_PLANTS, Factory: ConvertPlants},
+    {cardName: CardName.CONVERT_PLANTS_ECOLINE, Factory: ConvertPlantsEcoline},
     {cardName: CardName.CONVERT_HEAT, Factory: ConvertHeat},
   ],
 });

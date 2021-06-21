@@ -62,6 +62,7 @@ import {Units} from './Units';
 import {MoonExpansion} from './moon/MoonExpansion';
 import {StandardProjectCard} from './cards/StandardProjectCard';
 import {ConvertPlants} from './cards/base/standardActions/ConvertPlants';
+import {ConvertPlantsEcoline} from './cards/base/standardActions/ConvertPlantsEcoline';
 import {ConvertHeat} from './cards/base/standardActions/ConvertHeat';
 import {Manutech} from './cards/venusNext/Manutech';
 import {LunaProjectOffice} from './cards/moon/LunaProjectOffice';
@@ -1898,6 +1899,14 @@ export class Player implements ISerializable<SerializedPlayer> {
     return new CardLoader(this.game.gameOptions)
       .getStandardProjects()
       .filter((card) => {
+        if (this.isCorporation(CardName.THORGATE) && card.name === CardName.POWER_PLANT_STANDARD_PROJECT) {
+          return false;
+        } else if (!this.isCorporation(CardName.THORGATE) && card.name === CardName.POWER_PLANT_STANDARD_PROJECT_THORGATE) {
+          return false;
+        }
+        return true;
+      })
+      .filter((card) => {
         // sell patents is not displayed as a card
         if (card.name === CardName.SELL_PATENTS_STANDARD_PROJECT) {
           return false;
@@ -2040,7 +2049,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     // Convert Plants
-    const convertPlants = new ConvertPlants();
+    const convertPlants = this.isCorporation(CardName.ECOLINE) ? new ConvertPlantsEcoline() : new ConvertPlants();
     if (convertPlants.canAct(this)) {
       action.options.push(convertPlants.action(this));
     }

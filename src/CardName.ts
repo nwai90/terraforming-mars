@@ -2,6 +2,7 @@ export enum CardName {
     // Standard projects:
     SELL_PATENTS_STANDARD_PROJECT = 'Sell Patents',
     POWER_PLANT_STANDARD_PROJECT = 'Power Plant:SP',
+    POWER_PLANT_STANDARD_PROJECT_THORGATE = 'Power Plant:Thorgate',
     ASTEROID_STANDARD_PROJECT = 'Asteroid:SP',
     BUFFER_GAS_STANDARD_PROJECT = 'Buffer Gas',
     BUILD_COLONY_STANDARD_PROJECT = 'Colony',
@@ -12,6 +13,7 @@ export enum CardName {
 
     // Standard actions:
     CONVERT_PLANTS = 'Convert Plants',
+    CONVERT_PLANTS_ECOLINE = 'Convert Plants:Ecoline',
     CONVERT_HEAT = 'Convert Heat',
 
     ACQUIRED_COMPANY = 'Acquired Company',

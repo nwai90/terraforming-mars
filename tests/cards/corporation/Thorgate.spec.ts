@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {EnergySaving} from '../../../src/cards/base/EnergySaving';
 import {Pets} from '../../../src/cards/base/Pets';
-import {PowerPlantStandardProject} from '../../../src/cards/base/standardProjects/PowerPlantStandardProject';
+import {PowerPlantStandardProjectThorgate} from '../../../src/cards/base/standardProjects/PowerPlantStandardProjectThorgate';
 import {Thorgate} from '../../../src/cards/corporation/Thorgate';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
@@ -19,8 +19,8 @@ describe('Thorgate', function() {
     expect(player.getProduction(Resources.ENERGY)).to.eq(1);
     expect(card.getCardDiscount(player, new EnergySaving())).to.eq(3);
     expect(card.getCardDiscount(player, new Pets())).to.eq(0);
-    const powerPlant = new PowerPlantStandardProject();
-    player.megaCredits = powerPlant.cost - 3;
+    const powerPlant = new PowerPlantStandardProjectThorgate();
+    player.megaCredits = powerPlant.cost;
     expect(powerPlant.canAct(player)).eq(true);
     player.megaCredits--;
     expect(powerPlant.canAct(player)).eq(false);

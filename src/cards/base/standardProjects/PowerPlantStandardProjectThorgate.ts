@@ -4,16 +4,16 @@ import {CardRenderer} from '../../render/CardRenderer';
 import {StandardProjectCard} from '../../StandardProjectCard';
 import {Resources} from '../../../Resources';
 
-export class PowerPlantStandardProject extends StandardProjectCard {
+export class PowerPlantStandardProjectThorgate extends StandardProjectCard {
   constructor() {
     super({
-      name: CardName.POWER_PLANT_STANDARD_PROJECT,
-      cost: 11,
+      name: CardName.POWER_PLANT_STANDARD_PROJECT_THORGATE,
+      cost: 8,
       metadata: {
-        cardNumber: 'SP7',
+        cardNumber: 'SP9',
         renderData: CardRenderer.builder((b) =>
-          b.standardProject('Spend 11 M€ to increase your Energy production 1 step.', (eb) => {
-            eb.megacredits(11).startAction.production((pb) => {
+          b.standardProject('Spend 8 M€ to increase your Energy production 1 step.', (eb) => {
+            eb.megacredits(8).startAction.production((pb) => {
               pb.energy(1);
             });
           }),
