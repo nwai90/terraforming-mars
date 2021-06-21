@@ -577,6 +577,19 @@ export namespace MilestoneAwardSelector {
       candidateAwards.push(...ARABIA_TERRA_AWARDS.map(toName));
       candidateAwards.push(...TERRA_CIMMERIA_AWARDS.map(toName));
       candidateAwards.push(...VASTITAS_BOREALIS_AWARDS.map(toName));
+
+      // Remove expansion-specific fan MAs from randomization pool if that expansion is not selected
+      if (gameOptions.venusNextExtension === false && candidateMilestones.some((milestone) => milestone === 'Morningstar')) {
+        candidateMilestones.splice(candidateMilestones.indexOf('Morningstar'), 1);
+      }
+
+      if (gameOptions.coloniesExtension === false && candidateMilestones.some((milestone) => milestone === 'Colonizer')) {
+        candidateMilestones.splice(candidateMilestones.indexOf('Colonizer'), 1);
+      }
+
+      if (gameOptions.turmoilExtension === false && candidateAwards.some((award) => award === 'Politician')) {
+        candidateAwards.splice(candidateAwards.indexOf('Politician'), 1);
+      }
     } else if (gameOptions.boardName === BoardName.AMAZONIS) {
       candidateMilestones.push(...AMAZONIS_PLANITIA_MILESTONES.map(toName));
       candidateAwards.push(...AMAZONIS_PLANITIA_AWARDS.map(toName));
