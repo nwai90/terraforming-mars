@@ -4,7 +4,7 @@ import {IMilestone} from "../IMilestone";
 
 export class Electrician implements IMilestone {
   public name: string = 'Electrician';
-  public description: string = 'Have 4 Power tags'
+  public description: string = 'Have 4 Power tags';
 
   public getScore(player: Player): number {
     return player.getTagCount(Tags.ENERGY);

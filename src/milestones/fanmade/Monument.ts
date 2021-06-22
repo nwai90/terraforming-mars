@@ -5,7 +5,7 @@ import {IMilestone} from "../IMilestone";
 
 export class Monument implements IMilestone {
   public name: string = 'Monument';
-  public description: string = 'Discard 5 cards to claim this milestone'
+  public description: string = 'As an additional cost, discard 5 cards to claim this milestone';
 
   public getScore(player: Player): number {
     return player.cardsInHand.length;

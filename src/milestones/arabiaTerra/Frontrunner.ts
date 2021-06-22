@@ -3,7 +3,7 @@ import {IMilestone} from "../IMilestone";
 
 export class Frontrunner implements IMilestone {
   public name: string = 'Frontrunner';
-  public description: string = 'Have a net total of 6 VP on played cards'
+  public description: string = 'Have a net total of 6 VP on played cards';
 
   public getScore(player: Player): number {
     let score = 0;

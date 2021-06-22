@@ -4,7 +4,8 @@ import {isAresTile} from '../TileType';
 
 export class PolarExplorer implements IMilestone {
     public name: string = 'Polar Explorer';
-    public description: string = 'Requires that you have 3 tiles on the two bottom rows'
+    public description: string = 'Have 3 tiles on the bottom two rows';
+
     public getScore(player: Player): number {
       return player.game.board.spaces
         .filter((space) => space.player !== undefined &&

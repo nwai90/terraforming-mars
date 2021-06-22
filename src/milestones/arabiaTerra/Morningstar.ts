@@ -4,7 +4,7 @@ import {IMilestone} from "../IMilestone";
 
 export class Morningstar implements IMilestone {
   public name: string = 'Morningstar';
-  public description: string = 'Have 4 Venus tags'
+  public description: string = 'Have 4 Venus tags';
 
   public getScore(player: Player): number {
     return player.getTagCount(Tags.VENUS);

@@ -5,7 +5,7 @@ import {IMilestone} from "../IMilestone";
 
 export class Pioneer implements IMilestone {
   public name: string = 'Pioneer';
-  public description: string = 'Have 5 tiles on Mars'
+  public description: string = 'Have 5 tiles on Mars';
 
   public getScore(player: Player): number {
     // Don't simplify this to "space.tile?.tileType !== TileType.OCEAN"

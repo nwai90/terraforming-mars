@@ -3,7 +3,8 @@ import {Player} from '../Player';
 
 export class Legend implements IMilestone {
     public name: string = 'Legend';
-    public description: string = 'Requires that you have played 5 events'
+    public description: string = 'Have 5 played Events';
+
     public getScore(player: Player): number {
       return player.getPlayedEventsCount();
     }

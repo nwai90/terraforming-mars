@@ -4,7 +4,7 @@ import {IMilestone} from "../IMilestone";
 
 export class Tropicalist implements IMilestone {
   public name: string = 'Tropicalist';
-  public description: string = 'Have 3 tiles in the middle 3 equatorial rows'
+  public description: string = 'Have 3 tiles in the middle 3 equatorial rows';
 
   public getScore(player: Player): number {
     return player.game.board.spaces

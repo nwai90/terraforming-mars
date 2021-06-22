@@ -3,7 +3,7 @@ import {IMilestone} from "../IMilestone";
 
 export class Protagonist implements IMilestone {
   public name: string = 'Protagonist';
-  public description: string = 'Have 5 TR more than other players'
+  public description: string = 'Have 5 TR more than other players';
 
   public getScore(player: Player): number {
     const ownTr = player.getTerraformRating();

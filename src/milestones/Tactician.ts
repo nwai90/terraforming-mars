@@ -4,7 +4,7 @@ import {CardType} from '../cards/CardType';
 
 export class Tactician implements IMilestone {
     public name: string = 'Tactician';
-    public description: string = 'Requires that you have 5 cards with requirements in play'
+    public description: string = 'Have 5 cards with requirements in play';
     private excludedCardTypes = [CardType.PRELUDE, CardType.EVENT];
 
     public getScore(player: Player): number {

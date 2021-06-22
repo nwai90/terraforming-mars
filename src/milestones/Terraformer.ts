@@ -6,11 +6,11 @@ export class Terraformer implements IMilestone {
     private terraformRating: number = 35;
     private terraformRatingTurmoil: number = 26;
     public description: string;
+
     constructor() {
-      this.description = 'Having a terraform rating of at least ' +
-                            this.terraformRating + ' or ' +
-                            this.terraformRatingTurmoil + ' with Turmoil.';
+      this.description = 'Have ' + this.terraformRating + ' TR (or ' + this.terraformRatingTurmoil + ' with Turmoil)';
     }
+
     public getScore(player: Player): number {
       return player.getTerraformRating();
     }

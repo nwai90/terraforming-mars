@@ -3,7 +3,7 @@ import {IMilestone} from "../IMilestone";
 
 export class Herbalist implements IMilestone {
   public name: string = 'Herbalist';
-  public description: string = 'Have 12 plants'
+  public description: string = 'Have 12 plants';
 
   public getScore(player: Player): number {
     return player.plants;

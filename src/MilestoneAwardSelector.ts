@@ -289,7 +289,8 @@ export namespace MilestoneAwardSelector {
       bind(Generator, Industrialist, 7);
       bind(Generator, Contractor, 4);
 
-      bind(Protagonist, Terraformer, 8);
+      bind(Protagonist, Terraformer, 9);
+      bind(Protagonist, Benefactor, 9);
       bind(Protagonist, Gardener, 2);
 
       bind(Researcher, Scientist, 9);
