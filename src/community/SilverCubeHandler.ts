@@ -4,6 +4,8 @@ import {GreeneryStandardProject} from "../cards/base/standardProjects/GreenerySt
 import {AirScrappingStandardProject} from "../cards/venusNext/AirScrappingStandardProject";
 import {MAX_OCEAN_TILES, MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, MAX_VENUS_SCALE} from "../constants";
 import {Game} from "../Game";
+import {OrOptions} from "../inputs/OrOptions";
+import {SelectOption} from "../inputs/SelectOption";
 import {SelectSpace} from "../inputs/SelectSpace";
 import {Player} from "../Player";
 import {Resources} from "../Resources";
@@ -101,6 +103,41 @@ export class SilverCubeHandler {
         game.increaseVenusScaleLevel(player, 1);
         game.log('${0} acted as World Government and increased Venus scale', (b) => b.player(player));
       }
+    }
+  }
+
+  public static addSilverCubeWGTOptions(player: Player, game: Game, action: OrOptions): void {
+    if (game.getTemperature() < MAX_TEMPERATURE) {
+      action.options.push(
+        new SelectOption('Add 5 M€ to temperature track', 'Select', () => {
+          SilverCubeHandler.onTemperatureSilverCubeAdded(player, game);
+          return undefined;
+        }),
+      );
+    }
+    if (game.getOxygenLevel() < MAX_OXYGEN_LEVEL) {
+      action.options.push(
+        new SelectOption('Add 5 M€ to oxygen track', 'Select', () => {
+          SilverCubeHandler.onOxygenSilverCubeAdded(player, game);
+          return undefined;
+        }),
+      );
+    }
+    if (game.board.getOceansOnBoard() < MAX_OCEAN_TILES) {
+      action.options.push(
+        new SelectOption('Add 5 M€ to oceans track', 'Select', () => {
+          SilverCubeHandler.onOceanSilverCubeAdded(player, game);
+          return undefined;
+        }),
+      );
+    }
+    if (game.getVenusScaleLevel() < MAX_VENUS_SCALE && game.gameOptions.venusNextExtension) {
+      action.options.push(
+        new SelectOption('Add 5 M€ to Venus track', 'Select', () => {
+          SilverCubeHandler.onVenusSilverCubeAdded(player, game);
+          return undefined;
+        }),
+      );
     }
   }
 }

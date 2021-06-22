@@ -38,6 +38,8 @@ import {Historian} from './amazonisPlanitia/Historian';
 import {Tourist} from './amazonisPlanitia/Tourist';
 import {Zoologist} from './amazonisPlanitia/Zoologist';
 import {Engineer} from './amazonisPlanitia/Engineer';
+import {Player} from '../Player';
+import {VictoryPointsBreakdown} from '../VictoryPointsBreakdown';
 
 export const ORIGINAL_AWARDS: Array<IAward> = [
   new Landlord(),
@@ -130,5 +132,43 @@ export namespace Awards {
       return award;
     }
     throw new Error(`Award ${name} not found.`);
+  }
+
+  export function giveAwards(player: Player, vpb: VictoryPointsBreakdown): void {
+    player.game.fundedAwards.forEach((fundedAward) => {
+      // Awards are disabled for 1 player games
+      if (player.game.isSoloMode()) return;
+
+      const awardStr = fundedAward.award.name + ' award (funded by ' + fundedAward.player.name + ')';
+      const players: Array<Player> = player.game.getPlayers();
+      players.sort((p1, p2) => fundedAward.award.getScore(p2) - fundedAward.award.getScore(p1));
+
+      // We have one rank 1 player
+      if (fundedAward.award.getScore(players[0]) > fundedAward.award.getScore(players[1])) {
+        if (players[0].id === player.id) vpb.setVictoryPoints('awards', 5, '1st place for ' + awardStr);
+        players.shift();
+
+        if (players.length > 1) {
+          // We have one rank 2 player
+          if (fundedAward.award.getScore(players[0]) > fundedAward.award.getScore(players[1])) {
+            if (players[0].id === player.id) vpb.setVictoryPoints('awards', 2, '2nd place for ' + awardStr);
+          // We have at least two rank 2 players
+          } else {
+            const score = fundedAward.award.getScore(players[0]);
+            while (players.length > 0 && fundedAward.award.getScore(players[0]) === score) {
+              if (players[0].id === player.id) vpb.setVictoryPoints('awards', 2, '2nd place for ' + awardStr);
+              players.shift();
+            }
+          }
+        }
+      // We have at least two rank 1 players
+      } else {
+        const score = fundedAward.award.getScore(players[0]);
+        while (players.length > 0 && fundedAward.award.getScore(players[0]) === score) {
+          if (players[0].id === player.id) vpb.setVictoryPoints('awards', 5, '1st place for ' + awardStr);
+          players.shift();
+        }
+      }
+    });
   }
 }

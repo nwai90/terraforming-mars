@@ -80,6 +80,7 @@ import {LawSuit} from './cards/promo/LawSuit';
 import {CrashSiteCleanup} from './cards/promo/CrashSiteCleanup';
 import {MarsCoalition} from './cards/community/corporations/MarsCoalition';
 import {Monument} from './milestones/fanmade/Monument';
+import {Awards} from './awards/Awards';
 
 export type PlayerId = string;
 
@@ -505,7 +506,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     victoryPointsBreakdown.setVictoryPoints('terraformRating', this.terraformRating);
 
     // Victory points from awards
-    this.giveAwards(victoryPointsBreakdown);
+    Awards.giveAwards(this, victoryPointsBreakdown);
 
     // Victory points from milestones
     for (const milestone of this.game.claimedMilestones) {
@@ -633,17 +634,14 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public getResourcesOnCorporation():number {
-    if (this.corporationCard !== undefined &&
-      this.corporationCard.resourceCount !== undefined) {
+    if (this.corporationCard?.resourceCount !== undefined) {
       return this.corporationCard.resourceCount;
     } else return 0;
   }
 
   public getRequirementsBonus(parameter: GlobalParameter): number {
     let requirementsBonus: number = 0;
-    if (
-      this.corporationCard !== undefined &&
-          this.corporationCard.getRequirementBonus !== undefined) {
+    if (this.corporationCard?.getRequirementBonus !== undefined) {
       requirementsBonus += this.corporationCard.getRequirementBonus(this, parameter);
     }
     for (const playedCard of this.playedCards) {
@@ -731,7 +729,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   public getResourceCards(resource: ResourceType | undefined): Array<ICard> {
     let result: Array<ICard> = this.playedCards.filter((card) => card.resourceType !== undefined);
 
-    if (this.corporationCard !== undefined && this.corporationCard.resourceType !== undefined) {
+    if (this.corporationCard?.resourceType !== undefined) {
       result.push(this.corporationCard);
     }
 
@@ -1086,7 +1084,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     this.steel += this.steelProduction;
     this.plants += this.plantProduction;
 
-    if (this.corporationCard !== undefined && this.corporationCard.onProductionPhase !== undefined) {
+    if (this.corporationCard?.onProductionPhase !== undefined) {
       this.corporationCard.onProductionPhase(this);
     }
   }
@@ -1100,15 +1098,11 @@ export class Player implements ISerializable<SerializedPlayer> {
     action.title = 'Select action for Solar Phase';
     action.buttonLabel = 'Confirm';
     const game = this.game;
-    if (game.getTemperature() < constants.MAX_TEMPERATURE) {
-      if (game.gameOptions.silverCubeVariant === true) {
-        action.options.push(
-          new SelectOption('Add 5 M€ to temperature track', 'Select', () => {
-            SilverCubeHandler.onTemperatureSilverCubeAdded(this, game);
-            return undefined;
-          }),
-        );
-      } else {
+
+    if (game.gameOptions.silverCubeVariant === true) {
+      SilverCubeHandler.addSilverCubeWGTOptions(this, game, action);
+    } else {
+      if (game.getTemperature() < constants.MAX_TEMPERATURE) {
         action.options.push(
           new SelectOption('Increase temperature', 'Increase', () => {
             game.increaseTemperature(this, 1);
@@ -1117,16 +1111,7 @@ export class Player implements ISerializable<SerializedPlayer> {
           }),
         );
       }
-    }
-    if (game.getOxygenLevel() < constants.MAX_OXYGEN_LEVEL) {
-      if (game.gameOptions.silverCubeVariant === true) {
-        action.options.push(
-          new SelectOption('Add 5 M€ to oxygen track', 'Select', () => {
-            SilverCubeHandler.onOxygenSilverCubeAdded(this, game);
-            return undefined;
-          }),
-        );
-      } else {
+      if (game.getOxygenLevel() < constants.MAX_OXYGEN_LEVEL) {
         action.options.push(
           new SelectOption('Increase oxygen', 'Increase', () => {
             game.increaseOxygenLevel(this, 1);
@@ -1135,16 +1120,7 @@ export class Player implements ISerializable<SerializedPlayer> {
           }),
         );
       }
-    }
-    if (game.board.getOceansOnBoard() < constants.MAX_OCEAN_TILES) {
-      if (game.gameOptions.silverCubeVariant === true) {
-        action.options.push(
-          new SelectOption('Add 5 M€ to oceans track', 'Select', () => {
-            SilverCubeHandler.onOceanSilverCubeAdded(this, game);
-            return undefined;
-          }),
-        );
-      } else {
+      if (game.board.getOceansOnBoard() < constants.MAX_OCEAN_TILES) {
         action.options.push(
           new SelectSpace(
             'Add an ocean',
@@ -1156,16 +1132,7 @@ export class Player implements ISerializable<SerializedPlayer> {
           ),
         );
       }
-    }
-    if (game.getVenusScaleLevel() < constants.MAX_VENUS_SCALE && game.gameOptions.venusNextExtension) {
-      if (game.gameOptions.silverCubeVariant === true) {
-        action.options.push(
-          new SelectOption('Add 5 M€ to Venus track', 'Select', () => {
-            SilverCubeHandler.onVenusSilverCubeAdded(this, game);
-            return undefined;
-          }),
-        );
-      } else {
+      if (game.getVenusScaleLevel() < constants.MAX_VENUS_SCALE && game.gameOptions.venusNextExtension) {
         action.options.push(
           new SelectOption('Increase Venus scale', 'Increase', () => {
             game.increaseVenusScaleLevel(this, 1);
@@ -1271,7 +1238,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   /**
-   * @return {number} the number of avaialble megacredits. Which is just a shorthand for megacredits,
+   * @return {number} the number of available megacredits. Which is just a shorthand for megacredits,
    * plus any units of heat available thanks to Helion.
    */
   public spendableMegacredits(): number {
@@ -1714,47 +1681,6 @@ export class Player implements ISerializable<SerializedPlayer> {
       this.game.defer(new SelectHowToPayDeferred(this, this.game.getAwardFundingCost(), {title: 'Select how to pay for award'}));
       this.game.fundAward(this, award);
       return undefined;
-    });
-  }
-
-  private giveAwards(vpb: VictoryPointsBreakdown): void {
-    this.game.fundedAwards.forEach((fundedAward) => {
-      // Awards are disabled for 1 player games
-      if (this.game.isSoloMode()) return;
-
-      const players: Array<Player> = this.game.getPlayers().slice();
-      players.sort(
-        (p1, p2) => fundedAward.award.getScore(p2) - fundedAward.award.getScore(p1),
-      );
-
-      // We have one rank 1 player
-      if (fundedAward.award.getScore(players[0]) > fundedAward.award.getScore(players[1])) {
-        if (players[0].id === this.id) vpb.setVictoryPoints('awards', 5, '1st place for '+fundedAward.award.name+' award (funded by '+fundedAward.player.name+')');
-        players.shift();
-
-        if (players.length > 1) {
-          // We have one rank 2 player
-          if (fundedAward.award.getScore(players[0]) > fundedAward.award.getScore(players[1])) {
-            if (players[0].id === this.id) vpb.setVictoryPoints('awards', 2, '2nd place for '+fundedAward.award.name+' award (funded by '+fundedAward.player.name+')');
-
-          // We have at least two rank 2 players
-          } else {
-            const score = fundedAward.award.getScore(players[0]);
-            while (players.length > 0 && fundedAward.award.getScore(players[0]) === score) {
-              if (players[0].id === this.id) vpb.setVictoryPoints('awards', 2, '2nd place for '+fundedAward.award.name+' award (funded by '+fundedAward.player.name+')');
-              players.shift();
-            }
-          }
-        }
-
-      // We have at least two rank 1 players
-      } else {
-        const score = fundedAward.award.getScore(players[0]);
-        while (players.length > 0 && fundedAward.award.getScore(players[0]) === score) {
-          if (players[0].id === this.id) vpb.setVictoryPoints('awards', 5, '1st place for '+fundedAward.award.name+' award (funded by '+fundedAward.player.name+')');
-          players.shift();
-        }
-      }
     });
   }
 
