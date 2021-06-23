@@ -1,18 +1,24 @@
+import {CardName} from "../../CardName";
 import {Player} from "../../Player";
 import {isAresTile} from "../../TileType";
 import {IAward} from "../IAward";
+import {BJORN_AWARD_BONUS} from "../../constants";
 
 export class Edgedancer implements IAward {
   public name: string = 'Edgedancer';
   public description: string = 'Most tiles on the edges of the board'
 
   public getScore(player: Player): number {
-    return player.game.board.spaces
+    let score = player.game.board.spaces
       .filter((space) => space.player !== undefined &&
         space.player === player &&
         space.tile !== undefined &&
         isAresTile(space.tile.tileType) === false &&
         this.isOnEdge(space.x, space.y)).length;
+
+    if (player.cardIsInEffect(CardName.BJORN)) score += BJORN_AWARD_BONUS;
+    
+    return score;
   }
 
   private isOnEdge(x: number, y: number): boolean {

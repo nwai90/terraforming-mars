@@ -659,4 +659,22 @@ export enum CardName {
     MOON_ROAD_STANDARD_PROJECT = 'Road Infrastructure',
     MOON_MINE_STANDARD_PROJECT = 'Lunar Mine',
     MOON_COLONY_STANDARD_PROJECT = 'Lunar Habitat',
+
+    // Leaders
+    ANDERS = 'Anders',
+    BJORN = 'Bjorn',
+    CAROLINE = 'Caroline',
+    DILLON = 'Dillon',
+    EDNA = 'Edna',
+    FRITZ = 'Fritz',
+    GORAN = 'Goran',
+    HENRIETTA = 'Henrietta',
+    ISAK = 'Isak',
+    JANSSON = 'Jansson',
+    KAREN = 'Karen',
+    LINDBERG = 'Lindberg',
+    MARIA = 'Maria',
+    NILS = 'Nils',
+    OSCAR = 'Oscar',
+    PETRA = 'Petra',
 }

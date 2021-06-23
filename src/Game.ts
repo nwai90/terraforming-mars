@@ -105,6 +105,7 @@ export interface GameOptions {
   societyExpansion: boolean;
   solarPhaseOption: boolean;
   moonExpansion: boolean;
+  leadersExpansion: boolean;
 
   // Variants
   colosseumVariant: boolean;
@@ -149,6 +150,7 @@ const DEFAULT_GAME_OPTIONS: GameOptions = {
   escapeVelocityPenalty: undefined,
   fastModeOption: false,
   initialDraftVariant: false,
+  leadersExpansion: false,
   moonExpansion: false,
   newOpsExpansion: false,
   politicalAgendasExtension: AgendaStyle.STANDARD,
@@ -372,6 +374,7 @@ export class Game implements ISerializable<SerializedGame> {
 
         if (gameOptions.initialDraftVariant === false) this.dealProjectCards(player, dealer, game);
         if (gameOptions.preludeExtension) this.dealPreludeCards(player, dealer);
+        if (gameOptions.leadersExpansion) this.dealLeaderCards(player, dealer);
       } else if (!player.beginner ||
         // Bypass beginner choice if any extension is choosen
         gameOptions.preludeExtension ||
@@ -390,6 +393,7 @@ export class Game implements ISerializable<SerializedGame> {
         LogHelper.logDrawnCards(player, player.dealtCorporationCards, true, LogType.DREW);
         if (gameOptions.initialDraftVariant === false) this.dealProjectCards(player, dealer, game);
         if (gameOptions.preludeExtension) this.dealPreludeCards(player, dealer);
+        if (gameOptions.leadersExpansion) this.dealLeaderCards(player, dealer);
       } else {
         game.playerHasPickedCorporationCard(player, new BeginnerCorporation());
       }
@@ -426,6 +430,12 @@ export class Game implements ISerializable<SerializedGame> {
   private static dealPreludeCards(player: Player, dealer: Dealer): void {
     for (let i = 0; i < 4; i++) {
       player.dealtPreludeCards.push(dealer.dealPreludeCard());
+    }
+  }
+
+  private static dealLeaderCards(player: Player, dealer: Dealer): void {
+    for (let i = 0; i < 2; i++) {
+      player.dealtLeaderCards.push(dealer.dealLeaderCard());
     }
   }
 

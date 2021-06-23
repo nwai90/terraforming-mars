@@ -38,10 +38,12 @@ describe('Cloner', function() {
     expect(newPlayerZero.handicap).eq(3);
 
     expect(player.dealtCorporationCards, 'dealtCorporationCards').deep.eq(newPlayerZero.dealtCorporationCards);
+    expect(player.dealtLeaderCards, 'dealtLeaderCards').deep.eq(newPlayerZero.dealtLeaderCards);
     expect(player.dealtProjectCards, 'dealtProjectCards').deep.eq(newPlayerZero.dealtProjectCards);
     expect(player.dealtPreludeCards, 'dealtPreludeCards').deep.eq(newPlayerZero.dealtPreludeCards);
     expect(player.cardsInHand, 'cardsInHand').deep.eq(newPlayerZero.cardsInHand);
     expect(player.preludeCardsInHand, 'preludeCardsInHand').deep.eq(newPlayerZero.preludeCardsInHand);
+    expect(player.leaderCardsInHand, 'leaderCardsInHand').deep.eq(newPlayerZero.leaderCardsInHand);
     expect(player.playedCards, 'playedCards').deep.eq(newPlayerZero.playedCards);
     expect(player.draftedCards, 'draftedCards').deep.eq(newPlayerZero.draftedCards);
 

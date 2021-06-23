@@ -1,7 +1,9 @@
 import {Board} from "../../boards/Board";
+import {CardName} from "../../CardName";
 import {Player} from "../../Player";
 import {TileType} from "../../TileType";
 import {IAward} from "../IAward";
+import {BJORN_AWARD_BONUS} from "../../constants";
 
 export class Urbanist implements IAward {
   public name: string = 'Urbanist';
@@ -19,6 +21,8 @@ export class Urbanist implements IAward {
         }
       }
     });
+    
+    if (player.cardIsInEffect(CardName.BJORN)) score += BJORN_AWARD_BONUS;
 
     return score;
   }

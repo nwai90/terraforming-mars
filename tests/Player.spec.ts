@@ -232,10 +232,12 @@ describe('Player', function() {
       actionsThisGeneration: [CardName.FACTORUM, CardName.GHG_PRODUCING_BACTERIA],
       corporationInitialActionDone: false,
       dealtCorporationCards: [CardName.THARSIS_REPUBLIC],
+      dealtLeaderCards: [],
       dealtProjectCards: [CardName.FLOATER_LEASING, CardName.BUTTERFLY_EFFECT],
       dealtPreludeCards: [CardName.MOHOLE_EXCAVATION, CardName.LAVA_TUBE_SETTLEMENT],
       cardsInHand: [CardName.EARTH_ELEVATOR, CardName.DUST_SEALS],
       preludeCardsInHand: [CardName.METAL_RICH_ASTEROID, CardName.PSYCHROPHILES],
+      leaderCardsInHand: [],
       playedCards: [], // TODO(kberg): these are SerializedCard.
       draftedCards: [CardName.FISH, CardName.EXTREME_COLD_FUNGUS],
       needsToDraft: false,

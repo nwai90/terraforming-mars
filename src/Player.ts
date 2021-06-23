@@ -81,6 +81,7 @@ import {Awards} from './awards/Awards';
 import {TopsoilContract} from './cards/promo/TopsoilContract';
 import {MeatIndustry} from './cards/promo/MeatIndustry';
 import {Turmoil} from './turmoil/Turmoil';
+import {LeaderCard} from './cards/LeaderCard';
 
 export type PlayerId = string;
 
@@ -131,8 +132,10 @@ export class Player implements ISerializable<SerializedPlayer> {
   public dealtCorporationCards: Array<CorporationCard> = [];
   public dealtProjectCards: Array<IProjectCard> = [];
   public dealtPreludeCards: Array<IProjectCard> = [];
+  public dealtLeaderCards: Array<IProjectCard> = [];
   public cardsInHand: Array<IProjectCard> = [];
   public preludeCardsInHand: Array<IProjectCard> = [];
+  public leaderCardsInHand: Array<IProjectCard> = [];
   public playedCards: Array<IProjectCard> = [];
   public draftedCards: Array<IProjectCard> = [];
   public cardCost: number = constants.CARD_COST;
@@ -555,6 +558,11 @@ export class Player implements ISerializable<SerializedPlayer> {
     // Titania Colony VP
     if (this.colonyVictoryPoints > 0) {
       victoryPointsBreakdown.setVictoryPoints('victoryPoints', this.colonyVictoryPoints, 'Colony VP');
+    }
+
+    // Leaders VP
+    if (this.cardIsInEffect(CardName.DILLON)) {
+      victoryPointsBreakdown.setVictoryPoints('victoryPoints', 4, 'Leaders VP');
     }
 
     MoonExpansion.calculateVictoryPoints(this, victoryPointsBreakdown);
@@ -1369,6 +1377,17 @@ export class Player implements ISerializable<SerializedPlayer> {
     );
   }
 
+  private playLeaderCard(): PlayerInput {
+    return new SelectCard(
+      'Select leader card to play',
+      'Play',
+      this.leaderCardsInHand,
+      (foundCards: Array<IProjectCard>) => {
+        return this.playCard(foundCards[0]);
+      },
+    );
+  }
+
   public checkHowToPayAndPlayCard(selectedCard: IProjectCard, howToPay: HowToPay) {
     const cardCost: number = this.getCardCost(selectedCard);
     let totalToPay: number = 0;
@@ -1509,10 +1528,14 @@ export class Player implements ISerializable<SerializedPlayer> {
     // Remove card from hand
     const projectCardIndex = this.cardsInHand.findIndex((card) => card.name === selectedCard.name);
     const preludeCardIndex = this.preludeCardsInHand.findIndex((card) => card.name === selectedCard.name);
+    const leaderCardIndex = this.leaderCardsInHand.findIndex((card) => card.name === selectedCard.name);
+
     if (projectCardIndex !== -1) {
       this.cardsInHand.splice(projectCardIndex, 1);
     } else if (preludeCardIndex !== -1) {
       this.preludeCardsInHand.splice(preludeCardIndex, 1);
+    } else if (leaderCardIndex !== -1) {
+      this.leaderCardsInHand.splice(leaderCardIndex, 1);
     }
 
     // Remove card from Self Replicating Robots
@@ -1931,6 +1954,20 @@ export class Player implements ISerializable<SerializedPlayer> {
       game.phase = Phase.ACTION;
     }
 
+    // Leader cards have to be played right after Preludes
+    if (this.leaderCardsInHand.length > 0) {
+      this.setWaitingFor(this.playLeaderCard(), () => {
+        if (this.leaderCardsInHand.length === 1) {
+          this.takeAction();
+        } else {
+          game.playerIsFinishedTakingActions();
+        }
+      });
+      return;
+    } else {
+      game.phase = Phase.ACTION;
+    }
+
     if (game.hasPassedThisActionPhase(this) || (allOtherPlayersHavePassed === false && this.actionsTakenThisRound >= 2)) {
       this.actionsTakenThisRound = 0;
       game.playerIsFinishedTakingActions();
@@ -2171,6 +2208,9 @@ export class Player implements ISerializable<SerializedPlayer> {
       if (c.resourceCount !== undefined) {
         result.resourceCount = c.resourceCount;
       }
+      if ((c as LeaderCard).isDisabled !== undefined) {
+        result.isDisabled = (c as LeaderCard).isDisabled;
+      }
       if (c instanceof SelfReplicatingRobots) {
         result.targetCards = c.targetCards.map((t) => {
           return {
@@ -2225,8 +2265,10 @@ export class Player implements ISerializable<SerializedPlayer> {
       dealtCorporationCards: this.dealtCorporationCards.map((c) => c.name),
       dealtProjectCards: this.dealtProjectCards.map((c) => c.name),
       dealtPreludeCards: this.dealtPreludeCards.map((c) => c.name),
+      dealtLeaderCards: this.dealtLeaderCards.map((c) => c.name),
       cardsInHand: this.cardsInHand.map((c) => c.name),
       preludeCardsInHand: this.preludeCardsInHand.map((c) => c.name),
+      leaderCardsInHand: this.leaderCardsInHand.map((c) => c.name),
       playedCards: this.serializePlayedCards(),
       draftedCards: this.draftedCards.map((c) => c.name),
       cardCost: this.cardCost,
@@ -2363,6 +2405,9 @@ export class Player implements ISerializable<SerializedPlayer> {
     // Rebuild dealt prelude array
     player.dealtPreludeCards = cardFinder.cardsFromJSON(d.dealtPreludeCards);
 
+    // Rebuild dealt leaders array
+    player.dealtLeaderCards = cardFinder.cardsFromJSON(d.dealtLeaderCards);
+
     // Rebuild dealt cards array
     player.dealtProjectCards = cardFinder.cardsFromJSON(d.dealtProjectCards);
 
@@ -2372,11 +2417,18 @@ export class Player implements ISerializable<SerializedPlayer> {
     // Rebuild each prelude in hand
     player.preludeCardsInHand = cardFinder.cardsFromJSON(d.preludeCardsInHand);
 
+    // Rebuild each leader in hand
+    player.leaderCardsInHand = cardFinder.cardsFromJSON(d.leaderCardsInHand);
+
     // Rebuild each played card
     player.playedCards = d.playedCards.map((element: SerializedCard) => {
       const card = cardFinder.getProjectCardByName(element.name)!;
       if (element.resourceCount !== undefined) {
         card.resourceCount = element.resourceCount;
+      }
+      // TODO: Leaders are part of played cards and not stored separately, for now
+      if (element.isDisabled !== undefined) {
+        (card as LeaderCard).isDisabled = Boolean(element.isDisabled);
       }
       if (card instanceof SelfReplicatingRobots && element.targetCards !== undefined) {
         card.targetCards = [];

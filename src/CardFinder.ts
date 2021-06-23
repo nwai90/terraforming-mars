@@ -14,6 +14,7 @@ import {COMMUNITY_CARD_MANIFEST} from './cards/community/CommunityCardManifest';
 import {ARES_CARD_MANIFEST} from './cards/ares/AresCardManifest';
 import {MOON_CARD_MANIFEST} from './cards/moon/MoonCardManifest';
 import {Deck} from './Deck';
+import {LEADER_CARD_MANIFEST} from './cards/leaders/LeaderCardManifest';
 
 export class CardFinder {
     private static decks: undefined | Array<CardManifest>;
@@ -30,6 +31,7 @@ export class CardFinder {
           ARES_CARD_MANIFEST,
           COMMUNITY_CARD_MANIFEST,
           MOON_CARD_MANIFEST,
+          LEADER_CARD_MANIFEST,
         ];
       }
       return CardFinder.decks;
@@ -60,7 +62,7 @@ export class CardFinder {
     // TODO(kberg): Find the use cases where this is used to find Prelude cards and filter them out to
     //              another function, perhaps?
     public getProjectCardByName(cardName: CardName): IProjectCard | undefined {
-      return this.getCardByName(cardName, (manifest) => [manifest.projectCards, manifest.preludeCards]);
+      return this.getCardByName(cardName, (manifest) => [manifest.projectCards, manifest.preludeCards, manifest.leaderCards]);
     }
 
     public cardsFromJSON(cards: Array<ICard | CardName>): Array<IProjectCard> {

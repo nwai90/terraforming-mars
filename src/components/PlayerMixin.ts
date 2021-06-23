@@ -40,6 +40,9 @@ export const PlayerMixin = {
     getPreludeCardType: function() {
       return CardType.PRELUDE;
     },
+    getLeaderCardType: function() {
+      return CardType.LEADER;
+    },
     isCardActivated: function(
       card: CardModel,
       player: PlayerModel,

@@ -13,6 +13,7 @@ export class Dealer implements ISerializable<SerializedDealer> {
     public preludeDeck: Array<IProjectCard> = [];
     public discarded: Array<IProjectCard> = [];
     public corporationCards: Array<CorporationCard> = [];
+    public leaderDeck: Array<IProjectCard> = [];
 
     private constructor() { }
 
@@ -22,6 +23,7 @@ export class Dealer implements ISerializable<SerializedDealer> {
       dealer.deck = Dealer.shuffle(loader.getProjectCards());
       dealer.preludeDeck = Dealer.shuffle(loader.getPreludeCards());
       dealer.corporationCards = loader.getCorporationCards();
+      dealer.leaderDeck = Dealer.shuffle(loader.getLeaderCards());
       return dealer;
     }
 
@@ -91,6 +93,16 @@ export class Dealer implements ISerializable<SerializedDealer> {
       return result;
     }
 
+    // Leader deck does not need discard and reshuffle mecanisms
+    public dealLeaderCard(): IProjectCard {
+      const result: IProjectCard | undefined = this.leaderDeck.pop();
+      if (result === undefined) {
+        throw 'Unexpected empty leader deck';
+      }
+      // All Leader cards are expected to subclass IProjectCard
+      return result;
+    }
+
     public getDeckSize(): number {
       return this.deck.length;
     }
@@ -107,6 +119,7 @@ export class Dealer implements ISerializable<SerializedDealer> {
       dealer.deck = cardFinder.cardsFromJSON(d.deck);
       dealer.discarded = cardFinder.cardsFromJSON(d.discarded);
       dealer.preludeDeck = cardFinder.cardsFromJSON(d.preludeDeck);
+      dealer.leaderDeck = cardFinder.cardsFromJSON(d.leaderDeck);
       return dealer;
     }
 
@@ -116,6 +129,7 @@ export class Dealer implements ISerializable<SerializedDealer> {
         deck: this.deck.map((c) => c.name),
         discarded: this.discarded.map((c) => c.name),
         preludeDeck: this.preludeDeck.map((c) => c.name),
+        leaderDeck: this.leaderDeck.map((c) => c.name),
       };
     }
 }

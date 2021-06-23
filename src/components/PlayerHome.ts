@@ -293,6 +293,11 @@ export const PlayerHome = Vue.component('player-home', {
                     <div v-if="player.corporationCard !== undefined" class="cardbox">
                         <Card :card="player.corporationCard" :actionUsed="isCardActivated(player.corporationCard, player)"/>
                     </div>
+
+                    <div v-for="card in getCardsByType(player.playedCards, [getLeaderCardType()])" :key="card.name" class="cardbox">
+                        <Card :card="card" :actionUsed="isCardActivated(card, player)"/>
+                    </div>
+
                     <div v-show="isVisible('ACTIVE')" v-for="card in sortActiveCards(getCardsByType(player.playedCards, [getActiveCardType()]))" :key="card.name" class="cardbox">
                         <Card :card="card" :actionUsed="isCardActivated(card, player)"/>
                     </div>
@@ -343,6 +348,9 @@ export const PlayerHome = Vue.component('player-home', {
                     </div>
                     <div v-if="player.gameOptions.preludeExtension" v-for="card in player.preludeCardsInHand" :key="card.name" class="cardbox">
                       <Card :card="card"/>
+                    </div>
+                    <div v-if="player.gameOptions.leadersExpansion" v-for="card in player.leaderCardsInHand" :key="card.name" class="cardbox">
+                       <Card :card="card"/>
                     </div>
                   </div>
                   <div>

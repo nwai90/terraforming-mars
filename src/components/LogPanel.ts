@@ -76,6 +76,8 @@ export const LogPanel = Vue.component('log-panel', {
         className = 'background-color-prelude';
       } else if (cardType === CardType.STANDARD_PROJECT || cardType === CardType.STANDARD_ACTION) {
         className = 'background-color-standard-project';
+      } else if (cardType === CardType.LEADER) {
+        className = 'background-color-leader';
       }
 
       if (className === undefined) {
@@ -115,6 +117,7 @@ export const LogPanel = Vue.component('log-panel', {
           manifest.preludeCards,
           manifest.standardProjects,
           manifest.standardActions,
+          manifest.leaderCards,
         ]);
 
         for (const player of this.players) {

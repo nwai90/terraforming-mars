@@ -7,4 +7,5 @@ export interface SerializedDealer {
     deck: Array<IProjectCard | CardName>;
     discarded: Array<IProjectCard | CardName>;
     preludeDeck: Array<IProjectCard | CardName>;
+    leaderDeck: Array<IProjectCard | CardName>;
 }

@@ -39,6 +39,7 @@ import {MoonModel} from './MoonModel';
 import {Units} from '../Units';
 import {SelectPartyToSendDelegate} from '../inputs/SelectPartyToSendDelegate';
 import {Turmoil} from '../turmoil/Turmoil';
+import {LeaderCard} from '../cards/LeaderCard';
 
 export class Server {
   public static getGameModel(game: Game): GameHomeModel {
@@ -78,6 +79,7 @@ export class Server {
       color: player.color,
       corporationCard: getCorporationCard(player),
       dealtCorporationCards: getCards(player, player.dealtCorporationCards),
+      dealtLeaderCards: getCards(player, player.dealtLeaderCards),
       dealtPreludeCards: getCards(player, player.dealtPreludeCards),
       dealtProjectCards: getCards(player, player.dealtProjectCards),
       deckSize: game.dealer.getDeckSize(),
@@ -117,6 +119,7 @@ export class Server {
       playedCards: getCards(player, player.playedCards, {showResources: true}),
       players: getPlayers(game.getPlayers(), game),
       preludeCardsInHand: getCards(player, player.preludeCardsInHand),
+      leaderCardsInHand: getCards(player, player.leaderCardsInHand),
       remainingStallActionsCount: player.remainingStallActionsCount,
       researchedPlayers: game.getResearchedPlayers(),
       selfReplicatingRobotsCards: getSelfReplicatingRobotsTargetCards(player),
@@ -423,7 +426,7 @@ function getCards(
     name: card.name,
     calculatedCost: options.showNewCost ? (card.cost === undefined ? undefined : player.getCardCost(card as IProjectCard)) : card.cost,
     cardType: card.cardType,
-    isDisabled: options.enabled?.[index] === false,
+    isDisabled: options.enabled?.[index] === false || (card as LeaderCard).isDisabled === true,
     warning: card.warning,
     reserveUnits: options.reserveUnits ? options.reserveUnits[index] : Units.EMPTY,
     bonusResource: (card as IProjectCard).bonusResource,
@@ -498,6 +501,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
         colosseumVariant: game.gameOptions.colosseumVariant,
         newOpsExpansion: game.gameOptions.newOpsExpansion,
         archaeologyExtension: game.gameOptions.archaeologyExtension,
+        leadersExpansion: game.gameOptions.leadersExpansion,
         timer: player.timer.serialize(),
         totalSpend: player.totalSpend,
         silverCubeVariant: game.gameOptions.silverCubeVariant,
@@ -583,6 +587,7 @@ function getGameOptionsAsModel(options: GameOptions): GameOptionsModel {
     escapeVelocityPenalty: options.escapeVelocityPenalty,
     fastModeOption: options.fastModeOption,
     initialDraftVariant: options.initialDraftVariant,
+    leadersExpansion: options.leadersExpansion,
     moonExpansion: options.moonExpansion,
     newOpsExpansion: options.newOpsExpansion,
     preludeExtension: options.preludeExtension,

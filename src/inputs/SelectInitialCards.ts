@@ -44,6 +44,19 @@ export class SelectInitialCards extends AndOptions implements PlayerInput {
         );
       }
 
+      if (player.game.gameOptions.leadersExpansion) {
+        this.options.push(
+          new SelectCard(
+            'Select 2 Leader cards', undefined, player.dealtLeaderCards,
+            (leaderCards: Array<IProjectCard>) => {
+              player.leaderCardsInHand.push(...leaderCards);
+              LogHelper.logDrawnCards(player, leaderCards, true, LogType.KEPT);
+              return undefined;
+            }, 2, 2,
+          ),
+        );
+      }
+
       this.options.push(
         new SelectCard(
           'Select initial cards to buy', undefined, player.dealtProjectCards,

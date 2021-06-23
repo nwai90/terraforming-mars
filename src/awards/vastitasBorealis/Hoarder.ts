@@ -1,11 +1,15 @@
+import {CardName} from "../../CardName";
 import {Player} from "../../Player";
 import {IAward} from "../IAward";
+import {BJORN_AWARD_BONUS} from "../../constants";
 
 export class Hoarder implements IAward {
   public name: string = 'Hoarder';
   public description: string = 'Most cards in hand'
   
   public getScore(player: Player): number {
-    return player.cardsInHand.length;
+    let score = player.cardsInHand.length;
+    if (player.cardIsInEffect(CardName.BJORN)) score += BJORN_AWARD_BONUS;
+    return score;
   }
 }

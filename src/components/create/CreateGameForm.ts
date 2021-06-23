@@ -52,6 +52,7 @@ export interface CreateGameModel {
     colosseumVariant: boolean;
     newOpsExpansion: boolean;
     archaeologyExtension: boolean;
+    leadersExpansion: boolean;
     aresExtension: boolean;
     politicalAgendasExtension: AgendaStyle;
     societyExpansion: boolean;
@@ -137,6 +138,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       colosseumVariant: false,
       newOpsExpansion: false,
       archaeologyExtension: false,
+      leadersExpansion: false,
       aresExtension: false,
       politicalAgendasExtension: AgendaStyle.STANDARD,
       societyExpansion: false,
@@ -461,6 +463,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       const colosseumVariant = component.colosseumVariant;
       const newOpsExpansion = component.newOpsExpansion;
       const archaeologyExtension = component.archaeologyExtension;
+      const leadersExpansion = component.leadersExpansion;
       const aresExtension = component.aresExtension;
       const politicalAgendasExtension = this.politicalAgendasExtension;
       const societyExpansion = component.societyExpansion;
@@ -539,6 +542,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
         colosseumVariant: colosseumVariant,
         newOpsExpansion: newOpsExpansion,
         archaeologyExtension: archaeologyExtension,
+        leadersExpansion: leadersExpansion,
         aresExtension: aresExtension,
         politicalAgendasExtension: politicalAgendasExtension,
         societyExpansion: societyExpansion,
@@ -750,6 +754,14 @@ export const CreateGameForm = Vue.component('create-game-form', {
                                 <label for="silverCube-checkbox" class="expansion-button">
                                     <div class="create-game-expansion-icon expansion-icon-silver-cube"></div>
                                     <span v-i18n>Silver Cube</span>&nbsp;<a href="https://www.notion.so/Variants-32b53050f10a4cfbaea117c34d4f3a03#444114f07aca4d97a98c7597ce21c7db" class="tooltip" target="_blank">&#9432;</a>
+                                </label>
+                            </template>
+
+                            <template v-if="!isSoloGame()">
+                                <input type="checkbox" name="leadersExpansion" id="leaders-checkbox" v-model="leadersExpansion">
+                                <label for="leaders-checkbox" class="expansion-button">
+                                    <div class="create-game-expansion-icon expansion-icon-leaders"></div>
+                                    <span v-i18n>Leaders</span>&nbsp;<a href="https://www.notion.so/Society-64620077dfc84d06bbe5235679be7017" class="tooltip" target="_blank">&#9432;</a>
                                 </label>
                             </template>
                         </div>

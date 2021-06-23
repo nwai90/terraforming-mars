@@ -1,20 +1,26 @@
 import {Board} from "../../boards/Board";
+import {CardName} from "../../CardName";
 import {Player} from "../../Player";
 import {SpaceType} from "../../SpaceType";
 import {isAresTile} from "../../TileType";
 import {IAward} from "../IAward";
+import {BJORN_AWARD_BONUS} from "../../constants";
 
 export class Highlander implements IAward {
   public name: string = 'Highlander';
   public description: string = 'Most tiles on Mars not adjacent to oceans'
   
   public getScore(player: Player): number {
-    return player.game.board.spaces.filter((space) =>
+    let score = player.game.board.spaces.filter((space) =>
       space.player === player &&
       space.tile !== undefined &&
       isAresTile(space.tile.tileType) === false &&
       space.spaceType !== SpaceType.COLONY &&
       player.game.board.getAdjacentSpaces(space).every((space) => !Board.isOceanSpace(space)),
     ).length;
+
+    if (player.cardIsInEffect(CardName.BJORN)) score += BJORN_AWARD_BONUS;
+
+    return score;
   }
 }

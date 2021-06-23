@@ -38,6 +38,8 @@ export const CardTitle = Vue.component('CardTitle', {
         classes.push('background-color-prelude');
       } else if (this.type === CardType.STANDARD_PROJECT || this.type === CardType.STANDARD_ACTION) {
         classes.push('background-color-standard-project');
+      } else if (this.type === CardType.LEADER) {
+        classes.push('background-color-leader');
       }
 
       const localeSpecificTitle = translateText(this.getCardTitleWithoutSuffix(title));

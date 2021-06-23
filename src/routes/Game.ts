@@ -89,6 +89,7 @@ export class GameHandler extends Handler {
           archaeologyExtension: gameReq.archaeologyExtension,
           solarPhaseOption: gameReq.solarPhaseOption,
           silverCubeVariant: gameReq.silverCubeVariant,
+          leadersExpansion: gameReq.leadersExpansion,
 
           draftVariant: gameReq.draftVariant,
           initialDraftVariant: gameReq.initialDraft,

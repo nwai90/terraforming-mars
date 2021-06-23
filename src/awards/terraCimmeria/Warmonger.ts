@@ -1,6 +1,7 @@
 import {CardName} from "../../CardName";
 import {Player} from "../../Player";
 import {IAward} from "../IAward";
+import {BJORN_AWARD_BONUS} from "../../constants";
 
 export class Warmonger implements IAward {
   public name: string = 'Warmonger';
@@ -8,7 +9,10 @@ export class Warmonger implements IAward {
 
   public getScore(player: Player): number {
     const cardNames = player.playedCards.map((card) => card.name);
-    return cardNames.filter((name) => Warmonger.attackCards.includes(name)).length;
+    let score = cardNames.filter((name) => Warmonger.attackCards.includes(name)).length;
+    if (player.cardIsInEffect(CardName.BJORN)) score += BJORN_AWARD_BONUS;
+
+    return score;
   }
 
   private static attackCards = [

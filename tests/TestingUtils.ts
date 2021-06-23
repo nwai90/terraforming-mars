@@ -58,6 +58,7 @@ export class TestingUtils {
       colosseumVariant: false,
       newOpsExpansion: false,
       archaeologyExtension: false,
+      leadersExpansion: false,
       undoOption: false,
       showTimers: false,
       startingCorporations: 2,

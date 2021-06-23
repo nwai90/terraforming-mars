@@ -23,6 +23,9 @@ export const GameSetupDetail = Vue.component('game-setup-detail', {
     isSocietyExpansionOn: function(): boolean {
       return this.gameOptions.societyExpansion === true;
     },
+    isLeadersExpansionOn: function(): boolean {
+      return this.gameOptions.leadersExpansion === true;
+    },
     isNewOpsExpansionOn: function(): boolean {
       return this.gameOptions.newOpsExpansion === true;
     },
@@ -83,6 +86,7 @@ export const GameSetupDetail = Vue.component('game-setup-detail', {
               <div v-if="isColosseumVariantOn()" class="create-game-expansion-icon expansion-icon-colosseum"></div>
               <div v-if="isSilverCubeVariantOn()" class="create-game-expansion-icon expansion-icon-silver-cube"></div>
               <div v-if="isNewOpsExpansionOn()" class="create-game-expansion-icon expansion-icon-newOps"></div>
+              <div v-if="isLeadersExpansionOn()" class="create-game-expansion-icon expansion-icon-leaders"></div>
             </li>
 
             <li><div class="setup-item" v-i18n>Board:</div>

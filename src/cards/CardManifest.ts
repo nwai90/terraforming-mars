@@ -6,6 +6,7 @@ import {ICardFactory} from './ICardFactory';
 import {IProjectCard} from './IProjectCard';
 import {StandardProjectCard} from './StandardProjectCard';
 import {StandardActionCard} from './StandardActionCard';
+import {LeaderCard} from './LeaderCard';
 
 export class CardManifest {
     module: GameModule;
@@ -15,6 +16,8 @@ export class CardManifest {
     preludeCards : Deck<IProjectCard>;
     standardProjects : Deck<StandardProjectCard>;
     standardActions : Deck<StandardActionCard>;
+    leaderCards : Deck<LeaderCard>;
+
     constructor(arg: {
          module: GameModule,
          projectCards?: Array<ICardFactory<IProjectCard>>,
@@ -23,6 +26,7 @@ export class CardManifest {
          preludeCards?: Array<ICardFactory<IProjectCard>>,
          standardProjects?: Array<ICardFactory<StandardProjectCard>>,
          standardActions?: Array<ICardFactory<StandardActionCard>>,
+         leaderCards?: Array<ICardFactory<LeaderCard>>,
          }) {
       this.module = arg.module;
       this.projectCards = new Deck<IProjectCard>(arg.projectCards || []);
@@ -31,5 +35,6 @@ export class CardManifest {
       this.preludeCards = new Deck<IProjectCard>(arg.preludeCards || []);
       this.standardProjects = new Deck<StandardProjectCard>(arg.standardProjects || []);
       this.standardActions = new Deck<StandardActionCard>(arg.standardActions || []);
+      this.leaderCards = new Deck<LeaderCard>(arg.leaderCards || []);
     }
 }

@@ -1,6 +1,8 @@
 import {Tags} from "../../cards/Tags";
+import {CardName} from "../../CardName";
 import {Player} from "../../Player";
 import {IAward} from "../IAward";
+import {BJORN_AWARD_BONUS} from "../../constants";
 
 export class Curator implements IAward {
   public name: string = 'Curator';
@@ -14,6 +16,8 @@ export class Curator implements IAward {
       const tagCount = player.getTagCount(tag, false, false);
       if (tagCount > score) score = tagCount;
     });
+
+    if (player.cardIsInEffect(CardName.BJORN)) score += BJORN_AWARD_BONUS;
 
     return score;
   }

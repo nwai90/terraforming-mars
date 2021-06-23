@@ -14,6 +14,7 @@ import {Deck} from './Deck';
 import {GameModule} from './GameModule';
 import {GameOptions} from './Game';
 import {MOON_CARD_MANIFEST} from './cards/moon/MoonCardManifest';
+import {LEADER_CARD_MANIFEST} from './cards/leaders/LeaderCardManifest';
 
 export class CardLoader {
   private readonly gameOptions: GameOptions;
@@ -33,6 +34,7 @@ export class CardLoader {
       [gameOptions.promoCardsOption, PROMO_CARD_MANIFEST],
       [gameOptions.communityCardsOption, COMMUNITY_CARD_MANIFEST],
       [gameOptions.moonExpansion, MOON_CARD_MANIFEST],
+      [gameOptions.leadersExpansion, LEADER_CARD_MANIFEST],
     ];
 
     this.manifests = manifests.filter((a) => a[0]).map((a) => a[1]);
@@ -77,6 +79,9 @@ export class CardLoader {
   }
   public getPreludeCards() {
     return this.getCards((manifest) => manifest.preludeCards);
+  }
+  public getLeaderCards() {
+    return this.getCards((manifest) => manifest.leaderCards);
   }
 
   private getCards<T extends ICard>(getDeck: (arg0: CardManifest) => Deck<T>) : Array<T> {

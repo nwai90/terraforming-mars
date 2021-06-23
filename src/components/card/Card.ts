@@ -51,6 +51,7 @@ export const Card = Vue.component('card', {
         manifest.preludeCards,
         manifest.standardProjects,
         manifest.standardActions,
+        manifest.leaderCards,
       ];
       for (const deck of decks) {
         const factory = deck.findByCardName(cardName);

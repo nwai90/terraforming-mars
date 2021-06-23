@@ -31,6 +31,7 @@ export interface PlayerModel {
     color: Color;
     corporationCard: CardModel | undefined;
     dealtCorporationCards: Array<CardModel>;
+    dealtLeaderCards: Array<CardModel>;
     dealtPreludeCards: Array<CardModel>;
     dealtProjectCards: Array<CardModel>;
     deckSize: number;
@@ -70,6 +71,7 @@ export interface PlayerModel {
     playedCards: Array<CardModel>;
     players: Array<PlayerModel>;
     preludeCardsInHand: Array<CardModel>;
+    leaderCardsInHand: Array<CardModel>;
     remainingStallActionsCount: number;
     researchedPlayers: Array<Color>;
     selfReplicatingRobotsCards: Array<CardModel>;

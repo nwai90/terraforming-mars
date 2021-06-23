@@ -20,6 +20,7 @@ export interface SerializedPlayer {
     corporationCard: SerializedCard | undefined;
     corporationInitialActionDone: boolean;
     dealtCorporationCards: Array<CardName>;
+    dealtLeaderCards: Array<CardName>;
     dealtPreludeCards: Array<CardName>;
     dealtProjectCards: Array<CardName>;
     draftedCards: Array<CardName>;
@@ -49,6 +50,7 @@ export interface SerializedPlayer {
     politicalAgendasActionUsedCount: number;
     dominantPartyActionUsedCount: number;
     preludeCardsInHand: Array<CardName>;
+    leaderCardsInHand: Array<CardName>;
     remainingStallActionsCount: number;
     removedFromPlayCards: Array<CardName>;
     removingPlayers: Array<PlayerId>;

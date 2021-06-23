@@ -2,6 +2,8 @@ import {IAward} from './IAward';
 import {Player} from '../Player';
 import {TileType, isAresTile} from '../TileType';
 import {MoonExpansion} from '../moon/MoonExpansion';
+import {CardName} from '../CardName';
+import {BJORN_AWARD_BONUS} from '../constants';
 
 export class Landlord implements IAward {
     public name: string = 'Landlord';
@@ -17,6 +19,9 @@ export class Landlord implements IAward {
           (space) => space.tile !== undefined && space.player === player).length,
         () => 0);
 
-      return marsSpaces + moonSpaces;
+      let score = marsSpaces + moonSpaces;
+      if (player.cardIsInEffect(CardName.BJORN)) score += BJORN_AWARD_BONUS;
+
+      return score;
     }
 }

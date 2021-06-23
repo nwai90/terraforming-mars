@@ -19,6 +19,7 @@ export interface GameOptionsModel {
   escapeVelocityPenalty?: number,
   fastModeOption: boolean,
   initialDraftVariant: boolean,
+  leadersExpansion: boolean,
   moonExpansion: boolean,
   newOpsExpansion: boolean,
   preludeExtension: boolean,
