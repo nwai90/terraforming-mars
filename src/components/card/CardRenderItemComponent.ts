@@ -179,6 +179,8 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
         } else {
           classes.push(sized('card-tile-lunar-colony', this.item.size));
         }
+      } else if (type === CardRenderItemType.ARROW_OPG) {
+        classes.push('card-arrow-opg');
       }
 
       function sized(clazz: string, size: string | undefined) {
@@ -276,6 +278,11 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
     getMinus: function(): CardRenderSymbol {
       return CardRenderSymbol.minus();
     },
+    shouldShowDigit: function(): boolean {
+      if (this.item.type === CardRenderItemType.VP) return false;
+      if (this.item.showDigit !== undefined) return this.item.showDigit;
+      return false;
+    },
     itemsToShow: function(): number {
       if (this.item.showDigit) return 1;
       return this.getAmountAbs();
@@ -330,7 +337,8 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
         result = '<span class="card-award-icon">awards</span>';
       }
       if (this.item.type === CardRenderItemType.VP) {
-        result = '<div class="card-resource points-big card-vp-questionmark">?</div>';
+        const value = this.item.amount === 1000 ? '?' : this.item.amount.toString();
+        result = '<div class="card-vp-icon">' + value + '</div>';
       }
       // TODO(chosta): find a reasonable way to represent "?" (alphanumeric maybe)
       // This is assocaited with the card Playwrights.
@@ -353,7 +361,7 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
   },
   template: `
         <div class="card-item-container">
-            <div class="card-res-amount" v-if="item.showDigit">{{ getAmountAbs() }}</div>
+            <div class="card-res-amount" v-if="shouldShowDigit()">{{ getAmountAbs() }}</div>
             <div :class="getComponentClasses()" v-for="index in itemsToShow()" v-html="itemHtmlContent()" :key="index"/>
         </div>
     `,

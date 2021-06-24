@@ -15,9 +15,9 @@ export class Caroline extends Card implements LeaderCard {
       metadata: {
         cardNumber: 'L03',
         renderData: CardRenderer.builder((b) => {
-          b.text('X+2').plants(1).heat(1).asterix();
+          b.opgArrow().text('X+4').plants(1).heat(1).asterix();
         }),
-        description: 'Once per game, gain plants and heat equal to your production +2.',
+        description: 'Once per game, gain plants and heat equal to your production +4.',
       },
     });
   }
@@ -33,8 +33,8 @@ export class Caroline extends Card implements LeaderCard {
   }
 
   public action(player: Player): PlayerInput | undefined {
-    player.addResource(Resources.PLANTS, player.getProduction(Resources.PLANTS) + 2, {log: true});
-    player.addResource(Resources.HEAT, player.getProduction(Resources.HEAT) + 2, {log: true});
+    player.addResource(Resources.PLANTS, player.getProduction(Resources.PLANTS) + 4, {log: true});
+    player.addResource(Resources.HEAT, player.getProduction(Resources.HEAT) + 4, {log: true});
     this.isDisabled = true;
 
     return undefined;

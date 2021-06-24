@@ -407,8 +407,10 @@ class Builder {
     return this;
   }
 
-  public vpIcon() {
-    this._addRowItem(new CardRenderItem(CardRenderItemType.VP));
+  public vpIcon(amount: number = 1000) {
+    const item = new CardRenderItem(CardRenderItemType.VP, amount);
+    item.showDigit = true;
+    this._addRowItem(item);
     return this;
   }
 
@@ -481,6 +483,11 @@ class Builder {
 
   public syndicateFleet(amount: number = 1): Builder {
     this._addRowItem(new CardRenderItem(CardRenderItemType.SYNDICATE_FLEET, amount));
+    return this;
+  }
+
+  public opgArrow(): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.ARROW_OPG));
     return this;
   }
 

@@ -275,7 +275,7 @@ const AGENDA_HTML: Map<BonusId | PolicyId, string> = new Map();
     <div class="bonus-text">No card discounts are applied this generation</div>`);
   AGENDA_HTML.set('pp02',
     `<div class="policy-top-margin">
-    <div class="card-vp-questionmark">?</div> : <div class="resource money">-2</div>
+    <div class="card-vp-icon">?</div> : <div class="resource money">-2</div>
     </div>
     <div class="bonus-text">When you play a card with NON-NEGATIVE VP, lose 2 M€ or as much as possible</div>`);
   AGENDA_HTML.set('pp03',

@@ -18,7 +18,7 @@ export class Anders extends Card implements LeaderCard {
       metadata: {
         cardNumber: 'L01',
         renderData: CardRenderer.builder((b) => {
-          b.award().asterix();
+          b.opgArrow().award().asterix();
         }),
         description: 'Once per game, put an award into the game and fund it.',
       },

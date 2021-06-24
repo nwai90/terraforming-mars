@@ -13,7 +13,8 @@ export class Dillon extends Card implements LeaderCard {
       metadata: {
         cardNumber: 'L04',
         renderData: CardRenderer.builder((b) => {
-          b.text('4').vpIcon();
+          b.vpIcon(4);
+          b.br;
         }),
         description: 'Gain 4 VP.',
       },

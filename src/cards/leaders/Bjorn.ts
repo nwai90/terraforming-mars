@@ -14,7 +14,9 @@ export class Bjorn extends Card implements LeaderCard {
       metadata: {
         cardNumber: 'L02',
         renderData: CardRenderer.builder((b) => {
+          b.br.br;
           b.award().nbsp.colon().text('+2', Size.LARGE);
+          b.br.br.br;
         }),
         description: 'You have +2 score for all awards.',
       },

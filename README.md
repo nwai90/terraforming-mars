@@ -15,7 +15,7 @@
 <img src="https://raw.githubusercontent.com/nwai90/terraforming-mars/ux_improvements/assets/expansion_icons/expansion_icon_colosseum.png" height="60px" width="60px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <img src="https://raw.githubusercontent.com/nwai90/terraforming-mars/ux_improvements/assets/expansion_icons/expansion_icon_society.png" height="60px" width="60px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <img src="https://raw.githubusercontent.com/nwai90/terraforming-mars/ux_improvements/assets/expansion_icons/expansion_icon_themoon.png" height="60px" width="60px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<img src="https://raw.githubusercontent.com/nwai90/terraforming-mars/ux_improvements/assets/expansion_icons/silver_cube_variant.png" height="60px" width="60px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="https://raw.githubusercontent.com/nwai90/terraforming-mars/ux_improvements/assets/expansion_icons/expansion_icon_silverCube.png" height="60px" width="60px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <img src="https://raw.githubusercontent.com/nwai90/terraforming-mars/ux_improvements/assets/expansion_icons/expansion_icon_escapeVelocity.png" height="60px" width="60px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <br><br>
 
