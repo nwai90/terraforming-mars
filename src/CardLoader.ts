@@ -49,6 +49,8 @@ export class CardLoader {
       switch (expansion) {
       case GameModule.Venus:
         return gameOptions.venusNextExtension;
+      case GameModule.Prelude:
+        return gameOptions.preludeExtension;
       case GameModule.Colonies:
         return gameOptions.coloniesExtension;
       case GameModule.Turmoil:

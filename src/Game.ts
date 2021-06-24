@@ -434,7 +434,7 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   private static dealLeaderCards(player: Player, dealer: Dealer): void {
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < 3; i++) {
       player.dealtLeaderCards.push(dealer.dealLeaderCard());
     }
   }

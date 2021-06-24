@@ -33,6 +33,7 @@ export enum CardRenderItemType {
   NO_TAGS ='no_tags',
   PRESERVATION = 'preservation',
   WILD = 'wild',
+  WILD_TAG = 'wild_tag',
   FIGHTER = 'fighter',
   CAMPS = 'camps',
   DIVERSE_TAG = 'diverse_tag',

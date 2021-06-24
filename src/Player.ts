@@ -807,6 +807,8 @@ export class Player implements ISerializable<SerializedPlayer> {
       tagCount += 1;
     }
 
+    if (tag === Tags.WILDCARD && this.cardIsInEffect(CardName.LINDBERG)) tagCount += 1;
+
     tagCount = MarsCoalition.checkBonusWildTag(this, tag, tagCount);
 
     if (includeTagSubstitutions) {

@@ -285,6 +285,11 @@ class Builder {
     return this;
   }
 
+  public wildTag(): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.WILD_TAG));
+    return this;
+  }
+
   public trade(): Builder {
     this._addRowItem(new CardRenderItem(CardRenderItemType.TRADE));
     return this;

@@ -40,6 +40,7 @@ export const SelectInitialCards = Vue.component('select-initial-cards', {
       selectedCards: [] as Array<CardName>,
       selectedCorporation: undefined as CorporationCard | undefined,
       selectedPrelude: [] as Array<CardName>,
+      selectedLeaders: [] as Array<CardName>,
     };
   },
   methods: {
@@ -174,6 +175,14 @@ export const SelectInitialCards = Vue.component('select-initial-cards', {
       }
       return this.playerinput.options[idx];
     },
+    getProjectCardsOption: function() {
+      let optionIndex: number = 1;
+      if (this.hasPrelude() && this.hasLeaders()) optionIndex = 3;
+      if (this.hasPrelude() && !this.hasLeaders()) optionIndex = 2;
+      if (!this.hasPrelude() && this.hasLeaders()) optionIndex = 2;
+
+      return this.getOption(optionIndex);
+    },
     getStartingMegacredits: function() {
       if (this.selectedCorporation === undefined) {
         return NaN;
@@ -199,11 +208,17 @@ export const SelectInitialCards = Vue.component('select-initial-cards', {
       if (this.hasPrelude()) {
         result.push(this.selectedPrelude);
       }
+      if (this.hasLeaders()) {
+        result.push(this.selectedLeaders);
+      }
       result.push(this.selectedCards);
       this.onsave(result);
     },
     hasPrelude: function() {
-      return this.playerinput.options !== undefined && this.playerinput.options.length === 3;
+      return this.playerinput.options !== undefined && this.player.gameOptions.preludeExtension;
+    },
+    hasLeaders: function() {
+      return this.playerinput.options !== undefined && this.player.gameOptions.leadersExpansion;
     },
     cardsChanged: function(cards: Array<CardName>) {
       this.selectedCards = cards;
@@ -213,6 +228,9 @@ export const SelectInitialCards = Vue.component('select-initial-cards', {
     },
     preludesChanged: function(cards: Array<CardName>) {
       this.selectedPrelude = cards;
+    },
+    leadersChanged: function(cards: Array<CardName>) {
+      this.selectedLeaders = cards;
     },
     confirmSelection: function() {
       this.saveData();
@@ -226,7 +244,8 @@ export const SelectInitialCards = Vue.component('select-initial-cards', {
       v-on:accept="confirmSelection" />
     <select-card :player="player" :playerinput="getOption(0)" :showtitle="true" v-on:cardschanged="corporationChanged" />
     <select-card v-if="hasPrelude()" :player="player" :playerinput="getOption(1)" :showtitle="true" v-on:cardschanged="preludesChanged" />
-    <select-card :player="player" :playerinput="getOption(hasPrelude() ? 2 : 1)" :showtitle="true" v-on:cardschanged="cardsChanged" />
+    <select-card v-if="hasLeaders()" :player="player" :playerinput="getOption(hasPrelude() ? 2 : 1)" :showtitle="true" v-on:cardschanged="leadersChanged" />
+    <select-card :player="player" :playerinput="getProjectCardsOption()" :showtitle="true" v-on:cardschanged="cardsChanged" />
     <div v-if="selectedCorporation" v-i18n>Starting Megacredits: <div class="megacredits">{{getStartingMegacredits()}}</div></div>
     <div v-if="selectedCorporation && hasPrelude()" v-i18n>After Preludes: <div class="megacredits">{{getStartingMegacredits() + getAfterPreludes()}}</div></div>
     <Button v-if="showsave" :onClick="saveIfConfirmed" type="submit" :title="playerinput.buttonLabel" />

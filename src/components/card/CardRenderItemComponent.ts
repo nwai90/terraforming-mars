@@ -232,6 +232,8 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
           classes.push('card-tag-earth');
         } else if (type === CardRenderItemType.BUILDING) {
           classes.push('card-tag-building');
+        } else if (type === CardRenderItemType.WILD_TAG) {
+          classes.push('card-tag-wild');
         }
       }
 
