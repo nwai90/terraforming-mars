@@ -1,0 +1,53 @@
+import {expect} from "chai";
+import {Goran} from "../../src/cards/leaders/Goran";
+import {Game} from "../../src/Game";
+import {Player} from "../../src/Player";
+import {SpaceType} from "../../src/SpaceType";
+import {TileType} from "../../src/TileType";
+import {TestPlayers} from "../TestPlayers";
+
+describe('Goran', function() {
+  let card: Goran; let player: Player; let player2: Player; let game: Game;
+
+  beforeEach(() => {
+    card = new Goran();
+    player = TestPlayers.BLUE.newPlayer();
+    player2 = TestPlayers.RED.newPlayer();
+    game = Game.newInstance('foobar', [player, player2], player);
+
+    player.playedCards.push(card);
+  });
+
+  it('Can place greenery tile on any available land space', function() {
+    game.addGreenery(player, '35');
+    expect(game.board.getAvailableSpacesForGreenery(player).length).greaterThan(6);
+  });
+
+  it('Gains 1 MC when placing city or greenery tile', function() {
+    player.megaCredits = 0;
+
+    game.addGreenery(player, '35');
+    game.deferredActions.runNext();
+    expect(player.megaCredits).to.eq(1);
+
+    game.addCityTile(player, '37');
+    game.deferredActions.runNext();
+    expect(player.megaCredits).to.eq(2);
+  });
+
+  it('Does not gain 1 MC when placing city off Mars', function() {
+    player.megaCredits = 0;
+
+    game.addTile(player, SpaceType.COLONY, game.board.spaces.find((space) => space.spaceType === SpaceType.COLONY)!, {
+      tileType: TileType.CITY,
+    });
+
+    expect(player.megaCredits).to.eq(0);
+  });
+
+  it('Does not gain 1 MC when opponent places city or greenery tile', function() {
+    player.megaCredits = 0;
+    game.addGreenery(player2, '35');
+    expect(player.megaCredits).to.eq(0);
+  });
+});

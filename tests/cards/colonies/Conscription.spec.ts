@@ -32,7 +32,7 @@ describe('Conscription', function() {
     expect(card.getCardDiscount(player)).to.eq(0);
   });
 
-  it('Change in generation disables Indentured Workers', () => {
+  it('Change in generation disables Conscription', () => {
     player.playCard(card);
     expect(card.getCardDiscount(player)).to.eq(16);
 

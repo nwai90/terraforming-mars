@@ -325,7 +325,7 @@ describe('CardRenderer', function() {
     const renderer = CardRenderer.builder((b) => b.vpIcon());
     const item = renderer.rows[0][0] as CardRenderItem;
     expect(item.type).to.equal(CardRenderItemType.VP);
-    expect(item.amount).to.equal(-1);
+    expect(item.amount).to.equal(1000);
   });
   it('community: success', () => {
     const renderer = CardRenderer.builder((b) => b.community());
