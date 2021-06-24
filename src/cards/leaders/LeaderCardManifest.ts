@@ -5,6 +5,12 @@ import {Anders} from './Anders';
 import {Bjorn} from './Bjorn';
 import {Caroline} from './Caroline';
 import {Dillon} from './Dillon';
+import {Edna} from './Edna';
+import {Fritz} from './Fritz';
+import {Goran} from './Goran';
+import {Henrietta} from './Henrietta';
+import {Isak} from './Isak';
+import {Jansson} from './Jansson';
 
 export const LEADER_CARD_MANIFEST = new CardManifest({
   module: GameModule.Leader,
@@ -13,5 +19,11 @@ export const LEADER_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.BJORN, Factory: Bjorn},
     {cardName: CardName.CAROLINE, Factory: Caroline},
     {cardName: CardName.DILLON, Factory: Dillon},
+    {cardName: CardName.EDNA, Factory: Edna},
+    {cardName: CardName.FRITZ, Factory: Fritz},
+    {cardName: CardName.GORAN, Factory: Goran},
+    {cardName: CardName.HENRIETTA, Factory: Henrietta},
+    {cardName: CardName.ISAK, Factory: Isak},
+    {cardName: CardName.JANSSON, Factory: Jansson},
   ],
 });

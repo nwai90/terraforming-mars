@@ -82,6 +82,7 @@ import {TopsoilContract} from './cards/promo/TopsoilContract';
 import {MeatIndustry} from './cards/promo/MeatIndustry';
 import {Turmoil} from './turmoil/Turmoil';
 import {LeaderCard} from './cards/LeaderCard';
+import {LeadersExpansion} from './cards/leaders/LeadersExpansion';
 
 export type PlayerId = string;
 
@@ -561,9 +562,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     // Leaders VP
-    if (this.cardIsInEffect(CardName.DILLON)) {
-      victoryPointsBreakdown.setVictoryPoints('victoryPoints', 4, 'Leaders VP');
-    }
+    LeadersExpansion.calculateVictoryPoints(this, victoryPointsBreakdown);
 
     MoonExpansion.calculateVictoryPoints(this, victoryPointsBreakdown);
 

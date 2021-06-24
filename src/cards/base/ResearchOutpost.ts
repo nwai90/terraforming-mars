@@ -31,8 +31,11 @@ export class ResearchOutpost extends Card implements IProjectCard {
     });
   }
 
-  public static getAvailableSpaces(player: Player): Array<ISpace> {
-    return player.game.board.getAvailableSpacesOnLand(player)
+  private getAvailableSpaces(player: Player): Array<ISpace> {
+    const spaces =  player.game.board.getAvailableSpacesOnLand(player);
+    if (player.cardIsInEffect(CardName.GORAN)) return spaces;
+
+    return spaces
       .filter((space) => {
         const adjacentSpaces = player.game.board.getAdjacentSpaces(space);
         return adjacentSpaces.filter((space) => space.tile !== undefined).length === 0;
@@ -40,14 +43,14 @@ export class ResearchOutpost extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player): boolean {
-    return ResearchOutpost.getAvailableSpaces(player).length > 0;
+    return this.getAvailableSpaces(player).length > 0;
   }
 
   public getCardDiscount() {
     return 1;
   }
   public play(player: Player): PlayerInput {
-    return new SelectSpace('Select place next to no other tile for city', ResearchOutpost.getAvailableSpaces(player), (foundSpace: ISpace) => {
+    return new SelectSpace('Select place next to no other tile for city', this.getAvailableSpaces(player), (foundSpace: ISpace) => {
       player.game.addCityTile(player, foundSpace.id);
       return undefined;
     });

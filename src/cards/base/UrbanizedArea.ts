@@ -33,8 +33,10 @@ export class UrbanizedArea extends Card implements IProjectCard {
     });
   }
   private getAvailableSpaces(player: Player): Array<ISpace> {
-    return player.game.board.getAvailableSpacesOnLand(player)
-      .filter((space) => player.game.board.getAdjacentSpaces(space).filter((adjacentSpace) => Board.isCitySpace(adjacentSpace)).length >= 2);
+    const spaces =  player.game.board.getAvailableSpacesOnLand(player);
+    if (player.cardIsInEffect(CardName.GORAN)) return spaces;
+
+    return spaces.filter((space) => player.game.board.getAdjacentSpaces(space).filter((adjacentSpace) => Board.isCitySpace(adjacentSpace)).length >= 2);
   }
   public canPlay(player: Player): boolean {
     return player.getProduction(Resources.ENERGY) >= 1 && this.getAvailableSpaces(player).length > 0;

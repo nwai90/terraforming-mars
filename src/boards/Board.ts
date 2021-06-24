@@ -5,6 +5,7 @@ import {TileType} from '../TileType';
 import {AresHandler} from '../ares/AresHandler';
 import {SerializedBoard, SerializedSpace} from './SerializedBoard';
 import {SpaceBonus} from '../SpaceBonus';
+import {CardName} from '../CardName';
 
 /**
  * A representation of any hex board. This is normally Mars (Tharsis, Hellas, Elysium) but can also be The Moon.
@@ -130,6 +131,8 @@ export abstract class Board {
   }
 
   public getAvailableSpacesForCity(player: Player): Array<ISpace> {
+    if (player.cardIsInEffect(CardName.GORAN)) return this.getAvailableSpacesOnLand(player);
+
     // A city cannot be adjacent to another city
     return this.getAvailableSpacesOnLand(player).filter(
       (space) => this.getAdjacentSpaces(space).some((adjacentSpace) => Board.isCitySpace(adjacentSpace)) === false,
@@ -148,6 +151,8 @@ export abstract class Board {
   }
 
   public getAvailableSpacesForGreenery(player: Player): Array<ISpace> {
+    if (player.cardIsInEffect(CardName.GORAN)) return this.getAvailableSpacesOnLand(player);
+
     const spacesForGreenery = this.getAvailableSpacesOnLand(player)
       .filter((space) => this.getAdjacentSpaces(space).find((adj) => adj.tile !== undefined && adj.player === player && adj.tile.tileType !== TileType.OCEAN) !== undefined);
 
@@ -228,6 +233,10 @@ export abstract class Board {
   public static isCitySpace(space: ISpace): boolean {
     const cityTileTypes = [TileType.CITY, TileType.CAPITAL, TileType.OCEAN_CITY];
     return space.tile !== undefined && cityTileTypes.includes(space.tile.tileType);
+  }
+
+  public static isGreenerySpace(space: ISpace): boolean {
+    return space.tile !== undefined && space.tile.tileType === TileType.GREENERY;
   }
 
   public static isOceanSpace(space: ISpace): boolean {

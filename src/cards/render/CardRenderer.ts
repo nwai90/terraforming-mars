@@ -407,6 +407,7 @@ class Builder {
     return this;
   }
 
+  // 1000 renders a question mark ?
   public vpIcon(amount: number = 1000) {
     const item = new CardRenderItem(CardRenderItemType.VP, amount);
     item.showDigit = true;
