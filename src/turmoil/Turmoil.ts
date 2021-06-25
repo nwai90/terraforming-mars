@@ -455,7 +455,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       return influence;
     }
 
-    public addInfluenceBonus(player: Player, bonus:number = 1) {
+    public addInfluenceBonus(player: Player, bonus: number = 1) {
       if (this.playersInfluenceBonus.has(player.id)) {
         let current = this.playersInfluenceBonus.get(player.id);
         if (current) {

@@ -33,14 +33,13 @@ describe('Karen', function() {
     expect(player.playedCards.filter((card) => card.cardType === CardType.PRELUDE)).has.length(1);
   });
 
-  it('Takes action in Generation 5', function() {
-    TestingUtils.forceGenerationEnd(game);
+  it('Takes action in Generation 4', function() {
     TestingUtils.forceGenerationEnd(game);
     TestingUtils.forceGenerationEnd(game);
     TestingUtils.forceGenerationEnd(game);
 
     const selectCard = card.action(player) as SelectCard<IProjectCard>;
-    expect(selectCard.cards).has.length(5);
+    expect(selectCard.cards).has.length(4);
     
     selectCard.cb([selectCard.cards[0]]);
     expect(player.playedCards.filter((card) => card.cardType === CardType.PRELUDE)).has.length(1);
