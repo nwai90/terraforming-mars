@@ -1234,6 +1234,7 @@ export class Game implements ISerializable<SerializedGame> {
 
       TurmoilHandler.onGlobalParameterIncrease(player, GlobalParameter.VENUS, steps);
       player.increaseTerraformRatingSteps(steps);
+      if (player.cardIsInEffect(CardName.ROLAND)) player.increaseTerraformRating();
     }
 
     // Check for Aphrodite corporation

@@ -677,4 +677,6 @@ export enum CardName {
     NILS = 'Nils',
     OSCAR = 'Oscar',
     PETRA = 'Petra',
+    QUBIK = 'Qubik',
+    ROLAND = 'Roland',
 }

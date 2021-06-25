@@ -17,6 +17,8 @@ import {Maria} from './Maria';
 import {Nils} from './Nils';
 import {Oscar} from './Oscar';
 import {Petra} from './Petra';
+import {Qubik} from './Qubik';
+import {Roland} from './Roland';
 
 export const LEADER_CARD_MANIFEST = new CardManifest({
   module: GameModule.Leader,
@@ -37,5 +39,7 @@ export const LEADER_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.NILS, Factory: Nils, compatibility: GameModule.Colonies},
     {cardName: CardName.OSCAR, Factory: Oscar, compatibility: GameModule.Turmoil},
     {cardName: CardName.PETRA, Factory: Petra, compatibility: GameModule.Turmoil},
+    {cardName: CardName.QUBIK, Factory: Qubik, compatibility: GameModule.Venus},
+    {cardName: CardName.ROLAND, Factory: Roland, compatibility: GameModule.Venus},
   ],
 });
