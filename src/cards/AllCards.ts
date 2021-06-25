@@ -62,3 +62,5 @@ export const ALL_CORPORATION_CARD_NAMES = allCardNames(
   ALL_CORPORATION_DECKS,
 );
 export const ALL_PRELUDE_CARD_NAMES = allCardNames(ALL_PRELUDE_DECKS);
+
+export const ALL_LEADER_CARD_NAMES = allCardNames([LEADER_CARD_MANIFEST.leaderCards]);

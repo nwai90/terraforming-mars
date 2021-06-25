@@ -3,6 +3,7 @@ import {Card} from './card/Card';
 import {
   ALL_CARD_MANIFESTS,
   ALL_CORPORATION_CARD_NAMES,
+  ALL_LEADER_CARD_NAMES,
   ALL_PRELUDE_CARD_NAMES,
   ALL_PROJECT_CARD_NAMES,
   ALL_STANDARD_PROJECT_CARD_NAMES,
@@ -22,6 +23,7 @@ ALL_CARD_MANIFESTS.forEach((manifest) => {
     manifest.projectCards,
     manifest.corporationCards,
     manifest.preludeCards,
+    manifest.leaderCards,
     manifest.standardProjects].forEach((deck) => {
     deck.factories.forEach((cf: ICardFactory<ICard>) => {
       const card: ICard = new cf.Factory();
@@ -44,6 +46,7 @@ export interface DebugUIModel {
   community: boolean | unknown[],
   ares: boolean | unknown[],
   moon: boolean | unknown[],
+  leaders: boolean | unknown[],
   promo: boolean | unknown[],
 }
 
@@ -65,6 +68,7 @@ export const DebugUI = Vue.component('debug-ui', {
       community: true,
       ares: true,
       moon: true,
+      leaders: true,
       promo: true,
     } as DebugUIModel;
   },
@@ -96,6 +100,7 @@ export const DebugUI = Vue.component('debug-ui', {
       data.promo = !data.promo;
       data.ares = !data.ares;
       data.moon = !data.moon;
+      data.leaders = !data.leaders;
     },
     sort: function(names: Array<CardName>): Array<CardName> {
       if (this.$data.sortById) {
@@ -119,6 +124,9 @@ export const DebugUI = Vue.component('debug-ui', {
     },
     getAllPreludeCards: function() {
       return this.sort(ALL_PRELUDE_CARD_NAMES);
+    },
+    getAllLeaderCards: function() {
+      return this.sort(ALL_LEADER_CARD_NAMES);
     },
     filtered: function(cardName: CardName): boolean {
       const card = cards.get(cardName);
@@ -251,7 +259,23 @@ export const DebugUI = Vue.component('debug-ui', {
                 <div class="create-game-expansion-icon expansion-icon-themoon"></div>
                 <span v-i18n>The Moon</span>
               </label><span/>
+
+              <input type="checkbox" name="leaders" id="leaders-checkbox" v-model="leaders"></input>
+              <label for="leaders-checkbox" class="expansion-button">
+                <div class="create-game-expansion-icon expansion-icon-leaders"></div>
+                <span v-i18n>Leaders</span>
+              </label><span/>
             </div>
+
+            <template v-if="this.leaders === true">
+                <section class="debug-ui-cards-list">
+                    <h2>Leader Cards</h2>
+                    <div class="cardbox" v-for="card in getAllLeaderCards()">
+                        <Card v-show="filtered(card)" :card="{'name': card}" />
+                    </div>
+                </section>
+                <br>
+            </template>
 
             <section class="debug-ui-cards-list">
                 <h2>Project Cards</h2>
