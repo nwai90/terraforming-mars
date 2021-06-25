@@ -1378,17 +1378,6 @@ export class Player implements ISerializable<SerializedPlayer> {
     );
   }
 
-  private playLeaderCard(): PlayerInput {
-    return new SelectCard(
-      'Select leader card to play',
-      'Play',
-      this.leaderCardsInHand,
-      (foundCards: Array<IProjectCard>) => {
-        return this.playCard(foundCards[0]);
-      },
-    );
-  }
-
   public checkHowToPayAndPlayCard(selectedCard: IProjectCard, howToPay: HowToPay) {
     const cardCost: number = this.getCardCost(selectedCard);
     let totalToPay: number = 0;
@@ -1957,14 +1946,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
     // Leader cards have to be played right after Preludes
     if (this.leaderCardsInHand.length > 0) {
-      this.setWaitingFor(this.playLeaderCard(), () => {
-        if (this.leaderCardsInHand.length === 1) {
-          this.takeAction();
-        } else {
-          game.playerIsFinishedTakingActions();
-        }
-      });
-      return;
+      this.leaderCardsInHand.forEach((card) =>this.playCard(card));
     } else {
       game.phase = Phase.ACTION;
     }
