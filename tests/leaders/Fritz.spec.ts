@@ -7,12 +7,13 @@ import {TestingUtils} from "../TestingUtils";
 import {TestPlayers} from "../TestPlayers";
 
 describe('Fritz', function() {
-  let card: Fritz; let player: Player; let game: Game;
+  let card: Fritz; let player: Player; let player2: Player; let game: Game;
 
   beforeEach(() => {
     card = new Fritz();
     player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('foobar', [player], player);
+    player2 = TestPlayers.RED.newPlayer();
+    game = Game.newInstance('foobar', [player, player2], player);
   });
 
   it('Cannot act without cards', function() {

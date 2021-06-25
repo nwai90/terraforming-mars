@@ -1,5 +1,4 @@
 import {expect} from "chai";
-import {CardName} from "../../src/CardName";
 import {MicroMills} from "../../src/cards/base/MicroMills";
 import {Research} from "../../src/cards/base/Research";
 import {Edna} from "../../src/cards/leaders/Edna";
@@ -10,12 +9,13 @@ import {TestingUtils} from "../TestingUtils";
 import {TestPlayers} from "../TestPlayers";
 
 describe('Edna', function() {
-  let card: Edna; let player: Player; let game: Game;
+  let card: Edna; let player: Player; let player2: Player; let game: Game;
 
   beforeEach(() => {
     card = new Edna();
     player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('foobar', [player], player);
+    player2 = TestPlayers.RED.newPlayer();
+    game = Game.newInstance('foobar', [player, player2], player);
   });
 
   it('Cannot act without cards', function() {
@@ -29,10 +29,7 @@ describe('Edna', function() {
     const selectAmount = card.action(player) as SelectAmount;
     selectAmount.cb(2);
     game.deferredActions.runAll(() => {});
-
     expect(player.cardsInHand).has.length(2);
-    expect(player.cardsInHand.some((card) => card.name === CardName.RESEARCH)).is.false;
-    expect(player.cardsInHand.some((card) => card.name === CardName.MICRO_MILLS)).is.false;
   });
 
   it('Can only act once per game', function() {

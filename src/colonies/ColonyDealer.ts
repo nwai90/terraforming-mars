@@ -89,7 +89,7 @@ export class ColonyDealer {
     public coloniesDeck: Array<Colony> = [];
     public discardedColonies: Array<Colony> = [];
 
-    public shuffle(cards: Array<Colony>): Array<Colony> {
+    public static shuffle(cards: Array<Colony>): Array<Colony> {
       const deck: Array<Colony> = [];
       const copy = cards.slice();
       while (copy.length) {
@@ -124,7 +124,7 @@ export class ColonyDealer {
         count = 5;
       }
 
-      const tempDeck = this.shuffle(
+      const tempDeck = ColonyDealer.shuffle(
         colonyTiles.filter(
           (el) => allowList.includes(el.colonyName),
         ).map(

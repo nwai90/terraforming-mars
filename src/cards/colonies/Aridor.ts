@@ -51,8 +51,9 @@ export class Aridor extends Card implements CorporationCard {
             if (colony.name === colonyName) {
               game.colonies.push(colony);
               game.colonies.sort((a, b) => (a.name > b.name) ? 1 : -1);
+              game.colonyDealer?.discardedColonies.splice(game.colonyDealer?.discardedColonies.indexOf(colony), 1);
               game.log('${0} added a new Colony tile: ${1}', (b) => b.player(player).colony(colony));
-              this.checkActivation(colony, game);
+              Aridor.checkActivation(colony, game);
               return undefined;
             }
             return undefined;
@@ -64,7 +65,7 @@ export class Aridor extends Card implements CorporationCard {
       return selectColony;
     }
 
-    private checkActivation(colony: Colony, game: Game): void {
+    public static checkActivation(colony: Colony, game: Game): void {
       if (colony.resourceType === undefined) return;
       game.getPlayers().forEach((player) => {
         if (player.corporationCard !== undefined && player.corporationCard.resourceType === colony.resourceType) {

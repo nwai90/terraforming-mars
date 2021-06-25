@@ -18,6 +18,10 @@ describe('SelectInitialCards', function() {
       propsData: {
         player: {
           id: 'foo',
+          gameOptions: {
+            preludeExtension: false,
+            leadersExpansion: false,
+          },
         },
         playerinput: {
           title: 'foo',
@@ -53,6 +57,10 @@ describe('SelectInitialCards', function() {
       propsData: {
         player: {
           id: 'foo',
+          gameOptions: {
+            preludeExtension: true,
+            leadersExpansion: false,
+          },
         },
         playerinput: {
           title: 'foo',

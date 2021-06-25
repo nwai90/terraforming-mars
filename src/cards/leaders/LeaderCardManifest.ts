@@ -13,6 +13,8 @@ import {Isak} from './Isak';
 import {Jansson} from './Jansson';
 import {Karen} from './Karen';
 import {Lindberg} from './Lindberg';
+import {Maria} from './Maria';
+import {Nils} from './Nils';
 
 export const LEADER_CARD_MANIFEST = new CardManifest({
   module: GameModule.Leader,
@@ -29,5 +31,7 @@ export const LEADER_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.JANSSON, Factory: Jansson},
     {cardName: CardName.KAREN, Factory: Karen, compatibility: GameModule.Prelude},
     {cardName: CardName.LINDBERG, Factory: Lindberg, compatibility: GameModule.Prelude},
+    {cardName: CardName.MARIA, Factory: Maria, compatibility: GameModule.Colonies},
+    {cardName: CardName.NILS, Factory: Nils, compatibility: GameModule.Colonies},
   ],
 });

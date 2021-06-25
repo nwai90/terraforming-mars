@@ -9,13 +9,14 @@ import {TestingUtils} from "../TestingUtils";
 import {TestPlayers} from "../TestPlayers";
 
 describe('Karen', function() {
-  let card: Karen; let player: Player; let game: Game;
+  let card: Karen; let player: Player; let player2: Player; let game: Game;
 
   beforeEach(() => {
     card = new Karen();
     player = TestPlayers.BLUE.newPlayer();
+    player2 = TestPlayers.RED.newPlayer();
     const gameOptions = TestingUtils.setCustomGameOptions({preludeExtension: true});
-    game = Game.newInstance('foobar', [player], player, gameOptions);
+    game = Game.newInstance('foobar', [player, player2], player, gameOptions);
 
     player.megaCredits = 20;
   });
@@ -24,7 +25,7 @@ describe('Karen', function() {
     expect(card.canAct()).is.true;
   });
 
-  it('Takes action in Generation 1', function() {
+  it('Takes action', function() {
     const selectCard = card.action(player) as SelectCard<IProjectCard>;
     expect(selectCard.cards).has.length(1);
     
