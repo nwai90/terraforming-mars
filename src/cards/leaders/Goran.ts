@@ -19,10 +19,10 @@ export class Goran extends Card implements LeaderCard {
       metadata: {
         cardNumber: 'L07',
         renderData: CardRenderer.builder((b) => {
-          b.greenery().city().colon().megacredits(1).asterix();
+          b.greenery().city().colon().megacredits(2).asterix();
           b.br.br;
         }),
-        description: 'Ignore placement restrictions for greenery and city tiles on Mars. Gain 1 M€ when you place a greenery or city tile on Mars.',
+        description: 'Ignore placement restrictions for greenery and city tiles on Mars. Gain 2 M€ when you place a greenery or city tile on Mars.',
       },
     });
   }
@@ -44,7 +44,7 @@ export class Goran extends Card implements LeaderCard {
     if (space.spaceType === SpaceType.COLONY) return;
 
     if (Board.isCitySpace(space) || Board.isGreenerySpace(space)) {
-      cardOwner.game.defer(new GainResources(cardOwner, Resources.MEGACREDITS));
+      cardOwner.game.defer(new GainResources(cardOwner, Resources.MEGACREDITS, {count: 2}));
     }
     return;
   }

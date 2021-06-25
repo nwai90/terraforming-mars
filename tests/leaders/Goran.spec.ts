@@ -23,19 +23,19 @@ describe('Goran', function() {
     expect(game.board.getAvailableSpacesForGreenery(player).length).greaterThan(6);
   });
 
-  it('Gains 1 MC when placing city or greenery tile', function() {
+  it('Gains 2 MC when placing city or greenery tile', function() {
     player.megaCredits = 0;
 
     game.addGreenery(player, '35');
     game.deferredActions.runNext();
-    expect(player.megaCredits).to.eq(1);
+    expect(player.megaCredits).to.eq(2);
 
     game.addCityTile(player, '37');
     game.deferredActions.runNext();
-    expect(player.megaCredits).to.eq(2);
+    expect(player.megaCredits).to.eq(4);
   });
 
-  it('Does not gain 1 MC when placing city off Mars', function() {
+  it('Does not gain MC when placing city off Mars', function() {
     player.megaCredits = 0;
 
     game.addTile(player, SpaceType.COLONY, game.board.spaces.find((space) => space.spaceType === SpaceType.COLONY)!, {
@@ -45,7 +45,7 @@ describe('Goran', function() {
     expect(player.megaCredits).to.eq(0);
   });
 
-  it('Does not gain 1 MC when opponent places city or greenery tile', function() {
+  it('Does not gain MC when opponent places city or greenery tile', function() {
     player.megaCredits = 0;
     game.addGreenery(player2, '35');
     expect(player.megaCredits).to.eq(0);
