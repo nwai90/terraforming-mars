@@ -12,7 +12,7 @@ export class GamblingHouse extends PreludeCard {
         metadata: {
           cardNumber: 'Y19',
           renderData: CardRenderer.builder((b) => {
-            b.prelude().br.br.megacredits(5);
+            b.prelude().br.br.br.megacredits(5);
           }),
           description: 'Draw and play another prelude card. Gain 5 M€.',
         },

@@ -332,7 +332,7 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
         result = '<span class="card-place-colony">colony</span>';
       }
       if (this.item.type === CardRenderItemType.PRELUDE) {
-        result = '<div class="card-prelude-container"><span class="card-prelude-icon">prel</span></div>';
+        result = '<div class="card-prelude-icon"></div>';
       }
       if (this.item.type === CardRenderItemType.AWARD) {
         // iconography on card shows plural (awards)
