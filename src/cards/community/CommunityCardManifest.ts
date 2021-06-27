@@ -35,6 +35,12 @@ import {UnitedNationsMissionOne} from './corporations/UnitedNationsMissionOne';
 import {AbandonedSteelForge} from './preludes/AbandonedSteelForge';
 import {PerseveranceLanding} from './PerseveranceLanding';
 import {MarsCoalition} from './corporations/MarsCoalition';
+import {LaserFactory} from './preludes/LaserFactory';
+import {SolarBatteries} from './preludes/SolarBatteries';
+import {TharsisPrototypeCity} from './preludes/TharsisPrototypeCity';
+import {GroundwaterMohole} from './preludes/GroundwaterMohole';
+import {NewMarsResearchFacility} from './preludes/NewMarsResearchFacility';
+import {TerrainAcquisition} from './preludes/TerrainAcquisition';
 
 export const COMMUNITY_CARD_MANIFEST = new CardManifest({
   module: GameModule.Community,
@@ -118,33 +124,18 @@ export const COMMUNITY_CARD_MANIFEST = new CardManifest({
       Factory: TradeInfrastructure,
       compatibility: GameModule.Colonies,
     },
-    {
-      cardName: CardName.GEOTHERMAL_VENT,
-      Factory: GeothermalVent,
-    },
-    {
-      cardName: CardName.ACCUMULATED_KNOWLEDGE,
-      Factory: AccumulatedKnowledge,
-    },
-    {
-      cardName: CardName.BOTANICAL_HARVEST,
-      Factory: BotanicalHarvest,
-    },
-    {
-      cardName: CardName.MARTIAN_LUMBER_YARD,
-      Factory: MartianLumberYard,
-    },
-    {
-      cardName: CardName.FORTIFIED_OUTPOST,
-      Factory: FortifiedOutpost,
-    },
-    {
-      cardName: CardName.GAMBLING_HOUSE,
-      Factory: GamblingHouse,
-    },
-    {
-      cardName: CardName.ABANDONED_STEEL_FORGE,
-      Factory: AbandonedSteelForge,
-    },
+    {cardName: CardName.GEOTHERMAL_VENT, Factory: GeothermalVent},
+    {cardName: CardName.ACCUMULATED_KNOWLEDGE, Factory: AccumulatedKnowledge},
+    {cardName: CardName.BOTANICAL_HARVEST, Factory: BotanicalHarvest},
+    {cardName: CardName.MARTIAN_LUMBER_YARD, Factory: MartianLumberYard},
+    {cardName: CardName.FORTIFIED_OUTPOST, Factory: FortifiedOutpost},
+    {cardName: CardName.GAMBLING_HOUSE, Factory: GamblingHouse},
+    {cardName: CardName.ABANDONED_STEEL_FORGE, Factory: AbandonedSteelForge},
+    {cardName: CardName.LASER_FACTORY, Factory: LaserFactory},
+    {cardName: CardName.SOLAR_BATTERIES, Factory: SolarBatteries},
+    {cardName: CardName.THARSIS_PROTOTYPE_CITY, Factory: TharsisPrototypeCity},
+    {cardName: CardName.GROUNDWATER_MOHOLE, Factory: GroundwaterMohole},
+    {cardName: CardName.NEW_MARS_RESEARCH_FACILITY, Factory: NewMarsResearchFacility},
+    {cardName: CardName.TERRAIN_ACQUISITION, Factory: TerrainAcquisition},
   ],
 });

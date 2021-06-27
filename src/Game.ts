@@ -1336,11 +1336,12 @@ export class Game implements ISerializable<SerializedGame> {
     ).length;
   }
 
-  // addTile applies to the Mars board, but not the Moon board, see MoonExpansion.addTile for placing
-  // a tile on The Moon.
+  // addTile applies to the Mars board, but not the Moon board
+  // See MoonExpansion.addTile for placing a tile on The Moon.
+  // The property grantSpaceBonus is used for Tharsis Prototype City
   public addTile(
     player: Player, spaceType: SpaceType,
-    space: ISpace, tile: ITile): void {
+    space: ISpace, tile: ITile, grantSpaceBonus: boolean = true): void {
     // Part 1, basic validation checks.
 
     if (space.tile !== undefined && !this.gameOptions.aresExtension) {
@@ -1393,7 +1394,7 @@ export class Game implements ISerializable<SerializedGame> {
 
     // Part 5. Collect the bonuses
     if (this.phase !== Phase.SOLAR) {
-      if (!coveringExistingTile) {
+      if (!coveringExistingTile && grantSpaceBonus) {
         const bonuses = new Multiset(space.bonus);
         bonuses.entries().forEach(([bonus, count]) => {
           this.grantSpaceBonus(player, bonus, count);
@@ -1401,7 +1402,7 @@ export class Game implements ISerializable<SerializedGame> {
       }
 
       this.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
-        if (Board.isOceanSpace(adjacentSpace)) {
+        if (Board.isOceanSpace(adjacentSpace) && grantSpaceBonus) {
           player.megaCredits += player.oceanBonus;
         }
       });

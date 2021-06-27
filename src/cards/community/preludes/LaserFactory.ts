@@ -4,26 +4,27 @@ import {IProjectCard} from '../../IProjectCard';
 import {CardName} from '../../../CardName';
 import {Resources} from '../../../Resources';
 import {CardRenderer} from '../../render/CardRenderer';
+import {Tags} from '../../Tags';
 
-export class GeothermalVent extends PreludeCard implements IProjectCard {
+export class LaserFactory extends PreludeCard implements IProjectCard {
   constructor() {
     super({
-      name: CardName.GEOTHERMAL_VENT,
+      name: CardName.LASER_FACTORY,
+      tags: [Tags.SPACE],
 
       metadata: {
-        cardNumber: 'Y12',
+        cardNumber: 'Y22',
         renderData: CardRenderer.builder((b) => {
-          b.temperature(2).br;
-          b.production((pb) => pb.heat(2));
+          b.production((pb) => pb.titanium(1).heat(2));
         }),
-        description: 'Raise temperature 2 steps. Increase your heat production 2 steps.',
+        description: 'Increase your titanium production 1 step and your heat production 2 steps.',
       },
     });
   }
 
   public play(player: Player) {
+    player.addProduction(Resources.TITANIUM);
     player.addProduction(Resources.HEAT, 2);
-    player.game.increaseTemperature(player, 2);
     return undefined;
   }
 }

@@ -509,6 +509,12 @@ export enum CardName {
     FORTIFIED_OUTPOST = 'Fortified Outpost',
     GAMBLING_HOUSE = 'Gambling House',
     ABANDONED_STEEL_FORGE = 'Abandoned Steel Forge',
+    SOLAR_BATTERIES = 'Solar Batteries',
+    LASER_FACTORY = 'Laser Factory',
+    THARSIS_PROTOTYPE_CITY = 'Tharsis Prototype City',
+    GROUNDWATER_MOHOLE = 'Groundwater Mohole',
+    NEW_MARS_RESEARCH_FACILITY = 'New Mars Research Facility',
+    TERRAIN_ACQUISITION = 'Terrain Acquisition',
 
     // Community colonies
     SCIENCE_TAG_BLANK_CARD = '',

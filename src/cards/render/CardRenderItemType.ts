@@ -43,6 +43,7 @@ export enum CardRenderItemType {
   NBSP = 'nbsp',
   EMPTY_TILE = 'empty_tile',
   EMPTY_TILE_GOLDEN = 'empty_tile_golden',
+  LANDCLAIM_TILE = 'landclaim_tile',
   SELF_REPLICATING = 'self_replicating',
   MULTIPLIER_WHITE = 'multiplier_white',
   PROJECT_REQUIREMENTS = 'project_requirements',

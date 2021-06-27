@@ -493,6 +493,11 @@ class Builder {
     return this;
   }
 
+  public landClaimTile(amount: number): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.LANDCLAIM_TILE, amount));
+    return this;
+  }
+
   public production(pb: (builder: ProductionBoxBuilder) => void): Builder {
     this._addRowItem(CardRenderProductionBox.builder(pb));
     return this;
