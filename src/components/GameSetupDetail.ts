@@ -23,6 +23,15 @@ export const GameSetupDetail = Vue.component('game-setup-detail', {
     isSocietyExpansionOn: function(): boolean {
       return (this.gameOptions.societyExpansion === true);
     },
+    isNewOpsExpansionOn: function(): boolean {
+      return (this.gameOptions.newOpsExpansion === true);
+    },
+    isColosseumVariantOn: function(): boolean {
+      return (this.gameOptions.colosseumVariant === true);
+    },
+    isSilverCubeVariantOn: function(): boolean {
+      return (this.gameOptions.silverCubeVariant === true);
+    },
     getBoardColorClass: function(boardName: string): string {
       switch (boardName) {
       case BoardName.ORIGINAL:
@@ -67,6 +76,9 @@ export const GameSetupDetail = Vue.component('game-setup-detail', {
               <div v-if="gameOptions.communityCardsOption" class="create-game-expansion-icon expansion-icon-community"></div>
               <div v-if="isPoliticalAgendasOn()" class="create-game-expansion-icon expansion-icon-agendas"></div>
               <div v-if="isSocietyExpansionOn()" class="create-game-expansion-icon expansion-icon-society"></div>
+              <div v-if="isColosseumVariantOn()" class="create-game-expansion-icon expansion-icon-colosseum"></div>
+              <div v-if="isSilverCubeVariantOn()" class="create-game-expansion-icon expansion-icon-silver-cube"></div>
+              <div v-if="isNewOpsExpansionOn()" class="create-game-expansion-icon expansion-icon-newOps"></div>
             </li>
 
             <li><div class="setup-item" v-i18n>Board:</div>

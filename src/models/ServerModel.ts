@@ -586,6 +586,7 @@ function getGameOptionsAsModel(options: GameOptions): GameOptionsModel {
     societyExpansion: options.societyExpansion,
     showTimers: options.showTimers,
     shuffleMapOption: options.shuffleMapOption,
+    silverCubeVariant: options.silverCubeVariant,
     solarPhaseOption: options.solarPhaseOption,
     soloTR: options.soloTR,
     randomMA: options.randomMA,
