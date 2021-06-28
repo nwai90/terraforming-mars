@@ -6,6 +6,7 @@ import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {TileType} from '../../../src/TileType';
 import {TestPlayers} from '../../TestPlayers';
 import {Resources} from '../../../src/Resources';
+import {SpaceBonus} from '../../../src/SpaceBonus';
 
 describe('TharsisPrototypeCity', function() {
   let card : TharsisPrototypeCity; let player : Player; let game : Game;
@@ -22,6 +23,9 @@ describe('TharsisPrototypeCity', function() {
     expect(game.deferredActions).has.lengthOf(1);
 
     const selectSpaceForCity = game.deferredActions.pop()!.execute() as SelectSpace;
+    // Manually set for test
+    selectSpaceForCity.availableSpaces[0].bonus = [SpaceBonus.STEEL, SpaceBonus.STEEL];
+
     expect(selectSpaceForCity.cb(selectSpaceForCity.availableSpaces[0])).is.undefined;
     expect(selectSpaceForCity.availableSpaces[0].player).to.eq(player);
     expect(selectSpaceForCity.availableSpaces[0].tile).is.not.undefined;
@@ -29,5 +33,6 @@ describe('TharsisPrototypeCity', function() {
 
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
     expect(player.getProduction(Resources.ENERGY)).to.eq(1);
+    expect(player.steel).to.eq(0); // No placement bonus granted
   });
 });

@@ -5,8 +5,12 @@ import {CardName} from '../../../CardName';
 import {Resources} from '../../../Resources';
 import {CardRenderer} from '../../render/CardRenderer';
 import {Tags} from '../../Tags';
-import {PlaceCityTile} from '../../../deferredActions/PlaceCityTile';
 import {Units} from '../../../Units';
+import {DeferredAction} from '../../../deferredActions/DeferredAction';
+import {ISpace} from '../../../boards/ISpace';
+import {SelectSpace} from '../../../inputs/SelectSpace';
+import {TileType} from '../../../TileType';
+import {SpaceType} from '../../../SpaceType';
 
 export class TharsisPrototypeCity extends PreludeCard implements IProjectCard {
   constructor() {
@@ -26,8 +30,21 @@ export class TharsisPrototypeCity extends PreludeCard implements IProjectCard {
     });
   }
 
+  // PlaceCityTile is not used here due to override of granting placement bonuses
   public play(player: Player) {
-    player.game.defer(new PlaceCityTile(player));
+    const spaces = player.game.board.getAvailableSpacesForCity(player);
+
+    player.game.defer(new DeferredAction(player, () => {
+      return new SelectSpace(
+        'Select space for prototype city tile',
+        spaces,
+        (space: ISpace) => {
+          player.game.addTile(player, SpaceType.LAND, space, {tileType: TileType.CITY}, false);
+          return undefined;
+        },
+      );
+    }));
+
     player.addProduction(Resources.MEGACREDITS);
     player.addProduction(Resources.ENERGY);
     return undefined;
