@@ -11,8 +11,8 @@ describe('Capitalist', () => {
     player = TestPlayers.BLUE.newPlayer();
   });
 
-  it('Can claim with 72 M€', () => {
-    player.megaCredits = 72;
+  it('Can claim with 64 M€', () => {
+    player.megaCredits = 64;
     expect(milestone.canClaim(player)).is.true;
   });
 });
