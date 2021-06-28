@@ -45,7 +45,7 @@ export class WaterImportFromEuropa extends Card implements IActionCard, IProject
 
     if (oceansMaxed) return false;
 
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
+    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) {
       return player.canAfford(oceanCost + REDS_RULING_POLICY_COST, {titanium: true});
     }
 

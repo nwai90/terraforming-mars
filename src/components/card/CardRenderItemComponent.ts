@@ -181,6 +181,8 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
         }
       } else if (type === CardRenderItemType.ARROW_OPG) {
         classes.push('card-arrow-opg');
+      } else if (type === CardRenderItemType.REDS) {
+        classes.push('turmoil-party-reds-deactivated');
       }
 
       function sized(clazz: string, size: string | undefined) {
@@ -232,8 +234,12 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
           classes.push('card-tag-earth');
         } else if (type === CardRenderItemType.BUILDING) {
           classes.push('card-tag-building');
+        } else if (type === CardRenderItemType.CITY_TAG) {
+          classes.push('card-tag-city card-tag-large city-tag-adjustment');
+        } else if (type === CardRenderItemType.VENUS_TAG) {
+          classes.push('card-tag-venus card-tag-large venus-tag-adjustment');
         } else if (type === CardRenderItemType.WILD_TAG) {
-          classes.push('card-tag-wild');
+          classes.push('card-tag-wild card-tag-large');
         }
       }
 
@@ -293,7 +299,7 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
       let result: string = '';
       // in case of symbols inside
       if (this.item instanceof CardRenderItem && this.item.amountInside) {
-        if (this.item.amount !== 0) {
+        if (this.item.amount !== 0 || (this.item.amount === 0 && this.item.type === CardRenderItemType.MEGACREDITS)) {
           result += this.item.amount.toString();
         }
         if (this.item.multiplier) {

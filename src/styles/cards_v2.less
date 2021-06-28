@@ -1262,6 +1262,17 @@
                 background-size: 40px 40px;
                 vertical-align: middle;
             }
+            .turmoil-party-reds-deactivated {
+                display: inline-block;
+                background-image: url(./assets/turmoil/reds.png);
+                width: 50px;
+                height: 36px;
+                background-size: 50px 36px;
+                background-repeat: no-repeat;
+                filter: grayscale(1);
+                transform: scale(1.5);
+                margin-right: 10px;
+            }
             /*tags*/
             .card-resource-tag {
                 position: relative;
@@ -1281,7 +1292,6 @@
             }
             .card-tag-wild {
                 background-image: url("../assets/tags/wild.png");
-                transform: scale(1.5);
             }
             .card-tag-building {
                 background-image: url("./assets/tags/building.png");
@@ -1335,6 +1345,18 @@
             .card-tag-animal-resource {
                 background-image: url("./assets/resources/animal.png");
                 border-radius: 0px;
+            }
+            .card-tag-large {
+                transform: scale(1.5);
+            }
+            // Used only for Will leader card
+            .venus-tag-adjustment {
+                margin-right: 15px;
+            }
+            // Used only for Tate leader card
+            .city-tag-adjustment {
+                margin-left: 10px;
+                margin-top: 5px;
             }
             .card-community-services {
                 font-size: 42px;

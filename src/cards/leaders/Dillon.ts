@@ -26,7 +26,7 @@ export class Dillon extends Card implements LeaderCard {
   }
 
   public canAct(): boolean {
-   return false; 
+   return false;
   }
 
   public action(): PlayerInput | undefined {

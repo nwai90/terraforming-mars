@@ -13,14 +13,14 @@ export class Roland extends Card implements LeaderCard {
       metadata: {
         cardNumber: 'L18',
         renderData: CardRenderer.builder((b) => {
+          b.br;
           b.venus(1).colon().tr(1);
+          b.br.br;
         }),
         description: 'When you take an action that raises Venus, gain 1 TR.',
       },
     });
   }
-
-  public isDisabled = false;
 
   public play() {
     return undefined;

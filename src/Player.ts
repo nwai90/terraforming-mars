@@ -225,7 +225,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public getTitaniumValue(): number {
-    if (PartyHooks.shouldApplyPolicy(this.game, PartyName.UNITY)) return this.titaniumValue + 1;
+    if (PartyHooks.shouldApplyPolicy(this, PartyName.UNITY)) return this.titaniumValue + 1;
     if (MarsCoalition.shouldIncreaseMetalValue(this, PartyName.UNITY)) return this.titaniumValue + 1;
     return this.titaniumValue;
   }
@@ -245,7 +245,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public getSteelValue(): number {
-    if (PartyHooks.shouldApplyPolicy(this.game, PartyName.MARS, TurmoilPolicy.MARS_FIRST_POLICY_3)) return this.steelValue + 1;
+    if (PartyHooks.shouldApplyPolicy(this, PartyName.MARS, TurmoilPolicy.MARS_FIRST_POLICY_3)) return this.steelValue + 1;
     if (MarsCoalition.shouldIncreaseMetalValue(this, PartyName.MARS, TurmoilPolicy.MARS_FIRST_POLICY_3)) return this.steelValue + 1;
     return this.steelValue;
   }
@@ -273,14 +273,14 @@ export class Player implements ISerializable<SerializedPlayer> {
     // United Nations Mission One hook
     UnitedNationsMissionOne.onTRIncrease(this.game);
 
-    if (!this.game.gameOptions.turmoilExtension) {
+    if (!this.game.gameOptions.turmoilExtension || this.cardIsInEffect(CardName.ZOE)) {
       this.terraformRating++;
       this.hasIncreasedTerraformRatingThisGeneration = true;
       return;
     }
 
     // Turmoil Reds capacity
-    if (PartyHooks.shouldApplyPolicy(this.game, PartyName.REDS)) {
+    if (PartyHooks.shouldApplyPolicy(this, PartyName.REDS, )) {
       if (this.canAfford(REDS_RULING_POLICY_COST)) {
         this.game.defer(new SelectHowToPayDeferred(this, REDS_RULING_POLICY_COST, {title: 'Select how to pay for TR increase'}));
       } else {
@@ -407,7 +407,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     else if (resource === Resources.PLANTS) this.plantProduction += delta;
     else if (resource === Resources.ENERGY) {
       this.energyProduction += delta;
-      if (PartyHooks.shouldApplyPolicy(this.game, PartyName.EMPOWER, TurmoilPolicy.EMPOWER_POLICY_3)) {
+      if (PartyHooks.shouldApplyPolicy(this, PartyName.EMPOWER, TurmoilPolicy.EMPOWER_POLICY_3)) {
         this.addResource(Resources.ENERGY, 2);
       }
     }
@@ -671,12 +671,12 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     // PoliticalAgendas Scientists P2 hook
-    if (PartyHooks.shouldApplyPolicy(this.game, PartyName.SCIENTISTS, TurmoilPolicy.SCIENTISTS_POLICY_2)) {
+    if (PartyHooks.shouldApplyPolicy(this, PartyName.SCIENTISTS, TurmoilPolicy.SCIENTISTS_POLICY_2)) {
       requirementsBonus += 2;
     }
 
     // PoliticalAgendas Transhumans P3 hook
-    if (PartyHooks.shouldApplyPolicy(this.game, PartyName.TRANSHUMANS, TurmoilPolicy.TRANSHUMANS_POLICY_3) && this.turmoilPolicyActionUsed === true) {
+    if (PartyHooks.shouldApplyPolicy(this, PartyName.TRANSHUMANS, TurmoilPolicy.TRANSHUMANS_POLICY_3) && this.turmoilPolicyActionUsed === true) {
       requirementsBonus += 50;
     }
 
@@ -803,11 +803,11 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     // PoliticalAgendas Transhumans P1 hook
-    if (tag === Tags.WILDCARD && PartyHooks.shouldApplyPolicy(this.game, PartyName.TRANSHUMANS, TurmoilPolicy.TRANSHUMANS_DEFAULT_POLICY)) {
+    if (tag === Tags.WILDCARD && PartyHooks.shouldApplyPolicy(this, PartyName.TRANSHUMANS, TurmoilPolicy.TRANSHUMANS_DEFAULT_POLICY)) {
       tagCount += 1;
     }
 
-    if (tag === Tags.WILDCARD && this.cardIsInEffect(CardName.LINDBERG)) tagCount += 1;
+    if (tag === Tags.WILDCARD) tagCount = LeadersExpansion.getBonusWildTags(this, tagCount);
 
     tagCount = MarsCoalition.checkBonusWildTag(this, tag, tagCount);
 
@@ -1282,7 +1282,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
   public getCardCost(card: IProjectCard): number {
     // PoliticalAgendas Populists P1 hook
-    if (PartyHooks.shouldApplyPolicy(this.game, PartyName.POPULISTS, TurmoilPolicy.POPULISTS_DEFAULT_POLICY)) {
+    if (PartyHooks.shouldApplyPolicy(this, PartyName.POPULISTS, TurmoilPolicy.POPULISTS_DEFAULT_POLICY)) {
       return card.cost;
     }
 
@@ -1308,23 +1308,23 @@ export class Player implements ISerializable<SerializedPlayer> {
     });
 
     // PoliticalAgendas Unity P4 hook
-    if (card.tags.includes(Tags.SPACE) && PartyHooks.shouldApplyPolicy(this.game, PartyName.UNITY, TurmoilPolicy.UNITY_POLICY_4)) {
+    if (card.tags.includes(Tags.SPACE) && PartyHooks.shouldApplyPolicy(this, PartyName.UNITY, TurmoilPolicy.UNITY_POLICY_4)) {
       cost -= 2;
     }
 
     // PoliticalAgendas Empower P4 hook
-    if (card.tags.includes(Tags.ENERGY) && PartyHooks.shouldApplyPolicy(this.game, PartyName.EMPOWER, TurmoilPolicy.EMPOWER_POLICY_4)) {
+    if (card.tags.includes(Tags.ENERGY) && PartyHooks.shouldApplyPolicy(this, PartyName.EMPOWER, TurmoilPolicy.EMPOWER_POLICY_4)) {
       cost -= 3;
     }
 
     // PoliticalAgendas Bureaucrats P4 hook
-    if (card.tags.includes(Tags.EARTH) && PartyHooks.shouldApplyPolicy(this.game, PartyName.BUREAUCRATS, TurmoilPolicy.BUREAUCRATS_POLICY_4)) {
+    if (card.tags.includes(Tags.EARTH) && PartyHooks.shouldApplyPolicy(this, PartyName.BUREAUCRATS, TurmoilPolicy.BUREAUCRATS_POLICY_4)) {
       const earthTagCount = card.tags.filter((tag) => tag === Tags.EARTH).length;
       cost -= earthTagCount * 3;
     }
 
     // PoliticalAgendas Centrists P4 hook
-    if (card.cardType === CardType.EVENT && PartyHooks.shouldApplyPolicy(this.game, PartyName.CENTRISTS, TurmoilPolicy.CENTRISTS_POLICY_4)) {
+    if (card.cardType === CardType.EVENT && PartyHooks.shouldApplyPolicy(this, PartyName.CENTRISTS, TurmoilPolicy.CENTRISTS_POLICY_4)) {
       cost -= 2;
     }
 
@@ -1714,7 +1714,8 @@ export class Player implements ISerializable<SerializedPlayer> {
         player: this,
         milestone: milestone,
       });
-      this.game.defer(new SelectHowToPayDeferred(this, MILESTONE_COST, {title: 'Select how to pay for milestone'}));
+      const cost = this.cardIsInEffect(CardName.VERONICA) ? 0 : MILESTONE_COST;
+      this.game.defer(new SelectHowToPayDeferred(this, cost, {title: 'Select how to pay for milestone'}));
       if (milestone.name === 'Monument') Monument.discardCards(this);
       this.game.log('${0} claimed ${1} milestone', (b) => b.player(this).milestone(milestone));
       return undefined;
@@ -2017,7 +2018,9 @@ export class Player implements ISerializable<SerializedPlayer> {
       'Take your first action' : 'Take your next action';
     action.buttonLabel = 'Take action';
 
-    if (this.canAfford(MILESTONE_COST) && !this.game.allMilestonesClaimed()) {
+    const canAffordMilestone = this.canAfford(MILESTONE_COST) || this.cardIsInEffect(CardName.VERONICA);
+
+    if (canAffordMilestone && !this.game.allMilestonesClaimed()) {
       const remainingMilestones = new OrOptions();
       remainingMilestones.title = 'Claim a milestone';
       remainingMilestones.options = this.game.milestones
@@ -2076,7 +2079,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     // If you can pay to add a delegate to a party.
     Turmoil.ifTurmoil(this.game, (turmoil) => {
       let sendDelegate;
-      const shouldApplyCentristsTax = PartyHooks.shouldApplyPolicy(this.game, PartyName.CENTRISTS, TurmoilPolicy.CENTRISTS_POLICY_2);
+      const shouldApplyCentristsTax = PartyHooks.shouldApplyPolicy(this, PartyName.CENTRISTS, TurmoilPolicy.CENTRISTS_POLICY_2);
 
       let canAffordLobbyDelegate = true;
       if (shouldApplyCentristsTax && !this.canAfford(2)) canAffordLobbyDelegate = false;

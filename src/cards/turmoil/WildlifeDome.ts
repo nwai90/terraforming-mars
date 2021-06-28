@@ -43,7 +43,7 @@ export class WildlifeDome extends Card implements IProjectCard {
       const meetsPartyRequirements = turmoil.canPlay(player, PartyName.GREENS);
       const oxygenMaxed = player.game.getOxygenLevel() === MAX_OXYGEN_LEVEL;
 
-      if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !oxygenMaxed) {
+      if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS) && !oxygenMaxed) {
         return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, {steel: true, microbes: true}) && meetsPartyRequirements && canPlaceTile;
       }
 

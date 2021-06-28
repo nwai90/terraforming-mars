@@ -20,6 +20,8 @@ export enum CardRenderItemType {
   EARTH = 'earth',
   JOVIAN = 'jovian',
   BUILDING = 'building',
+  CITY_TAG = 'city_tag',
+  VENUS_TAG = 'venus_tag',
   COLONIES = 'colonies',
   SCIENCE = 'science',
   TRADE = 'trade',
@@ -66,4 +68,5 @@ export enum CardRenderItemType {
   MOON_MINING_RATE = 'moon-mine-rate',
   SYNDICATE_FLEET = 'syndicate-fleet',
   ARROW_OPG = 'arrow_opg',
+  REDS = 'reds',
 }

@@ -285,8 +285,18 @@ class Builder {
     return this;
   }
 
-  public wildTag(): Builder {
-    this._addRowItem(new CardRenderItem(CardRenderItemType.WILD_TAG));
+  public cityTag(): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.CITY_TAG));
+    return this;
+  }
+
+  public venusTag(): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.VENUS_TAG));
+    return this;
+  }
+
+  public wildTag(amount: number = 1): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.WILD_TAG, amount));
     return this;
   }
 
@@ -620,6 +630,11 @@ class Builder {
     item.isGreyPlate = true;
     item.isBold = true;
     this._addRowItem(item);
+    return this;
+  }
+
+  public reds(): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.REDS));
     return this;
   }
 

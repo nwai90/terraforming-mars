@@ -1,5 +1,4 @@
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {PartyName} from './PartyName';
 import {Phase} from '../../Phase';
 import {PolicyId} from '../Policy';
@@ -8,17 +7,18 @@ import {GREENS_DEFAULT_POLICY} from './Greens';
 import {MARS_FIRST_DEFAULT_POLICY} from './MarsFirst';
 import {TurmoilPolicy} from '../TurmoilPolicy';
 import {Turmoil} from '../Turmoil';
+import {CardName} from '../../CardName';
 
 export class PartyHooks {
   static applyMarsFirstRulingPolicy(player: Player, space: ISpace) {
-    if (this.shouldApplyPolicy(player.game, PartyName.MARS, TurmoilPolicy.MARS_FIRST_DEFAULT_POLICY)) {
+    if (this.shouldApplyPolicy(player, PartyName.MARS, TurmoilPolicy.MARS_FIRST_DEFAULT_POLICY)) {
       const marsFirstPolicy = MARS_FIRST_DEFAULT_POLICY;
       marsFirstPolicy.onTilePlaced(player, space);
     }
   }
 
   static applyGreensRulingPolicy(player: Player, space: ISpace) {
-    if (this.shouldApplyPolicy(player.game, PartyName.GREENS, TurmoilPolicy.GREENS_DEFAULT_POLICY)) {
+    if (this.shouldApplyPolicy(player, PartyName.GREENS, TurmoilPolicy.GREENS_DEFAULT_POLICY)) {
       const greensPolicy = GREENS_DEFAULT_POLICY;
       greensPolicy.onTilePlaced(player, space);
     }
@@ -26,7 +26,9 @@ export class PartyHooks {
 
   // Return true when the supplied policy is active. When `policyId` is inactive, it selects
   // the default policy for `partyName`.
-  static shouldApplyPolicy(game: Game, partyName: PartyName, policyId?: PolicyId): boolean {
+  static shouldApplyPolicy(player: Player, partyName: PartyName, policyId?: PolicyId): boolean {
+    const game = player.game;
+
     return Turmoil.ifTurmoilElse(game, (turmoil) => {
       if (game.phase !== Phase.ACTION) return false;
 
@@ -37,6 +39,9 @@ export class PartyHooks {
       if (policyId === undefined) {
         policyId = rulingParty.policies[0].id;
       }
+
+      // Leader card effect
+    if (player.cardIsInEffect(CardName.ZOE) && policyId === TurmoilPolicy.REDS_DEFAULT_POLICY) return false;
 
       const currentPolicyId: PolicyId = (turmoil.politicalAgendasData === undefined) ?
         rulingParty.policies[0].id :

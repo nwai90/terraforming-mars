@@ -40,7 +40,7 @@ export class VoteOfNoConfidence extends Card implements IProjectCard {
     const chairmanIsNeutral = turmoil.chairman === 'NEUTRAL';
     if (chairmanIsNeutral === false) return false;
 
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
+    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) {
       return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST);
     }
 
