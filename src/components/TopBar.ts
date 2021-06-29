@@ -40,7 +40,7 @@ export const TopBar = Vue.component('top-bar', {
     <div :class="formatCssClass()" :key="componentKey">
       <PlayerInfo v-show="isExpanded()" :player="player" :activePlayer="player" actionLabel="" :playerIndex="0" :hideZeroTags="true"/>
       <div class="top-bar-collapser" v-on:click="toggleBar()">
-        <img src="/assets/misc/arrows_left.png">
+        <img src="/assets/arrows/arrows_left.png">
       </div>
     </div>
   `,
