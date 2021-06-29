@@ -1,5 +1,6 @@
 import {expect} from 'chai';
 import {Tardigrades} from '../../../src/cards/base/Tardigrades';
+import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 
@@ -9,6 +10,7 @@ describe('Tardigrades', function() {
   beforeEach(() => {
     card = new Tardigrades();
     player = TestPlayers.BLUE.newPlayer();
+    Game.newInstance('test', [player], player);
   });
 
   it('Should play', function() {

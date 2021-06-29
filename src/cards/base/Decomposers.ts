@@ -39,7 +39,8 @@ export class Decomposers extends Card implements IProjectCard, IResourceCard {
   }
     public resourceCount: number = 0;
     public onCardPlayed(player: Player, card: IProjectCard): void {
-      player.addResourceTo(this, card.tags.filter((tag) => tag === Tags.ANIMAL || tag === Tags.PLANT || tag === Tags.MICROBE).length);
+      const qty = card.tags.filter((tag) => tag === Tags.ANIMAL || tag === Tags.PLANT || tag === Tags.MICROBE).length;
+      player.addResourceTo(this, {qty: qty, log: true});
     }
     public getVictoryPoints(): number {
       return Math.floor(this.resourceCount / 3);
@@ -47,7 +48,7 @@ export class Decomposers extends Card implements IProjectCard, IResourceCard {
     public play(player: Player) {
       // Get two extra microbes from EcoExperts if played during prelude while having just played EcoExperts
       if (player.game.phase === Phase.PRELUDES && player.playedCards.length > 0 && player.playedCards[player.playedCards.length-1].name === CardName.ECOLOGY_EXPERTS) {
-        player.addResourceTo(this, 2);
+        player.addResourceTo(this, {qty: 2, log: true});
       }
       return undefined;
     }

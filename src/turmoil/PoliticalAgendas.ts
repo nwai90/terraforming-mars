@@ -114,16 +114,11 @@ export class PoliticalAgendas {
       return PoliticalAgendas.newInstance(AgendaStyle.STANDARD, turmoil.parties, turmoil.rulingParty);
     }
 
-    if (d.staticAgendas !== undefined) {
-      return {
-        currentAgenda: d.currentAgenda,
-        staticAgendas: new Map(d.staticAgendas),
-        agendaStyle: d.agendaStyle,
-      };
-    }
+    const staticAgendas = d.staticAgendas !== undefined ? new Map(d.staticAgendas) : undefined;
+
     return {
       currentAgenda: d.currentAgenda,
-      staticAgendas: undefined,
+      staticAgendas: staticAgendas,
       agendaStyle: d.agendaStyle,
     };
   }

@@ -47,7 +47,7 @@ export class NitriteReducingBacteria extends Card implements IActionCard, IProje
       player.game.defer(new DeferredAction(
         player,
         () => {
-          player.addResourceTo(this, 3);
+          player.addResourceTo(this, {qty: 3, log: true});
           return undefined;
         },
       ));

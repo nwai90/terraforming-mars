@@ -65,7 +65,7 @@ export class Splice extends Card implements CorporationCard {
     const megacreditsGain = microbeTagsCount * gainPerMicrobe;
 
     const addResource = new SelectOption('Add a microbe resource to this card', 'Add microbe', () => {
-      player.addResourceTo(card);
+      player.addResourceTo(card, {log: true});
       return undefined;
     });
 

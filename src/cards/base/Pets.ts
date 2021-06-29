@@ -6,8 +6,7 @@ import {Player} from '../../Player';
 import {ISpace} from '../../boards/ISpace';
 import {ResourceType} from '../../ResourceType';
 import {CardName} from '../../CardName';
-import {Priority} from '../../deferredActions/DeferredAction';
-import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
+import {DeferredAction, Priority} from '../../deferredActions/DeferredAction';
 import {IResourceCard} from '../ICard';
 import {Board} from '../../boards/Board';
 import {CardRenderer} from '../render/CardRenderer';
@@ -48,14 +47,17 @@ export class Pets extends Card implements IProjectCard, IResourceCard {
   public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
     if (Board.isCitySpace(space)) {
       cardOwner.game.defer(
-        new AddResourcesToCard(cardOwner, ResourceType.ANIMAL, {filter: (c) => c.name === this.name}),
+        new DeferredAction(cardOwner, () => {
+          cardOwner.addResourceTo(this, {log: true});
+          return undefined;
+        }),
         cardOwner.id !== activePlayer.id ? Priority.OPPONENT_TRIGGER : undefined,
       );
     }
   }
 
   public play(player: Player) {
-    player.addResourceTo(this);
+    player.addResourceTo(this, {log: true});
     return undefined;
   }
 }

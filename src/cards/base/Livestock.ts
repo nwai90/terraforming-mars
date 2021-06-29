@@ -57,7 +57,7 @@ export class Livestock extends Card implements IActionCard, IProjectCard, IResou
       return true;
     }
     public action(player: Player) {
-      player.addResourceTo(this);
+      player.addResourceTo(this, {log: true});
       return undefined;
     }
 }

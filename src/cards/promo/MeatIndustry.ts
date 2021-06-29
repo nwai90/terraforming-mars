@@ -4,6 +4,10 @@ import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
+import {Player} from '../../Player';
+import {Resources} from '../../Resources';
+import {ResourceType} from '../../ResourceType';
+import {IResourceCard, ICard} from '../ICard';
 
 export class MeatIndustry extends Card implements IProjectCard {
   constructor() {
@@ -26,5 +30,11 @@ export class MeatIndustry extends Card implements IProjectCard {
 
   public play() {
     return undefined;
+  }
+
+  public static onResourceAdded(player: Player, card: IResourceCard & ICard, count: number): void {
+    if (card.resourceType === ResourceType.ANIMAL && player.cardIsInEffect(CardName.MEAT_INDUSTRY)) {
+      player.addResource(Resources.MEGACREDITS, count * 2, {log: true});
+    }
   }
 }

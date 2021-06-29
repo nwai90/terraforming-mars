@@ -51,7 +51,7 @@ export class SubZeroSaltFish extends Card implements IProjectCard, IResourceCard
   }
 
   public action(player: Player) {
-    player.addResourceTo(this);
+    player.addResourceTo(this, {log: true});
     return undefined;
   }
 

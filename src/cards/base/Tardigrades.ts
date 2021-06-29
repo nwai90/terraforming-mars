@@ -38,7 +38,7 @@ export class Tardigrades extends Card implements IProjectCard, IResourceCard {
       return undefined;
     }
     public action(player: Player) {
-      player.addResourceTo(this);
+      player.addResourceTo(this, {log: true});
       return undefined;
     }
     public canAct(): boolean {

@@ -81,6 +81,8 @@ import {CrashSiteCleanup} from './cards/promo/CrashSiteCleanup';
 import {MarsCoalition} from './cards/community/corporations/MarsCoalition';
 import {Monument} from './milestones/fanmade/Monument';
 import {Awards} from './awards/Awards';
+import {TopsoilContract} from './cards/promo/TopsoilContract';
+import {MeatIndustry} from './cards/promo/MeatIndustry';
 
 export type PlayerId = string;
 
@@ -695,15 +697,8 @@ export class Player implements ISerializable<SerializedPlayer> {
       card.resourceCount += count;
     }
 
-    // Topsoil contract hook
-    if (card.resourceType === ResourceType.MICROBE && this.playedCards.map((card) => card.name).includes(CardName.TOPSOIL_CONTRACT)) {
-      this.megaCredits += count;
-    }
-
-    // Meat industry hook
-    if (card.resourceType === ResourceType.ANIMAL && this.playedCards.map((card) => card.name).includes(CardName.MEAT_INDUSTRY)) {
-      this.megaCredits += count * 2;
-    }
+    TopsoilContract.onResourceAdded(this, card, count);
+    MeatIndustry.onResourceAdded(this, card, count);
 
     if (typeof(options) !== 'number' && options.log === true) {
       LogHelper.logAddResource(this, card, count);
