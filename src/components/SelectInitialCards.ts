@@ -57,6 +57,9 @@ export const SelectInitialCards = Vue.component('select-initial-cards', {
         case CardName.AQUIFER_TURBINES:
           result -= 3;
           break;
+        case CardName.MINING_IMPROVEMENTS:
+          result -= 2;
+          break;
         case CardName.DONATION:
           result += 21;
           break;
@@ -64,6 +67,9 @@ export const SelectInitialCards = Vue.component('select-initial-cards', {
         case CardName.HUGE_ASTEROID:
         case CardName.VITAL_COLONY:
           result -= 5;
+          break;
+        case CardName.TERRAFORMING_MISSION:
+          result -= 12;
           break;
         case CardName.LOAN:
           result += 30;
@@ -75,6 +81,9 @@ export const SelectInitialCards = Vue.component('select-initial-cards', {
         case CardName.NITROGEN_SHIPMENT:
         case CardName.GAMBLING_HOUSE:
           result += 5;
+          break;
+        case CardName.SOLAR_BATTERIES:
+          result += 7;
           break;
         case CardName.AEROSPACE_MISSION:
           result -= 14;
@@ -104,6 +113,7 @@ export const SelectInitialCards = Vue.component('select-initial-cards', {
             break;
           case CardName.METALS_COMPANY:
           case CardName.RESEARCH_NETWORK:
+          case CardName.THARSIS_PROTOTYPE_CITY:
             result += 1;
             break;
           case CardName.NITRATE_REDUCERS:

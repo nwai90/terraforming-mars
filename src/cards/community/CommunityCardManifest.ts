@@ -42,6 +42,8 @@ import {GroundwaterMohole} from './preludes/GroundwaterMohole';
 import {NewMarsResearchFacility} from './preludes/NewMarsResearchFacility';
 import {TerrainAcquisition} from './preludes/TerrainAcquisition';
 import {Microalgae} from './preludes/Microalgae';
+import {MiningImprovements} from './preludes/MiningImprovements';
+import {TerraformingMission} from './preludes/TerraformingMission';
 
 export const COMMUNITY_CARD_MANIFEST = new CardManifest({
   module: GameModule.Community,
@@ -139,5 +141,7 @@ export const COMMUNITY_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.NEW_MARS_RESEARCH_FACILITY, Factory: NewMarsResearchFacility},
     {cardName: CardName.TERRAIN_ACQUISITION, Factory: TerrainAcquisition},
     {cardName: CardName.MICROALGAE, Factory: Microalgae},
+    {cardName: CardName.MINING_IMPROVEMENTS, Factory: MiningImprovements},
+    {cardName: CardName.TERRAFORMING_MISSION, Factory: TerraformingMission},
   ],
 });

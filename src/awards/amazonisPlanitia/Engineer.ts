@@ -153,7 +153,10 @@ export class Engineer implements IAward {
     CardName.BOTANICAL_HARVEST,
     CardName.GEOTHERMAL_VENT,
     CardName.HYDROGEN_BOMBARDMENT,
+    CardName.LASER_FACTORY,
+    CardName.MICROALGAE,
     CardName.NITRATE_REDUCERS,
+    CardName.SOLAR_BATTERIES,
     CardName.TRADE_INFRASTRUCTURE,
     // Moon
     CardName.ALGAE_BIOREACTORS,
