@@ -515,6 +515,7 @@ export enum CardName {
     GROUNDWATER_MOHOLE = 'Groundwater Mohole',
     NEW_MARS_RESEARCH_FACILITY = 'New Mars Research Facility',
     TERRAIN_ACQUISITION = 'Terrain Acquisition',
+    MICROALGAE = 'Microalgae',
 
     // Community colonies
     SCIENCE_TAG_BLANK_CARD = '',

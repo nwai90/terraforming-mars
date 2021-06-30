@@ -19,7 +19,7 @@ export class SolarBatteries extends PreludeCard implements IProjectCard {
           b.production((pb) => pb.energy(1));
           b.megacredits(7);
         }),
-        description: 'Raise temperature 1 step. Increase your energy production 1 step. Gain 7 MC.',
+        description: 'Raise temperature 1 step. Increase your energy production 1 step. Gain 7 M€.',
       },
     });
   }
