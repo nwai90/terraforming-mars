@@ -379,9 +379,11 @@ export namespace MilestoneAwardSelector {
       bind(Zoologist, Economizer, 5);
       bind(Zoologist, Adapter, 6);
 
-      bind(Curator, Tycoon, 8);
-      bind(Curator, Magnate, 8);
-      bind(Curator, Diversifier, 3);
+      bind(Curator, Magnate, 3);
+      bind(Curator, Diversifier, 2);
+      bind(Curator, Scientist, 5);
+      bind(Curator, Contractor, 8);
+      bind(Curator, SpaceBaron, 7);
 
       bind(Tourist, Highlander, 1);
 
