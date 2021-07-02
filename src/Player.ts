@@ -1658,7 +1658,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     return trade;
   }
 
-  private claimMilestone(milestone: IMilestone): SelectOption {
+  public claimMilestone(milestone: IMilestone): SelectOption {
     return new SelectOption(milestone.name, 'Claim - ' + '('+ milestone.name + ')', () => {
       this.game.claimedMilestones.push({
         player: this,

@@ -51,6 +51,7 @@ import {Diversifier} from './milestones/Diversifier';
 import {Ecologist} from './milestones/Ecologist';
 import {Energizer} from './milestones/Energizer';
 import {Monument} from './milestones/fanmade/Monument';
+import {Wanderer} from './milestones/fanmade/Wanderer';
 import {Gardener} from './milestones/Gardener';
 import {Generalist} from './milestones/Generalist';
 import {Hoverlord} from './milestones/Hoverlord';
@@ -387,28 +388,32 @@ export namespace MilestoneAwardSelector {
 
       bind(Tourist, Highlander, 1);
 
-      bind(Engineer, Banker, 4);
-      bind(Engineer, Miner, 9);
-      bind(Engineer, Thermalist, 1);
-      bind(Engineer, Industrialist, 8);
+      bind(Engineer, Banker, 3);
+      bind(Engineer, Miner, 6);
+      bind(Engineer, Industrialist, 5);
       bind(Engineer, Magnate, 3);
       bind(Engineer, Contractor, 6);
-      bind(Engineer, SpaceBaron, 8);
-      bind(Engineer, Builder, 9);
-      bind(Engineer, Tycoon, 4);
-      bind(Engineer, Generalist, 3);
-      bind(Engineer, Naturalist, 3);
-      bind(Engineer, Generator, 5);
-      bind(Engineer, Producer, 3);
-      bind(Engineer, Electrician, 3);
+      bind(Engineer, SpaceBaron, 5);
+      bind(Engineer, Builder, 5);
+      bind(Engineer, Tycoon, 3);
+      bind(Engineer, Generator, 2);
+      bind(Engineer, Producer, 1);
+      bind(Engineer, Electrician, 2);
       bind(Engineer, Smith, 9);
-      bind(Engineer, Spacefarer, 8);
-      bind(Engineer, Farmer, 4);
-      bind(Engineer, Terran, 6);
+      bind(Engineer, Spacefarer, 4);
+      bind(Engineer, Farmer, 2);
+      bind(Engineer, Terran, 3);
 
       // New Ops
       bind(Monument, Minimalist, 9);
       bind(Monument, Planner, 2);
+
+      bind(Wanderer, Gardener, 4);
+      bind(Wanderer, Mayor, 3);
+      bind(Wanderer, Pioneer, 7);
+      bind(Wanderer, PolarExplorer, 4);
+      bind(Wanderer, EstateDealer, 1);
+      bind(Wanderer, Cultivator, 6);
 
       return synergies;
     }
