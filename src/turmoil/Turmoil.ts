@@ -116,6 +116,13 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       }
     }
 
+    public static getTurmoil(game: Game): Turmoil {
+      if (game.turmoil === undefined) {
+        throw new Error('Turmoil not defined');
+      }
+      return game.turmoil;
+    }
+
     public static newInstance(game: Game, agendaStyle: AgendaStyle = AgendaStyle.STANDARD): Turmoil {
       const societyExpansion: boolean = game.gameOptions.societyExpansion;
       const randomTurmoil: boolean = game.gameOptions.randomTurmoil;
