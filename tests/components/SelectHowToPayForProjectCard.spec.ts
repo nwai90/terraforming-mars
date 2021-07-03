@@ -58,8 +58,10 @@ describe('SelectHowToPayForProjectCard', function() {
           title: 'foo',
           cards: [{
             name: CardName.ANTS,
+            reserveUnits: Units.of({}),
           }, {
             name: CardName.BIRDS,
+            reserveUnits: Units.of({}),
           }],
         },
         onsave: function() {},
