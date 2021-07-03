@@ -37,7 +37,7 @@ export const StartScreen = Vue.component('start-screen', {
     <a class="start-screen-link start-screen-link--cards-list" href="/cards" target="_blank" v-i18n>Cards list</a>
     <a class="start-screen-link start-screen-link--board-game" href="https://boardgamegeek.com/boardgame/167791/terraforming-mars" target="_blank" v-i18n>Board game</a>
     <a class="start-screen-link start-screen-link--about" href="https://www.notion.so/Community-Add-ons-98a78a03dc6b4006926bf14e046309c8" target="_blank" v-i18n>Documentation</a>
-    <a class="start-screen-link start-screen-link--merch" href="https://teespring.com/stores/terraforming-guild" target="_blank" v-i18n>Fan merch</a>
+    <a class="start-screen-link start-screen-link--merch" href="https://terraforming-guild.creator-spring.com/" target="_blank" v-i18n>Fan merch</a>
     <a class="start-screen-link start-screen-link--chat" href="https://discord.gg/VR8TbrD" target="_blank" v-i18n>Join us on Discord</a>
     <div class="start-screen-header start-screen-link--languages">
       <language-switcher />
