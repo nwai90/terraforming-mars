@@ -6,7 +6,6 @@ import {PlayerInput} from '../../PlayerInput';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Resources} from '../../Resources';
-import {SpaceType} from '../../SpaceType';
 
 export class Ulrich extends Card implements LeaderCard {
   constructor() {
@@ -39,7 +38,7 @@ export class Ulrich extends Card implements LeaderCard {
     if (game.noOceansAvailable()) {
       player.addResource(Resources.MEGACREDITS, 9);
     } else {
-      const oceansPlaced = game.board.spaces.filter((space) => space.spaceType === SpaceType.OCEAN && space.tile !== undefined && space.player === undefined).length;
+      const oceansPlaced = game.board.getOceansOnBoard();
       player.addResource(Resources.MEGACREDITS, oceansPlaced * 3);
     }
 
