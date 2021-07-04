@@ -885,6 +885,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       megaCredits: 0,
       microbes: 0,
       floaters: 0,
+      science: 0,
     };
     try {
       const howToPay: HowToPay = JSON.parse(json);
@@ -1390,8 +1391,16 @@ export class Player implements ISerializable<SerializedPlayer> {
       totalToPay += howToPay.floaters * DEFAULT_FLOATERS_VALUE;
     }
 
+    if (howToPay.science ?? 0 > 0) {
+      totalToPay += howToPay.science;
+    }
+
     if (howToPay.megaCredits > this.megaCredits) {
       throw new Error('Do not have enough M€');
+    }
+
+    if (howToPay.science !== undefined) {
+      totalToPay += howToPay.science;
     }
 
     totalToPay += howToPay.megaCredits;
@@ -1425,6 +1434,13 @@ export class Player implements ISerializable<SerializedPlayer> {
     return 0;
   }
 
+  public getSpendableScienceResources(): number {
+    const lunaArchives = this.playedCards.find((card) => card.name === CardName.LUNA_ARCHIVES);
+    if (lunaArchives !== undefined) return this.getResourcesOnCard(lunaArchives)!;
+
+    return 0;
+  }
+
   public playCard(selectedCard: IProjectCard, howToPay?: HowToPay, addToPlayedCards: boolean = true): undefined {
     // Pay for card
     if (howToPay !== undefined) {
@@ -1439,6 +1455,10 @@ export class Player implements ISerializable<SerializedPlayer> {
 
         if (playedCard.name === CardName.DIRIGIBLES) {
           this.removeResourceFrom(playedCard, howToPay.floaters);
+        }
+
+        if (playedCard.name === CardName.LUNA_ARCHIVES) {
+          this.removeResourceFrom(playedCard, howToPay.science);
         }
       }
     }

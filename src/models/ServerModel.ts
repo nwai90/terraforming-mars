@@ -293,6 +293,7 @@ function getWaitingFor(
     maxByDefault: undefined,
     microbes: undefined,
     floaters: undefined,
+    science: undefined,
     coloniesModel: undefined,
     payProduction: undefined,
     aresData: undefined,
@@ -321,6 +322,7 @@ function getWaitingFor(
     playerInputModel.microbes = shtpfpc.microbes;
     playerInputModel.floaters = shtpfpc.floaters;
     playerInputModel.canUseHeat = shtpfpc.canUseHeat;
+    playerInputModel.science = shtpfpc.scienceResources;
     break;
   case PlayerInputTypes.SELECT_CARD:
     const selectCard = waitingFor as SelectCard<ICard>;

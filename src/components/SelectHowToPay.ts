@@ -149,6 +149,7 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
         titanium: this.$data.titanium,
         microbes: 0,
         floaters: 0,
+        science: 0,
       };
 
       if (htp.megaCredits > this.player.megaCredits) {
