@@ -292,6 +292,7 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
         AltSecondaryTag.MOON_MINING_RATE,
         AltSecondaryTag.MOON_LOGISTICS_RATE,
       ];
+
       // Oxygen is handled specially separately.
       if (this.item.secondaryTag !== undefined && !previouslyRendered.includes(this.item.secondaryTag)) {
         const classes: string[] = ['card-icon'];

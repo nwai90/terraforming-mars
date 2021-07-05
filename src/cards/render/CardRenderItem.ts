@@ -17,6 +17,9 @@ export enum AltSecondaryTag {
   FLOATER = 'floater',
   // 'blue' => used in Project Workshop
   BLUE = 'blue',
+  // render square resources instead of round tags
+  ANIMAL_RESOURCE = 'animal-resource',
+  STEEL_RESOURCE = 'steel-resource',
   ARES = 'ares',
 
   MOON_MINING_RATE = 'moon-mine',

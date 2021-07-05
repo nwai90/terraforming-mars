@@ -10,6 +10,7 @@ import {ISpace} from '../../../boards/ISpace';
 import {SelectSpace} from '../../../inputs/SelectSpace';
 import {SpaceType} from '../../../SpaceType';
 import {Units} from '../../../Units';
+import {AltSecondaryTag} from '../../render/CardRenderItem';
 
 export class GroundwaterMohole extends PreludeCard implements IProjectCard {
   constructor() {
@@ -21,7 +22,7 @@ export class GroundwaterMohole extends PreludeCard implements IProjectCard {
       metadata: {
         cardNumber: 'Y24',
         renderData: CardRenderer.builder((b) => {
-          b.oceans(1).secondaryTag(Tags.BUILDING).asterix().br;
+          b.oceans(1).secondaryTag(AltSecondaryTag.STEEL_RESOURCE).asterix().br;
           b.production((pb) => pb.steel(1));
           b.heat(3);
         }),

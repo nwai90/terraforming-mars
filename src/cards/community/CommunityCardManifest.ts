@@ -44,6 +44,7 @@ import {TerrainAcquisition} from './preludes/TerrainAcquisition';
 import {Microalgae} from './preludes/Microalgae';
 import {MiningImprovements} from './preludes/MiningImprovements';
 import {TerraformingMission} from './preludes/TerraformingMission';
+import {WildlifeSponsors} from './preludes/WildlifeSponsors';
 
 export const COMMUNITY_CARD_MANIFEST = new CardManifest({
   module: GameModule.Community,
@@ -143,5 +144,6 @@ export const COMMUNITY_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.MICROALGAE, Factory: Microalgae},
     {cardName: CardName.MINING_IMPROVEMENTS, Factory: MiningImprovements},
     {cardName: CardName.TERRAFORMING_MISSION, Factory: TerraformingMission},
+    {cardName: CardName.WILDLIFE_SPONSORS, Factory: WildlifeSponsors},
   ],
 });
