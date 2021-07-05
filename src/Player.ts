@@ -700,7 +700,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     TopsoilContract.onResourceAdded(this, card, count);
     MeatIndustry.onResourceAdded(this, card, count);
 
-    if (typeof(options) !== 'number' && options.log === true) {
+    if (typeof(options) !== 'number' && options.log === true && count > 0) {
       LogHelper.logAddResource(this, card, count);
     }
   }
