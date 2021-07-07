@@ -348,7 +348,17 @@ export class Player implements ISerializable<SerializedPlayer> {
     });
   }
 
-  public addResource(resource: Resources, amount: number = 1, options? : { log: boolean, from? : Player | GlobalEventName}) {
+  public deductResource(
+    resource: Resources,
+    amount: number,
+    options? : {
+      log?: boolean,
+      from? : Player | GlobalEventName,
+    }) {
+    this.addResource(resource, -amount, options);
+  }
+
+  public addResource(resource: Resources, amount: number = 1, options? : { log?: boolean, from? : Player | GlobalEventName}) {
     const playerAmount = this.getResource(resource);
     const delta = (amount >= 0) ? amount : Math.max(amount, -playerAmount);
 
