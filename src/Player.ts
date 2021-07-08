@@ -83,6 +83,7 @@ import {Monument} from './milestones/fanmade/Monument';
 import {Awards} from './awards/Awards';
 import {TopsoilContract} from './cards/promo/TopsoilContract';
 import {MeatIndustry} from './cards/promo/MeatIndustry';
+import {Turmoil} from './turmoil/Turmoil';
 
 export type PlayerId = string;
 
@@ -548,9 +549,11 @@ export class Player implements ISerializable<SerializedPlayer> {
     // Turmoil Victory Points
     const includeTurmoilVP : boolean = this.game.gameIsOver() || this.game.phase === Phase.END;
 
-    if (includeTurmoilVP && this.game.gameOptions.turmoilExtension && this.game.turmoil) {
-      victoryPointsBreakdown.setVictoryPoints('victoryPoints', this.game.turmoil.getPlayerVictoryPoints(this), 'Turmoil Points');
-    }
+    Turmoil.ifTurmoil(this.game, (turmoil) => {
+      if (includeTurmoilVP) {
+        victoryPointsBreakdown.setVictoryPoints('victoryPoints', turmoil.getPlayerVictoryPoints(this), 'Turmoil Points');
+      }
+    });
 
     // Titania Colony VP
     if (this.colonyVictoryPoints > 0) {
@@ -2047,7 +2050,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     // If you can pay to add a delegate to a party.
-    if (this.game.gameOptions.turmoilExtension && this.game.turmoil !== undefined) {
+    Turmoil.ifTurmoil(this.game, (turmoil) => {
       let sendDelegate;
       const shouldApplyCentristsTax = PartyHooks.shouldApplyPolicy(this.game, PartyName.CENTRISTS, TurmoilPolicy.CENTRISTS_POLICY_2);
 
@@ -2062,15 +2065,15 @@ export class Player implements ISerializable<SerializedPlayer> {
         inciteLobbyingCost += 2;
       }
 
-      if (this.game.turmoil?.lobby.has(this.id) && canAffordLobbyDelegate) {
+      if (turmoil.lobby.has(this.id) && canAffordLobbyDelegate) {
         sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (from lobby)');
 
         if (shouldApplyCentristsTax) {
           sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area from lobby (2 M€)', {cost: 2});
         }
-      } else if (this.isCorporation(CardName.INCITE) && this.canAfford(inciteLobbyingCost) && this.game.turmoil!.getDelegatesInReserve(this.id) > 0) {
+      } else if (this.isCorporation(CardName.INCITE) && this.canAfford(inciteLobbyingCost) && turmoil.getDelegatesInReserve(this.id) > 0) {
         sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (' + inciteLobbyingCost + ' M€)', {cost: inciteLobbyingCost});
-      } else if (this.canAfford(lobbyingCost) && this.game.turmoil!.getDelegatesInReserve(this.id) > 0) {
+      } else if (this.canAfford(lobbyingCost) && turmoil.getDelegatesInReserve(this.id) > 0) {
         sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (' + lobbyingCost + ' M€)', {cost: lobbyingCost});
       }
 
@@ -2080,7 +2083,7 @@ export class Player implements ISerializable<SerializedPlayer> {
           action.options.push(input);
         }
       }
-    }
+    });
 
     if (this.game.getPlayers().length > 1 && this.actionsTakenThisRound > 0 && this.allOtherPlayersHavePassed() === false) {
       if (!this.game.gameOptions.fastModeOption) {

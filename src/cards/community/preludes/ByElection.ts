@@ -9,6 +9,7 @@ import {DeferredAction} from '../../../deferredActions/DeferredAction';
 import {CardRenderer} from '../../render/CardRenderer';
 import {Size} from '../../render/Size';
 import {PoliticalAgendas} from '../../../turmoil/PoliticalAgendas';
+import {Turmoil} from '../../../turmoil/Turmoil';
 
 export class ByElection extends PreludeCard implements IProjectCard {
   constructor() {
@@ -26,14 +27,14 @@ export class ByElection extends PreludeCard implements IProjectCard {
       },
     });
   }
-  public canPlay(player: Player) {
-    return player.game.turmoil !== undefined;
+  public canPlay() {
+    return true;
   }
-  public play(player: Player) {
-    const turmoil = player.game.turmoil;
-    if (turmoil === undefined) return;
 
+  public play(player: Player) {
+    const turmoil = Turmoil.getTurmoil(player.game);
     turmoil.addInfluenceBonus(player);
+
     const setRulingParty = new OrOptions();
     setRulingParty.title = 'Select new ruling party';
 

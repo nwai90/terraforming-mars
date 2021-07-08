@@ -12,6 +12,7 @@ import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {SOCIETY_ADDITIONAL_CARD_COST} from '../../constants';
 import {TurmoilHandler} from '../../turmoil/TurmoilHandler';
+import {Turmoil} from '../../turmoil/Turmoil';
 import {Units} from '../../Units';
 
 export class CulturalMetropolis extends Card implements IProjectCard {
@@ -38,15 +39,14 @@ export class CulturalMetropolis extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player): boolean {
-    const turmoil = player.game.turmoil;
-    if (turmoil !== undefined) {
-      // This card requires player has 2 delegates available
-      if (turmoil.parties.find((p) => p.name === PartyName.UNITY)) {
-        return turmoil.canPlay(player, PartyName.UNITY) && player.getProduction(Resources.ENERGY) >= 1 && (turmoil.getDelegatesInReserve(player.id) > 1 || (turmoil.getDelegatesInReserve(player.id) === 1 && turmoil.lobby.has(player.id)));
-      }
-      return player.canAfford(player.getCardCost(this) + SOCIETY_ADDITIONAL_CARD_COST, {steel: true});
+    if (!super.canPlay(player)) return false;
+    if (player.getProduction(Resources.ENERGY) < 1) return false;
+
+    const turmoil = Turmoil.getTurmoil(player.game);
+    if (turmoil.parties.find((p) => p.name === PartyName.UNITY)) {
+      return turmoil.canPlay(player, PartyName.UNITY) && player.getProduction(Resources.ENERGY) >= 1 && (turmoil.getDelegatesInReserve(player.id) > 1 || (turmoil.getDelegatesInReserve(player.id) === 1 && turmoil.lobby.has(player.id)));
     }
-    return false;
+    return player.canAfford(player.getCardCost(this) + SOCIETY_ADDITIONAL_CARD_COST, {steel: true});
   }
 
   public play(player: Player) {
@@ -54,11 +54,13 @@ export class CulturalMetropolis extends Card implements IProjectCard {
     player.addProduction(Resources.MEGACREDITS, 3);
     player.game.defer(new PlaceCityTile(player));
     TurmoilHandler.handleSocietyPayment(player, PartyName.UNITY);
-    const title = 'Select where to send two delegates';
 
-    if (player.game.turmoil!.getDelegatesInReserve(player.id) > 1) {
+    const title = 'Select where to send two delegates';
+    const turmoil = Turmoil.getTurmoil(player.game);
+
+    if (turmoil.getDelegatesInReserve(player.id) > 1) {
       player.game.defer(new SendDelegateToArea(player, title, {count: 2, source: 'reserve'}));
-    } else if (player.game.turmoil!.getDelegatesInReserve(player.id) === 1 && player.game.turmoil!.lobby.has(player.id)) {
+    } else if (turmoil.getDelegatesInReserve(player.id) === 1 && turmoil.lobby.has(player.id)) {
       player.game.defer(new SendDelegateToArea(player, title, {count: 2, source: 'lobby'}));
     }
     return undefined;

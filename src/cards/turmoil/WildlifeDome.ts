@@ -13,6 +13,7 @@ import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {TurmoilHandler} from '../../turmoil/TurmoilHandler';
+import {Turmoil} from '../../turmoil/Turmoil';
 
 export class WildlifeDome extends Card implements IProjectCard {
   constructor() {
@@ -34,25 +35,23 @@ export class WildlifeDome extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player): boolean {
-    const turmoil = player.game.turmoil;
+    if (!super.canPlay(player)) return false;
 
-    if (turmoil !== undefined) {
-      const canPlaceTile = player.game.board.getAvailableSpacesForGreenery(player).length > 0;
+    const turmoil = Turmoil.getTurmoil(player.game);
+    const canPlaceTile = player.game.board.getAvailableSpacesForGreenery(player).length > 0;
 
-      if (turmoil.parties.find((p) => p.name === PartyName.GREENS)) {  
-        const meetsPartyRequirements = turmoil.canPlay(player, PartyName.GREENS);
-        const oxygenMaxed = player.game.getOxygenLevel() === MAX_OXYGEN_LEVEL;
+    if (turmoil.parties.find((p) => p.name === PartyName.GREENS)) {  
+      const meetsPartyRequirements = turmoil.canPlay(player, PartyName.GREENS);
+      const oxygenMaxed = player.game.getOxygenLevel() === MAX_OXYGEN_LEVEL;
 
-        if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !oxygenMaxed) {
-          return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, {steel: true, microbes: true}) && meetsPartyRequirements && canPlaceTile;
-        }
-
-        return meetsPartyRequirements && canPlaceTile;
+      if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !oxygenMaxed) {
+        return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, {steel: true, microbes: true}) && meetsPartyRequirements && canPlaceTile;
       }
 
-      return player.canAfford(player.getCardCost(this) + SOCIETY_ADDITIONAL_CARD_COST, {steel: true, microbes: true}) && canPlaceTile;
+      return meetsPartyRequirements && canPlaceTile;
     }
-    return false;
+
+    return player.canAfford(player.getCardCost(this) + SOCIETY_ADDITIONAL_CARD_COST, {steel: true, microbes: true}) && canPlaceTile;
   }
 
   public play(player: Player) {

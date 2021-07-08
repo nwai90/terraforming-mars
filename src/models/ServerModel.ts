@@ -29,9 +29,7 @@ import {
   IMilestoneScore,
 } from './ClaimedMilestoneModel';
 import {FundedAwardModel, IAwardScore} from './FundedAwardModel';
-import {
-  getTurmoil,
-} from './TurmoilModel';
+import {getTurmoilModel} from './TurmoilModel';
 import {SelectDelegate} from '../inputs/SelectDelegate';
 import {SelectColony} from '../inputs/SelectColony';
 import {SelectProductionToLose} from '../inputs/SelectProductionToLose';
@@ -40,6 +38,7 @@ import {SpectatorModel} from './SpectatorModel';
 import {MoonModel} from './MoonModel';
 import {Units} from '../Units';
 import {SelectPartyToSendDelegate} from '../inputs/SelectPartyToSendDelegate';
+import {Turmoil} from '../turmoil/Turmoil';
 
 export class Server {
   public static getGameModel(game: Game): GameHomeModel {
@@ -60,7 +59,7 @@ export class Server {
 
   public static getPlayerModel(player: Player): PlayerModel {
     const game = player.game;
-    const turmoil = getTurmoil(game);
+    const turmoil = getTurmoilModel(game);
 
     return {
       actionsTakenThisRound: player.actionsTakenThisRound,
@@ -93,7 +92,7 @@ export class Server {
       heat: player.heat,
       heatProduction: player.getProduction(Resources.HEAT),
       id: player.id,
-      influence: turmoil ? game.turmoil!.getPlayerInfluence(player) : 0,
+      influence: Turmoil.ifTurmoilElse(game, (turmoil) => turmoil.getPlayerInfluence(player), () => 0),
       isActive: player.id === game.activePlayer,
       isSoloModeWin: game.isSoloModeWin(),
       lastSoloGeneration: game.lastSoloGeneration(),
@@ -169,7 +168,7 @@ export class Server {
       players: getPlayers(game.getPlayers(), game),
       researchedPlayers: game.getResearchedPlayers(),
       temperature: game.getTemperature(),
-      turmoil: getTurmoil(game),
+      turmoil: getTurmoilModel(game),
       spaces: getSpaces(game.board),
       venusScaleLevel: game.getVenusScaleLevel(),
       silverCubeVariant: game.gameOptions.silverCubeVariant,
@@ -366,7 +365,7 @@ function getWaitingFor(
   case PlayerInputTypes.SELECT_PARTY_TO_SEND_DELEGATE:
     playerInputModel.availableParties = (waitingFor as SelectPartyToSendDelegate).availableParties;
     if (game !== undefined) {
-      playerInputModel.turmoil = getTurmoil(game);
+      playerInputModel.turmoil = getTurmoilModel(game);
     }
     break;
   case PlayerInputTypes.SELECT_DELEGATE:
@@ -383,7 +382,7 @@ function getWaitingFor(
   case PlayerInputTypes.SELECT_PARTY_TO_SEND_DELEGATE:
     playerInputModel.availableParties = (waitingFor as SelectPartyToSendDelegate).availableParties;
     if (player.game !== undefined) {
-      playerInputModel.turmoil = getTurmoil(player.game);
+      playerInputModel.turmoil = getTurmoilModel(player.game);
     }
     break;
   case PlayerInputTypes.SELECT_PRODUCTION_TO_LOSE:
@@ -435,7 +434,7 @@ function getCards(
 // many of the field's values aren't set. That's why the code needs an "as PlayerModel" at
 // the end. Eyuch. Warning, surprises ahead.
 function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
-  const turmoil = getTurmoil(game);
+  const turmoil = getTurmoilModel(game);
 
   return players.map((player) => {
     return {
@@ -462,7 +461,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
         citiesCount: player.getCitiesCount(),
         coloniesCount: player.getColoniesCount(),
         noTagsCount: player.getNoTagsCount(),
-        influence: turmoil ? game.turmoil!.getPlayerInfluence(player) : 0,
+        influence: Turmoil.ifTurmoilElse(game, (turmoil) => turmoil.getPlayerInfluence(player), () => 0),
         steel: player.steel,
         steelProduction: player.getProduction(Resources.STEEL),
         steelValue: player.getSteelValue(),

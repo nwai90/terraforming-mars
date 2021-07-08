@@ -12,6 +12,7 @@ import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {SOCIETY_ADDITIONAL_CARD_COST} from '../../constants';
 import {TurmoilHandler} from '../../turmoil/TurmoilHandler';
+import {Turmoil} from '../../turmoil/Turmoil';
 import {Units} from '../../Units';
 
 export class MartianMediaCenter extends Card implements IProjectCard {
@@ -40,14 +41,11 @@ export class MartianMediaCenter extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player): boolean {
-    const turmoil = player.game.turmoil;
-    if (turmoil !== undefined) {
-      if (turmoil.parties.find((p) => p.name === PartyName.MARS)) {
-        return turmoil.canPlay(player, PartyName.MARS);
-      }
-      return player.canAfford(player.getCardCost(this) + SOCIETY_ADDITIONAL_CARD_COST);
+    const turmoil = Turmoil.getTurmoil(player.game);
+    if (turmoil.parties.find((p) => p.name === PartyName.MARS)) {
+      return turmoil.canPlay(player, PartyName.MARS);
     }
-    return false;
+    return player.canAfford(player.getCardCost(this) + SOCIETY_ADDITIONAL_CARD_COST);
   }
 
   public play(player: Player) {

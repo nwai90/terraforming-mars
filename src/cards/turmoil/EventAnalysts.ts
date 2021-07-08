@@ -8,6 +8,7 @@ import {PartyName} from '../../turmoil/parties/PartyName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 import {TurmoilHandler} from '../../turmoil/TurmoilHandler';
+import {Turmoil} from '../../turmoil/Turmoil';
 import {SOCIETY_ADDITIONAL_CARD_COST} from '../../constants';
 
 export class EventAnalysts extends Card implements IProjectCard {
@@ -43,11 +44,7 @@ export class EventAnalysts extends Card implements IProjectCard {
 
   public play(player: Player) {
     TurmoilHandler.handleSocietyPayment(player, PartyName.SCIENTISTS);
-
-    if (player.game.turmoil) {
-      player.game.turmoil.addInfluenceBonus(player);
-    }
-
+    Turmoil.getTurmoil(player.game).addInfluenceBonus(player);
     return undefined;
   }
 }
