@@ -95,8 +95,8 @@ export class ProjectWorkshop extends Card implements CorporationCard {
       return undefined;
     });
 
-    if (activeCards.length === 0) return drawBlueCard;
-    if (!player.canAfford(4)) return flipBlueCard;
+    if (activeCards.length === 0) return drawBlueCard.cb();
+    if (!player.canAfford(4)) return flipBlueCard.cb();
 
     return new OrOptions(drawBlueCard, flipBlueCard);
   }

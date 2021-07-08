@@ -8,7 +8,6 @@ import {Extremophiles} from '../../../src/cards/venusNext/Extremophiles';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {SelectCard} from '../../../src/inputs/SelectCard';
-import {SelectOption} from '../../../src/inputs/SelectOption';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 
@@ -44,7 +43,7 @@ describe('ProjectWorkshop', function() {
     player.megaCredits = 4;
 
     expect(card.canAct(player)).is.true;
-    card.action(player).cb();
+    card.action(player);
     expect(player.cardsInHand).has.lengthOf(1);
     expect(player.cardsInHand[0].cardType).to.eq(CardType.ACTIVE);
   });
@@ -57,7 +56,7 @@ describe('ProjectWorkshop', function() {
     expect(player.getSteelValue()).to.eq(3);
     expect(player.getTitaniumValue()).to.eq(4);
 
-    card.action(player).cb();
+    card.action(player);
     expect(player.playedCards).has.lengthOf(0);
     expect(game.dealer.discarded.includes(advancedAlloys)).is.true;
     expect(player.cardsInHand).has.lengthOf(2);
@@ -75,11 +74,7 @@ describe('ProjectWorkshop', function() {
     const originalTR = player.getTerraformRating();
     player.playedCards.push(smallAnimals, extremophiles);
 
-    const selectOption = card.action(player);
-    expect(selectOption instanceof SelectOption).is.true;
-
-    const selectCard = selectOption.cb() as SelectCard<ICard>;
-
+    const selectCard = card.action(player) as SelectCard<ICard>;;
     selectCard.cb([smallAnimals]);
     expect(player.getTerraformRating()).to.eq(originalTR + 2);
     expect(player.cardsInHand).has.lengthOf(2);
