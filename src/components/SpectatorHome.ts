@@ -140,6 +140,13 @@ export const SpectatorHome = Vue.component('spectator-home', {
               </label>
             </template>
 
+            <template v-if="spectator.moon">
+              <input type="radio" name="spectator-tab" id="radio-moon">
+              <label for="radio-moon" v-on:click="toggleSpectatorTab('moon')">
+                <span v-i18n>Moon</span>
+              </label>
+            </template>
+
             <template v-if="spectator.players.length > 1">
               <input type="radio" name="spectator-tab" id="radio-scorechart">
               <label for="radio-scorechart" v-on:click="toggleSpectatorTab('scorechart')">
@@ -171,6 +178,8 @@ export const SpectatorHome = Vue.component('spectator-home', {
           </div>
           
           <turmoil v-if="spectator.turmoil && getCurrentSpectatorTab() === 'turmoil'" :turmoil="spectator.turmoil"></turmoil>
+
+          <moonboard v-if="spectator.moon && getCurrentSpectatorTab() === 'moon'" :model="spectator.moon"></moonboard>
 
           <div v-if="spectator.players.length > 1 && getCurrentSpectatorTab() === 'scorechart'">
             <score-chart :players="spectator.players" :generation="spectator.generation" :animation="false"></score-chart>

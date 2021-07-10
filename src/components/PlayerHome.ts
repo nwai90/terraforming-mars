@@ -393,7 +393,6 @@ export const PlayerHome = Vue.component('player-home', {
                         <turmoil v-if="player.turmoil" :turmoil="player.turmoil"></turmoil>
 
                         <moonboard v-if="player.gameOptions.moonExpansion" :model="player.moon"></moonboard>
-
                     </div>
                 </details>
             </div>
