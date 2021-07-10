@@ -4,7 +4,6 @@ import {ALL_CARD_MANIFESTS} from '../../../src/cards/AllCards';
 import {CapitalAres} from '../../../src/cards/ares/CapitalAres';
 import {SolarFarm} from '../../../src/cards/ares/SolarFarm';
 import {BiomassCombustors} from '../../../src/cards/base/BiomassCombustors';
-import {Capital} from '../../../src/cards/base/Capital';
 import {FoodFactory} from '../../../src/cards/base/FoodFactory';
 import {NoctisFarming} from '../../../src/cards/base/NoctisFarming';
 import {RoboticWorkforce} from '../../../src/cards/base/RoboticWorkforce';
@@ -25,6 +24,8 @@ import {Units} from '../../../src/Units';
 import {fail} from 'assert';
 import {SolarWindPower} from '../../../src/cards/base/SolarWindPower';
 import {MarsUniversity} from '../../../src/cards/base/MarsUniversity';
+import {Gyropolis} from '../../../src/cards/venusNext/Gyropolis';
+import {VenusGovernor} from '../../../src/cards/venusNext/VenusGovernor';
 
 describe('RoboticWorkforce', () => {
   let card : RoboticWorkforce; let player : TestPlayer; let game : Game;
@@ -69,19 +70,19 @@ describe('RoboticWorkforce', () => {
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
   });
 
-  it('Should work with capital', () => {
-    const capital = new Capital();
-    player.playedCards.push(capital);
+  it('Should work with Gyropolis', () => {
+    const gyropolis = new Gyropolis();
+    player.playedCards.push(gyropolis, new VenusGovernor());
 
-    const action = card.play(player);
-    expect(action).is.undefined; // Not enough energy production
-
+    expect(card.canPlay(player)).is.false; // Not enough energy production, no card to copy
     player.addProduction(Resources.ENERGY, 2);
+    expect(card.canPlay(player)).is.true;
+
     const selectCard = card.play(player);
     expect(selectCard).is.not.undefined;
-    selectCard!.cb([capital]);
+    selectCard!.cb([gyropolis]);
     expect(player.getProduction(Resources.ENERGY)).to.eq(0);
-    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(5);
+    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
   });
 
   it('Should work with Capital (Ares expansion)', () => {
