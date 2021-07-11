@@ -374,8 +374,8 @@ export const LogPanel = Vue.component('log-panel', {
           </div>
           <span class="label-additional" v-if="players.length === 1"><span :class="lastGenerationClass">of {{this.lastSoloGeneration}}</span></span>
 
-          <span style="margin-bottom:-20px">
-            <Button title="💾 Save Log" size="big" class="save-image-button" :onClick="_=>downloadLog()"/>
+          <span>
+            <Button title="💾 Save Log" size="big" class="save-log-button" :onClick="_=>downloadLog()"/>
           </span>
         </div>
         <div class="panel log-panel">
