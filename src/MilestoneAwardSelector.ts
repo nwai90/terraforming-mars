@@ -66,6 +66,7 @@ import {RimSettler} from './milestones/RimSettler';
 import {Specialist} from './milestones/Specialist';
 import {Tactician} from './milestones/Tactician';
 import {Collector} from './milestones/terraCimmeria/Collector';
+import {Firestarter} from './milestones/terraCimmeria/Firestarter';
 import {Pioneer} from './milestones/terraCimmeria/Pioneer';
 import {Spacefarer} from './milestones/terraCimmeria/Spacefarer';
 import {Terraformer} from './milestones/Terraformer';
@@ -312,6 +313,8 @@ export namespace MilestoneAwardSelector {
       bind(Spacefarer, RimSettler, 4);
       bind(Spacefarer, Magnate, 1);
       bind(Spacefarer, SpaceBaron, 9);
+
+      bind(Firestarter, Thermalist, 6);
 
       bind(Pioneer, Mayor, 8);
       bind(Pioneer, Gardener, 8);
