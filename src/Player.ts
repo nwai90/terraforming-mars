@@ -832,13 +832,14 @@ export class Player implements ISerializable<SerializedPlayer> {
   public getDistinctTagCount(countWild: boolean, extraTag?: Tags): number {
     const allTags: Tags[] = [];
     let wildcardCount: number = 0;
-    if (extraTag !== undefined) {
-      allTags.push(extraTag);
-    }
     const uniqueTags: Set<Tags> = new Set();
+
+    if (extraTag !== undefined) allTags.push(extraTag);
+
     if (this.corporationCard !== undefined && this.corporationCard.tags.length > 0 && !this.corporationCard.isDisabled) {
       this.corporationCard.tags.forEach((tag) => allTags.push(tag));
     }
+
     this.playedCards.forEach((card) => {
       if (card.cardType === CardType.EVENT) {
         return;
@@ -847,6 +848,9 @@ export class Player implements ISerializable<SerializedPlayer> {
         allTags.push(tag);
       });
     });
+
+    if (this.scienceTagCount > 0) allTags.push(Tags.SCIENCE);
+
     for (const tags of allTags) {
       if (tags === Tags.WILDCARD) {
         wildcardCount++;
@@ -854,6 +858,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         uniqueTags.add(tags);
       }
     }
+
     if (countWild) {
       return uniqueTags.size + wildcardCount;
     } else {
