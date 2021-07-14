@@ -38,15 +38,18 @@ export class CulturalMetropolis extends Card implements IProjectCard {
     });
   }
 
+  // Avoid checking super.canPlay(player) here due to Society's alternate rule for parties not in game
   public canPlay(player: Player): boolean {
-    if (!super.canPlay(player)) return false;
     if (player.getProduction(Resources.ENERGY) < 1) return false;
 
     const turmoil = Turmoil.getTurmoil(player.game);
+    const hasEnoughDelegates = turmoil.getDelegatesInReserve(player.id) > 1 || (turmoil.getDelegatesInReserve(player.id) === 1 && turmoil.lobby.has(player.id));
+
     if (turmoil.parties.find((p) => p.name === PartyName.UNITY)) {
-      return turmoil.canPlay(player, PartyName.UNITY) && player.getProduction(Resources.ENERGY) >= 1 && (turmoil.getDelegatesInReserve(player.id) > 1 || (turmoil.getDelegatesInReserve(player.id) === 1 && turmoil.lobby.has(player.id)));
+      return turmoil.canPlay(player, PartyName.UNITY) && hasEnoughDelegates;
     }
-    return player.canAfford(player.getCardCost(this) + SOCIETY_ADDITIONAL_CARD_COST, {steel: true});
+
+    return player.canAfford(player.getCardCost(this) + SOCIETY_ADDITIONAL_CARD_COST, {steel: true}) && hasEnoughDelegates;
   }
 
   public play(player: Player) {

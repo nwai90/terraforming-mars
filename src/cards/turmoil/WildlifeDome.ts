@@ -34,9 +34,8 @@ export class WildlifeDome extends Card implements IProjectCard {
     });
   }
 
+  // Avoid checking super.canPlay(player) here due to Society's alternate rule for parties not in game
   public canPlay(player: Player): boolean {
-    if (!super.canPlay(player)) return false;
-
     const turmoil = Turmoil.getTurmoil(player.game);
     const canPlaceTile = player.game.board.getAvailableSpacesForGreenery(player).length > 0;
 

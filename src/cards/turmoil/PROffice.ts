@@ -46,7 +46,7 @@ export class PROffice extends Card implements IProjectCard {
       }
       return player.canAfford(player.getCardCost(this) + SOCIETY_ADDITIONAL_CARD_COST); 
     }
-    return true;
+    return false;
   }
 
   public play(player: Player) {
