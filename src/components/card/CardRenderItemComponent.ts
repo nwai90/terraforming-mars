@@ -31,9 +31,15 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
       if (type === CardRenderItemType.TEMPERATURE) {
         classes.push('card-global-requirement');
         classes.push('card-temperature-global-requirement');
+        if (this.item.size !== undefined && this.item.size !== Size.MEDIUM) {
+          classes.push(`card-temperature--${this.item.size}`);
+        }
       } else if (type === CardRenderItemType.OXYGEN) {
         classes.push('card-global-requirement');
         classes.push('card-oxygen-global-requirement');
+        if (this.item.size !== undefined && this.item.size !== Size.MEDIUM) {
+          classes.push(`card-oxygen--${this.item.size}`);
+        }
       } else if (type === CardRenderItemType.OCEANS) {
         classes.push('card-global-requirement');
         classes.push('card-ocean-global-requirement');

@@ -156,8 +156,10 @@ class Builder {
     }
   }
 
-  public temperature(amount: number): Builder {
-    this._addRowItem(new CardRenderItem(CardRenderItemType.TEMPERATURE, amount));
+  public temperature(amount: number, size: Size = Size.MEDIUM): Builder {
+    const item = new CardRenderItem(CardRenderItemType.TEMPERATURE, amount);
+    item.size = size;
+    this._addRowItem(item);
     return this;
   }
 
@@ -168,8 +170,10 @@ class Builder {
     return this;
   }
 
-  public oxygen(amount: number): Builder {
-    this._addRowItem(new CardRenderItem(CardRenderItemType.OXYGEN, amount));
+  public oxygen(amount: number, size: Size = Size.MEDIUM): Builder {
+    const item = new CardRenderItem(CardRenderItemType.OXYGEN, amount);
+    item.size = size;
+    this._addRowItem(item);
     return this;
   }
 

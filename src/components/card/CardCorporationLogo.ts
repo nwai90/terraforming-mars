@@ -181,6 +181,8 @@ export const CardCorporationLogo = Vue.component('CardCorporationLogo', {
         return '<div class="card-curiosity-ii-logo">Curiosity II</div>';
       case CardName.MARS_COALITION:
         return '<div class="card-mars-coalition-logo">Mars Coalition</div>';
+      case CardName.TEMPEST_INC:
+        return '<div class="card-tempest-inc-logo">Tempest Inc.</div>';
       }
       return '';
     },

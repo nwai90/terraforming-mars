@@ -45,6 +45,7 @@ import {Microalgae} from './preludes/Microalgae';
 import {MiningImprovements} from './preludes/MiningImprovements';
 import {TerraformingMission} from './preludes/TerraformingMission';
 import {WildlifeSponsors} from './preludes/WildlifeSponsors';
+import {TempestInc} from './corporations/TempestInc';
 
 export const COMMUNITY_CARD_MANIFEST = new CardManifest({
   module: GameModule.Community,
@@ -65,6 +66,7 @@ export const COMMUNITY_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.LABOUR_UNION, Factory: LabourUnion},
     {cardName: CardName.UNITED_NATIONS_MISSION_ONE, Factory: UnitedNationsMissionOne},
     {cardName: CardName.MARS_COALITION, Factory: MarsCoalition},
+    {cardName: CardName.TEMPEST_INC, Factory: TempestInc},
   ],
   preludeCards: [
     {cardName: CardName.RESEARCH_GRANT, Factory: ResearchGrant},
