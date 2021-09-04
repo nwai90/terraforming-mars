@@ -2,7 +2,9 @@ import {expect} from 'chai';
 import {TempestInc} from '../../../src/cards/community/corporations/TempestInc';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
+import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {Player} from '../../../src/Player';
+import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('TempestInc', function() {
@@ -44,5 +46,60 @@ describe('TempestInc', function() {
     card.resourceCount = 0;
     expect(card.action(player)).is.undefined;
     expect(card.resourceCount).to.eq(1);
+  });
+
+
+  it('Works with Venus expansion', function() {
+    game = Game.newInstance('foobar2', [player, player2], player, TestingUtils.setCustomGameOptions({venusNextExtension: true}));
+    card.play(player);
+    card.initialAction(player);
+
+    const action = card.action(player) as OrOptions;
+    const globalParameterChoices = action.options[1].cb() as OrOptions;;
+
+    expect(globalParameterChoices.options).has.length(4);
+
+    // Raise Venus
+    expect(game.getVenusScaleLevel()).to.eq(0);
+    globalParameterChoices.options[3].cb();
+    expect(game.getVenusScaleLevel()).to.eq(2);
+  });
+
+  it('Venus option omitted when not using Venus', function() {
+    game = Game.newInstance('foobar2', [player, player2], player, TestingUtils.setCustomGameOptions({venusNextExtension: false}));
+    card.play(player);
+    card.initialAction(player);
+
+    const action = card.action(player) as OrOptions;
+    const globalParameterChoices = action.options[1].cb() as OrOptions;;
+
+    expect(globalParameterChoices.options).has.length(3);
+  });
+
+  it('Works with Moon expansion', function() {
+    game = Game.newInstance('foobar2', [player, player2], player, TestingUtils.setCustomGameOptions({moonExpansion: true}));
+    card.play(player);
+    card.initialAction(player);
+
+    const action = card.action(player) as OrOptions;
+    const globalParameterChoices = action.options[1].cb() as OrOptions;;
+
+    expect(globalParameterChoices.options).has.length(7);
+
+    card.resourceCount = 5;
+    // Raise Moon Colony Rate
+    expect(MoonExpansion.moonData(game).colonyRate).to.eq(0);
+    globalParameterChoices.options[4].cb();
+    expect(MoonExpansion.moonData(game).colonyRate).to.eq(1);
+
+    // Raise Moon Mining Rate
+    expect(MoonExpansion.moonData(game).miningRate).to.eq(0);
+    globalParameterChoices.options[5].cb();
+    expect(MoonExpansion.moonData(game).miningRate).to.eq(1);
+
+    // Raise Moon Logistics Rate
+    expect(MoonExpansion.moonData(game).logisticRate).to.eq(0);
+    globalParameterChoices.options[6].cb();
+    expect(MoonExpansion.moonData(game).logisticRate).to.eq(1);
   });
 });

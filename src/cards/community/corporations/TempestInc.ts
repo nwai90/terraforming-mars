@@ -13,6 +13,7 @@ import {SelectOption} from '../../../inputs/SelectOption';
 import {PartyHooks} from '../../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../../turmoil/parties/PartyName';
 import {Size} from '../../render/Size';
+import {MoonExpansion} from '../../../moon/MoonExpansion';
 
 export class TempestInc extends Card implements CorporationCard {
   constructor() {
@@ -123,6 +124,27 @@ export class TempestInc extends Card implements CorporationCard {
           game.log('${0} increased Venus scale 1 step', (b) => b.player(player));
         }
         game.increaseVenusScaleLevel(player, 1);
+        return undefined;
+      }));
+    }
+
+
+    if (player.game.gameOptions.moonExpansion === true) {
+      orOptions.options.push(new SelectOption('Increase Moon Colony rate', 'Select', () => {
+        player.removeResourceFrom(this, 1);
+        MoonExpansion.raiseColonyRate(player);
+        return undefined;
+      }));
+
+      orOptions.options.push(new SelectOption('Increase Moon Mining rate', 'Select', () => {
+        player.removeResourceFrom(this, 1);
+        MoonExpansion.raiseMiningRate(player);
+        return undefined;
+      }));
+
+      orOptions.options.push(new SelectOption('Increase Moon Logistics rate', 'Select', () => {
+        player.removeResourceFrom(this, 1);
+        MoonExpansion.raiseLogisticRate(player);
         return undefined;
       }));
     }
