@@ -10,7 +10,7 @@ import {CardExpansion} from './CardExpansion';
 import {CardTags} from './CardTags';
 import {CardType} from '../../cards/CardType';
 import {CardContent} from './CardContent';
-import {CardMetadata} from '../../cards/CardMetadata';
+import {ICardMetadata} from '../../cards/CardMetadata';
 import {Tags} from '../../cards/Tags';
 import {ALL_CARD_MANIFESTS} from '../../cards/AllCards';
 import {GameModule} from '../../GameModule';
@@ -126,7 +126,7 @@ export const Card = Vue.component('card', {
       }
       return classes.join(' ');
     },
-    getCardMetadata: function(): CardMetadata | undefined {
+    getCardMetadata(): ICardMetadata | undefined {
       return this.getCard()?.metadata;
     },
     getCardRequirements: function(): CardRequirements | undefined {
