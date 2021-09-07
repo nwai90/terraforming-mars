@@ -10,7 +10,7 @@ import {CardExpansion} from './CardExpansion';
 import {CardTags} from './CardTags';
 import {CardType} from '../../cards/CardType';
 import {CardContent} from './CardContent';
-import {ICardMetadata} from '../../cards/CardMetadata';
+import {ICardMetadata} from '../../cards/ICardMetadata';
 import {Tags} from '../../cards/Tags';
 import {ALL_CARD_MANIFESTS} from '../../cards/AllCards';
 import {GameModule} from '../../GameModule';
