@@ -35,9 +35,4 @@ export class Zoe extends Card implements LeaderCard {
   public action(): PlayerInput | undefined {
     return undefined;
   }
-
-  public onProductionPhase(player: Player) {
-    player.addResource(Resources.MEGACREDITS);
-    return undefined;
-  }
 }

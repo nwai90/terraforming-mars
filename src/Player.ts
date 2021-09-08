@@ -1109,6 +1109,8 @@ export class Player implements ISerializable<SerializedPlayer> {
     if (this.corporationCard?.onProductionPhase !== undefined) {
       this.corporationCard.onProductionPhase(this);
     }
+
+    if (this.cardIsInEffect(CardName.ZOE)) this.addResource(Resources.MEGACREDITS);
   }
 
   private doneWorldGovernmentTerraforming(): void {
