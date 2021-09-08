@@ -42,7 +42,7 @@ describe('Xavier', function() {
     // Resolve payment - can play card with tag requirements
     const selectHowToPay = game.deferredActions.pop()!.execute() as SelectHowToPayForProjectCard;
     expect(selectHowToPay.cards).to.include(lightningHarvest);
-    selectHowToPay.cb(lightningHarvest, {steel: 0, heat: 0, titanium: 0, megaCredits: 8, microbes: 0, floaters: 0});
+    selectHowToPay.cb(lightningHarvest, {steel: 0, heat: 0, titanium: 0, megaCredits: 8, microbes: 0, floaters: 0, science: 0});
     
     // Bonus wild tags are lost right after the OPG action
     game.deferredActions.runAll(() => {});
@@ -63,7 +63,7 @@ describe('Xavier', function() {
     // Resolve payment - 2 wild tags count for production effect
     const selectHowToPay = game.deferredActions.pop()!.execute() as SelectHowToPayForProjectCard;
     expect(selectHowToPay.cards).to.include(sulphurExports);
-    selectHowToPay.cb(sulphurExports, {steel: 0, heat: 0, titanium: 0, megaCredits: 21, microbes: 0, floaters: 0});
+    selectHowToPay.cb(sulphurExports, {steel: 0, heat: 0, titanium: 0, megaCredits: 21, microbes: 0, floaters: 0, science: 0});
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(3);
     
     // Bonus wild tags are lost right after the OPG action

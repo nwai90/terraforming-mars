@@ -64,7 +64,7 @@ export class TempestInc extends Card implements CorporationCard {
   public action(player: Player) {
     if (this.resourceCount === 0) return this.addResource(player);
 
-    const redsAreRuling = PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS);
+    const redsAreRuling = PartyHooks.shouldApplyPolicy(player, PartyName.REDS);
     const playerCanAffordReds = redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST);
     if (redsAreRuling && !playerCanAffordReds) return this.addResource(player);
 
