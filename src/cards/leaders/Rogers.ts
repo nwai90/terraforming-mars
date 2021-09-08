@@ -5,19 +5,19 @@ import {PlayerInput} from '../../PlayerInput';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 
-export class Lindberg extends Card implements LeaderCard {
+export class Rogers extends Card implements LeaderCard {
   constructor() {
     super({
-      name: CardName.LINDBERG,
+      name: CardName.ROGERS,
       cardType: CardType.LEADER,
       metadata: {
-        cardNumber: 'L12',
+        cardNumber: 'L18',
         renderData: CardRenderer.builder((b) => {
           b.br;
-          b.wildTag().played;
+          b.venus(1).colon().tr(1);
           b.br.br;
         }),
-        description: 'Gain a wild tag.',
+        description: 'When you take an action that raises Venus, gain 1 TR.',
       },
     });
   }
@@ -27,7 +27,7 @@ export class Lindberg extends Card implements LeaderCard {
   }
 
   public canAct(): boolean {
-   return false;
+    return false;
   }
 
   public action(): PlayerInput | undefined {

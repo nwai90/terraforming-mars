@@ -5,24 +5,22 @@ import {PlayerInput} from '../../PlayerInput';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 
-export class Veronica extends Card implements LeaderCard {
+export class Zan extends Card implements LeaderCard {
   constructor() {
     super({
-      name: CardName.VERONICA,
+      name: CardName.ZAN,
       cardType: CardType.LEADER,
       metadata: {
-        cardNumber: 'L22',
+        cardNumber: 'L26',
         renderData: CardRenderer.builder((b) => {
-          b.br;
-          b.text('MILESTONES: ').megacredits(0).asterix();
+          b.br.br;
+          b.reds().megacredits(1).asterix();
           b.br.br;
         }),
-        description: 'You may claim milestones for free (you must still meet the requirements).',
+        description: 'You are immune to Reds\' ruling policy. At the end of each generation, gain 1 M€.',
       },
     });
   }
-
-  public isDisabled = false;
 
   public play() {
     return undefined;

@@ -8,9 +8,9 @@ export class LeadersExpansion {
   public static calculateVictoryPoints(player: Player, vpb: VictoryPointsBreakdown): void {
     let score: number = 0;
 
-    if (player.cardIsInEffect(CardName.DILLON)) score += 4;
+    if (player.cardIsInEffect(CardName.DUNCAN)) score += 4;
 
-    if (player.cardIsInEffect(CardName.HENRIETTA)) {
+    if (player.cardIsInEffect(CardName.HAL9000)) {
       const sets = Math.max(Math.floor(player.getTerraformRating() / 8), 0);
       if (sets > 0) score += sets;
     }
@@ -23,7 +23,7 @@ export class LeadersExpansion {
   }
 
   public static getBonusWildTags(player: Player, tagCount: number) {
-    if (player.cardIsInEffect(CardName.LINDBERG)) tagCount += 1;
+    if (player.cardIsInEffect(CardName.LOWELL)) tagCount += 1;
 
     const xavier = player.playedCards.find((card) => card.name === CardName.XAVIER);
     if (xavier !== undefined && player.actionsThisGeneration.has(xavier.name) && (xavier as LeaderCard).isDisabled === false) {

@@ -11,10 +11,10 @@ import {SelectColony} from '../../inputs/SelectColony';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {MAX_COLONY_TRACK_POSITION} from '../../constants';
 
-export class Nils extends Card implements LeaderCard {
+export class Naomi extends Card implements LeaderCard {
   constructor() {
     super({
-      name: CardName.NILS,
+      name: CardName.NAOMI,
       cardType: CardType.LEADER,
       metadata: {
         cardNumber: 'L14',

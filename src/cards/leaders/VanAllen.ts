@@ -5,21 +5,24 @@ import {PlayerInput} from '../../PlayerInput';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 
-export class Henrietta extends Card implements LeaderCard {
+export class VanAllen extends Card implements LeaderCard {
   constructor() {
     super({
-      name: CardName.HENRIETTA,
+      name: CardName.VAN_ALLEN,
       cardType: CardType.LEADER,
       metadata: {
-        cardNumber: 'L08',
+        cardNumber: 'L22',
         renderData: CardRenderer.builder((b) => {
-          b.vpIcon(1).slash().tr(8);
           b.br;
+          b.text('MILESTONES: ').megacredits(0).asterix();
+          b.br.br;
         }),
-        description: 'Gain 1 VP for each set of 8 TR.',
+        description: 'You may claim milestones for free (you must still meet the requirements).',
       },
     });
   }
+
+  public isDisabled = false;
 
   public play() {
     return undefined;

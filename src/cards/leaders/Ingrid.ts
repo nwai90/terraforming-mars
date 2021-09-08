@@ -11,10 +11,10 @@ import {Player} from '../../Player';
 import {SpaceType} from '../../SpaceType';
 import {DiscardCards} from '../../deferredActions/DiscardCards';
 
-export class Isak extends Card implements LeaderCard {
+export class Ingrid extends Card implements LeaderCard {
   constructor() {
     super({
-      name: CardName.ISAK,
+      name: CardName.INGRID,
       cardType: CardType.LEADER,
       metadata: {
         cardNumber: 'L09',

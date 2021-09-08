@@ -1,5 +1,5 @@
 import {expect} from "chai";
-import {Qubik} from "../../src/cards/leaders/Qubik";
+import {Quill} from "../../src/cards/leaders/Quill";
 import {Dirigibles} from "../../src/cards/venusNext/Dirigibles";
 import {LocalShading} from "../../src/cards/venusNext/LocalShading";
 import {Game} from "../../src/Game";
@@ -7,11 +7,11 @@ import {Player} from "../../src/Player";
 import {TestingUtils} from "../TestingUtils";
 import {TestPlayers} from "../TestPlayers";
 
-describe('Qubik', function() {
-  let card: Qubik; let player: Player; let player2: Player; let game: Game;
+describe('Quill', function() {
+  let card: Quill; let player: Player; let player2: Player; let game: Game;
 
   beforeEach(() => {
-    card = new Qubik();
+    card = new Quill();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
     const gameOptions = TestingUtils.setCustomGameOptions();

@@ -1,16 +1,16 @@
 import {expect} from "chai";
-import {Anders} from "../../src/cards/leaders/Anders";
+import {Asimov} from "../../src/cards/leaders/Asimov";
 import {Game} from "../../src/Game";
 import {OrOptions} from "../../src/inputs/OrOptions";
 import {Player} from "../../src/Player";
 import {TestingUtils} from "../TestingUtils";
 import {TestPlayers} from "../TestPlayers";
 
-describe('Anders', function() {
-  let card: Anders; let player: Player; let player2: Player; let game: Game;
+describe('Asimov', function() {
+  let card: Asimov; let player: Player; let player2: Player; let game: Game;
 
   beforeEach(() => {
-    card = new Anders();
+    card = new Asimov();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, player2], player);

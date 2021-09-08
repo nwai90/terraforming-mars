@@ -1,5 +1,5 @@
 import {expect} from "chai";
-import {Nils} from "../../src/cards/leaders/Nils";
+import {Naomi} from "../../src/cards/leaders/Naomi";
 import {Callisto} from "../../src/colonies/Callisto";
 import {Ceres} from "../../src/colonies/Ceres";
 import {ColonyName} from "../../src/colonies/ColonyName";
@@ -10,11 +10,11 @@ import {Player} from "../../src/Player";
 import {TestingUtils} from "../TestingUtils";
 import {TestPlayers} from "../TestPlayers";
 
-describe('Nils', function() {
-  let card: Nils; let player: Player; let player2: Player; let game: Game;
+describe('Naomi', function() {
+  let card: Naomi; let player: Player; let player2: Player; let game: Game;
 
   beforeEach(() => {
-    card = new Nils();
+    card = new Naomi();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
     const gameOptions = TestingUtils.setCustomGameOptions({coloniesExtension: true});

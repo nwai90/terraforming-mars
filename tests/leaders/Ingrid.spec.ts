@@ -1,5 +1,5 @@
 import {expect} from "chai";
-import {Isak} from "../../src/cards/leaders/Isak";
+import {Ingrid} from "../../src/cards/leaders/Ingrid";
 import {Game} from "../../src/Game";
 import {Phase} from "../../src/Phase";
 import {Player} from "../../src/Player";
@@ -7,11 +7,11 @@ import {SpaceType} from "../../src/SpaceType";
 import {TileType} from "../../src/TileType";
 import {TestPlayers} from "../TestPlayers";
 
-describe('Isak', function() {
-  let card: Isak; let player: Player; let player2: Player; let game: Game;
+describe('Ingrid', function() {
+  let card: Ingrid; let player: Player; let player2: Player; let game: Game;
 
   beforeEach(() => {
-    card = new Isak();
+    card = new Ingrid();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, player2], player);

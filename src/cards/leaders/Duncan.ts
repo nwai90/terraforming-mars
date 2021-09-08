@@ -5,10 +5,10 @@ import {PlayerInput} from '../../PlayerInput';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 
-export class Dillon extends Card implements LeaderCard {
+export class Duncan extends Card implements LeaderCard {
   constructor() {
     super({
-      name: CardName.DILLON,
+      name: CardName.DUNCAN,
       cardType: CardType.LEADER,
       metadata: {
         cardNumber: 'L04',

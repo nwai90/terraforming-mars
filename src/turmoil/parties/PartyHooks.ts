@@ -41,7 +41,7 @@ export class PartyHooks {
       }
 
       // Leader card effect
-    if (player.cardIsInEffect(CardName.ZOE) && policyId === TurmoilPolicy.REDS_DEFAULT_POLICY) return false;
+      if (player.cardIsInEffect(CardName.ZAN) && policyId === TurmoilPolicy.REDS_DEFAULT_POLICY) return false;
 
       const currentPolicyId: PolicyId = (turmoil.politicalAgendasData === undefined) ?
         rulingParty.policies[0].id :

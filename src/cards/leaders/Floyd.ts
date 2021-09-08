@@ -8,10 +8,10 @@ import {CardType} from '../CardType';
 import {PlayProjectCard} from '../../deferredActions/PlayProjectCard';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 
-export class Fritz extends Card implements LeaderCard {
+export class Floyd extends Card implements LeaderCard {
   constructor() {
     super({
-      name: CardName.FRITZ,
+      name: CardName.FLOYD,
       cardType: CardType.LEADER,
       metadata: {
         cardNumber: 'L06',

@@ -1,18 +1,16 @@
 import {expect} from "chai";
-import {MicroMills} from "../../src/cards/base/MicroMills";
-import {Research} from "../../src/cards/base/Research";
-import {Edna} from "../../src/cards/leaders/Edna";
+import {AsteroidMining} from "../../src/cards/base/AsteroidMining";
+import {Floyd} from "../../src/cards/leaders/Floyd";
 import {Game} from "../../src/Game";
-import {SelectAmount} from "../../src/inputs/SelectAmount";
 import {Player} from "../../src/Player";
 import {TestingUtils} from "../TestingUtils";
 import {TestPlayers} from "../TestPlayers";
 
-describe('Edna', function() {
-  let card: Edna; let player: Player; let player2: Player; let game: Game;
+describe('Floyd', function() {
+  let card: Floyd; let player: Player; let player2: Player; let game: Game;
 
   beforeEach(() => {
-    card = new Edna();
+    card = new Floyd();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, player2], player);
@@ -23,18 +21,21 @@ describe('Edna', function() {
   });
 
   it('Takes action', function() {
-    player.cardsInHand.push(new Research(), new MicroMills());
+    player.cardsInHand.push(new AsteroidMining());
     expect(card.canAct(player)).is.true;
 
-    const selectAmount = card.action(player) as SelectAmount;
-    selectAmount.cb(2);
+    card.action(player);
+    expect(game.deferredActions).has.length(2);
+    player.actionsThisGeneration.add(card.name);
+    expect(card.getCardDiscount(player)).to.eq(15);
+
     game.deferredActions.runAll(() => {});
-    expect(player.cardsInHand).has.length(2);
+    expect(card.getCardDiscount(player)).to.eq(0);
   });
 
   it('Can only act once per game', function() {
-    player.cardsInHand.push(new Research(), new MicroMills());
-    (card.action(player) as SelectAmount).cb(2);
+    card.action(player);
+    game.deferredActions.runAll(() => {});
 
     TestingUtils.forceGenerationEnd(game);
     expect(card.isDisabled).is.true;

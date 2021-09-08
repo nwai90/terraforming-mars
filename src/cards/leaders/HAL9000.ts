@@ -5,19 +5,18 @@ import {PlayerInput} from '../../PlayerInput';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 
-export class Roland extends Card implements LeaderCard {
+export class HAL9000 extends Card implements LeaderCard {
   constructor() {
     super({
-      name: CardName.ROLAND,
+      name: CardName.HAL9000,
       cardType: CardType.LEADER,
       metadata: {
-        cardNumber: 'L18',
+        cardNumber: 'L08',
         renderData: CardRenderer.builder((b) => {
+          b.vpIcon(1).slash().tr(8);
           b.br;
-          b.venus(1).colon().tr(1);
-          b.br.br;
         }),
-        description: 'When you take an action that raises Venus, gain 1 TR.',
+        description: 'Gain 1 VP for each set of 8 TR.',
       },
     });
   }
@@ -27,7 +26,7 @@ export class Roland extends Card implements LeaderCard {
   }
 
   public canAct(): boolean {
-    return false;
+   return false;
   }
 
   public action(): PlayerInput | undefined {

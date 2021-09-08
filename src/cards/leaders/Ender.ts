@@ -10,10 +10,10 @@ import {DiscardCards} from '../../deferredActions/DiscardCards';
 import {DrawCards} from '../../deferredActions/DrawCards';
 import {SelectAmount} from '../../inputs/SelectAmount';
 
-export class Edna extends Card implements LeaderCard {
+export class Ender extends Card implements LeaderCard {
   constructor() {
     super({
-      name: CardName.EDNA,
+      name: CardName.ENDER,
       cardType: CardType.LEADER,
       metadata: {
         cardNumber: 'L05',

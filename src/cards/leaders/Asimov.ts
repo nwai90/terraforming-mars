@@ -10,10 +10,10 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 
-export class Anders extends Card implements LeaderCard {
+export class Asimov extends Card implements LeaderCard {
   constructor() {
     super({
-      name: CardName.ANDERS,
+      name: CardName.ASIMOV,
       cardType: CardType.LEADER,
       metadata: {
         cardNumber: 'L01',

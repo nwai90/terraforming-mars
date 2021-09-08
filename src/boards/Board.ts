@@ -131,7 +131,7 @@ export abstract class Board {
   }
 
   public getAvailableSpacesForCity(player: Player): Array<ISpace> {
-    if (player.cardIsInEffect(CardName.GORAN)) return this.getAvailableSpacesOnLand(player);
+    if (player.cardIsInEffect(CardName.GORDON)) return this.getAvailableSpacesOnLand(player);
 
     // A city cannot be adjacent to another city
     return this.getAvailableSpacesOnLand(player).filter(
@@ -151,7 +151,7 @@ export abstract class Board {
   }
 
   public getAvailableSpacesForGreenery(player: Player): Array<ISpace> {
-    if (player.cardIsInEffect(CardName.GORAN)) return this.getAvailableSpacesOnLand(player);
+    if (player.cardIsInEffect(CardName.GORDON)) return this.getAvailableSpacesOnLand(player);
 
     const spacesForGreenery = this.getAvailableSpacesOnLand(player)
       .filter((space) => this.getAdjacentSpaces(space).find((adj) => adj.tile !== undefined && adj.player === player && adj.tile.tileType !== TileType.OCEAN) !== undefined);

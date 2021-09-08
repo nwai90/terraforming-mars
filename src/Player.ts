@@ -273,7 +273,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     // United Nations Mission One hook
     UnitedNationsMissionOne.onTRIncrease(this.game);
 
-    if (!this.game.gameOptions.turmoilExtension || this.cardIsInEffect(CardName.ZOE)) {
+    if (!this.game.gameOptions.turmoilExtension || this.cardIsInEffect(CardName.ZAN)) {
       this.terraformRating++;
       this.hasIncreasedTerraformRatingThisGeneration = true;
       return;
@@ -1110,7 +1110,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       this.corporationCard.onProductionPhase(this);
     }
 
-    if (this.cardIsInEffect(CardName.ZOE)) this.addResource(Resources.MEGACREDITS);
+    if (this.cardIsInEffect(CardName.ZAN)) this.addResource(Resources.MEGACREDITS);
   }
 
   private doneWorldGovernmentTerraforming(): void {
@@ -1716,7 +1716,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         player: this,
         milestone: milestone,
       });
-      const cost = this.cardIsInEffect(CardName.VERONICA) ? 0 : MILESTONE_COST;
+      const cost = this.cardIsInEffect(CardName.VAN_ALLEN) ? 0 : MILESTONE_COST;
       this.game.defer(new SelectHowToPayDeferred(this, cost, {title: 'Select how to pay for milestone'}));
       if (milestone.name === 'Monument') Monument.discardCards(this);
       this.game.log('${0} claimed ${1} milestone', (b) => b.player(this).milestone(milestone));
@@ -2020,7 +2020,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       'Take your first action' : 'Take your next action';
     action.buttonLabel = 'Take action';
 
-    const canAffordMilestone = this.canAfford(MILESTONE_COST) || this.cardIsInEffect(CardName.VERONICA);
+    const canAffordMilestone = this.canAfford(MILESTONE_COST) || this.cardIsInEffect(CardName.VAN_ALLEN);
 
     if (canAffordMilestone && !this.game.allMilestonesClaimed()) {
       const remainingMilestones = new OrOptions();

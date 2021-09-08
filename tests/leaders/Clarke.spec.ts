@@ -1,15 +1,15 @@
 import {expect} from "chai";
-import {Caroline} from "../../src/cards/leaders/Caroline";
+import {Clarke} from "../../src/cards/leaders/Clarke";
 import {Game} from "../../src/Game";
 import {Player} from "../../src/Player";
 import {TestingUtils} from "../TestingUtils";
 import {TestPlayers} from "../TestPlayers";
 
-describe('Caroline', function() {
-  let card: Caroline; let player: Player; let player2: Player; let game: Game;
+describe('Clarke', function() {
+  let card: Clarke; let player: Player; let player2: Player; let game: Game;
 
   beforeEach(() => {
-    card = new Caroline();
+    card = new Clarke();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, player2], player);

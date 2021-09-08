@@ -1,14 +1,14 @@
 import {expect} from "chai";
-import {Dillon} from "../../src/cards/leaders/Dillon";
+import {Duncan} from "../../src/cards/leaders/Duncan";
 import {Game} from "../../src/Game";
 import {Player} from "../../src/Player";
 import {TestPlayers} from "../TestPlayers";
 
-describe('Dillon', function() {
-  let card: Dillon; let player: Player; let player2: Player;
+describe('Duncan', function() {
+  let card: Duncan; let player: Player; let player2: Player;
 
   beforeEach(() => {
-    card = new Dillon();
+    card = new Duncan();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
     Game.newInstance('foobar', [player, player2], player);

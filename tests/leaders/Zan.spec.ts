@@ -1,6 +1,6 @@
 import {expect} from "chai";
 import {ReleaseOfInertGases} from "../../src/cards/base/ReleaseOfInertGases";
-import {Zoe} from "../../src/cards/leaders/Zoe";
+import {Zan} from "../../src/cards/leaders/Zan";
 import {Game} from "../../src/Game";
 import {Player} from "../../src/Player";
 import {PartyName} from "../../src/turmoil/parties/PartyName";
@@ -8,11 +8,11 @@ import {TurmoilPolicy} from "../../src/turmoil/TurmoilPolicy";
 import {TestingUtils} from "../TestingUtils";
 import {TestPlayers} from "../TestPlayers";
 
-describe('Zoe', function() {
-  let card: Zoe; let player: Player; let player2: Player; let game: Game;
+describe('Zan', function() {
+  let card: Zan; let player: Player; let player2: Player; let game: Game;
 
   beforeEach(() => {
-    card = new Zoe();
+    card = new Zan();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
     const gameOptions = TestingUtils.setCustomGameOptions();

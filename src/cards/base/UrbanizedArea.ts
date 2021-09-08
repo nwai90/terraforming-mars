@@ -34,7 +34,7 @@ export class UrbanizedArea extends Card implements IProjectCard {
   }
   private getAvailableSpaces(player: Player): Array<ISpace> {
     const spaces =  player.game.board.getAvailableSpacesOnLand(player);
-    if (player.cardIsInEffect(CardName.GORAN)) return spaces;
+    if (player.cardIsInEffect(CardName.GORDON)) return spaces;
 
     return spaces.filter((space) => player.game.board.getAdjacentSpaces(space).filter((adjacentSpace) => Board.isCitySpace(adjacentSpace)).length >= 2);
   }

@@ -1,23 +1,25 @@
-import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {LeaderCard} from '../LeaderCard';
 import {PlayerInput} from '../../PlayerInput';
-import {Resources} from '../../Resources';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
+import {Player} from '../../Player';
+import {AltSecondaryTag} from '../render/CardRenderItem';
+import {ResourceType} from '../../ResourceType';
 
-export class Caroline extends Card implements LeaderCard {
+export class Quill extends Card implements LeaderCard {
   constructor() {
     super({
-      name: CardName.CAROLINE,
+      name: CardName.QUILL,
       cardType: CardType.LEADER,
       metadata: {
-        cardNumber: 'L03',
+        cardNumber: 'L17',
         renderData: CardRenderer.builder((b) => {
-          b.opgArrow().text('X+4').plants(1).heat(1).asterix();
+          b.opgArrow().cards(1).secondaryTag(AltSecondaryTag.FLOATER).colon();
+          b.plus().floaters(2).asterix();
         }),
-        description: 'Once per game, gain plants and heat equal to your production +4.',
+        description: 'Once per game, add 2 floaters to each of your cards that collect floaters.',
       },
     });
   }
@@ -33,10 +35,9 @@ export class Caroline extends Card implements LeaderCard {
   }
 
   public action(player: Player): PlayerInput | undefined {
-    player.addResource(Resources.PLANTS, player.getProduction(Resources.PLANTS) + 4, {log: true});
-    player.addResource(Resources.HEAT, player.getProduction(Resources.HEAT) + 4, {log: true});
+    const resourceCards = player.getResourceCards(ResourceType.FLOATER);
+    resourceCards.forEach((card) => player.addResourceTo(card, {qty: 2, log: true}));
     this.isDisabled = true;
-
     return undefined;
   }
 }

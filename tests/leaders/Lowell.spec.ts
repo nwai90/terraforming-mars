@@ -1,17 +1,17 @@
 import {expect} from "chai";
 import {LightningHarvest} from "../../src/cards/base/LightningHarvest";
 import {Research} from "../../src/cards/base/Research";
-import {Lindberg} from "../../src/cards/leaders/Lindberg";
+import {Lowell} from "../../src/cards/leaders/Lowell";
 import {Tags} from "../../src/cards/Tags";
 import {Game} from "../../src/Game";
 import {Player} from "../../src/Player";
 import {TestPlayers} from "../TestPlayers";
 
-describe('Lindberg', function() {
-  let card: Lindberg; let player: Player;
+describe('Lowell', function() {
+  let card: Lowell; let player: Player;
 
   beforeEach(() => {
-    card = new Lindberg();
+    card = new Lowell();
     player = TestPlayers.BLUE.newPlayer();
     Game.newInstance('foobar', [player], player);
   });
