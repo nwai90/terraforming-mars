@@ -104,13 +104,13 @@ export const DebugUI = Vue.component('debug-ui', {
     },
     sort: function(names: Array<CardName>): Array<CardName> {
       if (this.$data.sortById) {
-        return names.sort((a: CardName, b: CardName) => {
+        return [...names].sort((a: CardName, b: CardName) => {
           const an = cards.get(a)?.cardNumber || '';
           const bn = cards.get(b)?.cardNumber || '';
           return an.localeCompare(bn);
         });
       } else {
-        return names.sort();
+        return [...names].sort();
       }
     },
     getAllStandardProjectCards: function() {

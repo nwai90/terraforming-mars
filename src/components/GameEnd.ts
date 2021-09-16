@@ -38,7 +38,7 @@ export const GameEnd = Vue.component('game-end', {
       return Timer.toString(p.timer);
     },
     getSortedPlayers: function() {
-      this.player.players.sort(function(a:PlayerModel, b:PlayerModel) {
+      [...this.player.players].sort(function(a:PlayerModel, b:PlayerModel) {
         if (a.victoryPointsBreakdown.total < b.victoryPointsBreakdown.total) return -1;
         if (a.victoryPointsBreakdown.total > b.victoryPointsBreakdown.total) return 1;
         if (a.megaCredits < b.megaCredits) return -1;

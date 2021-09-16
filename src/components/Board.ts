@@ -57,7 +57,7 @@ export const Board = Vue.component('board', {
   mixins: [TranslateMixin],
   methods: {
     getAllSpacesOnMars: function(): Array<SpaceModel> {
-      const boardSpaces: Array<SpaceModel> = this.spaces;
+      const boardSpaces: Array<SpaceModel> = [...this.spaces];
       boardSpaces.sort(
         (space1: SpaceModel, space2: SpaceModel) => {
           return parseInt(space1.id) - parseInt(space2.id);
