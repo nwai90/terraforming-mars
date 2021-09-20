@@ -69,4 +69,5 @@ export enum CardRenderItemType {
   SYNDICATE_FLEET = 'syndicate-fleet',
   ARROW_OPG = 'arrow_opg',
   REDS = 'reds',
+  REDS_DEACTIVATED = 'reds-deactivated',
 }

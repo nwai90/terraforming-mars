@@ -3,7 +3,7 @@ import {Player} from '../Player';
 import {TileType, isAresTile} from '../TileType';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {CardName} from '../CardName';
-import {BJORN_AWARD_BONUS} from '../constants';
+import {ASIMOV_AWARD_BONUS} from '../constants';
 
 export class Landlord implements IAward {
     public name: string = 'Landlord';
@@ -20,7 +20,7 @@ export class Landlord implements IAward {
         () => 0);
 
       let score = marsSpaces + moonSpaces;
-      if (player.cardIsInEffect(CardName.BJORN)) score += BJORN_AWARD_BONUS;
+      if (player.cardIsInEffect(CardName.ASIMOV)) score += ASIMOV_AWARD_BONUS;
 
       return score;
     }

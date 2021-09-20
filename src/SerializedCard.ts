@@ -6,6 +6,7 @@ export interface SerializedCard {
   allTags?: Array<Tags>;
   bonusResource?: Resources;
   isDisabled?: boolean;
+  opgActionIsActive?: boolean;
   name: CardName;
   resourceCount?: number;
   targetCards?: Array<SerializedRobotCard>;

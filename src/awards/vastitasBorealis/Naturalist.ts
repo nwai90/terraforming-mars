@@ -2,7 +2,7 @@ import {CardName} from "../../CardName";
 import {Player} from "../../Player";
 import {Resources} from "../../Resources";
 import {IAward} from "../IAward";
-import {BJORN_AWARD_BONUS} from "../../constants";
+import {ASIMOV_AWARD_BONUS} from "../../constants";
 
 export class Naturalist implements IAward {
   public name: string = 'Naturalist';
@@ -10,7 +10,7 @@ export class Naturalist implements IAward {
   
   public getScore(player: Player): number {
     let score = player.getProduction(Resources.HEAT) + player.getProduction(Resources.PLANTS);
-    if (player.cardIsInEffect(CardName.BJORN)) score += BJORN_AWARD_BONUS;
+    if (player.cardIsInEffect(CardName.ASIMOV)) score += ASIMOV_AWARD_BONUS;
 
     return score;
   }

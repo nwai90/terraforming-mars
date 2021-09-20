@@ -17,7 +17,7 @@ export class Rogers extends Card implements LeaderCard {
           b.venus(1).colon().megacredits(3);
           b.br.br;
         }),
-        description: 'When you take an action that raises Venus, gain 3 M€.',
+        description: 'When you take an action that raises Venus, gain 3 M€ for each step.',
       },
     });
   }

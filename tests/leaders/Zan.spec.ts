@@ -37,4 +37,27 @@ describe('Zan', function() {
     const releaseOfInertGases = new ReleaseOfInertGases();
     expect(releaseOfInertGases.canPlay(player)).is.true;
   });
+
+  it('Takes OPG action', function() {
+    const turmoil = game.turmoil!;
+    card.action(player);
+
+    while (game.deferredActions.length) {
+      game.deferredActions.pop()!.execute();
+    }
+
+    expect(turmoil.lobby.has(player.id)).is.false;
+    expect(turmoil.delegateReserve.includes(player.id)).is.false;
+    expect(turmoil.dominantParty.name).to.eq(PartyName.REDS);
+    expect(turmoil.dominantParty.partyLeader).to.eq(player.id);
+    expect(card.isDisabled).is.true;
+  });
+
+  it('Can only act once per game', function() {
+    card.action(player);
+    TestingUtils.forceGenerationEnd(game);
+
+    expect(card.isDisabled).is.true;
+    expect(card.canAct()).is.false;
+  });
 });

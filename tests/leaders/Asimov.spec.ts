@@ -22,6 +22,7 @@ describe('Asimov', function() {
     const orOptions = card.action(player) as OrOptions;
     orOptions.options[0].cb();
     expect(card.isDisabled).is.true;
+    expect(player.megaCredits).to.eq(0);
 
     TestingUtils.forceGenerationEnd(game);
     expect(card.canAct(player)).is.false;
@@ -46,5 +47,13 @@ describe('Asimov', function() {
 
     const orOptions = card.action(player) as OrOptions;
     expect(orOptions.options.length > 10).is.true;
+  });
+
+  it('Has +2 score on awards', function() {
+    player.playedCards.push(card);
+
+    game.awards.forEach((award) => {
+      expect(award.getScore(player)).to.eq(2);
+    });
   });
 });

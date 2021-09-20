@@ -13,10 +13,10 @@ export class Duncan extends Card implements LeaderCard {
       metadata: {
         cardNumber: 'L04',
         renderData: CardRenderer.builder((b) => {
-          b.vpIcon(4);
+          b.vpIcon(6);
           b.br;
         }),
-        description: 'Gain 4 VP.',
+        description: 'Gain 6 VP.',
       },
     });
   }

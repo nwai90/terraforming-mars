@@ -2,7 +2,7 @@ import {CardName} from "../../CardName";
 import {CardType} from "../../cards/CardType";
 import {Player} from "../../Player";
 import {IAward} from "../IAward";
-import {BJORN_AWARD_BONUS} from "../../constants";
+import {ASIMOV_AWARD_BONUS} from "../../constants";
 
 export class Adapter implements IAward {
   public name: string = 'Adapter';
@@ -16,7 +16,7 @@ export class Adapter implements IAward {
       return isValidCardType && hasRequirements;
     }).length;
 
-    if (player.cardIsInEffect(CardName.BJORN)) score += BJORN_AWARD_BONUS;
+    if (player.cardIsInEffect(CardName.ASIMOV)) score += ASIMOV_AWARD_BONUS;
 
     return score;
   }

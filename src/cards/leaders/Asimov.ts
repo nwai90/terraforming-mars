@@ -9,6 +9,7 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
+import {Size} from '../render/Size';
 
 export class Asimov extends Card implements LeaderCard {
   constructor() {
@@ -18,9 +19,12 @@ export class Asimov extends Card implements LeaderCard {
       metadata: {
         cardNumber: 'L01',
         renderData: CardRenderer.builder((b) => {
+          b.br.br;
+          b.award().nbsp.colon().text('+2', Size.LARGE);
+          b.br.br.br;
           b.opgArrow().award().asterix();
         }),
-        description: 'Once per game, put an award into the game and fund it.',
+        description: 'You have +2 score for all awards. Once per game, put an award into the game and fund it for free.',
       },
     });
   }

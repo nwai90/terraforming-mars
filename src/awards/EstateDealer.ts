@@ -3,7 +3,7 @@ import {Player} from '../Player';
 import {isAresTile} from '../TileType';
 import {Board} from '../boards/Board';
 import {CardName} from '../CardName';
-import {BJORN_AWARD_BONUS} from '../constants';
+import {ASIMOV_AWARD_BONUS} from '../constants';
 
 export class EstateDealer implements IAward {
     public name: string = 'Estate Dealer';
@@ -16,7 +16,7 @@ export class EstateDealer implements IAward {
         player.game.board.getAdjacentSpaces(space).some((space) => Board.isOceanSpace(space)),
       ).length;
 
-      if (player.cardIsInEffect(CardName.BJORN)) score += BJORN_AWARD_BONUS;
+      if (player.cardIsInEffect(CardName.ASIMOV)) score += ASIMOV_AWARD_BONUS;
       return score;
     }
 }

@@ -21,9 +21,9 @@ export class Maria extends Card implements LeaderCard {
       metadata: {
         cardNumber: 'L13',
         renderData: CardRenderer.builder((b) => {
-          b.opgArrow().placeColony().colonies(1).asterix();
+          b.opgArrow().text('X ').placeColony().colonies(1);
         }),
-        description: 'Once per game, draw three colony tiles. Put one into play and build a colony on it.',
+        description: 'Once per game, draw colony tiles equal to the current generation number. Put one into play and build a colony on it for free if possible.',
       },
     });
   }
@@ -47,7 +47,8 @@ export class Maria extends Card implements LeaderCard {
     if (allDiscardedColonies.length === 0) return undefined;
 
     const game = player.game;
-    const availableColonies = allDiscardedColonies.slice(0, 3);
+    const count = Math.min(allDiscardedColonies.length, player.game.generation);
+    const availableColonies = allDiscardedColonies.slice(0, count);
     const coloniesModel: Array<ColonyModel> = game.getColoniesModel(availableColonies);
 
     return new SelectColony('Select colony tile to add', 'Add colony tile', coloniesModel, (colonyName: ColonyName) => {

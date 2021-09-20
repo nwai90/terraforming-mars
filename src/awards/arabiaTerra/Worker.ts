@@ -1,7 +1,7 @@
 import {CardName} from "../../CardName";
 import {Player} from "../../Player";
 import {IAward} from "../IAward";
-import {BJORN_AWARD_BONUS} from "../../constants";
+import {ASIMOV_AWARD_BONUS} from "../../constants";
 
 export class Worker implements IAward {
   public name: string = 'Worker';
@@ -10,7 +10,7 @@ export class Worker implements IAward {
   public getScore(player: Player): number {
     let score = player.playedCards.filter((card) => card.action !== undefined).length;
     if (player.corporationCard?.action !== undefined) score += 1;
-    if (player.cardIsInEffect(CardName.BJORN)) score += BJORN_AWARD_BONUS;
+    if (player.cardIsInEffect(CardName.ASIMOV)) score += ASIMOV_AWARD_BONUS;
 
     return score;
   }

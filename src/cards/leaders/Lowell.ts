@@ -4,33 +4,55 @@ import {LeaderCard} from '../LeaderCard';
 import {PlayerInput} from '../../PlayerInput';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
+import {Tags} from '../Tags';
+import {Player} from '../../Player';
+import {SelectCard} from '../../inputs/SelectCard';
+import {IProjectCard} from '../IProjectCard';
+import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 
 export class Lowell extends Card implements LeaderCard {
   constructor() {
     super({
       name: CardName.LOWELL,
       cardType: CardType.LEADER,
+      tags: [Tags.WILDCARD],
       metadata: {
         cardNumber: 'L12',
         renderData: CardRenderer.builder((b) => {
-          b.br;
-          b.wildTag().played;
+          b.opgArrow().megacredits(5).colon().text('CHANGE LEADER').asterix();
           b.br.br;
         }),
-        description: 'Gain a wild tag.',
+        description: 'Once per game, pay 5 M€ to draw 3 Leader cards and choose one to play. Discard this card.',
       },
     });
   }
+
+  public isDisabled = false;
 
   public play() {
     return undefined;
   }
 
-  public canAct(): boolean {
-   return false;
+  public canAct(player: Player): boolean {
+   return player.canAfford(5) && this.isDisabled === false;
   }
 
-  public action(): PlayerInput | undefined {
-    return undefined;
+  public action(player: Player): PlayerInput | undefined {
+    let cardsDrawn: Array<IProjectCard> = [];
+
+    for (let i = 0; i < 3; i++) {
+      cardsDrawn.push(player.game.dealer.dealLeaderCard());
+    }
+
+    player.game.defer(new SelectHowToPayDeferred(player, 5));
+    this.isDisabled = true;
+
+    return new SelectCard('Choose leader card to play', 'Play', cardsDrawn, (foundCards: Array<IProjectCard>) => {
+      const cardIndex = player.playedCards.findIndex((c) => c.name === this.name);
+      player.playedCards.splice(cardIndex, 1);
+      player.game.dealer.discard(this);
+
+      return player.playCard(foundCards[0]);
+    }, 1, 1);
   }
 }

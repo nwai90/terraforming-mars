@@ -2,7 +2,7 @@ import {CardName} from "../../CardName";
 import {Player} from "../../Player";
 import {isAresTile} from "../../TileType";
 import {IAward} from "../IAward";
-import {BJORN_AWARD_BONUS} from "../../constants";
+import {ASIMOV_AWARD_BONUS} from "../../constants";
 
 export class Edgedancer implements IAward {
   public name: string = 'Edgedancer';
@@ -16,7 +16,7 @@ export class Edgedancer implements IAward {
         isAresTile(space.tile.tileType) === false &&
         this.isOnEdge(space.x, space.y)).length;
 
-    if (player.cardIsInEffect(CardName.BJORN)) score += BJORN_AWARD_BONUS;
+    if (player.cardIsInEffect(CardName.ASIMOV)) score += ASIMOV_AWARD_BONUS;
     
     return score;
   }

@@ -2,7 +2,7 @@ import {IAward} from './IAward';
 import {Player} from '../Player';
 import {isAresTile} from '../TileType';
 import {CardName} from '../CardName';
-import {BJORN_AWARD_BONUS} from '../constants';
+import {ASIMOV_AWARD_BONUS} from '../constants';
 
 export class DesertSettler implements IAward {
     public name: string = 'Desert Settler';
@@ -15,7 +15,7 @@ export class DesertSettler implements IAward {
             isAresTile(space.tile.tileType) === false &&
             space.y >= 5 && space.y <= 8).length;
 
-      if (player.cardIsInEffect(CardName.BJORN)) score += BJORN_AWARD_BONUS;
+      if (player.cardIsInEffect(CardName.ASIMOV)) score += ASIMOV_AWARD_BONUS;
       return score;
     }
 }

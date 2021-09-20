@@ -83,6 +83,7 @@ import {MeatIndustry} from './cards/promo/MeatIndustry';
 import {Turmoil} from './turmoil/Turmoil';
 import {LeaderCard} from './cards/LeaderCard';
 import {LeadersExpansion} from './cards/leaders/LeadersExpansion';
+import {VanAllen} from './cards/leaders/VanAllen';
 
 export type PlayerId = string;
 
@@ -1110,7 +1111,10 @@ export class Player implements ISerializable<SerializedPlayer> {
       this.corporationCard.onProductionPhase(this);
     }
 
-    if (this.cardIsInEffect(CardName.ZAN)) this.addResource(Resources.MEGACREDITS);
+    // Leader OPG actions reset hook
+    this.playedCards
+      .filter((card) => card.cardType === CardType.LEADER)
+      .forEach((card) => (card as LeaderCard).opgActionIsActive = false);
   }
 
   private doneWorldGovernmentTerraforming(): void {
@@ -1718,7 +1722,9 @@ export class Player implements ISerializable<SerializedPlayer> {
       });
       const cost = this.cardIsInEffect(CardName.VAN_ALLEN) ? 0 : MILESTONE_COST;
       this.game.defer(new SelectHowToPayDeferred(this, cost, {title: 'Select how to pay for milestone'}));
+
       if (milestone.name === 'Monument') Monument.discardCards(this);
+      VanAllen.onMilestoneClaimed(this.game);
       this.game.log('${0} claimed ${1} milestone', (b) => b.player(this).milestone(milestone));
       return undefined;
     });
@@ -2199,6 +2205,9 @@ export class Player implements ISerializable<SerializedPlayer> {
       if ((c as LeaderCard).isDisabled !== undefined) {
         result.isDisabled = (c as LeaderCard).isDisabled;
       }
+      if ((c as LeaderCard).opgActionIsActive !== undefined) {
+        result.opgActionIsActive = (c as LeaderCard).opgActionIsActive;
+      }
       if (c instanceof SelfReplicatingRobots) {
         result.targetCards = c.targetCards.map((t) => {
           return {
@@ -2417,6 +2426,9 @@ export class Player implements ISerializable<SerializedPlayer> {
       // TODO: Leaders are part of played cards and not stored separately, for now
       if (element.isDisabled !== undefined) {
         (card as LeaderCard).isDisabled = Boolean(element.isDisabled);
+      }
+      if (element.opgActionIsActive !== undefined) {
+        (card as LeaderCard).opgActionIsActive = Boolean(element.opgActionIsActive);
       }
       if (card instanceof SelfReplicatingRobots && element.targetCards !== undefined) {
         card.targetCards = [];

@@ -18,7 +18,7 @@ export class Floyd extends Card implements LeaderCard {
         renderData: CardRenderer.builder((b) => {
           b.opgArrow().text('PLAY').cards(1).colon().megacredits(-15);
         }),
-        description: 'Once per game, play a card from hand for 15 MC less.',
+        description: 'Once per game, play a card from hand for 15 M€ less.',
       },
     });
   }

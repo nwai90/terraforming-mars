@@ -18,7 +18,7 @@ export class Karen extends Card implements LeaderCard {
         renderData: CardRenderer.builder((b) => {
           b.opgArrow().text('X').prelude().asterix();
         }),
-        description: 'Once per game, draw Prelude cards equal to the generation number and choose one to play.',
+        description: 'Once per game, draw Prelude cards equal to the current generation number and choose one to play.',
       },
     });
   }

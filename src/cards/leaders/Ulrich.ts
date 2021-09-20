@@ -15,9 +15,9 @@ export class Ulrich extends Card implements LeaderCard {
       metadata: {
         cardNumber: 'L21',
         renderData: CardRenderer.builder((b) => {
-          b.opgArrow().oceans(1).colon().megacredits(3).slash().megacredits(9).asterix();
+          b.opgArrow().oceans(1).colon().megacredits(4).slash().megacredits(12).asterix();
         }),
-        description: 'Once per game, gain 3 M€ for each ocean placed. If all oceans are aleady placed, gain only 9 M€.',
+        description: 'Once per game, gain 4 M€ for each ocean placed. If all oceans are aleady placed, gain only 12 M€.',
       },
     });
   }
@@ -36,10 +36,10 @@ export class Ulrich extends Card implements LeaderCard {
     const game = player.game;
 
     if (game.noOceansAvailable()) {
-      player.addResource(Resources.MEGACREDITS, 9);
+      player.addResource(Resources.MEGACREDITS, 12);
     } else {
       const oceansPlaced = game.board.getOceansOnBoard();
-      player.addResource(Resources.MEGACREDITS, oceansPlaced * 3);
+      player.addResource(Resources.MEGACREDITS, oceansPlaced * 4);
     }
 
     this.isDisabled = true;

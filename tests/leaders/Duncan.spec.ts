@@ -14,8 +14,8 @@ describe('Duncan', function() {
     Game.newInstance('foobar', [player, player2], player);
   });
 
-  it('Has 4 VP', function() {
+  it('Has 6 VP', function() {
     player.playedCards.push(card);
-    expect(player.getVictoryPoints().total).to.eq(24);
+    expect(player.getVictoryPoints().total).to.eq(26);
   });
 });

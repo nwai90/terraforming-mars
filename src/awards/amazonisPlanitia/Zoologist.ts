@@ -2,7 +2,7 @@ import {CardName} from "../../CardName";
 import {Player} from "../../Player";
 import {ResourceType} from "../../ResourceType";
 import {IAward} from "../IAward";
-import {BJORN_AWARD_BONUS} from "../../constants";
+import {ASIMOV_AWARD_BONUS} from "../../constants";
 
 export class Zoologist implements IAward {
   public name: string = 'Zoologist';
@@ -16,7 +16,7 @@ export class Zoologist implements IAward {
       score += player.getResourcesOnCard(card)!;
     });
 
-    if (player.cardIsInEffect(CardName.BJORN)) score += BJORN_AWARD_BONUS;
+    if (player.cardIsInEffect(CardName.ASIMOV)) score += ASIMOV_AWARD_BONUS;
 
     return score;
   }

@@ -638,6 +638,11 @@ class Builder {
     return this;
   }
 
+  public redsInactive(): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.REDS_DEACTIVATED));
+    return this;
+  }
+
   public text(text: string, size: Size = Size.MEDIUM, uppercase: boolean = false, isBold: boolean = true): Builder {
     const item = new CardRenderItem(CardRenderItemType.TEXT);
     item.text = text;

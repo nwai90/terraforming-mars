@@ -5,9 +5,8 @@ import {PlayerInput} from '../../PlayerInput';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../Tags';
-import {Resources} from '../../Resources';
+import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
+import {ResourceType} from '../../ResourceType';
 
 export class Will extends Card implements LeaderCard {
   constructor() {
@@ -17,11 +16,12 @@ export class Will extends Card implements LeaderCard {
       metadata: {
         cardNumber: 'L23',
         renderData: CardRenderer.builder((b) => {
-          b.br.br;
-          b.venusTag().played.colon().megacredits(3);
-          b.br.br;
+          b.opgArrow().text('GAIN BELOW RESOURCES').br;
+          b.animals(1).animals(1).microbes(1).microbes(1).br;
+          b.science().floaters(1).asteroids(1).wild(1);
+          b.br;
         }),
-        description: 'When you play a Venus tag, gain 3 M€.',
+        description: 'Once per game, add the following resources to your cards: 2 animals, 2 microbes, 1 science, 1 floater, 1 asteroid, 1 wild.',
       },
     });
   }
@@ -33,15 +33,18 @@ export class Will extends Card implements LeaderCard {
   }
 
   public canAct(): boolean {
-   return false;
+   return this.isDisabled === false;
   }
 
-  public action(): PlayerInput | undefined {
+  public action(player: Player): PlayerInput | undefined {
+    player.game.defer(new AddResourcesToCard(player, ResourceType.ANIMAL, {count: 2}));
+    player.game.defer(new AddResourcesToCard(player, ResourceType.MICROBE, {count: 2}));
+    player.game.defer(new AddResourcesToCard(player, ResourceType.SCIENCE, {count: 1}));
+    player.game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {count: 1}));
+    player.game.defer(new AddResourcesToCard(player, ResourceType.ASTEROID, {count: 1}));
+    player.game.defer(new AddResourcesToCard(player, undefined, {count: 1}));
+
+    this.isDisabled = true;
     return undefined;
-  }
-
-  public onCardPlayed(player: Player, card: IProjectCard): void {
-    const amount = card.tags.filter((tag) => tag === Tags.VENUS).length;
-    if (amount > 0) player.addResource(Resources.MEGACREDITS, amount * 3, {log: true});
   }
 }

@@ -4,9 +4,6 @@ import {LeaderCard} from '../LeaderCard';
 import {PlayerInput} from '../../PlayerInput';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
-import {Player} from '../../Player';
-import {DeferredAction} from '../../deferredActions/DeferredAction';
-import {PlayProjectCard} from '../../deferredActions/PlayProjectCard';
 
 export class Xavier extends Card implements LeaderCard {
   constructor() {
@@ -16,29 +13,30 @@ export class Xavier extends Card implements LeaderCard {
       metadata: {
         cardNumber: 'L24',
         renderData: CardRenderer.builder((b) => {
-          b.opgArrow().wildTag(2).played;
+          b.opgArrow().text('ACTIVATE THE BELOW ABILITY');
+          b.br.br;
+          b.text('GAIN').nbsp.wildTag(2).played;
+          b.br.br;
         }),
-        description: 'Once per game, gain 2 temporary wild tags and immediately play a card from hand.',
+        description: 'Gain 2 wild tags for this generation.',
       },
     });
   }
 
   public isDisabled = false;
+  public opgActionIsActive = false;
 
   public play() {
     return undefined;
   }
 
-  public canAct(player: Player): boolean {
-    return player.cardsInHand.length > 0 && this.isDisabled === false;
+  public canAct(): boolean {
+    return this.isDisabled === false;
   }
 
-  public action(player: Player): PlayerInput | undefined {
-    player.game.defer(new PlayProjectCard(player));
-    player.game.defer(new DeferredAction(player, () => {
-      this.isDisabled = true;
-      return undefined;
-    }));
+  public action(): PlayerInput | undefined {
+    this.opgActionIsActive = true;
+    this.isDisabled = true;
     return undefined;
   }
 }

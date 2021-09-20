@@ -16,7 +16,7 @@ describe('Van Allen', function() {
     player.playedCards.push(card);
   });
 
-  it('Can claim milestones for free', function() {
+  it('Can claim milestones for free, and gains 3 M€ upon claim', function() {
     player.megaCredits = 7;
     player.setTerraformRating(35); // Can claim Terraformer milestone
 
@@ -26,7 +26,7 @@ describe('Van Allen', function() {
     claimMilestoneAction!.options![0].cb();
     game.deferredActions.runAll(() => {});
     const claimedMilestone = player.game.claimedMilestones;
-    expect(player.megaCredits).to.eq(7); // No M€ cost incurred
+    expect(player.megaCredits).to.eq(10); // No M€ cost incurred, gains 3 M€ instead
     expect(claimedMilestone.find((cm) => cm.milestone.name === 'Terraformer' && cm.player === player)).is.not.undefined;
   });
 });

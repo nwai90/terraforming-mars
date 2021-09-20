@@ -427,6 +427,7 @@ function getCards(
     calculatedCost: options.showNewCost ? (card.cost === undefined ? undefined : player.getCardCost(card as IProjectCard)) : card.cost,
     cardType: card.cardType,
     isDisabled: options.enabled?.[index] === false || (card as LeaderCard).isDisabled === true,
+    opgActionIsActive: (card as LeaderCard).opgActionIsActive === true,
     warning: card.warning,
     reserveUnits: options.reserveUnits ? options.reserveUnits[index] : Units.EMPTY,
     bonusResource: (card as IProjectCard).bonusResource,

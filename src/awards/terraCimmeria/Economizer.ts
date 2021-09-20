@@ -2,7 +2,7 @@ import {CardName} from "../../CardName";
 import {CardType} from "../../cards/CardType";
 import {Player} from "../../Player";
 import {IAward} from "../IAward";
-import {BJORN_AWARD_BONUS} from "../../constants";
+import {ASIMOV_AWARD_BONUS} from "../../constants";
 
 export class Economizer implements IAward {
   public name: string = 'Economizer';
@@ -13,7 +13,7 @@ export class Economizer implements IAward {
     let score = player.playedCards
       .filter((card) => (card.cost <= 10) && validCardTypes.includes(card.cardType)).length;
 
-    if (player.cardIsInEffect(CardName.BJORN)) score += BJORN_AWARD_BONUS;
+    if (player.cardIsInEffect(CardName.ASIMOV)) score += ASIMOV_AWARD_BONUS;
     return score;
   }
 }

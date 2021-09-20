@@ -1,6 +1,7 @@
 import {expect} from "chai";
 import {Petra} from "../../src/cards/leaders/Petra";
 import {Game} from "../../src/Game";
+import {SelectPartyToSendDelegate} from "../../src/inputs/SelectPartyToSendDelegate";
 import {Player} from "../../src/Player";
 import {PartyName} from "../../src/turmoil/parties/PartyName";
 import {Turmoil} from "../../src/turmoil/Turmoil";
@@ -58,6 +59,17 @@ describe('Petra', function() {
     const reds = turmoil.getPartyByName(PartyName.REDS)!;
     expect(reds.delegates.filter((delegate) => delegate === player.id)).has.length(1);
     expect(reds.partyLeader).to.eq(player.id);
+
+    // Send 3 Neutral delegates
+    expect(game.deferredActions).has.lengthOf(3);
+
+    while (game.deferredActions.length) {
+      const selectParty = game.deferredActions.peek()!.execute() as SelectPartyToSendDelegate;
+      selectParty.cb(PartyName.GREENS);
+      game.deferredActions.pop();
+    }
+
+    expect(greens.delegates.filter((delegate) => delegate === 'NEUTRAL')).has.length(3);
   });
 
   it('Takes action - lobby delegate is also used', function() {

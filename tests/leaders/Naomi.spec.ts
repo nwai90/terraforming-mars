@@ -2,10 +2,9 @@ import {expect} from "chai";
 import {Naomi} from "../../src/cards/leaders/Naomi";
 import {Callisto} from "../../src/colonies/Callisto";
 import {Ceres} from "../../src/colonies/Ceres";
-import {ColonyName} from "../../src/colonies/ColonyName";
 import {MAX_COLONY_TRACK_POSITION} from "../../src/constants";
 import {Game} from "../../src/Game";
-import {SelectColony} from "../../src/inputs/SelectColony";
+import {OrOptions} from "../../src/inputs/OrOptions";
 import {Player} from "../../src/Player";
 import {TestingUtils} from "../TestingUtils";
 import {TestPlayers} from "../TestPlayers";
@@ -30,19 +29,25 @@ describe('Naomi', function() {
   
   it('Takes action', function() {
     card.action(player);
-    expect(game.deferredActions).has.length(1);
+    expect(game.deferredActions).has.length(3);
 
-    const selectColony = game.deferredActions.pop()!.execute() as SelectColony;
-    const colonyName = selectColony.coloniesModel[game.colonies.length - 1].name.toUpperCase();
+    const firstColony = game.deferredActions.pop()!.execute() as OrOptions;
+    firstColony.options[0].cb();
+    const secondColony = game.deferredActions.pop()!.execute() as OrOptions;
+    secondColony.options[1].cb();
 
-    selectColony.cb((<any>ColonyName)[colonyName]);
-    expect(game.colonies[game.colonies.length - 1].trackPosition).to.eq(MAX_COLONY_TRACK_POSITION);
+    expect(game.colonies[0].trackPosition).to.eq(MAX_COLONY_TRACK_POSITION);
+    expect(game.colonies[game.colonies.length - 1].trackPosition).to.eq(0);
   });
 
   it('Can only act once per game', function() {
     card.action(player);
-    const selectColony = game.deferredActions.pop()!.execute() as SelectColony;
-    selectColony.cb((<any>ColonyName)[selectColony.coloniesModel[0].name.toUpperCase()]);
+
+    const firstColony = game.deferredActions.pop()!.execute() as OrOptions;
+    firstColony.options[0].cb();
+    const secondColony = game.deferredActions.pop()!.execute() as OrOptions;
+    secondColony.options[1].cb();
+
     game.deferredActions.runAll(() => {});
     TestingUtils.forceGenerationEnd(game);
 

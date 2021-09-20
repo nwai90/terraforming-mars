@@ -182,6 +182,8 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
       } else if (type === CardRenderItemType.ARROW_OPG) {
         classes.push('card-arrow-opg');
       } else if (type === CardRenderItemType.REDS) {
+        classes.push('turmoil-party-reds');
+      } else if (type === CardRenderItemType.REDS_DEACTIVATED) {
         classes.push('turmoil-party-reds-deactivated');
       }
 
@@ -303,6 +305,7 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
           result += this.item.amount.toString();
         }
         if (this.item.multiplier) {
+          result = result.replace('0', '');
           result += 'X';
         }
       }

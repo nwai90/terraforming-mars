@@ -1,5 +1,5 @@
 import {CardName} from "../../CardName";
-import {BJORN_AWARD_BONUS} from "../../constants";
+import {ASIMOV_AWARD_BONUS} from "../../constants";
 import {Player} from "../../Player";
 import {Units} from "../../Units";
 import {IAward} from "../IAward";
@@ -12,7 +12,7 @@ export class Engineer implements IAward {
     let score = player.playedCards.filter((card) => card.produce !== undefined || (card.productionBox !== undefined && card.productionBox !== Units.EMPTY)).length;
     score += player.playedCards.filter((card) => Engineer.productionCards.includes(card.name)).length;
     if (player.corporationCard !== undefined && Engineer.productionCards.includes(player.corporationCard.name)) score += 1;
-    if (player.cardIsInEffect(CardName.BJORN)) score += BJORN_AWARD_BONUS;
+    if (player.cardIsInEffect(CardName.ASIMOV)) score += ASIMOV_AWARD_BONUS;
 
     return score;
   }

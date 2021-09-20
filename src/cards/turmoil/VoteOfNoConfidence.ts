@@ -49,6 +49,7 @@ export class VoteOfNoConfidence extends Card implements IProjectCard {
 
   public play(player: Player) {
     const turmoil = Turmoil.getTurmoil(player.game);
+    turmoil.delegateReserve.push(turmoil.chairman as string);
     turmoil.chairman = player.id;
     const index = turmoil.delegateReserve.indexOf(player.id);
 
