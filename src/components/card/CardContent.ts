@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import {CardMetadata} from '../../cards/CardMetadata';
+import {ICardMetadata} from '../../cards/ICardMetadata';
 import {CardRequirementsComponent} from './CardRequirementsComponent';
 import {CardVictoryPoints} from './CardVictoryPoints';
 import {CardDescription} from './CardDescription';
@@ -9,7 +9,7 @@ import {CardRequirements} from '../../cards/CardRequirements';
 export const CardContent = Vue.component('CardContent', {
   props: {
     metadata: {
-      type: Object as () => CardMetadata,
+      type: Object as () => ICardMetadata,
       required: true,
     },
     requirements: {
