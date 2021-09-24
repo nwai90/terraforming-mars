@@ -1837,8 +1837,10 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public canPlay(card: IProjectCard): boolean {
+    const cost = this.getCardCost(card) - MoonExpansion.spendableLunaArchiveResources(this, card);
+
     const canAfford = this.canAfford(
-      this.getCardCost(card),
+      cost,
       {
         steel: this.canUseSteel(card),
         titanium: this.canUseTitanium(card),
