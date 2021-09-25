@@ -45,7 +45,7 @@ export class RobinsonIndustries extends Card implements IActionCard, Corporation
 
     [Resources.MEGACREDITS, Resources.STEEL, Resources.TITANIUM, Resources.PLANTS, Resources.ENERGY, Resources.HEAT].forEach((resource) => {
       const option = new SelectOption('Increase ' + resource + ' production 1 step', 'Select', () => {
-        player.addResource(Resources.MEGACREDITS, -4);
+        player.deductResource(Resources.MEGACREDITS, 4);
         player.addProduction(resource, 1, {log: true});
         return undefined;
       });

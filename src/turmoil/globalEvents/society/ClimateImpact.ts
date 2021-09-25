@@ -21,7 +21,7 @@ export class ClimateImpact implements IGlobalEvent {
         const amount = Math.min(trSetsOver15, 5) + turmoil.getPlayerInfluence(player);
 
         if (amount > 0) {
-          player.addResource(Resources.PLANTS, -amount, {log: true});
+          player.deductResource(Resources.PLANTS, amount, {log: true});
         }
       });
     }

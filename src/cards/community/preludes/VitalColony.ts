@@ -38,14 +38,14 @@ export class VitalColony extends PreludeCard implements IProjectCard {
       game.defer(new DeferredAction(player, () => {
         game.colonies.forEach((colony) => {
           if (colony.colonies.includes(player.id) && !coloniesBeforeBuilding.includes(colony.name)) {
-            colony.giveBonus(player, colony.buildType, colony.buildQuantity[colony.colonies.length - 1], colony.buildResource);    
+            colony.giveBonus(player, colony.buildType, colony.buildQuantity[colony.colonies.length - 1], colony.buildResource);
           }
         });
 
         return undefined;
       }));
 
-      player.addResource(Resources.MEGACREDITS, -5);
+      player.deductResource(Resources.MEGACREDITS, 5);
       return undefined;
     }
 }

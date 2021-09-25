@@ -590,7 +590,7 @@ it('addResourceTo with Mons Insurance hook does not remove when no credits', () 
   player2.megaCredits = 3;
   game.monsInsuranceOwner = player2.id;
 
-  player1.addResource(Resources.MEGACREDITS, -3, {from: player2, log: false});
+  player1.deductResource(Resources.MEGACREDITS, 3, {from: player2, log: false});
   expect(player2.megaCredits).eq(3); ;
   player1.addProduction(Resources.MEGACREDITS, -3, {from: player2, log: false});
   expect(player2.megaCredits).eq(3);
@@ -605,13 +605,13 @@ it('adds resources', () => {
   player.addResource(Resources.MEGACREDITS, 12);
   expect(player.megaCredits).eq(22);
   // removes more than we have
-  player.addResource(Resources.MEGACREDITS, -23);
+  player.deductResource(Resources.MEGACREDITS, 23);
   expect(player.megaCredits).eq(0);
   // adds any positive amount
   player.addResource(Resources.MEGACREDITS, 5);
   expect(player.megaCredits).eq(5);
   // removes less than we have
-  player.addResource(Resources.MEGACREDITS, -4);
+  player.deductResource(Resources.MEGACREDITS, 4);
   expect(player.megaCredits).eq(1);
   // makes no change
   player.addResource(Resources.MEGACREDITS, 0);
@@ -639,7 +639,7 @@ it('addResource logging from player', () => {
   const game = Game.newInstance('foobar', [player, player2], player);
 
   player.megaCredits = 5;
-  player.addResource(Resources.MEGACREDITS, -5, {log: true, from: player2});
+  player.deductResource(Resources.MEGACREDITS, 5, {log: true, from: player2});
 
   const log = game.gameLog;
   const logEntry = log[log.length - 1];

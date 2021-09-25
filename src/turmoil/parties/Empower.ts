@@ -69,7 +69,7 @@ class EmpowerPolicy01 implements Policy {
           'Select amount of energy to gain',
           'Gain energy',
           (amount: number) => {
-            player.addResource(Resources.MEGACREDITS, -amount);
+            player.deductResource(Resources.MEGACREDITS, amount);
             player.addResource(Resources.ENERGY, amount);
             player.game.log('${0} used Turmoil Empower action', (b) => b.player(player));
             player.game.log('${0} spent ${1} M€ to gain ${2} energy', (b) => b.player(player).number(amount).number(amount));

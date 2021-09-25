@@ -84,7 +84,7 @@ describe('MonsInsurance', () => {
     player2.megaCredits = 10;
     player2.steel = 1;
 
-    player2.addResource(Resources.STEEL, -1, {log: false, from: player3});
+    player2.deductResource(Resources.STEEL, 1, {log: false, from: player3});
 
     expect(player2.megaCredits).to.eq(13);
     expect(player.megaCredits).to.eq(7);
@@ -97,7 +97,7 @@ describe('MonsInsurance', () => {
     player2.megaCredits = 10;
     player2.steel = 1;
 
-    player2.addResource(Resources.STEEL, -1, {log: false, from: GlobalEventName.ECO_SABOTAGE});
+    player2.deductResource(Resources.STEEL, 1, {log: false, from: GlobalEventName.ECO_SABOTAGE});
 
     expect(player2.megaCredits).to.eq(10);
     expect(player.megaCredits).to.eq(10);

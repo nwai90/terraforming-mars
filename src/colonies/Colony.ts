@@ -272,7 +272,7 @@ export abstract class Colony implements SerializedColony {
       case ColonyBenefit.ERODE_SPACES_ADJACENT_TO_HAZARDS:
         for (let i = 0; i < quantity; i++) {
           const availableSpaces = _AresHazardPlacement.getAllLandSpacesAdjacentToHazards(game);
-    
+
           if (availableSpaces.length > 0) {
             game.defer(new DeferredAction(
               player,
@@ -285,12 +285,12 @@ export abstract class Colony implements SerializedColony {
                   const reservedBonuses = [SpaceBonus.RESTRICTED];
                   foundSpace.bonus = foundSpace.bonus.filter((bonus) => reservedBonuses.includes(bonus));
                   game.erodedSpaces.push(foundSpace.id);
-    
+
                   const offset: number = Math.abs(foundSpace.y - 4);
                   const row: number = foundSpace.y + 1;
                   const position: number = foundSpace.x - offset + 1;
                   game.log("${0} eroded space on row ${1} position ${2}", b => b.player(player).number(row).number(position));
-    
+
                   return undefined;
                 }
               )
@@ -324,7 +324,7 @@ export abstract class Colony implements SerializedColony {
 
       case ColonyBenefit.LOSE_RESOURCES:
         if (resource === undefined) throw new Error('Resource cannot be undefined');
-        player.addResource(resource, -quantity);
+        player.deductResource(resource, quantity);
         break;
 
       case ColonyBenefit.OPPONENT_DISCARD:

@@ -62,7 +62,7 @@ class PopulistsPolicy02 implements Policy {
 
   onCardPlayed(player: Player, card: IProjectCard) {
     if (card.getVictoryPoints !== undefined && card.getVictoryPoints(player) > 0) {
-      player.addResource(Resources.MEGACREDITS, -2);
+      player.deductResource(Resources.MEGACREDITS, 2);
     }
   }
 }
