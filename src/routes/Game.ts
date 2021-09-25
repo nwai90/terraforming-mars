@@ -103,6 +103,7 @@ export class GameHandler extends Handler {
           customColoniesList: gameReq.customColoniesList,
           requiresVenusTrackCompletion: gameReq.requiresVenusTrackCompletion,
           requiresMoonTrackCompletion: gameReq.requiresMoonTrackCompletion,
+          moonStandardProjectVariant: gameReq.moonStandardProjectVariant,
           escapeVelocityMode: gameReq.escapeVelocityMode,
           escapeVelocityThreshold: gameReq.escapeVelocityThreshold,
           escapeVelocityPeriod: gameReq.escapeVelocityPeriod,

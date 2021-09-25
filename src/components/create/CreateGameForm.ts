@@ -66,6 +66,7 @@ export interface CreateGameModel {
     cloneGameData: Array<IGameData>;
     requiresVenusTrackCompletion: boolean;
     requiresMoonTrackCompletion: boolean;
+    moonStandardProjectVariant: boolean;
     seededGame: boolean;
     escapeVelocityMode: boolean;
     escapeVelocityThreshold: number;
@@ -153,6 +154,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       allOfficialExpansions: false,
       requiresVenusTrackCompletion: false,
       requiresMoonTrackCompletion: false,
+      moonStandardProjectVariant: false,
       escapeVelocityMode: false,
       escapeVelocityThreshold: 30,
       escapeVelocityPeriod: 2,
@@ -369,6 +371,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
     deselectMoonCompletion: function() {
       if (this.$data.moonExpansion === false) {
         this.requiresMoonTrackCompletion = false;
+        this.moonStandardProjectVariant = false;
       }
     },
     getBoardColorClass: function(boardName: string): string {
@@ -561,6 +564,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
         randomFirstPlayer,
         requiresVenusTrackCompletion,
         requiresMoonTrackCompletion,
+        moonStandardProjectVariant: component.moonStandardProjectVariant,
         escapeVelocityMode,
         escapeVelocityThreshold,
         escapeVelocityPeriod,
@@ -952,7 +956,11 @@ export const CreateGameForm = Vue.component('create-game-form', {
                                 <input type="checkbox" v-model="requiresMoonTrackCompletion" id="requiresMoonTrackCompletion-checkbox">
                                 <label for="requiresMoonTrackCompletion-checkbox">
                                     <span v-i18n>Moon Terraforming</span> &nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#moon-terraforming" class="tooltip" target="_blank">&#9432;</a>
-                                </label>
+                                    </label>
+                                    <input type="checkbox" v-model="moonStandardProjectVariant" id="moonStandardProjectVariant-checkbox">
+                                    <label for="moonStandardProjectVariant-checkbox">
+                                        <span v-i18n>Standard Project Variant</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#moon-standard-project-variant" class="tooltip" target="_blank">&#9432;</a>
+                                    </label>
                             </template>
 
                             <input type="checkbox" v-model="beginnerOption" id="beginnerOption-checkbox">

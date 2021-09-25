@@ -122,6 +122,7 @@ export interface GameOptions {
   cardsBlackList: Array<CardName>;
   customColoniesList: Array<ColonyName>;
   requiresVenusTrackCompletion: boolean; // Venus must be completed to end the game
+  moonStandardProjectVariant: boolean;
   silverCubeVariant: boolean; // modified WGT phase
   requiresMoonTrackCompletion: boolean; // Moon must be completed to end the game
   escapeVelocityMode: boolean;
@@ -152,6 +153,7 @@ const DEFAULT_GAME_OPTIONS: GameOptions = {
   initialDraftVariant: false,
   leadersExpansion: false,
   moonExpansion: false,
+  moonStandardProjectVariant: false,
   newOpsExpansion: false,
   politicalAgendasExtension: AgendaStyle.STANDARD,
   societyExpansion: false,
@@ -1200,7 +1202,7 @@ export class Game implements ISerializable<SerializedGame> {
     AresHandler.ifAres(this, (aresData) => {
       AresHandler.onOxygenChange(this, aresData);
     });
-    
+
     SilverCubeHandler.onOxygenIncrease(player, this);
 
     return undefined;

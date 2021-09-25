@@ -74,6 +74,7 @@ export class TestingUtils {
       societyExpansion: false,
       moonExpansion: false,
       requiresMoonTrackCompletion: false,
+      moonStandardProjectVariant: false,
       escapeVelocityMode: false,
       escapeVelocityThreshold: undefined,
       escapeVelocityPeriod: undefined,
