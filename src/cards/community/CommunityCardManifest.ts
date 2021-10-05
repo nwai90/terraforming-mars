@@ -46,6 +46,7 @@ import {MiningImprovements} from './preludes/MiningImprovements';
 import {TerraformingMission} from './preludes/TerraformingMission';
 import {WildlifeSponsors} from './preludes/WildlifeSponsors';
 import {TempestInc} from './corporations/TempestInc';
+import {ExecutiveOrder} from './preludes/ExecutiveOrder';
 
 export const COMMUNITY_CARD_MANIFEST = new CardManifest({
   module: GameModule.Community,
@@ -147,5 +148,6 @@ export const COMMUNITY_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.MINING_IMPROVEMENTS, Factory: MiningImprovements},
     {cardName: CardName.TERRAFORMING_MISSION, Factory: TerraformingMission},
     {cardName: CardName.WILDLIFE_SPONSORS, Factory: WildlifeSponsors},
+    {cardName: CardName.EXECUTIVE_ORDER, Factory: ExecutiveOrder, compatibility: GameModule.Turmoil},
   ],
 });

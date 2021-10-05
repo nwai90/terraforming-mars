@@ -375,6 +375,11 @@ class Builder {
     return this;
   }
 
+  public globalEvent() {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.GLOBAL_EVENT));
+    return this;
+  }
+
   public noTags() {
     this._addRowItem(new CardRenderItem(CardRenderItemType.NO_TAGS, -1));
     return this;

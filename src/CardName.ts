@@ -523,6 +523,7 @@ export enum CardName {
     MINING_IMPROVEMENTS = 'Mining Improvements',
     TERRAFORMING_MISSION = 'Terraforming Mission',
     WILDLIFE_SPONSORS = 'Wildlife Sponsors',
+    EXECUTIVE_ORDER = 'Executive Order',
 
     // Community colonies
     SCIENCE_TAG_BLANK_CARD = '',

@@ -185,6 +185,8 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
         classes.push('turmoil-party-reds');
       } else if (type === CardRenderItemType.REDS_DEACTIVATED) {
         classes.push('turmoil-party-reds-deactivated');
+      } else if (type === CardRenderItemType.GLOBAL_EVENT) {
+        classes.push('turmoil-global-event');
       }
 
       function sized(clazz: string, size: string | undefined) {

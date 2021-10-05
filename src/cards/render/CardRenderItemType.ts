@@ -70,4 +70,5 @@ export enum CardRenderItemType {
   ARROW_OPG = 'arrow_opg',
   REDS = 'reds',
   REDS_DEACTIVATED = 'reds-deactivated',
+  GLOBAL_EVENT = 'global-event',
 }
