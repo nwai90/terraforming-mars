@@ -55,6 +55,16 @@ export interface IDatabase {
     getGameVersion(game_id: GameId, save_id: number, cb: DbLoadCallback<SerializedGame>): void;
 
     /**
+     * Finds the game id associated with the given player.
+     *
+     * This is not yet written efficiently in Postgres, so use sparingly.
+     *
+     * @param playerId the playerID assocaited with a game
+     * @param cb called with the gameid if it exists. If it does not err will be truthy.
+     */
+    getGameId(playerId: string, cb: (err: Error | undefined, gameId?: GameId) => void): void;
+
+    /**
      * Return a list of all `game_id`s.
      *
      * @param cb a callback containing either a failure to load, or a list of
