@@ -28,27 +28,25 @@ import {MarsCoalition} from '../cards/community/corporations/MarsCoalition';
 
 export type NeutralPlayer = 'NEUTRAL';
 
-export interface IPartyFactory {
-    partyName: PartyName;
-    Factory: new () => IParty
+interface IPartyFactory {
+  partyName: PartyName;
+  Factory: new () => IParty;
+  society: boolean;
 }
 
-export const ALL_DEFAULT_PARTIES: Array<IPartyFactory> = [
-  {partyName: PartyName.MARS, Factory: MarsFirst},
-  {partyName: PartyName.SCIENTISTS, Factory: Scientists},
-  {partyName: PartyName.UNITY, Factory: Unity},
-  {partyName: PartyName.GREENS, Factory: Greens},
-  {partyName: PartyName.REDS, Factory: Reds},
-  {partyName: PartyName.KELVINISTS, Factory: Kelvinists},
-];
-
-export const ALL_SOCIETY_PARTIES: Array<IPartyFactory> = [
-  {partyName: PartyName.SPOME, Factory: Spome},
-  {partyName: PartyName.EMPOWER, Factory: Empower},
-  {partyName: PartyName.POPULISTS, Factory: Populists},
-  {partyName: PartyName.BUREAUCRATS, Factory: Bureaucrats},
-  {partyName: PartyName.TRANSHUMANS, Factory: Transhumans},
-  {partyName: PartyName.CENTRISTS, Factory: Centrists},
+const PARTIES: Array<IPartyFactory> = [
+  {partyName: PartyName.MARS, Factory: MarsFirst, society: false},
+  {partyName: PartyName.SCIENTISTS, Factory: Scientists, society: false},
+  {partyName: PartyName.UNITY, Factory: Unity, society: false},
+  {partyName: PartyName.GREENS, Factory: Greens, society: false},
+  {partyName: PartyName.REDS, Factory: Reds, society: false},
+  {partyName: PartyName.KELVINISTS, Factory: Kelvinists, society: false},
+  {partyName: PartyName.SPOME, Factory: Spome, society: true},
+  {partyName: PartyName.EMPOWER, Factory: Empower, society: true},
+  {partyName: PartyName.POPULISTS, Factory: Populists, society: true},
+  {partyName: PartyName.BUREAUCRATS, Factory: Bureaucrats, society: true},
+  {partyName: PartyName.TRANSHUMANS, Factory: Transhumans, society: true},
+  {partyName: PartyName.CENTRISTS, Factory: Centrists, society: true},
 ];
 
 const UNINITIALIZED_POLITICAL_AGENDAS_DATA: PoliticalAgendasData = {
@@ -61,60 +59,53 @@ const UNINITIALIZED_POLITICAL_AGENDAS_DATA: PoliticalAgendasData = {
 };
 
 export class Turmoil implements ISerializable<SerializedTurmoil> {
-    public chairman: undefined | PlayerId | NeutralPlayer = undefined;
-    public rulingParty: IParty;
-    public dominantParty: IParty;
-    public lobby: Set<PlayerId> = new Set<PlayerId>();
-    public delegateReserve: Array<PlayerId | NeutralPlayer> = [];
-    public parties: Array<IParty> = ALL_DEFAULT_PARTIES.concat(ALL_SOCIETY_PARTIES).map((cf) => new cf.Factory());
-    public playersInfluenceBonus: Map<string, number> = new Map<string, number>();
-    public readonly globalEventDealer: GlobalEventDealer;
-    public distantGlobalEvent: IGlobalEvent | undefined;
-    public comingGlobalEvent: IGlobalEvent | undefined;
-    public currentGlobalEvent: IGlobalEvent | undefined;
-    public politicalAgendasData: PoliticalAgendasData = UNINITIALIZED_POLITICAL_AGENDAS_DATA;
-    public globalEventDelegatesRandomisationDone: boolean = false;
+  public chairman: undefined | PlayerId | NeutralPlayer = undefined;
+  public rulingParty: IParty;
+  public dominantParty: IParty;
+  public lobby: Set<PlayerId> = new Set<PlayerId>();
+  public delegateReserve: Array<PlayerId | NeutralPlayer> = [];
+  public parties: Array<IParty>;
+  public playersInfluenceBonus: Map<string, number> = new Map<string, number>();
+  public readonly globalEventDealer: GlobalEventDealer;
+  public distantGlobalEvent: IGlobalEvent | undefined;
+  public comingGlobalEvent: IGlobalEvent | undefined;
+  public currentGlobalEvent: IGlobalEvent | undefined;
+  public politicalAgendasData: PoliticalAgendasData = UNINITIALIZED_POLITICAL_AGENDAS_DATA;
+  public globalEventDelegatesRandomisationDone: boolean = false;
 
-    private constructor(
-      rulingPartyName: PartyName,
-      chairman: PlayerId | 'NEUTRAL',
-      dominantPartyName: PartyName,
-      globalEventDealer: GlobalEventDealer,
-      societyExpansion: boolean,
-      randomTurmoil: boolean = false,
-      parties: SerializedParty[] | undefined = undefined) {
-      this.rulingParty = this.getPartyByName(rulingPartyName);
-      this.chairman = chairman;
-      this.dominantParty = this.getPartyByName(dominantPartyName);
-      this.globalEventDealer = globalEventDealer;
+  private constructor(
+    rulingPartyName: PartyName,
+    chairman: PlayerId | 'NEUTRAL',
+    dominantPartyName: PartyName,
+    globalEventDealer: GlobalEventDealer,
+    societyExpansion: boolean,
+    randomTurmoil: boolean = false,
+    parties: SerializedParty[] | undefined = undefined) {
+    this.chairman = chairman;
+    this.globalEventDealer = globalEventDealer;
 
-      // Init parties
-      if (societyExpansion) {
-        if (randomTurmoil) {
-          if (parties === undefined) {
-            // Randomly choose 6 of 12 parties the first time this is called
-            this.parties = ALL_DEFAULT_PARTIES.concat(ALL_SOCIETY_PARTIES).map((cf) => new cf.Factory())
-              .map((a) => ({sort: Math.random(), value: a}))
-              .sort((a, b) => a.sort - b.sort)
-              .map((a) => a.value)
-              .slice(0, 6);
+    let factories: Array<IPartyFactory> = [];
+    // Used when deserializing
+    if (parties !== undefined) {
+      factories = parties.map((party) => PARTIES.find((cf) => cf.partyName === party.name)!);
+    } else if (societyExpansion && randomTurmoil) {
+      // Randomly choose 6 of 12 parties the first time this is called
+      factories = PARTIES.map((a) => ({sort: Math.random(), value: a}))
+        .sort((a, b) => a.sort - b.sort)
+        .map((a) => a.value)
+        .slice(0, 6);
 
-            this.rulingParty = this.getPartyByName(this.parties[0].name);
-            this.dominantParty = this.getPartyByName(this.parties[0].name);
-          } else {
-            // Used when deserializing
-            this.parties = parties.map((party) => this.getPartyByName(party.name));
-            this.rulingParty = this.getPartyByName(rulingPartyName);
-            this.dominantParty = this.getPartyByName(dominantPartyName);
-          }
-
-        } else {
-          this.parties = ALL_SOCIETY_PARTIES.map((cf) => new cf.Factory());
-        }
-      } else {
-        this.parties = ALL_DEFAULT_PARTIES.map((cf) => new cf.Factory());
-      }
+      rulingPartyName = factories[0].partyName;
+      dominantPartyName = factories[0].partyName;
+    } else {
+      factories = PARTIES.filter((cf) => cf.society === false || societyExpansion === true);
     }
+
+    this.parties = factories.map((cf) => new cf.Factory());
+
+    this.rulingParty = this.getPartyByName(rulingPartyName);
+    this.dominantParty = this.getPartyByName(dominantPartyName);
+  }
 
     public static newInstance(game: Game, agendaStyle: AgendaStyle = AgendaStyle.STANDARD): Turmoil {
       const societyExpansion: boolean = game.gameOptions.societyExpansion;
@@ -162,7 +153,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
         }
         return game.turmoil;
       }
-  
+
       public static ifTurmoil(game: Game, cb: (turmoil: Turmoil) => void) {
         if (game.gameOptions.turmoilExtension !== false) {
           if (game.turmoil === undefined) {
@@ -172,7 +163,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
           }
         }
       }
-  
+
       public static ifTurmoilElse<T>(game: Game, cb: (turmoil: Turmoil) => T, elseCb: () => T): T {
         if (game.gameOptions.turmoilExtension !== false) {
           if (game.turmoil === undefined) {
