@@ -98,7 +98,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       rulingPartyName = factories[0].partyName;
       dominantPartyName = factories[0].partyName;
     } else {
-      factories = PARTIES.filter((cf) => cf.society === false || societyExpansion === true);
+      factories = PARTIES.filter((cf) => cf.society === societyExpansion);
     }
 
     this.parties = factories.map((cf) => new cf.Factory());
