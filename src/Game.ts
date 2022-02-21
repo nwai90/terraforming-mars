@@ -326,7 +326,7 @@ export class Game implements ISerializable<SerializedGame> {
 
     // Add Turmoil stuff
     if (gameOptions.turmoilExtension) {
-      game.turmoil = Turmoil.newInstance(game, gameOptions.politicalAgendasExtension);
+      game.turmoil = Turmoil.newInstance(game, gameOptions.politicalAgendasExtension, rng);
     }
 
     // and 2 neutral cities and forests on board
@@ -1734,7 +1734,7 @@ export class Game implements ISerializable<SerializedGame> {
 
     // Reload turmoil elements if needed
     if (d.turmoil && gameOptions.turmoilExtension) {
-      game.turmoil = Turmoil.deserialize(d.turmoil, gameOptions.societyExpansion, gameOptions.randomTurmoil);
+      game.turmoil = Turmoil.deserialize(d.turmoil);
     }
 
     // Reload moon elements if needed
