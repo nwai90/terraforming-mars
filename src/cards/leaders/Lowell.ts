@@ -34,11 +34,11 @@ export class Lowell extends Card implements LeaderCard {
   }
 
   public canAct(player: Player): boolean {
-   return player.canAfford(8) && this.isDisabled === false;
+    return player.canAfford(8) && this.isDisabled === false;
   }
 
   public action(player: Player): PlayerInput | undefined {
-    let cardsDrawn: Array<IProjectCard> = [];
+    const cardsDrawn: Array<IProjectCard> = [];
 
     for (let i = 0; i < 3; i++) {
       cardsDrawn.push(player.game.dealer.dealLeaderCard());
@@ -52,6 +52,6 @@ export class Lowell extends Card implements LeaderCard {
       player.playedCards.splice(cardIndex, 1);
 
       return player.playCard(foundCards[0]);
-    }, 1, 1);
+    });
   }
 }

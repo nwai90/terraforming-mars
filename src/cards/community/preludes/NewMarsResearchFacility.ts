@@ -24,7 +24,7 @@ export class NewMarsResearchFacility extends PreludeCard implements IProjectCard
 
   public play(player: Player) {
     const game = player.game;
-    let dealtCards: IProjectCard[] = [];
+    const dealtCards: IProjectCard[] = [];
     for (let i = 0; i < 6; i++) dealtCards.push(game.dealer.dealCard(game));
 
     game.defer(new DeferredAction(player, () => {
@@ -35,7 +35,7 @@ export class NewMarsResearchFacility extends PreludeCard implements IProjectCard
           player.cardsInHand.push(card);
         });
         return undefined;
-      }, dealtCards.length, 0);
+      }, {min: 0, max: dealtCards.length});
     }));
 
     game.defer(new DeferredAction(player, () => {

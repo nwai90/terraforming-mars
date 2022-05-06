@@ -40,6 +40,7 @@ import {Units} from '../Units';
 import {SelectPartyToSendDelegate} from '../inputs/SelectPartyToSendDelegate';
 import {Turmoil} from '../turmoil/Turmoil';
 import {LeaderCard} from '../cards/LeaderCard';
+import {CardName} from '../CardName';
 
 export class Server {
   public static getGameModel(game: Game): GameHomeModel {
@@ -330,15 +331,15 @@ function getWaitingFor(
   case PlayerInputTypes.SELECT_CARD:
     const selectCard = waitingFor as SelectCard<ICard>;
     playerInputModel.cards = getCards(player, selectCard.cards, {
-      showNewCost: !selectCard.played,
-      showResources: selectCard.played,
-      enabled: selectCard.enabled,
+      showNewCost: selectCard.config.played === false || selectCard.config.played === CardName.SELF_REPLICATING_ROBOTS,
+      showResources: selectCard.config.played === true || selectCard.config.played === CardName.SELF_REPLICATING_ROBOTS,
+      enabled: selectCard.config.enabled,
     });
-    playerInputModel.maxCardsToSelect = selectCard.maxCardsToSelect;
-    playerInputModel.minCardsToSelect = selectCard.minCardsToSelect;
-    playerInputModel.showOnlyInLearnerMode = selectCard.enabled?.every((p: boolean) => p === false);
-    playerInputModel.selectBlueCardAction = selectCard.selectBlueCardAction;
-    if (selectCard.showOwner) {
+    playerInputModel.maxCardsToSelect = selectCard.config.max;
+    playerInputModel.minCardsToSelect = selectCard.config.min;
+    playerInputModel.showOnlyInLearnerMode = selectCard.config.enabled?.every((p: boolean) => p === false);
+    playerInputModel.selectBlueCardAction = selectCard.config.selectBlueCardAction;
+    if (selectCard.config.showOwner) {
       playerInputModel.showOwner = true;
     }
     break;

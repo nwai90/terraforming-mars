@@ -40,6 +40,6 @@ export class NewPartner extends PreludeCard {
       } else {
         throw new Error('You cannot pay for this card');
       }
-    }, 1, 1);
+    });
   }
 }

@@ -1,4 +1,3 @@
-
 import {AndOptions} from './AndOptions';
 import {CorporationCard} from '../cards/corporation/CorporationCard';
 import {IProjectCard} from '../cards/IProjectCard';
@@ -39,7 +38,7 @@ export class SelectInitialCards extends AndOptions implements PlayerInput {
               player.preludeCardsInHand.push(...preludeCards);
               LogHelper.logDrawnCards(player, preludeCards, true, LogType.KEPT);
               return undefined;
-            }, 2, 2,
+            }, {min: 2, max: 2},
           ),
         );
       }
@@ -52,7 +51,7 @@ export class SelectInitialCards extends AndOptions implements PlayerInput {
               player.leaderCardsInHand.push(...leaderCards);
               LogHelper.logDrawnCards(player, leaderCards, true, LogType.KEPT);
               return undefined;
-            }, 1, 1,
+            },
           ),
         );
       }
@@ -64,7 +63,7 @@ export class SelectInitialCards extends AndOptions implements PlayerInput {
             player.cardsInHand.push(...foundCards);
             LogHelper.logDrawnCards(player, foundCards, true, LogType.BOUGHT);
             return undefined;
-          }, 10, 0,
+          }, {min: 0, max: 10},
         ),
       );
     }

@@ -112,11 +112,7 @@ export class DrawCards<T extends undefined | SelectCard<IProjectCard>> implement
       button,
       cards,
       cb,
-      max,
-      min,
-      false,
-      undefined,
-      false,
+      {max, min},
     );
   }
 }

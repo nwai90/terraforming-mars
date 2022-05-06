@@ -31,8 +31,7 @@ export class DiscardCards implements DeferredAction {
         LogHelper.logPlayerDiscardedCards(this.player, foundCards);
         return undefined;
       },
-      this.count,
-      this.count,
+      {min: this.count, max: this.count},
     );
   }
 }

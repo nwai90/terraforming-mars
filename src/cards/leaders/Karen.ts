@@ -34,7 +34,7 @@ export class Karen extends Card implements LeaderCard {
   }
 
   public action(player: Player): PlayerInput | undefined {
-    let cardsDrawn: Array<IProjectCard> = [];
+    const cardsDrawn: Array<IProjectCard> = [];
 
     for (let i = 0; i < player.game.generation; i++) {
       cardsDrawn.push(player.game.dealer.dealPreludeCard());
@@ -59,6 +59,6 @@ export class Karen extends Card implements LeaderCard {
       } else {
         throw new Error('You cannot pay for this card');
       }
-    }, 1, 1);
+    });
   }
 }

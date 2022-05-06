@@ -67,9 +67,7 @@ export class Musk extends Card implements LeaderCard {
                 LogHelper.logPlayerDiscardedCards(player, foundCards);
                 return undefined;
               },
-              amount,
-              amount,
-            )
+              {min: amount, max: amount})
           },
         )
 

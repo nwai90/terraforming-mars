@@ -36,7 +36,7 @@ describe('BusinessNetwork', function() {
     player.megaCredits = 2;
     const action = card.action(player);
     expect(action).instanceOf(SelectCard);
-    expect(action!.maxCardsToSelect).eq(0);
+    expect(action!.config.max).eq(0);
 
     (action! as SelectCard<IProjectCard>).cb([]);
     expect(game.dealer.discarded).has.lengthOf(1);

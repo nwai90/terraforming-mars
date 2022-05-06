@@ -54,7 +54,7 @@ export class ValleyTrust extends Card implements CorporationCard {
         } else {
           throw new Error('You cannot pay for this card');
         }
-      }, 1, 1);
+      });
     } else {
       console.warn('Prelude extension isn\'t selected.');
       return undefined;

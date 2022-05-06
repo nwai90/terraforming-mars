@@ -46,8 +46,7 @@ export class RemoveResourcesFromCard implements DeferredAction {
         owner.removeResourceFrom(card, this.count, this.player.game, this.player);
         return undefined;
       },
-    );
-    selectCard.showOwner = true;
+      {showOwner: true});
 
     if (this.mandatory) {
       if (resourceCards.length === 1) {
