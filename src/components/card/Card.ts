@@ -30,16 +30,20 @@ export const Card = Vue.component('card', {
     CardContent,
   },
   props: {
-    'card': {
+    card: {
       type: Object as () => CardModel,
       required: true,
     },
-    'actionUsed': {
+    actionUsed: {
       type: Boolean,
     },
-    'owner': {
+    owner: {
       type: Object as () => OwnerModel | undefined,
     },
+    robotCard: {
+      type: Object as () => CardModel | undefined,
+      required: false,
+    }
   },
   data: function() {
     let cardInstance: ICard | undefined;
@@ -133,8 +137,8 @@ export const Card = Vue.component('card', {
     getCardRequirements: function(): CardRequirements | undefined {
       return this.getCard()?.requirements;
     },
-    getResourceAmount: function(card: CardModel): number {
-      return card.resources !== undefined ? card.resources : 0;
+    getResourceAmount: function(): number {
+      return this.card.resources || this.robotCard?.resources || 0;
     },
     isCorporationCard: function() : boolean {
       return this.getCardType() === CardType.CORPORATION;
@@ -149,6 +153,9 @@ export const Card = Vue.component('card', {
       if (this.cardInstance.resourceType !== undefined) return this.cardInstance.resourceType;
       return ResourceType.RESOURCE_CUBE;
     },
+    hasResourceType(): boolean {
+      return this.card.resources !== undefined || this.robotCard !== undefined;
+    }
   },
   template: `
         <div :class="getCardClasses(card)">
@@ -161,7 +168,7 @@ export const Card = Vue.component('card', {
                 <CardContent v-if="getCardMetadata() !== undefined" :metadata="getCardMetadata()" :requirements="getCardRequirements()" :isCorporation="isCorporationCard()"/>
             </div>
             <CardExpansion :expansion="getCardExpansion()" :isCorporation="isCorporationCard()"/>
-            <CardResourceCounter v-if="card.resources !== undefined" :amount="getResourceAmount(card)" :type="resourceType" />
+            <CardResourceCounter v-if="hasResourceType" :amount="getResourceAmount()" :type="resourceType" />
             <CardExtraContent :card="card" />
             <template v-if="owner !== undefined">
               <div :class="'card-owner-label player_translucent_bg_color_'+ owner.color">

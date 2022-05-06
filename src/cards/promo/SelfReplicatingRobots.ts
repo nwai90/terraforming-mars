@@ -78,6 +78,7 @@ export class SelfReplicatingRobots extends Card implements IProjectCard {
             });
             return undefined;
           },
+          {played: CardName.SELF_REPLICATING_ROBOTS},
         ));
       }
 

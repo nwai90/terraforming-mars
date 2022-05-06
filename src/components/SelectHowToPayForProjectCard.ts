@@ -376,6 +376,9 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
         ]]);
       }
     },
+    robotCard(card: CardModel): CardModel | undefined {
+      return this.player.selfReplicatingRobotsCards?.find((r) => r.name === card.name);
+    },
   },
   template: `<div class="payments_cont">
 
@@ -383,7 +386,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
 
   <label v-for="availableCard in cards" class="payments_cards">
     <input class="hidden" type="radio" v-model="cardName" v-on:change="cardChanged()" :value="availableCard.name" />
-    <Card class="cardbox" :card="availableCard" />
+    <Card class="cardbox" :card="availableCard" :robotCard="robotCard(availableCard)"/>
   </label>
 
   <section v-trim-whitespace>
