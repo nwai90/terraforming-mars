@@ -14,25 +14,33 @@ import {AmazonisBoard} from './boards/AmazonisBoard';
 import {ArabiaTerraBoard} from './boards/ArabiaTerraBoard';
 import {VastitasBorealisBoard} from './boards/VastitasBorealisBoard';
 import {TerraCimmeriaBoard} from './boards/TerraCimmeriaBoard';
+import {SerializedBoard} from './boards/SerializedBoard';
+import {SerializedGame} from './SerializedGame';
+
+type BoardFactory = {
+  newInstance: (shuffle: boolean, rng: Random, includeVenus: boolean, includePromo: boolean, erodedSpaces: Array<string>) => Board;
+  deserialize: (board: SerializedBoard, players: Array<Player>) => Board;
+}
+const boards: Map<BoardName, BoardFactory> = new Map(
+  [[BoardName.ORIGINAL, OriginalBoard],
+    [BoardName.HELLAS, HellasBoard],
+    [BoardName.ELYSIUM, ElysiumBoard],
+    [BoardName.AMAZONIS, AmazonisBoard],
+    [BoardName.ARABIA_TERRA, ArabiaTerraBoard],
+    [BoardName.TERRA_CIMMERIA, TerraCimmeriaBoard],
+    [BoardName.VASTITAS_BOREALIS, VastitasBorealisBoard]],
+);
 
 export class GameSetup {
-  // Function to construct the board and milestones/awards list
   public static newBoard(boardName: BoardName, shuffle: boolean, rng: Random, includeVenus: boolean, includePromo: boolean, erodedSpaces: Array<string>): Board {
-    if (boardName === BoardName.ELYSIUM) {
-      return ElysiumBoard.newInstance(shuffle, rng, includeVenus, includePromo, erodedSpaces);
-    } else if (boardName === BoardName.HELLAS) {
-      return HellasBoard.newInstance(shuffle, rng, includeVenus, includePromo, erodedSpaces);
-    } else if (boardName === BoardName.AMAZONIS) {
-      return AmazonisBoard.newInstance(shuffle, rng, includeVenus, includePromo, erodedSpaces);
-    } else if (boardName === BoardName.ARABIA_TERRA) {
-      return ArabiaTerraBoard.newInstance(shuffle, rng, includeVenus, includePromo, erodedSpaces);
-    } else if (boardName === BoardName.VASTITAS_BOREALIS) {
-      return VastitasBorealisBoard.newInstance(shuffle, rng, includeVenus, includePromo, erodedSpaces);
-    } else if (boardName === BoardName.TERRA_CIMMERIA) {
-      return TerraCimmeriaBoard.newInstance(shuffle, rng, includeVenus, includePromo, erodedSpaces);
-    } else {
-      return OriginalBoard.newInstance(shuffle, rng, includeVenus, includePromo, erodedSpaces);
-    }
+    const factory = boards.get(boardName) ?? OriginalBoard;
+    return factory.newInstance(shuffle, rng, includeVenus, includePromo, erodedSpaces);
+  }
+
+  public static deserializeBoard(players: Array<Player>, gameOptions: GameOptions, d: SerializedGame) {
+    const playersForBoard = players.length !== 1 ? players : [players[0], GameSetup.neutralPlayerFor(d.id)];
+    const factory = boards.get(gameOptions.boardName) ?? OriginalBoard;
+    return factory.deserialize(d.board, playersForBoard);
   }
 
   public static setStartingProductions(player: Player) {

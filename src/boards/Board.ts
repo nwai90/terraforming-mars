@@ -184,9 +184,9 @@ export abstract class Board {
       // If it does have a hazard tile, make sure it's not a protected one.
       const blockedByDesperateMeasures = space.tile?.protectedHazard === true;
       // tiles are not placeable on restricted spaces at all
-      const isPlaceableSpace = !space.bonus.includes(SpaceBonus.RESTRICTED);
+      const isRestricted = space.bonus.includes(SpaceBonus.RESTRICTED);
 
-      return isPlaceableSpace && safeForPlayer && playableSpace && !blockedByDesperateMeasures;
+      return !isRestricted && safeForPlayer && playableSpace && !blockedByDesperateMeasures;
     });
 
     return landSpaces;

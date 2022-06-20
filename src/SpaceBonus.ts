@@ -17,9 +17,9 @@ export enum SpaceBonus {
     POWER, // 9,
 
     // Custom maps / special tiles
-    RESTRICTED, // Tiles cannot be placed on these spaces
-    COVE, // Spaces that allow both ocean and land tiles to be placed
-    TEMPERATURE, // Gives a bonus temperature raise
+    RESTRICTED, // 10, Tiles cannot be placed on these spaces
+    COVE, // 11, Spaces that allow both ocean and land tiles to be placed
+    TEMPERATURE, // 12, Gives a bonus temperature raise
 }
 
 const TO_STRING_MAP: Map<SpaceBonus, string> = new Map([

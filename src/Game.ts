@@ -14,7 +14,6 @@ import {Color} from './Color';
 import {CorporationCard} from './cards/corporation/CorporationCard';
 import {Database} from './database/Database';
 import {Dealer} from './Dealer';
-import {ElysiumBoard} from './boards/ElysiumBoard';
 import {FundedAward, serializeFundedAwards, deserializeFundedAwards} from './awards/FundedAward';
 import {HellasBoard} from './boards/HellasBoard';
 import {IAward} from './awards/IAward';
@@ -28,7 +27,6 @@ import {LogHelper} from './LogHelper';
 import {LogMessage} from './LogMessage';
 import {ALL_MILESTONES} from './milestones/Milestones';
 import {ALL_AWARDS} from './awards/Awards';
-import {OriginalBoard} from './boards/OriginalBoard';
 import {PartyHooks} from './turmoil/parties/PartyHooks';
 import {Phase} from './Phase';
 import {Player, PlayerId} from './Player';
@@ -62,10 +60,7 @@ import {MoonExpansion} from './moon/MoonExpansion';
 import {TurmoilHandler} from './turmoil/TurmoilHandler';
 import {Random} from './Random';
 import {AddResourcesToCard} from './deferredActions/AddResourcesToCard';
-import {AmazonisBoard} from './boards/AmazonisBoard';
-import {ArabiaTerraBoard} from './boards/ArabiaTerraBoard';
 import {VastitasBorealisBoard} from './boards/VastitasBorealisBoard';
-import {TerraCimmeriaBoard} from './boards/TerraCimmeriaBoard';
 import {SilverCubeHandler} from './community/SilverCubeHandler';
 import {MilestoneAwardSelector} from './MilestoneAwardSelector';
 import {BoardType} from './boards/BoardType';
@@ -1699,23 +1694,7 @@ export class Game implements ISerializable<SerializedGame> {
       throw new Error(`Player ${d.first} not found when rebuilding First Player`);
     }
 
-    const playersForBoard = players.length !== 1 ? players : [players[0], GameSetup.neutralPlayerFor(d.id)];
-    let board;
-    if (gameOptions.boardName === BoardName.ELYSIUM) {
-      board = ElysiumBoard.deserialize(d.board, playersForBoard);
-    } else if (gameOptions.boardName === BoardName.HELLAS) {
-      board = HellasBoard.deserialize(d.board, playersForBoard);
-    } else if (gameOptions.boardName === BoardName.AMAZONIS) {
-      board = AmazonisBoard.deserialize(d.board, playersForBoard);
-    } else if (gameOptions.boardName === BoardName.ARABIA_TERRA) {
-      board = ArabiaTerraBoard.deserialize(d.board, playersForBoard);
-    } else if (gameOptions.boardName === BoardName.VASTITAS_BOREALIS) {
-      board = VastitasBorealisBoard.deserialize(d.board, playersForBoard);
-    } else if (gameOptions.boardName === BoardName.TERRA_CIMMERIA) {
-      board = TerraCimmeriaBoard.deserialize(d.board, playersForBoard);
-    } else {
-      board = OriginalBoard.deserialize(d.board, playersForBoard);
-    }
+    const board = GameSetup.deserializeBoard(players, gameOptions, d);
 
     // Rebuild dealer object to be sure that we will have cards in the same order
     const dealer = Dealer.deserialize(d.dealer);
