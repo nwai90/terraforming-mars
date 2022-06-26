@@ -32,6 +32,12 @@ export class TestPlayer extends Player {
     }
   }
 
+  public getRawTagCount(tag: Tags, includeEventsTags:boolean = false): number {
+    return this.tagsForTest !== undefined ?
+      this.tagsForTest[tag] ?? 0 :
+      super.getRawTagCount(tag, includeEventsTags);
+  }
+
   public getVictoryPoints(): VictoryPointsBreakdown {
     this.victoryPointsBreakdown = super.getVictoryPoints();
     return this.victoryPointsBreakdown;

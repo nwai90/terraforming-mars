@@ -37,7 +37,7 @@ export class Gyropolis extends Card {
   public produce(player: Player) {
     const tags: Array<Tags> = [Tags.VENUS, Tags.EARTH];
     player.addProduction(Resources.ENERGY, -2);
-    player.addProduction(Resources.MEGACREDITS, player.getMultipleTagCount(tags), {log: true});
+    player.addProduction(Resources.MEGACREDITS, player.getMultipleTagCount(tags, 'milestones'), {log: true});
   }
 
   public play(player: Player) {

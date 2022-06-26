@@ -7,7 +7,7 @@ export class Morningstar implements IMilestone {
   public description: string = 'Have 4 Venus tags';
 
   public getScore(player: Player): number {
-    return player.getTagCount(Tags.VENUS);
+    return player.getTagCountNew(Tags.VENUS, 'milestone');
   }
 
   public canClaim(player: Player): boolean {

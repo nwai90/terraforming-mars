@@ -8,7 +8,7 @@ export class Ecologist implements IMilestone {
 
     public getScore(player: Player): number {
       const tags: Array<Tags> = [Tags.PLANT, Tags.ANIMAL, Tags.MICROBE];
-      return player.getMultipleTagCount(tags);
+      return player.getMultipleTagCount(tags, 'milestones');
     }
     public canClaim(player: Player): boolean {
       return this.getScore(player) >= 4;

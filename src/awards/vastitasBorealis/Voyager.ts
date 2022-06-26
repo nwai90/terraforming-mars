@@ -7,9 +7,9 @@ import {ASIMOV_AWARD_BONUS} from "../../constants";
 export class Voyager implements IAward {
   public name: string = 'Voyager';
   public description: string = 'Most Jovian tags in play'
-  
+
   public getScore(player: Player): number {
-    let score = player.getTagCount(Tags.JOVIAN, false, false);
+    let score = player.getTagCountNew(Tags.JOVIAN, 'award');
     if (player.cardIsInEffect(CardName.ASIMOV)) score += ASIMOV_AWARD_BONUS;
 
     return score;

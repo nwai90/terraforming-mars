@@ -8,6 +8,7 @@ import {SpaceElevator} from '../../../src/cards/base/SpaceElevator';
 import {ResearchCoordination} from '../../../src/cards/prelude/ResearchCoordination';
 import {InterplanetaryTrade} from '../../../src/cards/promo/InterplanetaryTrade';
 import {MaxwellBase} from '../../../src/cards/venusNext/MaxwellBase';
+import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
@@ -18,6 +19,7 @@ describe('InterplanetaryTrade', function() {
   beforeEach(() => {
     card = new InterplanetaryTrade();
     player = TestPlayers.BLUE.newPlayer();
+    Game.newInstance('foo', [player], player);
   });
 
   it('Should play', function() {
@@ -41,7 +43,7 @@ describe('InterplanetaryTrade', function() {
     player.playedCards.push(new ColonizerTrainingCamp());
 
     card.play(player);
-    expect(player.getProduction(Resources.MEGACREDITS)).eq(12);
+    expect(player.getProduction(Resources.MEGACREDITS)).eq(10);
   });
 
   it('Should give victory points', function() {

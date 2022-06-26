@@ -7,6 +7,7 @@ import {Player} from '../../src/Player';
 import {Leavitt} from '../../src/cards/community/colonies/Leavitt';
 import {TestingUtils} from '../TestingUtils';
 import {Game} from '../../src/Game';
+import {AntiGravityTechnology} from '../../src/cards/base/AntiGravityTechnology';
 
 describe('Diversifier', function() {
   let milestone : Diversifier; let player : Player; let player2 : Player;
@@ -15,6 +16,7 @@ describe('Diversifier', function() {
     milestone = new Diversifier();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
+    Game.newInstance('foo', [player], player);
   });
 
   it('Counts wildcard tags as unique tags', function() {
@@ -33,8 +35,17 @@ describe('Diversifier', function() {
     game.colonies = [leavitt];
 
     leavitt.addColony(player);
-    expect(player.getDistinctTagCount(true)).eq(1);
+    expect(milestone.getScore(player)).eq(1);
 
+    // Adding a second colony doesn't change things
+    leavitt.addColony(player);
+    expect(milestone.getScore(player)).eq(1);
+
+    // Or another science card.
+    player.playedCards.push(new AntiGravityTechnology());
+    expect(milestone.getScore(player)).eq(1);
+
+    expect(milestone.canClaim(player)).is.false;
     for (let i = 0; i < 7; i++) {
       player.playedCards.push(new ResearchNetwork());
     }

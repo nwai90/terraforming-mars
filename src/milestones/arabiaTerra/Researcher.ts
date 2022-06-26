@@ -7,7 +7,7 @@ export class Researcher implements IMilestone {
   public description: string = 'Have 6 Science tags';
 
   public getScore(player: Player): number {
-    return player.getTagCount(Tags.SCIENCE);
+    return player.getTagCountNew(Tags.SCIENCE, 'milestone');
   }
 
   public canClaim(player: Player): boolean {

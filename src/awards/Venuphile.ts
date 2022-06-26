@@ -8,7 +8,7 @@ export class Venuphile implements IAward {
     public name: string = 'Venuphile';
     public description: string = 'Having the most Venus tags in play'
     public getScore(player: Player): number {
-      let score = player.getTagCount(Tags.VENUS, false, false);
+      let score = player.getTagCountNew(Tags.VENUS, 'award');
       if (player.cardIsInEffect(CardName.ASIMOV)) score += ASIMOV_AWARD_BONUS;
       return score;
     }

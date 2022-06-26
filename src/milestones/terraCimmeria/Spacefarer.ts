@@ -7,7 +7,7 @@ export class Spacefarer implements IMilestone {
   public description: string = 'Have 6 Space tags';
 
   public getScore(player: Player): number {
-    return player.getTagCount(Tags.SPACE);
+    return player.getTagCountNew(Tags.SPACE, 'milestone');
   }
 
   public canClaim(player: Player): boolean {

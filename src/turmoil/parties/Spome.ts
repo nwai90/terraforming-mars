@@ -25,7 +25,7 @@ class SpomeBonus01 implements Bonus {
   description = 'Gain 1 M€ for each different tag you have';
 
   getScore(player: Player) {
-    return player.getDistinctTagCount(false);
+    return player.getDistinctTagCount('default');
   }
 
   grant(game: Game) {

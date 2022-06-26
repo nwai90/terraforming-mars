@@ -6,7 +6,7 @@ export class Diversifier implements IMilestone {
     public description: string = 'Have 8 different tags in play';
 
     public getScore(player: Player): number {
-      return player.getDistinctTagCount(true);
+      return player.getDistinctTagCount('milestone');
     }
     public canClaim(player: Player): boolean {
       return this.getScore(player) >= 8;

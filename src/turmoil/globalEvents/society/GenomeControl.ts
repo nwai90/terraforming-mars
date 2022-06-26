@@ -15,7 +15,7 @@ export class GenomeControl implements IGlobalEvent {
     public resolve(game: Game, turmoil: Turmoil) {
       if (game.isSoloMode()) {
         const player = game.getPlayers()[0];
-        if (player.getDistinctTagCount(false) - turmoil.getPlayerInfluence(player) >= 5) this.discardCards(player, game);
+        if (player.getDistinctTagCount('globalEvent') - turmoil.getPlayerInfluence(player) >= 5) this.discardCards(player, game);
       } else {
         const players = [...game.getPlayers()].sort(
           (p1, p2) => this.getScore(p2, turmoil) - this.getScore(p1, turmoil),
@@ -36,7 +36,7 @@ export class GenomeControl implements IGlobalEvent {
     }
 
     private getScore(player: Player, turmoil: Turmoil) {
-      return Math.max(player.getDistinctTagCount(false) - turmoil.getPlayerInfluence(player), 0);
+      return Math.max(player.getDistinctTagCount('globalEvent') - turmoil.getPlayerInfluence(player), 0);
     }
 
     private discardCards(player: Player, game: Game): void {

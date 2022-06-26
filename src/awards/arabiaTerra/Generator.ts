@@ -7,9 +7,9 @@ import {ASIMOV_AWARD_BONUS} from "../../constants";
 export class Generator implements IAward {
   public name: string = 'Generator';
   public description: string = 'Most Power tags'
-  
+
   public getScore(player: Player): number {
-    let score = player.getTagCount(Tags.ENERGY, false, false);
+    let score = player.getTagCountNew(Tags.ENERGY, 'award');
     if (player.cardIsInEffect(CardName.ASIMOV)) score += ASIMOV_AWARD_BONUS;
     return score;
   }
