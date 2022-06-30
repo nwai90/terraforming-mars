@@ -16,7 +16,7 @@ export class PowerTrip implements IGlobalEvent {
       game.getPlayers().forEach((player) => {
         player.energy = 0;
 
-        const powerTagsCount = Math.min(player.getTagCount(Tags.ENERGY), 5) + turmoil.getPlayerInfluence(player);
+        const powerTagsCount = Math.min(player.getTagCount(Tags.ENERGY, 'raw'), 5) + turmoil.getPlayerInfluence(player);
         if (powerTagsCount > 0) player.addResource(Resources.MEGACREDITS, powerTagsCount * 2, {log: true});
       });
     }

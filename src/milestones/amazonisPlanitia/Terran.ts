@@ -7,7 +7,7 @@ export class Terran implements IMilestone {
   public description: string = 'Have 6 Earth tags';
 
   public getScore(player: Player): number {
-    return player.getTagCountNew(Tags.EARTH, 'milestone');
+    return player.getTagCount(Tags.EARTH, 'milestone');
   }
 
   public canClaim(player: Player): boolean {

@@ -16,7 +16,7 @@ export class ExhaltSpecies implements IGlobalEvent {
 
     public resolve(game: Game, turmoil: Turmoil) {
       game.getPlayers().forEach((player) => {
-        const animalTagCount = Math.min(player.getTagCount(Tags.ANIMAL, false, false), 5);
+        const animalTagCount = Math.min(player.getTagCount(Tags.ANIMAL, 'raw'), 5);
         if (animalTagCount > 0) {
           player.addResource(Resources.MEGACREDITS, animalTagCount * 2, {log: true});
         }

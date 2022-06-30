@@ -8,7 +8,7 @@ export class SpaceBaron implements IAward {
     public name: string = 'Space Baron';
     public description: string = 'Most space tags (event cards do not count)'
     public getScore(player: Player): number {
-      let score = player.getTagCountNew(Tags.SPACE, 'award');
+      let score = player.getTagCount(Tags.SPACE, 'award');
       if (player.cardIsInEffect(CardName.ASIMOV)) score += ASIMOV_AWARD_BONUS;
       return score;
     }

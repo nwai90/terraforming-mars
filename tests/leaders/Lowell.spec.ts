@@ -25,8 +25,8 @@ describe('Lowell', function() {
 
   it('Has a wild tag', function() {
     player.playedCards.push(card);
-    expect(player.getTagCount(Tags.SPACE, false, true)).eq(1);
-    expect(player.getTagCount(Tags.SCIENCE, false, true)).eq(1);
+    expect(player.getTagCount(Tags.SPACE)).eq(1);
+    expect(player.getTagCount(Tags.SCIENCE)).eq(1);
 
     const lightningHarvest = new LightningHarvest();
     player.playedCards.push(new Research());

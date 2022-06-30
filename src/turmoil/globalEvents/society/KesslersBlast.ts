@@ -14,7 +14,7 @@ export class KesslersBlast implements IGlobalEvent {
 
     public resolve(game: Game, turmoil: Turmoil) {
       game.getPlayers().forEach((player) => {
-        const tagCount = Math.min(player.getTagCount(Tags.EARTH), 5) - turmoil.getPlayerInfluence(player);
+        const tagCount = Math.min(player.getTagCount(Tags.EARTH, 'raw'), 5) - turmoil.getPlayerInfluence(player);
         if (tagCount > 0) player.deductResource(Resources.MEGACREDITS, tagCount * 4, {log: true});
         player.addResource(Resources.TITANIUM, 2, {log: true});
       });

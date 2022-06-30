@@ -419,7 +419,7 @@ export abstract class Colony implements SerializedColony {
 
       case ColonyBenefit.GAIN_MC_FOR_EARTH_TAGS:
         const amount = game.getPlayers()
-        .map((p) => p.getTagCount(Tags.EARTH, false, p.id === player.id))
+        .map((p) => p.getTagCount(Tags.EARTH, p.id === player.id ? 'default' : 'raw'))
         .reduce((a, c) => a + c, 0);
 
         player.megaCredits += Math.floor(amount / 3);

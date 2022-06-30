@@ -15,7 +15,7 @@ export class AtmosphericCompression implements IGlobalEvent {
       game.increaseVenusScaleLevel(game.getPlayers()[0], -2);
 
       game.getPlayers().forEach((player) => {
-        const venusTagCount = player.getTagCount(Tags.VENUS, false, false) + turmoil.getPlayerInfluence(player);
+        const venusTagCount = player.getTagCount(Tags.VENUS, 'raw') + turmoil.getPlayerInfluence(player);
         if (venusTagCount >= 3) player.increaseTerraformRating();
       });
     }

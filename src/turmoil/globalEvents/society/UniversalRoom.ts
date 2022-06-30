@@ -16,7 +16,7 @@ export class UniversalRoom implements IGlobalEvent {
 
     public resolve(game: Game, turmoil: Turmoil) {
       game.getPlayers().forEach((player) => {
-        const cityTagCount = Math.min(player.getTagCount(Tags.CITY, false, false), 5);
+        const cityTagCount = Math.min(player.getTagCount(Tags.CITY, 'raw'), 5);
         if (cityTagCount > 0) {
           player.addResource(Resources.MEGACREDITS, cityTagCount * 2, {log: true});
         }

@@ -25,7 +25,7 @@ class EmpowerBonus01 implements Bonus {
   description = 'Gain 2 M€ for each Power tag you have';
 
   getScore(player: Player) {
-    return player.getTagCount(Tags.ENERGY, false, false) * 2;
+    return player.getTagCount(Tags.ENERGY, 'raw') * 2;
   }
 
   grant(game: Game) {

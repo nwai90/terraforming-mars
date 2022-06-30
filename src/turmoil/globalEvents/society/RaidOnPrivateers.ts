@@ -14,7 +14,7 @@ export class RaidOnPrivateers implements IGlobalEvent {
 
     public resolve(game: Game, turmoil: Turmoil) {
       game.getPlayers().forEach((player) => {
-        const planetaryTagCount = player.getTagCount(Tags.VENUS, false, false) + player.getTagCount(Tags.EARTH, false, false) + player.getTagCount(Tags.JOVIAN, false, false);
+        const planetaryTagCount = player.getTagCount(Tags.VENUS, 'raw') + player.getTagCount(Tags.EARTH, 'raw') + player.getTagCount(Tags.JOVIAN, 'raw');
         const amount = planetaryTagCount - turmoil.getPlayerInfluence(player);
         if (amount >= 4) player.deductResource(Resources.MEGACREDITS, 5, {log: true});
       });

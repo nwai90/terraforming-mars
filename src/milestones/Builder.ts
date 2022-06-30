@@ -7,7 +7,7 @@ export class Builder implements IMilestone {
     public description: string = 'Have 8 Building tags';
 
     public getScore(player: Player): number {
-      return player.getTagCountNew(Tags.BUILDING, 'milestone');
+      return player.getTagCount(Tags.BUILDING, 'milestone');
     }
     public canClaim(player: Player): boolean {
       return this.getScore(player) >= 8;

@@ -9,7 +9,7 @@ export class Biologist implements IAward {
   public description: string = 'Most Animal, Plant and Microbe tags'
 
   public getScore(player: Player): number {
-    let score = player.getTagCountNew(Tags.MICROBE, 'award') + player.getTagCountNew(Tags.PLANT, 'award') + player.getTagCountNew(Tags.ANIMAL, 'award');
+    let score = player.getTagCount(Tags.MICROBE, 'award') + player.getTagCount(Tags.PLANT, 'award') + player.getTagCount(Tags.ANIMAL, 'award');
     if (player.cardIsInEffect(CardName.ASIMOV)) score += ASIMOV_AWARD_BONUS;
     return score;
   }

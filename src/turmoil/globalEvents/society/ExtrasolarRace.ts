@@ -14,7 +14,7 @@ export class ExtrasolarRace implements IGlobalEvent {
 
     public resolve(game: Game, turmoil: Turmoil) {
       game.getPlayers().forEach((player) => {
-        const powerTagsCount = player.getTagCount(Tags.ENERGY);
+        const powerTagsCount = player.getTagCount(Tags.ENERGY, 'raw');
 
         if (powerTagsCount + turmoil.getPlayerInfluence(player) >= 3) {
           player.addProduction(Resources.TITANIUM, 1, {log: true});

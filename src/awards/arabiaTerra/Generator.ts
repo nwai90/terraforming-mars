@@ -9,7 +9,7 @@ export class Generator implements IAward {
   public description: string = 'Most Power tags'
 
   public getScore(player: Player): number {
-    let score = player.getTagCountNew(Tags.ENERGY, 'award');
+    let score = player.getTagCount(Tags.ENERGY, 'award');
     if (player.cardIsInEffect(CardName.ASIMOV)) score += ASIMOV_AWARD_BONUS;
     return score;
   }

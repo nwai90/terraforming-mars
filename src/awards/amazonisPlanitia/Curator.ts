@@ -13,7 +13,7 @@ export class Curator implements IAward {
     let score: number = 0;
 
     validTags.forEach((tag) => {
-      const tagCount = player.getTagCountNew(tag, 'award');
+      const tagCount = player.getTagCount(tag, 'award');
       if (tagCount > score) score = tagCount;
     });
 

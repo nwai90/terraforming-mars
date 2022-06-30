@@ -13,7 +13,7 @@ export class TechnologicalTelepathy implements IGlobalEvent {
 
     public resolve(game: Game, turmoil: Turmoil) {
       game.getPlayers().forEach((player) => {
-        const total = player.getTagCount(Tags.SCIENCE, false, false) + turmoil.getPlayerInfluence(player);
+        const total = player.getTagCount(Tags.SCIENCE, 'raw') + turmoil.getPlayerInfluence(player);
         const setsCount = Math.floor(total / 3);
         const amount = Math.min(setsCount, 5);
         if (amount > 0) player.drawCard(amount);

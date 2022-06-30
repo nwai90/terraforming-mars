@@ -788,81 +788,34 @@ export class Player implements ISerializable<SerializedPlayer> {
 
   public getAllTags(): Array<ITagCount> {
     return [
-      {tag: Tags.BUILDING, count: this.getTagCountNew(Tags.BUILDING, 'raw')},
-      {tag: Tags.CITY, count: this.getTagCountNew(Tags.CITY, 'raw')},
-      {tag: Tags.EARTH, count: this.getTagCountNew(Tags.EARTH, 'raw')},
-      {tag: Tags.ENERGY, count: this.getTagCountNew(Tags.ENERGY, 'raw')},
-      {tag: Tags.JOVIAN, count: this.getTagCountNew(Tags.JOVIAN, 'raw')},
-      {tag: Tags.MICROBE, count: this.getTagCountNew(Tags.MICROBE, 'raw')},
-      {tag: Tags.MOON, count: this.getTagCountNew(Tags.MOON, 'raw')},
-      {tag: Tags.PLANT, count: this.getTagCountNew(Tags.PLANT, 'raw')},
-      {tag: Tags.SCIENCE, count: this.getTagCountNew(Tags.SCIENCE, 'raw')},
-      {tag: Tags.SPACE, count: this.getTagCountNew(Tags.SPACE, 'raw')},
-      {tag: Tags.VENUS, count: this.getTagCountNew(Tags.VENUS, 'raw')},
-      {tag: Tags.WILDCARD, count: this.getTagCountNew(Tags.WILDCARD, 'raw')},
-      {tag: Tags.ANIMAL, count: this.getTagCountNew(Tags.ANIMAL, 'raw')},
+      {tag: Tags.BUILDING, count: this.getTagCount(Tags.BUILDING, 'raw')},
+      {tag: Tags.CITY, count: this.getTagCount(Tags.CITY, 'raw')},
+      {tag: Tags.EARTH, count: this.getTagCount(Tags.EARTH, 'raw')},
+      {tag: Tags.ENERGY, count: this.getTagCount(Tags.ENERGY, 'raw')},
+      {tag: Tags.JOVIAN, count: this.getTagCount(Tags.JOVIAN, 'raw')},
+      {tag: Tags.MICROBE, count: this.getTagCount(Tags.MICROBE, 'raw')},
+      {tag: Tags.MOON, count: this.getTagCount(Tags.MOON, 'raw')},
+      {tag: Tags.PLANT, count: this.getTagCount(Tags.PLANT, 'raw')},
+      {tag: Tags.SCIENCE, count: this.getTagCount(Tags.SCIENCE, 'raw')},
+      {tag: Tags.SPACE, count: this.getTagCount(Tags.SPACE, 'raw')},
+      {tag: Tags.VENUS, count: this.getTagCount(Tags.VENUS, 'raw')},
+      {tag: Tags.WILDCARD, count: this.getTagCount(Tags.WILDCARD, 'raw')},
+      {tag: Tags.ANIMAL, count: this.getTagCount(Tags.ANIMAL, 'raw')},
       {tag: Tags.EVENT, count: this.getPlayedEventsCount()},
     ].filter((tag) => tag.count > 0);
   }
 
-  // Replace with getTagCountNew
-  public getTagCount(tag: Tags, includeEventsTags:boolean = false, includeTagSubstitutions:boolean = true): number {
-    let tagCount = 0;
-
-    this.playedCards.forEach((card: IProjectCard) => {
-      if ( ! includeEventsTags && card.cardType === CardType.EVENT) return;
-      tagCount += card.tags.filter((cardTag) => cardTag === tag).length;
-    });
-
-    if (this.corporationCard !== undefined && !this.corporationCard.isDisabled) {
-      tagCount += this.corporationCard.tags.filter(
-        (cardTag) => cardTag === tag,
-      ).length;
-    }
-
-    // Leavitt Station hook
-    if (tag === Tags.SCIENCE && this.scienceTagCount > 0) {
-      tagCount += this.scienceTagCount;
-    }
-
-    // PoliticalAgendas Transhumans P1 hook
-    if (tag === Tags.WILDCARD && PartyHooks.shouldApplyPolicy(this, PartyName.TRANSHUMANS, TurmoilPolicy.TRANSHUMANS_DEFAULT_POLICY)) {
-      tagCount += 1;
-    }
-
-    if (tag === Tags.WILDCARD) tagCount += LeadersExpansion.getBonusWildTags(this);
-
-    tagCount = MarsCoalition.checkBonusWildTag(this, tag, tagCount);
-
-    if (includeTagSubstitutions) {
-      // Earth Embassy hook
-      if (tag === Tags.EARTH && this.playedCards.some((c) => c.name === CardName.EARTH_EMBASSY)) {
-        tagCount += this.getTagCount(Tags.MOON, includeEventsTags, false);
-      }
-      if (tag !== Tags.WILDCARD) {
-        tagCount += this.getTagCount(Tags.WILDCARD, includeEventsTags, false);
-      }
-    }
-
-    return tagCount;
-  }
-
-  // New tag functions
   /*
    * Get the number of tags a player has, depending on certain conditions.
    *
    * 'raw': count face-up tags literally, including Leavitt Station.
    * 'default': Same as raw, but include the wild tags.
-   * 'milestone': Same as raw with special conditions for milestones (Chimera)
-   * 'award': Same as raw with special conditions for awards (Chimera)
-   * 'vps': Same as raw, but include event tags.
-  //  * 'raw-pf': Same as raw, but includes Mars Tags when tag is Science  (Habitat Marte)
+   * 'milestone': Same as raw
+   * 'award': Same as raw
    */
-  public getTagCountNew(tag: Tags, mode: 'default' | 'raw' | 'milestone' | 'award' | 'vps' /* | 'raw-pf' */ = 'default') {
-    const includeEvents = mode === 'vps' /* || this.corporationCard?.name === CardName.ODYSSEY */;
+  public getTagCount(tag: Tags, mode: 'default' | 'raw' | 'milestone' | 'award' = 'default') {
     const includeTagSubstitutions = (mode === 'default' || mode === 'milestone');
-
-    let tagCount = this.getRawTagCount(tag, includeEvents);
+    let tagCount = this.getRawTagCount(tag, false);
 
     // Leavitt Station hook
     if (tag === Tags.SCIENCE && this.scienceTagCount > 0) {
@@ -870,54 +823,33 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     // PoliticalAgendas Transhumans P1 hook
-    if (tag === Tags.WILDCARD && PartyHooks.shouldApplyPolicy(this, PartyName.TRANSHUMANS, TurmoilPolicy.TRANSHUMANS_DEFAULT_POLICY)) {
+    if ((tag === Tags.WILDCARD || includeTagSubstitutions) && PartyHooks.shouldApplyPolicy(this, PartyName.TRANSHUMANS, TurmoilPolicy.TRANSHUMANS_DEFAULT_POLICY)) {
       tagCount += 1;
     }
 
-    if (tag === Tags.WILDCARD) tagCount += LeadersExpansion.getBonusWildTags(this);
+    if (tag === Tags.WILDCARD || includeTagSubstitutions) {
+      tagCount += LeadersExpansion.getBonusWildTags(this);
+    }
 
     tagCount = MarsCoalition.checkBonusWildTag(this, tag, tagCount);
 
     if (includeTagSubstitutions) {
       // Earth Embassy hook
       if (tag === Tags.EARTH && this.cardIsInEffect(CardName.EARTH_EMBASSY)) {
-        tagCount += this.getRawTagCount(Tags.MOON, includeEvents);
+        tagCount += this.getRawTagCount(Tags.MOON, false);
       }
 
       if (tag !== Tags.WILDCARD) {
-        tagCount += this.getRawTagCount(Tags.WILDCARD, includeEvents);
+        tagCount += this.getRawTagCount(Tags.WILDCARD, false);
       }
     }
 
-    // // Habitat Marte hook
-    // if (mode !== 'raw') {
-    //   if (tag === Tags.SCIENCE && this.corporationCard?.name === CardName.HABITAT_MARTE) {
-    //     tagCount += this.getRawTagCount(Tags.MARS, includeEvents);
-    //   }
-    // }
-
-    // // Chimera hook
-    // if (this.corporationCard?.name === CardName.CHIMERA) {
-    //   // Milestones don't count wild tags, so in this case one will be added.
-    //   if (mode === 'award') {
-    //     tagCount++;
-    //   }
-    //   // Milestones count wild tags, so in this case one will be deducted.
-    //   if (mode === 'milestone') {
-    //     tagCount--;
-    //   }
-    // }
     return tagCount;
   }
 
   public cardHasTag(card: ICard, target: Tags): boolean {
     for (const tag of card.tags) {
       if (tag === target) return true;
-      // if (tag === Tags.MARS &&
-      //     target === Tags.SCIENCE &&
-      //     this.corporationCard?.name === CardName.HABITAT_MARTE) {
-      //   return true;
-      // }
     }
     return false;
   }
@@ -925,10 +857,6 @@ export class Player implements ISerializable<SerializedPlayer> {
     let count = 0;
     for (const tag of card.tags) {
       if (tag === target) count++;
-      // if (tag === Tags.MARS && target === Tags.SCIENCE &&
-      //     this.corporationCard?.name === CardName.HABITAT_MARTE) {
-      //   count++;
-      // }
     }
     return count;
   }
@@ -965,9 +893,6 @@ export class Player implements ISerializable<SerializedPlayer> {
 
     tagCount += this.getRawTagCount(Tags.WILDCARD, false);
 
-    // // Chimera has 2 wild tags but should only count as one for milestones.
-    // if (this.corporationCard?.name === CardName.CHIMERA && mode === 'milestones') tagCount--;
-
     return tagCount;
   }
 
@@ -997,18 +922,10 @@ export class Player implements ISerializable<SerializedPlayer> {
 
     if (mode === 'globalEvent') return uniqueTags.size;
 
-    // Leavitt Station hook
-
-    // if (mode === 'milestone' && this.corporationCard?.name === CardName.CHIMERA) wildTagCount--;
-
-    // TODO(kberg): it might be more correct to count all the tags
-    // in a game regardless of expansion? But if that happens it needs
-    // to be done once, during set-up so that this operation doesn't
-    // always go through every tag every time.
     let maxTagCount = 10;
     if (this.game.gameOptions.venusNextExtension) maxTagCount++;
     if (this.game.gameOptions.moonExpansion) maxTagCount++;
-    // if (this.game.gameOptions.pathfindersExpansion) maxTagCount++;
+
     const total = uniqueTags.size + wildTagCount;
     return Math.min(total, maxTagCount);
   }
@@ -1017,7 +934,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   public checkMultipleTagPresence(tags: Array<Tags>): boolean {
     let distinctCount = 0;
     tags.forEach((tag) => {
-      if (this.getTagCountNew(tag, 'raw') > 0) {
+      if (this.getTagCount(tag, 'raw') > 0) {
         distinctCount++;
       } else if (tag === Tags.SCIENCE && this.hasTurmoilScienceTagBonus) {
         distinctCount++;

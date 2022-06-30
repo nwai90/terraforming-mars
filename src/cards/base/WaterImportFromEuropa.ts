@@ -34,7 +34,7 @@ export class WaterImportFromEuropa extends Card implements IActionCard, IProject
     });
   }
   public getVictoryPoints(player: Player) {
-    return player.getTagCount(Tags.JOVIAN, false, false);
+    return player.getTagCount(Tags.JOVIAN, 'raw');
   }
   public play() {
     return undefined;

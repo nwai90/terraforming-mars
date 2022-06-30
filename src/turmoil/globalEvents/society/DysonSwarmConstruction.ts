@@ -57,6 +57,6 @@ export class DysonSwarmConstruction implements IGlobalEvent {
       }
     }
     public getScore(player: Player, turmoil: Turmoil) {
-      return player.getTagCount(Tags.SPACE, false, false) + turmoil.getPlayerInfluence(player);
+      return player.getTagCount(Tags.SPACE, 'raw') + turmoil.getPlayerInfluence(player);
     }
 }

@@ -16,7 +16,7 @@ export class AdaptedPathogens implements IGlobalEvent {
 
     public resolve(game: Game, turmoil: Turmoil) {
       game.getPlayers().forEach((player) => {
-        const microbeTagCount = Math.min(player.getTagCount(Tags.MICROBE, false, false), 5);
+        const microbeTagCount = Math.min(player.getTagCount(Tags.MICROBE, 'raw'), 5);
         if (microbeTagCount > 0) {
           player.addResource(Resources.MEGACREDITS, microbeTagCount * 2, {log: true});
         }

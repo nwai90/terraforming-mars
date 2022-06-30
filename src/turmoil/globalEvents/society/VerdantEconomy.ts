@@ -14,7 +14,7 @@ export class VerdantEconomy implements IGlobalEvent {
 
     public resolve(game: Game, turmoil: Turmoil) {
       game.getPlayers().forEach((player) => {
-        const tagCount = Math.min(player.getTagCount(Tags.PLANT, false, false), 5) + turmoil.getPlayerInfluence(player);
+        const tagCount = Math.min(player.getTagCount(Tags.PLANT, 'raw'), 5) + turmoil.getPlayerInfluence(player);
 
         if (tagCount > 0) {
           player.addResource(Resources.MEGACREDITS, tagCount * 2, {log: true});

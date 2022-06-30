@@ -14,7 +14,7 @@ export class MagneticShield implements IGlobalEvent {
 
     public resolve(game: Game, turmoil: Turmoil) {
       game.getPlayers().forEach((player) => {
-        let powerTagsCount = Math.min(player.getTagCount(Tags.ENERGY), 5);
+        let powerTagsCount = Math.min(player.getTagCount(Tags.ENERGY, 'raw'), 5);
         powerTagsCount = Math.max(powerTagsCount - turmoil.getPlayerInfluence(player), 0);
         if (powerTagsCount > 0) player.deductResource(Resources.MEGACREDITS, powerTagsCount * 4, {log: true});
       });

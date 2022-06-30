@@ -8,7 +8,7 @@ export class Contractor implements IAward {
     public name: string = 'Contractor';
     public description: string = 'Most building tags (event cards do not count)'
     public getScore(player: Player): number {
-      let score = player.getTagCountNew(Tags.BUILDING, 'award');
+      let score = player.getTagCount(Tags.BUILDING, 'award');
       if (player.cardIsInEffect(CardName.ASIMOV)) score += ASIMOV_AWARD_BONUS;
       return score;
     }

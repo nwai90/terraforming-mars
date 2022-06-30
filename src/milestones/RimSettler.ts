@@ -7,7 +7,7 @@ export class RimSettler implements IMilestone {
     public description: string = 'Have 3 Jovian tags';
 
     public getScore(player: Player): number {
-      return player.getTagCountNew(Tags.JOVIAN, 'milestone');
+      return player.getTagCount(Tags.JOVIAN, 'milestone');
     }
     public canClaim(player: Player): boolean {
       return this.getScore(player) >= 3;

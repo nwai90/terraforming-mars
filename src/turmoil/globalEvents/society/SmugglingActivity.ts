@@ -14,7 +14,7 @@ export class SmugglingActivity implements IGlobalEvent {
 
     public resolve(game: Game, turmoil: Turmoil) {
       game.getPlayers().forEach((player) => {  
-        const amount = Math.min(player.getTagCount(Tags.JOVIAN, false, false), 5) + turmoil.getPlayerInfluence(player);
+        const amount = Math.min(player.getTagCount(Tags.JOVIAN, 'raw'), 5) + turmoil.getPlayerInfluence(player);
         player.addResource(Resources.MEGACREDITS, amount * 2, {log: true});
       });
 

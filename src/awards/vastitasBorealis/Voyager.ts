@@ -9,7 +9,7 @@ export class Voyager implements IAward {
   public description: string = 'Most Jovian tags in play'
 
   public getScore(player: Player): number {
-    let score = player.getTagCountNew(Tags.JOVIAN, 'award');
+    let score = player.getTagCount(Tags.JOVIAN, 'award');
     if (player.cardIsInEffect(CardName.ASIMOV)) score += ASIMOV_AWARD_BONUS;
 
     return score;
