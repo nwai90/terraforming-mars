@@ -11,6 +11,7 @@ import {GlobalParameterValue} from './GlobalParameterValue';
 import {MoonGlobalParameterValue} from './MoonGlobalParameterValue';
 import {GlobalParameter} from '../GlobalParameter';
 import {MoonModel} from '../models/MoonModel';
+import {LanguageIcon} from './LanguageIcon';
 
 export const Sidebar = Vue.component('sidebar', {
   props: {
@@ -70,6 +71,7 @@ export const Sidebar = Vue.component('sidebar', {
     'game-setup-detail': GameSetupDetail,
     'global-parameter-value': GlobalParameterValue,
     'moon-global-parameter-value': MoonGlobalParameterValue,
+    'language-icon': LanguageIcon,
   },
   mixins: [TranslateMixin],
   data: function() {
@@ -251,6 +253,9 @@ export const Sidebar = Vue.component('sidebar', {
                         <i class="preferences_icon preferences_icon--colonies"></i>
                     </div>
                 </a>
+
+                <language-icon></language-icon>
+
                 <div class="preferences_item preferences_item--info">
                   <i class="preferences_icon preferences_icon--info"
                   :class="{'preferences_item--is-active': ui.gamesetup_detail_open}"
@@ -322,9 +327,9 @@ export const Sidebar = Vue.component('sidebar', {
                     <div class="preferences_panel_item form-group">
                         <label class="form-label"><span v-i18n>Language</span> (<a href="javascript:document.location.reload(true);" v-i18n>refresh page</a> <span v-i18n>to see changes</span>)</label>
                         <div class="preferences_panel_langs">
-                            <label class="form-radio" v-for="language in langs">
-                                <input name="lang" type="radio" v-on:change="updatePreferences" v-model="lang" :value="language.id" />
-                                <i class="form-icon"></i> {{ language.title }}
+                            <label class="form-radio" v-for="language in LANGUAGES" :key="language.id">
+                            <input name="lang" type="radio" v-on:change="updatePreferences" v-model="prefs.lang" :value="language.id">
+                            <i class="form-icon"></i>{{ language.title }}
                             </label>
                         </div>
                     </div>

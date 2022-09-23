@@ -9,18 +9,18 @@ export const LanguageSwitcher = Vue.component('language-switcher', {
     };
   },
   methods: {
-    switchLanguageTo: function(langId: string, reloadThePage: boolean = false) {
+    switchLanguageTo: function(langId: string) {
       PreferencesManager.save('lang', langId);
-      if (reloadThePage) window.location = window.location;
+      window.location.reload();
     },
   },
   template: `
         <div class="language-switcher">
             <div
                 v-for="lang in languages"
-                :class="'language-icon language-icon--'+lang.id"
+                :class="'language-icon language-icon--'+lang.id language-icon-for-switcher"
                 :title="lang.title"
-                v-on:click="switchLanguageTo(lang.id, true)"></div>
+                v-on:click="switchLanguageTo(lang.id)">&nbsp;</div>
         </div>
     `,
 });
