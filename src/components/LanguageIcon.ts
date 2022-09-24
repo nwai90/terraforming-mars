@@ -5,7 +5,7 @@ import {PreferencesManager} from './PreferencesManager';
 export const LanguageIcon = Vue.component('language-icon', {
   name: 'LanguageIcon',
   components: {
-    'language-selection-dialog': LanguageSelectionDialog,
+    // 'language-selection-dialog': LanguageSelectionDialog,
   },
   data() {
     return {
@@ -28,11 +28,11 @@ export const LanguageIcon = Vue.component('language-icon', {
     <div
       class="preferences_icon preferences_icon--language"
       :class="{'preferences_item--is-active': languagePanelOpen}">
-      <div :class="language-icon language-icon-for-sidebar language-icon--${lang}"
+      <div :class="'language-icon language-icon-for-sidebar language-icon--' + this.lang()'"
       :title="title"
       v-on:click="languagePanelOpen = !languagePanelOpen"/>
       </div>
-    <language-selection-dialog v-show="languagePanelOpen" :preferencesManager="preferencesManager"/>
+    <language-selection-dialog v-show="langua gePanelOpen" :preferencesManager="preferencesManager"/>
   </div>
   `,
 });
