@@ -324,16 +324,6 @@ export const Sidebar = Vue.component('sidebar', {
                         </label>
                     </div>
 
-                    <div class="preferences_panel_item form-group">
-                        <label class="form-label"><span v-i18n>Language</span> (<a href="javascript:document.location.reload(true);" v-i18n>refresh page</a> <span v-i18n>to see changes</span>)</label>
-                        <div class="preferences_panel_langs">
-                            <label class="form-radio" v-for="language in LANGUAGES" :key="language.id">
-                            <input name="lang" type="radio" v-on:change="updatePreferences" v-model="prefs.lang" :value="language.id">
-                            <i class="form-icon"></i>{{ language.title }}
-                            </label>
-                        </div>
-                    </div>
-
                     <div class="preferences_panel_actions">
                       <button class="btn btn-lg btn-primary" v-on:click="ui.preferences_panel_open=false">Ok</button>
                     </div>

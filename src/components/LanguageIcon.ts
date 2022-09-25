@@ -1,11 +1,12 @@
 import Vue from 'vue';
 import {LANGUAGES2} from '../constants';
+import {LanguageSelectionDialog} from './LanguageSelectionDialog';
 import {PreferencesManager} from './PreferencesManager';
 
 export const LanguageIcon = Vue.component('language-icon', {
   name: 'LanguageIcon',
   components: {
-    // 'language-selection-dialog': LanguageSelectionDialog,
+    'language-selection-dialog': LanguageSelectionDialog,
   },
   data() {
     return {
@@ -32,7 +33,7 @@ export const LanguageIcon = Vue.component('language-icon', {
       :title="title"
       v-on:click="languagePanelOpen = !languagePanelOpen"/>
       </div>
-    <language-selection-dialog v-show="langua gePanelOpen" :preferencesManager="preferencesManager"/>
+    <language-selection-dialog v-show="languagePanelOpen" :preferencesManager="preferencesManager"/>
   </div>
   `,
 });
