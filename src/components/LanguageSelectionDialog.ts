@@ -27,9 +27,10 @@ export const LanguageSelectionDialog = Vue.component('language-selection-dialog'
         <label class="form-radio" v-for="lang in LANGUAGES" :key="lang.id">
           <div
             :key="lang.id"
-            :class="'language-icon language-icon--' + lang.id'"
+            :class="'language-icon language-icon--' + lang.id"
             :title="lang.title"
             @click="switchLanguageTo(lang.id)"
+            style="vertical-align:sub;"
           />
           {{ lang.title }}
         </label>

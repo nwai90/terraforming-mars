@@ -2,6 +2,7 @@ import Vue from 'vue';
 import {LANGUAGES2} from '../constants';
 import {LanguageSelectionDialog} from './LanguageSelectionDialog';
 import {PreferencesManager} from './PreferencesManager';
+import {TranslateMixin} from './TranslateMixin';
 
 export const LanguageIcon = Vue.component('language-icon', {
   name: 'LanguageIcon',
@@ -13,6 +14,12 @@ export const LanguageIcon = Vue.component('language-icon', {
       languagePanelOpen: false,
     };
   },
+  methods: {
+    toggleLanguagePanelOpen: function(): void {
+      this.languagePanelOpen = !this.languagePanelOpen;
+    },
+  },
+  mixins: [TranslateMixin],
   computed: {
     preferencesManager(): PreferencesManager {
       return PreferencesManager;
@@ -29,9 +36,9 @@ export const LanguageIcon = Vue.component('language-icon', {
     <div
       class="preferences_icon preferences_icon--language"
       :class="{'preferences_item--is-active': languagePanelOpen}">
-      <div :class="'language-icon language-icon-for-sidebar language-icon--' + this.lang()'"
+      <div :class="'language-icon language-icon--for-sidebar language-icon--' + lang"
       :title="title"
-      v-on:click="languagePanelOpen = !languagePanelOpen"/>
+      v-on:click="toggleLanguagePanelOpen"/>
       </div>
     <language-selection-dialog v-show="languagePanelOpen" :preferencesManager="preferencesManager"/>
   </div>
