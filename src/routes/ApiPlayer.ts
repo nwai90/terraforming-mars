@@ -26,7 +26,7 @@ export class ApiPlayer extends Handler {
         const player = game.getPlayerById(playerId);
 
         // Don't bother with password for solo mode
-        if (game.isSoloMode() || game.gameOptions.requiresPassword === false || game.gameOptions.requiresPassword === undefined) {
+        if (game.isSoloMode()) {
           ctx.route.writeJson(res, Server.getPlayerModel(player));
         } else {
           if (player.password === undefined) {

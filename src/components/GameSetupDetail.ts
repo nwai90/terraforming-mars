@@ -104,11 +104,6 @@ export const GameSetupDetail = Vue.component('game-setup-detail', {
             <li v-if="gameOptions.requiresVenusTrackCompletion">Require Terraforming Venus to end the game</li>
             <li v-if="gameOptions.requiresMoonTrackCompletion">Require Terraforming The Moon to end the game</li>
 
-            <li><div class="setup-item" v-i18n>Password:</div>
-                <div v-if="gameOptions.requiresPassword" class="game-config generic" v-i18n>Required</div>
-                <div v-else class="game-config generic" v-i18n>Not required</div>
-            </li>
-
             <li v-if="playerNumber > 1">
               <div class="setup-item" v-i18n>Milestones and Awards:</div>
               <div v-if="isRandomMANone()" class="game-config generic" v-i18n>Board-defined</div>

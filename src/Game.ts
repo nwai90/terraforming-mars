@@ -136,7 +136,6 @@ export interface GameOptions {
   escapeVelocityThreshold?: number;
   escapeVelocityPeriod?: number;
   escapeVelocityPenalty?: number;
-  requiresPassword: boolean;
   automaSoloVariant: boolean;
 }
 
@@ -172,7 +171,6 @@ const DEFAULT_GAME_OPTIONS: GameOptions = {
   randomMA: RandomMAOptionType.NONE,
   randomTurmoil: false,
   requiresMoonTrackCompletion: false,
-  requiresPassword: true,
   requiresVenusTrackCompletion: false,
   showTimers: true,
   shuffleMapOption: false,

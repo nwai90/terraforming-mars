@@ -81,7 +81,7 @@ export const GameHome = Vue.component('game-home', {
       <div id="game-home" class="game-home-container">
         <h1><span v-i18n>Terraforming mars</span> [game id: <span>{{getGameId()}}</span>]</h1>
         <h4 style="width:80%" v-i18n>Instructions: To start the game, share this page with all the players or separately copy and share the links with each player. Click on your name to start the game.</h4>
-        <h4 v-if="game.gameOptions.requiresPassword" style="width:80%" v-i18n>The first time someone clicks on a link, they will receive a password. From then on, only the player with the password can access that player page.</h4>
+        <h4 style="width:80%" v-i18n>The first time someone clicks on a link, they will receive a password. From then on, only the player with the password can access that player page.</h4>
         <ul>
           <li v-for="(player, index) in (game === undefined ? [] : game.players)">
             <span class="turn-order">{{getTurnOrder(index)}}</span>

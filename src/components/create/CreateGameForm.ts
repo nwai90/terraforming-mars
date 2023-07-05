@@ -77,7 +77,6 @@ export interface CreateGameModel {
     escapeVelocityThreshold: number;
     escapeVelocityPeriod: number;
     escapeVelocityPenalty: number;
-    requiresPassword: boolean;
     automaSoloVariant: boolean;
     preludeTwoExtension: boolean;
 }
@@ -165,7 +164,6 @@ export const CreateGameForm = Vue.component('create-game-form', {
       allOfficialExpansions: false,
       requiresVenusTrackCompletion: false,
       requiresMoonTrackCompletion: false,
-      requiresPassword: true,
       moonStandardProjectVariant: false,
       altVenusBoard: false,
       escapeVelocityMode: false,
@@ -529,7 +527,6 @@ export const CreateGameForm = Vue.component('create-game-form', {
       const randomFirstPlayer = component.randomFirstPlayer;
       const requiresVenusTrackCompletion = component.requiresVenusTrackCompletion;
       const requiresMoonTrackCompletion = component.requiresMoonTrackCompletion;
-      const requiresPassword = true;
       const escapeVelocityMode = component.escapeVelocityMode;
       const escapeVelocityThreshold = component.escapeVelocityMode ? component.escapeVelocityThreshold : undefined;
       const escapeVelocityPeriod = component.escapeVelocityMode ? component.escapeVelocityPeriod : undefined;
@@ -622,7 +619,6 @@ export const CreateGameForm = Vue.component('create-game-form', {
         randomFirstPlayer,
         requiresVenusTrackCompletion,
         requiresMoonTrackCompletion,
-        requiresPassword,
         moonStandardProjectVariant: component.moonStandardProjectVariant,
         altVenusBoard: component.altVenusBoard,
         escapeVelocityMode,

@@ -672,7 +672,6 @@ function getGameOptionsAsModel(options: GameOptions): GameOptionsModel {
     turmoilExtension: options.turmoilExtension,
     twoCorpsVariant: options.twoCorpsVariant,
     venusNextExtension: options.venusNextExtension,
-    requiresPassword: options.requiresPassword,
     requiresVenusTrackCompletion: options.requiresVenusTrackCompletion,
     automaSoloVariant: options.automaSoloVariant,
     preludeTwoExtension: options.preludeTwoExtension,

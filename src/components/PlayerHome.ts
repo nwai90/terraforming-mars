@@ -180,9 +180,8 @@ export const PlayerHome = Vue.component('player-home', {
     isPasswordNeeded: function(): boolean {
       const isGameNotEnded = this.player.phase !== Phase.END;
       const isMultiPlayerGame = this.player.players.length !== 1;
-      const isPasswordRequired = this.player.gameOptions.requiresPassword === true;
       const currentlyHasNoPassword = window.location.href.includes('password') === false;
-      return isGameNotEnded && isMultiPlayerGame && isPasswordRequired && currentlyHasNoPassword;
+      return isGameNotEnded && isMultiPlayerGame && currentlyHasNoPassword;
     },
     getPasswordLink: function(): string {
       return '/player?id=' + this.player.id + '&password=' + this.player.password;

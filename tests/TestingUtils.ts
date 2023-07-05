@@ -101,7 +101,6 @@ export class TestingUtils {
       escapeVelocityThreshold: undefined,
       escapeVelocityPeriod: undefined,
       escapeVelocityPenalty: undefined,
-      requiresPassword: true,
     };
 
     return Object.assign(defaultOptions, options);
