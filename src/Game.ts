@@ -172,7 +172,7 @@ const DEFAULT_GAME_OPTIONS: GameOptions = {
   randomMA: RandomMAOptionType.NONE,
   randomTurmoil: false,
   requiresMoonTrackCompletion: false,
-  requiresPassword: false,
+  requiresPassword: true,
   requiresVenusTrackCompletion: false,
   showTimers: true,
   shuffleMapOption: false,
