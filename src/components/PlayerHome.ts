@@ -177,15 +177,6 @@ export const PlayerHome = Vue.component('player-home', {
         return '';
       }
     },
-    isPasswordNeeded: function(): boolean {
-      const isGameNotEnded = this.player.phase !== Phase.END;
-      const isMultiPlayerGame = this.player.players.length !== 1;
-      const currentlyHasNoPassword = window.location.href.includes('password') === false;
-      return isGameNotEnded && isMultiPlayerGame && currentlyHasNoPassword;
-    },
-    getPasswordLink: function(): string {
-      return '/player?id=' + this.player.id + '&password=' + this.player.password;
-    },
   },
   destroyed: function() {
     window.removeEventListener('keydown', this.navigatePage);
@@ -193,7 +184,11 @@ export const PlayerHome = Vue.component('player-home', {
   mounted: function() {
     window.addEventListener('keydown', this.navigatePage);
 
-    if (window.location.href.includes('serverId')) {
+    const isGameNotEnded = this.player.phase !== Phase.END;
+    const isMultiPlayerGame = this.player.players.length !== 1;
+    const currentlyHasNoPassword = window.location.href.includes('password') === false;
+
+    if (window.location.href.includes('serverId') || (isGameNotEnded && isMultiPlayerGame && currentlyHasNoPassword)) {
       window.location.replace('/player?id=' + this.player.id + '&password=' + this.player.password);
     }
 
@@ -205,255 +200,243 @@ export const PlayerHome = Vue.component('player-home', {
   },
   template: `
         <div id="player-home" :class="(player.turmoil ? 'with-turmoil': '')">
-            <template v-if="isPasswordNeeded()">
-                <a :href="getPasswordLink()">
-                <span class="btn unlock-account">
-                &#x1f510 Collect your password and unlock your account.
-                </span>
-                </a>
-                <div class="password-warning">
-                DO NOT CLOSE or REFRESH this page until you click on the button or you will permanently lose your password.<br>
-                If you need to open the link on another device, write down the password or copy the URL after clicking on the button.
+            <top-bar :player="player" />
+
+            <div v-if="player.phase === 'end'">
+                <div class="player_home_block">
+                    <dynamic-title title="This game is over!" :color="player.color"/>
+                    <a :href="'/the-end?id='+ player.id" v-i18n>Go to game results</a>
                 </div>
-            </template>
+            </div>
 
-            <template v-else>
-                <top-bar :player="player" />
+            <sidebar v-trim-whitespace
+            :player_color="player.color"
+            :generation="player.generation"
+            :coloniesCount="player.colonies.length"
+            :temperature = "player.temperature"
+            :oxygen = "player.oxygenLevel"
+            :oceans = "player.oceans"
+            :venus = "player.venusScaleLevel"
+            :turmoil = "player.turmoil"
+            :moonData="player.moon"
+            :gameOptions = "player.gameOptions"
+            :playerNumber = "player.players.length"
+            :silverCubeVariant = "player.silverCubeVariant"
+            :temperatureSilverCubeBonusMC = "player.temperatureSilverCubeBonusMC"
+            :oceansSilverCubeBonusMC = "player.oceansSilverCubeBonusMC"
+            :oxygenSilverCubeBonusMC = "player.oxygenSilverCubeBonusMC"
+            :venusSilverCubeBonusMC = "player.venusSilverCubeBonusMC"
+            :lastSoloGeneration = "player.lastSoloGeneration"
+            >
+                <div class="deck-size">{{ player.deckSize }}</div>
+            </sidebar>
 
-                <div v-if="player.phase === 'end'">
-                    <div class="player_home_block">
-                        <dynamic-title title="This game is over!" :color="player.color"/>
-                        <a :href="'/the-end?id='+ player.id" v-i18n>Go to game results</a>
+            <div v-if="player.corporationCards.length > 0">
+                <div class="player_home_block">
+                    <a name="board" class="player_home_anchor"></a>
+                    <board
+                    :spaces="player.spaces"
+                    :venusNextExtension="player.gameOptions.venusNextExtension"
+                    :venusScaleLevel="player.venusScaleLevel"
+                    :altVenusBoard="player.gameOptions.altVenusBoard"
+                    :automaSoloVariant="player.gameOptions.automaSoloVariant"
+                    :boardName ="player.gameOptions.boardName"
+                    :oceans_count="player.oceans"
+                    :oxygen_level="player.oxygenLevel"
+                    :temperature="player.temperature"
+                    :aresExtension="player.gameOptions.aresExtension"
+                    :aresData="player.aresData"
+                    :promoCardsOption="player.gameOptions.promoCardsOption"
+                    id="shortkey-board">
+                    </board>
+
+                    <turmoil v-if="player.turmoil" :turmoil="player.turmoil"></turmoil>
+
+                    <moonboard v-if="player.gameOptions.moonExpansion" :model="player.moon" :automaSoloVariant="player.gameOptions.automaSoloVariant"></moonboard>
+
+                    <div v-if="player.players.length > 1 || (player.players.length === 1 && player.gameOptions.automaSoloVariant)" class="player_home_block--milestones-and-awards">
+                        <milestone :milestones_list="player.milestones" :automaSoloVariant="player.gameOptions.automaSoloVariant" :corporations="player.corporationCards" :spectator="false" />
+                    </div>
+
+                    <div v-if="player.players.length > 1" class="player_home_block--milestones-and-awards">
+                        <award :awards_list="player.awards" :corporations="player.corporationCards" :spectator="false" />
                     </div>
                 </div>
 
-                <sidebar v-trim-whitespace
-                :player_color="player.color"
-                :generation="player.generation"
-                :coloniesCount="player.colonies.length"
-                :temperature = "player.temperature"
-                :oxygen = "player.oxygenLevel"
-                :oceans = "player.oceans"
-                :venus = "player.venusScaleLevel"
-                :turmoil = "player.turmoil"
-                :moonData="player.moon"
-                :gameOptions = "player.gameOptions"
-                :playerNumber = "player.players.length"
-                :silverCubeVariant = "player.silverCubeVariant"
-                :temperatureSilverCubeBonusMC = "player.temperatureSilverCubeBonusMC"
-                :oceansSilverCubeBonusMC = "player.oceansSilverCubeBonusMC"
-                :oxygenSilverCubeBonusMC = "player.oxygenSilverCubeBonusMC"
-                :venusSilverCubeBonusMC = "player.venusSilverCubeBonusMC"
-                :lastSoloGeneration = "player.lastSoloGeneration"
-                >
-                    <div class="deck-size">{{ player.deckSize }}</div>
-                </sidebar>
+                <players-overview class="player_home_block player_home_block--players nofloat:" :player="player" v-trim-whitespace id="shortkey-playersoverview"/>
 
-                <div v-if="player.corporationCards.length > 0">
-                    <div class="player_home_block">
-                        <a name="board" class="player_home_anchor"></a>
+                <div class="player_home_block player_home_block--log player_home_block--hide_log nofloat">
+                    <log-panel :id="player.id" :players="player.players" :generation="player.generation" :lastSoloGeneration="player.lastSoloGeneration" :color="player.color"></log-panel>
+                </div>
+
+                <div class="player_home_block player_home_block--actions nofloat">
+                    <a name="actions" class="player_home_anchor"></a>
+                    <dynamic-title title="Actions" :color="player.color"/>
+                    <waiting-for v-if="player.phase !== 'end'" :players="player.players" :player="player" :settings="settings" :waitingfor="player.waitingFor"></waiting-for>
+                </div>
+
+                <div class="player_home_block player_home_block--hand" v-if="player.draftedCards.length > 0">
+                    <dynamic-title title="Drafted cards" :color="player.color" />
+                    <div v-for="card in player.draftedCards" :key="card.name" class="cardbox">
+                        <Card :card="card"/>
+                    </div>
+                </div>
+
+                <a name="cards" class="player_home_anchor"></a>
+                <div class="player_home_block player_home_block--hand" v-if="player.cardsInHand.length + player.preludeCardsInHand.length + player.leaderCardsInHand.length > 0" id="shortkey-hand">
+                    <dynamic-title title="Cards In Hand" :color="player.color" :withAdditional="true" :additional="(player.cardsInHandNbr + player.preludeCardsInHand.length + player.leaderCardsInHand.length).toString()" />
+                    <sortable-cards :playerId="player.id" :cards="player.preludeCardsInHand.concat(player.leaderCardsInHand, player.cardsInHand)" />
+                </div>
+
+                <div class="player_home_block player_home_block--cards"">
+                    <dynamic-title title="Played Cards" :color="player.color" :withAdditional="true" :additional="getPlayerCardsPlayed(player, true).toString()" />
+                    <div class="hiding-card-button-row">
+                        <div :class="getHideButtonClass('ACTIVE')" v-on:click.prevent="toggle('ACTIVE')">
+                            <span v-i18n>{{ getToggleLabel('ACTIVE')}}</span>
+                            <span>{{'&nbsp;('+getCardsByType(player.playedCards, [getActiveCardType()]).length.toString()+')' }}</span>
+                        </div>
+                        <div :class="getHideButtonClass('AUTOMATED')" v-on:click.prevent="toggle('AUTOMATED')">
+                            <span v-i18n>{{ getToggleLabel('AUTOMATED')}}</span>
+                            <span>{{'&nbsp;('+getCardsByType(player.playedCards, [getAutomatedCardType(), getPreludeCardType()]).length.toString()+')' }}</span>
+                        </div>
+                        <div :class="getHideButtonClass('EVENT')" v-on:click.prevent="toggle('EVENT')">
+                            <span v-i18n>{{ getToggleLabel('EVENT')}}</span>
+                            <span>{{'&nbsp;('+getCardsByType(player.playedCards, [getEventCardType()]).length.toString()+')' }}</span>
+                        </div>
+                    </div>
+
+                    <div v-for="card in player.corporationCards" class="cardbox">
+                        <Card :card="card" :actionUsed="isCardActivated(card, player)"/>
+                    </div>
+
+                    <div v-for="card in getCardsByType(player.playedCards, [getLeaderCardType()])" :key="card.name" class="cardbox">
+                        <Card :card="card" :actionUsed="isCardActivated(card, player)"/>
+                    </div>
+
+                    <div v-show="isVisible('ACTIVE')" v-for="card in sortActiveCards(getCardsByType(player.playedCards, [getActiveCardType()]))" :key="card.name" class="cardbox">
+                        <Card :card="card" :actionUsed="isCardActivated(card, player)"/>
+                    </div>
+
+                    <stacked-cards v-show="isVisible('AUTOMATED')" :cards="getCardsByType(player.playedCards, [getAutomatedCardType(), getPreludeCardType()])" ></stacked-cards>
+
+                    <stacked-cards v-show="isVisible('EVENT')" :cards="getCardsByType(player.playedCards, [getEventCardType()])" ></stacked-cards>
+                </div>
+
+                <div v-if="player.selfReplicatingRobotsCards.length > 0" class="player_home_block">
+                    <dynamic-title title="Self-Replicating Robots cards" :color="player.color"/>
+                    <div>
+                        <div v-for="card in getCardsByType(player.selfReplicatingRobotsCards, [getActiveCardType()])" :key="card.name" class="cardbox">
+                            <Card :card="card"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="player_home_block player_home_block--setup nofloat"  v-if="player.corporationCards.length === 0">
+                <div v-for="card in player.dealtCorporationCards" :key="card.name" class="cardbox" v-if="isInitialDraftingPhase()">
+                    <Card :card="card"/>
+                </div>
+
+                <div v-for="card in player.dealtPreludeCards" :key="card.name" class="cardbox" v-if="isInitialDraftingPhase()">
+                    <Card :card="card"/>
+                </div>
+
+                <div v-for="card in player.dealtLeaderCards" :key="card.name" class="cardbox" v-if="isInitialDraftingPhase()">
+                    <Card :card="card"/>
+                </div>
+
+                <div v-for="card in player.dealtProjectCards" :key="card.name" class="cardbox" v-if="isInitialDraftingPhase()">
+                    <Card :card="card"/>
+                </div>
+
+                <div class="player_home_block player_home_block--hand" v-if="player.draftedCards.length > 0">
+                    <dynamic-title title="Drafted Cards" :color="player.color"/>
+                    <div v-for="card in player.draftedCards" :key="card.name" class="cardbox">
+                        <Card :card="card"/>
+                    </div>
+                </div>
+
+                <template v-if="player.pickedCorporationCard.length === 1">
+                    <dynamic-title title="Your selected cards:" :color="player.color"/>
+                    <div>
+                        <div class="cardbox">
+                            <Card :card="player.pickedCorporationCard[0]"/>
+                        </div>
+                        <div v-if="player.gameOptions.preludeExtension" v-for="card in player.preludeCardsInHand" :key="card.name" class="cardbox">
+                            <Card :card="card"/>
+                        </div>
+                        <div v-if="player.gameOptions.leadersExpansion" v-for="card in player.leaderCardsInHand" :key="card.name" class="cardbox">
+                            <Card :card="card"/>
+                        </div>
+                    </div>
+                    <div>
+                        <div v-for="card in player.cardsInHand" :key="card.name" class="cardbox">
+                            <Card :card="card"/>
+                        </div>
+                    </div>
+                </template>
+
+                <dynamic-title v-if="player.pickedCorporationCard.length === 0" title="Select initial cards:" :color="player.color"/>
+                <waiting-for v-if="player.phase !== 'end'" :players="player.players" :player="player" :settings="settings" :waitingfor="player.waitingFor"></waiting-for>
+
+                <dynamic-title title="Game details" :color="player.color"/>
+
+                <div class="player_home_block" v-if="player.players.length > 1 || (player.players.length === 1 && player.gameOptions.automaSoloVariant)">
+                    <milestone :show_scores="false" :milestones_list="player.milestones" :automaSoloVariant="player.gameOptions.automaSoloVariant" :corporations="player.corporationCards" :spectator="false" />
+                    <award :show_scores="false" :awards_list="player.awards" :corporations="player.corporationCards" :spectator="false" />
+                </div>
+
+                <div class="player_home_block player_home_block--turnorder nofloat" v-if="player.players.length>1">
+                    <dynamic-title title="Turn order" :color="player.color"/>
+                    <div class="player_item" v-for="(p, idx) in player.players" v-trim-whitespace>
+                        <div class="player_name_cont" :class="getPlayerCssForTurnOrder(p, true)">
+                            <span class="player_number">{{ idx+1 }}.</span><span class="player_name" :class="getPlayerCssForTurnOrder(p, false)" href="#">{{ p.name }}</span>
+                        </div>
+                        <div class="player_separator" v-if="idx !== player.players.length - 1">⟶</div>
+                    </div>
+                </div>
+
+                <details class="accordion board-accordion" open>
+                    <summary class="accordion-header">
+                        <div class="is-action">
+                            <i class="icon icon-arrow-right mr-1"></i>
+                            <span v-i18n>Board</span>
+                        </div>
+                    </summary>
+                    <div class="accordion-body">
                         <board
-                            :spaces="player.spaces"
-                            :venusNextExtension="player.gameOptions.venusNextExtension"
-                            :venusScaleLevel="player.venusScaleLevel"
-                            :altVenusBoard="player.gameOptions.altVenusBoard"
-                            :automaSoloVariant="player.gameOptions.automaSoloVariant"
-                            :boardName ="player.gameOptions.boardName"
-                            :oceans_count="player.oceans"
-                            :oxygen_level="player.oxygenLevel"
-                            :temperature="player.temperature"
-                            :aresExtension="player.gameOptions.aresExtension"
-                            :aresData="player.aresData"
-                            :promoCardsOption="player.gameOptions.promoCardsOption"
-                            id="shortkey-board"></board>
+                        :spaces="player.spaces"
+                        :venusNextExtension="player.gameOptions.venusNextExtension"
+                        :venusScaleLevel="player.venusScaleLevel"
+                        :altVenusBoard="player.gameOptions.altVenusBoard"
+                        :automaSoloVariant="player.gameOptions.automaSoloVariant"
+                        :boardName ="player.gameOptions.boardName"
+                        :aresExtension="player.gameOptions.aresExtension"
+                        :aresData="player.aresData"
+                        :promoCardsOption="player.gameOptions.promoCardsOption">
+                        </board>
 
                         <turmoil v-if="player.turmoil" :turmoil="player.turmoil"></turmoil>
 
                         <moonboard v-if="player.gameOptions.moonExpansion" :model="player.moon" :automaSoloVariant="player.gameOptions.automaSoloVariant"></moonboard>
-
-                        <div v-if="player.players.length > 1 || (player.players.length === 1 && player.gameOptions.automaSoloVariant)" class="player_home_block--milestones-and-awards">
-                            <milestone :milestones_list="player.milestones" :automaSoloVariant="player.gameOptions.automaSoloVariant" :corporations="player.corporationCards" :spectator="false" />
-                        </div>
-
-                        <div v-if="player.players.length > 1" class="player_home_block--milestones-and-awards">
-                            <award :awards_list="player.awards" :corporations="player.corporationCards" :spectator="false" />
-                        </div>
                     </div>
+                </details>
+            </div>
 
-                    <players-overview class="player_home_block player_home_block--players nofloat:" :player="player" v-trim-whitespace id="shortkey-playersoverview"/>
-
-                    <div class="player_home_block player_home_block--log player_home_block--hide_log nofloat">
-                        <log-panel :id="player.id" :players="player.players" :generation="player.generation" :lastSoloGeneration="player.lastSoloGeneration" :color="player.color"></log-panel>
-                    </div>
-
-                    <div class="player_home_block player_home_block--actions nofloat">
-                        <a name="actions" class="player_home_anchor"></a>
-                        <dynamic-title title="Actions" :color="player.color"/>
-                        <waiting-for v-if="player.phase !== 'end'" :players="player.players" :player="player" :settings="settings" :waitingfor="player.waitingFor"></waiting-for>
-                    </div>
-
-                    <div class="player_home_block player_home_block--hand" v-if="player.draftedCards.length > 0">
-                        <dynamic-title title="Drafted cards" :color="player.color" />
-                        <div v-for="card in player.draftedCards" :key="card.name" class="cardbox">
-                            <Card :card="card"/>
-                        </div>
-                    </div>
-
-                    <a name="cards" class="player_home_anchor"></a>
-                    <div class="player_home_block player_home_block--hand" v-if="player.cardsInHand.length + player.preludeCardsInHand.length + player.leaderCardsInHand.length > 0" id="shortkey-hand">
-                        <dynamic-title title="Cards In Hand" :color="player.color" :withAdditional="true" :additional="(player.cardsInHandNbr + player.preludeCardsInHand.length + player.leaderCardsInHand.length).toString()" />
-                        <sortable-cards :playerId="player.id" :cards="player.preludeCardsInHand.concat(player.leaderCardsInHand, player.cardsInHand)" />
-                    </div>
-
-                    <div class="player_home_block player_home_block--cards"">
-                        <dynamic-title title="Played Cards" :color="player.color" :withAdditional="true" :additional="getPlayerCardsPlayed(player, true).toString()" />
-                        <div class="hiding-card-button-row">
-                            <div :class="getHideButtonClass('ACTIVE')" v-on:click.prevent="toggle('ACTIVE')">
-                            <span v-i18n>{{ getToggleLabel('ACTIVE')}}</span>
-                            <span>{{'&nbsp;('+getCardsByType(player.playedCards, [getActiveCardType()]).length.toString()+')' }}</span>
-                            </div>
-                            <div :class="getHideButtonClass('AUTOMATED')" v-on:click.prevent="toggle('AUTOMATED')">
-                            <span v-i18n>{{ getToggleLabel('AUTOMATED')}}</span>
-                            <span>{{'&nbsp;('+getCardsByType(player.playedCards, [getAutomatedCardType(), getPreludeCardType()]).length.toString()+')' }}</span>
-                            </div>
-                            <div :class="getHideButtonClass('EVENT')" v-on:click.prevent="toggle('EVENT')">
-                            <span v-i18n>{{ getToggleLabel('EVENT')}}</span>
-                            <span>{{'&nbsp;('+getCardsByType(player.playedCards, [getEventCardType()]).length.toString()+')' }}</span>
-                            </div>
-                        </div>
-                        <div v-for="card in player.corporationCards" class="cardbox">
-                            <Card :card="card" :actionUsed="isCardActivated(card, player)"/>
-                        </div>
-
-                        <div v-for="card in getCardsByType(player.playedCards, [getLeaderCardType()])" :key="card.name" class="cardbox">
-                            <Card :card="card" :actionUsed="isCardActivated(card, player)"/>
-                        </div>
-
-                        <div v-show="isVisible('ACTIVE')" v-for="card in sortActiveCards(getCardsByType(player.playedCards, [getActiveCardType()]))" :key="card.name" class="cardbox">
-                            <Card :card="card" :actionUsed="isCardActivated(card, player)"/>
-                        </div>
-
-                        <stacked-cards v-show="isVisible('AUTOMATED')" :cards="getCardsByType(player.playedCards, [getAutomatedCardType(), getPreludeCardType()])" ></stacked-cards>
-
-                        <stacked-cards v-show="isVisible('EVENT')" :cards="getCardsByType(player.playedCards, [getEventCardType()])" ></stacked-cards>
-                    </div>
-
-                    <div v-if="player.selfReplicatingRobotsCards.length > 0" class="player_home_block">
-                        <dynamic-title title="Self-Replicating Robots cards" :color="player.color"/>
-                        <div>
-                            <div v-for="card in getCardsByType(player.selfReplicatingRobotsCards, [getActiveCardType()])" :key="card.name" class="cardbox">
-                                <Card :card="card"/>
-                            </div>
-                        </div>
+            <div v-if="player.colonies.length > 0" class="player_home_block" ref="colonies" id="shortkey-colonies">
+                <a name="colonies" class="player_home_anchor"></a>
+                <dynamic-title title="Colonies" :color="player.color"/>
+                <div class="colonies-fleets-cont" v-if="player.corporationCards.length > 0">
+                    <div class="colonies-player-fleets" v-for="colonyPlayer in player.players">
+                        <div :class="'colonies-fleet colonies-fleet-'+ colonyPlayer.color" v-for="idx in getFleetsCountRange(colonyPlayer)"></div>
                     </div>
                 </div>
-
-                <div class="player_home_block player_home_block--setup nofloat"  v-if="player.corporationCards.length === 0">
-                    <div v-for="card in player.dealtCorporationCards" :key="card.name" class="cardbox" v-if="isInitialDraftingPhase()">
-                        <Card :card="card"/>
-                    </div>
-
-                    <div v-for="card in player.dealtPreludeCards" :key="card.name" class="cardbox" v-if="isInitialDraftingPhase()">
-                        <Card :card="card"/>
-                    </div>
-
-                    <div v-for="card in player.dealtLeaderCards" :key="card.name" class="cardbox" v-if="isInitialDraftingPhase()">
-                        <Card :card="card"/>
-                    </div>
-
-                    <div v-for="card in player.dealtProjectCards" :key="card.name" class="cardbox" v-if="isInitialDraftingPhase()">
-                        <Card :card="card"/>
-                    </div>
-
-                    <div class="player_home_block player_home_block--hand" v-if="player.draftedCards.length > 0">
-                        <dynamic-title title="Drafted Cards" :color="player.color"/>
-                        <div v-for="card in player.draftedCards" :key="card.name" class="cardbox">
-                            <Card :card="card"/>
-                        </div>
-                    </div>
-
-                    <template v-if="player.pickedCorporationCard.length === 1">
-                        <dynamic-title title="Your selected cards:" :color="player.color"/>
-                        <div>
-                            <div class="cardbox">
-                            <Card :card="player.pickedCorporationCard[0]"/>
-                            </div>
-                            <div v-if="player.gameOptions.preludeExtension" v-for="card in player.preludeCardsInHand" :key="card.name" class="cardbox">
-                            <Card :card="card"/>
-                            </div>
-                            <div v-if="player.gameOptions.leadersExpansion" v-for="card in player.leaderCardsInHand" :key="card.name" class="cardbox">
-                            <Card :card="card"/>
-                            </div>
-                        </div>
-                        <div>
-                            <div v-for="card in player.cardsInHand" :key="card.name" class="cardbox">
-                            <Card :card="card"/>
-                            </div>
-                        </div>
-                    </template>
-
-                    <dynamic-title v-if="player.pickedCorporationCard.length === 0" title="Select initial cards:" :color="player.color"/>
-                    <waiting-for v-if="player.phase !== 'end'" :players="player.players" :player="player" :settings="settings" :waitingfor="player.waitingFor"></waiting-for>
-
-                    <dynamic-title title="Game details" :color="player.color"/>
-
-                    <div class="player_home_block" v-if="player.players.length > 1 || (player.players.length === 1 && player.gameOptions.automaSoloVariant)">
-                        <milestone :show_scores="false" :milestones_list="player.milestones" :automaSoloVariant="player.gameOptions.automaSoloVariant" :corporations="player.corporationCards" :spectator="false" />
-                        <award :show_scores="false" :awards_list="player.awards" :corporations="player.corporationCards" :spectator="false" />
-                    </div>
-
-                    <div class="player_home_block player_home_block--turnorder nofloat" v-if="player.players.length>1">
-                        <dynamic-title title="Turn order" :color="player.color"/>
-                        <div class="player_item" v-for="(p, idx) in player.players" v-trim-whitespace>
-                            <div class="player_name_cont" :class="getPlayerCssForTurnOrder(p, true)">
-                                <span class="player_number">{{ idx+1 }}.</span><span class="player_name" :class="getPlayerCssForTurnOrder(p, false)" href="#">{{ p.name }}</span>
-                            </div>
-                            <div class="player_separator" v-if="idx !== player.players.length - 1">⟶</div>
-                        </div>
-                    </div>
-
-                    <details class="accordion board-accordion" open>
-                        <summary class="accordion-header">
-                            <div class="is-action">
-                                <i class="icon icon-arrow-right mr-1"></i>
-                                <span v-i18n>Board</span>
-                            </div>
-                        </summary>
-                        <div class="accordion-body">
-                            <board
-                            :spaces="player.spaces"
-                            :venusNextExtension="player.gameOptions.venusNextExtension"
-                            :venusScaleLevel="player.venusScaleLevel"
-                            :altVenusBoard="player.gameOptions.altVenusBoard"
-                            :automaSoloVariant="player.gameOptions.automaSoloVariant"
-                            :boardName ="player.gameOptions.boardName"
-                            :aresExtension="player.gameOptions.aresExtension"
-                            :aresData="player.aresData"
-                            :promoCardsOption="player.gameOptions.promoCardsOption">
-                            </board>
-
-                            <turmoil v-if="player.turmoil" :turmoil="player.turmoil"></turmoil>
-
-                            <moonboard v-if="player.gameOptions.moonExpansion" :model="player.moon" :automaSoloVariant="player.gameOptions.automaSoloVariant"></moonboard>
-                        </div>
-                    </details>
-                </div>
-
-                <div v-if="player.colonies.length > 0" class="player_home_block" ref="colonies" id="shortkey-colonies">
-                    <a name="colonies" class="player_home_anchor"></a>
-                    <dynamic-title title="Colonies" :color="player.color"/>
-                    <div class="colonies-fleets-cont" v-if="player.corporationCards.length > 0">
-                        <div class="colonies-player-fleets" v-for="colonyPlayer in player.players">
-                            <div :class="'colonies-fleet colonies-fleet-'+ colonyPlayer.color" v-for="idx in getFleetsCountRange(colonyPlayer)"></div>
-                        </div>
-                    </div>
-                    <div class="player_home_colony_cont">
-                        <div class="player_home_colony" v-for="colony in player.colonies" :key="colony.name">
-                            <colony :colony="colony"></colony>
-                        </div>
+                <div class="player_home_colony_cont">
+                    <div class="player_home_colony" v-for="colony in player.colonies" :key="colony.name">
+                        <colony :colony="colony"></colony>
                     </div>
                 </div>
-            </template>
+            </div>
         </div>
     `,
 });
