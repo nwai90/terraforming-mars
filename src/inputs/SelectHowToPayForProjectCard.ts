@@ -5,6 +5,7 @@ import {IProjectCard} from '../cards/IProjectCard';
 import {Units} from '../Units';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {Player} from '../Player';
+import {CardName} from '../CardName';
 
 // TODO(kberg): Rename to SelectProjectCardToPlay
 export class SelectHowToPayForProjectCard implements PlayerInput {
@@ -14,6 +15,7 @@ export class SelectHowToPayForProjectCard implements PlayerInput {
   public microbes: number;
   public floaters: number;
   public canUseHeat: boolean;
+  public canUsePlants: boolean;
   public scienceResources: number;
   public grapheneResources: number;
   public asteroidResources: number;
@@ -26,6 +28,7 @@ export class SelectHowToPayForProjectCard implements PlayerInput {
     this.microbes = player.getMicrobesCanSpend();
     this.floaters = player.getFloatersCanSpend();
     this.canUseHeat = player.canUseHeatAsMegaCredits;
+    this.canUsePlants = player.cardIsInEffect(CardName.MARTIAN_LUMBER_CORP);
     this.scienceResources = player.getSpendableScienceResources();
     this.asteroidResources = player.getSpendableAsteroidResources();
     this.grapheneResources = player.getSpendableGrapheneResources();

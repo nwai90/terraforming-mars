@@ -8,7 +8,7 @@ import {PreferencesManager} from './PreferencesManager';
 import {Button} from '../components/common/Button';
 import {TranslateMixin} from './TranslateMixin';
 import {CardName} from '../CardName';
-import {DEFAULT_GRAPHENE_VALUE} from '../constants';
+import {DEFAULT_GRAPHENE_VALUE, DEFAULT_PLANT_VALUE} from '../constants';
 
 interface SelectHowToPayModel {
     cost: number;
@@ -20,6 +20,7 @@ interface SelectHowToPayModel {
     floaters: number;
     graphene: number;
     asteroids: number;
+    plants: number;
     warning: string | undefined;
 }
 
@@ -55,6 +56,7 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
       floaters: 0,
       graphene: 0,
       asteroids: 0,
+      plants: 0,
       warning: undefined,
     } as SelectHowToPayModel;
   },
@@ -66,6 +68,7 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
       app.$data.megaCredits = (app as any).getMegaCreditsMax();
 
       app.setDefaultSteelValue();
+      app.setDefaultPlantsValue();
       app.setDefaultGrapheneValue();
       app.setDefaultTitaniumValue();
       app.setDefaultHeatValue();
@@ -103,6 +106,30 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
         this.$data.steel = 0;
       }
     },
+    setDefaultPlantsValue: function() {
+      // automatically use available plants to pay if not enough M€
+      if (!this.canAffordWithMcOnly() && this.canUsePlants()) {
+        let requiredPlantsQty = Math.ceil(Math.max(this.$data.cost - this.player.megaCredits, 0) / DEFAULT_PLANT_VALUE);
+
+        if (requiredPlantsQty > this.player.plants) {
+          this.$data.plants = this.player.plants;
+        } else {
+          // use as many plants as possible without overpaying by default
+          let currentPlantsValue = requiredPlantsQty * DEFAULT_PLANT_VALUE;
+          while (currentPlantsValue <= this.$data.cost - DEFAULT_PLANT_VALUE && requiredPlantsQty < this.player.plants) {
+            requiredPlantsQty++;
+            currentPlantsValue = requiredPlantsQty * DEFAULT_PLANT_VALUE;
+          }
+
+          this.$data.plants = requiredPlantsQty;
+        }
+
+        const discountedCost = this.$data.cost - (this.$data.steel * this.player.steelValue) - (this.$data.plants * DEFAULT_PLANT_VALUE);
+        this.$data.megaCredits = Math.max(discountedCost, 0);
+      } else {
+        this.$data.plants = 0;
+      }
+    },
     setDefaultGrapheneValue: function() {
       // automatically use available graphene to pay if not enough M€
       if (!this.canAffordWithMcOnly() && this.canUseGraphene()) {
@@ -121,7 +148,7 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
           this.$data.graphene = requiredGrapheneQty;
         }
 
-        const discountedCost = this.$data.cost - (this.$data.steel * this.player.steelValue) - (this.$data.graphene * DEFAULT_GRAPHENE_VALUE);
+        const discountedCost = this.$data.cost - (this.$data.steel * this.player.steelValue) - (this.$data.plants * DEFAULT_PLANT_VALUE) - (this.$data.graphene * DEFAULT_GRAPHENE_VALUE);
         this.$data.megaCredits = Math.max(discountedCost, 0);
       } else {
         this.$data.graphene = 0;
@@ -145,7 +172,7 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
           this.$data.titanium = requiredTitaniumQty;
         }
 
-        const discountedCost = this.$data.cost - (this.$data.steel * this.player.steelValue) - (this.$data.graphene * DEFAULT_GRAPHENE_VALUE) - (this.$data.titanium * this.player.titaniumValue);
+        const discountedCost = this.$data.cost - (this.$data.steel * this.player.steelValue) - (this.$data.plants * DEFAULT_PLANT_VALUE) - (this.$data.graphene * DEFAULT_GRAPHENE_VALUE) - (this.$data.titanium * this.player.titaniumValue);
         this.$data.megaCredits = Math.max(discountedCost, 0);
       } else {
         this.$data.titanium = 0;
@@ -158,7 +185,7 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
       } else {
         this.$data.heat = 0;
       }
-      const discountedCost = this.$data.cost - (this.$data.steel * this.player.steelValue) - (this.$data.graphene * DEFAULT_GRAPHENE_VALUE) - (this.$data.titanium * this.player.titaniumValue) - this.$data.heat;
+      const discountedCost = this.$data.cost - (this.$data.steel * this.player.steelValue) - (this.$data.plants * DEFAULT_PLANT_VALUE) - (this.$data.graphene * DEFAULT_GRAPHENE_VALUE) - (this.$data.titanium * this.player.titaniumValue) - this.$data.heat;
       this.$data.megaCredits = Math.max(discountedCost, 0);
     },
     setDefaultAsteroidsValue: function() {
@@ -168,7 +195,7 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
       } else {
         this.$data.asteroids = 0;
       }
-      const discountedCost = this.$data.cost - (this.$data.steel * this.player.steelValue) - (this.$data.graphene * DEFAULT_GRAPHENE_VALUE) - (this.$data.titanium * this.player.titaniumValue) - this.$data.heat - this.$data.asteroids;
+      const discountedCost = this.$data.cost - (this.$data.steel * this.player.steelValue) - (this.$data.plants * DEFAULT_PLANT_VALUE) - (this.$data.graphene * DEFAULT_GRAPHENE_VALUE) - (this.$data.titanium * this.player.titaniumValue) - this.$data.heat - this.$data.asteroids;
       this.$data.megaCredits = Math.max(discountedCost, 0);
     },
     canAffordWithMcOnly: function() {
@@ -207,6 +234,9 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
     canUseHeat: function() {
       return this.playerinput.canUseHeat && this.getAvailableHeat() > 0;
     },
+    canUsePlants: function() {
+      return this.playerinput.canUsePlants && this.player.plants > 0;
+    },
     canUseSteel: function() {
       return this.playerinput.canUseSteel && this.player.steel > 0;
     },
@@ -230,6 +260,7 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
         science: 0,
         graphene: this.$data.graphene,
         asteroids: this.$data.asteroids,
+        plants: this.$data.plants,
       };
 
       if (htp.megaCredits > this.player.megaCredits) {
@@ -242,6 +273,10 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
       }
       if (htp.titanium > this.player.titanium) {
         this.$data.warning = 'You don\'t have enough titanium';
+        return;
+      }
+      if (htp.plants > this.player.plants) {
+        this.$data.warning = 'You don\'t have enough plants';
         return;
       }
       if (htp.steel > this.player.steel) {
@@ -258,7 +293,7 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
       }
 
       const requiredAmt = this.playerinput.amount || 0;
-      const totalSpentAmt = htp.heat + htp.asteroids + htp.megaCredits + (htp.steel * this.player.steelValue) + (htp.titanium * this.player.titaniumValue) + (htp.microbes * 2) + (htp.floaters * 3) + (htp.graphene * DEFAULT_GRAPHENE_VALUE);
+      const totalSpentAmt = htp.heat + htp.asteroids + htp.megaCredits + (htp.plants * DEFAULT_PLANT_VALUE) + (htp.steel * this.player.steelValue) + (htp.titanium * this.player.titaniumValue) + (htp.microbes * 2) + (htp.floaters * 3) + (htp.graphene * DEFAULT_GRAPHENE_VALUE);
 
       if (requiredAmt > 0 && totalSpentAmt < requiredAmt) {
         this.$data.warning = 'Haven\'t spent enough';
@@ -274,6 +309,10 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
         const diff = totalSpentAmt - requiredAmt;
         if (htp.titanium && diff >= this.player.titaniumValue) {
           this.$data.warning = 'You cannot overspend titanium';
+          return;
+        }
+        if (htp.plants && diff >= DEFAULT_PLANT_VALUE) {
+          this.$data.warning = 'You cannot overspend plants';
           return;
         }
         if (htp.steel && diff >= this.player.steelValue) {
@@ -318,6 +357,14 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
   <section v-trim-whitespace>
 
     <h3 class="payments_title">{{ $t(playerinput.title) }}</h3>
+
+    <div class="payments_type input-group" v-if="playerinput.canUsePlants">
+      <i class="resource_icon resource_icon--plants payments_type_icon" :title="$t('Pay by Plants')"></i>
+      <Button type="minus" :onClick="_=>reduceValue('plants', 1)" />
+      <input class="form-input form-inline payments_input" v-model.number="plants" />
+      <Button type="plus" :onClick="_=>addValue('plants', 1)" />
+      <Button type="max" :onClick="_=>setMaxValue('plants')" title="MAX" />
+    </div>
 
     <div class="payments_type input-group" v-if="playerinput.canUseSteel">
       <i class="resource_icon resource_icon--steel payments_type_icon" :title="$t('Pay by Steel')"></i>

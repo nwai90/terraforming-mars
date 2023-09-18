@@ -52,6 +52,7 @@ describe('SelectHowToPayForProjectCard', function() {
             name: CardName.BIRDS,
           }],
           id: 'foo',
+          playedCards: [],
           selfReplicatingRobotCards: [],
         },
         playerinput: {
@@ -361,6 +362,7 @@ describe('SelectHowToPayForProjectCard', function() {
     const player: Partial<PlayerModel> = Object.assign({
       cards: [{name: cardName, calculatedCost: cardCost}],
       corporationCards: [],
+      playedCards: [],
       id: 'foo',
       steel: 0,
       titanium: 0,

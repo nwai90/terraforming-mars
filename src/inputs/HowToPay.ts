@@ -9,5 +9,6 @@ export interface HowToPay {
     science: number;
     graphene: number;
     asteroids: number;
+    plants: number;
 }
 

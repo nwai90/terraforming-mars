@@ -24,7 +24,7 @@ export class CarbonNanosystems extends Card implements IProjectCard {
             eb.science(1).played.startEffect.graphene(1);
           });
           b.br.br;
-          b.effect('When you play a Science tag, including this, add a graphene resource here. When playing a Space or City Tag, graphenes may be used as 4 M€ each.', (eb) => {
+          b.effect('When you play a Science tag, including this, add a graphene resource here. When playing a Space or City tag, graphenes may be used as 4 M€ each.', (eb) => {
             eb.space().played.slash().cityTag().played.startEffect.graphene(1).nbsp(Size.TINY).equals().megacredits(4);
           });
         }),

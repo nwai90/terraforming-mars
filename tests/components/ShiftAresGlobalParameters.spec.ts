@@ -19,6 +19,7 @@ describe('ShiftAresGlobalParameters', function() {
     canUseSteel: undefined,
     canUseTitanium: undefined,
     canUseHeat: undefined,
+    canUsePlants: undefined,
     canUseGraphene: undefined,
     canUseAsteroids: undefined,
     players: undefined,

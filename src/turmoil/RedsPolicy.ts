@@ -8,7 +8,7 @@ import {SpaceName} from "../SpaceName";
 import {StandardProjectType} from "../StandardProjectType";
 import {Tags} from "../cards/Tags";
 import {TileType} from "../TileType";
-import {HELLAS_BONUS_OCEAN_COST, MAXIMUM_COLONY_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE, MAX_OCEAN_TILES, MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, MAX_VENUS_SCALE, REDS_RULING_POLICY_COST} from "../constants";
+import {DEFAULT_PLANT_VALUE, HELLAS_BONUS_OCEAN_COST, MAXIMUM_COLONY_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE, MAX_OCEAN_TILES, MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, MAX_VENUS_SCALE, REDS_RULING_POLICY_COST} from "../constants";
 import {Board} from "../boards/Board";
 import {ISpace} from "../boards/ISpace";
 import {BoardName} from "../boards/BoardName";
@@ -86,11 +86,13 @@ export class RedsPolicy {
     canUseFloaters: boolean = false,
     canUseMicrobes: boolean = false,
     canUseScience: boolean = false,
-    // TODO: Update RedsPolicy.canAffordRedsPolicy for affected cards
+    // TODO: Update RedsPolicy.canAffordRedsPolicy for affected space and city tag cards
     canUseGraphene: boolean = false,
     canUseAsteroids: boolean = false,
+    canUsePlants: boolean = false,
   ): HowToAffordRedsPolicy {
     const board = game.board;
+    canUsePlants = canUseSteel && player.cardIsInEffect(CardName.MARTIAN_LUMBER_CORP) && player.plants > 0;
 
     // If oxygen increase will increase temperature
     if (game.getOxygenLevel() < 8 && game.getOxygenLevel() + action.oxygenIncrease >= 8) {
@@ -305,6 +307,11 @@ export class RedsPolicy {
     const spendableMegacredits = player.spendableMegacredits();
     let mustSpendAtMost = spendableMegacredits - (redTaxes - bonusMCFromPlay);
     let missingMC: number = totalToPay - player.spendableMegacredits();
+
+    if (canUsePlants) {
+      const plantsUsed = Math.min(player.plants, Math.ceil(missingMC / DEFAULT_PLANT_VALUE));
+      missingMC -= plantsUsed * DEFAULT_PLANT_VALUE;
+    }
 
     if (canUseSteel) {
       const steelValue = player.getSteelValue();

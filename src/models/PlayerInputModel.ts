@@ -14,6 +14,7 @@ export interface PlayerInputModel {
     availableSpaces: Array<string> | undefined;
     availableParties: Array<PartyName> | undefined;
     canUseHeat: boolean | undefined;
+    canUsePlants: boolean | undefined;
     canUseSteel: boolean | undefined;
     canUseTitanium: boolean | undefined;
     canUseGraphene: boolean | undefined;

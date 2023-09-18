@@ -34,7 +34,7 @@ export const PaymentWidgetMixin = {
         rate = (this as any).player.steelValue;
       } else if (resourceName === 'microbes') {
         rate = 2;
-      } else if (resourceName === 'floaters') {
+      } else if (resourceName === 'floaters' || resourceName === 'plants') {
         rate = 3;
       } else if (resourceName === 'graphene') {
         rate = 4;
@@ -86,6 +86,7 @@ export const PaymentWidgetMixin = {
       const remainingMC: number = (this as any).$data.cost -
               (this as any)['heat'] -
               (this as any)['titanium'] * this.getResourceRate('titanium') -
+              (this as any)['plants'] * this.getResourceRate('plants') -
               (this as any)['steel'] * this.getResourceRate('steel') -
               (this as any)['microbes'] * this.getResourceRate('microbes') -
               (this as any)['floaters'] * this.getResourceRate('floaters') -
@@ -103,7 +104,7 @@ export const PaymentWidgetMixin = {
       if (target === 'asteroids') amountHave = this.availableAsteroids();
 
       let amountNeed: number = cardCost;
-      if (['titanium', 'steel', 'microbes', 'floaters', 'graphene'].includes(target)) {
+      if (['titanium', 'steel', 'microbes', 'floaters', 'graphene', 'plants'].includes(target)) {
         amountNeed = Math.floor(cardCost/this.getResourceRate(target));
       }
 

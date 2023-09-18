@@ -304,6 +304,7 @@ function getWaitingFor(
     cards: undefined,
     maxCardsToSelect: undefined,
     minCardsToSelect: undefined,
+    canUsePlants: undefined,
     canUseSteel: undefined,
     canUseTitanium: undefined,
     canUseHeat: undefined,
@@ -377,6 +378,7 @@ function getWaitingFor(
     playerInputModel.canUseHeat = (waitingFor as SelectHowToPay).canUseHeat;
     playerInputModel.canUseGraphene = (waitingFor as SelectHowToPay).canUseGraphene;
     playerInputModel.canUseAsteroids = (waitingFor as SelectHowToPay).canUseAsteroids;
+    playerInputModel.canUsePlants = (waitingFor as SelectHowToPay).canUsePlants;
     break;
   case PlayerInputTypes.SELECT_PLAYER:
     playerInputModel.players = (waitingFor as SelectPlayer).players.map(

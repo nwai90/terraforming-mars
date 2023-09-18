@@ -1,5 +1,5 @@
 import * as constants from './constants';
-import {DEFAULT_FLOATERS_VALUE, DEFAULT_MICROBES_VALUE, ENERGY_TRADE_COST, MAX_FLEET_SIZE, MC_TRADE_COST, MILESTONE_COST, POLITICAL_AGENDAS_MAX_ACTION_USES, REDS_RULING_POLICY_COST, TITANIUM_TRADE_COST} from './constants';
+import {DEFAULT_FLOATERS_VALUE, DEFAULT_GRAPHENE_VALUE, DEFAULT_MICROBES_VALUE, DEFAULT_PLANT_VALUE, ENERGY_TRADE_COST, MAX_FLEET_SIZE, MC_TRADE_COST, MILESTONE_COST, POLITICAL_AGENDAS_MAX_ACTION_USES, REDS_RULING_POLICY_COST, TITANIUM_TRADE_COST} from './constants';
 import {AndOptions} from './inputs/AndOptions';
 import {Aridor} from './cards/colonies/Aridor';
 import {Board} from './boards/Board';
@@ -1069,6 +1069,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       science: 0,
       graphene: 0,
       asteroids: 0,
+      plants: 0,
     };
     try {
       const howToPay: HowToPay = JSON.parse(json);
@@ -1605,6 +1606,11 @@ export class Player implements ISerializable<SerializedPlayer> {
     return card.name === CardName.ASTEROID_STANDARD_PROJECT || card.name === CardName.AQUIFER_STANDARD_PROJECT;
   }
 
+  private canUsePlants(card: ICard): boolean {
+    if (this.cardIsInEffect(CardName.MARTIAN_LUMBER_CORP) === false) return false;
+    return card.tags.includes(Tags.BUILDING);
+  }
+
   private getMcTradeCost(): number {
     let cost = MC_TRADE_COST - this.colonyTradeDiscount;
     if (this.hasBureaucratsColonyTradePenalty) cost += 1;
@@ -1656,6 +1662,14 @@ export class Player implements ISerializable<SerializedPlayer> {
     const canUseTitanium: boolean = this.canUseTitanium(selectedCard);
     const canUseGraphene: boolean = this.canUseGraphene(selectedCard);
     const canUseAsteroids: boolean = this.canUseAsteroids(selectedCard);
+    const canUsePlants: boolean = this.canUsePlants(selectedCard);
+
+    if (canUsePlants && howToPay.plants > 0) {
+      if (howToPay.plants > this.plants) {
+        throw new Error('Do not have enough plants');
+      }
+      totalToPay += howToPay.plants * DEFAULT_PLANT_VALUE;
+    }
 
     if (canUseSteel && howToPay.steel > 0) {
       if (howToPay.steel > this.steel) {
@@ -1672,7 +1686,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     if (canUseGraphene && howToPay.graphene > 0) {
-      totalToPay += howToPay.graphene * constants.DEFAULT_GRAPHENE_VALUE;
+      totalToPay += howToPay.graphene * DEFAULT_GRAPHENE_VALUE;
     }
 
     if (canUseAsteroids && howToPay.asteroids > 0) {
@@ -1758,6 +1772,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       this.steel -= howToPay.steel;
       this.titanium -= howToPay.titanium;
       this.megaCredits -= howToPay.megaCredits;
+      this.plants -= howToPay.plants;
 
       if (howToPay.heat > 0) {
         this.game.defer(new DeferredAction(this, () => this.spendHeat(howToPay.heat)));
@@ -2274,6 +2289,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         microbes: this.canUseMicrobes(card),
         graphene: this.canUseGraphene(card),
         asteroids: this.canUseAsteroids(card),
+        plants: this.canUsePlants(card),
         reserveUnits: MoonExpansion.adjustedReserveCosts(this, card),
       });
 
@@ -2289,6 +2305,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     microbes?: boolean,
     graphene?: boolean,
     asteroids?: boolean,
+    plants? :boolean,
     reserveUnits?: Units,
   }) {
     const reserveUnits = options?.reserveUnits ?? Units.EMPTY;
@@ -2314,6 +2331,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     const canUseMicrobes: boolean = options?.microbes ?? false;
     const canUseGraphene: boolean = options?.graphene ?? false;
     const canUseAsteroids: boolean = options?.asteroids ?? false;
+    const canUsePlants: boolean = options?.plants ?? (canUseSteel && this.cardIsInEffect(CardName.MARTIAN_LUMBER_CORP));
 
     const availableMegacredits = this.megaCredits - reserveUnits.megacredits;
     if (availableMegacredits < 0) return false;
@@ -2323,10 +2341,11 @@ export class Player implements ISerializable<SerializedPlayer> {
       (this.canUseHeatAsMegaCredits ? this.availableHeat - reserveUnits.heat : 0) +
       (canUseSteel ? (this.steel - reserveUnits.steel) * this.getSteelValue() : 0) +
       (canUseTitanium ? (this.titanium - reserveUnits.titanium) * this.getTitaniumValue() : 0) +
-      (canUseFloaters ? this.getFloatersCanSpend() * 3 : 0) +
-      (canUseMicrobes ? this.getMicrobesCanSpend() * 2 : 0) +
-      (canUseGraphene ? this.getSpendableGrapheneResources() * 4 : 0) +
-      (canUseAsteroids ? this.getSpendableAsteroidResources() : 0);
+      (canUseFloaters ? this.getFloatersCanSpend() * DEFAULT_FLOATERS_VALUE : 0) +
+      (canUseMicrobes ? this.getMicrobesCanSpend() * DEFAULT_MICROBES_VALUE : 0) +
+      (canUseGraphene ? this.getSpendableGrapheneResources() * DEFAULT_GRAPHENE_VALUE : 0) +
+      (canUseAsteroids ? this.getSpendableAsteroidResources() : 0) +
+      (canUsePlants ? this.plants * DEFAULT_PLANT_VALUE : 0);
   }
 
   public computeTerraformRatingBump(card: IProjectCard): number {

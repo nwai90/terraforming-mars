@@ -522,6 +522,7 @@ export enum CardName {
     KUIPER_COOPERATIVE = 'Kuiper Cooperative',
     LI_TRADE_TERMINAL = 'Li Trade Terminal',
     MARS_NOMADS = 'Mars Nomads',
+    MARTIAN_LUMBER_CORP = 'Martian Lumber Corp',
     NEPTUNIAN_POWER_CONSULTANTS = 'Neptunian Power Consultants',
     NIRGAL_ENTERPRISES = 'Nirgal Enterprises',
     NOBEL_PRIZE = 'Nobel Prize',
