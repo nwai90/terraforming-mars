@@ -1165,6 +1165,41 @@
                     left: 63px;
                 }
             }
+            .card-prelude-box {
+                position: absolute;
+                display: flex;
+                flex-flow: column;
+                justify-content: center;
+                min-height: 120px;
+                border-radius: 10px;
+                background: linear-gradient(to bottom right, #cccccc, #aaaaaa, #dddddd, #cccccc, #aaaaaa, #cacaca, #aaaaaa, #cccccc);
+                box-shadow: 0 0 0px 1px rgba(0, 0, 0.5);
+                bottom: 8px;
+                left: 8px;
+                width: 216px;
+                padding: 0 4px;
+                /* hide points on hover by poppig the overlay on top of them*/
+                &:hover {
+                    box-shadow: 0px 0px 4px 1px #353594;
+                    z-index: 4;
+                }
+                .card-prelude-label {
+                    background-color: #2c84c4;
+                    background: linear-gradient(#6eafde, #2c84c4, #2c84c4);
+                    width: 100px;
+                    height: 12px;
+                    line-height: 12px;
+                    text-align: center;
+                    font-weight: bold;
+                    font-size: 10px;
+                    padding-top: 2px;
+                    border-radius: 0 0 20px 20px;
+                    text-transform: uppercase;
+                    position: absolute;
+                    top: 0px;
+                    left: 63px;
+                }
+            }
             .card-effect-box {
                 display: flex;
                 flex-flow: column;

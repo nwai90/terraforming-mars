@@ -115,6 +115,30 @@ export class CardRenderCorpBoxAction extends CardRenderer {
   }
 }
 
+export class CardRenderPreludeBoxEffect extends CardRenderer {
+  constructor(rows: Array<Array<CardRenderEffect | CardRenderItem | string>>) {
+    super(rows);
+  }
+
+  public static builder(f: (builder: PreludeEffectBuilderEffect) => void): CardRenderPreludeBoxEffect {
+    const builder = new PreludeEffectBuilderEffect();
+    f(builder);
+    return builder.build();
+  }
+}
+  
+export class CardRenderPreludeBoxAction extends CardRenderer {
+  constructor(rows: Array<Array<CardRenderEffect | CardRenderItem | string>>) {
+    super(rows);
+  }
+
+  public static builder(f: (builder: PreludeEffectBuilderAction) => void): CardRenderPreludeBoxAction {
+    const builder = new PreludeEffectBuilderAction();
+    f(builder);
+    return builder.build();
+  }
+}
+
 class Builder {
   protected _data: Array<Array<ItemType>> = [[]];
 
@@ -628,6 +652,15 @@ class Builder {
     return this;
   }
 
+  public preludeBox(type: 'action' | 'effect', eb: (builder: PreludeEffectBuilderEffect | PreludeEffectBuilderAction) => void): Builder {
+    if (type === 'action') {
+      this._addRowItem(CardRenderPreludeBoxAction.builder(eb));
+    } else {
+      this._addRowItem(CardRenderPreludeBoxEffect.builder(eb));
+    }
+    return this;
+  }
+
   public or(size: Size = Size.SMALL): Builder {
     this._checkExistingItem();
     this._addSymbol(CardRenderSymbol.or(size));
@@ -982,5 +1015,21 @@ class CorpEffectBuilderAction extends Builder {
 
   public build(): CardRenderCorpBoxEffect {
     return new CardRenderCorpBoxAction(this._data);
+  }
+}
+
+class PreludeEffectBuilderEffect extends Builder {
+  protected _data: Array<Array<CardRenderEffect | CardRenderItem>> = [[]];
+
+  public build(): CardRenderPreludeBoxAction {
+    return new CardRenderPreludeBoxEffect(this._data);
+  }
+}
+
+class PreludeEffectBuilderAction extends Builder {
+  protected _data: Array<Array<CardRenderEffect | CardRenderItem>> = [[]];
+
+  public build(): CardRenderPreludeBoxEffect {
+    return new CardRenderPreludeBoxAction(this._data);
   }
 }

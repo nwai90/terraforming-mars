@@ -2,12 +2,13 @@ import Vue from 'vue';
 import {CardRenderItem} from '../../cards/render/CardRenderItem';
 import {isIDescription} from '../../cards/render/ICardRenderDescription';
 import {CardRenderSymbol} from '../../cards/render/CardRenderSymbol';
-import {CardRenderProductionBox} from '../../cards/render/CardRenderer';
+import {CardRenderPreludeBoxAction, CardRenderPreludeBoxEffect, CardRenderProductionBox} from '../../cards/render/CardRenderer';
 import {CardRenderTile} from '../../cards/render/CardRenderer';
 import {CardRenderItemComponent} from './CardRenderItemComponent';
 import {CardProductionBoxComponent} from './CardProductionBoxComponent';
 import {CardRenderEffectBoxComponent} from './CardRenderEffectBoxComponent';
 import {CardRenderCorpBoxComponent} from './CardRenderCorpBoxComponent';
+import {CardRenderPreludeBoxComponent} from './CardRenderPreludeBoxComponent';
 import {CardRenderTileComponent} from './CardRenderTileComponent';
 import {CardDescription} from './CardDescription';
 import {CardRenderSymbolComponent} from './CardRenderSymbolComponent';
@@ -16,7 +17,7 @@ import {CardRenderEffect, CardRenderCorpBoxEffect, CardRenderCorpBoxAction} from
 export const CardRowComponent = Vue.component('CardRowComponent', {
   props: {
     componentData: {
-      type: Object as () => CardRenderItem | CardRenderProductionBox | CardRenderSymbol | CardRenderEffect | CardRenderTile | CardRenderCorpBoxEffect | CardRenderCorpBoxAction,
+      type: Object as () => CardRenderItem | CardRenderProductionBox | CardRenderSymbol | CardRenderEffect | CardRenderTile | CardRenderCorpBoxEffect | CardRenderCorpBoxAction | CardRenderPreludeBoxEffect | CardRenderPreludeBoxAction,
       required: true,
     },
   },
@@ -26,6 +27,7 @@ export const CardRowComponent = Vue.component('CardRowComponent', {
     CardProductionBoxComponent,
     CardRenderEffectBoxComponent,
     CardRenderCorpBoxComponent,
+    CardRenderPreludeBoxComponent,
     CardRenderTileComponent,
     CardDescription,
   },
@@ -59,6 +61,17 @@ export const CardRowComponent = Vue.component('CardRowComponent', {
       }
       return 'n/a';
     },
+    isPreludeBox: function(): boolean {
+      return this.componentData instanceof CardRenderPreludeBoxEffect || this.componentData instanceof CardRenderPreludeBoxAction;
+    },
+    preludeBoxLabel: function(): string {
+      if (this.componentData instanceof CardRenderPreludeBoxEffect) {
+        return 'effect';
+      } else if (this.componentData instanceof CardRenderPreludeBoxAction) {
+        return 'action';
+      }
+      return 'n/a';
+    },
 
   },
   template: ` 
@@ -69,6 +82,7 @@ export const CardRowComponent = Vue.component('CardRowComponent', {
         <CardRenderTileComponent v-else-if="isTile()" :item="componentData" />
         <CardDescription v-else-if="isDescription()" :item="componentData" />
         <CardRenderCorpBoxComponent v-else-if="isCorpBox()" :rows="componentData.rows" :label="corpBoxLabel()" />
+        <CardRenderPreludeBoxComponent v-else-if="isPreludeBox()" :rows="componentData.rows" :label="preludeBoxLabel()" />
         <div v-else>n/a</div>
     `,
 });

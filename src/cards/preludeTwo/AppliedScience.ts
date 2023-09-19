@@ -12,6 +12,7 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {SelectCard} from '../../inputs/SelectCard';
 import {LogHelper} from '../../LogHelper';
 import {RobotCard} from '../promo/SelfReplicatingRobots';
+import {Size} from '../render/Size';
 
 export class AppliedScience extends PreludeCard implements IProjectCard, IResourceCard {
   constructor() {
@@ -22,11 +23,14 @@ export class AppliedScience extends PreludeCard implements IProjectCard, IResour
       metadata: {
         cardNumber: '??',
         renderData: CardRenderer.builder((b) => {
-          b.action('Remove 1 Science resource here to gain 1 standard resource or add 1 resource to ANY CARD WITH A RESOURCE.', (eb) => {
-            eb.science(1).startAction.wild(1).asterix();
-          });
-          b.br.br;
           b.science(6);
+          b.preludeBox('action', (ce) => {
+            ce.vSpace(Size.LARGE);
+            ce.action('Remove 1 Science resource here to gain 1 standard resource or add 1 resource to ANY CARD WITH A RESOURCE.', (eb) => {
+              eb.science(1).startAction.wild(1).asterix();
+            });
+            ce.vSpace();
+          });
         }),
         description: 'Add 6 Science resources here.',
       },

@@ -19,11 +19,13 @@ export class FocusedOrganization extends PreludeCard {
       metadata: {
         cardNumber: '??',
         renderData: CardRenderer.builder((b) => {
-          b.action('Discard 1 card and spend 1 standard resource to draw 1 card and gain 1 standard resource.', (eb) => {
-            eb.minus().cards(1).wild(1).startAction.cards(1).wild(1);
-          });
-          b.br.br;
           b.cards(1).wild(1);
+          b.preludeBox('action', (ce) => {
+            ce.vSpace();
+            ce.action('Discard 1 card and spend 1 standard resource to draw 1 card and gain 1 standard resource.', (eb) => {
+              eb.minus().cards(1).wild(1).startAction.cards(1).wild(1);
+            });
+          });
         }),
         description: 'Draw 1 card and gain 1 standard resource.',
       },
