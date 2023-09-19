@@ -28,6 +28,7 @@ import {NirgalEnterprises} from './NirgalEnterprises';
 import {NobelPrize} from './NobelPrize';
 import {OldMiningColony} from './OldMiningColony';
 import {RedAppeasement} from './RedAppeasement';
+import {RedShips} from './RedShips';
 import {PalladinShipping} from './PalladinShipping';
 import {SagittaFrontierServices} from './SagittaFrontierServices';
 import {StJosephOfCupertinoMission} from './StJosephOfCupertinoMission';
@@ -53,6 +54,7 @@ export const PRELUDE_TWO_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.MARTIAN_LUMBER_CORP, Factory: MartianLumberCorp},
     {cardName: CardName.NEPTUNIAN_POWER_CONSULTANTS, Factory: NeptunianPowerConsultants},
     {cardName: CardName.RED_APPEASEMENT, Factory: RedAppeasement, compatibility: GameModule.Turmoil},
+    {cardName: CardName.RED_SHIPS, Factory: RedShips},
     {cardName: CardName.ST_JOSEPH_OF_CUPERTINO_MISSION, Factory: StJosephOfCupertinoMission},
     {cardName: CardName.SUMMIT_LOGISTICS, Factory: SummitLogistics, compatibility: GameModule.Turmoil},
   ],

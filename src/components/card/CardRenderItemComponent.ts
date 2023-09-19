@@ -193,6 +193,9 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
       } else if (type === CardRenderItemType.EMPTY_TILE_GOLDEN) {
         classes.push('card-tile-ares');
         classes.push('board-space-tile--adjacency-tile');
+      } else if (type === CardRenderItemType.CITY_OR_SPECIAL_TILE) {
+        classes.push('card-tile');
+        classes.push('city-or-special-tile');
       } else if (type === CardRenderItemType.LANDCLAIM_TILE) {
         classes.push('card-tile');
         classes.push('landclaim-tile');

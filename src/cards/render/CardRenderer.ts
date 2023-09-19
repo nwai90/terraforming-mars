@@ -611,6 +611,11 @@ class Builder {
     return this;
   }
 
+  public cityOrSpecialTile(amount: number) {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.CITY_OR_SPECIAL_TILE, amount));
+    return this;
+  }
+
   public landClaimTile(amount: number): Builder {
     this._addRowItem(new CardRenderItem(CardRenderItemType.LANDCLAIM_TILE, amount));
     return this;
