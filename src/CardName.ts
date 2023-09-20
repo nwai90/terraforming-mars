@@ -536,6 +536,7 @@ export enum CardName {
     ST_JOSEPH_OF_CUPERTINO_MISSION = 'St. Joseph of Cupertino Mission',
     SUMMIT_LOGISTICS = 'Summit Logistics',
     TERRAFORMING_DEAL = 'Terraforming Deal',
+    TESLARACT = 'Teslaract',
     TYCHO_MAGNETICS = 'Tycho Magnetics',
 
     // Community cards

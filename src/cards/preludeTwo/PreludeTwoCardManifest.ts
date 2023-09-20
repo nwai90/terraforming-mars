@@ -36,6 +36,7 @@ import {Spire} from './Spire';
 import {StJosephOfCupertinoMission} from './StJosephOfCupertinoMission';
 import {SummitLogistics} from './SummitLogistics';
 import {TerraformingDeal} from './TerraformingDeal';
+import {Teslaract} from './Teslaract';
 import {TychoMagnetics} from './TychoMagnetics';
 
 export const PRELUDE_TWO_CARD_MANIFEST = new CardManifest({
@@ -60,6 +61,7 @@ export const PRELUDE_TWO_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.SOLAR_LOGISTICS, Factory: SolarLogistics},
     {cardName: CardName.ST_JOSEPH_OF_CUPERTINO_MISSION, Factory: StJosephOfCupertinoMission},
     {cardName: CardName.SUMMIT_LOGISTICS, Factory: SummitLogistics, compatibility: GameModule.Turmoil},
+    {cardName: CardName.TESLARACT, Factory: Teslaract},
   ],
   corporationCards: [
     {cardName: CardName.ECOTEC, Factory: Ecotec},
