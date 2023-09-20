@@ -19,6 +19,7 @@ export interface PlayerInputModel {
     canUseTitanium: boolean | undefined;
     canUseGraphene: boolean | undefined;
     canUseAsteroids: boolean | undefined;
+    canUseSpireScience: boolean | undefined;
     cards: Array<CardModel> | undefined;
     inputType: PlayerInputTypes;
     options: Array<PlayerInputModel> | undefined;
@@ -31,6 +32,7 @@ export interface PlayerInputModel {
     science: number | undefined;
     graphene: number | undefined;
     asteroids: number | undefined;
+    spireScience: number | undefined;
     minCardsToSelect: number | undefined;
     players: Array<ColorWithNeutral> | undefined;
     title: string | Message;

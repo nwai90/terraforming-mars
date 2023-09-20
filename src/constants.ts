@@ -12,6 +12,7 @@ export const DEFAULT_FLOATERS_VALUE: number = 3;
 export const DEFAULT_MICROBES_VALUE: number = 2;
 export const DEFAULT_GRAPHENE_VALUE: number = 4;
 export const DEFAULT_PLANT_VALUE: number = 3;
+export const DEFAULT_SPIRE_SCIENCE_VALUE: number = 2;
 export const OCEAN_BONUS: number = 2;
 export const SOLO_START_TR: number = 14;
 

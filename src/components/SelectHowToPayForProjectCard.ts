@@ -18,6 +18,7 @@ interface SelectHowToPayForProjectCardModel {
   graphene: number;
   asteroids: number;
   plants: number;
+  spireScience: number;
   warning: string | undefined;
   available: Units;
 }
@@ -35,7 +36,7 @@ import {PreferencesManager} from './PreferencesManager';
 import {TranslateMixin} from './TranslateMixin';
 import {CardName} from '../CardName';
 import {Units} from '../Units';
-import {DEFAULT_FLOATERS_VALUE, DEFAULT_MICROBES_VALUE, DEFAULT_STEEL_VALUE, DEFAULT_TITANIUM_VALUE, DEFAULT_GRAPHENE_VALUE, DEFAULT_PLANT_VALUE} from '../constants';
+import {DEFAULT_FLOATERS_VALUE, DEFAULT_MICROBES_VALUE, DEFAULT_STEEL_VALUE, DEFAULT_TITANIUM_VALUE, DEFAULT_GRAPHENE_VALUE, DEFAULT_PLANT_VALUE, DEFAULT_SPIRE_SCIENCE_VALUE} from '../constants';
 
 export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for-project-card', {
   props: {
@@ -87,6 +88,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       graphene: 0,
       asteroids: 0,
       plants: 0,
+      spireScience: 0,
       warning: undefined,
       available: Units.of({}),
     };
@@ -134,6 +136,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       this.graphene = 0;
       this.asteroids = 0;
       this.plants = 0;
+      this.spireScience = 0;
 
       const units = this.card.reserveUnits || Units.EMPTY;
       let megacreditBalance = Math.max(this.cost - this.mustSpendAtMost + units.megacredits, 0);
@@ -191,6 +194,10 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
         this.asteroids = deductUnits(this.playerinput.asteroids, 1);
       }
 
+      if (megacreditBalance > 0 && this.canUseSpireScience()) {
+        this.spireScience = deductUnits(this.playerinput.spireScience, DEFAULT_SPIRE_SCIENCE_VALUE);
+      }
+
       if (megacreditBalance > 0 && this.canUseGraphene()) {
         this.graphene = deductUnits(this.playerinput.graphene, DEFAULT_GRAPHENE_VALUE);
       }
@@ -229,6 +236,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
         this.science -= saveOverSpendingUnits(this.science, 1);
         this.asteroids -= saveOverSpendingUnits(this.asteroids, 1);
         this.graphene -= saveOverSpendingUnits(this.graphene, DEFAULT_GRAPHENE_VALUE);
+        this.spireScience -= saveOverSpendingUnits(this.spireScience, DEFAULT_SPIRE_SCIENCE_VALUE);
       }
 
       let finalmegaCreditsCost = this.cost;
@@ -241,6 +249,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       finalmegaCreditsCost -= this.science || 0;
       finalmegaCreditsCost -= this.asteroids || 0;
       finalmegaCreditsCost -= (this.graphene || 0) * DEFAULT_GRAPHENE_VALUE;
+      finalmegaCreditsCost -= (this.spireScience || 0) * DEFAULT_SPIRE_SCIENCE_VALUE;
 
       this.megaCredits = Math.max(0, finalmegaCreditsCost);
     },
@@ -319,6 +328,33 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       }
       return false;
     },
+    canUseSpireScience: function() {
+      const standardProjectNames = [
+        CardName.ASTEROID_STANDARD_PROJECT,
+        CardName.AQUIFER_STANDARD_PROJECT,
+        CardName.CITY_STANDARD_PROJECT,
+        CardName.GREENERY_STANDARD_PROJECT,
+        CardName.POWER_PLANT_STANDARD_PROJECT,
+        CardName.POWER_PLANT_STANDARD_PROJECT_THORGATE,
+        CardName.BUFFER_GAS_STANDARD_PROJECT,
+        CardName.AIR_SCRAPPING_STANDARD_PROJECT,
+        CardName.AIR_SCRAPPING_STANDARD_PROJECT_VARIANT,
+        CardName.BUILD_COLONY_STANDARD_PROJECT,
+        CardName.MOON_COLONY_STANDARD_PROJECT,
+        CardName.MOON_COLONY_STANDARD_PROJECT_V2,
+        CardName.MOON_MINE_STANDARD_PROJECT,
+        CardName.MOON_MINE_STANDARD_PROJECT_V2,
+        CardName.MOON_ROAD_STANDARD_PROJECT,
+        CardName.MOON_ROAD_STANDARD_PROJECT_V2,
+      ];
+
+      if (this.card !== undefined && (this.playerinput.spireScience ?? 0) > 0) {
+        if (standardProjectNames.includes(this.cardName)) {
+          return true;
+        }
+      }
+      return false;
+    },
     canUseGraphene: function() {
       // Graphene resources are limited to the Carbon Nanosystems card, which allows spending graphene resources for Space or City cards.
       if (this.card !== undefined && this.playerinput.graphene !== undefined && this.playerinput.graphene > 0) {
@@ -371,6 +407,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
         graphene: this.graphene,
         asteroids: this.asteroids,
         plants: this.plants,
+        spireScience: this.spireScience,
       };
       if (htp.megaCredits > this.player.megaCredits) {
         this.warning = 'You don\'t have that many M€';
@@ -396,6 +433,10 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
         this.warning = 'You don\'t have enough asteroid resources';
         return;
       }
+      if (this.playerinput.spireScience !== undefined && htp.spireScience > this.playerinput.spireScience) {
+        this.warning = 'You don\'t have enough science resources';
+        return;
+      }
       if (htp.heat > this.availableHeat()) {
         this.warning = 'You don\'t have enough heat';
         return;
@@ -418,6 +459,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
         (DEFAULT_MICROBES_VALUE * htp.microbes) +
         (DEFAULT_GRAPHENE_VALUE * htp.graphene) +
         (DEFAULT_PLANT_VALUE * htp.plants) +
+        (DEFAULT_SPIRE_SCIENCE_VALUE * htp.spireScience) +
         htp.asteroids +
         htp.science +
         htp.heat +
@@ -453,6 +495,10 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
           return;
         }
         if (htp.science && diff >= 1) {
+          this.warning = 'You cannot overspend science resources';
+          return;
+        }
+        if (htp.spireScience && diff >= DEFAULT_SPIRE_SCIENCE_VALUE) {
           this.warning = 'You cannot overspend science resources';
           return;
         }
@@ -535,6 +581,14 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
     </div>
     <div v-if="showReserveSteelWarning()" class="card-warning" v-i18n>
     (Some steel is unavailable here in reserve for the project card.)
+    </div>
+
+    <div class="payments_type input-group" v-if="canUseSpireScience()">
+      <i class="resource_icon resource_icon--science payments_type_icon" :title="$t('Pay by Science')"></i>
+      <Button type="minus" :onClick="_=>reduceValue('spireScience', 1)" />
+      <input class="form-input form-inline payments_input" v-model.number="spireScience" />
+      <Button type="plus" :onClick="_=>addValue('spireScience', 1)" />
+      <Button type="max" :onClick="_=>setMaxValue('spireScience')" title="MAX" />
     </div>
 
     <div class="payments_type input-group" v-if="canUseAsteroids()">

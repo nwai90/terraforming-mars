@@ -38,7 +38,7 @@ export class AquiferStandardProject extends StandardProjectCard {
     if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) {
       this.reserveUnits = Units.adjustUnits(this.reserveUnits, {megacredits: trGain * REDS_RULING_POLICY_COST});
       const actionDetails = this.getActionDetails(player, this);
-      this.howToAffordReds = RedsPolicy.canAffordRedsPolicy(player, player.game, actionDetails, false, false, false, false, false, false, true);
+      this.howToAffordReds = RedsPolicy.canAffordRedsPolicy(player, player.game, actionDetails, false, false, false, false, false, false, true, false, true);
 
       if (this.howToAffordReds.mustSpendAtMost !== undefined || this.howToAffordReds.bonusMCFromPlay !== undefined) {
         this.reserveUnits = Units.maybeAdjustReservedMegacredits(player, this.reserveUnits, this.howToAffordReds);
@@ -48,12 +48,10 @@ export class AquiferStandardProject extends StandardProjectCard {
     }
 
     this.howToAffordReds = undefined;
+    const canUseAsteroids = player.isCorporation(CardName.KUIPER_COOPERATIVE);
+    const canUseSpireScience = player.isCorporation(CardName.SPIRE);
 
-    if (player.isCorporation(CardName.KUIPER_COOPERATIVE)) {
-      return player.canAfford(this.cost - super.discount(player), {asteroids: true});    
-    }
-
-    return player.canAfford(this.cost - super.discount(player));
+    return player.canAfford(this.cost - super.discount(player), {asteroids: canUseAsteroids, spireScience: canUseSpireScience});
   }
 
   actionEssence(player: Player): void {

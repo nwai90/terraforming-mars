@@ -18,7 +18,7 @@ export class SelectHowToPayDeferred implements DeferredAction {
             (!this.options.canUseSteel || this.player.steel === 0) &&
             (!this.options.canUsePlants || this.player.plants === 0) &&
             (!this.options.canUseTitanium || this.player.titanium === 0) &&
-            !this.options.canUseAsteroids && !this.options.canUseGraphene) {
+            !this.options.canUseAsteroids && !this.options.canUseGraphene && !this.options.canUseSpireScience) {
       this.player.megaCredits -= this.amount;
       if (this.options.afterPay !== undefined) {
         this.options.afterPay();
@@ -32,8 +32,9 @@ export class SelectHowToPayDeferred implements DeferredAction {
       this.options.canUseTitanium || false,
       this.player.canUseHeatAsMegaCredits && this.player.availableHeat > 0,
       this.options.canUseGraphene || false,
-      this.options.canUseAsteroids|| false,
+      this.options.canUseAsteroids || false,
       this.options.canUsePlants || false,
+      this.options.canUseSpireScience || false,
       this.amount,
       (howToPay: HowToPay) => {
         this.player.plants -= howToPay.plants;
@@ -41,6 +42,7 @@ export class SelectHowToPayDeferred implements DeferredAction {
         this.player.titanium -= howToPay.titanium;
         this.player.megaCredits -= howToPay.megaCredits;
         this.player.spendGraphene(howToPay.graphene);
+        this.player.spendSpireScience(howToPay.spireScience);
         this.player.spendAsteroids(howToPay.asteroids);
         this.player.game.defer(new DeferredAction(this.player, () => this.player.spendHeat(howToPay.heat)));
         if (this.options.afterPay !== undefined) {
@@ -59,6 +61,7 @@ export namespace SelectHowToPayDeferred {
     canUseTitanium?: boolean;
     canUseGraphene?: boolean;
     canUseAsteroids?: boolean;
+    canUseSpireScience?: boolean;
     title?: string;
     afterPay?: () => void;
   };

@@ -229,6 +229,8 @@ export const CardCorporationLogo = Vue.component('CardCorporationLogo', {
         return '<div class="card-sagitta-logo">Sagitta</div>';
       case CardName.KUIPER_COOPERATIVE:
         return '<div class="card-kuiper-logo">Kuiper<br/>Cooperative</div>';
+      case CardName.SPIRE:
+        return '<div class="card-spire-logo">Spire</div>';
       }
       return '';
     },

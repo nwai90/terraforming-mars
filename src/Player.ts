@@ -1,5 +1,5 @@
 import * as constants from './constants';
-import {DEFAULT_FLOATERS_VALUE, DEFAULT_GRAPHENE_VALUE, DEFAULT_MICROBES_VALUE, DEFAULT_PLANT_VALUE, ENERGY_TRADE_COST, MAX_FLEET_SIZE, MC_TRADE_COST, MILESTONE_COST, POLITICAL_AGENDAS_MAX_ACTION_USES, REDS_RULING_POLICY_COST, TITANIUM_TRADE_COST} from './constants';
+import {DEFAULT_FLOATERS_VALUE, DEFAULT_GRAPHENE_VALUE, DEFAULT_MICROBES_VALUE, DEFAULT_PLANT_VALUE, DEFAULT_SPIRE_SCIENCE_VALUE, ENERGY_TRADE_COST, MAX_FLEET_SIZE, MC_TRADE_COST, MILESTONE_COST, POLITICAL_AGENDAS_MAX_ACTION_USES, REDS_RULING_POLICY_COST, TITANIUM_TRADE_COST} from './constants';
 import {AndOptions} from './inputs/AndOptions';
 import {Aridor} from './cards/colonies/Aridor';
 import {Board} from './boards/Board';
@@ -1070,6 +1070,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       graphene: 0,
       asteroids: 0,
       plants: 0,
+      spireScience: 0,
     };
     try {
       const howToPay: HowToPay = JSON.parse(json);
@@ -1606,6 +1607,16 @@ export class Player implements ISerializable<SerializedPlayer> {
     return card.name === CardName.ASTEROID_STANDARD_PROJECT || card.name === CardName.AQUIFER_STANDARD_PROJECT;
   }
 
+  private canUseSpireScience(card: ICard): boolean {
+    if (!this.isCorporation(CardName.SPIRE)) return false;
+
+    const spire = this.corporationCards.find((corp) => corp.name === CardName.SPIRE)!;
+    if (spire.resourceCount === 0) return false;
+
+    const standardProjectNames = this.getStandardProjects().map((c) => c.name)
+    return standardProjectNames.includes(card.name);
+  }
+
   private canUsePlants(card: ICard): boolean {
     if (this.cardIsInEffect(CardName.MARTIAN_LUMBER_CORP) === false) return false;
     return card.tags.includes(Tags.BUILDING);
@@ -1662,6 +1673,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     const canUseTitanium: boolean = this.canUseTitanium(selectedCard);
     const canUseGraphene: boolean = this.canUseGraphene(selectedCard);
     const canUseAsteroids: boolean = this.canUseAsteroids(selectedCard);
+    const canUseSpireScience: boolean = this.canUseSpireScience(selectedCard);
     const canUsePlants: boolean = this.canUsePlants(selectedCard);
 
     if (canUsePlants && howToPay.plants > 0) {
@@ -1691,6 +1703,10 @@ export class Player implements ISerializable<SerializedPlayer> {
 
     if (canUseAsteroids && howToPay.asteroids > 0) {
       totalToPay += howToPay.asteroids;
+    }
+
+    if (canUseSpireScience && howToPay.spireScience > 0) {
+      totalToPay += howToPay.spireScience;
     }
 
     if (this.canUseHeatAsMegaCredits && howToPay.heat !== undefined) {
@@ -1766,6 +1782,13 @@ export class Player implements ISerializable<SerializedPlayer> {
     return 0;
   }
 
+  public getSpendableSpireScienceResources(): number {
+    const spire = this.corporationCards.find((card) => card.name === CardName.SPIRE);
+    if (spire !== undefined) return this.getResourcesOnCard(spire)!;
+
+    return 0;
+  }
+
   public playCard(selectedCard: IProjectCard, howToPay?: HowToPay, addToPlayedCards: boolean = true): undefined {
     // Pay for card
     if (howToPay !== undefined) {
@@ -1799,6 +1822,10 @@ export class Player implements ISerializable<SerializedPlayer> {
       for (const corp of this.corporationCards) {
         if (corp.name === CardName.KUIPER_COOPERATIVE) {
           this.removeResourceFrom(corp, howToPay.asteroids);
+        }
+
+        if (corp.name === CardName.SPIRE) {
+          this.removeResourceFrom(corp, howToPay.spireScience);
         }
       }
     }
@@ -1990,6 +2017,15 @@ export class Player implements ISerializable<SerializedPlayer> {
     if (this.isCorporation(CardName.KUIPER_COOPERATIVE)) {
       const kuiperCooperative = this.corporationCards.find((card) => card.name === CardName.KUIPER_COOPERATIVE)!;
       this.removeResourceFrom(kuiperCooperative, amount);
+    }
+
+    return undefined;
+  }
+
+  public spendSpireScience(amount: number) : undefined {
+    if (this.isCorporation(CardName.SPIRE)) {
+      const spire = this.corporationCards.find((card) => card.name === CardName.SPIRE)!;
+      this.removeResourceFrom(spire, amount);
     }
 
     return undefined;
@@ -2290,6 +2326,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         graphene: this.canUseGraphene(card),
         asteroids: this.canUseAsteroids(card),
         plants: this.canUsePlants(card),
+        spireScience: this.canUseSpireScience(card),
         reserveUnits: MoonExpansion.adjustedReserveCosts(this, card),
       });
 
@@ -2305,7 +2342,8 @@ export class Player implements ISerializable<SerializedPlayer> {
     microbes?: boolean,
     graphene?: boolean,
     asteroids?: boolean,
-    plants? :boolean,
+    plants?: boolean,
+    spireScience?: boolean,
     reserveUnits?: Units,
   }) {
     const reserveUnits = options?.reserveUnits ?? Units.EMPTY;
@@ -2332,6 +2370,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     const canUseGraphene: boolean = options?.graphene ?? false;
     const canUseAsteroids: boolean = options?.asteroids ?? false;
     const canUsePlants: boolean = options?.plants ?? (canUseSteel && this.cardIsInEffect(CardName.MARTIAN_LUMBER_CORP));
+    const canUseSpireScience: boolean = options?.spireScience ?? false;
 
     const availableMegacredits = this.megaCredits - reserveUnits.megacredits;
     if (availableMegacredits < 0) return false;
@@ -2345,7 +2384,8 @@ export class Player implements ISerializable<SerializedPlayer> {
       (canUseMicrobes ? this.getMicrobesCanSpend() * DEFAULT_MICROBES_VALUE : 0) +
       (canUseGraphene ? this.getSpendableGrapheneResources() * DEFAULT_GRAPHENE_VALUE : 0) +
       (canUseAsteroids ? this.getSpendableAsteroidResources() : 0) +
-      (canUsePlants ? this.plants * DEFAULT_PLANT_VALUE : 0);
+      (canUsePlants ? this.plants * DEFAULT_PLANT_VALUE : 0) + 
+      (canUseSpireScience ? this.getSpendableSpireScienceResources() * DEFAULT_SPIRE_SCIENCE_VALUE : 0);
   }
 
   public computeTerraformRatingBump(card: IProjectCard): number {

@@ -32,7 +32,7 @@ export const PaymentWidgetMixin = {
         rate = (this as any).player.titaniumValue;
       } else if (resourceName === 'steel') {
         rate = (this as any).player.steelValue;
-      } else if (resourceName === 'microbes') {
+      } else if (resourceName === 'microbes' || resourceName === 'spireScience') {
         rate = 2;
       } else if (resourceName === 'floaters' || resourceName === 'plants') {
         rate = 3;
@@ -65,6 +65,10 @@ export const PaymentWidgetMixin = {
         maxValue = this.availableAsteroids();
       }
 
+      if (target === 'spireScience') {
+        maxValue = this.availableSpireScience();
+      }
+
       if (target === 'microbes') maxValue = (this as any).playerinput.microbes;
       if (target === 'floaters') {
         maxValue = (this as any).playerinput.floaters;
@@ -92,6 +96,7 @@ export const PaymentWidgetMixin = {
               (this as any)['floaters'] * this.getResourceRate('floaters') -
               (this as any)['graphene'] * this.getResourceRate('graphene') -
               ((this as any)['asteroids'] ?? 0) -
+              ((this as any)['spireScience'] ?? 0) * this.getResourceRate('spireScience') -
               ((this as any)['science'] ?? 0);
 
       (this as any)['megaCredits'] = Math.max(0, Math.min(this.getMegaCreditsMax(), remainingMC));
@@ -102,9 +107,10 @@ export const PaymentWidgetMixin = {
       let amountHave: number = max ?? (this as any).player[target];
       if (target === 'heat') amountHave = this.availableHeat();
       if (target === 'asteroids') amountHave = this.availableAsteroids();
+      if (target === 'spireScience') amountHave = this.availableSpireScience();
 
       let amountNeed: number = cardCost;
-      if (['titanium', 'steel', 'microbes', 'floaters', 'graphene', 'plants'].includes(target)) {
+      if (['titanium', 'steel', 'microbes', 'floaters', 'graphene', 'plants', 'spireScience'].includes(target)) {
         amountNeed = Math.floor(cardCost/this.getResourceRate(target));
       }
 
@@ -137,6 +143,17 @@ export const PaymentWidgetMixin = {
       const kuiperCooperative = corpCards.find((card) => card.name === CardName.KUIPER_COOPERATIVE);
       if (kuiperCooperative !== undefined && kuiperCooperative.resources !== undefined) {
         return kuiperCooperative.resources;
+      }
+
+      return 0;
+    },
+    availableSpireScience(): number {
+      const thisPlayer = (this as any).player;
+      const corpCards = thisPlayer.corporationCards as Array<CardModel>;
+      
+      const spire = corpCards.find((card) => card.name === CardName.SPIRE);
+      if (spire !== undefined && spire.resources !== undefined) {
+        return spire.resources;
       }
 
       return 0;

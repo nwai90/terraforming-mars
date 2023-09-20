@@ -10,5 +10,6 @@ export interface HowToPay {
     graphene: number;
     asteroids: number;
     plants: number;
+    spireScience: number;
 }
 

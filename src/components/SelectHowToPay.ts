@@ -8,7 +8,7 @@ import {PreferencesManager} from './PreferencesManager';
 import {Button} from '../components/common/Button';
 import {TranslateMixin} from './TranslateMixin';
 import {CardName} from '../CardName';
-import {DEFAULT_GRAPHENE_VALUE, DEFAULT_PLANT_VALUE} from '../constants';
+import {DEFAULT_GRAPHENE_VALUE, DEFAULT_PLANT_VALUE, DEFAULT_SPIRE_SCIENCE_VALUE} from '../constants';
 
 interface SelectHowToPayModel {
     cost: number;
@@ -21,6 +21,7 @@ interface SelectHowToPayModel {
     graphene: number;
     asteroids: number;
     plants: number;
+    spireScience: number;
     warning: string | undefined;
 }
 
@@ -57,6 +58,7 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
       graphene: 0,
       asteroids: 0,
       plants: 0,
+      spireScience: 0,
       warning: undefined,
     } as SelectHowToPayModel;
   },
@@ -73,6 +75,7 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
       app.setDefaultTitaniumValue();
       app.setDefaultHeatValue();
       app.setDefaultAsteroidsValue();
+      app.setDefaultSpireScienceValue();
     });
   },
   methods: {
@@ -198,6 +201,30 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
       const discountedCost = this.$data.cost - (this.$data.steel * this.player.steelValue) - (this.$data.plants * DEFAULT_PLANT_VALUE) - (this.$data.graphene * DEFAULT_GRAPHENE_VALUE) - (this.$data.titanium * this.player.titaniumValue) - this.$data.heat - this.$data.asteroids;
       this.$data.megaCredits = Math.max(discountedCost, 0);
     },
+    setDefaultSpireScienceValue: function() {
+      // automatically use available Spire science resources if not enough M€
+      if (!this.canAffordWithMcOnly() && this.canUseSpireScience()) {
+        let requiredSpireScienceQty = Math.ceil(Math.max(this.$data.cost - this.player.megaCredits - (this.$data.steel * this.player.steelValue)- (this.$data.graphene * DEFAULT_GRAPHENE_VALUE) - (this.$data.titanium * this.player.titaniumValue) - this.$data.heat - this.$data.asteroids, 0) / DEFAULT_SPIRE_SCIENCE_VALUE);
+
+        if (requiredSpireScienceQty > this.getAvailableSpireScience()) {
+          this.$data.spireScience = this.getAvailableSpireScience();
+        } else {
+          // use as much science as possible without overpaying by default
+          let currentSpireScienceValue = requiredSpireScienceQty * DEFAULT_SPIRE_SCIENCE_VALUE;
+          while (currentSpireScienceValue <= this.$data.cost - DEFAULT_SPIRE_SCIENCE_VALUE && requiredSpireScienceQty < this.getAvailableSpireScience()) {
+            requiredSpireScienceQty++;
+            currentSpireScienceValue = requiredSpireScienceQty * DEFAULT_SPIRE_SCIENCE_VALUE;
+          }
+
+          this.$data.spireScience = requiredSpireScienceQty;
+        }
+
+        const discountedCost = this.$data.cost - (this.$data.steel * this.player.steelValue) - (this.$data.plants * DEFAULT_PLANT_VALUE) - (this.$data.graphene * DEFAULT_GRAPHENE_VALUE) - (this.$data.titanium * this.player.titaniumValue) - this.$data.heat - this.$data.asteroids - (this.$data.spireScience * DEFAULT_SPIRE_SCIENCE_VALUE);
+        this.$data.megaCredits = Math.max(discountedCost, 0);
+      } else {
+        this.$data.spireScience = 0;
+      }
+    },
     canAffordWithMcOnly: function() {
       return this.player.megaCredits >= this.$data.cost;
     },
@@ -231,6 +258,16 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
 
       return availableAsteroids;
     },
+    getAvailableSpireScience: function() {
+      let availableSpireScience = 0;
+      const spire = this.player.corporationCards.find((c) => c.name === CardName.SPIRE);
+
+      if (spire !== undefined && spire.resources !== undefined) {
+        availableSpireScience = spire.resources;
+      }
+
+      return availableSpireScience;
+    },
     canUseHeat: function() {
       return this.playerinput.canUseHeat && this.getAvailableHeat() > 0;
     },
@@ -249,6 +286,9 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
     canUseAsteroids: function() {
       return this.playerinput.canUseAsteroids && this.getAvailableAsteroids() > 0;
     },
+    canUseSpireScience: function() {
+      return this.playerinput.canUseSpireScience && this.getAvailableSpireScience() > 0;
+    },
     saveData: function() {
       const htp: HowToPay = {
         heat: this.$data.heat,
@@ -261,6 +301,7 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
         graphene: this.$data.graphene,
         asteroids: this.$data.asteroids,
         plants: this.$data.plants,
+        spireScience: this.$data.spireScience,
       };
 
       if (htp.megaCredits > this.player.megaCredits) {
@@ -291,9 +332,13 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
         this.$data.warning = 'You don\'t have enough asteroid resources';
         return;
       }
+      if (htp.spireScience > this.getAvailableSpireScience()) {
+        this.$data.warning = 'You don\'t have enough science resources';
+        return;
+      }
 
       const requiredAmt = this.playerinput.amount || 0;
-      const totalSpentAmt = htp.heat + htp.asteroids + htp.megaCredits + (htp.plants * DEFAULT_PLANT_VALUE) + (htp.steel * this.player.steelValue) + (htp.titanium * this.player.titaniumValue) + (htp.microbes * 2) + (htp.floaters * 3) + (htp.graphene * DEFAULT_GRAPHENE_VALUE);
+      const totalSpentAmt = htp.heat + htp.asteroids + htp.megaCredits + (htp.plants * DEFAULT_PLANT_VALUE) + (htp.steel * this.player.steelValue) + (htp.titanium * this.player.titaniumValue) + (htp.microbes * 2) + (htp.floaters * 3) + (htp.graphene * DEFAULT_GRAPHENE_VALUE) + (htp.spireScience * DEFAULT_SPIRE_SCIENCE_VALUE);
 
       if (requiredAmt > 0 && totalSpentAmt < requiredAmt) {
         this.$data.warning = 'Haven\'t spent enough';
@@ -325,6 +370,10 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
         }
         if (htp.asteroids && diff >= 1) {
           this.$data.warning = 'You cannot overspend asteroids';
+          return;
+        }
+        if (htp.spireScience && diff >= DEFAULT_SPIRE_SCIENCE_VALUE) {
+          this.$data.warning = 'You cannot overspend science';
           return;
         }
         if (htp.graphene && diff >= DEFAULT_GRAPHENE_VALUE) {
@@ -380,6 +429,14 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
       <input class="form-input form-inline payments_input" v-model.number="graphene" />
       <Button type="plus" :onClick="_=>addValue('graphene', 1)" />
       <Button type="max" :onClick="_=>setMaxValue('graphene')" title="MAX" />
+    </div>
+
+    <div class="payments_type input-group" v-if="playerinput.canUseSpireScience">
+      <i class="resource_icon resource_icon--science payments_type_icon" :title="$t('Pay by Science')"></i>
+      <Button type="minus" :onClick="_=>reduceValue('spireScience', 1)" />
+      <input class="form-input form-inline payments_input" v-model.number="spireScience" />
+      <Button type="plus" :onClick="_=>addValue('spireScience', 1)" />
+      <Button type="max" :onClick="_=>setMaxValue('spireScience')" title="MAX" />
     </div>
     
     <div class="payments_type input-group" v-if="playerinput.canUseAsteroids">

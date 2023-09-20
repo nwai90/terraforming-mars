@@ -48,7 +48,9 @@ export class AirScrappingStandardProject extends StandardProjectCard {
     }
 
     this.howToAffordReds = undefined;
-    return player.canAfford(this.cost - this.discount(player));
+    const canUseSpireScience = player.isCorporation(CardName.SPIRE);
+
+    return player.canAfford(this.cost - this.discount(player), {spireScience: canUseSpireScience});
   }
 
   actionEssence(player: Player): void {

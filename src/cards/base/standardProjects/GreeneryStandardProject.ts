@@ -50,7 +50,9 @@ export class GreeneryStandardProject extends StandardProjectCard {
     }
 
     this.howToAffordReds = undefined;
-    return player.canAfford(this.cost - super.discount(player));
+    const canUseSpireScience = player.isCorporation(CardName.SPIRE);
+
+    return player.canAfford(this.cost - super.discount(player), {spireScience: canUseSpireScience});
   }
 
   actionEssence(player: Player): void {

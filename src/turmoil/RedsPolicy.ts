@@ -8,7 +8,7 @@ import {SpaceName} from "../SpaceName";
 import {StandardProjectType} from "../StandardProjectType";
 import {Tags} from "../cards/Tags";
 import {TileType} from "../TileType";
-import {DEFAULT_PLANT_VALUE, HELLAS_BONUS_OCEAN_COST, MAXIMUM_COLONY_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE, MAX_OCEAN_TILES, MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, MAX_VENUS_SCALE, REDS_RULING_POLICY_COST} from "../constants";
+import {DEFAULT_FLOATERS_VALUE, DEFAULT_GRAPHENE_VALUE, DEFAULT_MICROBES_VALUE, DEFAULT_PLANT_VALUE, DEFAULT_SPIRE_SCIENCE_VALUE, HELLAS_BONUS_OCEAN_COST, MAXIMUM_COLONY_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE, MAX_OCEAN_TILES, MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, MAX_VENUS_SCALE, REDS_RULING_POLICY_COST} from "../constants";
 import {Board} from "../boards/Board";
 import {ISpace} from "../boards/ISpace";
 import {BoardName} from "../boards/BoardName";
@@ -90,6 +90,7 @@ export class RedsPolicy {
     canUseGraphene: boolean = false,
     canUseAsteroids: boolean = false,
     canUsePlants: boolean = false,
+    canUseSpireScience: boolean = false,
   ): HowToAffordRedsPolicy {
     const board = game.board;
     canUsePlants = canUseSteel && player.cardIsInEffect(CardName.MARTIAN_LUMBER_CORP) && player.plants > 0;
@@ -334,11 +335,13 @@ export class RedsPolicy {
         mustSpendAtMost += 1;
       }
     }
+
     if (canUseMicrobes) {
-      missingMC -= Math.min(player.getMicrobesCanSpend(), Math.ceil(missingMC / 2)) * 2;
+      missingMC -= Math.min(player.getMicrobesCanSpend(), Math.ceil(missingMC / DEFAULT_MICROBES_VALUE)) * DEFAULT_MICROBES_VALUE;
     }
+
     if (canUseFloaters) {
-      missingMC -= Math.min(player.getFloatersCanSpend(), Math.ceil(missingMC / 3)) * 3;
+      missingMC -= Math.min(player.getFloatersCanSpend(), Math.ceil(missingMC / DEFAULT_FLOATERS_VALUE)) * DEFAULT_FLOATERS_VALUE;
     }
 
     if (canUseScience) {
@@ -349,8 +352,12 @@ export class RedsPolicy {
       missingMC -= Math.min(player.getSpendableAsteroidResources(), missingMC);
     }
 
+    if (canUseSpireScience) {
+      missingMC -= Math.min(player.getSpendableSpireScienceResources(), Math.ceil(missingMC / DEFAULT_SPIRE_SCIENCE_VALUE)) * DEFAULT_SPIRE_SCIENCE_VALUE;
+    }
+
     if (canUseGraphene) {
-      missingMC -= Math.min(player.getSpendableGrapheneResources(), Math.ceil(missingMC / 4)) * 2;
+      missingMC -= Math.min(player.getSpendableGrapheneResources(), Math.ceil(missingMC / DEFAULT_GRAPHENE_VALUE)) * DEFAULT_GRAPHENE_VALUE;
     }
 
     // If player uses steel/titanium/etc it can pay for everything but must not spend more than |mustSpendAtMost| M€ on the action/card itself

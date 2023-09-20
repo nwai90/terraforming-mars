@@ -22,6 +22,11 @@ export class PowerPlantStandardProject extends StandardProjectCard {
     });
   }
 
+  public canAct(player: Player): boolean {
+    const canUseSpireScience = player.isCorporation(CardName.SPIRE);
+    return player.canAfford(this.cost - super.discount(player), {spireScience: canUseSpireScience});
+  }
+
   actionEssence(player: Player): void {
     player.addProduction(Resources.ENERGY, 1);
   }

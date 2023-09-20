@@ -19,6 +19,7 @@ export class SelectHowToPayForProjectCard implements PlayerInput {
   public scienceResources: number;
   public grapheneResources: number;
   public asteroidResources: number;
+  public spireScienceResources: number;
   public reserveUnits: Array<Units>;
 
   constructor(
@@ -31,6 +32,7 @@ export class SelectHowToPayForProjectCard implements PlayerInput {
     this.canUsePlants = player.cardIsInEffect(CardName.MARTIAN_LUMBER_CORP);
     this.scienceResources = player.getSpendableScienceResources();
     this.asteroidResources = player.getSpendableAsteroidResources();
+    this.spireScienceResources = player.getSpendableSpireScienceResources();
     this.grapheneResources = player.getSpendableGrapheneResources();
     this.reserveUnits = this.cards.map((card) => {
       return card.reserveUnits ? MoonExpansion.adjustedReserveCosts(player, card) : Units.EMPTY;

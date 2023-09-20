@@ -24,7 +24,8 @@ export class CityStandardProject extends StandardProjectCard {
   }
 
   public canAct(player: Player): boolean {
-    return player.canAfford(this.cost - super.discount(player)) && player.game.board.getAvailableSpacesForCity(player).length > 0;
+    const canUseSpireScience = player.isCorporation(CardName.SPIRE);
+    return player.canAfford(this.cost - super.discount(player), {spireScience: canUseSpireScience}) && player.game.board.getAvailableSpacesForCity(player).length > 0;
   }
 
   actionEssence(player: Player): void {

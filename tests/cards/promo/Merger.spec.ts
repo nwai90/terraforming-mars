@@ -197,7 +197,7 @@ describe('Merger', function() {
     TestingUtils.runAllActions(game);
 
     const howToPay = player.getWaitingFor() as SelectHowToPay;
-    howToPay.cb({megaCredits: 2, heat: 2, steel: 0, titanium: 0, microbes: 0, floaters: 0, science: 0, graphene: 0, asteroids: 0, plants: 0});
+    howToPay.cb({megaCredits: 2, heat: 2, steel: 0, titanium: 0, microbes: 0, floaters: 0, science: 0, graphene: 0, asteroids: 0, plants: 0, spireScience: 0});
     TestingUtils.runAllActions(game);
     expect(player.getProduction(Resources.STEEL)).to.eq(1);
     expect(player.megaCredits).to.eq(1);
@@ -224,7 +224,7 @@ describe('Merger', function() {
     TestingUtils.runAllActions(game);
 
     const howToPay = player.getWaitingFor() as SelectHowToPay;
-    howToPay.cb({megaCredits: 1, heat: 2, steel: 0, titanium: 0, microbes: 0, floaters: 0, science: 0, graphene: 0, asteroids: 0, plants: 0});
+    howToPay.cb({megaCredits: 1, heat: 2, steel: 0, titanium: 0, microbes: 0, floaters: 0, science: 0, graphene: 0, asteroids: 0, plants: 0, spireScience: 0});
     TestingUtils.runAllActions(game);
 
     expect(player.getTerraformRating()).to.eq(22);
@@ -251,7 +251,7 @@ describe('Merger', function() {
     TestingUtils.runAllActions(game);
 
     const howToPay = player.getWaitingFor() as SelectHowToPay;
-    howToPay.cb({megaCredits: 1, heat: 2, steel: 0, titanium: 0, microbes: 0, floaters: 0, science: 0, graphene: 0, asteroids: 0, plants: 0});
+    howToPay.cb({megaCredits: 1, heat: 2, steel: 0, titanium: 0, microbes: 0, floaters: 0, science: 0, graphene: 0, asteroids: 0, plants: 0, spireScience: 0});
     TestingUtils.runAllActions(game);
 
     expect(player.cardsInHand).has.lengthOf(1);
@@ -276,7 +276,7 @@ describe('Merger', function() {
     TestingUtils.runAllActions(game);
 
     const howToPay = player.getWaitingFor() as SelectHowToPay;
-    howToPay.cb({megaCredits: 3, heat: 2, steel: 0, titanium: 0, microbes: 0, floaters: 0, science: 0, graphene: 0, asteroids: 0, plants: 0});
+    howToPay.cb({megaCredits: 3, heat: 2, steel: 0, titanium: 0, microbes: 0, floaters: 0, science: 0, graphene: 0, asteroids: 0, plants: 0, spireScience: 0});
     TestingUtils.runAllActions(game);
 
     expect(player.megaCredits).to.eq(1);
