@@ -13,7 +13,7 @@ import {Resources} from '../../Resources';
 export class RedShips extends Card implements IProjectCard {
   constructor() {
     super({
-      cardType: CardType.AUTOMATED,
+      cardType: CardType.ACTIVE,
       name: CardName.RED_SHIPS,
       cost: 2,
       requirements: CardRequirements.builder((b) => b.oxygen(4)),
