@@ -4,4 +4,5 @@ export enum Size {
   MEDIUM = 'M',
   LARGE = 'L',
   TINY = 'XS',
+  DESCRIPTION = 'D',
 }
