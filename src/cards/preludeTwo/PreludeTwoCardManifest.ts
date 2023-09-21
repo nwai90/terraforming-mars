@@ -34,6 +34,7 @@ import {SagittaFrontierServices} from './SagittaFrontierServices';
 import {SolarLogistics} from './SolarLogistics';
 import {Spire} from './Spire';
 import {StJosephOfCupertinoMission} from './StJosephOfCupertinoMission';
+import {StrategicBasePlanning} from './StrategicBasePlanning';
 import {SummitLogistics} from './SummitLogistics';
 import {TerraformingDeal} from './TerraformingDeal';
 import {Teslaract} from './Teslaract';
@@ -82,6 +83,7 @@ export const PRELUDE_TWO_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.GIANT_SOLAR_COLLECTOR, Factory: GiantSolarCollector, compatibility: GameModule.Venus},
     {cardName: CardName.NOBEL_PRIZE, Factory: NobelPrize},
     {cardName: CardName.OLD_MINING_COLONY, Factory: OldMiningColony, compatibility: GameModule.Colonies},
+    {cardName: CardName.STRATEGIC_BASE_PLANNING, Factory: StrategicBasePlanning, compatibility: GameModule.Colonies},
     {cardName: CardName.TERRAFORMING_DEAL, Factory: TerraformingDeal},
   ],
 });

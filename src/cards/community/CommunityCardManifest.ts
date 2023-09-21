@@ -20,7 +20,6 @@ import {JunkVentures} from './corporations/JunkVentures';
 import {Aristarchus} from './corporations/Aristarchus';
 import {HydrogenBombardment} from './preludes/HydrogenBombardment';
 import {VitalColony} from './preludes/VitalColony';
-import {StrategicBasePlanning} from './preludes/StrategicBasePlanning';
 import {NitrateReducers} from './preludes/NitrateReducers';
 import {ExperiencedMartians} from './preludes/ExperiencedMartians';
 import {TradeInfrastructure} from './preludes/TradeInfrastructure';
@@ -316,11 +315,6 @@ export const COMMUNITY_CARD_MANIFEST = new CardManifest({
     {
       cardName: CardName.VITAL_COLONY,
       Factory: VitalColony,
-      compatibility: GameModule.Colonies,
-    },
-    {
-      cardName: CardName.STRATEGIC_BASE_PLANNING,
-      Factory: StrategicBasePlanning,
       compatibility: GameModule.Colonies,
     },
     {

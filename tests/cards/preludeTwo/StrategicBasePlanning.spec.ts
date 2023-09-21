@@ -5,7 +5,7 @@ import {TestPlayers} from '../../TestPlayers';
 import {Game, GameOptions} from '../../../src/Game';
 import {ColonyName} from '../../../src/colonies/ColonyName';
 import {SelectColony} from '../../../src/inputs/SelectColony';
-import {StrategicBasePlanning} from '../../../src/cards/community/preludes/StrategicBasePlanning';
+import {StrategicBasePlanning} from '../../../src/cards/preludeTwo/StrategicBasePlanning';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {TileType} from '../../../src/TileType';
 import {Iapetus} from '../../../src/cards/community/colonies/Iapetus';
@@ -24,7 +24,7 @@ describe('StrategicBasePlanning', function() {
   });
 
   it('Should play', function() {
-    player.megaCredits = 6;
+    player.megaCredits = 3;
     card.play(player);
     expect(game.deferredActions).has.lengthOf(2);
 

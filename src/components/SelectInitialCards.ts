@@ -55,10 +55,10 @@ export const SelectInitialCards = Vue.component('select-initial-cards', {
           result += 3;
           break;
         case CardName.BUSINESS_EMPIRE:
-        case CardName.STRATEGIC_BASE_PLANNING:
           result -= 6;
           break;
         case CardName.AQUIFER_TURBINES:
+        case CardName.STRATEGIC_BASE_PLANNING:
           result -= 3;
           break;
         case CardName.MINING_IMPROVEMENTS:
