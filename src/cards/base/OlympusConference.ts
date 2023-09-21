@@ -36,6 +36,8 @@ export class OlympusConference extends Card implements IProjectCard, IResourceCa
     public resourceCount: number = 0;
 
     public onCardPlayed(player: Player, card: IProjectCard) {
+      if (!player.cardIsInEffect(this.name)) return;
+
       const scienceTags = card.tags.filter((tag) => tag === Tags.SCIENCE).length;
       for (let i = 0; i < scienceTags; i++) {
         player.game.defer(new DeferredAction(

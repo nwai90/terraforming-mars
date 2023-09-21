@@ -45,6 +45,7 @@ export class Faraday extends Card implements LeaderCard {
 
   public onCardPlayed(player: Player, card: IProjectCard) {
     if (card.cardType === CardType.EVENT) return;
+    if (!player.cardIsInEffect(this.name)) return;
 
     const validTags =
       player.getAllTags()

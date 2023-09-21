@@ -1899,21 +1899,10 @@ export class Player implements ISerializable<SerializedPlayer> {
       this.removedFromPlayCards.pop();
     }
 
-    for (const playedCard of this.playedCards) {
-      if (playedCard.onCardPlayed !== undefined) {
-        const actionFromPlayedCard: OrOptions | void = playedCard.onCardPlayed(this, selectedCard);
-        if (actionFromPlayedCard !== undefined) {
-          this.game.defer(new DeferredAction(
-            this,
-            () => actionFromPlayedCard,
-          ));
-        }
-      }
-    }
-
     TurmoilHandler.applyOnCardPlayedEffect(this, selectedCard);
 
     for (const somePlayer of this.game.getPlayers()) {
+      // Trigger corp onCardPlayed effects for all players
       somePlayer.corporationCards.forEach((corp) => {
         if (corp.onCardPlayed !== undefined) {
           // For Colosseum variant, only trigger the effect once for each player (e.g. Vitor receives only 3 M€)
@@ -1929,6 +1918,19 @@ export class Player implements ISerializable<SerializedPlayer> {
           };          
         }
       });
+
+      // Trigger project card onCardPlayed effects for all players
+      for (const playedCard of somePlayer.playedCards) {
+        if (playedCard.onCardPlayed !== undefined) {
+          const actionFromPlayedCard: OrOptions | void = playedCard.onCardPlayed(this, selectedCard);
+          if (actionFromPlayedCard !== undefined) {
+            this.game.defer(new DeferredAction(
+              this,
+              () => actionFromPlayedCard,
+            ));
+          }
+        }
+      }
     }
 
     return undefined;

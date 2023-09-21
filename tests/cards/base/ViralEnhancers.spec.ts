@@ -9,23 +9,23 @@ import {ResourceType} from '../../../src/ResourceType';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('ViralEnhancers', function() {
-  let card : ViralEnhancers; let player : Player; let game : Game;
+  let card : ViralEnhancers; let player : Player; let player2 : Player; let game : Game;
 
   beforeEach(() => {
     card = new ViralEnhancers();
     player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    player2 = TestPlayers.RED.newPlayer();
+    game = Game.newInstance('foobar', [player, player2], player);
   });
 
   it('Should play', function() {
     card.play();
+    player.playedCards.push(card);
 
     const ants = {tags: [Tags.ANIMAL], resourceType: ResourceType.MICROBE, resourceCount: 0} as IProjectCard;
     const birds = {tags: [Tags.ANIMAL], resourceType: ResourceType.ANIMAL, resourceCount: 0} as IProjectCard;
     const moss = {tags: [Tags.PLANT]} as IProjectCard;
-    player.playedCards.push(ants, birds, moss);
-
+    
     card.onCardPlayed(player, birds);
     expect(game.deferredActions).has.lengthOf(1);
 
@@ -43,10 +43,18 @@ describe('ViralEnhancers', function() {
     expect(player.getResourcesOnCard(ants)).eq(1);
     orOptions2.options[1].cb();
     expect(player.plants).eq(2);
+
+    card.onCardPlayed(player, moss);
+    expect(player.plants).eq(3);
+
+    card.onCardPlayed(player2, moss);
+    expect(player.plants).eq(3);
+    expect(player2.plants).eq(0);
   });
 
   it('Should play for each tag', function() {
     card.play();
+    player.playedCards.push(card);
 
     const ecologicalZone = {tags: [Tags.PLANT, Tags.ANIMAL], resourceType: ResourceType.ANIMAL, resourceCount: 0} as IProjectCard;
     card.onCardPlayed(player, ecologicalZone);

@@ -11,13 +11,13 @@ import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('OlympusConference', function() {
-  let card : OlympusConference; let player : TestPlayer; let game : Game;
+  let card : OlympusConference; let player : TestPlayer; let player2 : TestPlayer; let game : Game;
 
   beforeEach(() => {
     card = new OlympusConference();
     player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    player2 = TestPlayers.RED.newPlayer();
+    game = Game.newInstance('foobar', [player, player2], player);
   });
 
   it('Should play', function() {
@@ -50,6 +50,9 @@ describe('OlympusConference', function() {
     orOptions.options[0].cb();
     expect(card.resourceCount).eq(1);
     expect(player.cardsInHand).has.lengthOf(1);
+    expect(game.deferredActions).has.lengthOf(0);
+
+    card.onCardPlayed(player2, card);
     expect(game.deferredActions).has.lengthOf(0);
   });
 
@@ -95,11 +98,9 @@ describe('OlympusConference', function() {
     orOptions.options[1].cb();
     expect(card.resourceCount).eq(2);
 
-
     // Reset the state
     game.deferredActions = new DeferredActionsQueue();
     player.playedCards = [];
-
 
     // Mars University played before Olympus Conference
     player.playedCards.push(marsUniversity);

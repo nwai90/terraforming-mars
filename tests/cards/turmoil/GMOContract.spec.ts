@@ -9,19 +9,27 @@ describe('GMOContract', function() {
   it('Should play', function() {
     const card = new GMOContract();
     const player = TestPlayers.BLUE.newPlayer();
+    const player2 = TestPlayers.RED.newPlayer();
     const gameOptions = TestingUtils.setCustomGameOptions();
-    const game = Game.newInstance('foobar', [player], player, gameOptions);
+    const game = Game.newInstance('foobar', [player, player2], player, gameOptions);
 
     if (game.turmoil !== undefined) {
       game.turmoil.rulingParty = game.turmoil.getPartyByName(PartyName.REDS);
       expect(card.canPlay(player)).is.false;
       const greens = game.turmoil.getPartyByName(PartyName.GREENS);
+
       if (greens !== undefined) {
         greens.delegates.push(player.id, player.id);
         expect(card.canPlay(player)).is.true;
       }
-      card.play(player);
+
+      player.playedCards.push(card);
+
       card.onCardPlayed(player, card);
+      game.deferredActions.runNext();
+      expect(player.megaCredits).eq(2);
+
+      card.onCardPlayed(player2, card);
       game.deferredActions.runNext();
       expect(player.megaCredits).eq(2);
     }

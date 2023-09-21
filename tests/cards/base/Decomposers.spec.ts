@@ -9,13 +9,13 @@ import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('Decomposers', function() {
-  let card : Decomposers; let player : Player; let game : Game;
+  let card : Decomposers; let player : Player; let player2 : Player; let game : Game;
 
   beforeEach(() => {
     card = new Decomposers();
     player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    player2 = TestPlayers.RED.newPlayer();
+    game = Game.newInstance('foobar', [player, player2], player);
   });
 
   it('Can\'t play', function() {
@@ -25,15 +25,22 @@ describe('Decomposers', function() {
   it('Should play', function() {
     game.setOxygenLevel(3);
     expect(card.canPlay(player)).is.true;
+
     card.play(player);
+    player.playedCards.push(card);
 
     card.onCardPlayed(player, {tags: [Tags.ANIMAL]} as IProjectCard);
     expect(card.resourceCount).eq(1);
-    card.onCardPlayed(player, card);
-    expect(card.resourceCount).eq(2);
-    card.onCardPlayed(player, {tags: [Tags.PLANT]} as IProjectCard);
 
+    card.onCardPlayed(player, {tags: [Tags.MICROBE]} as IProjectCard);
+    expect(card.resourceCount).eq(2);
+
+    card.onCardPlayed(player, {tags: [Tags.PLANT]} as IProjectCard);
     expect(card.resourceCount).eq(3);
+
+    card.onCardPlayed(player2, {tags: [Tags.PLANT]} as IProjectCard);
+    expect(card.resourceCount).eq(3);
+
     expect(card.getVictoryPoints()).eq(1);
   });
 

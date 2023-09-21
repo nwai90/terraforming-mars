@@ -12,10 +12,17 @@ describe('SpinoffDepartment', function() {
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
     Game.newInstance('foobar', [player, player2], player);
+
     const action = card.play(player);
     expect(action).is.undefined;
     expect(player.getProduction(Resources.MEGACREDITS)).eq(2);
+
+    player.playedCards.push(card);    
     card.onCardPlayed(player, card2);
     expect(player.cardsInHand).has.lengthOf(1);
+
+    card.onCardPlayed(player2, card2);
+    expect(player.cardsInHand).has.lengthOf(1);
+    expect(player2.cardsInHand).has.lengthOf(0);
   });
 });

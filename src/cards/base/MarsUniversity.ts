@@ -31,6 +31,8 @@ export class MarsUniversity extends Card implements IProjectCard {
   }
 
   public onCardPlayed(player: Player, card: IProjectCard) {
+    if (!player.cardIsInEffect(this.name)) return;
+
     const scienceTags = card.tags.filter((tag) => tag === Tags.SCIENCE).length;
     for (let i = 0; i < scienceTags; i++) {
       player.game.defer(new DeferredAction(

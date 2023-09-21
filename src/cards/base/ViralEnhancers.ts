@@ -33,6 +33,8 @@ export class ViralEnhancers extends Card implements IProjectCard {
     });
   }
   public onCardPlayed(player: Player, card: IProjectCard) {
+    if (!player.cardIsInEffect(this.name)) return;
+
     const resourceCount = card.tags.filter((tag) => tag === Tags.ANIMAL || tag === Tags.PLANT || tag === Tags.MICROBE).length;
     if (resourceCount === 0) {
       return undefined;

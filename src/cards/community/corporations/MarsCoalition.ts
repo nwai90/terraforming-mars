@@ -116,7 +116,7 @@ export class MarsCoalition extends Card implements CorporationCard {
   }
 
   public onCardPlayed(player: Player, card: IProjectCard): void {
-    if (!player.isCorporation(CardName.MARS_COALITION)) return;
+    if (!player.isCorporation(this.name)) return;
     const dominantPartyPolicy = MarsCoalition.getDominantPartyPolicyId(player);
 
     switch (dominantPartyPolicy) {

@@ -40,6 +40,8 @@ export class CarbonNanosystems extends Card implements IProjectCard {
   }
 
   public onCardPlayed(player: Player, card: IProjectCard): void {
+    if (!player.cardIsInEffect(this.name)) return;
+
     const qty = card.tags.filter((tag) => tag === Tags.SCIENCE).length;
     player.addResourceTo(this, {qty: qty, log: true});
   }

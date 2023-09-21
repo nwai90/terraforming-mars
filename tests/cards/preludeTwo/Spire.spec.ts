@@ -11,13 +11,14 @@ import {MedicalLab} from '../../../src/cards/base/MedicalLab';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 
 describe('Spire', function() {
-  let card : Spire; let player : Player; let game : Game;
+  let card : Spire; let player : Player; let player2 : Player; let game : Game;
   let noTagsCard: IProjectCard; let singleTagCard: IProjectCard; let twoTagsCard: IProjectCard; let twoTagsEventCard: IProjectCard; 
 
   beforeEach(() => {
     card = new Spire();
     player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('foobar', [player], player);
+    player2 = TestPlayers.YELLOW.newPlayer();
+    game = Game.newInstance('foobar', [player, player2], player);
 
     singleTagCard = new Mine();
     twoTagsCard = new MedicalLab();
@@ -55,6 +56,9 @@ describe('Spire', function() {
     expect(card.resourceCount).eq(1);
 
     card.onCardPlayed(player, twoTagsEventCard);
+    expect(card.resourceCount).eq(2);
+
+    card.onCardPlayed(player2, twoTagsEventCard);
     expect(card.resourceCount).eq(2);
   });
 });

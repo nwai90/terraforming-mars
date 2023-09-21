@@ -9,13 +9,14 @@ import {TileType} from '../../../src/TileType';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('EcologicalZone', function() {
-  let card : EcologicalZone; let player : Player; let game : Game;
+  let card : EcologicalZone; let player : Player; let player2 : Player; let game : Game;
 
   beforeEach(() => {
     card = new EcologicalZone();
     player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    player2 = TestPlayers.RED.newPlayer();
+
+    game = Game.newInstance('foobar', [player, player2], player);
   });
 
   it('Cannot play', function() {
@@ -23,6 +24,8 @@ describe('EcologicalZone', function() {
   });
 
   it('Should play', function() {
+    player.playedCards.push(card);
+
     const landSpace = game.board.getAvailableSpacesOnLand(player)[0];
     game.addGreenery(player, landSpace.id);
     expect(card.canPlay(player)).is.true;
@@ -38,6 +41,9 @@ describe('EcologicalZone', function() {
     expect(card.resourceCount).eq(2);
     expect(card.getVictoryPoints()).eq(1);
     expect(adjacentSpace.adjacency?.bonus).eq(undefined);
+
+    card.onCardPlayed(player2, card);
+    expect(card.resourceCount).eq(2);
   });
 
   it('Should get triggered by EcoExperts if played together', function() {

@@ -9,15 +9,18 @@ describe('Advertising', function() {
   it('Should play', function() {
     const advertising = new Advertising();
     const player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player], player);
+    const player2 = TestPlayers.RED.newPlayer();
+    Game.newInstance('foobar', [player, player2], player);
 
     player.playedCards.push(advertising);
     advertising.play();
     expect(player.getProduction(Resources.MEGACREDITS)).eq(0);
 
-    const card = new EarthCatapult();
-    card.play();
-    advertising.onCardPlayed(player, card);
+    advertising.onCardPlayed(player, new EarthCatapult());
     expect(player.getProduction(Resources.MEGACREDITS)).eq(1);
+
+    advertising.onCardPlayed(player2, new EarthCatapult());
+    expect(player.getProduction(Resources.MEGACREDITS)).eq(1);
+    expect(player2.getProduction(Resources.MEGACREDITS)).eq(0);
   });
 });

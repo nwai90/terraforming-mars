@@ -6,13 +6,13 @@ import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('VenusianAnimals', function() {
-  let card : VenusianAnimals; let player : Player; let game : Game;
+  let card : VenusianAnimals; let player : Player; let player2 : Player; let game : Game;
 
   beforeEach(() => {
     card = new VenusianAnimals();
     player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    player2 = TestPlayers.RED.newPlayer();
+    game = Game.newInstance('foobar', [player, player2], player);
   });
 
   it('Can\'t play', function() {
@@ -30,6 +30,9 @@ describe('VenusianAnimals', function() {
     expect(player.getResourcesOnCard(card)).eq(1);
 
     card.onCardPlayed(player, new Research());
+    expect(player.getResourcesOnCard(card)).eq(3);
+
+    card.onCardPlayed(player2, new Research());
     expect(player.getResourcesOnCard(card)).eq(3);
 
     expect(card.getVictoryPoints()).eq(3);

@@ -7,13 +7,13 @@ import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('MartianZoo', function() {
-  let card : MartianZoo; let player : Player;
+  let card : MartianZoo; let player : Player; let player2 : Player;
 
   beforeEach(() => {
     card = new MartianZoo();
     player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, redPlayer], player);
+    player2 = TestPlayers.RED.newPlayer();
+    Game.newInstance('foobar', [player, player2], player);
   });
 
   it('Can\'t play', function() {
@@ -36,11 +36,16 @@ describe('MartianZoo', function() {
   });
 
   it('Should act', function() {
-    card.onCardPlayed(player, {tags: [Tags.EARTH, Tags.EARTH]} as IProjectCard);
-    expect(card.canAct()).is.true;
+    player.playedCards.push(card);
 
+    card.onCardPlayed(player, {tags: [Tags.EARTH, Tags.EARTH]} as IProjectCard);
+    expect(card.resourceCount).eq(2);
+
+    card.onCardPlayed(player2, {tags: [Tags.EARTH, Tags.EARTH]} as IProjectCard);
+    expect(card.resourceCount).eq(2);
+
+    expect(card.canAct()).is.true;
     card.action(player);
     expect(player.megaCredits).eq(2);
-    expect(card.resourceCount).eq(2);
   });
 });

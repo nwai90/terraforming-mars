@@ -5,6 +5,7 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
+import {Resources} from '../../Resources';
 
 export class OptimalAerobraking extends Card implements IProjectCard {
   constructor() {
@@ -24,9 +25,9 @@ export class OptimalAerobraking extends Card implements IProjectCard {
   }
 
   public onCardPlayed(player: Player, card: IProjectCard) {
-    if (card.cardType === CardType.EVENT && card.tags.includes(Tags.SPACE)) {
-      player.megaCredits += 3;
-      player.heat += 3;
+    if (card.cardType === CardType.EVENT && card.tags.includes(Tags.SPACE) && player.cardIsInEffect(this.name)) {
+      player.addResource(Resources.MEGACREDITS, 3);
+      player.addResource(Resources.HEAT, 3);
     }
   }
   public play() {

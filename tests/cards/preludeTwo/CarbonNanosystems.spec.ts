@@ -8,12 +8,13 @@ import {Research} from '../../../src/cards/base/Research';
 import {SearchForLife} from '../../../src/cards/base/SearchForLife';
 
 describe('CarbonNanosystems', function() {
-  let card : CarbonNanosystems; let player : Player; let game : Game;
+  let card : CarbonNanosystems; let player : Player; let player2 : Player; let game : Game;
 
   beforeEach(() => {
     card = new CarbonNanosystems();
     player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('foobar', [player], player);
+    player2 = TestPlayers.RED.newPlayer();
+    game = Game.newInstance('foobar', [player, player2], player);
   });
 
   it('Play', function() {
@@ -30,6 +31,10 @@ describe('CarbonNanosystems', function() {
     expect(card.resourceCount).eq(1);
 
     player.playCard(new Research());
+    TestingUtils.runAllActions(game);
+    expect(card.resourceCount).eq(3);
+
+    player2.playCard(new SearchForLife());
     TestingUtils.runAllActions(game);
     expect(card.resourceCount).eq(3);
   });
