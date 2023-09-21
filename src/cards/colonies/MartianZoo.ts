@@ -26,7 +26,7 @@ export class MartianZoo extends Card implements IProjectCard, IResourceCard {
           b.effect('When you play an Earth tag, place an animal here.', (eb) => {
             eb.earth().played.startEffect.animals(1);
           }).br;
-          b.action('Gain 1M€ per animal here.', (eb) => {
+          b.action('Gain 1 M€ per animal here.', (eb) => {
             eb.empty().startAction.megacredits(1).slash().animals(1);
           });
         }),
