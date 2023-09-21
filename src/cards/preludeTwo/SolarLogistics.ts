@@ -48,7 +48,7 @@ export class SolarLogistics extends Card implements IProjectCard {
     const owner = player.game.getCardPlayer(this.name);
 
     if (card.cardType === CardType.EVENT && card.tags.includes(Tags.SPACE)) {
-      owner.drawCard(1);
+      owner.drawCard();
     }
   }
 

@@ -53,6 +53,7 @@ export const LogPanel = Vue.component('log-panel', {
       globalEventNames: [] as Array<GlobalEventName>,
       messages: [] as Array<LogMessage>,
       selectedGeneration: this.generation,
+      copiedUrl: null as String | null,
     };
   },
   components: {
@@ -179,7 +180,7 @@ export const LogPanel = Vue.component('log-panel', {
         });
         return `BUG: Unparseable message: ${message.message}, (${data.join(', ')})`;
       } catch (err) {
-        return `BUG: Unparseable message: ${message.message} ${err.toString()}`;
+        return `BUG: Unparseable message: ${message.message} ${err}`;
       }
     },
     messageToHTML: function(message: LogMessage) {
@@ -397,6 +398,24 @@ export const LogPanel = Vue.component('log-panel', {
 
       return undefined;
     },
+    copyPlayerLink: function(): void {
+      const url = window.location.href;
+      const input = document.createElement('input');
+
+      this.copiedUrl = url;
+      input.setAttribute('value', url);
+      document.body.appendChild(input);
+
+      input.select();
+      document.execCommand('copy');
+      document.body.removeChild(input);
+    },
+    isUrlCopied: function(): boolean {
+      return this.copiedUrl !== null;
+    },
+    clearCopiedUrl: function() {
+      this.copiedUrl = null;
+    },
   },
   mounted: function() {
     this.getLogsForGeneration(this.generation);
@@ -416,8 +435,14 @@ export const LogPanel = Vue.component('log-panel', {
           <span class="label-additional" v-if="players.length === 1"><span :class="lastGenerationClass">of {{this.lastSoloGeneration}}</span></span>
 
           <span>
+            <Button title="Copy Link" size="big" class="copy-link-button" :onClick="_=>copyPlayerLink()"/>
+          </span>
+
+          <span>
             <Button title="💾 Save Log" size="big" class="save-log-button" :onClick="_=>downloadLog()"/>
           </span>
+
+          <span v-if="isUrlCopied()" class="copied-notice">Link copied to clipboard! <span class="dismissed" @click="clearCopiedUrl" >dismiss</span></span>
         </div>
         <div class="panel log-panel">
           <div id="logpanel-scrollable" class="panel-body">
