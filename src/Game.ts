@@ -71,6 +71,8 @@ import {_AresHazardPlacement} from './ares/AresHazards';
 import {Eris} from './cards/ares/Eris';
 import {AutomaHandler} from './automa/AutomaHandler';
 import {TharsisBot} from './cards/automa/TharsisBot';
+import {ArchaeologyHandler} from './community/ArchaeologyHandler';
+import {Multiset} from './utils/Multiset';
 
 export type GameId = string;
 export type SpectatorId = string;
@@ -1656,10 +1658,10 @@ export class Game implements ISerializable<SerializedGame> {
     // Part 5. Collect the bonuses
     if (this.phase !== Phase.SOLAR) {
       if (!coveringExistingTile && grantSpaceBonus) {
-        this.board.grantSpaceBonuses(player, space);
+        this.grantSpaceBonuses(player, space);
       }
 
-      this.board.grantOceanAdjacencyBonuses(player, space, grantSpaceBonus);
+      this.grantOceanAdjacencyBonuses(player, space, grantSpaceBonus);
 
       AresHandler.ifAres(this, (aresData) => {
         AresHandler.earnAdjacencyBonuses(aresData, player, space);
@@ -1699,6 +1701,25 @@ export class Game implements ISerializable<SerializedGame> {
     space.tile = tile;
     space.player = tile.tileType !== TileType.OCEAN ? player : undefined;
     LogHelper.logTilePlacement(player, space, tile.tileType);
+  }
+
+  public grantOceanAdjacencyBonuses(player : Player, space: ISpace, grantSpaceBonus: boolean) {
+    player.game.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
+      if (Board.isOceanSpace(adjacentSpace) && grantSpaceBonus) {
+        player.megaCredits += player.oceanBonus;
+      }
+    });
+  }
+
+  public grantSpaceBonuses(player : Player, space: ISpace) {
+    if (space.bonus.length > 0) {
+      const bonuses = new Multiset(space.bonus);
+      bonuses.entries().forEach(([bonus, count]) => {
+        player.game.grantSpaceBonus(player, bonus, count);
+      });
+    } else if (player.game.gameOptions.archaeologyExtension && space.spaceType !== SpaceType.COLONY) {
+      ArchaeologyHandler.explore(player);
+    }
   }
 
   public grantSpaceBonus(player: Player, spaceBonus: SpaceBonus, count: number = 1) {

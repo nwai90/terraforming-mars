@@ -67,8 +67,8 @@ export class MarsNomads extends Card implements IProjectCard {
         space.hasNomads = true;
 
         // Grant space bonuses
-        board.grantSpaceBonuses(player, space);
-        board.grantOceanAdjacencyBonuses(player, space, true);
+        player.game.grantSpaceBonuses(player, space);
+        player.game.grantOceanAdjacencyBonuses(player, space, true);
 
         AresHandler.ifAres(player.game, (aresData) => {
           AresHandler.earnAdjacencyBonuses(aresData, player, space);
