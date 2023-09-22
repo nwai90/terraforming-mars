@@ -41,14 +41,6 @@ export class MarsNomads extends Card implements IProjectCard {
       player.game.board.getAvailableSpacesOnLand(player),
       (space: ISpace) => {
         space.hasNomads = true;
-        // Grant space bonuses        
-        if (space.bonus.length > 0) {
-          const bonuses = new Multiset(space.bonus);
-          bonuses.entries().forEach(([bonus, count]) => {
-            player.game.grantSpaceBonus(player, bonus, count);
-          });
-        }
-
         return undefined;
       },
     );
@@ -72,7 +64,7 @@ export class MarsNomads extends Card implements IProjectCard {
       (space: ISpace) => {
         board.spaces.forEach((s) => s.hasNomads = false);
         space.hasNomads = true;
-        // Grant space bonuses        
+        // Grant space bonuses
         if (space.bonus.length > 0) {
           const bonuses = new Multiset(space.bonus);
           bonuses.entries().forEach(([bonus, count]) => {

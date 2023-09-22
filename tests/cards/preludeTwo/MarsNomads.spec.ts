@@ -22,7 +22,9 @@ describe('MarsNomads', function() {
 
     const selectSpace = card.play(player);
     selectSpace.cb(targetSpace);
-    expect(player.plants).eq(1);
+
+    // Initial placement must not grant space bonuses
+    expect(player.plants).eq(0);
   });
 
   it('Action', function() {
