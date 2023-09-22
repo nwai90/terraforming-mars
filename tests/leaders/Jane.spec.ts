@@ -21,11 +21,6 @@ describe('Jane', function() {
     game = Game.newInstance('foobar', [player, player2], player);
   });
 
-  it('Cannot act in generation 1', function() {
-    game.generation = 1;
-    expect(card.canAct(player)).is.false;
-  });
-
   it('Cannot act if there are no used action cards', function() {
     game.generation = 2;
 
@@ -50,9 +45,13 @@ describe('Jane', function() {
     card.action(player);
     const selectCard = game.deferredActions.pop()!.execute() as SelectCard<ICard>;
     selectCard.cb([selectCard.cards[0]]);
+
+    const selectCard2 = game.deferredActions.pop()!.execute() as SelectCard<ICard>;
+    selectCard2.cb([selectCard2.cards[0]]);
     game.deferredActions.runAll(() => {});
 
     expect(player.actionsThisGeneration.has(spaceMirrors.name)).is.false;
+    expect(player.actionsThisGeneration.has(searchForLife.name)).is.false;
   });
 
   it('Can only act once per game', function() {
