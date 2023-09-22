@@ -8,7 +8,6 @@ import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {AltSecondaryTag} from '../render/CardRenderItem';
 import {ICard} from '../ICard';
 import {SelectCard} from '../../inputs/SelectCard';
-import {Size} from '../render/Size';
 
 export class Jane extends Card implements LeaderCard {
   constructor() {
@@ -19,9 +18,9 @@ export class Jane extends Card implements LeaderCard {
         cardNumber: 'L40',
         renderData: CardRenderer.builder((b) => {
           b.br.br;
-          b.opgArrow().text('RESET 12-X', Size.SMALL).cards(1).secondaryTag(AltSecondaryTag.BLUE).asterix();
+          b.opgArrow().text('RESET X-1').cards(1).secondaryTag(AltSecondaryTag.BLUE).asterix();
         }),
-        description: 'Once per game, mark up to 12-X blue card actions (min. 4) as unused this generation, where X is the current generation number.',
+        description: 'Once per game, mark up to X-1 blue card actions as unused this generation, where X is the current generation number.',
       },
     });
   }
@@ -34,12 +33,12 @@ export class Jane extends Card implements LeaderCard {
 
   public canAct(player: Player): boolean {
     const usedActionCards = this.getUsedActionCards(player);
-    return this.isDisabled === false && usedActionCards.length > 0;
+    return this.isDisabled === false && usedActionCards.length > 0 && player.game.generation > 1;
   }
 
   public action(player: Player): undefined {
     const game = player.game;
-    const resetCount = Math.min(Math.max(12 - game.generation, 4), this.getUsedActionCards(player).length);
+    const resetCount = Math.min(game.generation - 1, this.getUsedActionCards(player).length);
 
     for (let i = 0; i < resetCount; i++) {
       game.defer(new DeferredAction(
