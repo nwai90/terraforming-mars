@@ -4,7 +4,7 @@ import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 import {Game} from '../../../src/Game';
 import {SpaceBonus} from '../../../src/SpaceBonus';
-import { SpaceType } from '../../../src/SpaceType';
+import {SpaceType} from '../../../src/SpaceType';
 
 describe('MarsNomads', function() {
   let card : MarsNomads; let player : Player; let player2 : Player; let game : Game;

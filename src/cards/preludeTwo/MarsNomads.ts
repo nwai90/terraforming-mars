@@ -6,8 +6,9 @@ import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {ISpace} from '../../boards/ISpace';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {Multiset} from '../../utils/Multiset';
 import {intersection} from '../../utils/utils';
+import {AresHandler} from '../../ares/AresHandler';
+import {TurmoilHandler} from '../../turmoil/TurmoilHandler';
 
 export class MarsNomads extends Card implements IProjectCard {
   constructor() {
@@ -64,13 +65,16 @@ export class MarsNomads extends Card implements IProjectCard {
       (space: ISpace) => {
         board.spaces.forEach((s) => s.hasNomads = false);
         space.hasNomads = true;
+
         // Grant space bonuses
-        if (space.bonus.length > 0) {
-          const bonuses = new Multiset(space.bonus);
-          bonuses.entries().forEach(([bonus, count]) => {
-            player.game.grantSpaceBonus(player, bonus, count);
-          });
-        }
+        board.grantSpaceBonuses(player, space);
+        board.grantOceanAdjacencyBonuses(player, space, true);
+
+        AresHandler.ifAres(player.game, (aresData) => {
+          AresHandler.earnAdjacencyBonuses(aresData, player, space);
+        });
+
+        TurmoilHandler.resolveTilePlacementBonuses(player, space);
 
         return undefined;
       },

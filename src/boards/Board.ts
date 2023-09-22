@@ -6,6 +6,8 @@ import {AresHandler} from '../ares/AresHandler';
 import {SerializedBoard, SerializedSpace} from './SerializedBoard';
 import {SpaceBonus} from '../SpaceBonus';
 import {CardName} from '../CardName';
+import {ArchaeologyHandler} from '../community/ArchaeologyHandler';
+import {Multiset} from '../utils/Multiset';
 
 /**
  * A representation of any hex board. This is normally Mars (Tharsis, Hellas, Elysium) but can also be The Moon.
@@ -119,6 +121,25 @@ export abstract class Board {
       );
     } else {
       return this.spaces.filter((space) => Board.isOceanSpace(space));
+    }
+  }
+
+  public grantOceanAdjacencyBonuses(player : Player, space: ISpace, grantSpaceBonus: boolean) {
+    this.getAdjacentSpaces(space).forEach((adjacentSpace) => {
+      if (Board.isOceanSpace(adjacentSpace) && grantSpaceBonus) {
+        player.megaCredits += player.oceanBonus;
+      }
+    });
+  }
+
+  public grantSpaceBonuses(player : Player, space: ISpace) {
+    if (space.bonus.length > 0) {
+      const bonuses = new Multiset(space.bonus);
+      bonuses.entries().forEach(([bonus, count]) => {
+        player.game.grantSpaceBonus(player, bonus, count);
+      });
+    } else if (player.game.gameOptions.archaeologyExtension && space.spaceType !== SpaceType.COLONY) {
+      ArchaeologyHandler.explore(player);
     }
   }
 

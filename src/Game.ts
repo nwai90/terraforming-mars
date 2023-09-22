@@ -64,11 +64,9 @@ import {VastitasBorealisBoard} from './boards/VastitasBorealisBoard';
 import {SilverCubeHandler} from './community/SilverCubeHandler';
 import {MilestoneAwardSelector} from './MilestoneAwardSelector';
 import {BoardType} from './boards/BoardType';
-import {Multiset} from './utils/Multiset';
 import {GrantVenusAltTrackBonusDeferred} from './venusNext/GrantVenusAltTrackBonusDeferred';
 import {VictoryPointsBreakdown} from './VictoryPointsBreakdown';
 import {LogType} from './deferredActions/DrawCards';
-import {ArchaeologyHandler} from './community/ArchaeologyHandler';
 import {_AresHazardPlacement} from './ares/AresHazards';
 import {Eris} from './cards/ares/Eris';
 import {AutomaHandler} from './automa/AutomaHandler';
@@ -1658,21 +1656,10 @@ export class Game implements ISerializable<SerializedGame> {
     // Part 5. Collect the bonuses
     if (this.phase !== Phase.SOLAR) {
       if (!coveringExistingTile && grantSpaceBonus) {
-        if (space.bonus.length > 0) {
-          const bonuses = new Multiset(space.bonus);
-          bonuses.entries().forEach(([bonus, count]) => {
-            this.grantSpaceBonus(player, bonus, count);
-          });
-        } else if (this.gameOptions.archaeologyExtension && space.spaceType !== SpaceType.COLONY) {
-          ArchaeologyHandler.explore(player);
-        }
+        this.board.grantSpaceBonuses(player, space);
       }
 
-      this.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
-        if (Board.isOceanSpace(adjacentSpace) && grantSpaceBonus) {
-          player.megaCredits += player.oceanBonus;
-        }
-      });
+      this.board.grantOceanAdjacencyBonuses(player, space, grantSpaceBonus);
 
       AresHandler.ifAres(this, (aresData) => {
         AresHandler.earnAdjacencyBonuses(aresData, player, space);
