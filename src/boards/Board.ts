@@ -136,6 +136,34 @@ export abstract class Board {
     ).length;
   }
 
+  public getSpacesWithSpecialTiles(): Array<ISpace>  {
+    const specialTileTypes = [
+      TileType.COMMERCIAL_DISTRICT,
+      TileType.ECOLOGICAL_ZONE,
+      TileType.INDUSTRIAL_CENTER,
+      TileType.LAVA_FLOWS,
+      TileType.MINING_AREA,
+      TileType.MINING_RIGHTS,
+      TileType.MOHOLE_AREA,
+      TileType.NATURAL_PRESERVE,
+      TileType.NUCLEAR_ZONE,
+      TileType.RESTRICTED_AREA,
+      TileType.DEIMOS_DOWN,
+      TileType.GREAT_DAM,
+      TileType.MAGNETIC_FIELD_GENERATORS,
+      TileType.BIOFERTILIZER_FACILITY,
+      TileType.METALLIC_ASTEROID,
+      TileType.SOLAR_FARM,
+      TileType.OCEAN_FARM,
+      TileType.OCEAN_SANCTUARY,
+      TileType.MINING_STEEL_BONUS,
+      TileType.MINING_TITANIUM_BONUS,
+      TileType.PERSEVERANCE_LANDING,
+    ];
+
+    return this.spaces.filter((space) => space.tile !== undefined && specialTileTypes.includes(space.tile.tileType));
+  }
+
   // The second parameter shouldApplyGordonEffect is used by Deimos Down Promo
   public getAvailableSpacesForCity(player: Player, shouldApplyGordonEffect: boolean = true): Array<ISpace> {
     if (player.cardIsInEffect(CardName.GORDON) && shouldApplyGordonEffect) return this.getAvailableSpacesOnLand(player);

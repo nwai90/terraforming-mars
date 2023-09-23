@@ -45,6 +45,7 @@ import {Passer} from './fanmade/Passer';
 import {Purifier} from './fanmade/Purifier';
 import {Dignitary} from './fanmade/Dignitary';
 import {Maverick} from './fanmade/Maverick';
+import {Landshaper} from './preludeTwo/Landshaper';
 
 export const ORIGINAL_MILESTONES: Array<IMilestone> = [
   new Terraformer(),
@@ -125,6 +126,10 @@ export const MOON_MILESTONES: Array<IMilestone> = [
   new Lunarchitect(),
 ];
 
+export const PRELUDE_TWO_MILESTONES: Array<IMilestone> = [
+  new Landshaper(),
+];
+
 export const ALL_MILESTONES: Array<IMilestone> = [
   ...ORIGINAL_MILESTONES,
   ...ELYSIUM_MILESTONES,
@@ -137,6 +142,7 @@ export const ALL_MILESTONES: Array<IMilestone> = [
   ...VENUS_MILESTONES,
   ...ARES_MILESTONES,
   ...MOON_MILESTONES,
+  ...PRELUDE_TWO_MILESTONES,
 ];
 
 export namespace Milestones {

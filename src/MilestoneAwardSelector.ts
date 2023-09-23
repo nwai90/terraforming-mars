@@ -64,7 +64,7 @@ import {Hoverlord} from './milestones/Hoverlord';
 import {IMilestone} from './milestones/IMilestone';
 import {Legend} from './milestones/Legend';
 import {Mayor} from './milestones/Mayor';
-import {AMAZONIS_PLANITIA_MILESTONES, ARABIA_TERRA_MILESTONES, ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, Milestones, MOON_MILESTONES, NEW_OPS_MILESTONES, ORIGINAL_MILESTONES, TERRA_CIMMERIA_MILESTONES, VASTITAS_BOREALIS_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
+import {AMAZONIS_PLANITIA_MILESTONES, ARABIA_TERRA_MILESTONES, ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, Milestones, MOON_MILESTONES, NEW_OPS_MILESTONES, ORIGINAL_MILESTONES, PRELUDE_TWO_MILESTONES, TERRA_CIMMERIA_MILESTONES, VASTITAS_BOREALIS_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
 import {Networker} from './milestones/Networker';
 import {Planner} from './milestones/Planner';
 import {PolarExplorer} from './milestones/PolarExplorer';
@@ -618,6 +618,9 @@ export namespace MilestoneAwardSelector {
     if (gameOptions.moonExpansion) {
       candidateMilestones.push(...MOON_MILESTONES.map(toName));
       candidateAwards.push(...MOON_AWARDS.map(toName));
+    }
+    if (gameOptions.preludeTwoExtension) {
+      candidateMilestones.push(...PRELUDE_TWO_MILESTONES.map(toName));
     }
 
     if (gameOptions.newOpsExpansion) {
