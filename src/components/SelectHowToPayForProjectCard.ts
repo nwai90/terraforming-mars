@@ -565,7 +565,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
     <h3 class="payments_title" v-i18n>How to pay?</h3>
 
     <div class="payments_type input-group" v-if="canUsePlants()">
-      <i class="resource_icon resource_icon--plants payments_type_icon" title="Pay by Plants"></i>
+      <i class="resource_icon resource_icon--plants payments_type_icon" title="Pay with Plants"></i>
       <Button type="minus" :onClick="_=>reduceValue('plants', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="plants" />
       <Button type="plus" :onClick="_=>addValue('plants', 1, this.available.plants)" />
@@ -573,7 +573,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
     </div>
 
     <div class="payments_type input-group" v-if="canUseSteel()">
-      <i class="resource_icon resource_icon--steel payments_type_icon" title="Pay by Steel"></i>
+      <i class="resource_icon resource_icon--steel payments_type_icon" title="Pay with Steel"></i>
       <Button type="minus" :onClick="_=>reduceValue('steel', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="steel" />
       <Button type="plus" :onClick="_=>addValue('steel', 1, this.available.steel)" />
@@ -584,7 +584,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
     </div>
 
     <div class="payments_type input-group" v-if="canUseSpireScience()">
-      <i class="resource_icon resource_icon--science payments_type_icon" :title="$t('Pay by Science')"></i>
+      <i class="resource_icon resource_icon--science payments_type_icon" :title="$t('Pay with Science')"></i>
       <Button type="minus" :onClick="_=>reduceValue('spireScience', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="spireScience" />
       <Button type="plus" :onClick="_=>addValue('spireScience', 1)" />
@@ -592,7 +592,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
     </div>
 
     <div class="payments_type input-group" v-if="canUseAsteroids()">
-      <i class="resource_icon resource_icon--asteroid payments_type_icon" :title="$t('Pay by Asteroids')"></i>
+      <i class="resource_icon resource_icon--asteroid payments_type_icon" :title="$t('Pay with Asteroids')"></i>
       <Button type="minus" :onClick="_=>reduceValue('asteroids', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="asteroids" />
       <Button type="plus" :onClick="_=>addValue('asteroids', 1)" />
@@ -600,7 +600,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
     </div>
 
     <div class="payments_type input-group" v-if="canUseGraphene()">
-      <i class="resource_icon resource_icon--graphene payments_type_icon" :title="$t('Pay by Graphene')"></i>
+      <i class="resource_icon resource_icon--graphene payments_type_icon" :title="$t('Pay with Graphene')"></i>
       <Button type="minus" :onClick="_=>reduceValue('graphene', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="graphene" />
       <Button type="plus" :onClick="_=>addValue('graphene', 1)" />
@@ -608,7 +608,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
     </div>
 
     <div class="payments_type input-group" v-if="canUseTitanium()">
-      <i class="resource_icon resource_icon--titanium payments_type_icon" :title="$t('Pay by Titanium')"></i>
+      <i class="resource_icon resource_icon--titanium payments_type_icon" :title="$t('Pay with Titanium')"></i>
       <Button type="minus" :onClick="_=>reduceValue('titanium', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="titanium" />
       <Button type="plus" :onClick="_=>addValue('titanium', 1, this.available.titanium)" />
@@ -619,7 +619,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
     </div>
 
     <div class="payments_type input-group" v-if="canUseHeat()">
-      <i class="resource_icon resource_icon--heat payments_type_icon" :title="$t('Pay by Heat')"></i>
+      <i class="resource_icon resource_icon--heat payments_type_icon" :title="$t('Pay with Heat')"></i>
       <Button type="minus" :onClick="_=>reduceValue('heat', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="heat" />
       <Button type="plus" :onClick="_=>addValue('heat', 1, this.available.heat)" />
@@ -630,7 +630,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
     </div>
 
     <div class="payments_type input-group" v-if="canUseMicrobes()">
-      <i class="resource_icon resource_icon--microbe payments_type_icon" :title="$t('Pay by Microbes')"></i>
+      <i class="resource_icon resource_icon--microbe payments_type_icon" :title="$t('Pay with Microbes')"></i>
       <Button type="minus" :onClick="_=>reduceValue('microbes', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="microbes" />
       <Button type="plus" :onClick="_=>addValue('microbes', 1)" />
@@ -638,7 +638,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
     </div>
 
     <div class="payments_type input-group" v-if="canUseFloaters()">
-      <i class="resource_icon resource_icon--floater payments_type_icon" :title="$t('Pay by Floaters')"></i>
+      <i class="resource_icon resource_icon--floater payments_type_icon" :title="$t('Pay with Floaters')"></i>
       <Button type="minus" :onClick="_=>reduceValue('floaters', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="floaters" />
       <Button type="plus" :onClick="_=>addValue('floaters', 1)" />
@@ -646,7 +646,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
     </div>
 
     <div class="payments_type input-group" v-if="canUseScience()">
-      <i class="resource_icon resource_icon--science payments_type_icon" :title="$t('Pay by Science Resources')"></i>
+      <i class="resource_icon resource_icon--science payments_type_icon" :title="$t('Pay with Science Resources')"></i>
       <Button type="minus" :onClick="_=>reduceValue('science', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="science" />
       <Button type="plus" :onClick="_=>addValue('science', 1)" />
@@ -654,7 +654,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
     </div>
 
     <div class="payments_type input-group">
-      <i class="resource_icon resource_icon--megacredits payments_type_icon" :title="$t('Pay by Megacredits')"></i>
+      <i class="resource_icon resource_icon--megacredits payments_type_icon" :title="$t('Pay with Megacredits')"></i>
       <Button type="minus" :onClick="_=>reduceValue('megaCredits', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="megaCredits" />
       <Button type="plus" :onClick="_=>addValue('megaCredits', 1)" />
