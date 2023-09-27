@@ -9,6 +9,8 @@ import {SelectSpace} from '../../inputs/SelectSpace';
 import {intersection} from '../../utils/utils';
 import {AresHandler} from '../../ares/AresHandler';
 import {TurmoilHandler} from '../../turmoil/TurmoilHandler';
+import {HellasBoard} from '../../boards/HellasBoard';
+import {VastitasBorealisBoard} from '../../boards/VastitasBorealisBoard';
 
 export class MarsNomads extends Card implements IProjectCard {
   constructor() {
@@ -56,7 +58,8 @@ export class MarsNomads extends Card implements IProjectCard {
   }
 
   public action(player: Player) {
-    const board = player.game.board;
+    const game = player.game;
+    const board = game.board;
     const eligibleAdjacentSpaces = this.getEligibleDestinationSpaces(player);
     
     return new SelectSpace(
@@ -67,10 +70,15 @@ export class MarsNomads extends Card implements IProjectCard {
         space.hasNomads = true;
 
         // Grant space bonuses
-        player.game.grantSpaceBonuses(player, space);
-        player.game.grantOceanAdjacencyBonuses(player, space, true);
+        game.grantSpaceBonuses(player, space);
+        game.grantOceanAdjacencyBonuses(player, space, true);
 
-        AresHandler.ifAres(player.game, (aresData) => {
+        // Hellas special requirements ocean tile
+        HellasBoard.handleBonusOceanFromTilePlacement(game, player, space);
+        // Vastitas Borealis special requirements temperature tile
+        VastitasBorealisBoard.handleBonusTemperatureFromTilePlacement(game, player, space);
+
+        AresHandler.ifAres(game, (aresData) => {
           AresHandler.earnAdjacencyBonuses(aresData, player, space);
         });
 
