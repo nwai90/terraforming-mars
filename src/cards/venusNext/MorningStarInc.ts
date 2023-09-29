@@ -6,6 +6,7 @@ import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {GlobalParameter} from '../../GlobalParameter';
+import {Size} from '../render/Size';
 
 export class MorningStarInc extends Card implements CorporationCard {
   constructor() {
@@ -23,7 +24,7 @@ export class MorningStarInc extends Card implements CorporationCard {
           b.megacredits(50).nbsp().cards(3).secondaryTag(Tags.VENUS);
           b.corpBox('effect', (ce) => {
             ce.effect('Your Venus requirements are +/- 2 steps, your choice in each case.', (eb) => {
-              eb.plate('Venus requirements').startEffect.text('+/- 2');
+              eb.plate('Venus requirements', Size.LARGE).startEffect.text('± 2');
             });
           });
         }),
