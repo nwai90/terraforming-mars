@@ -41,7 +41,7 @@ export class StJosephOfCupertinoMission extends Card implements IProjectCard {
 
   public canAct(player: Player) {
     const eligibleCitySpaces = this.getEligibleCitySpaces(player.game.board);
-    return player.canAfford(5, {steel: true}) && eligibleCitySpaces.length > 0;
+    return player.canAfford(5, {steel: true, plants: false}) && eligibleCitySpaces.length > 0;
   }
 
   public action(player: Player) {

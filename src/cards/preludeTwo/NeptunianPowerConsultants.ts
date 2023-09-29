@@ -45,7 +45,9 @@ export class NeptunianPowerConsultants extends Card implements IProjectCard {
   }
 
   public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
-    if (!cardOwner.canAfford(5, {steel: true})) return;
+    // We need to explicitly specify plants: false to avoid including Martian Lumber Corp plants
+    // in the computation, as player.canAfford knows nothing about the source card
+    if (!cardOwner.canAfford(5, {steel: true, plants: false})) return;
 
     if (space.tile?.tileType === TileType.OCEAN) {
       cardOwner.game.defer(

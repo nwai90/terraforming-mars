@@ -47,7 +47,7 @@ export class AquiferPumping extends Card implements IActionCard, IProjectCard {
 
     if (oceansMaxed) {
       Card.setUselessActionWarningText(this, 'all oceans have already been placed');
-      return player.canAfford(oceanCost, {steel: true});
+      return player.canAfford(oceanCost, {steel: true, plants: false});
     }
 
     if (redsAreRuling) {
@@ -62,7 +62,7 @@ export class AquiferPumping extends Card implements IActionCard, IProjectCard {
       return this.howToAffordReds.canAfford;
     }
 
-    return player.canAfford(oceanCost, {steel: true});
+    return player.canAfford(oceanCost, {steel: true, plants: false});
   }
 
   public action(player: Player) {
