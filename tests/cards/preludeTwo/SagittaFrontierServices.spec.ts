@@ -10,13 +10,13 @@ import {Mine} from '../../../src/cards/base/Mine';
 import {ReleaseOfInertGases} from '../../../src/cards/base/ReleaseOfInertGases';
 
 describe('SagittaFrontierServices', function() {
-  let card : SagittaFrontierServices; let player : Player;
+  let card : SagittaFrontierServices; let player : Player; let game : Game;
   let singleTagCard: IProjectCard; let singleTagEventCard: IProjectCard; let noTagsCard: IProjectCard;
 
   beforeEach(() => {
     card = new SagittaFrontierServices();
     player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('foobar', [player], player);
+    game = Game.newInstance('foobar', [player], player);
 
     singleTagCard = new Mine();
     singleTagEventCard = new ReleaseOfInertGases();
@@ -33,15 +33,19 @@ describe('SagittaFrontierServices', function() {
   it('Effect: play card with no tags', function() {
     player.corporationCards.push(card);
     card.onCardPlayed(player, noTagsCard);
+    game.deferredActions.runAll(() => {});
+
     expect(player.megaCredits).eq(4);
   });
 
   it('Effect: play card with 1 tag', function() {
     player.corporationCards.push(card);
     card.onCardPlayed(player, singleTagCard);
+    game.deferredActions.runAll(() => {});
     expect(player.megaCredits).eq(1);
 
     card.onCardPlayed(player, singleTagEventCard);
+    game.deferredActions.runAll(() => {});
     expect(player.megaCredits).eq(2);
   });
 });

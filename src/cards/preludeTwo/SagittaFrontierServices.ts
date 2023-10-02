@@ -8,6 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {IProjectCard} from '../IProjectCard';
 import {AltSecondaryTag} from '../render/CardRenderItem';
 import {Size} from '../render/Size';
+import {DeferredAction, Priority} from '../../deferredActions/DeferredAction';
 
 export class SagittaFrontierServices extends Card implements CorporationCard {
   constructor() {
@@ -58,14 +59,21 @@ export class SagittaFrontierServices extends Card implements CorporationCard {
   public _onCardPlayed(player: Player, card: IProjectCard | CorporationCard) {
     if (!player.isCorporation(this.name)) return undefined;
 
+    const game = player.game;
     const count = card.tags.length + (card.cardType === CardType.EVENT ? 1 : 0);
 
     if (count === 0) {
-      player.addResource(Resources.MEGACREDITS, 4);
-      player.game.log('${0} gained 4 M€ for playing a card with no tags.', (b) => b.player(player));
+      game.defer(new DeferredAction(player,() => {
+        player.addResource(Resources.MEGACREDITS, 4);
+        game.log('${0} gained 4 M€ for playing a card with no tags.', (b) => b.player(player));
+        return undefined;
+      }), Priority.GAIN_RESOURCE_OR_PRODUCTION);
     } else if (count === 1) {
-      player.addResource(Resources.MEGACREDITS, 1);
-      player.game.log('${0} gained 1 M€ for playing a card with exactly 1 tag.', (b) => b.player(player));
+      game.defer(new DeferredAction(player,() => {
+        player.addResource(Resources.MEGACREDITS, 1);
+        game.log('${0} gained 1 M€ for playing a card with exactly 1 tag.', (b) => b.player(player));
+        return undefined;
+      }), Priority.GAIN_RESOURCE_OR_PRODUCTION);
     }
 
     return undefined;
