@@ -210,6 +210,7 @@ export class Game implements ISerializable<SerializedGame> {
   private oxygenLevel: number = constants.MIN_OXYGEN_LEVEL;
   private temperature: number = constants.MIN_TEMPERATURE;
   private venusScaleLevel: number = constants.MIN_VENUS_SCALE;
+  public globalsPerGeneration: Array<Partial<Record<GlobalParameter, number>>> = [];
 
   // Player data
   public activePlayer: PlayerId;
@@ -265,7 +266,8 @@ export class Game implements ISerializable<SerializedGame> {
     public gameOptions: GameOptions,
     seed: number,
     board: Board,
-    dealer: Dealer) {
+    dealer: Dealer,
+    globalsPerGeneration: Array<Partial<Record<GlobalParameter, number>>> = []) {
     const playerIds = players.map((p) => p.id);
     if (playerIds.includes(first.id) === false) {
       throw new Error('Cannot find first player ' + first.id + ' in ' + playerIds);
@@ -285,6 +287,7 @@ export class Game implements ISerializable<SerializedGame> {
     this.seed = seed;
     this.dealer = dealer;
     this.board = board;
+    this.globalsPerGeneration = globalsPerGeneration;
 
     this.players.forEach((player) => {
       player.game = this;
@@ -498,6 +501,7 @@ export class Game implements ISerializable<SerializedGame> {
       gameLog: this.gameLog,
       gameOptions: this.gameOptions,
       generation: this.generation,
+      globalsPerGeneration: this.globalsPerGeneration,
       id: this.id,
       initialDraftIteration: this.initialDraftIteration,
       lastSaveId: this.lastSaveId,
@@ -1020,11 +1024,13 @@ export class Game implements ISerializable<SerializedGame> {
     if (this.deferredActions.length > 0) {
       this.resolveTurmoilDeferredActions();
       this.updateEndGenerationScores();
+      this.updateEndGenerationGlobals();
       return;
     }
 
-    // Track player score stats
+    // Track player score and global parameter stats
     this.updateEndGenerationScores();
+    this.updateEndGenerationGlobals();
 
     this.phase = Phase.INTERGENERATION;
     this.goToDraftOrResearch();
@@ -1034,6 +1040,25 @@ export class Game implements ISerializable<SerializedGame> {
     this.getPlayers().forEach((player) => {
       const playerScore: VictoryPointsBreakdown = player.getVictoryPoints();
       player.endGenerationScores.push(playerScore.total);
+    });
+  }
+
+  private updateEndGenerationGlobals(): void {
+    this.globalsPerGeneration.push({});
+
+    const entry = this.globalsPerGeneration[this.globalsPerGeneration.length - 1];
+    entry[GlobalParameter.TEMPERATURE] = this.temperature;
+    entry[GlobalParameter.OXYGEN] = this.oxygenLevel;
+    entry[GlobalParameter.OCEANS] = this.board.getOceansOnBoard();
+
+    if (this.gameOptions.venusNextExtension) {
+      entry[GlobalParameter.VENUS] = this.venusScaleLevel;
+    }
+
+    MoonExpansion.ifMoon(this, (moonData) => {
+      entry[GlobalParameter.MOON_COLONY_RATE] = moonData.colonyRate;
+      entry[GlobalParameter.MOON_MINING_RATE] = moonData.miningRate;
+      entry[GlobalParameter.MOON_LOGISTICS_RATE] = moonData.logisticRate;
     });
   }
 
@@ -1351,6 +1376,7 @@ export class Game implements ISerializable<SerializedGame> {
     };
 
     this.updateEndGenerationScores();
+    this.updateEndGenerationGlobals();
     this.gotoEndGame();
   }
 
@@ -2026,6 +2052,7 @@ export class Game implements ISerializable<SerializedGame> {
     game.syndicatePirateRaider = d.syndicatePirateRaider;
     game.automaBotVictoryPointsBreakdown = AutomaHandler.deserializeBotVictoryPoints(d.automaBotVictoryPointsBreakdown);
     game.overwriteNextBotAction = d.overwriteNextBotAction;
+    game.globalsPerGeneration = d.globalsPerGeneration ?? {};
 
     if (d.automaBotCorporation !== undefined) {
       const automaBotCorporation = cardFinder.getCorporationCardByName(d.automaBotCorporation);

@@ -6,6 +6,7 @@ import {Button} from '../components/common/Button';
 import {playerColorClass} from '../utils/utils';
 import {Timer} from '../Timer';
 import {ScoreChart} from '../components/ScoreChart';
+import {GlobalsChart} from '../components/GlobalsChart';
 import {MoonBoard} from './moon/MoonBoard';
 
 import * as htmlToImage from 'html-to-image';
@@ -28,6 +29,7 @@ export const GameEnd = Vue.component('game-end', {
     'log-panel': LogPanel,
     'Button': Button,
     'score-chart': ScoreChart,
+    'globals-chart': GlobalsChart,
     'moonboard': MoonBoard,
   },
   methods: {
@@ -254,6 +256,7 @@ export const GameEnd = Vue.component('game-end', {
                     <h2 v-i18n>Victory points details</h2>
 
                     <score-chart :players="player.players" :generation="player.generation" :animation="true"></score-chart>
+                    <globals-chart :players="player.players" :generation="player.generation" :animation="true"></globals-chart>
 
                     <div class="game-end-flexrow">
                         <div v-for="p in getSortedPlayers()" class="game-end-column">

@@ -6,7 +6,7 @@ import {GlobalParameter} from '../GlobalParameter';
 export const GlobalParameterValue = Vue.component('global-parameter-value', {
   props: {
     param: {
-      type: Number, // GlobalParameter
+      type: String, // GlobalParameter
     },
     value: {
       type: Number,

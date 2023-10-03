@@ -1,6 +1,7 @@
 
 import {Color} from '../Color';
 import {GameId, SpectatorId} from '../Game';
+import {GlobalParameter} from '../GlobalParameter';
 import {Phase} from '../Phase';
 import {PlayerId} from '../Player';
 import {GameOptionsModel} from '../models/GameOptionsModel';
@@ -13,6 +14,7 @@ export interface GameHomeModel {
     gameOptions: GameOptionsModel;
     lastSoloGeneration: number;
     spectatorId: SpectatorId | undefined;
+    globalsPerGeneration: Array<Partial<Record<GlobalParameter, number>>>,
 }
 
 interface GameHomePlayerModel {

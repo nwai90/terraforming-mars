@@ -62,6 +62,7 @@ describe('ApiGame', () => {
         'gameOptions': {
           'altVenusBoard': false, 'aresExtension': false, 'boardName': 'tharsis', 'cardsBlackList': [], 'coloniesExtension': false, 'communityCardsOption': false, 'colosseumVariant': false, 'twoCorpsVariant': false, 'newOpsExpansion': false, 'aresExtremeVariant': false, 'corporateEra': true, 'draftVariant': false, 'fastModeOption': false, 'initialDraftVariant': false, 'leadersExpansion': false, 'archaeologyExtension': false, 'automaSoloVariant': false, 'preludeTwoExtension': false, 'moonExpansion': false, 'preludeExtension': false, 'promoCardsOption': false, 'politicalAgendasExtension': 'Standard', 'showTimers': true, 'shuffleMapOption': false, 'shuffleMoonMapOption': false, 'societyExpansion': false, 'silverCubeVariant': false, 'singleTradeVariant': false, 'equalOpportunityVariant': false, 'solarPhaseOption': false, 'soloTR': false, 'randomMA': 'No randomization', 'randomTurmoil': false, 'turmoilExtension': false, 'venusNextExtension': false, 'requiresVenusTrackCompletion': false, 'escapeVelocityMode': false,
         },
+        'globalsPerGeneration': [],
       },
     );
   });

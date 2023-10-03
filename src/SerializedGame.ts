@@ -16,6 +16,7 @@ import {LogMessage} from './LogMessage';
 import {SerializedBoard} from './boards/SerializedBoard';
 import {SerializedMoonData} from './moon/SerializedMoonData';
 import {SerializedVictoryPointsBreakdown} from './SerializedVictoryPointsBreakdown';
+import {GlobalParameter} from './GlobalParameter';
 
 export interface SerializedGame {
     activePlayer: PlayerId;
@@ -38,6 +39,7 @@ export interface SerializedGame {
     gameLog: Array<LogMessage>;
     gameOptions: GameOptions;
     generation: number;
+    globalsPerGeneration: Array<Partial<Record<GlobalParameter, number>>>;
     id: GameId;
     initialDraftIteration: number;
     lastSaveId: number;

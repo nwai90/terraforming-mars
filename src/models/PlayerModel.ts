@@ -14,6 +14,7 @@ import {IAresData} from '../ares/IAresData';
 import {SerializedTimer} from '../SerializedTimer';
 import {MoonModel} from './MoonModel';
 import {Password} from '../Player';
+import {GlobalParameter} from '../GlobalParameter';
 
 export interface PlayerModel {
     actionsTakenThisRound: number;
@@ -48,6 +49,7 @@ export interface PlayerModel {
     gameAge: number;
     gameOptions: GameOptionsModel;
     generation: number;
+    globalsPerGeneration: Array<Partial<Record<GlobalParameter, number>>>,
     hasConceded: boolean;
     heat: number;
     heatProduction: number;
