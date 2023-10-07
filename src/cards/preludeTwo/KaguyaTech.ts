@@ -46,7 +46,7 @@ export class KaguyaTech extends Card implements IProjectCard {
     return new SelectSpace('Select greenery tile to replace with a city', greenerySpaces, (space: ISpace) => {
       player.game.removeTile(space.id);
       LogHelper.logBoardTileAction(player, space, 'greenery tile', 'removed');
-      player.game.addCityTile(player, space.id);
+      player.game.addCityTile(player, space.id, space.spaceType);
       return undefined;
     });
   }
