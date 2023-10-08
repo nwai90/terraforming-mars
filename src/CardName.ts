@@ -499,6 +499,7 @@ export enum CardName {
     ROBOT_POLLINATORS = 'Robot Pollinators',
     SUPERCAPACITORS = 'Supercapacitors',
     DIRECTED_HEAT_USAGE = 'Directed Heat Usage',
+    FLOYD_CONTINUUM = 'Floyd Continuum',
 
     // Prelude 2
     ANTI_DESERTIFICATION_TECHNIQUES = 'Anti-Desertification Techniques',

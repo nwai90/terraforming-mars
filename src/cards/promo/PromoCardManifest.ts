@@ -59,6 +59,7 @@ import {SixteenPsyche} from './16Psyche';
 import {RobotPollinators} from './RobotPollinators';
 import {Supercapacitors} from './Supercapacitors';
 import {DirectedHeatUsage} from './DirectedHeatUsage';
+import {FloydContinuum} from './FloydContinuum';
 
 export const PROMO_CARD_MANIFEST = new CardManifest({
   module: GameModule.Promo,
@@ -108,6 +109,7 @@ export const PROMO_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.ROBOT_POLLINATORS, Factory: RobotPollinators},
     {cardName: CardName.SUPERCAPACITORS, Factory: Supercapacitors},
     {cardName: CardName.DIRECTED_HEAT_USAGE, Factory: DirectedHeatUsage},
+    {cardName: CardName.FLOYD_CONTINUUM, Factory: FloydContinuum},
   ],
   preludeCards: [
     {cardName: CardName.NEW_PARTNER, Factory: NewPartner},
