@@ -124,6 +124,7 @@ import {CorporateAlliance} from './preludes/CorporateAlliance';
 import {GreenMarsInitiative} from './preludes/GreenMarsInitiative';
 import {IntellectualistMovement} from './preludes/IntellectualistMovement';
 import {CyanobacteriaPods} from './preludes/CyanobacteriaPods';
+import {AlliedResearch} from './preludes/AlliedResearch';
 
 export const MISINFORMATION_CARDS = [
   CardName.MISINFORMATION_1,
@@ -362,6 +363,7 @@ export const COMMUNITY_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.GREEN_MARS_INITIATIVE, Factory: GreenMarsInitiative, compatibility: GameModule.Turmoil},
     {cardName: CardName.INTELLECTUALIST_MOVEMENT, Factory: IntellectualistMovement, compatibility: GameModule.Turmoil},
     {cardName: CardName.CYANOBACTERIA_PODS, Factory: CyanobacteriaPods},
+    {cardName: CardName.ALLIED_RESEARCH, Factory: AlliedResearch},
   ],
   cardsToRemove: [
     ...MISINFORMATION_CARDS,
