@@ -8,13 +8,14 @@ import {CardType} from '../cards/CardType';
 import {SelectHowToPayDeferred} from './SelectHowToPayDeferred';
 import {LogHelper} from '../LogHelper';
 import {Aerotech} from '../cards/community/corporations/Aerotech';
+import {Phase} from '../Phase';
 
 export enum LogType {
   DREW = 'drew',
   KEPT = 'kept',
-  DRAFTED='drafted',
+  DRAFTED = 'drafted',
   BOUGHT = 'bought',
-  SOLD='sold',
+  SOLD = 'sold',
   DREW_VERBOSE = 'drew_verbose',
 }
 
@@ -64,7 +65,10 @@ export class DrawCards<T extends undefined | SelectCard<IProjectCard>> implement
     if (logType === LogType.DREW_VERBOSE) {
       LogHelper.logDrawnCards(player, cards);
     } else {
-      player.game.log('${0} ${1} ${2} card(s)', (b) => b.player(player).string(logType).number(cards.length));
+      // Hide the number of cards bought in draft from spectators
+      let logOptions = player.game.phase === Phase.RESEARCH && logType === LogType.BOUGHT ? {reservedFor: player} : undefined;
+      player.game.log('${0} ${1} ${2} card(s)', (b) => b.player(player).string(logType).number(cards.length), logOptions);
+
       if (cards.length > 0) LogHelper.logDrawnCards(player, cards, true, logType);
     }
     return undefined;

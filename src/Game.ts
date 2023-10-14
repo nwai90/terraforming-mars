@@ -1149,6 +1149,15 @@ export class Game implements ISerializable<SerializedGame> {
       if (this.allPlayersHaveFinishedResearch()) {
         this.phase = Phase.ACTION;
         this.passedPlayers.clear();
+
+        // Publicly reveal number of cards bought in draft by each player once all players have researched
+        // See DrawCards.keep for the other half of this effect
+        this.gameLog.forEach((log) => {
+          if (/\$\{0\} \$\{1\} \$\{2\} card\(s\)/.test(log.message) === true && log.playerId !== undefined) {
+            log.playerId = undefined;
+          }
+        });
+
         this.startActionsForPlayer(this.first);
       }
     });
