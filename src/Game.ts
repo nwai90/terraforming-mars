@@ -819,20 +819,33 @@ export class Game implements ISerializable<SerializedGame> {
         player.preludeCardsInHand = [];
         throw new Error('Too many cards selected');
       }
-      // discard all unpurchased cards
-      player.dealtProjectCards.forEach((card) => {
-        if (player.cardsInHand.includes(card) === false) {
-          this.dealer.discard(card);
-        }
-      });
 
       this.playerHasPickedCorporationCard(player, corporation);
+      const discardedCorps: CorporationCard[] = [];
+
       // discard remaining corps that were not chosen
       player.dealtCorporationCards.forEach((card) => {
         if (card.name !== corporation.name) {
           this.dealer.discardCorporation(card);
+          discardedCorps.push(card);
         }
       });
+
+      LogHelper.logPlayerDiscardedCards(player, discardedCorps);
+
+      // discard all unpurchased cards
+      const discardedProjects: IProjectCard[] = [];
+
+      player.dealtProjectCards.forEach((card) => {
+        if (player.cardsInHand.includes(card) === false) {
+          this.dealer.discard(card);
+          discardedProjects.push(card);
+        }
+      });
+
+      LogHelper.logPlayerDiscardedCards(player, discardedProjects);
+
+      // TODO: Log discarded preludes and CEOs
 
       return undefined;
     });
