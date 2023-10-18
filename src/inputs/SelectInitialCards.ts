@@ -32,16 +32,18 @@ export class SelectInitialCards extends AndOptions implements PlayerInput {
         ),
       );
 
+      const game = player.game;
+
       // Give each player Merger in this variant, or a 5th prelude if they already have Merger
-      if (player.game.gameOptions.twoCorpsVariant) {
+      if (game.gameOptions.twoCorpsVariant) {
         if (!player.dealtPreludeCards.some((card) => card.name === CardName.MERGER)) {
           player.dealtPreludeCards.push(new Merger());
         } else {
-          player.dealtPreludeCards.push(player.game.dealer.dealPreludeCard());
+          player.dealtPreludeCards.push(game.dealer.dealPreludeCard(game));
         }
       }
 
-      if (player.game.gameOptions.preludeExtension) {
+      if (game.gameOptions.preludeExtension) {
         this.options.push(
           new SelectCard(
             'Select 2 Prelude cards', undefined, player.dealtPreludeCards,
@@ -54,7 +56,7 @@ export class SelectInitialCards extends AndOptions implements PlayerInput {
         );
       }
 
-      if (player.game.gameOptions.leadersExpansion) {
+      if (game.gameOptions.leadersExpansion) {
         this.options.push(
           new SelectCard(
             'Select 1 Leader card', undefined, player.dealtLeaderCards,

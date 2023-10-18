@@ -36,9 +36,10 @@ export class Karen extends Card implements LeaderCard {
 
   public action(player: Player): PlayerInput | undefined {
     const cardsDrawn: Array<IProjectCard> = [];
+    const game = player.game;
 
-    for (let i = 0; i < player.game.generation; i++) {
-      cardsDrawn.push(player.game.dealer.dealPreludeCard());
+    for (let i = 0; i < game.generation; i++) {
+      cardsDrawn.push(game.dealer.dealPreludeCard(game));
     }
 
     cardsDrawn.forEach((card) => {
@@ -51,7 +52,7 @@ export class Karen extends Card implements LeaderCard {
         return player.playCard(foundCards[0]);
       } else {
         // Same rationale as player.playPreludeCard()
-        player.game.log('${0} was discarded for 15 M€ as ${1} could not afford to play it', (b) => b.card(foundCards[0]).player(player));
+        game.log('${0} was discarded for 15 M€ as ${1} could not afford to play it', (b) => b.card(foundCards[0]).player(player));
         this.isDisabled = true;
         player.addResource(Resources.MEGACREDITS, 15, {log: true});
         foundCards[0].warning = undefined;

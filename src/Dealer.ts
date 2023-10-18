@@ -12,6 +12,7 @@ export class Dealer implements ISerializable<SerializedDealer> {
     public deck: Array<IProjectCard> = [];
     public preludeDeck: Array<IProjectCard> = [];
     public discarded: Array<IProjectCard> = [];
+    public discardedPreludes: Array<IProjectCard> = [];
     public corporationCards: Array<CorporationCard> = [];
     public discardedCorporations: Array<CorporationCard> = [];
     public leaderDeck: Array<IProjectCard> = [];
@@ -41,6 +42,9 @@ export class Dealer implements ISerializable<SerializedDealer> {
     }
     public discardCorporation(card: CorporationCard): void {
       this.discardedCorporations.push(card);
+    }
+    public discardPrelude(card: IProjectCard): void {
+      this.discardedPreludes.push(card);
     }
     public dealCard(game: Game, isResearchPhase: boolean = false): IProjectCard {
       let result: IProjectCard | undefined;
@@ -87,13 +91,18 @@ export class Dealer implements ISerializable<SerializedDealer> {
       return result;
     }
 
-    // Prelude deck does not need discard and reshuffle mecanisms
-    public dealPreludeCard(): IProjectCard {
+    public dealPreludeCard(game: Game): IProjectCard {
+      if (this.preludeDeck.length === 0) {
+        game.log('The preludes discard pile has been shuffled to form a new deck.');
+        this.preludeDeck = Dealer.shuffle(this.discardedPreludes);
+        this.discardedPreludes = [];
+      }
+
       const result: IProjectCard | undefined = this.preludeDeck.pop();
       if (result === undefined) {
         throw 'Unexpected empty prelude deck';
       }
-      // All Prelude cards are expected to subclass IProjectCard
+
       return result;
     }
 
@@ -133,6 +142,7 @@ export class Dealer implements ISerializable<SerializedDealer> {
       dealer.discardedCorporations = cardFinder.corporationCardsFromJSON(d.discardedCorporations);
       dealer.deck = cardFinder.cardsFromJSON(d.deck);
       dealer.discarded = cardFinder.cardsFromJSON(d.discarded);
+      dealer.discardedPreludes = cardFinder.cardsFromJSON(d.discardedPreludes);
       dealer.preludeDeck = cardFinder.cardsFromJSON(d.preludeDeck);
       dealer.leaderDeck = cardFinder.cardsFromJSON(d.leaderDeck);
       return dealer;
@@ -144,6 +154,7 @@ export class Dealer implements ISerializable<SerializedDealer> {
         discardedCorporations: this.discardedCorporations.map((c) => c.name),
         deck: this.deck.map((c) => c.name),
         discarded: this.discarded.map((c) => c.name),
+        discardedPreludes: this.discardedPreludes.map((c) => c.name),
         preludeDeck: this.preludeDeck.map((c) => c.name),
         leaderDeck: this.leaderDeck.map((c) => c.name),
       };

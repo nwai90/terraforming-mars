@@ -461,7 +461,7 @@ export class Game implements ISerializable<SerializedGame> {
 
   private static dealPreludeCards(player: Player, dealer: Dealer): void {
     for (let i = 0; i < 4; i++) {
-      player.dealtPreludeCards.push(dealer.dealPreludeCard());
+      player.dealtPreludeCards.push(dealer.dealPreludeCard(player.game));
     }
   }
 
@@ -823,7 +823,7 @@ export class Game implements ISerializable<SerializedGame> {
       this.playerHasPickedCorporationCard(player, corporation);
       const discardedCorps: CorporationCard[] = [];
 
-      // discard remaining corps that were not chosen
+      // Discard remaining corps that were not chosen
       player.dealtCorporationCards.forEach((card) => {
         if (card.name !== corporation.name) {
           this.dealer.discardCorporation(card);
@@ -833,7 +833,21 @@ export class Game implements ISerializable<SerializedGame> {
 
       LogHelper.logPlayerDiscardedCards(player, discardedCorps);
 
-      // discard all unpurchased cards
+      // Discard remaining preludes that were not chosen
+      if (this.gameOptions.preludeExtension) {
+        const discardedPreludes: IProjectCard[] = [];
+
+        player.dealtPreludeCards.forEach((card) => {
+          if (player.preludeCardsInHand.includes(card) === false) {
+            this.dealer.discardPrelude(card);
+            discardedPreludes.push(card);
+          }
+        })
+
+        LogHelper.logPlayerDiscardedCards(player, discardedPreludes);
+      }
+
+      // Discard all unpurchased cards
       const discardedProjects: IProjectCard[] = [];
 
       player.dealtProjectCards.forEach((card) => {
@@ -845,7 +859,7 @@ export class Game implements ISerializable<SerializedGame> {
 
       LogHelper.logPlayerDiscardedCards(player, discardedProjects);
 
-      // TODO: Log discarded preludes and CEOs
+      // TODO: Log discarded CEOs
 
       return undefined;
     });

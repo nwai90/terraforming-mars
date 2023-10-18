@@ -22,15 +22,16 @@ export class NewPartner extends PreludeCard {
   }
 
   public play(player: Player) {
+    const game = player.game;
     player.addProduction(Resources.MEGACREDITS, 1);
 
     const cardsDrawn: Array<IProjectCard> = [
-      player.game.dealer.dealPreludeCard(),
-      player.game.dealer.dealPreludeCard(),
+      game.dealer.dealPreludeCard(game),
+      game.dealer.dealPreludeCard(game),
     ];
 
     if (cardsDrawn.every((card) => card.canPlay !== undefined && card.canPlay(player) === false)) {
-      player.game.log('${0} and ${1} were discarded as ${2} could not pay for both cards.', (b) => b.card(cardsDrawn[0]).card(cardsDrawn[1]).player(player));
+      game.log('${0} and ${1} were discarded as ${2} could not pay for both cards.', (b) => b.card(cardsDrawn[0]).card(cardsDrawn[1]).player(player));
       return undefined;
     }
 
