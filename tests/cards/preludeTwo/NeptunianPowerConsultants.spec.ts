@@ -18,9 +18,16 @@ describe('NeptunianPowerConsultants', function() {
   });
 
   it('Effect: Does not proc if corp owner cannot afford', function() {
+    player.megaCredits = 2;
+    player.steel = 1;
     const oceanSpace = game.board.getAvailableSpacesForOcean(player)[0];
     game.addOceanTile(player, oceanSpace.id);
-    expect(game.deferredActions).has.length(0);
+
+    game.deferredActions.runAll(() => {});
+    expect(player.megaCredits).eq(2);
+    expect(player.steel).greaterThanOrEqual(1);
+    expect(player.getProduction(Resources.ENERGY)).eq(0);
+    expect(card.resourceCount).eq(0);
   });
 
   it('Effect: Can proc', function() {
@@ -29,6 +36,7 @@ describe('NeptunianPowerConsultants', function() {
     const oceanSpace = game.board.getAvailableSpacesForOcean(player)[0];
     game.addOceanTile(player, oceanSpace.id);
 
+    game.deferredActions.runNext();
     const orOptions = game.deferredActions.pop()!.execute() as OrOptions;
 
     // Do nothing
