@@ -60,8 +60,9 @@ export class StJosephOfCupertinoMission extends Card implements IProjectCard {
           foundSpace.hasCathedral = true;
 
           const cityOwner = foundSpace.player!;
-          game.defer(new DeferredAction(cityOwner, () => CuriosityII.payToDrawCard(cityOwner)), Priority.PAY_TO_DRAW_CARDS);
+          if (cityOwner.hasConceded) return undefined;
 
+          game.defer(new DeferredAction(cityOwner, () => CuriosityII.payToDrawCard(cityOwner)), Priority.PAY_TO_DRAW_CARDS);
           return undefined;
         });
       }));

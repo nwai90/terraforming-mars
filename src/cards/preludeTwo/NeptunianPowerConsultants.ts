@@ -45,6 +45,8 @@ export class NeptunianPowerConsultants extends Card implements IProjectCard {
   }
 
   public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
+    if (cardOwner.hasConceded) return;
+
     cardOwner.game.defer(new DeferredAction(cardOwner, () => {
       // We need to explicitly specify plants: false to avoid including Martian Lumber Corp plants
       // in the computation, as player.canAfford knows nothing about the source card
