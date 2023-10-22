@@ -17,8 +17,8 @@ export class AlliedResearch extends PreludeCard implements IProjectCard {
             b.preludeBox('action', (ce) => {
               ce.vSpace(Size.LARGE);
               ce.vSpace();
-              ce.action('Discard your hand, then draw 3 cards.', (eb) => {
-                eb.minus().text('ALL').cards(1).startAction.cards(3).digit;
+              ce.action('Discard your hand, then draw 4 cards.', (eb) => {
+                eb.minus().text('ALL').cards(1).startAction.cards(4).digit;
               });
               ce.vSpace(Size.LARGE);
             });
@@ -44,7 +44,7 @@ export class AlliedResearch extends PreludeCard implements IProjectCard {
       // Failsafe (strictly speaking this should not be necessary)
       player.cardsInHand = [];
 
-      player.drawCard(3);
+      player.drawCard(4);
 
       return undefined;
     }

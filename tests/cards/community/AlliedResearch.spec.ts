@@ -14,7 +14,7 @@ describe('AlliedResearch', function() {
     player.playedCards.push(mine);
 
     card.action(player);
-    expect(player.cardsInHand).has.length(3);
+    expect(player.cardsInHand).has.length(4);
     expect(player.cardsInHand.includes(mine)).is.false;
   });
 });
