@@ -52,6 +52,18 @@ export class Predators extends Card implements IProjectCard, IActionCard, IResou
     }
 
     public action(player: Player) {
+      if (player.isCorporation(CardName.BENTENMARU)) {
+        const allTargets = RemoveResourcesFromCard.getAvailableTargetCards(player, ResourceType.ANIMAL);
+        const ownTargets = RemoveResourcesFromCard.getAvailableTargetCards(player, ResourceType.ANIMAL, true);
+        const opponentTargets = allTargets.filter((target) => !ownTargets.includes(target));
+
+        if (opponentTargets.length > 0 || player.game.isSoloMode()) {
+          player.game.defer(new AddResourcesToCard(player, ResourceType.ANIMAL, {filter: (c) => c.name === this.name, count: 2}));
+        }
+
+        return undefined;
+      }
+
       player.game.defer(new RemoveResourcesFromCard(player, ResourceType.ANIMAL));
       player.game.defer(new AddResourcesToCard(player, ResourceType.ANIMAL, {filter: (c) => c.name === this.name}));
       return undefined;

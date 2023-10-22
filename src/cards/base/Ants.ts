@@ -52,6 +52,18 @@ export class Ants extends Card implements IActionCard, IProjectCard, IResourceCa
   }
 
   public action(player: Player) {
+    if (player.isCorporation(CardName.BENTENMARU)) {
+      const allTargets = RemoveResourcesFromCard.getAvailableTargetCards(player, ResourceType.MICROBE);
+      const ownTargets = RemoveResourcesFromCard.getAvailableTargetCards(player, ResourceType.MICROBE, true);
+      const opponentTargets = allTargets.filter((target) => !ownTargets.includes(target));
+
+      if (opponentTargets.length > 0 || player.game.isSoloMode()) {
+        player.game.defer(new AddResourcesToCard(player, ResourceType.MICROBE, {filter: (c) => c.name === this.name, count: 2}));
+      }
+
+      return undefined;
+    }
+
     player.game.defer(new RemoveResourcesFromCard(player, ResourceType.MICROBE));
     player.game.defer(new AddResourcesToCard(player, ResourceType.MICROBE, {filter: (c) => c.name === this.name}));
     return undefined;
