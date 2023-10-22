@@ -1492,13 +1492,6 @@ export class Player implements ISerializable<SerializedPlayer> {
    */
   public spendableMegacredits(): number {
     const spendableMegacredits = this.megaCredits;
-
-    // This should never happen, but let's add a failsafe for debugging purposes and allow the game to continue
-    // if (spendableMegacredits < 0) {
-    //   console.warn(`player.spendableMegacredits (${spendableMegacredits}) is less than 0`);
-    //   spendableMegacredits = 0;
-    // }
-
     return spendableMegacredits + (this.canUseHeatAsMegaCredits ? this.availableHeat : 0);
   }
 
@@ -3227,8 +3220,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     player.plantsNeededForGreenery = d.plantsNeededForGreenery;
     player.remainingStallActionsCount = d.remainingStallActionsCount;
     player.removingPlayers = d.removingPlayers;
-    // TODO: Remove after 28 Feb 2023
-    player.requirementsBonus = d.requirementsBonus || 0;
+    player.requirementsBonus = d.requirementsBonus;
     player.scienceTagCount = d.scienceTagCount;
     player.steel = d.steel;
     player.steelProduction = d.steelProduction;
