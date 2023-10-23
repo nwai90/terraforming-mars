@@ -11,10 +11,11 @@ describe('AlliedResearch', function() {
     Game.newInstance('foobar', [player], player);
 
     const mine = new Mine();
-    player.playedCards.push(mine);
+    player.cardsInHand.push(mine);
 
     card.action(player);
     expect(player.cardsInHand).has.length(4);
     expect(player.cardsInHand.includes(mine)).is.false;
+    expect(player.megaCredits).eq(1);
   });
 });

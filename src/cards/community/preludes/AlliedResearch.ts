@@ -5,6 +5,7 @@ import {CardName} from '../../../CardName';
 import {CardRenderer} from '../../render/CardRenderer';
 import {Size} from '../../render/Size';
 import {Tags} from '../../Tags';
+import {Resources} from '../../../Resources';
 
 export class AlliedResearch extends PreludeCard implements IProjectCard {
     constructor() {
@@ -17,8 +18,8 @@ export class AlliedResearch extends PreludeCard implements IProjectCard {
             b.preludeBox('action', (ce) => {
               ce.vSpace(Size.LARGE);
               ce.vSpace();
-              ce.action('Discard your hand, then draw 4 cards.', (eb) => {
-                eb.minus().text('ALL').cards(1).startAction.cards(4).digit;
+              ce.action('Discard your hand for 1 M€ per card, then draw 4 cards.', (eb) => {
+                eb.minus().text('ALL').cards(1).startAction.megacredits(1).multiplier.nbsp(Size.SMALL).cards(4).digit;
               });
               ce.vSpace(Size.LARGE);
             });
@@ -36,6 +37,8 @@ export class AlliedResearch extends PreludeCard implements IProjectCard {
     }
 
     public action(player: Player) {
+      player.addResource(Resources.MEGACREDITS, player.cardsInHand.length);
+
       player.cardsInHand.forEach((card, index) => {
         player.cardsInHand.splice(index, 1);
         player.game.dealer.discard(card);
