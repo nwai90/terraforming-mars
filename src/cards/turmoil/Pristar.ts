@@ -8,6 +8,7 @@ import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {Resources} from '../../Resources';
 
 export class Pristar extends Card implements CorporationCard, IResourceCard {
   constructor() {
@@ -47,8 +48,8 @@ export class Pristar extends Card implements CorporationCard, IResourceCard {
 
     public onProductionPhase(player: Player) {
       if (!(player.hasIncreasedTerraformRatingThisGeneration)) {
-        player.megaCredits += 6;
-        player.addResourceTo(this, 1);
+        player.addResource(Resources.MEGACREDITS, 6, {log: true});
+        player.addResourceTo(this, {qty: 1, log: true});
       }
       return undefined;
     }
