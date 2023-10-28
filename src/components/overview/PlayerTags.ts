@@ -12,6 +12,7 @@ import {TurmoilPolicy} from '../../turmoil/TurmoilPolicy';
 import {CardModel} from '../../models/CardModel';
 import {PreferencesManager} from '../PreferencesManager';
 import {CardName} from '../../CardName';
+import {Phase} from '../../Phase';
 
 type InterfaceTagsType = Tags | SpecialTags | 'all' | 'separator';
 
@@ -119,10 +120,8 @@ export const PlayerTags = Vue.component('player-tags', {
       });
     },
     getCardCount: function(): number {
-      if (this.player.cardsInHandNbr) {
-        return this.player.cardsInHandNbr;
-      }
-      return 0;
+      if (this.player.phase === Phase.RESEARCH) return -1;
+      return this.player.cardsInHandNbr;
     },
     getTR: function(): number {
       return this.player.terraformRating;
