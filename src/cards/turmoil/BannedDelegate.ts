@@ -41,10 +41,10 @@ export class BannedDelegate extends Card implements IProjectCard {
         const players: Array<Player | NeutralPlayer> = [];
 
         playersId.forEach((playerId) => {
-          if (playerId === 'NEUTRAL') {
-            players.push('NEUTRAL');
-          } else {
-            players.push(player.game.getPlayerById(playerId));
+          const target = playerId === 'NEUTRAL' ? 'NEUTRAL' : player.game.getPlayerById(playerId);
+
+          if (players.includes(target) === false) {
+            players.push(target);
           }
         });
 

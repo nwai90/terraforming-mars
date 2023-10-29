@@ -46,7 +46,7 @@ export class RedTourismWave extends Card implements IProjectCard {
 
   public play(player: Player) {
     const amount = RedTourismWave.getAdjacentEmptySpacesCount(player);
-    player.addResource(Resources.MEGACREDITS, amount);
+    player.addResource(Resources.MEGACREDITS, amount, {log: true});
     TurmoilHandler.handleSocietyPayment(player, PartyName.REDS);
     return undefined;
   }
