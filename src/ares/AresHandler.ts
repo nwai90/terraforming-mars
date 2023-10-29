@@ -194,11 +194,15 @@ export class AresHandler {
     if (availableProductionUnits >= cost.production && player.canAfford(cost.megacredits)) {
       return cost;
     }
+
     if (cost.production > 0) {
       throw new Error(`Placing here costs ${cost.production} units of production and ${cost.megacredits} M€`);
-    } else {
+    }
+    if (cost.megacredits > 0) {
       throw new Error(`Placing here costs ${cost.megacredits} M€`);
     }
+
+    return cost;
   }
 
   public static payAdjacencyAndHazardCosts(player: Player, space: ISpace, subjectToHazardAdjacency: boolean) {
