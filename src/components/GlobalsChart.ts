@@ -55,8 +55,8 @@ export const GlobalsChart = Vue.component('globals-chart', {
 
       function getValues(param: GlobalParameter, min: number, max: number): Array<number> {
         return gpg.map((entry) => {
-            const val = entry[param] ?? min;
-            return 100 * (val - min) / (max - min);
+          const val = entry[param] ?? min;
+          return 100 * (val - min) / (max - min);
         });
       }
 
