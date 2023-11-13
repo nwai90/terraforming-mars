@@ -39,7 +39,7 @@
     "eslint": "^6.6.0",
     "eslint-plugin-vue": "^6.2.2",
     "js-beautify": "^1.13.0",
-    "jsdom": "^22.1.0",
+    "jsdom": "^16.4.0",
     "mocha": "^8.3.2",
     "nyc": "^14.1.1"
   },
