@@ -10,7 +10,6 @@ import {VictoryPointMultiplier} from './VictoryPointMultiplier';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {TurmoilPolicy} from '../../turmoil/TurmoilPolicy';
 import {CardModel} from '../../models/CardModel';
-import {PreferencesManager} from '../PreferencesManager';
 import {CardName} from '../../CardName';
 import {Phase} from '../../Phase';
 
@@ -271,9 +270,6 @@ export const PlayerTags = Vue.component('player-tags', {
     getAvailableBlueActionCount: function(): number {
       return this.player.availableBlueCardActionCount;
     },
-    isLearnerModeOn: function(): boolean {
-      return PreferencesManager.loadBoolean('learner_mode') === true;
-    },
     isEscapeVelocityOn: function(): boolean {
       return this.player.gameOptions.escapeVelocityMode;
     },
@@ -292,7 +288,7 @@ export const PlayerTags = Vue.component('player-tags', {
 
                 <tag-count :tag="'tr'" :count="getTR()" :size="'big'" :type="'main'"/>
 
-                <div v-if="isLearnerModeOn()" class="tag-display tooltip tooltip-top" data-tooltip="The number of available active card actions">
+                <div class="tag-display tooltip tooltip-top" data-tooltip="The number of available active card actions">
                     <div class="tag-count tag-action-card">
                     <div class="blue-stripe"></div>
                     <div class="red-arrow"></div>

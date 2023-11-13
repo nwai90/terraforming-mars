@@ -15,7 +15,6 @@ import {Tags} from '../../cards/Tags';
 import {ALL_CARD_MANIFESTS} from '../../cards/AllCards';
 import {GameModule} from '../../GameModule';
 import {CardRequirements} from '../../cards/CardRequirements';
-import {PreferencesManager} from '../PreferencesManager';
 import {OwnerModel} from '../../components/SelectCard';
 import {ResourceType} from '../../ResourceType';
 
@@ -130,10 +129,6 @@ export const Card = Vue.component('card', {
       }
       if (this.isStandardProject()) {
         classes.push('card-standard-project');
-      }
-      const learnerModeOff = PreferencesManager.load('learner_mode') === '0';
-      if (learnerModeOff && this.isStandardProject() && card.isDisabled) {
-        classes.push('card-hide');
       }
       return classes.join(' ');
     },

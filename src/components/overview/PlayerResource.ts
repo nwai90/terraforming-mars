@@ -1,10 +1,9 @@
 import Vue from 'vue';
-import {DEFAULT_STEEL_VALUE, DEFAULT_TITANIUM_VALUE, HEAT_FOR_TEMPERATURE} from '../../constants';
+import {HEAT_FOR_TEMPERATURE} from '../../constants';
 import {Resources} from '../../Resources';
 import {TurmoilModel} from '../../models/TurmoilModel';
 import {CardModel} from '../../models/CardModel';
 import {CardName} from '../../CardName';
-import {PreferencesManager} from '../PreferencesManager';
 
 export const PlayerResource = Vue.component('player-resource', {
   props: {
@@ -57,12 +56,11 @@ export const PlayerResource = Vue.component('player-resource', {
       return this.type === Resources.PLANTS && this.plantsAreProtected;
     },
     showResourceValue: function(): boolean {
-      const learnerModeOn = PreferencesManager.load('learner_mode') === '1';
       switch (this.type) {
       case Resources.STEEL:
-        return learnerModeOn || this.steelValue > DEFAULT_STEEL_VALUE;
+        return true;
       case Resources.TITANIUM:
-        return learnerModeOn || this.titaniumValue > DEFAULT_TITANIUM_VALUE;
+        return true;
       case Resources.HEAT:
         return this.canUseHeatAsMegaCredits;
       default:

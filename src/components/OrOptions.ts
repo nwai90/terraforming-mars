@@ -4,7 +4,6 @@ import {$t} from '../directives/i18n';
 import {Button} from '../components/common/Button';
 import {PlayerModel} from '../models/PlayerModel';
 import {PlayerInputModel} from '../models/PlayerInputModel';
-import {PreferencesManager} from './PreferencesManager';
 
 let unique: number = 0;
 
@@ -121,11 +120,8 @@ export const OrOptions = Vue.component('or-options', {
       );
       optionElements.push(subchildren[subchildren.length - 1]);
 
-      // Show all option by default unless it is told to show only in learner mode
-      let showOption = true;
-      if (option.showOnlyInLearnerMode && !PreferencesManager.loadBoolean('learner_mode')) {
-        showOption = false;
-      }
+      // Show all options by defaul. If we need a setting to conditionally hide options in the list it will go here
+      const showOption = true;
 
       // Only push this orOption element if we are showing it
       if (showOption) {

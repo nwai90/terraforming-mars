@@ -367,7 +367,6 @@ function getWaitingFor(
     });
     playerInputModel.maxCardsToSelect = selectCard.config.max;
     playerInputModel.minCardsToSelect = selectCard.config.min;
-    playerInputModel.showOnlyInLearnerMode = selectCard.config.enabled?.every((p: boolean) => p === false);
     playerInputModel.selectBlueCardAction = selectCard.config.selectBlueCardAction;
     if (selectCard.config.showOwner) {
       playerInputModel.showOwner = true;

@@ -12,7 +12,6 @@ export const preferences = [
   'enable_sounds',
   'show_tile_confirmation',
   'show_discount_on_cards',
-  'learner_mode',
   'spectator_tab',
 ] as const;
 

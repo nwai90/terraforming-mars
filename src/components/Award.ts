@@ -70,9 +70,6 @@ export const Award = Vue.component('award', {
 
       return AWARD_COSTS.slice(numFundedAwards);
     },
-    isLearnerModeOn: function(): boolean {
-      return PreferencesManager.loadBoolean('learner_mode');
-    },
   },
   template: `
     <div class="awards_cont" v-trim-whitespace>
@@ -83,7 +80,7 @@ export const Award = Vue.component('award', {
                     <span v-i18n>{{ award.award.name }}</span>
                     <span class="ma-player-cube"><i :class="'board-cube board-cube--'+award.player_color" /></span>
                 </span>
-                <span v-for="spotPrice in getAvailableAwardSpots()" class="milestone-award-inline unpaid" v-if="isLearnerModeOn()">
+                <span v-for="spotPrice in getAvailableAwardSpots()" class="milestone-award-inline unpaid">
                   <div class="milestone-award-price">{{spotPrice}}</div>
                 </span>
             </div>

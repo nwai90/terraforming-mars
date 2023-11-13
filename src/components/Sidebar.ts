@@ -91,7 +91,6 @@ export const Sidebar = Vue.component('sidebar', {
       'enable_sounds': false,
       'show_tile_confirmation': false,
       'show_discount_on_cards': true,
-      'learner_mode': true,
       'spectator_tab': 'board',
       'globalParameter': GlobalParameter,
     };
@@ -310,15 +309,6 @@ export const Sidebar = Vue.component('sidebar', {
                             <i class="form-icon"></i> <span v-i18n>Show discount on cards</span>
                         </label>
                     </div>
-                    <div class="preferences_panel_item">
-                        <label class="form-switch">
-                            <input type="checkbox" v-on:change="updatePreferences" v-model="learner_mode" />
-                            <i class="form-icon"></i>
-                            <span v-i18n>Learner Mode (req. refresh)</span>
-                            <span class="tooltip tooltip-left" data-tooltip="Show information that can be helpful\n to players who are still learning the games">&#9432;</span>
-                        </label>
-                    </div>
-
                     <div class="preferences_panel_actions">
                       <button class="btn btn-lg btn-primary" v-on:click="ui.preferences_panel_open=false">Ok</button>
                     </div>
