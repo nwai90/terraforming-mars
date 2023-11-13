@@ -419,6 +419,7 @@ export const LogPanel = Vue.component('log-panel', {
   },
   mounted: function() {
     this.getLogsForGeneration(this.generation);
+    this.copyPlayerLink();
   },
   template: `
       <div class="log-container">

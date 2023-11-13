@@ -87,8 +87,6 @@ export const GameHome = Vue.component('game-home', {
             <span class="turn-order">{{getTurnOrder(index)}}</span>
             <span :class="'color-square ' + getPlayerCubeColorClass(player.color)"></span>
             <span class="player-name"><a :href="getHref(player.id)">{{player.name}}</a></span>
-            <Button title="copy" size="tiny" :onClick="_=>copyUrl(player.id)"/>
-            <span v-if="isPlayerUrlCopied(player.id)" class="copied-notice">Playable link for {{player.name}} copied to clipboard <span class="dismissed" @click="setCopiedIdToDefault" >dismiss</span></span>
           </li>
 
           <br>
