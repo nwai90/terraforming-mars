@@ -10,4 +10,9 @@ export class Venus extends Colony {
     public tradeType = ColonyBenefit.ADD_RESOURCES_TO_VENUS_CARD;
     public tradeQuantity = [0, 0, 1, 1, 2, 3, 4];
     public colonyBonusType = ColonyBenefit.ADD_RESOURCES_TO_VENUS_CARD;
+    public details = [
+      'Increase Venus 1 step',
+      'Add n resources to ANY Venus card',
+      'Add 1 resource to ANY Venus card',
+    ];
 }

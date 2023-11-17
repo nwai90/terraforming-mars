@@ -9,4 +9,9 @@ export class Pallas extends Colony {
     public tradeType = ColonyBenefit.PLACE_DELEGATES;
     public tradeQuantity = [1, 1, 1, 2, 2, 2, 3];
     public colonyBonusType = ColonyBenefit.GAIN_MC_PER_DELEGATE;
+    public details = [
+      'Gain +1 permanent influence',
+      'Place n delegates',
+      'Gain 1 M€ per party delegate',
+    ];
 }

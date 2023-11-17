@@ -22,4 +22,9 @@ export class Hygiea extends Colony {
     public colonyBonusQuantity = 3;
     public colonyBonusResource = Resources.MEGACREDITS;
     public shouldIncreaseTrack = ShouldIncreaseTrack.ASK;
+    public details = [
+      'Choose opponent to discard 1 card',
+      'Steal 3 units of the indicated type',
+      'Gain 3 M€',
+    ];
 }

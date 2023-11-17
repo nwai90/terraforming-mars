@@ -13,4 +13,9 @@ export class Titan extends Colony {
     public tradeType = ColonyBenefit.ADD_RESOURCES_TO_CARD;
     public tradeQuantity = [0, 1, 1, 2, 3, 3, 4];
     public colonyBonusType = ColonyBenefit.ADD_RESOURCES_TO_CARD;
+    public details = [
+      'Add 3 floaters to ANY card',
+      'Add n floaters to ANY card',
+      'Add 1 floater to ANY card',
+    ];
 }

@@ -9,4 +9,9 @@ export class Deimos extends Colony {
     public tradeType = ColonyBenefit.ERODE_SPACES_ADJACENT_TO_HAZARDS;
     public tradeQuantity = [0, 0, 1, 1, 2, 2, 3];
     public colonyBonusType = ColonyBenefit.GAIN_MC_PER_HAZARD_TILE;
+    public details = [
+      'Place a hazard tile next to no other tile',
+      'Erode n spaces adjacent to hazard tiles',
+      'Gain 1 M€ per hazard tile on Mars',
+    ];
 }

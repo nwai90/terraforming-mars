@@ -11,4 +11,9 @@ export class Leavitt extends Colony {
     public colonyBonusType = ColonyBenefit.DRAW_CARDS_AND_BUY_ONE;
     // For Productive Outpost, collect payment only after other bonuses have been collected
     public priority = 2;
+    public details = [
+      'Gain 1 Science tag',
+      'Draw n cards and keep 1',
+      'Reveal and buy or discard\nthe top card of the deck',
+    ];
 }

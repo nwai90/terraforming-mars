@@ -16,4 +16,9 @@ export class Kuiper extends Colony {
     public colonyBonusType = ColonyBenefit.GAIN_RESOURCES;
     public colonyBonusResource = Resources.MEGACREDITS;
     public colonyBonusQuantity = 3;
+    public details = [
+      'Add 2 asteroids to ANY card',
+      'Add n asteroids to ANY card',
+      'Gain 3 M€',
+    ];
 }

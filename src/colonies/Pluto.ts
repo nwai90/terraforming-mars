@@ -10,4 +10,9 @@ export class Pluto extends Colony {
     public tradeType = ColonyBenefit.DRAW_CARDS;
     public tradeQuantity = [0, 1, 2, 2, 3, 3, 4];
     public colonyBonusType = ColonyBenefit.DRAW_CARDS_AND_DISCARD_ONE;
+    public details = [
+      'Draw 2 cards',
+      'Draw n cards',
+      'Draw 1 card, then discard 1 card',
+    ];
 }

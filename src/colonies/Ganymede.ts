@@ -13,4 +13,9 @@ export class Ganymede extends Colony {
     public tradeResource = Resources.PLANTS;
     public colonyBonusType = ColonyBenefit.GAIN_RESOURCES;
     public colonyBonusResource = Resources.PLANTS;
+    public details = [
+      'Gain 1 plant production',
+      'Gain n plants',
+      'Gain 1 plant',
+    ];
 }

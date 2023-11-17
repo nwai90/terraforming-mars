@@ -14,4 +14,9 @@ export class Io extends Colony {
     public colonyBonusType = ColonyBenefit.GAIN_RESOURCES;
     public colonyBonusQuantity = 2;
     public colonyBonusResource = Resources.HEAT;
+    public details = [
+      'Gain 1 heat production',
+      'Gain n heat',
+      'Gain 2 heat',
+    ];
 }

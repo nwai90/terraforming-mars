@@ -13,4 +13,9 @@ export class Enceladus extends Colony {
     public tradeType = ColonyBenefit.ADD_RESOURCES_TO_CARD;
     public tradeQuantity = [0, 1, 2, 3, 4, 4, 5];
     public colonyBonusType = ColonyBenefit.ADD_RESOURCES_TO_CARD;
+    public details = [
+      'Add 3 microbes to ANY card',
+      'Add n microbes to ANY card',
+      'Add 1 microbe to ANY card',
+    ];
 }

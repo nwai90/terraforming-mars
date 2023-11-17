@@ -44,6 +44,7 @@ type TradeOptions = {
 export abstract class Colony implements SerializedColony {
     public abstract name: ColonyName;
     public abstract description: string;
+    public details: string[] = [];
 
     public isActive: boolean = true;
     public visitor: undefined | PlayerId = undefined;

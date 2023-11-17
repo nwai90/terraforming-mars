@@ -16,4 +16,9 @@ export class Titania extends Colony {
     public shouldIncreaseTrack = ShouldIncreaseTrack.NO;
     // For Productive Outpost, try to collect payment before other bonuses have been collected
     public priority = 0;
+    public details = [
+      'Gain 5 / 3 / 2 VP',
+      'Gain n VP',
+      'Lose 3 M€, or as much as possible',
+    ];
 }

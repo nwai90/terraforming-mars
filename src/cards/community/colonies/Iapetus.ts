@@ -9,4 +9,9 @@ export class Iapetus extends Colony {
     public tradeType = ColonyBenefit.GAIN_TR;
     public tradeQuantity = [0, 0, 0, 1, 1, 1, 2];
     public colonyBonusType = ColonyBenefit.GAIN_CARD_DISCOUNT;
+    public details = [
+      'Gain 1 TR',
+      'Gain n TR',
+      'Playing cards costs 1 M€\nless this generation',
+    ];
 }

@@ -10,4 +10,9 @@ export class Terra extends Colony {
     public tradeQuantity = [0, 0, 0, 1, 1, 2, 2];
     public colonyBonusType = ColonyBenefit.GAIN_MC_FOR_EARTH_TAGS;
     public shouldIncreaseTrack = ShouldIncreaseTrack.ASK;
+    public details = [
+      'Draw an Earth card',
+      'WGT raises indicated global parameter',
+      'Gain 1 M€ per 3 Earth tags in play',
+    ];
 }

@@ -7,4 +7,5 @@ export interface ColonyModel {
     name: string;
     trackPosition: number;
     visitor: Color | undefined;
+    details: string[];
 }

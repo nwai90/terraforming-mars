@@ -14,4 +14,9 @@ export class Ceres extends Colony {
     public colonyBonusType = ColonyBenefit.GAIN_RESOURCES;
     public colonyBonusQuantity = 2;
     public colonyBonusResource = Resources.STEEL;
+    public details = [
+      'Gain 1 steel production',
+      'Gain n steel',
+      'Gain 2 steel',
+    ];
 }

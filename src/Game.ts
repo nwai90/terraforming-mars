@@ -582,6 +582,7 @@ export class Game implements ISerializable<SerializedGame> {
         ),
         isActive: colony.isActive,
         name: colony.name,
+        details: colony.details,
         trackPosition: colony.trackPosition,
         visitor:
               colony.visitor === undefined ?

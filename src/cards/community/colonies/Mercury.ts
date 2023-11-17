@@ -17,4 +17,9 @@ export class Mercury extends Colony {
     public colonyBonusResource = Resources.MEGACREDITS;
     public colonyBonusQuantity = 2;
     public shouldIncreaseTrack = ShouldIncreaseTrack.ASK;
+    public details = [
+      'Gain the trade bonus of any colony tile',
+      'Gain the indicated production',
+      'Gain 2 M€',
+    ];
 }

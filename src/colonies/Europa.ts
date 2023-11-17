@@ -16,4 +16,9 @@ export class Europa extends Colony {
     public colonyBonusType = ColonyBenefit.GAIN_RESOURCES;
     public colonyBonusResource = Resources.MEGACREDITS;
     public shouldIncreaseTrack = ShouldIncreaseTrack.ASK;
+    public details = [
+      'Place an ocean tile',
+      'Gain the indicated production',
+      'Gain 1 M€',
+    ];
 }

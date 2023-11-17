@@ -183,10 +183,14 @@ export const Colony = Vue.component('colony', {
     getClassForColonyPlacementBonus: (colony: ColonyModel, index: number): string => {
       if (colony.colonies.length > index) return 'filter: grayscale(1) opacity(0.5)';
       return '';
-    }
+    },
+    tooltip: (colony: ColonyModel): string => {
+      const details = colony.details;
+      return `Build bonus: ${details[0]}\nTrade bonus: ${details[1]}\nColony bonus: ${details[2]}`;
+    },
   },
   template: `
-    <div class="filterDiv colony-card colonies" :class="colony.name + '-background'" v-i18n>
+    <div class="filterDiv colony-card colonies tooltip tooltip-top" :class="colony.name + '-background'" :data-tooltip="tooltip(colony)" v-i18n>
     <div v-if="colony.visitor !== undefined" class="colony-spaceship">
       <div :class="'colonies-fleet colonies-fleet-'+ colony.visitor"></div>
     </div>

@@ -14,4 +14,9 @@ export class Callisto extends Colony {
     public colonyBonusType = ColonyBenefit.GAIN_RESOURCES;
     public colonyBonusQuantity = 3;
     public colonyBonusResource = Resources.ENERGY;
+    public details = [
+      'Gain 1 energy production',
+      'Gain n energy',
+      'Gain 3 energy',
+    ];
 }
