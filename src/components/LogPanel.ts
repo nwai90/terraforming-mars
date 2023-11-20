@@ -420,6 +420,11 @@ export const LogPanel = Vue.component('log-panel', {
   },
   mounted: function() {
     this.getLogsForGeneration(this.generation);
+
+    for (const player of this.players) {
+      if (player.actionsTakenThisGame > 0) return;
+    }
+
     this.copyPlayerLink();
   },
   template: `
