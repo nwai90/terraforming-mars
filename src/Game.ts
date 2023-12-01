@@ -1875,22 +1875,25 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   public addOceanTile(
-    player: Player, spaceId: SpaceId,
-    spaceType: SpaceType = SpaceType.OCEAN): void {
+    player: Player,
+    spaceId: SpaceId,
+    spaceType: SpaceType = SpaceType.OCEAN,
+    playerToGainPlacementRewards: Player = player,
+  ): void {
     if (this.noOceansAvailable()) return;
 
-    this.addTile(player, spaceType, this.board.getSpace(spaceId), {
+    this.addTile(playerToGainPlacementRewards, spaceType, this.board.getSpace(spaceId), {
       tileType: TileType.OCEAN,
     });
     if (this.phase !== Phase.SOLAR) {
-      TurmoilHandler.onGlobalParameterIncrease(player, GlobalParameter.OCEANS);
-      player.increaseTerraformRatingSteps(1);
+      TurmoilHandler.onGlobalParameterIncrease(playerToGainPlacementRewards, GlobalParameter.OCEANS);
+      playerToGainPlacementRewards.increaseTerraformRatingSteps(1);
     }
     AresHandler.ifAres(this, (aresData) => {
-      AresHandler.onOceanPlaced(aresData, player);
+      AresHandler.onOceanPlaced(aresData, playerToGainPlacementRewards);
     });
 
-    SilverCubeHandler.onOceanPlaced(player, this);
+    SilverCubeHandler.onOceanPlaced(playerToGainPlacementRewards, this);
   }
 
   public removeTile(spaceId: string): void {

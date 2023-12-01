@@ -500,6 +500,7 @@ export enum CardName {
     SUPERCAPACITORS = 'Supercapacitors',
     DIRECTED_HEAT_USAGE = 'Directed Heat Usage',
     FLOYD_CONTINUUM = 'Floyd Continuum',
+    ICY_IMPACTORS = 'Icy Impactors',
 
     // Prelude 2
     ANTI_DESERTIFICATION_TECHNIQUES = 'Anti-Desertification Techniques',

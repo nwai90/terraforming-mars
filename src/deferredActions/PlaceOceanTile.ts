@@ -9,6 +9,7 @@ export class PlaceOceanTile implements DeferredAction {
   constructor(
         public player: Player,
         public title: string = 'Select space for ocean tile',
+        public playerToGainPlacementRewards: Player = player,
   ) {}
 
   public execute() {
@@ -20,7 +21,7 @@ export class PlaceOceanTile implements DeferredAction {
       this.title,
       this.player.game.board.getAvailableSpacesForOcean(this.player),
       (space: ISpace) => {
-        this.player.game.addOceanTile(this.player, space.id, SpaceType.OCEAN);
+        this.player.game.addOceanTile(this.player, space.id, SpaceType.OCEAN, this.playerToGainPlacementRewards);
         return undefined;
       },
     );
