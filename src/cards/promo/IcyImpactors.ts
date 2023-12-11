@@ -17,6 +17,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {HowToAffordRedsPolicy, ActionDetails, RedsPolicy} from '../../turmoil/RedsPolicy';
 import {Units} from '../../Units';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
+import {Game} from '../../Game';
 
 export class IcyImpactors extends Card implements IActionCard, IProjectCard, IResourceCard {
   public howToAffordReds: HowToAffordRedsPolicy | undefined;
@@ -132,9 +133,23 @@ export class IcyImpactors extends Card implements IActionCard, IProjectCard, IRe
     this.resourceCount--;
     LogHelper.logRemoveResource(player, this, 1, 'place an ocean');
 
-    const firstPlayer = player.game.getPlayers()[0];
+    const firstPlayer = this.getFirstEligiblePlayer(player.game);
     player.game.defer(new PlaceOceanTile(firstPlayer, 'Select space for ocean tile', player));
     return undefined;
+  }
+
+  private getFirstEligiblePlayer(game: Game): Player {
+    let firstPlayer = undefined;
+
+    for (const player of game.getPlayers()) {
+      if (player.hasConceded === false) {
+        firstPlayer = player;
+      }
+
+      if (firstPlayer !== undefined) break;
+    }
+
+    return firstPlayer!;
   }
 
   public getActionDetails() {
