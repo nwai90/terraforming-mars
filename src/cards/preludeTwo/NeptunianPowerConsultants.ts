@@ -57,6 +57,8 @@ export class NeptunianPowerConsultants extends Card implements IProjectCard {
           new DeferredAction(cardOwner, () => {
             return new OrOptions(
               new SelectOption('Pay 5 M€ to increase energy production 1 step and gain 1 hydroelectric resource', 'Confirm', () => {
+                if (!cardOwner.canAfford(5, {steel: true, plants: false})) return undefined;
+
                 cardOwner.game.defer(new SelectHowToPayDeferred(cardOwner, 5, {canUseSteel: true, title: 'Select how to pay for action'}));
                 cardOwner.addProduction(Resources.ENERGY, 1);
                 cardOwner.addResourceTo(this, {qty: 1, log: true});
