@@ -39,7 +39,7 @@ export const TagCount = Vue.component('tag-count', {
     },
     getCount: function(): number | string {
       // Hide player cardsInHand count during research phase
-      if (this.count === -1) return '?';
+      if (this.count === -1 && this.tag !== 'escape') return '?';
       return this.count;
     },
   },
