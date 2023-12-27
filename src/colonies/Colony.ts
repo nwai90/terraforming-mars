@@ -174,8 +174,11 @@ export abstract class Colony implements SerializedColony {
     }
 
     private handleTrade(player: Player, options: TradeOptions) {
-      const resource = Array.isArray(this.tradeResource) ? this.tradeResource[this.trackPosition] : this.tradeResource;
+      if (player.cardIsInEffect(CardName.VENUS_TRADE_HUB)) {
+        player.addResource(Resources.MEGACREDITS, 3, {log: true});
+      }
 
+      const resource = Array.isArray(this.tradeResource) ? this.tradeResource[this.trackPosition] : this.tradeResource;
       this.giveBonus(player, this.tradeType, this.tradeQuantity[this.trackPosition], resource);
 
       if (options.giveColonyBonuses !== false) {
