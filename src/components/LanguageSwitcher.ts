@@ -18,7 +18,7 @@ export const LanguageSwitcher = Vue.component('language-switcher', {
         <div class="language-switcher">
             <div
                 v-for="lang in languages"
-                :class="'language-icon language-icon--'+lang.id language-icon-for-switcher"
+                :class="'language-icon language-icon--'+lang.id"
                 :title="lang.title"
                 v-on:click="switchLanguageTo(lang.id)">&nbsp;</div>
         </div>

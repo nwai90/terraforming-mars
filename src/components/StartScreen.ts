@@ -39,23 +39,26 @@ export const StartScreen = Vue.component('start-screen', {
     <a class="start-screen-link start-screen-link--about" href="https://www.notion.so/Community-Add-ons-98a78a03dc6b4006926bf14e046309c8" target="_blank" v-i18n>Documentation</a>
     <a class="start-screen-link start-screen-link--merch" href="https://terraforming-guild.creator-spring.com/" target="_blank" v-i18n>Fan merch</a>
     <a class="start-screen-link start-screen-link--chat" href="https://discord.gg/SGeHJ5pSuX" target="_blank" v-i18n>Join us on Discord</a>
-    <div class="start-screen-header start-screen-link--languages">
+    <div class="start-screen-footer start-screen-link--languages">
       <language-switcher />
       <div class="start-screen-version-cont">
         <div class="nowrap start-screen-date"><span v-i18n>deployed</span>: {{getAppDate()}}</div>
         <div class="nowrap start-screen-version"><span v-i18n>version</span>: {{getAppVersion()}}</div>
       </div>
-    </div>
-    <div class="source-code">
-      <a href="https://github.com/nwai90/terraforming-mars" target="_blank" class="source-code-text">
-        <img src="/assets/misc/github.png" class="source-code-img">
-        source code
-      </a>
-    </div>
-    <div class="source-code">
-      <a href="https://www.buymeacoffee.com/memories90" target="_blank">
-        <img src="/assets/misc/bmac.png" class="bmac">
-      </a>
+
+      <div class="source-code">
+        <div>
+            <a href="https://github.com/nwai90/terraforming-mars" target="_blank" class="source-code-text">
+                <img src="/assets/misc/github.png" class="source-code-img">
+                source code
+            </a>
+        </div>
+        <div>
+            <a href="https://www.buymeacoffee.com/memories90" target="_blank">
+                <img src="/assets/misc/bmac.png" class="bmac">
+            </a>
+        </div>
+        </div>
     </div>
   </div>
 </div>`,
