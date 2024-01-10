@@ -47,27 +47,31 @@ export class NeptunianPowerConsultants extends Card implements IProjectCard {
   public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
     if (cardOwner.hasConceded) return;
 
-    cardOwner.game.defer(new DeferredAction(cardOwner, () => {
-      // We need to explicitly specify plants: false to avoid including Martian Lumber Corp plants
-      // in the computation, as player.canAfford knows nothing about the source card
-      if (!cardOwner.canAfford(5, {steel: true, plants: false})) return;
+    // We need to explicitly specify plants: false to avoid including Martian Lumber Corp plants
+    // in the computation, as player.canAfford knows nothing about the source card
+    if (!cardOwner.canAfford(5, {steel: true, plants: false})) return;
 
+    cardOwner.game.defer(new DeferredAction(cardOwner, () => {
       if (space.tile?.tileType === TileType.OCEAN) {
         cardOwner.game.defer(
           new DeferredAction(cardOwner, () => {
-            return new OrOptions(
-              new SelectOption('Pay 5 M€ to increase energy production 1 step and gain 1 hydroelectric resource', 'Confirm', () => {
-                if (!cardOwner.canAfford(5, {steel: true, plants: false})) return undefined;
+            const orOptions = new OrOptions();
 
-                cardOwner.game.defer(new SelectHowToPayDeferred(cardOwner, 5, {canUseSteel: true, title: 'Select how to pay for action'}));
+            if (cardOwner.canAfford(5, {steel: true, plants: false})) {
+              orOptions.options.push(new SelectOption('Pay 5 M€ to increase energy production 1 step and gain 1 hydroelectric resource', 'Confirm', () => {
+                cardOwner.game.defer(new SelectHowToPayDeferred(cardOwner, 5, {canUseSteel: true, title: 'Select how to pay for action'}), Priority.COST);
                 cardOwner.addProduction(Resources.ENERGY, 1);
                 cardOwner.addResourceTo(this, {qty: 1, log: true});
                 return undefined;
-              }),
-              new SelectOption('Do nothing', 'Confirm', () => {
-                return undefined;
-              }),
-            );
+              }));
+            }
+
+            orOptions.options.push(new SelectOption('Do nothing', 'Confirm', () => {
+              return undefined;
+            }));
+
+            if (orOptions.options.length === 1) return orOptions.options[0].cb();
+            return orOptions;
           }),
           cardOwner.id !== activePlayer.id ? Priority.OPPONENT_TRIGGER : undefined,
         );
