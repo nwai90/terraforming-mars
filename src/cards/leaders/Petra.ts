@@ -23,11 +23,11 @@ export class Petra extends Card implements LeaderCard {
         renderData: CardRenderer.builder((b) => {
           b.opgArrow().text('ACTIVATE THE BELOW ABILITY');
           b.br;
-          b.text('REPLACE ALL NEUTRAL', Size.TINY).delegates(1).colon().megacredits(3).asterix();
+          b.text('REPLACE', Size.SMALL).delegates(1).colon().megacredits(3).asterix();
           b.br.br;
           b.plus().delegates(3).asterix;
         }),
-        description: 'Once per game, replace all Neutral delegates with your delegates. Gain 3 M€ for each delegate replaced this way. Place 3 Neutral delegates.',
+        description: 'Once per game, replace as many Neutral delegates as possible with your delegates. Gain 3 M€ for each delegate replaced this way. Place 3 Neutral delegates.',
       },
     });
   }
@@ -42,47 +42,40 @@ export class Petra extends Card implements LeaderCard {
     const turmoil = player.game.turmoil;
     if (turmoil === undefined) return false;
 
-    let delegatesToReplace = turmoil.parties.map((party) => party.getDelegates("NEUTRAL")).reduce((a, b) => a + b, 0);
-    if (turmoil.chairman === "NEUTRAL") delegatesToReplace += 1;
-
-    let playerTotalDelegateCount = turmoil.getDelegatesInReserve(player.id);
-    if (turmoil.lobby.has(player.id)) playerTotalDelegateCount += 1;
-
-    return playerTotalDelegateCount >= delegatesToReplace && this.isDisabled === false;
+    return this.isDisabled === false;
   }
 
   public action(player: Player): PlayerInput | undefined {
     const game = player.game;
     const turmoil = game.turmoil as Turmoil;
-    let count = 0;
 
-    // Replace all neutral delegates in parties
-    turmoil.parties.forEach((party) => {
-      while (party.delegates.includes("NEUTRAL")) {
-        const source = turmoil.hasAvailableDelegates(player.id) ? 'reserve' : 'lobby';
-        turmoil.replaceDelegateFromParty("NEUTRAL", player.id, source, party.name, game);
-        player.totalDelegatesPlaced++;
-        count++;
-      }
-      turmoil.checkDominantParty(party);
-    });
+    let playerTotalDelegateCount = turmoil.getDelegatesInReserve(player.id);
+    if (turmoil.lobby.has(player.id)) playerTotalDelegateCount += 1;
 
-    // Replace chairman if it is neutral
-    if (turmoil.chairman === "NEUTRAL") {
-      turmoil.delegateReserve.push("NEUTRAL");
-      turmoil.chairman = player.id;
-      player.totalDelegatesPlaced++;
-      count++;
+    const replaceNeutralDelegateTitle = 'Select where to replace a Neutral delegate';
+    const neutralDelegateCount = turmoil.parties.map((p) => p.delegates.filter((d) => d === "NEUTRAL").length).reduce((a, c) => a + c, 0);
+    const replacedCount = Math.min(neutralDelegateCount, playerTotalDelegateCount);
 
-      const index = turmoil.delegateReserve.indexOf(player.id);
-      if (index > -1) {
-        turmoil.delegateReserve.splice(index, 1);
-      } else {
-        turmoil.lobby.delete(player.id);
-      }
+    // Replace as many neutral delegates as possible
+    for (let i = 0; i < replacedCount; i++) {
+      game.defer(new DeferredAction(player, () => {
+        const partiesWithNeutralDelegates = turmoil.parties.filter((party) => party.delegates.includes("NEUTRAL")).map((party) => party.name);
+
+        return new SelectPartyToSendDelegate(replaceNeutralDelegateTitle, 'Replace Neutral delegate', partiesWithNeutralDelegates, (partyName: PartyName) => {
+          const source = turmoil.hasAvailableDelegates(player.id) ? 'reserve' : 'lobby';
+          turmoil.replaceDelegateFromParty("NEUTRAL", player.id, source, partyName, game);
+          player.totalDelegatesPlaced++;
+
+          const party = turmoil.getPartyByName(partyName);
+          turmoil.checkDominantParty(party);
+
+          game.log('${0} replaced Neutral delegate in ${1}', (b) => b.player(player).party(turmoil.getPartyByName(partyName)));
+          return undefined;
+        });
+      }));
     }
 
-    player.addResource(Resources.MEGACREDITS, count * 3, {log: true});
+    player.addResource(Resources.MEGACREDITS, replacedCount * 3, {log: true});
 
     // Place 3 Neutral delegates
     const availableParties = turmoil.parties.map((party) => party.name);

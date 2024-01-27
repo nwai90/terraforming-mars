@@ -1318,7 +1318,7 @@ export class Game implements ISerializable<SerializedGame> {
     // With CEOs. Special handling as the CEO is auto played during the action phase, replacing player.lastCardPlayed
     if (player.lastCardPlayed?.cardType === CardType.LEADER) {
       const indexOfLeaderCard = player.playedCards.indexOf(player.lastCardPlayed);
-      const indexOfPreviousPlayedCard = indexOfLeaderCard - 1;
+      const indexOfPreviousPlayedCard = Math.max(indexOfLeaderCard - 1, 0);
       const targetCard = player.playedCards[indexOfPreviousPlayedCard];
       if (targetCard.name === CardName.HEAD_START) return true;
     }
