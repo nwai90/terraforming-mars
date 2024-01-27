@@ -73,6 +73,7 @@ import {AutomaHandler} from './automa/AutomaHandler';
 import {TharsisBot} from './cards/automa/TharsisBot';
 import {ArchaeologyHandler} from './community/ArchaeologyHandler';
 import {Multiset} from './utils/Multiset';
+import {PublicGrants} from './cards/leaders/PublicGrants';
 
 export type GameId = string;
 export type SpectatorId = string;
@@ -469,7 +470,9 @@ export class Game implements ISerializable<SerializedGame> {
     for (let i = 0; i < 3; i++) {
       player.dealtLeaderCards.push(dealer.dealLeaderCard());
     }
+
     LogHelper.logDrawnCards(player, player.dealtLeaderCards, true, LogType.DREW);
+    player.dealtLeaderCards.push(new PublicGrants());
   }
 
   public save(): void {

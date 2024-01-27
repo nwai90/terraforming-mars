@@ -29,6 +29,7 @@ import {Naomi} from './Naomi';
 import {Neil} from './Neil';
 import {Oscar} from './Oscar';
 import {Petra} from './Petra';
+import {PublicGrants} from './PublicGrants';
 import {Quill} from './Quill';
 import {Rogers} from './Rogers';
 import {Ryu} from './Ryu';
@@ -73,6 +74,7 @@ export const LEADER_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.NEIL, Factory: Neil, compatibility: GameModule.Moon},
     {cardName: CardName.OSCAR, Factory: Oscar, compatibility: GameModule.Turmoil},
     {cardName: CardName.PETRA, Factory: Petra, compatibility: GameModule.Turmoil},
+    {cardName: CardName.PUBLIC_GRANTS, Factory: PublicGrants},
     {cardName: CardName.QUILL, Factory: Quill, compatibility: GameModule.Venus},
     {cardName: CardName.ROGERS, Factory: Rogers, compatibility: GameModule.Venus},
     {cardName: CardName.RYU, Factory: Ryu},
@@ -85,5 +87,8 @@ export const LEADER_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.XU, Factory: Xu, compatibility: GameModule.Venus},
     {cardName: CardName.YVONNE, Factory: Yvonne, compatibility: GameModule.Colonies},
     {cardName: CardName.ZAN, Factory: Zan, compatibility: GameModule.Turmoil},
+  ],
+  cardsToRemove: [
+    CardName.PUBLIC_GRANTS,
   ],
 });
