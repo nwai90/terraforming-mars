@@ -184,8 +184,22 @@ export const SelectInitialCards = Vue.component('select-initial-cards', {
             result += 4;
             break;
           }
+          break;
+        case CardName.SAGITTA_FRONTIER_SERVICES:
+          const cardFinder = new CardFinder();
+          const preludeCard = cardFinder.getProjectCardByName(prelude)!;
+          const tagCount = preludeCard.tags.length;
+
+          if (tagCount === 0) {
+            result += 4;
+          } else if (tagCount === 1) {
+            result += 1;
+          }
+
+          break;
         }
       }
+
       return result;
     },
     getOption: function(idx: number) {
@@ -206,6 +220,7 @@ export const SelectInitialCards = Vue.component('select-initial-cards', {
       if (this.selectedCorporation === undefined) {
         return NaN;
       }
+
       let starting = this.selectedCorporation.startingMegaCredits;
       let cardCost = this.selectedCorporation.cardCost === undefined ? constants.CARD_COST : this.selectedCorporation.cardCost;
 
