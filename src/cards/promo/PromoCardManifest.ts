@@ -61,6 +61,7 @@ import {Supercapacitors} from './Supercapacitors';
 import {DirectedHeatUsage} from './DirectedHeatUsage';
 import {FloydContinuum} from './FloydContinuum';
 import {IcyImpactors} from './IcyImpactors';
+import {SoilEnrichment} from './SoilEnrichment';
 
 export const PROMO_CARD_MANIFEST = new CardManifest({
   module: GameModule.Promo,
@@ -112,6 +113,7 @@ export const PROMO_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.DIRECTED_HEAT_USAGE, Factory: DirectedHeatUsage},
     {cardName: CardName.FLOYD_CONTINUUM, Factory: FloydContinuum},
     {cardName: CardName.ICY_IMPACTORS, Factory: IcyImpactors},
+    {cardName: CardName.SOIL_ENRICHMENT, Factory: SoilEnrichment},
   ],
   preludeCards: [
     {cardName: CardName.NEW_PARTNER, Factory: NewPartner},

@@ -501,6 +501,7 @@ export enum CardName {
     DIRECTED_HEAT_USAGE = 'Directed Heat Usage',
     FLOYD_CONTINUUM = 'Floyd Continuum',
     ICY_IMPACTORS = 'Icy Impactors',
+    SOIL_ENRICHMENT = 'Soil Enrichment',
 
     // Prelude 2
     ANTI_DESERTIFICATION_TECHNIQUES = 'Anti-Desertification Techniques',
