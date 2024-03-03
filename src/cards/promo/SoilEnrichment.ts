@@ -34,14 +34,14 @@ export class SoilEnrichment extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    const microbeCards = player.getResourceCards(ResourceType.MICROBE);
+    const microbeCardsWithResources = player.getResourceCards(ResourceType.MICROBE).filter((c) => c.resourceCount! > 0);
 
-    if (microbeCards.length === 1) {
-      player.removeResourceFrom(microbeCards[0], 1, player.game, player, true);
+    if (microbeCardsWithResources.length === 1) {
+      player.removeResourceFrom(microbeCardsWithResources[0], 1, player.game, player, true);
       player.addResource(Resources.PLANTS, 5, {log: true});
       return undefined;
-    } else if (microbeCards.length > 1) {
-      return new SelectCard('Select card to remove 1 microbe and gain 5 plants', 'Select', microbeCards, (foundCards: Array<ICard>) => {
+    } else if (microbeCardsWithResources.length > 1) {
+      return new SelectCard('Select card to remove 1 microbe and gain 5 plants', 'Select', microbeCardsWithResources, (foundCards: Array<ICard>) => {
         player.removeResourceFrom(foundCards[0], 1, player.game, player, true);
         player.addResource(Resources.PLANTS, 5, {log: true});
         return undefined;

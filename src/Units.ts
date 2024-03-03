@@ -16,13 +16,6 @@ export interface Units {
 }
 
 export namespace Units {
-  // // Options used when logging changes in units.
-  // export interface Options {
-  //   dueTo?: Player;
-  //   globalEvent?: boolean;
-  //   log?: boolean;
-  // };
-
   export const EMPTY: Readonly<Units> = {
     get megacredits() {
       return 0;

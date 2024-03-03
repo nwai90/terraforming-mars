@@ -1137,6 +1137,18 @@ export class Player implements ISerializable<SerializedPlayer> {
       if (reserveUnits.titanium + howToPay.titanium > this.titanium) {
         throw new Error(`${reserveUnits.titanium} units of titanium must be reserved for ${cardName}`);
       }
+
+      if (cardName === CardName.SOIL_ENRICHMENT) {
+        const microbeCardsWithResources = this.getResourceCards(ResourceType.MICROBE).filter((c) => c.resourceCount! > 0);
+        if (microbeCardsWithResources.length === 1 && microbeCardsWithResources[0].name === CardName.PSYCHROPHILES) {
+          const availableMicrobes = this.getMicrobesCanSpend();
+
+          if (howToPay.microbes + 1 > availableMicrobes) {
+            throw new Error(`1 microbe must be reserved for ${cardName}`);
+          }
+        }
+      }
+
       this.runInputCb(pi.cb(foundCard, howToPay));
     } else if (pi instanceof SelectCard) {
       this.checkInputLength(input, 1);
