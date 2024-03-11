@@ -34,14 +34,14 @@ export class MarsNomads extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player) {
-    const spaces = player.game.board.getAvailableSpacesOnLand(player);
+    const spaces = player.game.board.getNonReservedLandSpaces();
     return spaces.length > 0;
   }
 
   public play(player: Player) {
     return new SelectSpace(
       'Select space for Nomads',
-      player.game.board.getAvailableSpacesOnLand(player),
+      player.game.board.getNonReservedLandSpaces(),
       (space: ISpace) => {
         space.hasNomads = true;
         return undefined;
