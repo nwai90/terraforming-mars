@@ -14,6 +14,7 @@ import {AmazonisBoard} from './boards/AmazonisBoard';
 import {ArabiaTerraBoard} from './boards/ArabiaTerraBoard';
 import {VastitasBorealisBoard} from './boards/VastitasBorealisBoard';
 import {TerraCimmeriaBoard} from './boards/TerraCimmeriaBoard';
+import {LabyrinthusBoard} from './boards/LabyrinthusBoard';
 import {SerializedBoard} from './boards/SerializedBoard';
 import {SerializedGame} from './SerializedGame';
 
@@ -28,7 +29,9 @@ const boards: Map<BoardName, BoardFactory> = new Map(
     [BoardName.AMAZONIS, AmazonisBoard],
     [BoardName.ARABIA_TERRA, ArabiaTerraBoard],
     [BoardName.TERRA_CIMMERIA, TerraCimmeriaBoard],
-    [BoardName.VASTITAS_BOREALIS, VastitasBorealisBoard]],
+    [BoardName.VASTITAS_BOREALIS, VastitasBorealisBoard],
+    [BoardName.LABYRINTHUS, LabyrinthusBoard],
+  ],
 );
 
 export class GameSetup {

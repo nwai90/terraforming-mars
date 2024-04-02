@@ -11,7 +11,6 @@ import {Random} from '../Random';
 import {DeferredAction} from '../deferredActions/DeferredAction';
 import {SelectHowToPayDeferred} from '../deferredActions/SelectHowToPayDeferred';
 import {Game} from '../Game';
-import {BoardName} from './BoardName';
 import {Color} from '../Color';
 
 export class VastitasBorealisBoard extends Board {
@@ -51,12 +50,13 @@ export class VastitasBorealisBoard extends Board {
     const spaces = builder.build(erodedSpaces);
     return new VastitasBorealisBoard(spaces);
   }
-        
+
   public static deserialize(board: SerializedBoard, players: Array<Player>): VastitasBorealisBoard {
     return new VastitasBorealisBoard(Board.deserializeSpaces(board.spaces, players));
   }
 
   private filterVastitasBorealis(player: Player, spaces: Array<ISpace>) {
+    if (player.name === 'neutral') return spaces;
     return player.canAfford(VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST) ? spaces : spaces.filter((space) => space.id !== SpaceName.VASTITAS_BOREALIS_NORTH_POLE);
   }
 
@@ -90,7 +90,7 @@ export class VastitasBorealisBoard extends Board {
   }
 
   public static handleBonusTemperatureFromTilePlacement(game: Game, player: Player, space: ISpace) {
-    if (space.id === SpaceName.VASTITAS_BOREALIS_NORTH_POLE && game.getTemperature() < MAX_TEMPERATURE && game.gameOptions.boardName === BoardName.VASTITAS_BOREALIS) {
+    if (space.bonus.includes(SpaceBonus.TEMPERATURE) && game.getTemperature() < MAX_TEMPERATURE) {
       if (player.color !== Color.NEUTRAL) {
         game.defer(new DeferredAction(player, () => game.increaseTemperature(player, 1)));
         game.defer(new SelectHowToPayDeferred(player, VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST, {title: 'Select how to pay for placement bonus temperature'}));

@@ -2305,7 +2305,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
     if (card.getActionDetails !== undefined) {
       const actionDetails = card.getActionDetails(this, card);
-      if (RedsPolicy.canAffordRedsPolicy(this, this.game, actionDetails)) {
+      if (RedsPolicy.canAffordRedsPolicy(this, this.game, actionDetails).canAfford) {
         redsCost = 0;
       }
     }

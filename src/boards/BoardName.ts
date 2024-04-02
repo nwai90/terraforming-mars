@@ -6,6 +6,7 @@ export enum BoardName {
     ARABIA_TERRA = 'arabia terra',
     VASTITAS_BOREALIS = 'v. borealis',
     TERRA_CIMMERIA = 't. cimmeria',
+    LABYRINTHUS = 'labyrinthus',
 }
 
 export enum BoardRandomOption {

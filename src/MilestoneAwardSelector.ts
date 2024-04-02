@@ -508,7 +508,12 @@ export namespace MilestoneAwardSelector {
     const includeMoon = gameOptions.moonExpansion;
     if (includeMoon) requiredQty++;
 
-    switch (gameOptions.randomMA) {
+    const includeAres = gameOptions.aresExtension;
+    if (includeAres) requiredQty++;
+
+    const randomMAOption = gameOptions.boardName === BoardName.LABYRINTHUS ? RandomMAOptionType.LIMITED : gameOptions.randomMA;
+
+    switch (randomMAOption) {
     case RandomMAOptionType.NONE:
       switch (gameOptions.boardName) {
       case BoardName.ORIGINAL:
@@ -554,7 +559,7 @@ export namespace MilestoneAwardSelector {
         drawnMilestonesAndAwards.awards.push(...ELYSIUM_AWARDS);
         break;
       }
-      if (includeVenus) {
+      if (includeVenus && gameOptions.boardName !== BoardName.LABYRINTHUS) {
         drawnMilestonesAndAwards.milestones.push(...VENUS_MILESTONES);
         drawnMilestonesAndAwards.awards.push(...VENUS_AWARDS);
       }
@@ -562,7 +567,7 @@ export namespace MilestoneAwardSelector {
         drawnMilestonesAndAwards.milestones.push(...ARES_MILESTONES);
         drawnMilestonesAndAwards.awards.push(...ARES_AWARDS);
       };
-      if (gameOptions.moonExpansion) {
+      if (gameOptions.moonExpansion && gameOptions.boardName !== BoardName.LABYRINTHUS) {
         // One MA will reward moon tags, the other will reward moon tiles.
         if (Math.random() > 0.5) {
           drawnMilestonesAndAwards.milestones.push(new OneGiantStep());

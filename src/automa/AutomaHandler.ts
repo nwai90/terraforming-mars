@@ -80,7 +80,7 @@ export class AutomaHandler {
     public static placeInitialOcean(player: Player, game: Game): void {
       const neutral = GameSetup.neutralPlayerFor(game.id);
 
-      if (game.gameOptions.shuffleMapOption) {
+      if (game.gameOptions.shuffleMapOption || game.gameOptions.boardName === BoardName.LABYRINTHUS) {
         const availableOceanSpaces = game.board.getAvailableSpacesForOcean(player);
         const oceanPlacementValues = availableOceanSpaces.map((s) => this.computePlacementValue(s));
         const highestOceanPlacementValue = Math.max(...oceanPlacementValues);
@@ -124,7 +124,7 @@ export class AutomaHandler {
     public static placeInitialGreenery(game: Game): void {
       const neutral = GameSetup.neutralPlayerFor(game.id);
 
-      if (game.gameOptions.shuffleMapOption) {
+      if (game.gameOptions.shuffleMapOption || game.gameOptions.boardName === BoardName.LABYRINTHUS) {
         this.placeGreeneryOnHighestLandPlacementValueSpot(game, neutral);
       } else {
         const targetSpace = this.getTargetInitialGreenerySpace(game);
@@ -159,6 +159,8 @@ export class AutomaHandler {
       case BoardName.VASTITAS_BOREALIS:
         // Temperature spot
         return game.board.getSpace('33');
+      default:
+        return undefined;
       }
     }
 

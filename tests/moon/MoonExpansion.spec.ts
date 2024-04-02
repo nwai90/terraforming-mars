@@ -19,8 +19,6 @@ import {Phase} from '../../src/Phase';
 import {Comet} from '../../src/cards/base/Comet';
 import {Reds} from '../../src/turmoil/parties/Reds';
 import {PoliticalAgendas} from '../../src/turmoil/PoliticalAgendas';
-import {REDS_RULING_POLICY_COST} from '../../src/constants';
-import {Units} from '../../src/Units';
 
 const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
@@ -265,7 +263,7 @@ describe('MoonExpansion', () => {
     expect(trBump).to.eq(2);
     expect(player.canPlay(card)).is.false;
 
-    card.reserveUnits = Units.adjustUnits(card.reserveUnits, {megacredits: trBump * REDS_RULING_POLICY_COST});
+    expect(card.reserveUnits.megacredits).to.eq(6);
     const reserveUnits = MoonExpansion.adjustedReserveCosts(player, card);
     expect(reserveUnits.megacredits).to.eq(6);
   });
