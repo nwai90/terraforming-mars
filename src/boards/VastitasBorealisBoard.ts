@@ -12,6 +12,7 @@ import {DeferredAction} from '../deferredActions/DeferredAction';
 import {SelectHowToPayDeferred} from '../deferredActions/SelectHowToPayDeferred';
 import {Game} from '../Game';
 import {Color} from '../Color';
+import {Phase} from '../Phase';
 
 export class VastitasBorealisBoard extends Board {
   public static newInstance(shuffle: boolean, rng: Random, includeVenus: boolean, includePromo: boolean, erodedSpaces: Array<string> = []): VastitasBorealisBoard {
@@ -90,6 +91,9 @@ export class VastitasBorealisBoard extends Board {
   }
 
   public static handleBonusTemperatureFromTilePlacement(game: Game, player: Player, space: ISpace) {
+    // if WGT is placing the ocean, don't trigger the placement bonus and cost
+    if (game.phase === Phase.SOLAR) return;
+
     if (space.bonus.includes(SpaceBonus.TEMPERATURE) && game.getTemperature() < MAX_TEMPERATURE) {
       if (player.color !== Color.NEUTRAL) {
         game.defer(new DeferredAction(player, () => game.increaseTemperature(player, 1)));

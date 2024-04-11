@@ -12,6 +12,7 @@ import {Game} from '../Game';
 import {PlaceOceanTile} from '../deferredActions/PlaceOceanTile';
 import {SelectHowToPayDeferred} from '../deferredActions/SelectHowToPayDeferred';
 import {Color} from '../Color';
+import {Phase} from '../Phase';
 
 export class HellasBoard extends Board {
   public static newInstance(shuffle: boolean, rng: Random, includeVenus: boolean, includePromo: boolean, erodedSpaces: Array<string> = []): HellasBoard {
@@ -85,6 +86,9 @@ export class HellasBoard extends Board {
   }
 
   public static handleBonusOceanFromTilePlacement(game: Game, player: Player, space: ISpace) {
+    // if WGT is placing the ocean, don't trigger the placement bonus and cost
+    if (game.phase === Phase.SOLAR) return;
+
     if (space.bonus.includes(SpaceBonus.OCEAN) && game.canAddOcean()) {
       if (player.color !== Color.NEUTRAL) {
         game.defer(new PlaceOceanTile(player, 'Select space for ocean from placement bonus'));
