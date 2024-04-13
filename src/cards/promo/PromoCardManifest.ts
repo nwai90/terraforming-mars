@@ -62,6 +62,7 @@ import {DirectedHeatUsage} from './DirectedHeatUsage';
 import {FloydContinuum} from './FloydContinuum';
 import {IcyImpactors} from './IcyImpactors';
 import {SoilEnrichment} from './SoilEnrichment';
+import {CityPark} from './CityPark';
 
 export const PROMO_CARD_MANIFEST = new CardManifest({
   module: GameModule.Promo,
@@ -114,6 +115,7 @@ export const PROMO_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.FLOYD_CONTINUUM, Factory: FloydContinuum},
     {cardName: CardName.ICY_IMPACTORS, Factory: IcyImpactors},
     {cardName: CardName.SOIL_ENRICHMENT, Factory: SoilEnrichment},
+    {cardName: CardName.CITY_PARK, Factory: CityPark},
   ],
   preludeCards: [
     {cardName: CardName.NEW_PARTNER, Factory: NewPartner},
