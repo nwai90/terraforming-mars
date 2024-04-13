@@ -537,6 +537,7 @@ export enum CardName {
     SAGITTA_FRONTIER_SERVICES = 'Sagitta Frontier Services',
     SOLAR_LOGISTICS = 'Solar Logistics',
     SPIRE = 'Spire',
+    SPONSORING_NATION = 'Sponsoring Nation',
     ST_JOSEPH_OF_CUPERTINO_MISSION = 'St. Joseph of Cupertino Mission',
     SUMMIT_LOGISTICS = 'Summit Logistics',
     TERRAFORMING_DEAL = 'Terraforming Deal',

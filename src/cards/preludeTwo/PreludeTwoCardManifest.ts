@@ -40,6 +40,7 @@ import {TerraformingDeal} from './TerraformingDeal';
 import {Teslaract} from './Teslaract';
 import {TychoMagnetics} from './TychoMagnetics';
 import {VenusTradeHub} from './VenusTradeHub';
+import {SponsoringNation} from './SponsoringNation';
 
 export const PRELUDE_TWO_CARD_MANIFEST = new CardManifest({
   module: GameModule.PreludeTwo,
@@ -61,6 +62,7 @@ export const PRELUDE_TWO_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.RED_APPEASEMENT, Factory: RedAppeasement, compatibility: GameModule.Turmoil},
     {cardName: CardName.RED_SHIPS, Factory: RedShips},
     {cardName: CardName.SOLAR_LOGISTICS, Factory: SolarLogistics},
+    {cardName: CardName.SPONSORING_NATION, Factory: SponsoringNation, compatibility: GameModule.Turmoil},
     {cardName: CardName.ST_JOSEPH_OF_CUPERTINO_MISSION, Factory: StJosephOfCupertinoMission},
     {cardName: CardName.SUMMIT_LOGISTICS, Factory: SummitLogistics, compatibility: GameModule.Turmoil},
     {cardName: CardName.TESLARACT, Factory: Teslaract},

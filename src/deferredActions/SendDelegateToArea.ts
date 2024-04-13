@@ -44,7 +44,7 @@ export class SendDelegateToArea implements DeferredAction {
       }
 
       const source = this.options.source || 'lobby';
-      if (numDelegateToSend > 1 && source === 'lobby') { // For card: Cultural Metropolis
+      if (numDelegateToSend > 1 && source === 'lobby') { // For cards Cultural Metropolis and SponsoringNation
         turmoil.sendDelegateToParty(this.player.id, partyName, this.player.game, 'lobby');
         for (let i = 0; i < numDelegateToSend - 1; i++) {
           turmoil.sendDelegateToParty(this.player.id, partyName, this.player.game, 'reserve');
