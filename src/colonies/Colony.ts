@@ -252,8 +252,12 @@ export abstract class Colony implements SerializedColony {
         break;
 
       case ColonyBenefit.DRAW_CARDS_AND_DISCARD_ONE:
-        player.drawCard();
-        action = new DiscardCards(player, 1, this.name + ' colony bonus. Select a card to discard');
+        player.game.defer(new DeferredAction(player, () => {
+          player.drawCard();
+          player.game.defer(new DiscardCards(player, 1, this.name + ' colony bonus. Select a card to discard'), Priority.SUPERPOWER);
+          return undefined;
+        }));
+
         break;
 
       case ColonyBenefit.DRAW_CARDS_AND_KEEP_ONE:

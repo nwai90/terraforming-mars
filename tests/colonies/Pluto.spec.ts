@@ -5,6 +5,7 @@ import {Game} from '../../src/Game';
 import {SelectCard} from '../../src/inputs/SelectCard';
 import {Player} from '../../src/Player';
 import {TestPlayers} from '../TestPlayers';
+import {TestingUtils} from '../TestingUtils';
 
 describe('Pluto', function() {
   let pluto: Pluto; let player: Player; let player2: Player; let game: Game;
@@ -52,5 +53,29 @@ describe('Pluto', function() {
 
     expect(player.cardsInHand).has.lengthOf(2); // 2 + 1 - 1
     expect(player2.cardsInHand).has.lengthOf(1);
+  });
+
+  it('Draw and discard one at a time', () => {
+    pluto.addColony(player);
+    pluto.addColony(player);
+    TestingUtils.runAllActions(game);
+    expect(player.cardsInHand).has.lengthOf(4);
+
+    pluto.trade(player2);
+    TestingUtils.runAllActions(game);
+    expect(player.cardsInHand).has.lengthOf(5);
+
+    const input = player.getWaitingFor()! as SelectCard<IProjectCard>;
+    expect(input).instanceof(SelectCard);
+    input.cb([input.cards[0]]); // Discard first card
+    expect(player.cardsInHand).has.lengthOf(4);
+
+    TestingUtils.runAllActions(game);
+    expect(player.cardsInHand).has.lengthOf(5);
+
+    const input2 = player.getWaitingFor()! as SelectCard<IProjectCard>;
+    expect(input2).instanceof(SelectCard);
+    input2.cb([input2.cards[0]]); // Discard second card
+    expect(player.cardsInHand).has.lengthOf(4);
   });
 });
