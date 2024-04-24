@@ -43,6 +43,7 @@ import {VenusTradeHub} from './VenusTradeHub';
 import {SponsoringNation} from './SponsoringNation';
 import {ColonialEnvoys} from './ColonialEnvoys';
 import {CorridorsOfPower} from './CorridorsOfPower';
+import {SpaceCorridors} from './SpaceCorridors';
 
 export const PRELUDE_TWO_CARD_MANIFEST = new CardManifest({
   module: GameModule.PreludeTwo,
@@ -91,6 +92,7 @@ export const PRELUDE_TWO_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.GIANT_SOLAR_COLLECTOR, Factory: GiantSolarCollector, compatibility: GameModule.Venus},
     {cardName: CardName.NOBEL_PRIZE, Factory: NobelPrize},
     {cardName: CardName.OLD_MINING_COLONY, Factory: OldMiningColony, compatibility: GameModule.Colonies},
+    {cardName: CardName.SPACE_CORRIDORS, Factory: SpaceCorridors},
     {cardName: CardName.STRATEGIC_BASE_PLANNING, Factory: StrategicBasePlanning, compatibility: GameModule.Colonies},
     {cardName: CardName.TERRAFORMING_DEAL, Factory: TerraformingDeal},
   ],

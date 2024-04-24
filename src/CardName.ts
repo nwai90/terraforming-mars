@@ -538,6 +538,7 @@ export enum CardName {
     RED_SHIPS = 'Red Ships',
     SAGITTA_FRONTIER_SERVICES = 'Sagitta Frontier Services',
     SOLAR_LOGISTICS = 'Solar Logistics',
+    SPACE_CORRIDORS = 'Space Corridors',
     SPIRE = 'Spire',
     SPONSORING_NATION = 'Sponsoring Nation',
     ST_JOSEPH_OF_CUPERTINO_MISSION = 'St. Joseph of Cupertino Mission',
