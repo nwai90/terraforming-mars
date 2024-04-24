@@ -515,6 +515,7 @@ export enum CardName {
     CLOUD_TOURISM = 'Cloud Tourism',
     COLONIAL_ENVOYS = 'Colonial Envoys',
     COLONY_TRADE_HUB = 'Colony Trade Hub',
+    CORRIDORS_OF_POWER = 'Corridors of Power',
     CYBERIA_SYSTEMS = 'Cyberia Systems',
     ECOTEC = 'Ecotec',
     ESTABLISHED_METHODS = 'Established Methods',

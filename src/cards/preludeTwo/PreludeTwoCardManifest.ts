@@ -42,6 +42,7 @@ import {TychoMagnetics} from './TychoMagnetics';
 import {VenusTradeHub} from './VenusTradeHub';
 import {SponsoringNation} from './SponsoringNation';
 import {ColonialEnvoys} from './ColonialEnvoys';
+import {CorridorsOfPower} from './CorridorsOfPower';
 
 export const PRELUDE_TWO_CARD_MANIFEST = new CardManifest({
   module: GameModule.PreludeTwo,
@@ -52,6 +53,7 @@ export const PRELUDE_TWO_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.CERES_TECH_MARKET, Factory: CeresTechMarket, compatibility: GameModule.Colonies},
     {cardName: CardName.CLOUD_TOURISM, Factory: CloudTourism, compatibility: GameModule.Venus},
     {cardName: CardName.COLONIAL_ENVOYS, Factory: ColonialEnvoys, compatibility: GameModule.Turmoil},
+    {cardName: CardName.CORRIDORS_OF_POWER, Factory: CorridorsOfPower, compatibility: GameModule.Turmoil},
     {cardName: CardName.CYBERIA_SYSTEMS, Factory: CyberiaSystems},
     {cardName: CardName.HERMETIC_ORDER_OF_MARS, Factory: HermeticOrderOfMars},
     {cardName: CardName.HOMEOSTASIS_BUREAU, Factory: HomeostasisBureau},

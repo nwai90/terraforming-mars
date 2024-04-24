@@ -3,6 +3,7 @@ import {Game} from '../../Game';
 import {NeutralPlayer} from '../Turmoil';
 import {IParty} from './IParty';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
+import {CardName} from '../../CardName';
 
 export abstract class Party {
     public partyLeader: undefined | PlayerId | NeutralPlayer = undefined;
@@ -81,6 +82,14 @@ export abstract class Party {
         }
       } else {
         this.partyLeader = newPlayer;
+      }
+
+      // Corridors of Power: If you become party leader, draw a card
+      if (this.partyLeader === newPlayer && newPlayer !== "NEUTRAL") {
+        const player = game.getPlayerById(newPlayer);
+        if (player.cardIsInEffect(CardName.CORRIDORS_OF_POWER)) {
+          player.drawCard(1);
+        }
       }
     }
 
