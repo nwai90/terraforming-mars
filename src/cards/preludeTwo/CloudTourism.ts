@@ -15,7 +15,7 @@ export class CloudTourism extends Card implements IProjectCard {
       cardType: CardType.ACTIVE,
       name: CardName.CLOUD_TOURISM,
       tags: [Tags.JOVIAN, Tags.VENUS],
-      cost: 12,
+      cost: 11,
       resourceType: ResourceType.FLOATER,
 
       metadata: {
