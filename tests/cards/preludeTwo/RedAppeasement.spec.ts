@@ -30,7 +30,7 @@ describe('RedAppeasement', function() {
     turmoil.rulingParty = reds;
     expect(card.canPlay(player)).is.true;
 
-    turmoil.rulingParty = greens;    
+    turmoil.rulingParty = greens;
     reds.delegates.push(player.id, player.id);
     expect(card.canPlay(player)).is.true;
 

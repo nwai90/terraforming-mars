@@ -44,6 +44,7 @@ import {SponsoringNation} from './SponsoringNation';
 import {ColonialEnvoys} from './ColonialEnvoys';
 import {CorridorsOfPower} from './CorridorsOfPower';
 import {SpaceCorridors} from './SpaceCorridors';
+import {GHGShipment} from './GHGShipment';
 
 export const PRELUDE_TWO_CARD_MANIFEST = new CardManifest({
   module: GameModule.PreludeTwo,
@@ -55,6 +56,7 @@ export const PRELUDE_TWO_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.CLOUD_TOURISM, Factory: CloudTourism, compatibility: GameModule.Venus},
     {cardName: CardName.COLONIAL_ENVOYS, Factory: ColonialEnvoys, compatibility: GameModule.Turmoil},
     {cardName: CardName.CYBERIA_SYSTEMS, Factory: CyberiaSystems},
+    {cardName: CardName.GHG_SHIPMENT, Factory: GHGShipment, compatibility: GameModule.Turmoil},
     {cardName: CardName.HERMETIC_ORDER_OF_MARS, Factory: HermeticOrderOfMars},
     {cardName: CardName.HOMEOSTASIS_BUREAU, Factory: HomeostasisBureau},
     {cardName: CardName.ISHTAR_EXPEDITION, Factory: IshtarExpedition, compatibility: GameModule.Venus},
