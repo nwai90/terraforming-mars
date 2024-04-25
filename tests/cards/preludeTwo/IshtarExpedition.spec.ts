@@ -11,7 +11,7 @@ describe('IshtarExpedition', function() {
 
   beforeEach(() => {
     card = new IshtarExpedition();
-    
+
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
     const gameOptions = TestingUtils.setCustomGameOptions();

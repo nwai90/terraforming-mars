@@ -45,6 +45,7 @@ import {ColonialEnvoys} from './ColonialEnvoys';
 import {CorridorsOfPower} from './CorridorsOfPower';
 import {SpaceCorridors} from './SpaceCorridors';
 import {GHGShipment} from './GHGShipment';
+import {UnexpectedApplication} from './UnexpectedApplication';
 
 export const PRELUDE_TWO_CARD_MANIFEST = new CardManifest({
   module: GameModule.PreludeTwo,
@@ -72,6 +73,7 @@ export const PRELUDE_TWO_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.ST_JOSEPH_OF_CUPERTINO_MISSION, Factory: StJosephOfCupertinoMission},
     {cardName: CardName.SUMMIT_LOGISTICS, Factory: SummitLogistics, compatibility: GameModule.Turmoil},
     {cardName: CardName.TESLARACT, Factory: Teslaract},
+    {cardName: CardName.UNEXPECTED_APPLICATION, Factory: UnexpectedApplication, compatibility: GameModule.Venus},
     {cardName: CardName.VENUS_TRADE_HUB, Factory: VenusTradeHub, compatibility: [GameModule.Venus, GameModule.Colonies]},
   ],
   corporationCards: [

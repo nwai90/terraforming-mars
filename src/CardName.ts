@@ -547,6 +547,7 @@ export enum CardName {
     TERRAFORMING_DEAL = 'Terraforming Deal',
     TESLARACT = 'Teslaract',
     TYCHO_MAGNETICS = 'Tycho Magnetics',
+    UNEXPECTED_APPLICATION = 'Unexpected Application',
     VENUS_TRADE_HUB = 'Venus Trade Hub',
 
     // Community cards
