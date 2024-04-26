@@ -74,6 +74,12 @@ describe('AutomaHandler: Initial setup', function() {
     game = Game.newInstance('x', [player], player, TestingUtils.setCustomGameOptions({automaSoloVariant: true, boardName: BoardName.VASTITAS_BOREALIS}));
     AutomaHandler.placeInitialOcean(player, game);
     expect(game.board.getSpace('19').tile!.tileType).to.eq(TileType.OCEAN);
+
+    // Utopia Planitia map
+    game.board = EmptyBoard.newInstance();
+    game = Game.newInstance('x', [player], player, TestingUtils.setCustomGameOptions({automaSoloVariant: true, boardName: BoardName.UTOPIA_PLANITIA}));
+    AutomaHandler.placeInitialOcean(player, game);
+    expect(game.board.getSpace('14').tile!.tileType).to.eq(TileType.OCEAN);
   });
 
   it('Places initial greenery', function() {
@@ -112,6 +118,12 @@ describe('AutomaHandler: Initial setup', function() {
     game = Game.newInstance('x', [player], player, TestingUtils.setCustomGameOptions({automaSoloVariant: true, boardName: BoardName.VASTITAS_BOREALIS}));
     AutomaHandler.placeInitialGreenery(game);
     expect(game.board.getSpace('33').tile!.tileType).to.eq(TileType.GREENERY);
+
+    // Utopia Planitia map
+    game.board = EmptyBoard.newInstance();
+    game = Game.newInstance('x', [player], player, TestingUtils.setCustomGameOptions({automaSoloVariant: true, boardName: BoardName.UTOPIA_PLANITIA}));
+    AutomaHandler.placeInitialGreenery(game);
+    expect(game.board.getSpace('19').tile!.tileType).to.eq(TileType.GREENERY);
   });
 });
 

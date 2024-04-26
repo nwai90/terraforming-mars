@@ -113,6 +113,10 @@ export class AutomaHandler {
           // Bottom middle 2 plant spot
           game.simpleAddTile(neutral, game.board.getSpace('61'), {tileType: TileType.OCEAN});
           break;
+        case BoardName.UTOPIA_PLANITIA:
+          // 3 plant spot
+          game.simpleAddTile(neutral, game.board.getSpace('14'), {tileType: TileType.OCEAN});
+          break;
         case BoardName.VASTITAS_BOREALIS:
           // Plant + card spot
           game.simpleAddTile(neutral, game.board.getSpace('19'), {tileType: TileType.OCEAN});
@@ -156,6 +160,9 @@ export class AutomaHandler {
       case BoardName.TERRA_CIMMERIA:
         // 2 card spot
         return game.board.getSpace('38');
+      case BoardName.UTOPIA_PLANITIA:
+        // 2 card + titanium spot
+        return game.board.getSpace('19');
       case BoardName.VASTITAS_BOREALIS:
         // Temperature spot
         return game.board.getSpace('33');

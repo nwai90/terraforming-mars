@@ -50,6 +50,8 @@ export const GameSetupDetail = Vue.component('game-setup-detail', {
         return 'game-config board-amazonis map';
       case BoardName.ARABIA_TERRA:
         return 'game-config board-arabia_terra map';
+      case BoardName.UTOPIA_PLANITIA:
+        return 'game-config board-utopia_planitia map';
       case BoardName.VASTITAS_BOREALIS:
         return 'game-config board-vastitas_borealis map';
       case BoardName.TERRA_CIMMERIA:

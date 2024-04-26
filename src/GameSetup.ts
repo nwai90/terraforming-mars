@@ -15,6 +15,7 @@ import {ArabiaTerraBoard} from './boards/ArabiaTerraBoard';
 import {VastitasBorealisBoard} from './boards/VastitasBorealisBoard';
 import {TerraCimmeriaBoard} from './boards/TerraCimmeriaBoard';
 import {LabyrinthusBoard} from './boards/LabyrinthusBoard';
+import {UtopiaPlanitiaBoard} from './boards/UtopiaPlanitiaBoard';
 import {SerializedBoard} from './boards/SerializedBoard';
 import {SerializedGame} from './SerializedGame';
 
@@ -29,6 +30,7 @@ const boards: Map<BoardName, BoardFactory> = new Map(
     [BoardName.AMAZONIS, AmazonisBoard],
     [BoardName.ARABIA_TERRA, ArabiaTerraBoard],
     [BoardName.TERRA_CIMMERIA, TerraCimmeriaBoard],
+    [BoardName.UTOPIA_PLANITIA, UtopiaPlanitiaBoard],
     [BoardName.VASTITAS_BOREALIS, VastitasBorealisBoard],
     [BoardName.LABYRINTHUS, LabyrinthusBoard],
   ],
