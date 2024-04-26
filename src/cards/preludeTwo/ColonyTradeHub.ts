@@ -15,21 +15,21 @@ export class ColonyTradeHub extends PreludeCard {
         cardNumber: '??',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.energy(1));
-          b.titanium(3);
+          b.titanium(2);
           b.preludeBox('effect', (ce) => {
             ce.effect('When any colony is placed, gain 2 M€.', (eb) => {
               eb.colonies(1, Size.SMALL).any.startEffect.megacredits(2);
             });
           });
         }),
-        description: 'Increase your energy production 1 step and gain 3 titanium.',
+        description: 'Increase your energy production 1 step and gain 2 titanium.',
       },
     });
   }
 
   public play(player: Player) {
     player.addProduction(Resources.ENERGY, 1);
-    player.addResource(Resources.TITANIUM, 3);
+    player.addResource(Resources.TITANIUM, 2);
     return undefined;
   }
 }

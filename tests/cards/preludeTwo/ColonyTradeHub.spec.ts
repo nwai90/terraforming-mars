@@ -21,7 +21,7 @@ describe('ColonyTradeHub', function() {
   it('Play', function() {
     card.play(player);
     expect(player.getProduction(Resources.ENERGY)).eq(1);
-    expect(player.titanium).eq(3);
+    expect(player.titanium).eq(2);
   });
 
   it('Effect', function() {
