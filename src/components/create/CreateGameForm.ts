@@ -830,7 +830,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
 
                             <div class="create-game-subsection-label" v-i18n>Fan-made &nbsp;<a href="https://www.notion.so/0f47cf7b3d844b908acc71667e3f7016?v=b87cbc68e9b749649004daba9772aa91" class="tooltip" target="_blank">&#9432;</a></div>
 
-                            <template v-for="boardName in boards.slice(4,10)">
+                            <template v-for="boardName in boards.slice(4,11)">
                                 <input type="radio" :value="boardName" name="board" v-model="board" :id="boardName+'-checkbox'">
                                 <label :for="boardName+'-checkbox'" class="expansion-button">
                                     <span :class="getBoardColorClass(boardName)">&#x2B22;</span><span class="capitalized" v-i18n>{{ boardName }}</span>

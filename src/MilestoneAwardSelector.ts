@@ -8,7 +8,7 @@ import {Highlander} from './awards/arabiaTerra/Highlander';
 import {Producer} from './awards/arabiaTerra/Producer';
 import {Purist} from './awards/arabiaTerra/Purist';
 import {Worker} from './awards/arabiaTerra/Worker';
-import {AMAZONIS_PLANITIA_AWARDS, ARABIA_TERRA_AWARDS, ARES_AWARDS, Awards, ELYSIUM_AWARDS, HELLAS_AWARDS, MOON_AWARDS, ORIGINAL_AWARDS, TERRA_CIMMERIA_AWARDS, VASTITAS_BOREALIS_AWARDS, VENUS_AWARDS} from './awards/Awards';
+import {AMAZONIS_PLANITIA_AWARDS, ARABIA_TERRA_AWARDS, ARES_AWARDS, Awards, ELYSIUM_AWARDS, HELLAS_AWARDS, MOON_AWARDS, ORIGINAL_AWARDS, TERRA_CIMMERIA_AWARDS, UTOPIA_PLANITIA_AWARDS, VASTITAS_BOREALIS_AWARDS, VENUS_AWARDS, PRELUDE_TWO_AWARDS, NEW_OPS_AWARDS} from './awards/Awards';
 import {Banker} from './awards/Banker';
 import {Benefactor} from './awards/Benefactor';
 import {Celebrity} from './awards/Celebrity';
@@ -56,7 +56,6 @@ import {Ambassador} from './milestones/fanmade/Ambassador';
 import {Monument} from './milestones/fanmade/Monument';
 import {Wanderer} from './milestones/fanmade/Wanderer';
 import {Passer} from './milestones/fanmade/Passer';
-import {Dignitary} from './milestones/fanmade/Dignitary';
 import {Maverick} from './milestones/fanmade/Maverick';
 import {Gardener} from './milestones/Gardener';
 import {Generalist} from './milestones/Generalist';
@@ -64,7 +63,7 @@ import {Hoverlord} from './milestones/Hoverlord';
 import {IMilestone} from './milestones/IMilestone';
 import {Legend} from './milestones/Legend';
 import {Mayor} from './milestones/Mayor';
-import {AMAZONIS_PLANITIA_MILESTONES, ARABIA_TERRA_MILESTONES, ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, Milestones, MOON_MILESTONES, NEW_OPS_MILESTONES, ORIGINAL_MILESTONES, PRELUDE_TWO_MILESTONES, TERRA_CIMMERIA_MILESTONES, VASTITAS_BOREALIS_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
+import {AMAZONIS_PLANITIA_MILESTONES, ARABIA_TERRA_MILESTONES, ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, Milestones, MOON_MILESTONES, NEW_OPS_MILESTONES, ORIGINAL_MILESTONES, PRELUDE_TWO_MILESTONES, TERRA_CIMMERIA_MILESTONES, UTOPIA_PLANITIA_MILESTONES, VASTITAS_BOREALIS_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
 import {Networker} from './milestones/Networker';
 import {Planner} from './milestones/Planner';
 import {PolarExplorer} from './milestones/PolarExplorer';
@@ -88,6 +87,13 @@ import {LunarMagnate} from './moon/LunarMagnate';
 import {OneGiantStep} from './moon/OneGiantStep';
 import {RandomMAOptionType} from './RandomMAOptionType';
 import {Rugged} from './awards/fanmade/Rugged';
+import {LandSpecialist} from './milestones/utopiaPlanitia/LandSpecialist';
+import {Investor} from './awards/utopiaPlanitia/Investor';
+import {Botanist} from './awards/utopiaPlanitia/Botanist';
+import {Metropolist} from './awards/utopiaPlanitia/Metropolist';
+import {Blacksmith} from './awards/preludeTwo/Blacksmith';
+import {Landshaper} from './milestones/preludeTwo/Landshaper';
+import {Sponsor} from './milestones/preludeTwo/Sponsor';
 
 export namespace MilestoneAwardSelector {
   // This map uses keys of the format "X|Y" where X and Y are MA names. Entries are stored as "X|Y"
@@ -439,10 +445,42 @@ export namespace MilestoneAwardSelector {
       bind(Rugged, Landlord, 6);
       bind(Rugged, DesertSettler, 5);
 
-      bind(Dignitary, Celebrity, 8);
-      bind(Dignitary, Minimalist, 4);
-
       bind(Maverick, Tycoon, 2);
+
+      // Utopia Planitia
+      bind(LandSpecialist, Landlord, 6);
+
+      bind(Investor, Terran, 9);
+      bind(Investor, Magnate, 4);
+
+      bind(Botanist, Cultivator, 5);
+      bind(Botanist, Farmer, 9);
+      bind(Botanist, Gardener, 5);
+      bind(Botanist, Naturalist, 7);
+      bind(Botanist, Ecologist, 4);
+      bind(Botanist, Landlord, 4);
+
+      bind(Metropolist, Mayor, 9);
+      bind(Metropolist, Landlord, 5);
+      bind(Metropolist, DesertSettler, 3);
+      bind(Metropolist, Tropicalist, 2);
+      bind(Metropolist, Urbanist, 2);
+
+      // Prelude 2
+      bind(Blacksmith, Smith, 8);
+      bind(Blacksmith, Miner, 6);
+      bind(Blacksmith, Thermalist, 5);
+      bind(Blacksmith, Naturalist, 5);
+      bind(Blacksmith, Firestarter, 3);
+
+      bind(Landshaper, Pioneer, 9);
+      bind(Landshaper, Landlord, 4);
+      bind(Landshaper, Gardener, 2);
+      bind(Landshaper, Mayor, 2);
+      bind(Landshaper, LandSpecialist, 2);
+
+      bind(Sponsor, Celebrity, 5);
+      bind(Sponsor, Minimalist, 2);
 
       return synergies;
     }
@@ -550,6 +588,17 @@ export namespace MilestoneAwardSelector {
         }
 
         break;
+      case BoardName.UTOPIA_PLANITIA:
+        drawnMilestonesAndAwards.milestones.push(...UTOPIA_PLANITIA_MILESTONES);
+        drawnMilestonesAndAwards.awards.push(...UTOPIA_PLANITIA_AWARDS);
+
+        if (gameOptions.coloniesExtension === false && drawnMilestonesAndAwards.milestones.some((milestone) => milestone.name === 'Colonizer')) {
+          const randomMilestone = [...ORIGINAL_MILESTONES, ...HELLAS_MILESTONES, ...ELYSIUM_MILESTONES].find((m) => !drawnMilestonesAndAwards.milestones.includes(m))!;
+          drawnMilestonesAndAwards.milestones = drawnMilestonesAndAwards.milestones.filter((m) => m.name !== 'Colonizer');
+          drawnMilestonesAndAwards.milestones.push(randomMilestone);
+        }
+
+        break;
       case BoardName.HELLAS:
         drawnMilestonesAndAwards.milestones.push(...HELLAS_MILESTONES);
         drawnMilestonesAndAwards.awards.push(...HELLAS_AWARDS);
@@ -609,8 +658,8 @@ export namespace MilestoneAwardSelector {
 
     const toName = (e: {name: string}) => e.name;
 
-    const candidateMilestones = [...ORIGINAL_MILESTONES, ...ELYSIUM_MILESTONES, ...HELLAS_MILESTONES].map(toName);
-    const candidateAwards = [...ORIGINAL_AWARDS, ...ELYSIUM_AWARDS, ...HELLAS_AWARDS].map(toName);
+    let candidateMilestones = [...ORIGINAL_MILESTONES, ...ELYSIUM_MILESTONES, ...HELLAS_MILESTONES].map(toName);
+    let candidateAwards = [...ORIGINAL_AWARDS, ...ELYSIUM_AWARDS, ...HELLAS_AWARDS].map(toName);
 
     if (gameOptions.venusNextExtension) {
       candidateMilestones.push(...VENUS_MILESTONES.map(toName));
@@ -626,6 +675,7 @@ export namespace MilestoneAwardSelector {
     }
     if (gameOptions.preludeTwoExtension) {
       candidateMilestones.push(...PRELUDE_TWO_MILESTONES.map(toName));
+      candidateAwards.push(...PRELUDE_TWO_AWARDS.map(toName));
     }
 
     if (gameOptions.newOpsExpansion) {
@@ -633,12 +683,15 @@ export namespace MilestoneAwardSelector {
       candidateMilestones.push(...ARABIA_TERRA_MILESTONES.map(toName));
       candidateMilestones.push(...TERRA_CIMMERIA_MILESTONES.map(toName));
       candidateMilestones.push(...VASTITAS_BOREALIS_MILESTONES.map(toName));
+      candidateMilestones.push(...UTOPIA_PLANITIA_MILESTONES.map(toName));
       candidateMilestones.push(...NEW_OPS_MILESTONES.map(toName));
 
       candidateAwards.push(...AMAZONIS_PLANITIA_AWARDS.map(toName));
       candidateAwards.push(...ARABIA_TERRA_AWARDS.map(toName));
       candidateAwards.push(...TERRA_CIMMERIA_AWARDS.map(toName));
       candidateAwards.push(...VASTITAS_BOREALIS_AWARDS.map(toName));
+      candidateAwards.push(...UTOPIA_PLANITIA_AWARDS.map(toName));
+      candidateAwards.push(...NEW_OPS_AWARDS.map(toName));
 
       // Remove expansion-specific fan MAs from randomization pool if that expansion is not selected
       if (gameOptions.venusNextExtension === false && candidateMilestones.some((milestone) => milestone === 'Morningstar')) {
@@ -676,7 +729,14 @@ export namespace MilestoneAwardSelector {
     } else if (gameOptions.boardName === BoardName.VASTITAS_BOREALIS) {
       candidateMilestones.push(...VASTITAS_BOREALIS_MILESTONES.map(toName));
       candidateAwards.push(...VASTITAS_BOREALIS_AWARDS.map(toName));
+    } else if (gameOptions.boardName === BoardName.UTOPIA_PLANITIA) {
+      candidateMilestones.push(...UTOPIA_PLANITIA_MILESTONES.map(toName));
+      candidateAwards.push(...UTOPIA_PLANITIA_AWARDS.map(toName));
     }
+
+    // Remove duplicates as some MA are shared by Utopia Planitia and other maps
+    candidateAwards = Array.from(new Set(candidateAwards));
+    candidateMilestones = Array.from(new Set(candidateMilestones));
 
     const shuffledMilestones = shuffle(candidateMilestones);
     const shuffledAwards = shuffle(candidateAwards);

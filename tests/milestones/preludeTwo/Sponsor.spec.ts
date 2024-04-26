@@ -1,24 +1,23 @@
 import {expect} from "chai";
-import {AsteroidMining} from "../../../src/cards/base/AsteroidMining";
 import {Comet} from "../../../src/cards/base/Comet";
 import {MethaneFromTitan} from "../../../src/cards/base/MethaneFromTitan";
 import {MoholeArea} from "../../../src/cards/base/MoholeArea";
 import {EarthElevator} from "../../../src/cards/colonies/EarthElevator";
 import {Game} from "../../../src/Game";
-import {Dignitary} from "../../../src/milestones/fanmade/Dignitary";
+import {Sponsor} from "../../../src/milestones/preludeTwo/Sponsor";
 import {Player} from "../../../src/Player";
 import {TestPlayers} from "../../TestPlayers";
 
-describe('Dignitary', () => {
-  let milestone : Dignitary; let player : Player; let player2 : Player;
+describe('Sponsor', () => {
+  let milestone : Sponsor; let player : Player; let player2 : Player;
 
   beforeEach(() => {
-    milestone = new Dignitary();
+    milestone = new Sponsor();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
 
     Game.newInstance('test', [player, player2], player);
-    player.playedCards.push(new EarthElevator(), new AsteroidMining(), new MoholeArea());
+    player.playedCards.push(new EarthElevator(), new MoholeArea());
   });
 
   it('Cannot claim', () => {

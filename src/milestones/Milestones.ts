@@ -43,9 +43,10 @@ import {Wanderer} from './fanmade/Wanderer';
 import {Ambassador} from './fanmade/Ambassador';
 import {Passer} from './fanmade/Passer';
 import {Purifier} from './fanmade/Purifier';
-import {Dignitary} from './fanmade/Dignitary';
 import {Maverick} from './fanmade/Maverick';
 import {Landshaper} from './preludeTwo/Landshaper';
+import {LandSpecialist} from './utopiaPlanitia/LandSpecialist';
+import {Sponsor} from './preludeTwo/Sponsor';
 
 export const ORIGINAL_MILESTONES: Array<IMilestone> = [
   new Terraformer(),
@@ -107,13 +108,20 @@ export const AMAZONIS_PLANITIA_MILESTONES: Array<IMilestone> = [
   new Tropicalist(),
 ];
 
+export const UTOPIA_PLANITIA_MILESTONES: Array<IMilestone> = [
+  new LandSpecialist(),
+  new Colonizer(),
+  new Tradesman(),
+  new Smith(),
+  new Researcher(),
+];
+
 export const NEW_OPS_MILESTONES: Array<IMilestone> = [
   new Monument(),
   new Wanderer(),
   new Ambassador(),
   new Passer(),
   new Purifier(),
-  new Dignitary(),
   new Maverick(),
 ];
 
@@ -128,9 +136,10 @@ export const MOON_MILESTONES: Array<IMilestone> = [
 
 export const PRELUDE_TWO_MILESTONES: Array<IMilestone> = [
   new Landshaper(),
+  new Sponsor(),
 ];
 
-export const ALL_MILESTONES: Array<IMilestone> = [
+export const ALL_MILESTONES: Array<IMilestone> = Array.from(new Set([
   ...ORIGINAL_MILESTONES,
   ...ELYSIUM_MILESTONES,
   ...HELLAS_MILESTONES,
@@ -138,12 +147,13 @@ export const ALL_MILESTONES: Array<IMilestone> = [
   ...ARABIA_TERRA_MILESTONES,
   ...TERRA_CIMMERIA_MILESTONES,
   ...AMAZONIS_PLANITIA_MILESTONES,
+  ...UTOPIA_PLANITIA_MILESTONES,
   ...NEW_OPS_MILESTONES,
   ...VENUS_MILESTONES,
   ...ARES_MILESTONES,
   ...MOON_MILESTONES,
   ...PRELUDE_TWO_MILESTONES,
-];
+]));
 
 export namespace Milestones {
   export const ALL = ALL_MILESTONES;

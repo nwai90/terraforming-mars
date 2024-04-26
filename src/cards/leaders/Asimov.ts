@@ -3,7 +3,7 @@ import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {LeaderCard} from '../LeaderCard';
 import {PlayerInput} from '../../PlayerInput';
-import {ALL_AWARDS, AMAZONIS_PLANITIA_AWARDS, ARABIA_TERRA_AWARDS, NEW_OPS_AWARDS, TERRA_CIMMERIA_AWARDS, VASTITAS_BOREALIS_AWARDS} from '../../awards/Awards';
+import {ALL_AWARDS, NEW_OPS_AWARDS, PRELUDE_TWO_AWARDS} from '../../awards/Awards';
 import {IAward} from '../../awards/IAward';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -54,8 +54,11 @@ export class Asimov extends Card implements LeaderCard {
       if (!game.gameOptions.moonExpansion && award.name === 'Lunar Magnate') return false;
 
       if (!game.gameOptions.newOpsExpansion) {
-        const fanAwards = [...AMAZONIS_PLANITIA_AWARDS, ...ARABIA_TERRA_AWARDS, ...TERRA_CIMMERIA_AWARDS, ...VASTITAS_BOREALIS_AWARDS, ...NEW_OPS_AWARDS];
-        if (fanAwards.includes(award)) return false;
+        if (NEW_OPS_AWARDS.includes(award)) return false;
+      }
+
+      if (!game.gameOptions.preludeTwoExtension) {
+        if (PRELUDE_TWO_AWARDS.includes(award)) return false;
       }
 
       return true;

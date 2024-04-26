@@ -41,6 +41,10 @@ import {Engineer} from './amazonisPlanitia/Engineer';
 import {Player} from '../Player';
 import {VictoryPointsBreakdown} from '../VictoryPointsBreakdown';
 import {Rugged} from './fanmade/Rugged';
+import {Botanist} from './utopiaPlanitia/Botanist';
+import {Investor} from './utopiaPlanitia/Investor';
+import {Metropolist} from './utopiaPlanitia/Metropolist';
+import {Blacksmith} from './preludeTwo/Blacksmith';
 
 export const ORIGINAL_AWARDS: Array<IAward> = [
   new Landlord(),
@@ -102,6 +106,14 @@ export const AMAZONIS_PLANITIA_AWARDS: Array<IAward> = [
   new Zoologist(),
 ];
 
+export const UTOPIA_PLANITIA_AWARDS: Array<IAward> = [
+  new Edgedancer(),
+  new Investor(),
+  new Botanist(),
+  new Economizer(),
+  new Metropolist(),
+];
+
 export const ARES_AWARDS: Array<IAward> = [
   new Entrepreneur(),
 ];
@@ -115,7 +127,11 @@ export const NEW_OPS_AWARDS: Array<IAward> = [
   new Rugged(),
 ];
 
-export const ALL_AWARDS: Array<IAward> = [
+export const PRELUDE_TWO_AWARDS: Array<IAward> = [
+  new Blacksmith(),
+];
+
+export const ALL_AWARDS: Array<IAward> = Array.from(new Set([
   ...ORIGINAL_AWARDS,
   ...ELYSIUM_AWARDS,
   ...HELLAS_AWARDS,
@@ -126,8 +142,10 @@ export const ALL_AWARDS: Array<IAward> = [
   ...ARABIA_TERRA_AWARDS,
   ...TERRA_CIMMERIA_AWARDS,
   ...AMAZONIS_PLANITIA_AWARDS,
-  ...NEW_OPS_AWARDS
-];
+  ...UTOPIA_PLANITIA_AWARDS,
+  ...NEW_OPS_AWARDS,
+  ...PRELUDE_TWO_AWARDS
+]));
 
 export namespace Awards {
   export const ALL = ALL_AWARDS;
