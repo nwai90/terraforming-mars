@@ -63,6 +63,7 @@ import {FloydContinuum} from './FloydContinuum';
 import {IcyImpactors} from './IcyImpactors';
 import {SoilEnrichment} from './SoilEnrichment';
 import {CityPark} from './CityPark';
+import {Supermarkets} from './Supermarkets';
 
 export const PROMO_CARD_MANIFEST = new CardManifest({
   module: GameModule.Promo,
@@ -116,6 +117,7 @@ export const PROMO_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.ICY_IMPACTORS, Factory: IcyImpactors},
     {cardName: CardName.SOIL_ENRICHMENT, Factory: SoilEnrichment},
     {cardName: CardName.CITY_PARK, Factory: CityPark},
+    {cardName: CardName.SUPERMARKETS, Factory: Supermarkets},
   ],
   preludeCards: [
     {cardName: CardName.NEW_PARTNER, Factory: NewPartner},
