@@ -58,7 +58,7 @@ export interface ICard {
     action?: (player: Player) => OrOptions | SelectOption | AndOptions | SelectAmount | SelectCard<ICard> | SelectCard<IProjectCard> | SelectHowToPay | SelectPlayer | SelectSpace | undefined;
     canAct?: (player: Player) => boolean;
     getCardDiscount?: (player: Player, card: IProjectCard) => number;
-    cardDiscount?: CardDiscount;
+    cardDiscount?: CardDiscount | Array<CardDiscount>;
     // parameter is a Morningstar Inc. special case.
     getRequirementBonus?: (player: Player, parameter: GlobalParameter) => number;
     getVictoryPoints?: (player: Player) => number;

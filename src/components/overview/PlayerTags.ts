@@ -28,19 +28,33 @@ const MOON_MULTIPLIERS: Array<CardName> = [
 
 const hasDiscount = (tag: InterfaceTagsType, card: CardModel): boolean => {
   if (tag === SpecialTags.COLONY_COUNT || tag === SpecialTags.CITY_COUNT) return false;
-  if (card.discount === undefined) {
-    return false;
-  }
+  if (card.discount === undefined) return false;
+
   if (tag === 'all') {
-    return card.discount.tag === undefined;
+    if (Array.isArray(card.discount)) {
+      return card.discount.some((discount) => discount.tag === undefined);
+    } else {
+      return card.discount.tag === undefined;
+    }
   }
-  return card.discount.tag === tag;
+
+  if (Array.isArray(card.discount)) {
+    return card.discount.some((discount) => discount.tag === tag);
+  } else {
+    return card.discount.tag === tag;
+  }
 };
 
 const getDiscountAmount = (tag: InterfaceTagsType, card: CardModel): number => {
   if (hasDiscount(tag, card)) {
-    return card?.discount?.amount || 0;
+    if (Array.isArray(card.discount)) {
+      const discount = card.discount.find((d) => d.tag === tag);
+      return discount?.amount || 0;
+    } else {
+      return card.discount?.amount || 0;
+    } 
   }
+
   return 0;
 };
 

@@ -26,7 +26,7 @@ export interface StaticCardProperties {
   startingMegaCredits?: number;
   tags?: Array<Tags>;
   productionBox?: Units;
-  cardDiscount?: CardDiscount;
+  cardDiscount?: CardDiscount | Array<CardDiscount>;
   reserveUnits?: Units,
   tr?: TRSource,
 }

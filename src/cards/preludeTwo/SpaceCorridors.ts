@@ -11,6 +11,7 @@ export class SpaceCorridors extends PreludeCard {
     super({
       name: CardName.SPACE_CORRIDORS,
       tags: [Tags.SPACE],
+      cardDiscount: [{tag: Tags.JOVIAN, amount: 2}, {tag: Tags.EARTH, amount: 2}, {tag: Tags.VENUS, amount: 2}],
       metadata: {
         cardNumber: '??',
         renderData: CardRenderer.builder((b) => {
