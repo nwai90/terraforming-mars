@@ -2024,7 +2024,7 @@ export class Game implements ISerializable<SerializedGame> {
       }
     });
 
-    game.milestones = milestones;
+    game.milestones = Array.from(new Set(milestones));
     game.claimedMilestones = deserializeClaimedMilestones(d.claimedMilestones, players, milestones);
 
     const awards: Array<IAward> = [];
@@ -2036,7 +2036,7 @@ export class Game implements ISerializable<SerializedGame> {
       });
     });
 
-    game.awards = awards;
+    game.awards = Array.from(new Set(awards));
     game.fundedAwards = deserializeFundedAwards(d.fundedAwards, players, awards);
 
     if (gameOptions.aresExtension) {

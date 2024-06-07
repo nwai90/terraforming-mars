@@ -62,7 +62,7 @@ export class Asimov extends Card implements LeaderCard {
       }
 
       return true;
-    })
+    });
 
     const freeAward = new OrOptions();
     freeAward.title = 'Select award to put into play and fund';
